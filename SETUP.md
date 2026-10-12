@@ -1,6 +1,6 @@
 # Start backend work without losing product context
 
-This is a context/runtime starter, not a running API. It carries the source documents and BB8 into `Kikiland-ai/kiki-backend`; the first implementation session must scaffold and test the backend.
+This is a context/runtime starter, not a running API. It carries the source documents and BB8 into `Kikiland-ai/kiki-backend`. The first session must load context through `CONTEXT-BOOT.md` and wait for the user's thoughts. The runtime/service instructions below are reference material for later authorized implementation, not startup actions.
 
 ## 1. Select this repo in the new environment
 
@@ -67,11 +67,15 @@ These are required destinations for the selected adapters, not evidence of acces
 
 Paste this into the fresh backend session:
 
-> Use BB8 in this repo, with engineering-implementation for the build. Read AGENTS.md, SETUP.md, context/README.md, the revised prototype directions, prototype handoff, latest student journey, and the relevant v2 types. Inspect SOURCE.json to establish the pinned baseline. Treat the copied material as source references, and record backend decisions separately. Present Now/Next/Later, then implement the first vertical slice: a TypeScript API with runtime-validated lesson/speech/scene/annotation contracts, Firebase emulator configuration, a two-concept fixture pack, and one versioned lesson-package endpoint. Preserve distinct image and live-screen anchor contracts. Add a reviewed example speech plan and graphics scene; fixtures must stay labelled and do not count as a working TTS/graphics engine. Run actual relevant checks and source integrity validation. Update docs/plans/active.md with what runs, unresolved assumptions, and the next step. Next, trial real mixed-language speech and render one GIF/editable scene before expanding the synchronized player. Investigate actual Simulink observation/highlighting access early.
+> Use BB8 in this repository in context-loading mode only. Read AGENTS.md and follow CONTEXT-BOOT.md. Load the core sources in its reading order and verify the pinned baseline if tools are available. Report what you actually read, your understanding, and any missing or conflicting context. Do not begin implementation, install dependencies, run services, or modify files. Then wait for my thoughts on how to move forward.
 
-The prompt is scoped to a running initial slice; it does not ask the agent to build all seven prototypes in one turn.
+Context boot is complete when the agent reports the actual sources loaded and waits. It does not require an API, dependencies, credentials, or running services. If the repo is not attached/readable, the agent must report that rather than claim this context was loaded.
 
-## 5. Acceptance before considering the setup complete
+## 5. Later implementation reference — only after the user requests building
+
+The earlier proposal suggested starting with a runtime-validated TypeScript API, reconciled lesson/speech/scene/annotation contracts, emulator configuration, a two-concept fixture pack, and a versioned lesson-package endpoint. Keep this as a possible slice, not a committed sequence. Discuss the user's intended direction first. Subsequent live speech/graphics and Simulink trials remain pending.
+
+Once implementation is requested, the relevant setup acceptance criteria are:
 
 - Source integrity and BB8 checks pass; the imported source matches its manifest.
 - Backend install is reproducible from a committed lockfile and declared runtime versions.

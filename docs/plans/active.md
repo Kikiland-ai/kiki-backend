@@ -1,10 +1,10 @@
 # Backend implementation continuation
 
-Status: Context published to private Kikiland-ai/kiki-backend/main; application implementation not started
+Status: Context published; new session must load context and wait for the user's thoughts; application implementation not started
 
 ## Objective
 
-Build the seven core prototypes described in the pinned source proposal, starting with one source-backed concept, mixed-language speech, animated graphics, image annotation, diagnosis, and evidence-driven follow-up.
+Establish the product context before the user chooses how to proceed toward the seven core prototypes. Their scope covers source-backed content, mixed-language speech, animated graphics, image annotation, diagnosis, evidence-driven curation, and lab guidance. The initial build slice and sequence remain subject to the user's thoughts.
 
 ## Baseline
 
@@ -14,11 +14,11 @@ The remote is now available and the initial source import was pushed successfull
 
 ## Now
 
-Verify the snapshot and BB8 checks. Scaffold the runtime-validated TypeScript API, dependencies/lockfile, and emulator integration. Port two reviewed concept fixtures and stable lesson/speech/scene/annotation contracts. Record actual executed results below.
+Follow CONTEXT-BOOT.md in read-only mode: load the core sources, verify the source snapshot where tools are available, summarize confirmed decisions and pending choices, then wait. Do not scaffold, install, configure, start services, run live trials, or change files during this first context-loading pass.
 
 ## Next
 
-Trial real mixed-language synthesis; generate one reviewed GIF plus editable scene; synchronize image annotations against actual audio timing. Connect diagnostic evidence and curation. Trial actual Simulink observation/overlay access early.
+Discuss the user's thoughts and intended direction. Only after they request implementation, choose a concrete slice and then address the relevant runtime, media, assessment, or real-tool trials. Earlier build-order suggestions are proposals rather than authorization.
 
 ## Open questions and boundaries
 
@@ -31,7 +31,7 @@ Trial real mixed-language synthesis; generate one reviewed GIF plus editable sce
 
 ## Session log and exact next action
 
-Initial next action: run source/BB8 checks, read the first-session prompt, and scaffold the first API slice. Replace this section with actual checks, current failures, changed files, and a concrete continuation point before ending each substantive session.
+Exact next action: load context through CONTEXT-BOOT.md, report the files actually read and remaining uncertainties, and wait for the user's thoughts. Implementation-session updates belong here after authorized changes; context-only startup should leave this file unchanged.
 
 ## Setup execution: 12 October 2026
 
@@ -43,7 +43,7 @@ Initial next action: run source/BB8 checks, read the first-session prompt, and s
 - No API, npm dependencies/lockfile, real providers, audio/graphics engine, or Simulink connection has been implemented.
 - One pre-existing missing UX reference is documented in `context/KNOWN-GAPS.md`.
 
-Next implementation action after remote/environment setup: read SETUP.md's first-session prompt, scaffold the validated API/fixture slice, and record actual checks here.
+The earlier proposed API/fixture startup is superseded by the user's context-only startup instruction below.
 
 ## Explicit source refresh: 12 October 2026
 
@@ -55,4 +55,8 @@ Refreshed the unchanged source snapshot to `9a7f369192aaa1be49eeff8535b24d2543be
 - Published the prepared branch to `origin/main`; fetch verification showed local/remote alignment.
 - Re-ran source integrity, BB8 package/discovery, and all 11 reference-adapter tests successfully before publishing.
 - Credentials, application dependencies, API implementation, real speech/graphics, and Simulink integration remain unconfigured/unimplemented. No CI outcome has been claimed.
-- Exact next action: attach a fresh environment/session to `Kikiland-ai/kiki-backend` on `main`; read AGENTS.md, SETUP.md, context/README.md, and this plan, then execute SETUP.md's first-session prompt for the validated API/fixture slice.
+- Exact next action, updated by the user's clarification: attach a fresh environment/session to `Kikiland-ai/kiki-backend` on `main`; follow CONTEXT-BOOT.md, report context readiness, then wait for their thoughts.
+
+## User clarification: context before action — 12 October 2026
+
+The user wants the start of a session to load the right context, with no automatic building. Updated AGENTS.md, README.md, SETUP.md, and this plan to make that boundary explicit; CONTEXT-BOOT.md provides the required reading order and an inspectable readiness report. Runtime configuration and the previously suggested first implementation slice remain later reference material, requiring an implementation request. Pinned source files were not changed.

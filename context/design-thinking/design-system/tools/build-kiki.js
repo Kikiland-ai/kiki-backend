@@ -23,7 +23,8 @@ const C = {
 };
 const DOTS = [C.blue, C.red, C.yellow, C.green];
 const FONT = "Noto Sans, Roboto, Arial, sans-serif";
-const SKILL = { concept: [C.blue, C.blueInk, C.blueTint], words: [C.red, C.redInk, C.redTint], lab: [C.green, C.greenInk, C.greenTint] };
+/* Concept is green, Lab (practical) is blue. Kiki's own dots keep Google's order (DOTS). */
+const SKILL = { concept: [C.green, C.greenInk, C.greenTint], words: [C.red, C.redInk, C.redTint], lab: [C.blue, C.blueInk, C.blueTint] };
 const f = (n) => Math.round(n * 100) / 100;
 
 /* ---------------- the pointer ---------------- */
@@ -170,7 +171,7 @@ const RT = P.top - 8, RB = P.bot + 8, RX2 = P.r2 + 30;
   const k = pointer(228, 148, { s: S, gaze: [224, 108] });
   scenes.connect = frame(
     circuit() + walked(`M${P.r1} ${RT} H${P.r2}`) + walked(`M${P.r1} ${RB} H${P.r2}`) + haloRect(P.r1 - 14, P.r1a - 8, 28, 60) + haloRect(P.r2 - 14, P.r1a - 8, 28, 60)
-    + `<text x="224" y="30" text-anchor="middle" font-family="${FONT}" font-size="12" font-weight="700" fill="${C.blueInk}">A</text><text x="290" y="${RB + 4}" font-family="${FONT}" font-size="12" font-weight="700" fill="${C.blueInk}">B</text>`
+    + `<text x="224" y="30" text-anchor="middle" font-family="${FONT}" font-size="12" font-weight="700" fill="${C.greenInk}">A</text><text x="290" y="${RB + 4}" font-family="${FONT}" font-size="12" font-weight="700" fill="${C.greenInk}">B</text>`
     + arrow(`M${P.r1 + 18} 96 Q224 80 ${P.r2 - 20} 96`, 'concept', 'c1') + arrow(`M${P.r2 - 18} 124 Q224 140 ${P.r1 + 20} 124`, 'concept', 'c2')
     + trail([306, 206], k.tail, { bend: -0.2 }) + k.svg + chip(16, 196, 'Both join A and B: parallel', { icon: 'kiki' }),
     { title: 'Kiki guide: connect', label: 'Connect' });
@@ -178,7 +179,7 @@ const RT = P.top - 8, RB = P.bot + 8, RX2 = P.r2 + 30;
 // 5. Your turn: Kiki parks beside the target and waits; it never covers the thing to tap.
 {
   const k = pointer(130, 74, { s: S, gaze: [108, P.top] });
-  const ring = `<circle cx="108" cy="${P.top}" r="24" fill="${C.blueTint}" fill-opacity="0.6" stroke="${C.blue}" stroke-width="2.2" stroke-dasharray="6 5"><animateTransform attributeName="transform" type="rotate" from="0 108 ${P.top}" to="360 108 ${P.top}" dur="6s" repeatCount="indefinite"/></circle>`;
+  const ring = `<circle cx="108" cy="${P.top}" r="24" fill="${C.greenTint}" fill-opacity="0.6" stroke="${C.green}" stroke-width="2.2" stroke-dasharray="6 5"><animateTransform attributeName="transform" type="rotate" from="0 108 ${P.top}" to="360 108 ${P.top}" dur="6s" repeatCount="indefinite"/></circle>`;
   scenes.yourTurn = frame(
     circuit() + ring + badge(3, 80, 22, 'now') + trail([150, 160], k.tail, { bend: 0.1, line: false }) + k.svg + chip(16, 186, 'Your turn: tap the part in series', { icon: 'kiki' }),
     { title: 'Kiki guide: your turn', label: 'Your turn' });
@@ -194,7 +195,7 @@ const RT = P.top - 8, RB = P.bot + 8, RX2 = P.r2 + 30;
 // 7. Show me: Kiki demonstrates a drag in the lab, from the parts tray to the empty slot.
 {
   const tray = `<rect x="214" y="8" width="94" height="26" rx="8" fill="${C.raised}" stroke="${C.line}"/><text x="222" y="25" font-family="${FONT}" font-size="10.5" fill="${C.pencil}">Parts</text><path d="${zzH(256, 298, 21, 4, 6)}" fill="none" stroke="${C.pencil}" stroke-width="1.4" opacity="0.4"/>`;
-  const ghost = `<rect x="150" y="12" width="44" height="18" rx="5" fill="${C.greenTint}" stroke="${C.green}" stroke-width="1.8"/><path d="${zzH(154, 190, 21, 4, 6)}" fill="none" stroke="${C.greenInk}" stroke-width="1.6"/>`;
+  const ghost = `<rect x="150" y="12" width="44" height="18" rx="5" fill="${C.blueTint}" stroke="${C.blue}" stroke-width="1.8"/><path d="${zzH(154, 190, 21, 4, 6)}" fill="none" stroke="${C.blueInk}" stroke-width="1.6"/>`;
   const k = pointer(170, 26, { s: S, rot: -6, gaze: [108, P.top] });
   scenes.showMe = frame(
     circuit({ slot: true }) + walked(`M246 30 Q222 40 198 24`, 'lab') + ahead(`M146 24 Q118 22 110 34`, 'lab') + badge(1, 300, 44, 'done', 'lab') + badge(2, 74, 30, 'next', 'lab') + tray + ghost
@@ -236,7 +237,7 @@ const RT = P.top - 8, RB = P.bot + 8, RX2 = P.r2 + 30;
 {
   const k = pointer(232, 128, { s: S, gaze: [150, 100] });
   const orbit = DOTS.map((col, i) => `<circle r="2.6" fill="${col}" cx="${f(250 + 17 * Math.cos(i * Math.PI / 2))}" cy="${f(150 + 17 * Math.sin(i * Math.PI / 2))}"><animateTransform attributeName="transform" type="rotate" from="0 250 150" to="360 250 150" dur="2.4s" repeatCount="indefinite"/></circle>`).join('');
-  const scan = `<rect x="24" y="60" width="272" height="16" fill="${C.blue}" opacity="0.12"><animate attributeName="y" values="40;160;40" dur="3s" repeatCount="indefinite"/></rect>`;
+  const scan = `<rect x="24" y="60" width="272" height="16" fill="${C.green}" opacity="0.12"><animate attributeName="y" values="40;160;40" dur="3s" repeatCount="indefinite"/></rect>`;
   scenes.think = frame(circuit() + scan + k.svg + orbit + chip(16, 186, 'Reading your diagram', { icon: 'kiki' }), { title: 'Kiki guide: thinking', label: 'Thinking' });
 }
 // 12. Listen: Kiki listens to the student; the dots become a level meter.

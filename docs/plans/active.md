@@ -42,3 +42,7 @@ Initial next action: run source/BB8 checks, read the first-session prompt, and s
 - One pre-existing missing UX reference is documented in `context/KNOWN-GAPS.md`.
 
 Next implementation action after remote/environment setup: read SETUP.md's first-session prompt, scaffold the validated API/fixture slice, and record actual checks here.
+
+## Explicit source refresh: 12 October 2026
+
+Refreshed the unchanged source snapshot to `9a7f369192aaa1be49eeff8535b24d2543be45b8` after reviewing three upstream component/guide/artwork commits. This retains all revised prototype documents while carrying current green-concept/blue-practical references. SOURCE.json and source hashes were regenerated together; the source integrity check must pass after refresh. The original starter manifest remains the historical initial-import record. No runtime/API implementation was added.

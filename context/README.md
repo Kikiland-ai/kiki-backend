@@ -14,6 +14,8 @@ The Simulink recommendation is a proposed experiment and an untested connection.
 
 See [KNOWN-GAPS.md](KNOWN-GAPS.md) for the pre-existing missing local reference and pending capability trials.
 
+The carryover baseline includes the subsequent component/guide/artwork updates through `9a7f369`: concept is green and practical is blue. The prototype proposal's earlier audit mentions the old component colours; that particular component issue is now resolved in the imported references. Remaining schema/timing/scene/anchor reconciliation still applies.
+
 ## Open these first
 
 - [Revised prototype directions](design-thinking/docs/prototypes/backend-prototype-directions.md)

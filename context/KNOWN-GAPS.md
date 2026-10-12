@@ -20,3 +20,7 @@ Private live Claude artifacts are referenced but were not retrieved. Their URLs 
 - Backend runtime, credentials, provider quotas, and datastore/authorization integration.
 
 These are explicit tasks to resolve, not hidden prerequisites treated as already complete. Keep fixture/live status and trial results in `docs/plans/active.md`.
+
+## Resolved during source carryover
+
+The earlier prototype review identified old component colour assignments. The carryover now includes the component guides, bundles, tokens, and Kiki artwork updates through `9a7f369`, aligning green with concept and blue with practical. This source update does not establish speech timing, general image markup, or real-tool guidance.

@@ -47,80 +47,80 @@
       "files": {
         "kiki-guide-storyboard.svg": {
           "name": "kiki-guide-storyboard.svg",
-          "blob": "b43217cc4a9b1fa6bb8b2fe6dce39bb2",
-          "size": 72663,
+          "blob": "abb056512267662b8a6ace0328cb38a1",
+          "size": 81899,
           "type": "image/svg+xml"
         },
         "kiki-sheet.svg": {
           "name": "kiki-sheet.svg",
-          "blob": "4c24a5740f70f0c55e4487c200238b8f",
-          "size": 232668,
+          "blob": "c72f276b27b332e08e297ba02817e0ad",
+          "size": 262390,
           "type": "image/svg+xml"
         },
         "kiki-guide-look.svg": {
           "name": "kiki-guide-look.svg",
-          "blob": "8056f3811249a6ddb6f11909c0fdfd04",
-          "size": 17761,
+          "blob": "94d001b5f9ef4aa9265c3dfd72d04668",
+          "size": 20029,
           "type": "image/svg+xml"
         },
         "kiki-guide-path-ahead.svg": {
           "name": "kiki-guide-path-ahead.svg",
-          "blob": "6a30059ac3121296cbb4c25e15014e7b",
-          "size": 18161,
+          "blob": "639382e7aa9283144e0071a46f6f544f",
+          "size": 20339,
           "type": "image/svg+xml"
         },
         "kiki-guide-trace.svg": {
           "name": "kiki-guide-trace.svg",
-          "blob": "c87efeb8d284b33cc469b4b604881c9e",
-          "size": 17942,
+          "blob": "56fd2a569c3a5928f5fb6f7f5a6a73a3",
+          "size": 20305,
           "type": "image/svg+xml"
         },
         "kiki-guide-connect.svg": {
           "name": "kiki-guide-connect.svg",
-          "blob": "5a29ad0d3bccc760dbb1522ed7593dec",
-          "size": 18351,
+          "blob": "3fe27c5c4d7712e6e98c3670e5cea1e1",
+          "size": 20814,
           "type": "image/svg+xml"
         },
         "kiki-guide-your-turn.svg": {
           "name": "kiki-guide-your-turn.svg",
-          "blob": "e680bd8d26b39f4bc07e37d99e723a69",
-          "size": 17280,
+          "blob": "5b75e956b69f7f519b90b82db9c1ee5e",
+          "size": 19574,
           "type": "image/svg+xml"
         },
         "kiki-guide-redirect.svg": {
           "name": "kiki-guide-redirect.svg",
-          "blob": "dd8da551a8166dffe63673ec988c71a5",
-          "size": 17723,
+          "blob": "de18844c465e278e536264e91344bfe2",
+          "size": 19999,
           "type": "image/svg+xml"
         },
         "kiki-guide-show-me.svg": {
           "name": "kiki-guide-show-me.svg",
-          "blob": "e4c4fa50751c2e86a5982e9fc8f5524b",
-          "size": 18181,
+          "blob": "9653833a85e86fe5acbe9e4cb3105185",
+          "size": 20550,
           "type": "image/svg+xml"
         },
         "kiki-guide-ask.svg": {
           "name": "kiki-guide-ask.svg",
-          "blob": "d6bbc6a6dd8eac2c75c9affaa38e0874",
-          "size": 17255,
+          "blob": "dae04dd8f56a4b82b1456d2f6931ee76",
+          "size": 19652,
           "type": "image/svg+xml"
         },
         "kiki-guide-done.svg": {
           "name": "kiki-guide-done.svg",
-          "blob": "995f58fd5cb7bba533b6e9b4f281bcb4",
-          "size": 17563,
+          "blob": "53160c22f4b37ba32d951c42f209495b",
+          "size": 19976,
           "type": "image/svg+xml"
         },
         "kiki-guide-words.svg": {
           "name": "kiki-guide-words.svg",
-          "blob": "c1e5af14dc9b2fa392bee49c3d946c54",
-          "size": 16969,
+          "blob": "0ae877ccbc6a872fc0330966d979575f",
+          "size": 19268,
           "type": "image/svg+xml"
         },
         "kiki-guide-thinking.svg": {
           "name": "kiki-guide-thinking.svg",
-          "blob": "bb6b1605b4dd454eac0410aeb4768cc4",
-          "size": 17462,
+          "blob": "c490ac2ac8d39c49667308ee2b5e815b",
+          "size": 19244,
           "type": "image/svg+xml"
         },
         "kiki-guide-listening.svg": {
@@ -131,8 +131,8 @@
         },
         "kiki-guide-unsure.svg": {
           "name": "kiki-guide-unsure.svg",
-          "blob": "04b5c4ccd0c7b0511e34ebfc4f0d75d5",
-          "size": 17563,
+          "blob": "c225a49ad64fa7d42fe9b3bec6aa51aa",
+          "size": 20002,
           "type": "image/svg+xml"
         },
         "kiki-pointer.svg": {
@@ -158,7 +158,7 @@
   "lastChange": {
     "by": "Arpan",
     "via": "Claude Code",
-    "at": "2026-10-11T13:03:56Z",
-    "note": "Kiki redrawn as a companion-cursor guide (Clicky-style): 13 guide moves on one worked circuit (look, path ahead, trace, connect, your turn, redirect, show me, ask, done, words, thinking, listening, unsure), a storyboard and a sheet. Old pointer-state SVGs replaced."
+    "at": "2026-10-12T17:45:00Z",
+    "note": "Mastery colours changed: green = concept, red = words, yellow = English, blue = lab (practical). README, tokens usage, bundle, component guides and all Kiki guide artwork updated; Kiki's four dots keep Google order."
   }
 }

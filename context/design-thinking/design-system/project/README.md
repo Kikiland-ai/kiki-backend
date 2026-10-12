@@ -1,4 +1,4 @@
-Breadboard is the design system for a bilingual Odia–English learning app for first-year engineering students. The app looks like a friendly electronics breadboard on graph paper, and Google's four colours appear only when the student earns them. A new student sees ink on `paper` with one spot of colour, Kiki's four dots. A student near mid-sem sees a map lit up in blue, red, yellow and green.
+Breadboard is the design system for a bilingual Odia–English learning app for first-year engineering students. The app looks like a friendly electronics breadboard on graph paper, and Google's four colours appear only when the student earns them. A new student sees ink on `paper` with one spot of colour, Kiki's four dots. A student near mid-sem sees a map lit up in green, red, yellow and blue.
 
 ## Content fundamentals
 
@@ -15,14 +15,14 @@ Colour is earned. Brand colour marks mastery and Kiki; everything else is `ink`,
 
 | Dimension | Fill token | Text token | Means |
 | --- | --- | --- | --- |
-| Concept | `blue` | `blue-ink` | "I understand it" |
+| Concept | `green` | `green-ink` | "I understand it" |
 | Words | `red` | `red-ink` | "I know what it's called" |
 | English | `yellow` | `yellow-ink` | "I can explain it in English" |
-| Lab | `green` | `green-ink` | "I can make it work" |
+| Lab (practical) | `blue` | `blue-ink` | "I can make it work" |
 
-- Always show the four dimensions in this order: blue, red, yellow, green (ring segments clockwise from the top, Kiki's dots, progress segments).
+- Always show the four dimensions in this order: concept, words, English, lab, which is green, red, yellow, blue (ring segments clockwise from the top, progress segments). Kiki's four dots keep Google's order (blue, red, yellow, green): they are Kiki's identity, not a progress readout. When Kiki leads with a dimension, the dot of that colour grows.
 - Use the fill tokens for shapes only. For text and icons use the `-ink` tokens, which meet 4.5:1 on `paper` and `paper-raised` in both themes. Never set text in `yellow` on paper. Text on a `yellow` fill is `on-yellow`.
-- `red` never means wrong; it means Words. `green` never means correct; it means Lab. A wrong answer is a dashed `pencil` outline. A correct answer lights up in the colour of the dimension being practised.
+- `red` never means wrong; it means Words. `green` never means correct on its own; it means Concept. Correct answers always carry a tick and a word as well as colour. A wrong answer is a dashed `pencil` outline. A correct answer lights up in the colour of the dimension being practised.
 - An owned term chip or sticker uses a `red-strong` fill with white text.
 - The primary button fill is `blue-ink` with `on-blue-ink` text, because `blue` with white text is below 4.5:1.
 - Lab mode is a scope: `scope-glass` background, `scope-grid` lines, `scope-trace` for output, `blue` for the student's prediction, `scope-text` for readouts.
@@ -64,7 +64,7 @@ Use Material Symbols Rounded (loaded from Google Fonts in `bundle.css`). Outline
 
 - Kiki uses two forms. The four dots are for presence: the avatar, the caption bar, loading. The pointer is for guidance: whenever Kiki points at, demonstrates or watches something on screen. The student's own cursor or finger is never replaced.
 - In a lesson, Kiki explains through `KikiWalkthrough`: a dark caption bar plays one sentence at a time (Odia first, English under it) while the pointer moves to the word or diagram part that sentence is about.
-- Kiki marks a word in one of five ways, always in the colour of the skill being taught: **sweep** (an underline draws under the word as it is said), **marker** (a highlighter stroke behind the word while the rest of the paragraph dims), **lens** (a card opens with the word at 28px, its Odia meaning and Hear it), **connect** (a dashed line from the word to the matching point on the diagram) and **circle** (a hand-drawn loop for exam vocabulary). Technical words are red, ideas blue, exam English yellow, lab controls green.
+- Kiki marks a word in one of five ways, always in the colour of the skill being taught: **sweep** (an underline draws under the word as it is said), **marker** (a highlighter stroke behind the word while the rest of the paragraph dims), **lens** (a card opens with the word at 28px, its Odia meaning and Hear it), **connect** (a dashed line from the word to the matching point on the diagram) and **circle** (a hand-drawn loop for exam vocabulary). Technical words are red, ideas green, exam English yellow, lab controls blue.
 - Words are never enlarged in place, so text never reflows. Only the lens zooms.
 - In the lab, Kiki follows `LabGuide`: show me once with a ghost drag, wait at the part for the student's turn, tilt and explain in one sentence after a wrong move, dim everything but the next control and tap it, then ask "why" at the output. The callout is always attached to the pointer.
 

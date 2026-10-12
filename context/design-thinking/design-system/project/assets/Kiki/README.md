@@ -8,7 +8,7 @@ Kiki's guide artwork: Kiki as a companion cursor that lives beside the student's
 - **Where Kiki came from:** the four dots trail behind the pointer along its flight path. A faint dotted line shows a longer flight, for example from beside the student's cursor.
 - **Kiki's eyes look at the next thing,** not at the student, so the gaze itself points the way.
 - **Kiki never covers the target.** It parks at the edge of the halo, and its marks run beside a wire or a line of text (a rail), never on top of the student's diagram.
-- **Colour is the skill:** blue for an idea, red for a technical term, yellow for exam English, green in the lab. Red never means wrong.
+- **Colour is the skill:** green for an idea, red for a technical term, yellow for exam English, blue in the lab. Red never means wrong.
 
 **Files** (each scene is 320 × 220 and uses the same worked example: R3 in series, then R1 and R2 in parallel):
 
@@ -34,4 +34,4 @@ Kiki's guide artwork: Kiki as a companion cursor that lives beside the student's
 
 Scenes animate gently where a browser shows them through an `<img>` (the halo pulses, the route ahead flows, the wait ring turns). A static copy shows the first frame, which is complete on its own.
 
-Inks: the pointer body is #1f1f1f with a #ffffff outline, white eyes with dark pupils, in every theme. The dots are always blue #4285f4, red #ea4335, yellow #fbbc05 and green #34a853, in that order. Source: `design-system/tools/build-kiki.js` regenerates every file.
+Inks: the pointer body is #1f1f1f with a #ffffff outline, white eyes with dark pupils, in every theme. The dots are always blue #4285f4, red #ea4335, yellow #fbbc05 and green #34a853, in that order: they are Kiki's identity, not the skill colours. Source: `design-system/tools/build-kiki.js` regenerates every file.

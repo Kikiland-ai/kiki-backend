@@ -31,12 +31,12 @@
     } catch (e) {}
   }
 
-  /* The four mastery dimensions, in ring order. */
+  /* The four mastery dimensions, in ring order. Concept is green, Lab (practical) is blue. */
   var DIMS = [
-    { key: "concept", name: "Concept", fill: "var(--blue, #4285f4)", ink: "var(--blue-ink, #1967d2)" },
+    { key: "concept", name: "Concept", fill: "var(--green, #34a853)", ink: "var(--green-ink, #137333)" },
     { key: "words", name: "Words", fill: "var(--red, #ea4335)", ink: "var(--red-ink, #c5221f)" },
     { key: "english", name: "English", fill: "var(--yellow, #fbbc05)", ink: "var(--yellow-ink, #9a5500)" },
-    { key: "lab", name: "Lab", fill: "var(--green, #34a853)", ink: "var(--green-ink, #137333)" }
+    { key: "lab", name: "Lab", fill: "var(--blue, #4285f4)", ink: "var(--blue-ink, #1967d2)" }
   ];
 
   /* Sample content: the worked example used across previews. Odia copy needs native-speaker review. */
@@ -94,7 +94,8 @@
     var state = KIKI_POS[props.state] ? props.state : "idle";
     var size = props.size || 64;
     var lead = props.lead; /* "concept" | "words" | "english" | "lab": that dot leads */
-    var leadIndex = DIMS.map(function (d) { return d.key; }).indexOf(lead);
+    var leadDim = DIMS.filter(function (d) { return d.key === lead; })[0];
+    var leadIndex = leadDim ? KIKI_COLORS.indexOf(leadDim.fill) : -1;
     var pos = KIKI_POS[state];
     var rot = state === "pointing" && props.direction ? props.direction : 0;
     return h("svg", { className: cx("bb-kiki", "bb-kiki-" + state, props.className), width: size, height: size, viewBox: "0 0 64 64", role: "img", "aria-label": props.label || KIKI_LABELS[state] },
@@ -270,7 +271,7 @@
       h("div", { className: "bb-explore-figs" },
         h("svg", { viewBox: "0 0 160 150", role: "img", "aria-label": "Circuit: battery, resistor and diode in a loop" },
           h("rect", { x: 20, y: 20, width: 120, height: 100, rx: 10, fill: "none", stroke: "var(--pencil, #5f6368)", strokeWidth: 2.5 }),
-          speed ? h("rect", { className: "bb-current", x: 20, y: 20, width: 120, height: 100, rx: 10, fill: "none", stroke: "var(--blue, #4285f4)", strokeWidth: 4, style: { animationDuration: speed + "s" } }) : null,
+          speed ? h("rect", { className: "bb-current", x: 20, y: 20, width: 120, height: 100, rx: 10, fill: "none", stroke: "var(--green, #34a853)", strokeWidth: 4, style: { animationDuration: speed + "s" } }) : null,
           h("rect", { x: 8, y: 54, width: 24, height: 32, fill: "var(--paper-raised, #ffffff)" }),
           h("line", { x1: 10, y1: 62, x2: 30, y2: 62, stroke: "var(--ink, #1f1f1f)", strokeWidth: 3 }),
           h("line", { x1: 14, y1: 72, x2: 26, y2: 72, stroke: "var(--ink, #1f1f1f)", strokeWidth: 3 }),
@@ -279,18 +280,18 @@
           h("text", { x: 80, y: 44, fontSize: 10, fill: "var(--pencil, #5f6368)", textAnchor: "middle" }, "R"),
           h("g", { transform: "translate(140,70)" },
             h("rect", { x: -12, y: -14, width: 24, height: 28, fill: "var(--paper-raised, #ffffff)" }),
-            h("polygon", { points: "-9,-10 9,-10 0,6", fill: i > 0.05 ? "var(--blue, #4285f4)" : "var(--paper-raised, #ffffff)", stroke: "var(--ink, #1f1f1f)", strokeWidth: 2 }),
+            h("polygon", { points: "-9,-10 9,-10 0,6", fill: i > 0.05 ? "var(--green, #34a853)" : "var(--paper-raised, #ffffff)", stroke: "var(--ink, #1f1f1f)", strokeWidth: 2 }),
             h("line", { x1: -10, y1: 7, x2: 10, y2: 7, stroke: "var(--ink, #1f1f1f)", strokeWidth: 2.5 })),
           h("text", { x: 128, y: 104, fontSize: 10, fill: "var(--pencil, #5f6368)", textAnchor: "end" }, "diode")),
         h("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": "V-I curve of a silicon diode" },
           h("line", { x1: X(vmin), y1: Y(0), x2: X(vmax), y2: Y(0), stroke: "var(--line, #d9d6cf)", strokeWidth: 1.5 }),
           h("line", { x1: X(0), y1: 10, x2: X(0), y2: H - 22, stroke: "var(--line, #d9d6cf)", strokeWidth: 1.5 }),
-          h("line", { x1: X(0.7), y1: 10, x2: X(0.7), y2: H - 22, stroke: "var(--blue-ink, #1967d2)", strokeWidth: 1, strokeDasharray: "3 4", opacity: 0.6 }),
-          h("text", { x: X(0.7), y: H - 8, fontSize: 10, fill: "var(--blue-ink, #1967d2)", textAnchor: "middle", fontFamily: "Roboto Mono, monospace" }, "0.7 V"),
+          h("line", { x1: X(0.7), y1: 10, x2: X(0.7), y2: H - 22, stroke: "var(--green-ink, #137333)", strokeWidth: 1, strokeDasharray: "3 4", opacity: 0.6 }),
+          h("text", { x: X(0.7), y: H - 8, fontSize: 10, fill: "var(--green-ink, #137333)", textAnchor: "middle", fontFamily: "Roboto Mono, monospace" }, "0.7 V"),
           h("text", { x: X(vmin), y: H - 8, fontSize: 10, fill: "var(--pencil, #5f6368)", fontFamily: "Roboto Mono, monospace" }, "-2 V"),
           h("text", { x: X(0) + 4, y: 16, fontSize: 10, fill: "var(--pencil, #5f6368)", fontFamily: "Roboto Mono, monospace" }, "I (mA)"),
           h("polyline", { points: pts.join(" "), fill: "none", stroke: "var(--ink, #1f1f1f)", strokeWidth: 2 }),
-          h("circle", { cx: X(v), cy: Y(i), r: 6, fill: "var(--blue, #4285f4)", stroke: "var(--paper-raised, #ffffff)", strokeWidth: 2 }))),
+          h("circle", { cx: X(v), cy: Y(i), r: 6, fill: "var(--green, #34a853)", stroke: "var(--paper-raised, #ffffff)", strokeWidth: 2 }))),
       h("label", { className: "bb-label", htmlFor: props.id || "bb-diode-v" }, "Voltage across the diode"),
       h("input", { id: props.id || "bb-diode-v", type: "range", min: -2, max: 1, step: 0.01, value: v, onChange: function (e) { setV(parseFloat(e.target.value)); } }),
       h("div", { className: "bb-explore-read bb-mono" }, h("span", null, "V = " + v.toFixed(2) + " V"), h("span", null, "I = " + (i < 0.01 ? "0.00" : Math.min(i, 99).toFixed(2)) + " mA")),
@@ -521,7 +522,7 @@
     return h("div", { className: cx("bb-fault", fixed && "bb-fault-fixed", props.className) },
       h("div", { className: "bb-fault-head" },
         h("span", { className: "bb-fault-type" }, icon("build"), (props.type || "Flipped").toUpperCase()),
-        h("span", { className: "bb-label", style: { color: fixed ? "var(--green-ink, #137333)" : "var(--pencil, #5f6368)" } }, fixed ? "Fixed" : "Your lab partner changed something")),
+        h("span", { className: "bb-label", style: { color: fixed ? "var(--blue-ink, #1967d2)" : "var(--pencil, #5f6368)" } }, fixed ? "Fixed" : "Your lab partner changed something")),
       h("div", { style: { fontSize: 15 } }, h("b", null, "Symptom: "), props.symptom || "Only the negative half-cycles appear on the scope."),
       fixed ? h("div", { style: { fontSize: 15 } }, icon("check_circle", true), " ", props.fixedMessage || "Fixed. Now explain in English why the output changed.")
         : h(React.Fragment, null,
@@ -612,7 +613,8 @@
   function KikiPointer(props) {
     var state = KP_DOTS[props.state] ? props.state : "idle";
     var size = props.size || 64;
-    var leadIndex = DIMS.map(function (d) { return d.key; }).indexOf(props.lead);
+    var leadDim = DIMS.filter(function (d) { return d.key === props.lead; })[0];
+    var leadIndex = leadDim ? KIKI_COLORS.indexOf(leadDim.fill) : -1;
     var leadColor = leadIndex >= 0 ? KIKI_COLORS[leadIndex] : KIKI_COLORS[0];
     var dots = KP_DOTS[state];
     var eyes;
@@ -632,7 +634,7 @@
       state === "tapping" ? h("circle", { className: "kp-ripple", cx: 12, cy: 8, r: 9, fill: "none", stroke: leadColor, strokeWidth: 3 }) : null,
       state === "thinking" ? h("g", { className: "kp-orbit" }, dotEls) : h("g", null, dotEls),
       h("g", { className: "kp-body" },
-        state === "dragging" ? h("rect", { x: 2, y: 0, width: 22, height: 12, rx: 4, fill: "var(--green-tint, #e6f4ea)", stroke: "var(--green, #34a853)", strokeWidth: 2, opacity: 0.95 }) : null,
+        state === "dragging" ? h("rect", { x: 2, y: 0, width: 22, height: 12, rx: 4, fill: "var(--blue-tint, #e8f0fe)", stroke: "var(--blue, #4285f4)", strokeWidth: 2, opacity: 0.95 }) : null,
         h("path", { d: KP_BODY, fill: "#1f1f1f", stroke: "#ffffff", strokeWidth: 3, strokeLinejoin: "round" }),
         eyes));
   }
@@ -659,7 +661,7 @@
       h("line", { x1: 105, y1: 10, x2: 105, y2: 104, stroke: "var(--line, #d9d6cf)", strokeWidth: 1.5 }),
       h("polyline", { points: pts.join(" "), fill: "none", stroke: "var(--ink, #1f1f1f)", strokeWidth: 2 }),
       h("text", { x: kx, y: 113, fontSize: 9, textAnchor: "middle", fill: "var(--pencil, #5f6368)", fontFamily: "Roboto Mono, monospace" }, "0.7 V"),
-      h("circle", { "data-kk-point": "knee", cx: kx, cy: 100 - diodeCurrent(0.7) / 20 * 84, r: 4, fill: "var(--blue, #4285f4)" }));
+      h("circle", { "data-kk-point": "knee", cx: kx, cy: 100 - diodeCurrent(0.7) / 20 * 84, r: 4, fill: "var(--green, #34a853)" }));
   }
   function KikiWalkthrough(props) {
     var data = props.data || WALK_SAMPLE;

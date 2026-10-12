@@ -14,7 +14,7 @@ How Kiki marks a word. One action per narration sentence, in the colour of the s
 | connect | the word is marked and a dashed line runs from it to the matching point on the diagram, which pulses | linking a word to the graph or circuit |
 | circle | a hand-drawn loop around the word | exam vocabulary or a word to say exactly |
 
-Colours: technical words red (Words), ideas and phrases blue (Concept), exam English yellow (English), lab controls green (Lab). Text is never enlarged in place, so the paragraph never reflows. Only the lens zooms.
+Colours: technical words red (Words), ideas and phrases green (Concept), exam English yellow (English), lab controls blue (Lab). Text is never enlarged in place, so the paragraph never reflows. Only the lens zooms.
 
 - Do: write one sentence per step, at most 18 words, Odia first with the English line under it, following the dial.
 - Do: let the student pause, step back and tap any word at any time; the walkthrough is a guide, not a video.

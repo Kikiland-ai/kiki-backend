@@ -1,6 +1,6 @@
 # Backend implementation continuation
 
-Status: Context imported; application implementation not started
+Status: Context imported and committed locally; remote creation/push blocked; application implementation not started
 
 ## Objective
 
@@ -30,3 +30,15 @@ Trial real mixed-language synthesis; generate one reviewed GIF plus editable sce
 ## Session log and exact next action
 
 Initial next action: run source/BB8 checks, read the first-session prompt, and scaffold the first API slice. Replace this section with actual checks, current failures, changed files, and a concrete continuation point before ending each substantive session.
+
+## Setup execution: 12 October 2026
+
+- Source snapshot: 130 product files pinned to `f4919cbcb5bde0ca011bb68180c8800c9772b894`; integrity check passed.
+- BB8 package and discovery checks passed; 11 reference-adapter and 18 provisioning tests passed. All three copied ledgers validate (diode exam weights remain estimates).
+- Local Git repo is initialized on `main`, with remote `https://github.com/Kikiland-ai/kiki-backend.git` and committed starter files.
+- GitHub CLI creation returned `Forbidden`; pushing this starter returned `Repository not found`. Remote hosting/CI therefore remain unverified.
+- Once an empty private remote is created and this identity has access, run `git push -u origin main` from this repo. Then select this repo/branch in the new environment and follow SETUP.md.
+- No API, npm dependencies/lockfile, real providers, audio/graphics engine, or Simulink connection has been implemented.
+- One pre-existing missing UX reference is documented in `context/KNOWN-GAPS.md`.
+
+Next implementation action after remote/environment setup: read SETUP.md's first-session prompt, scaffold the validated API/fixture slice, and record actual checks here.

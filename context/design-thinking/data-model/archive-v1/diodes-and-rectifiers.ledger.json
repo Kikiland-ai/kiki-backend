@@ -1,0 +1,801 @@
+{
+  "version": "1.0.0",
+  "course": {
+    "id": "CRS-BE-ECE1",
+    "title": "Basic Electronics",
+    "branch": "Electronics",
+    "semester": 1,
+    "sourceLanguage": "en",
+    "studentLanguage": "or",
+    "lessonPlanIds": ["LP-DR"]
+  },
+  "lessonPlan": {
+    "id": "LP-DR",
+    "courseId": "CRS-BE-ECE1",
+    "title": "Diodes and rectifiers",
+    "governingQuestion": "How does a diode-based power supply turn AC from the wall into steady DC, and how do we analyse each stage?",
+    "canDo": "Explain, calculate and design each stage of a simple AC-to-DC power supply, and write it in exam-ready English.",
+    "objectiveId": "O-0",
+    "mece": {
+      "dimension": "Stage of the AC-to-DC power-supply chain: the device, then rectify, filter, regulate",
+      "rationale": "Each stage changes the signal in exactly one way: the diode switches, the rectifier makes it one-directional, the filter smooths it, the regulator holds it constant. A linear power supply is exactly these four stages, so every chapter topic belongs to one stage and no stage is missing.",
+      "outOfScope": ["Transistors and amplifiers (next chapter)", "Clipper and clamper circuits", "Switched-mode power supplies", "LEDs, photodiodes and other special diodes beyond the Zener"]
+    },
+    "broadConceptIds": ["BC-1", "BC-2", "BC-3", "BC-4"],
+    "syllabusLines": [
+      { "id": "S-1", "text": "PN junction diode: formation of the depletion region, barrier potential", "conceptIds": ["C-1.1"] },
+      { "id": "S-2", "text": "Forward and reverse bias; V-I characteristics", "conceptIds": ["C-1.2", "C-1.3"] },
+      { "id": "S-3", "text": "Diode equivalent circuits (models)", "conceptIds": ["C-1.4"] },
+      { "id": "S-4", "text": "Half-wave and full-wave rectifiers (centre-tap and bridge)", "conceptIds": ["C-2.1", "C-2.2", "C-2.3"] },
+      { "id": "S-5", "text": "Ripple factor, rectification efficiency, peak inverse voltage", "conceptIds": ["C-2.4"] },
+      { "id": "S-6", "text": "Capacitor filter", "conceptIds": ["C-3.1", "C-3.2"] },
+      { "id": "S-7", "text": "Zener diode; Zener diode as a voltage regulator", "conceptIds": ["C-4.1", "C-4.2"] }
+    ],
+    "estMinutes": 159,
+    "sources": [
+      { "kind": "curated", "label": "Team-curated worked example for the demo" },
+      { "kind": "syllabus", "label": "Typical first-year Basic Electronics syllabus lines; replace with the uploaded syllabus" }
+    ]
+  },
+  "broadConcepts": [
+    {
+      "id": "BC-1", "lessonPlanId": "LP-DR", "order": 1,
+      "title": "The PN junction diode",
+      "governingQuestion": "What is a diode, how does it behave, and how do we model it in a circuit?",
+      "objectiveId": "O-1",
+      "mece": {
+        "dimension": "Level of description of the diode: physical structure, bias behaviour, measured characteristic, circuit model",
+        "rationale": "Each level answers a different question (why, what happens, what we measure, how we calculate) and together they are everything the later stages need from the diode.",
+        "outOfScope": ["Band diagrams and carrier transport equations", "Diode capacitance and switching speed"]
+      },
+      "conceptIds": ["C-1.1", "C-1.2", "C-1.3", "C-1.4"]
+    },
+    {
+      "id": "BC-2", "lessonPlanId": "LP-DR", "order": 2,
+      "title": "Rectification: AC to pulsating DC",
+      "governingQuestion": "How do diode circuits make current flow in one direction, and how do we compare them?",
+      "objectiveId": "O-2",
+      "mece": {
+        "dimension": "What a student must know about rectifiers: each circuit's working (three topologies), then the shared measures that compare them",
+        "rationale": "The three circuits don't overlap: one diode, two diodes with a centre tap, four diodes in a bridge. The figures of merit are taught once in their own concept instead of being repeated inside each circuit, which keeps the circuit concepts exclusive.",
+        "outOfScope": ["Polyphase rectifiers", "Controlled (SCR) rectifiers"]
+      },
+      "conceptIds": ["C-2.1", "C-2.2", "C-2.3", "C-2.4"]
+    },
+    {
+      "id": "BC-3", "lessonPlanId": "LP-DR", "order": 3,
+      "title": "Filtering: pulsating DC to smooth DC",
+      "governingQuestion": "How does a capacitor smooth rectified DC, and how big must it be?",
+      "objectiveId": "O-3",
+      "mece": {
+        "dimension": "Qualitative versus quantitative: how the filter works, then how much ripple it leaves",
+        "rationale": "The first concept builds the picture, the second turns it into numbers for design; nothing about the capacitor filter falls outside these two.",
+        "outOfScope": ["LC and pi filters"]
+      },
+      "conceptIds": ["C-3.1", "C-3.2"]
+    },
+    {
+      "id": "BC-4", "lessonPlanId": "LP-DR", "order": 4,
+      "title": "Regulation: smooth DC to constant DC",
+      "governingQuestion": "How does a Zener diode hold the output voltage constant?",
+      "objectiveId": "O-4",
+      "mece": {
+        "dimension": "The device versus the circuit that uses it",
+        "rationale": "First the Zener diode on its own (breakdown and its characteristic), then the regulator built from it; the two don't overlap and together cover the topic.",
+        "outOfScope": ["IC voltage regulators such as the 78xx series", "Transistor series regulators"]
+      },
+      "conceptIds": ["C-4.1", "C-4.2"]
+    }
+  ],
+  "objectives": [
+    { "id": "O-0", "statement": "Explain and analyse how a diode-based power supply turns AC into steady DC.", "bloom": "analyse", "parentId": null, "ownerId": "LP-DR" },
+    { "id": "O-1", "statement": "Explain how a PN junction diode behaves and model it in circuits.", "bloom": "apply", "parentId": "O-0", "ownerId": "BC-1" },
+    { "id": "O-2", "statement": "Explain and compare rectifier circuits that turn AC into pulsating DC.", "bloom": "analyse", "parentId": "O-0", "ownerId": "BC-2" },
+    { "id": "O-3", "statement": "Explain how a capacitor filter smooths rectified DC and size it for a ripple target.", "bloom": "apply", "parentId": "O-0", "ownerId": "BC-3" },
+    { "id": "O-4", "statement": "Explain how a Zener diode holds a constant DC voltage and design a simple regulator.", "bloom": "apply", "parentId": "O-0", "ownerId": "BC-4" },
+    { "id": "O-1.1", "statement": "Explain how the depletion region and barrier potential form in a PN junction.", "bloom": "understand", "parentId": "O-1", "ownerId": "C-1.1" },
+    { "id": "O-1.2", "statement": "Explain the effect of forward and reverse bias on the depletion region and the current.", "bloom": "understand", "parentId": "O-1", "ownerId": "C-1.2" },
+    { "id": "O-1.3", "statement": "Draw and interpret the V-I characteristic of a silicon diode.", "bloom": "apply", "parentId": "O-1", "ownerId": "C-1.3" },
+    { "id": "O-1.4", "statement": "Choose a diode model and calculate the current in a simple diode circuit.", "bloom": "apply", "parentId": "O-1", "ownerId": "C-1.4" },
+    { "id": "O-2.1", "statement": "Explain the working of a half-wave rectifier and sketch its waveforms.", "bloom": "understand", "parentId": "O-2", "ownerId": "C-2.1" },
+    { "id": "O-2.2", "statement": "Explain the working of a centre-tap full-wave rectifier and state the PIV of its diodes.", "bloom": "understand", "parentId": "O-2", "ownerId": "C-2.2" },
+    { "id": "O-2.3", "statement": "Explain the working of a bridge rectifier and compare it with the centre-tap rectifier.", "bloom": "analyse", "parentId": "O-2", "ownerId": "C-2.3" },
+    { "id": "O-2.4", "statement": "Define and calculate rectifier figures of merit: average and RMS values, ripple factor, efficiency and PIV.", "bloom": "apply", "parentId": "O-2", "ownerId": "C-2.4" },
+    { "id": "O-3.1", "statement": "Explain how a capacitor filter smooths the output of a rectifier.", "bloom": "understand", "parentId": "O-3", "ownerId": "C-3.1" },
+    { "id": "O-3.2", "statement": "Estimate the ripple voltage and choose a filter capacitor.", "bloom": "apply", "parentId": "O-3", "ownerId": "C-3.2" },
+    { "id": "O-4.1", "statement": "Explain Zener and avalanche breakdown and the Zener diode's reverse characteristic.", "bloom": "understand", "parentId": "O-4", "ownerId": "C-4.1" },
+    { "id": "O-4.2", "statement": "Design a Zener voltage regulator and explain how it holds the output constant.", "bloom": "apply", "parentId": "O-4", "ownerId": "C-4.2" }
+  ],
+  "terms": [
+    { "id": "T-pn-junction", "en": "PN junction", "definition": "The boundary where p-type and n-type semiconductor meet.", "ownerConceptId": "C-1.1" },
+    { "id": "T-majority-carrier", "en": "majority carriers", "definition": "The more numerous charge carriers: holes in p-type, electrons in n-type.", "ownerConceptId": "C-1.1" },
+    { "id": "T-depletion-region", "en": "depletion region", "definition": "The layer at the junction with no free carriers, only fixed ions.", "ownerConceptId": "C-1.1" },
+    { "id": "T-barrier-potential", "en": "barrier potential", "definition": "The voltage across the depletion region that opposes diffusion: about 0.7 V in silicon.", "ownerConceptId": "C-1.1" },
+    { "id": "T-forward-bias", "en": "forward bias", "definition": "Applying voltage with the p-side positive, so the diode conducts.", "odiaGloss": "ଯେତେବେଳେ p-side କୁ positive voltage ଦିଆଯାଏ", "ownerConceptId": "C-1.2" },
+    { "id": "T-reverse-bias", "en": "reverse bias", "definition": "Applying voltage with the p-side negative, so the diode blocks current.", "odiaGloss": "ଯେତେବେଳେ n-side କୁ positive voltage ଦିଆଯାଏ", "ownerConceptId": "C-1.2" },
+    { "id": "T-conduct", "en": "conducts", "definition": "Lets current flow. The exam word for a diode in forward bias.", "odiaGloss": "current ଯିବାକୁ ଦିଏ", "ownerConceptId": "C-1.2" },
+    { "id": "T-vi-characteristic", "en": "V-I characteristic", "definition": "The graph of diode current against the voltage across it.", "ownerConceptId": "C-1.3" },
+    { "id": "T-cut-in-voltage", "en": "cut-in voltage", "definition": "The forward voltage above which current rises sharply: about 0.7 V for silicon.", "odiaGloss": "ଯେଉଁ voltage ପରେ diode ରେ current ବହିବା ଆରମ୍ଭ ହୁଏ", "ownerConceptId": "C-1.3" },
+    { "id": "T-reverse-saturation-current", "en": "reverse saturation current", "definition": "The tiny, nearly constant current in reverse bias, due to minority carriers.", "ownerConceptId": "C-1.3" },
+    { "id": "T-breakdown-voltage", "en": "breakdown voltage", "definition": "The reverse voltage at which reverse current rises sharply.", "ownerConceptId": "C-1.3" },
+    { "id": "T-ideal-diode", "en": "ideal diode model", "definition": "A short circuit in forward bias and an open circuit in reverse bias.", "ownerConceptId": "C-1.4" },
+    { "id": "T-constant-drop", "en": "constant-voltage-drop model", "definition": "A conducting diode modelled as a fixed 0.7 V drop (silicon).", "ownerConceptId": "C-1.4" },
+    { "id": "T-forward-resistance", "en": "forward resistance", "definition": "The small resistance of a conducting diode, added in the piecewise-linear model.", "ownerConceptId": "C-1.4" },
+    { "id": "T-rectifier", "en": "rectifier", "definition": "A circuit that converts AC into DC.", "ownerConceptId": "C-2.1" },
+    { "id": "T-half-wave", "en": "half-wave rectifier", "definition": "A one-diode rectifier that passes only one half of each AC cycle.", "ownerConceptId": "C-2.1" },
+    { "id": "T-pulsating-dc", "en": "pulsating DC", "definition": "Current in one direction that rises and falls in pulses.", "ownerConceptId": "C-2.1" },
+    { "id": "T-centre-tap", "en": "centre-tap transformer", "definition": "A transformer whose secondary has a connection at its midpoint.", "ownerConceptId": "C-2.2" },
+    { "id": "T-full-wave", "en": "full-wave rectifier", "definition": "A rectifier that uses both halves of each AC cycle.", "ownerConceptId": "C-2.2" },
+    { "id": "T-bridge-rectifier", "en": "bridge rectifier", "definition": "A full-wave rectifier of four diodes that needs no centre-tapped transformer.", "ownerConceptId": "C-2.3" },
+    { "id": "T-average-value", "en": "average (DC) value", "definition": "The steady value a DC meter reads.", "ownerConceptId": "C-2.4" },
+    { "id": "T-rms", "en": "RMS value", "definition": "The effective value of a waveform, including its AC part.", "ownerConceptId": "C-2.4" },
+    { "id": "T-ripple-factor", "en": "ripple factor", "definition": "RMS value of the AC part of the output divided by its DC value.", "ownerConceptId": "C-2.4" },
+    { "id": "T-rectification-efficiency", "en": "rectification efficiency", "definition": "DC output power divided by AC input power.", "ownerConceptId": "C-2.4" },
+    { "id": "T-piv", "en": "peak inverse voltage (PIV)", "definition": "The largest reverse voltage a diode must withstand in a circuit.", "ownerConceptId": "C-2.4" },
+    { "id": "T-capacitor-filter", "en": "capacitor filter", "definition": "A large capacitor across the load that smooths rectified DC.", "ownerConceptId": "C-3.1" },
+    { "id": "T-ripple", "en": "ripple", "definition": "The small AC variation left on a DC output.", "ownerConceptId": "C-3.1" },
+    { "id": "T-ripple-voltage", "en": "peak-to-peak ripple voltage", "definition": "The difference between the highest and lowest output voltage.", "ownerConceptId": "C-3.2" },
+    { "id": "T-zener-diode", "en": "Zener diode", "definition": "A heavily doped diode designed to work in reverse breakdown.", "ownerConceptId": "C-4.1" },
+    { "id": "T-zener-voltage", "en": "Zener voltage", "definition": "The reverse voltage at which a Zener diode breaks down and holds the voltage nearly constant.", "ownerConceptId": "C-4.1" },
+    { "id": "T-zener-breakdown", "en": "Zener breakdown", "definition": "Breakdown at low voltage, where a strong field pulls electrons out of their bonds.", "ownerConceptId": "C-4.1" },
+    { "id": "T-avalanche-breakdown", "en": "avalanche breakdown", "definition": "Breakdown at higher voltage, where fast carriers knock out more carriers in a chain.", "ownerConceptId": "C-4.1" },
+    { "id": "T-voltage-regulator", "en": "voltage regulator", "definition": "A circuit that holds its output voltage constant.", "ownerConceptId": "C-4.2" },
+    { "id": "T-series-resistor", "en": "series resistor", "definition": "The resistor Rs that drops the difference between input and Zener voltage.", "ownerConceptId": "C-4.2" },
+    { "id": "T-load-regulation", "en": "load regulation", "definition": "The ability to keep the output voltage constant as the load current changes.", "ownerConceptId": "C-4.2" }
+  ],
+  "labs": [
+    { "id": "LAB-RECT", "title": "Half-wave rectifier with a capacitor filter (browser simulator)", "conceptIds": ["C-2.1", "C-3.1"] }
+  ],
+  "concepts": [
+    {
+      "id": "C-1.1", "broadConceptId": "BC-1", "order": 1,
+      "title": "PN junction and the depletion region",
+      "canDo": "Explain how a depletion region forms when p-type and n-type silicon meet.",
+      "objectiveIds": ["O-1.1"], "prerequisiteIds": [],
+      "termIds": ["T-pn-junction", "T-majority-carrier", "T-depletion-region", "T-barrier-potential"],
+      "misconceptions": [
+        { "id": "M-1.1-a", "statement": "The depletion region is full of free electrons.", "correction": "It has almost no free carriers; only fixed ions remain." },
+        { "id": "M-1.1-b", "statement": "The barrier potential can be measured with a voltmeter across the diode.", "correction": "It is internal; the contact potentials at the terminals cancel it out." }
+      ],
+      "explanation": {
+        "keyIdea": "Carriers cross the junction and recombine, leaving fixed ions whose field builds a barrier of about 0.7 V in silicon.",
+        "text": "A PN junction forms where p-type silicon (majority carriers: holes) meets n-type silicon (majority carriers: electrons). Electrons diffuse from the n-side into the p-side and recombine with holes, and holes diffuse the other way. This leaves a thin layer near the junction with no free carriers, only fixed ions: negative ions on the p-side and positive ions on the n-side. This layer is the depletion region. The fixed ions create an electric field that opposes further diffusion, so a barrier potential builds up, about 0.7 V for silicon and 0.3 V for germanium. At equilibrium, diffusion stops.",
+        "modalities": {
+          "textImage": { "diagram": { "kind": "physical", "description": "A bar split into p (left, holes as small circles) and n (right, electrons as dots). A shaded middle strip labelled 'depletion region' with minus signs on the p-side and plus signs on the n-side, a field arrow from n to p, and a small potential-hill graph below marked 0.7 V.", "alt": "PN junction with the depletion region, fixed ions, electric field and a 0.7 V barrier" } },
+          "voice": { "walkthrough": [
+            { "target": "PN junction", "mark": "sweep", "dim": "words", "en": "A PN junction is where p-type and n-type silicon meet." },
+            { "target": "depletion region", "mark": "lens", "dim": "words", "en": "Carriers recombine near the junction and leave only fixed ions: the depletion region." },
+            { "target": "opposes further diffusion", "mark": "marker", "dim": "concept", "en": "The field of those ions opposes further diffusion, so the junction settles." },
+            { "target": "barrier potential", "mark": "marker", "dim": "words", "en": "That field is the barrier potential: about 0.7 V in silicon." }
+          ] },
+          "video": { "format": "generated_clip", "durationSec": 18, "beats": ["Holes and electrons drift towards the junction", "They meet and vanish in pairs near the junction", "Fixed ions remain and a field arrow grows", "Diffusion stops: the depletion region has formed"] }
+        },
+        "defaultModality": "voice"
+      },
+      "example": { "title": "Two crowded rooms with an open door", "scenario": "Open a door between a room of people (holes) and a room of different people (electrons). People cross and pair off near the door, leaving an empty strip guarded by people who cannot move. Soon the guards stop anyone else from crossing.", "takeaway": "The empty strip is the depletion region, and the guards' push-back is the barrier potential." },
+      "workedQuestion": {
+        "id": "W-1.1", "type": "long_answer", "marks": 5,
+        "prompt": "Explain the formation of the depletion region in a PN junction with a neat diagram.",
+        "modelAnswer": [
+          "A PN junction is formed when a p-type semiconductor is joined to an n-type semiconductor.",
+          "In the p-type region holes are the majority carriers; in the n-type region electrons are the majority carriers.",
+          "Because of the concentration difference, electrons diffuse from the n-side to the p-side and holes diffuse from the p-side to the n-side, where they recombine.",
+          "Recombination leaves immobile negative acceptor ions on the p-side and immobile positive donor ions on the n-side near the junction. This region, with no free charge carriers, is called the depletion region.",
+          "These ions set up an electric field from the n-side to the p-side that opposes further diffusion. The resulting potential difference is the barrier potential: about 0.7 V for silicon and 0.3 V for germanium.",
+          "(Diagram: p and n regions, the depletion region with − and + ions, the field arrow and the barrier potential.)"
+        ],
+        "rubric": [
+          { "criterion": "Defines the PN junction and names the majority carriers", "marks": 1 },
+          { "criterion": "Explains diffusion and recombination", "marks": 1 },
+          { "criterion": "Explains the immobile ions and names the depletion region", "marks": 1 },
+          { "criterion": "Explains the field and the barrier potential with values", "marks": 1 },
+          { "criterion": "Neat, labelled diagram", "marks": 1 }
+        ],
+        "examVocabulary": ["T-depletion-region", "T-barrier-potential", "T-majority-carrier"]
+      },
+      "checks": [
+        { "id": "Q-1.1-a", "type": "mcq", "dimension": "concept", "prompt": "The depletion region mainly contains:", "options": ["Free electrons", "Free holes", "Immobile ions", "Equal numbers of free electrons and holes"], "answer": "Immobile ions", "explanation": "Free carriers recombine near the junction; only the fixed ions remain.", "objectiveIds": ["O-1.1"], "difficulty": 1 },
+        { "id": "Q-1.1-b", "type": "term_match", "dimension": "words", "prompt": "Match the term: barrier potential", "options": ["The voltage across the depletion region that opposes diffusion", "The voltage of the battery", "The current through the diode"], "answer": "The voltage across the depletion region that opposes diffusion", "explanation": "It is an internal voltage set up by the fixed ions.", "objectiveIds": ["O-1.1"], "difficulty": 1 },
+        { "id": "Q-1.1-c", "type": "mcq", "dimension": "concept", "prompt": "The barrier potential of a silicon junction at room temperature is about:", "options": ["0.3 V", "0.7 V", "1.5 V", "5 V"], "answer": "0.7 V", "explanation": "Silicon: about 0.7 V. Germanium: about 0.3 V.", "objectiveIds": ["O-1.1"], "difficulty": 1 },
+        { "id": "Q-1.1-d", "type": "short_english", "dimension": "english", "prompt": "In one sentence, explain why diffusion stops at a PN junction.", "answer": "The electric field of the immobile ions in the depletion region opposes further diffusion of carriers.", "explanation": "Key words to use: electric field, immobile ions, opposes, diffusion.", "objectiveIds": ["O-1.1"], "difficulty": 2, "marks": 2 }
+      ],
+      "examWeight": { "askedIn": 2, "outOf": 5, "note": "Sample weight; replace with real past-paper counts" },
+      "estMinutes": 12,
+      "language": { "status": "to_generate", "dialLevels": [1, 2, 3, 4, 5] }
+    },
+    {
+      "id": "C-1.2", "broadConceptId": "BC-1", "order": 2,
+      "title": "Forward and reverse bias",
+      "canDo": "Explain why a diode conducts in forward bias and blocks in reverse bias.",
+      "objectiveIds": ["O-1.2"], "prerequisiteIds": ["C-1.1"],
+      "termIds": ["T-forward-bias", "T-reverse-bias", "T-conduct"],
+      "misconceptions": [
+        { "id": "M-1.2-a", "statement": "Reverse current is exactly zero.", "correction": "A tiny reverse saturation current of minority carriers flows." },
+        { "id": "M-1.2-b", "statement": "Any forward voltage makes a diode conduct strongly.", "correction": "A silicon diode conducts strongly only above about 0.7 V." },
+        { "id": "M-1.2-c", "statement": "It doesn't matter which way round the diode is connected.", "correction": "The orientation decides whether it is forward or reverse biased.", "faultType": "Flipped" }
+      ],
+      "explanation": {
+        "keyIdea": "Forward bias narrows the depletion region so the diode conducts; reverse bias widens it so the diode blocks.",
+        "text": "Biasing means applying an external voltage to the diode. In forward bias, the p-side is connected to the positive terminal. This pushes carriers towards the junction, narrows the depletion region and lowers the barrier, so once the applied voltage is above about 0.7 V the diode conducts a large current. In reverse bias, the p-side is connected to the negative terminal. Carriers are pulled away from the junction, the depletion region widens and the barrier rises, so the diode blocks current. Only a tiny reverse saturation current of minority carriers flows, in nanoamperes for silicon.",
+        "modalities": {
+          "textImage": { "diagram": { "kind": "circuit", "description": "Two circuits side by side. Left: battery positive to the p-side, a narrow depletion strip, a current arrow and a lit bulb. Right: battery negative to the p-side, a wide depletion strip, no current, bulb off.", "alt": "Forward-biased diode lighting a bulb next to a reverse-biased diode with the bulb off" } },
+          "voice": { "walkthrough": [
+            { "target": "forward bias", "mark": "sweep", "dim": "words", "en": "In forward bias, the p-side goes to the positive terminal." },
+            { "target": "narrows the depletion region", "mark": "marker", "dim": "concept", "en": "That narrows the depletion region and lowers the barrier." },
+            { "target": "conducts", "mark": "circle", "dim": "english", "en": "Exam word: the diode conducts. Don't write that it passes current." },
+            { "target": "the depletion region widens", "mark": "marker", "dim": "concept", "en": "In reverse bias the depletion region widens, so the diode blocks current." }
+          ] },
+          "video": { "format": "narrated_slides", "durationSec": 60, "beats": ["Forward bias: battery positive to p", "The depletion region narrows and current flows", "Reverse bias: battery negative to p", "The depletion region widens and current is blocked"] }
+        },
+        "defaultModality": "voice"
+      },
+      "example": { "title": "Reverse-polarity protection", "scenario": "A diode in series with a toy's battery holder lets current flow when the cells go in the right way round. If someone puts them in backwards, the diode is reverse biased and blocks current, so the circuit isn't damaged.", "takeaway": "Forward bias conducts, reverse bias blocks: the diode is a one-way gate." },
+      "workedQuestion": {
+        "id": "W-1.2", "type": "long_answer", "marks": 5,
+        "prompt": "Compare forward bias and reverse bias of a PN junction diode.",
+        "modelAnswer": [
+          "Connection: in forward bias the p-side is connected to the positive terminal; in reverse bias the p-side is connected to the negative terminal.",
+          "Depletion region: it narrows in forward bias and widens in reverse bias.",
+          "Barrier potential: it decreases in forward bias and increases in reverse bias.",
+          "Current: a large forward current (milliamperes) flows once the voltage exceeds about 0.7 V; in reverse bias only a very small reverse saturation current (nanoamperes) flows.",
+          "Resistance: the diode's resistance is low in forward bias and very high in reverse bias."
+        ],
+        "rubric": [
+          { "criterion": "Connection in each bias", "marks": 1 },
+          { "criterion": "Effect on the depletion region", "marks": 1 },
+          { "criterion": "Effect on the barrier potential", "marks": 1 },
+          { "criterion": "Current in each bias, with magnitudes", "marks": 1 },
+          { "criterion": "Resistance in each bias", "marks": 1 }
+        ],
+        "examVocabulary": ["T-forward-bias", "T-reverse-bias", "T-conduct", "T-depletion-region"]
+      },
+      "checks": [
+        { "id": "Q-1.2-a", "type": "mcq", "dimension": "concept", "prompt": "In reverse bias, the depletion region:", "options": ["Narrows", "Widens", "Disappears", "Stays the same"], "answer": "Widens", "explanation": "Carriers are pulled away from the junction, so the depletion region widens.", "objectiveIds": ["O-1.2"], "difficulty": 1 },
+        { "id": "Q-1.2-b", "type": "term_match", "dimension": "words", "prompt": "Match the term: forward bias", "options": ["The p-side connected to the positive terminal", "The n-side connected to the positive terminal", "No voltage applied"], "answer": "The p-side connected to the positive terminal", "explanation": "Positive to p is forward bias.", "objectiveIds": ["O-1.2"], "difficulty": 1 },
+        { "id": "Q-1.2-c", "type": "short_english", "dimension": "english", "prompt": "Why does a reverse-biased diode not conduct?", "answer": "In reverse bias the depletion region widens and the barrier rises, so majority carriers cannot cross and the diode blocks current.", "explanation": "Concept: wider depletion region. English: use 'widens' and 'blocks'.", "objectiveIds": ["O-1.2"], "difficulty": 2, "marks": 2 },
+        { "id": "Q-1.2-d", "type": "spoken", "dimension": "english", "prompt": "Say in English: when does a diode conduct?", "answer": "A diode conducts when it is forward biased and the applied voltage is above the cut-in voltage.", "explanation": "Use 'conducts' and 'forward biased'.", "objectiveIds": ["O-1.2"], "difficulty": 2 }
+      ],
+      "examWeight": { "askedIn": 4, "outOf": 5, "note": "Sample weight" },
+      "estMinutes": 12,
+      "language": { "status": "to_generate", "dialLevels": [1, 2, 3, 4, 5] }
+    },
+    {
+      "id": "C-1.3", "broadConceptId": "BC-1", "order": 3,
+      "title": "V-I characteristic and cut-in voltage",
+      "canDo": "Draw the V-I characteristic of a silicon diode and explain each region.",
+      "objectiveIds": ["O-1.3"], "prerequisiteIds": ["C-1.2"],
+      "termIds": ["T-vi-characteristic", "T-cut-in-voltage", "T-reverse-saturation-current", "T-breakdown-voltage"],
+      "misconceptions": [
+        { "id": "M-1.3-a", "statement": "Diode current rises in a straight line with voltage, like a resistor.", "correction": "It is exponential: almost nothing, then a steep rise after the cut-in voltage." },
+        { "id": "M-1.3-b", "statement": "Breakdown always destroys a diode.", "correction": "It can destroy an ordinary diode, but a Zener diode is designed to work there." }
+      ],
+      "explanation": {
+        "keyIdea": "Almost no current until about 0.7 V, then a steep rise; in reverse, a tiny current until breakdown.",
+        "text": "The V-I characteristic is the graph of diode current against the voltage across it. In forward bias, the current stays almost zero until the voltage reaches the cut-in voltage, about 0.7 V for silicon, and then rises steeply, almost exponentially. In reverse bias, a very small, nearly constant reverse saturation current flows. If the reverse voltage reaches the breakdown voltage, the current rises sharply, which can destroy an ordinary diode. The curve follows the diode equation I = Is(e^(V/ηVT) − 1).",
+        "modalities": {
+          "textImage": { "diagram": { "kind": "graph", "description": "V-I curve: forward branch flat until 0.7 V then steep; reverse branch with a tiny constant current, then a sharp drop at breakdown. Labels: cut-in voltage, reverse saturation current, breakdown voltage.", "alt": "Silicon diode V-I characteristic with cut-in voltage, reverse saturation current and breakdown marked" } },
+          "voice": { "walkthrough": [
+            { "target": "V-I characteristic", "mark": "sweep", "dim": "words", "en": "The V-I characteristic is the graph of current against voltage." },
+            { "target": "cut-in voltage", "mark": "lens", "dim": "words", "en": "The cut-in voltage is about 0.7 V for silicon." },
+            { "target": "rises steeply", "mark": "connect", "dim": "concept", "en": "After the cut-in voltage, current rises steeply. See the knee on the graph." },
+            { "target": "breakdown voltage", "mark": "marker", "dim": "words", "en": "At the breakdown voltage, reverse current shoots up." }
+          ] },
+          "video": { "format": "narrated_slides", "durationSec": 70, "beats": ["Plot current against voltage", "Forward: flat, then the knee at 0.7 V", "Reverse: a tiny saturation current", "Breakdown: the sharp drop"] }
+        },
+        "defaultModality": "voice"
+      },
+      "example": { "title": "Measuring a 1N4007 in the lab", "scenario": "Sweeping the voltage across a 1N4007 silicon diode, the current is almost 0 mA at 0.5 V, a few milliamperes near 0.7 V and tens of milliamperes by 0.8 V.", "takeaway": "That steep knee is why we treat a conducting silicon diode as having about 0.7 V across it." },
+      "workedQuestion": {
+        "id": "W-1.3", "type": "diagram", "marks": 5,
+        "prompt": "Draw the V-I characteristic of a silicon diode. Mark the cut-in voltage, reverse saturation current and breakdown voltage, and explain each region.",
+        "modelAnswer": [
+          "(Graph: forward current on the positive y-axis, reverse current on the negative y-axis, voltage on the x-axis.)",
+          "Forward region: the current is nearly zero until the cut-in voltage (about 0.7 V for silicon); beyond it, the current increases rapidly.",
+          "Reverse region: a very small reverse saturation current flows, almost independent of the reverse voltage.",
+          "Breakdown region: at the breakdown voltage the reverse current increases sharply; an ordinary diode can be damaged here.",
+          "The curve follows the diode equation I = Is(e^(V/ηVT) − 1), where Is is the reverse saturation current and VT ≈ 26 mV at room temperature."
+        ],
+        "rubric": [
+          { "criterion": "Correctly drawn and labelled graph", "marks": 2 },
+          { "criterion": "Forward region and cut-in voltage", "marks": 1 },
+          { "criterion": "Reverse saturation current", "marks": 1 },
+          { "criterion": "Breakdown region", "marks": 1 }
+        ],
+        "examVocabulary": ["T-vi-characteristic", "T-cut-in-voltage", "T-reverse-saturation-current", "T-breakdown-voltage"]
+      },
+      "checks": [
+        { "id": "Q-1.3-a", "type": "mcq", "dimension": "concept", "prompt": "On the V-I curve of a silicon diode, the forward current at 0.3 V is:", "options": ["Almost zero", "About 10 mA", "Equal to the breakdown current", "Very large"], "answer": "Almost zero", "explanation": "0.3 V is below the 0.7 V cut-in voltage.", "objectiveIds": ["O-1.3"], "difficulty": 1 },
+        { "id": "Q-1.3-b", "type": "term_match", "dimension": "words", "prompt": "Match the term: cut-in voltage", "options": ["The forward voltage above which current rises sharply", "The reverse voltage at which current shoots up", "The supply voltage"], "answer": "The forward voltage above which current rises sharply", "explanation": "The second option describes the breakdown voltage.", "objectiveIds": ["O-1.3"], "difficulty": 1 },
+        { "id": "Q-1.3-c", "type": "diagram", "dimension": "concept", "prompt": "Sketch the forward part of the V-I curve and mark the cut-in voltage.", "answer": "Flat near zero up to about 0.7 V, then a steep rise; 0.7 V marked at the knee.", "explanation": "Graded on the prediction canvas against the reference curve.", "objectiveIds": ["O-1.3"], "difficulty": 2 },
+        { "id": "Q-1.3-d", "type": "short_english", "dimension": "english", "prompt": "Explain in one sentence what the cut-in voltage is.", "answer": "The cut-in voltage is the forward voltage, about 0.7 V for silicon, above which the diode current increases rapidly.", "explanation": "Include the value and the word 'rapidly' or 'sharply'.", "objectiveIds": ["O-1.3"], "difficulty": 2, "marks": 2 }
+      ],
+      "examWeight": { "askedIn": 4, "outOf": 5, "note": "Sample weight" },
+      "estMinutes": 12,
+      "language": { "status": "to_generate", "dialLevels": [1, 2, 3, 4, 5] }
+    },
+    {
+      "id": "C-1.4", "broadConceptId": "BC-1", "order": 4,
+      "title": "Diode models",
+      "canDo": "Choose a diode model and calculate the current in a simple circuit.",
+      "objectiveIds": ["O-1.4"], "prerequisiteIds": ["C-1.3"],
+      "termIds": ["T-ideal-diode", "T-constant-drop", "T-forward-resistance"],
+      "misconceptions": [
+        { "id": "M-1.4-a", "statement": "A diode has 0.7 V across it even when reverse biased.", "correction": "In reverse bias it is almost an open circuit; the 0.7 V applies only when it conducts." },
+        { "id": "M-1.4-b", "statement": "The ideal model is fine for any circuit.", "correction": "For supplies of a few volts, the 0.7 V drop matters; use the constant-voltage-drop model.", "faultType": "Wrong assumption" }
+      ],
+      "explanation": {
+        "keyIdea": "Use the simplest model that is accurate enough: ideal for large supplies, a 0.7 V drop for small ones.",
+        "text": "A diode model replaces the real curve with something simple enough to calculate with. In the ideal diode model, a forward-biased diode is a short circuit and a reverse-biased diode is an open circuit. In the constant-voltage-drop model, a conducting silicon diode has a fixed 0.7 V across it. The piecewise-linear model adds a small forward resistance in series with that 0.7 V. Choose the simplest model that is accurate enough: when the supply is much larger than 0.7 V, the ideal model is close; for small supplies, use the constant-voltage-drop model.",
+        "modalities": {
+          "textImage": { "diagram": { "kind": "block", "description": "Three equivalent circuits side by side: ideal (a closed switch), constant drop (switch plus a 0.7 V cell), piecewise linear (switch, 0.7 V cell and a small resistor rf).", "alt": "Ideal, constant-voltage-drop and piecewise-linear diode models" } },
+          "voice": { "walkthrough": [
+            { "target": "ideal diode model", "mark": "sweep", "dim": "words", "en": "In the ideal diode model, a conducting diode is just a short circuit." },
+            { "target": "constant-voltage-drop model", "mark": "marker", "dim": "words", "en": "The constant-voltage-drop model keeps 0.7 V across a conducting silicon diode." },
+            { "target": "forward resistance", "mark": "lens", "dim": "words", "en": "The piecewise-linear model adds a small forward resistance." },
+            { "target": "Choose the simplest model", "mark": "marker", "dim": "concept", "en": "Choose the simplest model that is accurate enough for your supply." }
+          ] }
+        },
+        "defaultModality": "textImage"
+      },
+      "example": { "title": "5 V, 1 kΩ and a silicon diode", "scenario": "A silicon diode and a 1 kΩ resistor are in series across 5 V, forward biased. Ideal model: I = 5/1000 = 5 mA. Constant-voltage-drop model: I = (5 − 0.7)/1000 = 4.3 mA. Piecewise-linear with rf = 20 Ω: I = 4.3/1020 ≈ 4.22 mA.", "takeaway": "The models differ by about 15% here because 5 V is not much larger than 0.7 V." },
+      "workedQuestion": {
+        "id": "W-1.4", "type": "numerical", "marks": 5,
+        "prompt": "A silicon diode is connected in series with a 2.2 kΩ resistor across a 12 V supply in forward bias. Find the current using (a) the ideal model and (b) the constant-voltage-drop model. Which is closer to the real value, and why?",
+        "modelAnswer": [
+          "(a) Ideal model: the diode is a short circuit, so I = 12 V / 2.2 kΩ = 5.45 mA.",
+          "(b) Constant-voltage-drop model: I = (12 − 0.7) V / 2.2 kΩ = 11.3 / 2200 = 5.14 mA.",
+          "The constant-voltage-drop model is closer, because a real silicon diode has about 0.7 V across it while conducting.",
+          "The difference is small (about 6%) because 12 V is much larger than 0.7 V."
+        ],
+        "rubric": [
+          { "criterion": "(a) Correct current with unit", "marks": 2 },
+          { "criterion": "(b) Correct current with unit", "marks": 2 },
+          { "criterion": "Chooses the closer model with a reason", "marks": 1 }
+        ],
+        "examVocabulary": ["T-ideal-diode", "T-constant-drop"]
+      },
+      "checks": [
+        { "id": "Q-1.4-a", "type": "numerical", "dimension": "concept", "prompt": "A silicon diode and a 1 kΩ resistor are in series across 5 V, forward biased. Using the constant-voltage-drop model, find the current.", "answer": "4.3 mA", "tolerance": "±2%", "explanation": "I = (5 − 0.7) / 1000 = 4.3 mA.", "objectiveIds": ["O-1.4"], "difficulty": 2 },
+        { "id": "Q-1.4-b", "type": "mcq", "dimension": "concept", "prompt": "In the ideal model, a forward-biased diode behaves like:", "options": ["A short circuit", "An open circuit", "A 0.7 V cell", "A large resistor"], "answer": "A short circuit", "explanation": "Ideal: short when forward, open when reverse.", "objectiveIds": ["O-1.4"], "difficulty": 1 },
+        { "id": "Q-1.4-c", "type": "term_match", "dimension": "words", "prompt": "Match the term: forward resistance", "options": ["The small resistance of a conducting diode", "The resistance of the load", "The resistance in reverse bias"], "answer": "The small resistance of a conducting diode", "explanation": "It is added in series in the piecewise-linear model.", "objectiveIds": ["O-1.4"], "difficulty": 1 },
+        { "id": "Q-1.4-d", "type": "short_english", "dimension": "english", "prompt": "When is the ideal diode model good enough?", "answer": "When the supply voltage is much larger than the 0.7 V diode drop.", "explanation": "Then the 0.7 V is a small fraction of the total.", "objectiveIds": ["O-1.4"], "difficulty": 2, "marks": 2 }
+      ],
+      "examWeight": { "askedIn": 2, "outOf": 5, "note": "Sample weight" },
+      "estMinutes": 12,
+      "language": { "status": "to_generate", "dialLevels": [1, 2, 3, 4, 5] }
+    },
+    {
+      "id": "C-2.1", "broadConceptId": "BC-2", "order": 1,
+      "title": "Half-wave rectifier",
+      "canDo": "Explain how a half-wave rectifier turns AC into pulsating DC and sketch its waveforms.",
+      "objectiveIds": ["O-2.1"], "prerequisiteIds": ["C-1.2", "C-1.4"],
+      "termIds": ["T-rectifier", "T-half-wave", "T-pulsating-dc"],
+      "misconceptions": [
+        { "id": "M-2.1-a", "statement": "The negative half is flipped upwards at the output.", "correction": "That is a full-wave rectifier; a half-wave rectifier simply removes the negative half." },
+        { "id": "M-2.1-b", "statement": "Turning the diode round makes no difference.", "correction": "A reversed diode passes only the negative half-cycles.", "faultType": "Flipped" }
+      ],
+      "explanation": {
+        "keyIdea": "One diode passes only the positive half-cycles, so the output is pulsating DC with an average of Vm/π.",
+        "text": "A rectifier converts AC into DC. In a half-wave rectifier, one diode is placed in series with the load. During the positive half-cycle of the input, the diode is forward biased and conducts, so that half-cycle appears across the load. During the negative half-cycle, the diode is reverse biased and blocks, so the output is zero. The output is pulsating DC: positive half-cycles separated by gaps, at the same frequency as the input. Its average value is Vm/π, about 0.318 Vm.",
+        "modalities": {
+          "textImage": { "diagram": { "kind": "waveform", "description": "Transformer secondary, one diode and load resistor RL; the input sine wave above and the output with only positive half-cycles below, on the same time axis.", "alt": "Half-wave rectifier circuit with input sine and output of positive half-cycles" } },
+          "voice": { "walkthrough": [
+            { "target": "rectifier", "mark": "sweep", "dim": "words", "en": "A rectifier converts AC into DC." },
+            { "target": "positive half-cycle", "mark": "marker", "dim": "concept", "en": "In the positive half-cycle the diode is forward biased and conducts." },
+            { "target": "blocks", "mark": "circle", "dim": "english", "en": "In the negative half it blocks. Exam words: conducts, then blocks." },
+            { "target": "pulsating DC", "mark": "lens", "dim": "words", "en": "The result is pulsating DC: one direction, but in bumps." }
+          ] },
+          "video": { "format": "generated_clip", "durationSec": 20, "beats": ["The input sine wave arrives", "Positive half: current flows through the diode to the load", "Negative half: the diode blocks, the output is flat", "Only the bumps remain: pulsating DC"] }
+        },
+        "defaultModality": "voice"
+      },
+      "example": { "title": "The rectifier lab", "scenario": "A 230 V to 12 V (RMS) transformer feeds a 1N4007 diode and a 1 kΩ load. The peak is Vm = 12 × √2 ≈ 17 V. After the 0.7 V drop the output peak is about 16.3 V, and the average is 16.3/π ≈ 5.2 V.", "takeaway": "Half the waveform is thrown away, so the average output is low." },
+      "workedQuestion": {
+        "id": "W-2.1", "type": "long_answer", "marks": 5,
+        "prompt": "Explain the working of a half-wave rectifier with a neat circuit diagram and waveforms.",
+        "modelAnswer": [
+          "A half-wave rectifier converts AC into pulsating DC using a single diode in series with the load resistor RL.",
+          "During the positive half-cycle, the diode is forward biased and conducts, so current flows through RL and the output follows the input.",
+          "During the negative half-cycle, the diode is reverse biased and blocks current, so the output voltage is zero.",
+          "The output therefore has only the positive half-cycles, at the same frequency as the input. The average output is Vdc = Vm/π.",
+          "(Diagram: transformer, diode and RL; input sine wave and output with only positive half-cycles.)"
+        ],
+        "rubric": [
+          { "criterion": "Purpose and circuit description", "marks": 1 },
+          { "criterion": "Positive half-cycle", "marks": 1 },
+          { "criterion": "Negative half-cycle", "marks": 1 },
+          { "criterion": "Output described, with Vdc = Vm/π", "marks": 1 },
+          { "criterion": "Circuit diagram and waveforms", "marks": 1 }
+        ],
+        "examVocabulary": ["T-rectifier", "T-pulsating-dc", "T-conduct", "T-forward-bias", "T-reverse-bias"]
+      },
+      "checks": [
+        { "id": "Q-2.1-a", "type": "mcq", "dimension": "concept", "prompt": "For a 50 Hz input, the output frequency of a half-wave rectifier is:", "options": ["25 Hz", "50 Hz", "100 Hz", "0 Hz"], "answer": "50 Hz", "explanation": "There is one output pulse per input cycle.", "objectiveIds": ["O-2.1"], "difficulty": 1 },
+        { "id": "Q-2.1-b", "type": "numerical", "dimension": "concept", "prompt": "An ideal half-wave rectifier has a peak input of 20 V. Find the average output voltage.", "answer": "6.37 V", "tolerance": "±2%", "explanation": "Vdc = Vm/π = 20/π = 6.37 V.", "objectiveIds": ["O-2.1"], "difficulty": 2 },
+        { "id": "Q-2.1-c", "type": "term_match", "dimension": "words", "prompt": "Match the term: pulsating DC", "options": ["Current in one direction that rises and falls in pulses", "Perfectly steady DC", "AC at twice the frequency"], "answer": "Current in one direction that rises and falls in pulses", "explanation": "It is DC because it never reverses, but it is not steady.", "objectiveIds": ["O-2.1"], "difficulty": 1 },
+        { "id": "Q-2.1-d", "type": "short_english", "dimension": "english", "prompt": "Why is the negative half-cycle missing at the output?", "answer": "During the negative half-cycle the diode is reverse biased, so it blocks current and the output is zero.", "explanation": "Use 'reverse biased' and 'blocks'.", "objectiveIds": ["O-2.1"], "difficulty": 2, "marks": 2 },
+        { "id": "Q-2.1-e", "type": "lab_predict", "dimension": "lab", "prompt": "Before you run the simulation, sketch the output across RL.", "answer": "Positive half-cycles only, flat at zero during the negative halves.", "explanation": "Compared on the prediction canvas with the simulated output.", "objectiveIds": ["O-2.1"], "difficulty": 2 }
+      ],
+      "labId": "LAB-RECT",
+      "examWeight": { "askedIn": 5, "outOf": 5, "note": "Sample weight" },
+      "estMinutes": 15,
+      "language": { "status": "to_generate", "dialLevels": [1, 2, 3, 4, 5] }
+    },
+    {
+      "id": "C-2.2", "broadConceptId": "BC-2", "order": 2,
+      "title": "Centre-tap full-wave rectifier",
+      "canDo": "Explain how a centre-tap rectifier uses both halves of the AC cycle.",
+      "objectiveIds": ["O-2.2"], "prerequisiteIds": ["C-2.1"],
+      "termIds": ["T-centre-tap", "T-full-wave"],
+      "misconceptions": [
+        { "id": "M-2.2-a", "statement": "Both diodes conduct at the same time.", "correction": "They take turns: D1 in the positive half-cycle, D2 in the negative half-cycle." }
+      ],
+      "explanation": {
+        "keyIdea": "Two diodes take turns, so both halves reach the load in the same direction: average 2Vm/π, ripple at twice the mains frequency.",
+        "text": "A centre-tap full-wave rectifier uses a transformer with a centre-tapped secondary and two diodes. During the positive half-cycle, the top half of the secondary forward biases D1, which conducts. During the negative half-cycle, the bottom half forward biases D2. Both diodes send current through the load in the same direction, so both half-cycles appear at the output. The output repeats at twice the input frequency, the average is 2Vm/π, where Vm is the peak of each half of the secondary, and each diode must withstand a peak inverse voltage of 2Vm.",
+        "modalities": {
+          "textImage": { "diagram": { "kind": "circuit", "description": "Centre-tapped transformer, D1 on the top end and D2 on the bottom end joined at the load RL, return to the centre tap. Current paths for each half-cycle in two colours; input and full-wave output waveforms.", "alt": "Centre-tap full-wave rectifier with current paths for both half-cycles" } },
+          "voice": { "walkthrough": [
+            { "target": "centre-tapped secondary", "mark": "sweep", "dim": "words", "en": "The transformer has a centre-tapped secondary: a connection in the middle." },
+            { "target": "same direction", "mark": "marker", "dim": "concept", "en": "Both diodes push current through the load in the same direction." },
+            { "target": "twice the input frequency", "mark": "marker", "dim": "concept", "en": "So the output bumps come at twice the input frequency." },
+            { "target": "peak inverse voltage", "mark": "circle", "dim": "english", "en": "Exam phrase: peak inverse voltage, 2Vm for the centre-tap rectifier." }
+          ] }
+        },
+        "defaultModality": "voice"
+      },
+      "example": { "title": "Same mains, twice the bumps", "scenario": "With each half of the secondary giving Vm = 15 V, an ideal centre-tap rectifier gives Vdc = 2 × 15/π ≈ 9.55 V, and on 50 Hz mains the output repeats 100 times a second.", "takeaway": "Using both halves doubles the average and the ripple frequency." },
+      "workedQuestion": {
+        "id": "W-2.2", "type": "long_answer", "marks": 5,
+        "prompt": "Explain the working of a centre-tap full-wave rectifier with a circuit diagram and waveforms. State the PIV of each diode.",
+        "modelAnswer": [
+          "The circuit uses a centre-tapped transformer and two diodes, D1 and D2, connected to the load RL.",
+          "During the positive half-cycle, D1 is forward biased and conducts, while D2 is reverse biased; current flows through RL.",
+          "During the negative half-cycle, D2 is forward biased and conducts, while D1 is reverse biased; current flows through RL in the same direction.",
+          "The output therefore contains both half-cycles, at twice the input frequency, with Vdc = 2Vm/π.",
+          "When a diode is reverse biased it sees the full secondary voltage, so the PIV of each diode is 2Vm."
+        ],
+        "rubric": [
+          { "criterion": "Circuit with centre-tapped transformer and two diodes", "marks": 1 },
+          { "criterion": "Positive half-cycle", "marks": 1 },
+          { "criterion": "Negative half-cycle, same load-current direction", "marks": 1 },
+          { "criterion": "Output: both halves, 2f, Vdc = 2Vm/π", "marks": 1 },
+          { "criterion": "PIV = 2Vm with reason", "marks": 1 }
+        ],
+        "examVocabulary": ["T-centre-tap", "T-full-wave", "T-piv"]
+      },
+      "checks": [
+        { "id": "Q-2.2-a", "type": "mcq", "dimension": "concept", "prompt": "On 50 Hz mains, the output of a full-wave rectifier repeats at:", "options": ["25 Hz", "50 Hz", "100 Hz", "200 Hz"], "answer": "100 Hz", "explanation": "Two output pulses per input cycle.", "objectiveIds": ["O-2.2"], "difficulty": 1 },
+        { "id": "Q-2.2-b", "type": "numerical", "dimension": "concept", "prompt": "Each half of the secondary has a peak of 15 V. Find the average output of an ideal centre-tap rectifier.", "answer": "9.55 V", "tolerance": "±2%", "explanation": "Vdc = 2Vm/π = 30/π = 9.55 V.", "objectiveIds": ["O-2.2"], "difficulty": 2 },
+        { "id": "Q-2.2-c", "type": "term_match", "dimension": "words", "prompt": "Match the term: centre-tap transformer", "options": ["A transformer whose secondary has a connection at its midpoint", "A transformer with two primaries", "A transformer with no secondary"], "answer": "A transformer whose secondary has a connection at its midpoint", "explanation": "The midpoint is the return for both halves.", "objectiveIds": ["O-2.2"], "difficulty": 1 },
+        { "id": "Q-2.2-d", "type": "short_english", "dimension": "english", "prompt": "Why must each diode in a centre-tap rectifier withstand 2Vm?", "answer": "When one diode conducts, the reverse-biased diode sees the full secondary voltage, which peaks at 2Vm.", "explanation": "Use 'reverse biased' and 'full secondary voltage'.", "objectiveIds": ["O-2.2"], "difficulty": 3, "marks": 2 }
+      ],
+      "examWeight": { "askedIn": 5, "outOf": 5, "note": "Sample weight; counted together with the bridge rectifier" },
+      "estMinutes": 15,
+      "language": { "status": "to_generate", "dialLevels": [1, 2, 3, 4, 5] }
+    },
+    {
+      "id": "C-2.3", "broadConceptId": "BC-2", "order": 3,
+      "title": "Bridge rectifier",
+      "canDo": "Explain how a bridge rectifier works and compare it with the centre-tap rectifier.",
+      "objectiveIds": ["O-2.3"], "prerequisiteIds": ["C-2.2"],
+      "termIds": ["T-bridge-rectifier"],
+      "misconceptions": [
+        { "id": "M-2.3-a", "statement": "All four diodes conduct at once.", "correction": "Two opposite diodes conduct in each half-cycle." },
+        { "id": "M-2.3-b", "statement": "One diode the wrong way round in the bridge doesn't matter.", "correction": "A reversed diode stops rectification or shorts the supply in one half-cycle.", "faultType": "Wrong connection" }
+      ],
+      "explanation": {
+        "keyIdea": "Four diodes give full-wave output without a centre tap, with two diode drops and a PIV of only Vm.",
+        "text": "A bridge rectifier uses four diodes and needs no centre tap. During the positive half-cycle, two opposite diodes conduct; during the negative half-cycle, the other two conduct. In both half-cycles, current flows through the load in the same direction, so the output is full-wave. Because two diodes are always in the current path, the output peak is Vm − 1.4 V for silicon diodes. Each diode's peak inverse voltage is only Vm, and the whole transformer secondary is used in both half-cycles.",
+        "modalities": {
+          "textImage": { "diagram": { "kind": "circuit", "description": "Four diodes in a diamond, AC input on the left and right corners, load RL across the top and bottom corners; the conducting pair highlighted for each half-cycle.", "alt": "Bridge rectifier with the conducting diode pair for each half-cycle" } },
+          "voice": { "walkthrough": [
+            { "target": "bridge rectifier", "mark": "sweep", "dim": "words", "en": "A bridge rectifier uses four diodes." },
+            { "target": "no centre tap", "mark": "circle", "dim": "english", "en": "Exam phrase: a bridge needs no centre tap." },
+            { "target": "two opposite diodes conduct", "mark": "marker", "dim": "concept", "en": "In each half-cycle, two opposite diodes conduct." },
+            { "target": "two diodes are always in the current path", "mark": "marker", "dim": "concept", "en": "Two diodes are always in the path, so you lose about 1.4 V." }
+          ] }
+        },
+        "defaultModality": "voice"
+      },
+      "example": { "title": "The input of a mains adapter", "scenario": "Most mains adapters start with a bridge of four diodes, often in one small package, because it gives full-wave output from an ordinary transformer, or directly from the mains.", "takeaway": "A bridge gives full-wave output without a centre tap, at the cost of two diode drops." },
+      "workedQuestion": {
+        "id": "W-2.3", "type": "long_answer", "marks": 5,
+        "prompt": "Compare the centre-tap and bridge full-wave rectifiers.",
+        "modelAnswer": [
+          "Number of diodes: the centre-tap rectifier uses two; the bridge uses four.",
+          "Transformer: the centre-tap rectifier needs a centre-tapped transformer; the bridge needs no centre tap.",
+          "Peak inverse voltage: 2Vm for each diode in the centre-tap rectifier; only Vm in the bridge.",
+          "Diode drops: one diode conducts at a time in the centre-tap rectifier (output peak Vm − 0.7 V); two in the bridge (Vm − 1.4 V).",
+          "Transformer use: each half of a centre-tap secondary works for only half the cycle; the whole bridge secondary works in both halves, so the transformer can be smaller."
+        ],
+        "rubric": [
+          { "criterion": "Number of diodes", "marks": 1 },
+          { "criterion": "Transformer requirement", "marks": 1 },
+          { "criterion": "PIV", "marks": 1 },
+          { "criterion": "Diode drops in the path", "marks": 1 },
+          { "criterion": "Transformer utilisation", "marks": 1 }
+        ],
+        "examVocabulary": ["T-bridge-rectifier", "T-centre-tap", "T-piv"]
+      },
+      "checks": [
+        { "id": "Q-2.3-a", "type": "mcq", "dimension": "concept", "prompt": "In a bridge rectifier, how many diodes conduct at any instant?", "options": ["1", "2", "3", "4"], "answer": "2", "explanation": "One opposite pair per half-cycle.", "objectiveIds": ["O-2.3"], "difficulty": 1 },
+        { "id": "Q-2.3-b", "type": "numerical", "dimension": "concept", "prompt": "A bridge rectifier with silicon diodes (constant-voltage-drop model) has Vm = 12 V. Find the average output voltage.", "answer": "6.75 V", "tolerance": "±2%", "explanation": "Vdc = 2(Vm − 1.4)/π = 2 × 10.6/π = 6.75 V.", "objectiveIds": ["O-2.3"], "difficulty": 3 },
+        { "id": "Q-2.3-c", "type": "term_match", "dimension": "words", "prompt": "Match the term: bridge rectifier", "options": ["A full-wave rectifier of four diodes that needs no centre tap", "A half-wave rectifier with two diodes", "A filter made of four capacitors"], "answer": "A full-wave rectifier of four diodes that needs no centre tap", "explanation": "Four diodes in a diamond.", "objectiveIds": ["O-2.3"], "difficulty": 1 },
+        { "id": "Q-2.3-d", "type": "short_english", "dimension": "english", "prompt": "Give one advantage of a bridge rectifier over a centre-tap rectifier.", "answer": "It needs no centre-tapped transformer, and each diode only has to withstand Vm.", "explanation": "Either advantage earns the mark; write it as a full sentence.", "objectiveIds": ["O-2.3"], "difficulty": 2, "marks": 2 }
+      ],
+      "examWeight": { "askedIn": 5, "outOf": 5, "note": "Sample weight; counted together with the centre-tap rectifier" },
+      "estMinutes": 12,
+      "language": { "status": "to_generate", "dialLevels": [1, 2, 3, 4, 5] }
+    },
+    {
+      "id": "C-2.4", "broadConceptId": "BC-2", "order": 4,
+      "title": "Rectifier figures of merit",
+      "canDo": "Calculate and compare the ripple factor, efficiency and PIV of rectifiers.",
+      "objectiveIds": ["O-2.4"], "prerequisiteIds": ["C-2.1", "C-2.2"],
+      "termIds": ["T-average-value", "T-rms", "T-ripple-factor", "T-rectification-efficiency", "T-piv"],
+      "misconceptions": [
+        { "id": "M-2.4-a", "statement": "A higher ripple factor is better.", "correction": "A lower ripple factor means smoother DC." },
+        { "id": "M-2.4-b", "statement": "PIV is the same for every rectifier.", "correction": "Vm for half-wave and bridge, 2Vm for centre-tap." }
+      ],
+      "explanation": {
+        "keyIdea": "Ripple factor, efficiency and PIV turn 'which rectifier is better' into numbers; full-wave wins on ripple and efficiency.",
+        "text": "Figures of merit let us compare rectifiers with numbers. The average (DC) value is what a DC meter reads; the RMS value includes the AC part as well. The ripple factor is the RMS value of the AC component divided by the DC value: γ = √((Vrms/Vdc)² − 1). It is 1.21 for a half-wave rectifier and 0.482 for a full-wave rectifier, so full-wave output is much smoother. Rectification efficiency is DC output power divided by AC input power, at most 40.6% for half-wave and 81.2% for full-wave. The peak inverse voltage (PIV) is the largest reverse voltage a diode must withstand: Vm for half-wave and bridge, 2Vm for centre-tap.",
+        "modalities": {
+          "textImage": { "diagram": { "kind": "block", "description": "A comparison card of three columns (half-wave, centre-tap, bridge) with rows for Vdc, ripple factor, maximum efficiency and PIV.", "alt": "Table comparing rectifier figures of merit" } },
+          "voice": { "walkthrough": [
+            { "target": "ripple factor", "mark": "lens", "dim": "words", "en": "The ripple factor measures how much AC is left on the DC." },
+            { "target": "1.21 for a half-wave rectifier and 0.482 for a full-wave rectifier", "mark": "marker", "dim": "concept", "en": "Half-wave 1.21, full-wave 0.482: full-wave is much smoother." },
+            { "target": "Rectification efficiency", "mark": "sweep", "dim": "words", "en": "Rectification efficiency is DC power out over AC power in." },
+            { "target": "peak inverse voltage (PIV)", "mark": "sweep", "dim": "words", "en": "PIV is the largest reverse voltage a diode must survive." }
+          ] }
+        },
+        "defaultModality": "textImage"
+      },
+      "example": { "title": "Choosing a rectifier for a charger", "scenario": "A designer compares the options: half-wave gives γ = 1.21 and at most 40.6% efficiency; full-wave gives γ = 0.482 and up to 81.2%. Full-wave wins on both, so it is used almost everywhere.", "takeaway": "Figures of merit make the choice obvious and defensible." },
+      "workedQuestion": {
+        "id": "W-2.4", "type": "numerical", "marks": 5,
+        "prompt": "Define ripple factor and derive its value for a half-wave rectifier.",
+        "modelAnswer": [
+          "Ripple factor γ = (RMS value of the AC component of the output) / (DC value of the output).",
+          "Since Vrms² = Vdc² + Vac², γ = √((Vrms/Vdc)² − 1).",
+          "For a half-wave rectifier, Vdc = Vm/π and Vrms = Vm/2.",
+          "So Vrms/Vdc = (Vm/2)/(Vm/π) = π/2 = 1.571.",
+          "γ = √(1.571² − 1) = √(2.467 − 1) = √1.467 = 1.21."
+        ],
+        "rubric": [
+          { "criterion": "Definition", "marks": 1 },
+          { "criterion": "General formula", "marks": 1 },
+          { "criterion": "Vdc and Vrms for half-wave", "marks": 1 },
+          { "criterion": "Ratio π/2", "marks": 1 },
+          { "criterion": "Final value 1.21", "marks": 1 }
+        ],
+        "examVocabulary": ["T-ripple-factor", "T-rms", "T-average-value"]
+      },
+      "checks": [
+        { "id": "Q-2.4-a", "type": "mcq", "dimension": "concept", "prompt": "The ripple factor of a full-wave rectifier is about:", "options": ["0.482", "1.21", "0", "2"], "answer": "0.482", "explanation": "Half-wave is 1.21; full-wave is much lower.", "objectiveIds": ["O-2.4"], "difficulty": 1 },
+        { "id": "Q-2.4-b", "type": "numerical", "dimension": "concept", "prompt": "What PIV rating does each diode need in a bridge rectifier with Vm = 17 V?", "answer": "17 V", "explanation": "Bridge PIV = Vm. In practice, pick a rating with margin, such as 50 V.", "objectiveIds": ["O-2.4"], "difficulty": 2 },
+        { "id": "Q-2.4-c", "type": "term_match", "dimension": "words", "prompt": "Match the term: ripple factor", "options": ["RMS value of the AC part divided by the DC value", "DC power divided by AC power", "The largest reverse voltage on a diode"], "answer": "RMS value of the AC part divided by the DC value", "explanation": "The others are efficiency and PIV.", "objectiveIds": ["O-2.4"], "difficulty": 1 },
+        { "id": "Q-2.4-d", "type": "long_written", "dimension": "english", "prompt": "Define rectification efficiency and state its maximum value for a half-wave rectifier.", "answer": "Rectification efficiency is the ratio of DC output power to AC input power; its maximum value for a half-wave rectifier is 40.6%.", "explanation": "Two marks: one for the definition, one for the value.", "objectiveIds": ["O-2.4"], "difficulty": 2, "marks": 2 }
+      ],
+      "examWeight": { "askedIn": 4, "outOf": 5, "note": "Sample weight" },
+      "estMinutes": 15,
+      "language": { "status": "to_generate", "dialLevels": [1, 2, 3, 4, 5] }
+    },
+    {
+      "id": "C-3.1", "broadConceptId": "BC-3", "order": 1,
+      "title": "How a capacitor filter smooths",
+      "canDo": "Explain how a capacitor filter smooths the output of a rectifier.",
+      "objectiveIds": ["O-3.1"], "prerequisiteIds": ["C-2.1"],
+      "termIds": ["T-capacitor-filter", "T-ripple"],
+      "misconceptions": [
+        { "id": "M-3.1-a", "statement": "The capacitor removes all the AC, giving perfect DC.", "correction": "A small ripple always remains; a bigger capacitor only reduces it." },
+        { "id": "M-3.1-b", "statement": "The capacitor can go in series with the load.", "correction": "In series it blocks DC entirely; it must be across the load.", "faultType": "Wrong connection" }
+      ],
+      "explanation": {
+        "keyIdea": "The capacitor charges to the peak, then discharges slowly through the load to fill the gaps.",
+        "text": "The output of a rectifier still pulses. A capacitor filter is a large capacitor connected across the load. While the rectified voltage rises towards its peak, the diode conducts and the capacitor charges to the peak. When the input falls below the capacitor voltage, the diode stops conducting and the capacitor discharges slowly through the load, filling the gap until the next peak. The output becomes a nearly steady DC with a small sawtooth-shaped ripple. A larger capacitor or a larger load resistance makes the discharge slower and the ripple smaller.",
+        "modalities": {
+          "textImage": { "diagram": { "kind": "waveform", "description": "Rectified output dashed; filtered output solid, rising to each peak and sloping down gently until the next peak; charge and discharge segments labelled.", "alt": "Capacitor-filtered output: charging to the peak, slow discharge, small sawtooth ripple" } },
+          "voice": { "walkthrough": [
+            { "target": "capacitor filter", "mark": "sweep", "dim": "words", "en": "A capacitor filter is a big capacitor across the load." },
+            { "target": "charges to the peak", "mark": "marker", "dim": "concept", "en": "While the voltage rises, the capacitor charges to the peak." },
+            { "target": "discharges slowly through the load", "mark": "marker", "dim": "concept", "en": "Then it discharges slowly through the load, filling the gap." },
+            { "target": "ripple", "mark": "lens", "dim": "words", "en": "What is left is a small ripple." }
+          ] },
+          "video": { "format": "generated_clip", "durationSec": 20, "beats": ["Bumpy rectified output", "The capacitor fills up at each peak", "Between peaks it drains slowly into the load", "The result: nearly flat DC with a small ripple"] }
+        },
+        "defaultModality": "voice"
+      },
+      "example": { "title": "A tank under a tap that runs in bursts", "scenario": "A tap that gushes and stops (the rectifier) fills a tank (the capacitor). The pipe out of the tank (the load) keeps flowing steadily, even between gushes. A bigger tank gives a steadier flow.", "takeaway": "The capacitor stores charge at the peaks and releases it in the gaps." },
+      "workedQuestion": {
+        "id": "W-3.1", "type": "long_answer", "marks": 5,
+        "prompt": "Why is a capacitor filter used after a rectifier? Explain how it smooths the output, with waveforms.",
+        "modelAnswer": [
+          "The output of a rectifier is pulsating DC, which is not suitable for electronic circuits, so a capacitor filter is used to smooth it.",
+          "A large capacitor is connected across the load. While the rectified voltage rises, the diode conducts and the capacitor charges to the peak value.",
+          "When the input falls below the capacitor voltage, the diode is reverse biased and stops conducting; the capacitor then discharges slowly through the load.",
+          "The output therefore stays close to the peak, with a small sawtooth ripple. (Waveform: rectified output and the smoothed output.)",
+          "A larger capacitance or larger load resistance slows the discharge and reduces the ripple."
+        ],
+        "rubric": [
+          { "criterion": "Why a filter is needed", "marks": 1 },
+          { "criterion": "Charging to the peak", "marks": 1 },
+          { "criterion": "Discharging through the load", "marks": 1 },
+          { "criterion": "Correct waveform", "marks": 1 },
+          { "criterion": "Effect of C and RL on ripple", "marks": 1 }
+        ],
+        "examVocabulary": ["T-capacitor-filter", "T-ripple", "T-pulsating-dc"]
+      },
+      "checks": [
+        { "id": "Q-3.1-a", "type": "mcq", "dimension": "concept", "prompt": "Increasing the filter capacitance:", "options": ["Reduces the ripple", "Increases the ripple", "Has no effect", "Reverses the output"], "answer": "Reduces the ripple", "explanation": "A bigger capacitor discharges more slowly.", "objectiveIds": ["O-3.1"], "difficulty": 1 },
+        { "id": "Q-3.1-b", "type": "term_match", "dimension": "words", "prompt": "Match the term: ripple", "options": ["The small AC variation left on a DC output", "The peak of the AC input", "The current in reverse bias"], "answer": "The small AC variation left on a DC output", "explanation": "Ripple is what the filter tries to reduce.", "objectiveIds": ["O-3.1"], "difficulty": 1 },
+        { "id": "Q-3.1-c", "type": "short_english", "dimension": "english", "prompt": "What does the capacitor do when the diode stops conducting?", "answer": "It discharges through the load and keeps the output voltage up until the next peak.", "explanation": "Use 'discharges' and 'through the load'.", "objectiveIds": ["O-3.1"], "difficulty": 2, "marks": 2 },
+        { "id": "Q-3.1-d", "type": "lab_predict", "dimension": "lab", "prompt": "Sketch the output after adding a 1000 µF capacitor across the load.", "answer": "Nearly flat close to the peak, with a small sawtooth ripple.", "explanation": "Compared on the prediction canvas with the simulated output.", "objectiveIds": ["O-3.1"], "difficulty": 2 }
+      ],
+      "labId": "LAB-RECT",
+      "examWeight": { "askedIn": 3, "outOf": 5, "note": "Sample weight" },
+      "estMinutes": 12,
+      "language": { "status": "to_generate", "dialLevels": [1, 2, 3, 4, 5] }
+    },
+    {
+      "id": "C-3.2", "broadConceptId": "BC-3", "order": 2,
+      "title": "Ripple voltage and choosing the capacitor",
+      "canDo": "Estimate the ripple of a capacitor filter and choose a capacitor for a ripple target.",
+      "objectiveIds": ["O-3.2"], "prerequisiteIds": ["C-3.1", "C-2.4"],
+      "termIds": ["T-ripple-voltage"],
+      "misconceptions": [
+        { "id": "M-3.2-a", "statement": "Ripple depends only on the capacitance.", "correction": "It also depends on the load current and the mains frequency." },
+        { "id": "M-3.2-b", "statement": "The full-wave formula uses f, not 2f.", "correction": "Full-wave recharges twice per cycle, so use 2f.", "faultType": "Wrong value" }
+      ],
+      "explanation": {
+        "keyIdea": "Ripple ≈ load current ÷ (refill rate × C); full-wave refills twice as often, so it needs half the capacitance.",
+        "text": "We can estimate how big the ripple is. For a capacitor filter, the peak-to-peak ripple voltage is approximately Vr = Idc / (f·C) for a half-wave rectifier and Vr = Idc / (2f·C) for a full-wave rectifier, where Idc is the load current and f is the mains frequency. Full-wave refills the capacitor twice as often, so it needs half the capacitance for the same ripple. To choose a capacitor, rearrange: C = Idc / (2f·Vr) for full-wave, then pick the next larger standard value.",
+        "modalities": {
+          "textImage": { "diagram": { "kind": "waveform", "description": "Filtered full-wave output with the peak-to-peak ripple Vr marked between the highest and lowest points, and the discharge time between refills marked.", "alt": "Peak-to-peak ripple voltage on a filtered full-wave output" } },
+          "voice": { "walkthrough": [
+            { "target": "peak-to-peak ripple voltage", "mark": "sweep", "dim": "words", "en": "The peak-to-peak ripple voltage is the gap between the highest and lowest output." },
+            { "target": "Vr = Idc / (2f·C)", "mark": "marker", "dim": "concept", "en": "For full-wave, Vr is the load current over two f times C." },
+            { "target": "twice as often", "mark": "marker", "dim": "concept", "en": "Full-wave refills twice as often, so it needs half the capacitance." },
+            { "target": "rearrange", "mark": "circle", "dim": "english", "en": "Exam move: rearrange the formula to find C." }
+          ] }
+        },
+        "defaultModality": "textImage"
+      },
+      "example": { "title": "A supply for a microcontroller", "scenario": "A full-wave rectifier on 50 Hz mains supplies 100 mA through a 1000 µF capacitor: Vr = 0.1 / (2 × 50 × 0.001) = 1 V peak-to-peak.", "takeaway": "Using 2200 µF instead would cut the ripple to about 0.45 V." },
+      "workedQuestion": {
+        "id": "W-3.2", "type": "numerical", "marks": 5,
+        "prompt": "A full-wave rectifier on 50 Hz mains supplies 200 mA to a load. Find the filter capacitance needed to keep the peak-to-peak ripple at or below 1 V, and choose a standard value.",
+        "modelAnswer": [
+          "For a full-wave rectifier with a capacitor filter, Vr ≈ Idc / (2f·C).",
+          "Rearranging: C = Idc / (2f·Vr).",
+          "C = 0.2 A / (2 × 50 Hz × 1 V) = 0.2 / 100 = 0.002 F = 2000 µF.",
+          "Choose the next larger standard value: 2200 µF.",
+          "Check: with 2200 µF, Vr = 0.2 / (100 × 0.0022) ≈ 0.91 V, which meets the 1 V limit."
+        ],
+        "rubric": [
+          { "criterion": "Correct formula", "marks": 1 },
+          { "criterion": "Rearranged for C", "marks": 1 },
+          { "criterion": "Calculation with units", "marks": 1 },
+          { "criterion": "Standard value chosen", "marks": 1 },
+          { "criterion": "Ripple checked", "marks": 1 }
+        ],
+        "examVocabulary": ["T-ripple-voltage", "T-capacitor-filter"]
+      },
+      "checks": [
+        { "id": "Q-3.2-a", "type": "numerical", "dimension": "concept", "prompt": "A half-wave rectifier on 50 Hz supplies 50 mA through a 470 µF filter capacitor. Estimate the peak-to-peak ripple.", "answer": "2.13 V", "tolerance": "±3%", "explanation": "Vr = Idc / (f·C) = 0.05 / (50 × 470×10⁻⁶) = 2.13 V.", "objectiveIds": ["O-3.2"], "difficulty": 2 },
+        { "id": "Q-3.2-b", "type": "mcq", "dimension": "concept", "prompt": "For the same ripple, a full-wave rectifier needs ___ the capacitance of a half-wave rectifier.", "options": ["half", "twice", "the same", "four times"], "answer": "half", "explanation": "It refills the capacitor twice per mains cycle.", "objectiveIds": ["O-3.2"], "difficulty": 2 },
+        { "id": "Q-3.2-c", "type": "term_match", "dimension": "words", "prompt": "Match the term: peak-to-peak ripple voltage", "options": ["The difference between the highest and lowest output voltage", "The average output voltage", "The peak of the AC input"], "answer": "The difference between the highest and lowest output voltage", "explanation": "Vr is measured from top to bottom of the ripple.", "objectiveIds": ["O-3.2"], "difficulty": 1 },
+        { "id": "Q-3.2-d", "type": "short_english", "dimension": "english", "prompt": "Why does a full-wave rectifier need a smaller filter capacitor?", "answer": "It recharges the capacitor twice per mains cycle, so the capacitor discharges for only half as long.", "explanation": "Use 'recharges' and 'twice per cycle'.", "objectiveIds": ["O-3.2"], "difficulty": 2, "marks": 2 }
+      ],
+      "examWeight": { "askedIn": 4, "outOf": 5, "note": "Sample weight; ripple questions shared with figures of merit" },
+      "estMinutes": 15,
+      "language": { "status": "to_generate", "dialLevels": [1, 2, 3, 4, 5] }
+    },
+    {
+      "id": "C-4.1", "broadConceptId": "BC-4", "order": 1,
+      "title": "The Zener diode and breakdown",
+      "canDo": "Explain Zener and avalanche breakdown and why a Zener diode holds a steady voltage.",
+      "objectiveIds": ["O-4.1"], "prerequisiteIds": ["C-1.3"],
+      "termIds": ["T-zener-diode", "T-zener-voltage", "T-zener-breakdown", "T-avalanche-breakdown"],
+      "misconceptions": [
+        { "id": "M-4.1-a", "statement": "Breakdown always destroys a diode.", "correction": "A Zener diode is designed to operate in breakdown safely, within its power rating." },
+        { "id": "M-4.1-b", "statement": "A Zener regulates in forward bias.", "correction": "It regulates in reverse breakdown; forward biased it just drops about 0.7 V.", "faultType": "Flipped" }
+      ],
+      "explanation": {
+        "keyIdea": "A Zener diode works in reverse breakdown, where its voltage stays nearly constant over a wide range of current.",
+        "text": "A Zener diode is a heavily doped diode designed to work in reverse breakdown without damage. In forward bias it behaves like an ordinary diode. In reverse bias, once the voltage reaches the Zener voltage Vz, the current rises sharply while the voltage across it stays nearly constant. Below about 5 V, breakdown is mainly Zener breakdown: the strong field across the very thin depletion region pulls electrons directly out of their bonds. Above about 6 V, it is mainly avalanche breakdown: fast carriers knock out more carriers in a chain reaction.",
+        "modalities": {
+          "textImage": { "diagram": { "kind": "graph", "description": "Zener V-I curve: normal forward branch; reverse branch flat until −Vz, then a near-vertical line labelled Vz; Zener symbol beside it.", "alt": "Zener diode characteristic with the near-vertical breakdown at Vz" } },
+          "voice": { "walkthrough": [
+            { "target": "Zener diode", "mark": "sweep", "dim": "words", "en": "A Zener diode is built to work in reverse breakdown." },
+            { "target": "Zener voltage", "mark": "lens", "dim": "words", "en": "Its breakdown point is the Zener voltage, Vz." },
+            { "target": "stays nearly constant", "mark": "marker", "dim": "concept", "en": "The key idea: the voltage stays nearly constant as current changes." },
+            { "target": "avalanche breakdown", "mark": "marker", "dim": "words", "en": "At higher voltages, the mechanism is avalanche breakdown." }
+          ] }
+        },
+        "defaultModality": "voice"
+      },
+      "example": { "title": "A 5.1 V reference", "scenario": "A 5.1 V Zener diode, reverse biased through a resistor, keeps about 5.1 V across it whether its current is 5 mA or 30 mA.", "takeaway": "A Zener diode is a voltage holder, not a one-way gate." },
+      "workedQuestion": {
+        "id": "W-4.1", "type": "long_answer", "marks": 5,
+        "prompt": "Explain Zener breakdown and avalanche breakdown. How are they different?",
+        "modelAnswer": [
+          "Zener breakdown occurs in heavily doped junctions with a very thin depletion region. At a low reverse voltage (below about 5 V), the strong electric field pulls electrons directly out of their covalent bonds, so the reverse current rises sharply.",
+          "Avalanche breakdown occurs in lightly doped junctions at higher reverse voltages (above about 6 V). Minority carriers gain enough energy to knock electrons out of bonds when they collide, and those carriers knock out more, in a chain reaction.",
+          "Differences: Zener breakdown happens at low voltage in heavily doped diodes; avalanche happens at higher voltage in lightly doped diodes.",
+          "The Zener breakdown voltage falls slightly as temperature rises (negative temperature coefficient); the avalanche voltage rises with temperature (positive temperature coefficient)."
+        ],
+        "rubric": [
+          { "criterion": "Zener breakdown mechanism", "marks": 2 },
+          { "criterion": "Avalanche breakdown mechanism", "marks": 2 },
+          { "criterion": "At least one clear difference (doping, voltage or temperature coefficient)", "marks": 1 }
+        ],
+        "examVocabulary": ["T-zener-breakdown", "T-avalanche-breakdown", "T-zener-voltage"]
+      },
+      "checks": [
+        { "id": "Q-4.1-a", "type": "mcq", "dimension": "concept", "prompt": "A Zener diode used as a regulator is operated in:", "options": ["Forward bias", "Reverse breakdown", "Zero bias", "Saturation"], "answer": "Reverse breakdown", "explanation": "That is where its voltage stays nearly constant.", "objectiveIds": ["O-4.1"], "difficulty": 1 },
+        { "id": "Q-4.1-b", "type": "mcq", "dimension": "concept", "prompt": "Breakdown in a 3.3 V Zener diode is mainly:", "options": ["Zener breakdown", "Avalanche breakdown", "Thermal runaway"], "answer": "Zener breakdown", "explanation": "Below about 5 V, the Zener mechanism dominates.", "objectiveIds": ["O-4.1"], "difficulty": 2 },
+        { "id": "Q-4.1-c", "type": "term_match", "dimension": "words", "prompt": "Match the term: Zener voltage", "options": ["The reverse voltage at which a Zener diode breaks down and holds steady", "The forward voltage of an LED", "The peak of the AC input"], "answer": "The reverse voltage at which a Zener diode breaks down and holds steady", "explanation": "Written Vz.", "objectiveIds": ["O-4.1"], "difficulty": 1 },
+        { "id": "Q-4.1-d", "type": "short_english", "dimension": "english", "prompt": "How is avalanche breakdown different from Zener breakdown?", "answer": "Avalanche breakdown happens at higher voltages when fast carriers knock out more carriers, while Zener breakdown happens at low voltages when a strong field pulls electrons out of their bonds.", "explanation": "Compare both the voltage and the mechanism.", "objectiveIds": ["O-4.1"], "difficulty": 3, "marks": 2 }
+      ],
+      "examWeight": { "askedIn": 3, "outOf": 5, "note": "Sample weight" },
+      "estMinutes": 12,
+      "language": { "status": "to_generate", "dialLevels": [1, 2, 3, 4, 5] }
+    },
+    {
+      "id": "C-4.2", "broadConceptId": "BC-4", "order": 2,
+      "title": "The Zener voltage regulator",
+      "canDo": "Design a Zener regulator and explain how it holds the output constant.",
+      "objectiveIds": ["O-4.2"], "prerequisiteIds": ["C-4.1", "C-1.4"],
+      "termIds": ["T-voltage-regulator", "T-series-resistor", "T-load-regulation"],
+      "misconceptions": [
+        { "id": "M-4.2-a", "statement": "The series resistor isn't needed.", "correction": "Without Rs the Zener current is unlimited and the diode burns out.", "faultType": "Missing piece" },
+        { "id": "M-4.2-b", "statement": "The Zener goes in series with the load.", "correction": "It goes in parallel with the load, with Rs in series.", "faultType": "Wrong connection" }
+      ],
+      "explanation": {
+        "keyIdea": "Rs sets the total current; the Zener in parallel takes whatever the load doesn't, so the load voltage stays at Vz.",
+        "text": "A Zener voltage regulator holds the load voltage constant even when the input or the load changes. The Zener diode is connected in reverse bias, in parallel with the load, and a series resistor Rs drops the difference between the input and the Zener voltage. The current through Rs is I = (Vin − Vz)/Rs, and it splits between the Zener and the load: I = Iz + IL. If the input rises, the extra current flows into the Zener and the output stays at Vz. If the load draws more, the Zener takes less. This ability to hold the output as the load changes is called load regulation. Rs must keep Iz above its minimum at full load, and the Zener power Vz × Iz must stay within its rating at no load.",
+        "modalities": {
+          "textImage": { "diagram": { "kind": "circuit", "description": "Unregulated input, series resistor Rs, Zener diode (reverse biased) in parallel with load RL; current arrows I, Iz and IL; Vout = Vz marked.", "alt": "Zener voltage regulator with series resistor and load" } },
+          "voice": { "walkthrough": [
+            { "target": "series resistor Rs", "mark": "sweep", "dim": "words", "en": "The series resistor Rs drops the extra voltage." },
+            { "target": "in parallel with the load", "mark": "marker", "dim": "concept", "en": "The Zener sits in parallel with the load, holding it at Vz." },
+            { "target": "I = Iz + IL", "mark": "marker", "dim": "concept", "en": "The current through Rs splits: I equals Iz plus IL." },
+            { "target": "load regulation", "mark": "circle", "dim": "english", "en": "Exam phrase: load regulation." }
+          ] }
+        },
+        "defaultModality": "textImage"
+      },
+      "example": { "title": "5.1 V for a microcontroller from 12 V", "scenario": "Vin = 12 V, Vz = 5.1 V, IL = 20 mA and a minimum Iz of 10 mA: Rs = (12 − 5.1)/0.030 = 230 Ω, so use 220 Ω. Then I = 6.9/220 ≈ 31 mA.", "takeaway": "Rs sets the total current; the Zener soaks up whatever the load doesn't take." },
+      "workedQuestion": {
+        "id": "W-4.2", "type": "numerical", "marks": 5,
+        "prompt": "Design a Zener regulator to supply 5.1 V to a 20 mA load from a 12 V input, keeping at least 10 mA in the Zener. Find Rs, choose a standard value, and find the Zener power at no load.",
+        "modelAnswer": [
+          "Total current at full load: I = Iz(min) + IL = 10 mA + 20 mA = 30 mA.",
+          "Rs = (Vin − Vz)/I = (12 − 5.1)/0.030 = 6.9/0.030 = 230 Ω.",
+          "Choose the next lower standard value, 220 Ω, so that Iz stays above 10 mA: I = 6.9/220 = 31.4 mA, giving Iz = 11.4 mA at full load.",
+          "At no load, all 31.4 mA flows through the Zener: Pz = Vz × Iz = 5.1 × 0.0314 = 0.16 W.",
+          "Use a Zener rated 0.5 W for a safe margin."
+        ],
+        "rubric": [
+          { "criterion": "Total current at full load", "marks": 1 },
+          { "criterion": "Rs calculated", "marks": 1 },
+          { "criterion": "Standard value with reason", "marks": 1 },
+          { "criterion": "No-load Zener current and power", "marks": 1 },
+          { "criterion": "Power rating chosen", "marks": 1 }
+        ],
+        "examVocabulary": ["T-voltage-regulator", "T-series-resistor", "T-zener-voltage"]
+      },
+      "checks": [
+        { "id": "Q-4.2-a", "type": "numerical", "dimension": "concept", "prompt": "Vin = 10 V, Vz = 6.2 V, Rs = 100 Ω and IL = 20 mA. Find the Zener current.", "answer": "18 mA", "tolerance": "±2%", "explanation": "I = (10 − 6.2)/100 = 38 mA, so Iz = 38 − 20 = 18 mA.", "objectiveIds": ["O-4.2"], "difficulty": 2 },
+        { "id": "Q-4.2-b", "type": "mcq", "dimension": "concept", "prompt": "If the load current increases, the Zener current:", "options": ["Decreases", "Increases", "Stays the same", "Reverses"], "answer": "Decreases", "explanation": "The total through Rs is fixed by Vin and Vz, so the Zener gives up current to the load.", "objectiveIds": ["O-4.2"], "difficulty": 2 },
+        { "id": "Q-4.2-c", "type": "term_match", "dimension": "words", "prompt": "Match the term: load regulation", "options": ["Keeping the output voltage constant as the load current changes", "Keeping the input voltage constant", "Limiting the Zener's power"], "answer": "Keeping the output voltage constant as the load current changes", "explanation": "Line regulation is the version for input changes.", "objectiveIds": ["O-4.2"], "difficulty": 1 },
+        { "id": "Q-4.2-d", "type": "short_english", "dimension": "english", "prompt": "Explain how the output stays constant when the input voltage rises.", "answer": "The extra current through Rs flows into the Zener diode, so the voltage across the load stays at Vz.", "explanation": "Use 'extra current', 'flows into the Zener' and 'stays at Vz'.", "objectiveIds": ["O-4.2"], "difficulty": 2, "marks": 2 }
+      ],
+      "examWeight": { "askedIn": 2, "outOf": 5, "note": "Sample weight" },
+      "estMinutes": 15,
+      "language": { "status": "to_generate", "dialLevels": [1, 2, 3, 4, 5] }
+    }
+  ]
+}

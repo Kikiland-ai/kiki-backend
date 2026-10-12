@@ -1,0 +1,14 @@
+node_modules/
+dist/
+coverage/
+.venv/
+__pycache__/
+*.pyc
+.firebase/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+service-account*.json
+*-credentials.json

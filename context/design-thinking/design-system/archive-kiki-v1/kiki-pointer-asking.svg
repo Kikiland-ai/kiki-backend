@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="-8 -8 96 96" role="img" aria-label="Kiki pointer, asking">
+<title>Kiki pointer: asking</title>
+<text x="50" y="30" font-size="26" font-weight="700" font-family="Baloo 2, sans-serif" fill="#4285f4">?</text>
+<g><circle cx="48" cy="40" r="3.2" fill="#4285f4"/><circle cx="56" cy="46" r="3.2" fill="#ea4335"/><circle cx="64" cy="40" r="3.2" fill="#fbbc05"/><circle cx="72" cy="46" r="3.2" fill="#34a853"/></g>
+<g><path d="M12 8 L12 46 L21.5 37.5 L28.5 53 L35 50 L28 35 L40 35 Z" fill="#1f1f1f" stroke="#ffffff" stroke-width="3" stroke-linejoin="round"/><circle cx="16.8" cy="23" r="2.8" fill="#ffffff"/><circle cx="23.4" cy="23" r="2.8" fill="#ffffff"/></g>
+</svg>

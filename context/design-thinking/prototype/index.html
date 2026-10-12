@@ -1,0 +1,876 @@
+<title>Mid-sem Onboarding Demo</title>
+<link rel="stylesheet" href="bundle.css">
+<style>
+/* Layout: a phone frame on a breadboard desk, with a screen list beside it on wide screens; the phone fills the screen on mobile. */
+:root {
+  --paper: #fbfaf7; --paper-raised: #ffffff; --ink: #1f1f1f; --pencil: #5f6368; --line: #d9d6cf; --grid-dot: #e3e1dc;
+  --blue: #4285f4; --blue-ink: #1967d2; --blue-tint: #e8f0fe; --on-blue-ink: #ffffff;
+  --red: #ea4335; --red-ink: #c5221f; --red-strong: #c5221f; --red-tint: #fce8e6;
+  --yellow: #fbbc05; --yellow-ink: #9a5500; --yellow-tint: #fef7e0; --on-yellow: #1f1f1f;
+  --green: #34a853; --green-ink: #137333; --green-tint: #e6f4ea;
+  --scope-glass: #0e1116; --scope-grid: #23303a; --scope-trace: #5be38a; --scope-text: #c9d6df; --focus-ring: #1967d2;
+  --key-edge-blue: 0 3px 0 #0f4fa8; --key-edge-neutral: 0 3px 0 #c9c5bc; --lift: 0 8px 24px rgba(31,31,31,0.12);
+  --frame: #1f1f1f; --desk: #f1efe9;
+  --font-display: "Baloo 2", "Baloo Bhaina 2", system-ui, sans-serif;
+  --font-odia-display: "Baloo Bhaina 2", "Baloo 2", system-ui, sans-serif;
+  --font-body: "Noto Sans", "Noto Sans Oriya", system-ui, sans-serif;
+  --font-odia: "Noto Sans Oriya", "Noto Sans", system-ui, sans-serif;
+  --font-mono: "Roboto Mono", ui-monospace, monospace;
+  --font-hand: "Kalam", "Comic Sans MS", cursive;
+  --radius-node: 16px; --radius-card: 24px; --radius-sheet: 28px; --radius-pill: 999px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #14161a; --paper-raised: #1e2127; --ink: #ecedef; --pencil: #a8adb4; --line: #3a3f48; --grid-dot: #2c3038;
+    --blue-ink: #8ab4f8; --blue-tint: #1b2a44; --on-blue-ink: #062e6f; --red-ink: #f28b82; --red-tint: #3b2120;
+    --yellow-ink: #fdd663; --yellow-tint: #3a3220; --green-ink: #81c995; --green-tint: #1c3324;
+    --scope-glass: #0b0d11; --scope-grid: #1e2830; --focus-ring: #8ab4f8;
+    --key-edge-blue: 0 3px 0 #4f7fc4; --key-edge-neutral: 0 3px 0 #0b0d11; --lift: 0 8px 24px rgba(0,0,0,0.5);
+    --frame: #000000; --desk: #0f1114; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #14161a; --paper-raised: #1e2127; --ink: #ecedef; --pencil: #a8adb4; --line: #3a3f48; --grid-dot: #2c3038;
+  --blue-ink: #8ab4f8; --blue-tint: #1b2a44; --on-blue-ink: #062e6f; --red-ink: #f28b82; --red-tint: #3b2120;
+  --yellow-ink: #fdd663; --yellow-tint: #3a3220; --green-ink: #81c995; --green-tint: #1c3324;
+  --scope-glass: #0b0d11; --scope-grid: #1e2830; --focus-ring: #8ab4f8;
+  --key-edge-blue: 0 3px 0 #4f7fc4; --key-edge-neutral: 0 3px 0 #0b0d11; --lift: 0 8px 24px rgba(0,0,0,0.5);
+  --frame: #000000; --desk: #0f1114; color-scheme: dark;
+}
+html, body { height: 100%; }
+body { margin: 0; background: var(--desk); color: var(--ink); font-family: var(--font-body); }
+#app { min-height: 100%; }
+
+.stage { display: flex; gap: 40px; justify-content: center; align-items: flex-start; padding-block: 32px; padding-inline: 24px; }
+.panel { width: 280px; display: grid; gap: 16px; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 24px); }
+.panel h1 { margin: 0; font: 700 28px/1.1 var(--font-display); text-wrap: balance; }
+.panel p { margin: 0; font-size: 14px; line-height: 1.5; color: var(--pencil); }
+.flow { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; counter-reset: s; }
+.flow button { width: 100%; text-align: left; display: flex; gap: 10px; align-items: center; padding: 8px 10px; border-radius: 10px; border: 0; background: transparent; color: var(--ink); font: 500 14px/1.3 var(--font-body); cursor: pointer; }
+.flow button:hover { background: var(--paper-raised); }
+.flow button[aria-current="step"] { background: var(--paper-raised); box-shadow: inset 3px 0 0 var(--blue); font-weight: 700; }
+.flow .num { font: 500 12px/1 var(--font-mono); color: var(--pencil); width: 18px; }
+.flow .grp { font: 600 11px/1 var(--font-body); letter-spacing: 0.06em; color: var(--pencil); padding: 12px 10px 4px; }
+
+.phone { width: 390px; height: 820px; border-radius: 48px; background: var(--frame); padding: 12px; box-shadow: 0 30px 60px rgba(0,0,0,0.18); flex: none; }
+.screen-wrap { position: relative; width: 100%; height: 100%; border-radius: 37px; overflow: hidden; background: var(--paper); display: flex; flex-direction: column; }
+.statusbar { flex: none; height: 34px; display: flex; justify-content: space-between; align-items: center; padding: 0 26px; font: 600 13px/1 var(--font-body); color: var(--ink); }
+.mobilebar { display: none; }
+
+@media (max-width: 760px) {
+  .stage { padding: 0; gap: 0; display: block; }
+  .panel { display: none; }
+  .phone { width: 100%; height: 100%; min-height: 100vh; min-height: 100dvh; border-radius: 0; padding: 0; box-shadow: none; background: var(--paper); }
+  .screen-wrap { border-radius: 0; height: 100vh; height: 100dvh; }
+  .statusbar { display: none; }
+  .mobilebar { display: flex; flex: none; justify-content: space-between; align-items: center; gap: 8px; padding: 6px 16px; font-size: 12px; color: var(--pencil); background: var(--paper-raised); border-bottom: 1px solid var(--line); }
+  .mobilebar select { font: 500 12px var(--font-body); color: var(--ink); background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 4px 6px; max-width: 60vw; }
+}
+
+.scr { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+.scr-body { flex: 1; min-height: 0; overflow-y: auto; padding: 8px 20px 20px; display: grid; gap: 16px; align-content: start; }
+.scr-foot { flex: none; padding: 12px 20px 18px; display: grid; gap: 8px; background: var(--paper); border-top: 1px solid var(--line); }
+.scr-foot .bb-btn { width: 100%; }
+.topbar { flex: none; display: flex; align-items: center; gap: 10px; padding: 6px 12px 6px 8px; min-height: 48px; }
+.iconbtn { width: 40px; height: 40px; border-radius: 50%; border: 0; background: transparent; color: var(--ink); display: grid; place-items: center; cursor: pointer; flex: none; }
+.iconbtn:hover { background: var(--line); }
+.steps { display: flex; gap: 4px; flex: 1; }
+.steps span { flex: 1; height: 4px; border-radius: 4px; background: var(--line); }
+.steps span.on { background: var(--ink); }
+.title { margin: 0; font: 700 26px/1.2 var(--font-display); text-wrap: balance; }
+.title-or { margin: 0; font: 600 18px/1.6 var(--font-odia-display); color: var(--pencil); }
+.sub { margin: 0; font-size: 15px; line-height: 1.5; color: var(--pencil); }
+.card { padding: 16px; border-radius: var(--radius-card); background: var(--paper-raised); border: 1px solid var(--line); display: grid; gap: 10px; }
+.card-ink { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.card-ink .sub { color: var(--paper); opacity: 0.8; }
+.row { display: flex; gap: 12px; align-items: center; }
+.row > .grow { flex: 1; min-width: 0; }
+.choice { width: 100%; text-align: left; padding: 14px 16px; border-radius: 18px; border: 2px solid var(--line); background: var(--paper-raised); color: var(--ink); font: 400 15px/1.5 var(--font-body); cursor: pointer; display: grid; gap: 4px; }
+.choice:hover { border-color: var(--pencil); }
+.choice[aria-pressed="true"] { border-color: var(--blue-ink); background: var(--blue-tint); }
+.choice[disabled] { opacity: 0.5; cursor: not-allowed; }
+.choice .tag { font: 600 11px/1 var(--font-body); letter-spacing: 0.05em; color: var(--pencil); }
+.chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip { padding: 8px 14px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--paper-raised); color: var(--ink); font: 600 14px/1 var(--font-body); cursor: pointer; }
+.chip[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+.chip[disabled] { opacity: 0.45; cursor: not-allowed; }
+.note { font-size: 13px; color: var(--pencil); line-height: 1.45; }
+.banner { display: flex; gap: 8px; align-items: center; padding: 10px 12px; border-radius: 14px; background: var(--blue-tint); color: var(--ink); font-size: 13px; }
+.banner .bb-icon { color: var(--blue-ink); }
+.kiki-line { display: flex; gap: 10px; align-items: flex-start; }
+.kiki-line .bubble { flex: 1; min-width: 0; padding: 10px 14px; border-radius: 4px 18px 18px 18px; background: var(--paper-raised); border: 1px solid var(--line); font-size: 15px; line-height: 1.5; }
+.center { display: grid; justify-items: center; text-align: center; gap: 14px; }
+.big-num { font: 700 30px/1 var(--font-display); }
+.eyebrow { font: 600 11px/1 var(--font-body); letter-spacing: 0.08em; text-transform: uppercase; color: var(--pencil); }
+.card-ink .eyebrow { color: var(--paper); opacity: 0.75; }
+
+/* Chat mock */
+.chat { flex: 1; min-height: 0; display: flex; flex-direction: column; background: var(--paper); }
+.chat-head { flex: none; display: flex; gap: 10px; align-items: center; padding: 10px 14px; background: var(--paper-raised); border-bottom: 1px solid var(--line); }
+.avatar { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; font: 700 14px/1 var(--font-body); background: var(--line); color: var(--ink); flex: none; }
+.chat-body { flex: 1; overflow-y: auto; padding: 16px 12px; display: grid; gap: 10px; align-content: end; }
+.msg { max-width: 84%; padding: 8px 12px; border-radius: 4px 16px 16px 16px; background: var(--paper-raised); border: 1px solid var(--line); font-size: 14px; line-height: 1.45; }
+.msg .who { font: 700 12px/1.4 var(--font-body); color: var(--red-ink); }
+.msg.me { justify-self: end; border-radius: 16px 4px 16px 16px; background: var(--green-tint); }
+.preview { display: grid; gap: 8px; margin-top: 6px; padding: 12px; border-radius: 12px; background: var(--paper); border: 1px solid var(--line); text-align: left; cursor: pointer; width: 100%; color: var(--ink); font: inherit; }
+.preview:hover { border-color: var(--blue-ink); }
+.preview .url { font: 400 11px/1 var(--font-mono); color: var(--pencil); }
+.chat-input { flex: none; padding: 10px 12px; border-top: 1px solid var(--line); background: var(--paper-raised); color: var(--pencil); font-size: 14px; }
+
+/* Route list */
+.route { position: relative; display: grid; gap: 6px; }
+.route::before { content: ""; position: absolute; left: 33px; top: 30px; bottom: 30px; width: 6px; border-radius: 3px; background: var(--blue); opacity: 0.85; }
+.stop { position: relative; display: flex; gap: 14px; align-items: center; padding: 6px 4px; border-radius: 16px; }
+.stop-node { position: relative; width: 60px; height: 60px; border-radius: var(--radius-node); background: var(--paper-raised); border: 2px solid var(--ink); box-shadow: var(--key-edge-neutral); display: grid; place-items: center; flex: none; z-index: 1; }
+.stop-node .led { position: absolute; top: 5px; right: 5px; width: 8px; height: 8px; border-radius: 50%; background: var(--line); border: 1.5px solid var(--pencil); }
+.stop-done .stop-node .led { background: var(--green); border-color: var(--green-ink); box-shadow: 0 0 8px 2px rgba(52,168,83,0.55); }
+.stop-flicker .stop-node .led { background: var(--green); border-color: var(--green-ink); animation: bb-flicker 1.8s ease-in-out infinite; }
+.stop-skip .stop-node { border-style: dashed; box-shadow: none; }
+.stop-now { background: var(--blue-tint); }
+.stop-name { font-weight: 600; font-size: 15px; line-height: 1.3; }
+.stop-meta { font-size: 12px; color: var(--pencil); display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.heat { font: 600 11px/1.3 var(--font-mono); padding: 2px 7px; border-radius: 999px; background: var(--ink); color: var(--paper); }
+.pin { position: absolute; left: -6px; top: -14px; z-index: 2; }
+
+/* Bottom nav */
+.nav { flex: none; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); background: var(--paper-raised); padding: 6px 8px 10px; }
+.nav button { display: grid; justify-items: center; gap: 2px; padding: 6px; border: 0; background: transparent; color: var(--pencil); font: 600 12px/1.2 var(--font-body); cursor: pointer; border-radius: 12px; }
+.nav button[aria-current="page"] { color: var(--ink); }
+.nav button[aria-current="page"] .bb-icon { font-variation-settings: "FILL" 1, "wght" 500, "opsz" 24; color: var(--blue-ink); }
+
+/* Lesson */
+.beat { display: grid; gap: 16px; }
+.mcq { display: grid; gap: 8px; }
+.mcq .choice.right { border-color: var(--blue); background: var(--blue-tint); }
+.mcq .choice.notyet { border-style: dashed; border-color: var(--pencil); animation: shake 300ms ease 1; }
+@keyframes shake { 0%,100% { transform: none; } 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+.sticker-row { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 6px; }
+.sticker-row .bb-sticker { width: 150px; height: 180px; flex: none; }
+.collected-badge { position: absolute; top: 8px; right: 8px; z-index: 5; color: var(--red-ink); }
+.charger { width: 100%; max-width: 280px; height: auto; justify-self: center; }
+.toast-zone { position: absolute; left: 12px; right: 12px; bottom: 96px; display: grid; justify-items: center; z-index: 30; pointer-events: none; }
+.toast-zone > * { pointer-events: auto; }
+.counter { font: 700 40px/1 var(--font-display); font-variant-numeric: tabular-nums; }
+.strike { text-decoration: line-through; color: var(--pencil); font-size: 24px; }
+.bars { display: grid; gap: 10px; }
+.bar { display: grid; grid-template-columns: 76px 1fr 54px; gap: 10px; align-items: center; font-size: 13px; }
+.bar-track { height: 10px; border-radius: 10px; background: var(--line); overflow: hidden; }
+.bar-track > span { display: block; height: 100%; border-radius: 10px; }
+.mile { display: flex; gap: 10px; align-items: center; font-size: 14px; }
+.mile .bb-icon { color: var(--blue-ink); }
+.share { display: grid; gap: 6px; padding: 16px; border-radius: 20px; background: var(--ink); color: var(--paper); }
+.share b { font: 700 20px/1.2 var(--font-display); }
+@media (prefers-reduced-motion: reduce) { .mcq .choice.notyet { animation: none; } }
+</style>
+
+<div id="app"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<script src="bundle.js"></script>
+<script>
+(function () {
+  var h = React.createElement, B = window.Breadboard;
+  var useState = React.useState, useEffect = React.useEffect, useRef = React.useRef;
+  function icon(n, filled) { return h("span", { className: "bb-icon" + (filled ? " bb-filled" : ""), "aria-hidden": "true" }, n); }
+  function or(text) { return h("span", { className: "bb-or", lang: "or" }, text); }
+
+  var FLOW = [
+    ["chat", "Class group link", "Arrive"],
+    ["hello", "Kiki says hello", "Arrive"],
+    ["promise", "The promise", "Arrive"],
+    ["easy", "Which feels easy?", "Onboarding questions"],
+    ["about", "About you", "Onboarding questions"],
+    ["goal", "What do you need?", "Onboarding questions"],
+    ["plan", "Your mid-sem plan", "Onboarding questions"],
+    ["before", "The “before” question", "Onboarding questions"],
+    ["route", "Your route to mid-sem", "Mid-sem route"],
+    ["lesson", "Lesson: the diode", "Mid-sem route"],
+    ["receipt", "Learning receipt", "Mid-sem route"],
+    ["home", "Map and revision", "Revision"],
+    ["recharge", "2-minute recharge", "Revision"],
+    ["practice", "Practise for the mid-sem?", "Exam practice"],
+    ["write", "Write on paper", "Exam practice"],
+    ["snap", "Snap your pages", "Exam practice"],
+    ["report", "Your analysis", "Exam practice"],
+    ["answer", "One answer, marked", "Exam practice"],
+    ["repair", "Your repair map", "Exam practice"],
+    ["stickers", "Sticker deck", "Your space"],
+    ["me", "How far you've come", "Your space"]
+  ];
+  var LATE = ["home", "recharge", "practice", "write", "snap", "report", "answer", "repair", "stickers", "me", "receipt"];
+  var ONBOARD = ["easy", "about", "goal", "plan", "before"];
+
+  var STOPS = [
+    { id: "semi", name: "Semiconductor basics", odia: "ସେମିକଣ୍ଡକ୍ଟର ମୂଳ କଥା", min: 0, heat: "2/5", base: true },
+    { id: "diode", name: "Diode: a one-way gate", min: 10, heat: "4/5" },
+    { id: "vi", name: "V-I characteristic", min: 12, heat: "4/5" },
+    { id: "models", name: "Diode models", min: 25, heat: "2/5" },
+    { id: "hwr", name: "Half-wave rectifier", min: 35, heat: "5/5", lab: true },
+    { id: "fwr", name: "Full-wave rectifier", min: 40, heat: "5/5" },
+    { id: "filter", name: "Filter capacitor", min: 30, heat: "3/5" },
+    { id: "ripple", name: "Ripple factor", min: 35, heat: "4/5" },
+    { id: "zener", name: "Zener diode", min: 38, heat: "3/5" },
+    { id: "zreg", name: "Zener regulator", min: 45, heat: "2/5" }
+  ];
+  var TOTAL_MIN = STOPS.reduce(function (s, x) { return s + x.min; }, 0); /* 270 */
+  function fmtMin(m) { var hh = Math.floor(m / 60), mm = m % 60; return (hh ? hh + " h " : "") + (mm ? mm + " min" : ""); }
+
+  var BEFORE_OPTIONS = [
+    "The depletion region widens and blocks the flow.",
+    "The diode gets too hot to work.",
+    "Current flows the other way instead.",
+    "I don't know yet."
+  ];
+
+  function initialState() {
+    return { screen: "chat", dial: 1, easyPick: null, branch: "Electronics", sem: 1, goal: "midsem", daily: 30, synced: false, before: null,
+      beat: 0, ring: { concept: 0, words: 0, english: 0, lab: 0 }, lessonDone: false, flicker: true, recharged: false };
+  }
+
+  function App() {
+    var st = useState(initialState); var s = st[0], setS = st[1];
+    var tz = useState(null); var toast = tz[0], setToast = tz[1];
+    var toastTimer = useRef(0);
+    function set(patch) { setS(function (old) { return Object.assign({}, old, typeof patch === "function" ? patch(old) : patch); }); }
+    function go(screen, extra) { set(Object.assign({ screen: screen }, extra || {})); var el = document.querySelector(".scr-body"); if (el) el.scrollTop = 0; }
+    function say(msg, opts) {
+      clearTimeout(toastTimer.current);
+      setToast(Object.assign({ message: msg }, opts || {}));
+      toastTimer.current = setTimeout(function () { setToast(null); }, 2600);
+    }
+    function jump(key) {
+      var extra = { screen: key };
+      if (LATE.indexOf(key) >= 0 && !s.lessonDone) extra = Object.assign(extra, { lessonDone: true, ring: { concept: 1, words: 0.8, english: 0.7, lab: 0 }, before: s.before || 3 });
+      if (key === "lesson") extra.beat = 0;
+      set(extra);
+    }
+    var ctx = { s: s, set: set, go: go, say: say };
+    var screens = { chat: ChatScreen, hello: HelloScreen, promise: PromiseScreen, easy: EasyScreen, about: AboutScreen, goal: GoalScreen, plan: PlanScreen, before: BeforeScreen,
+      route: RouteScreen, lesson: LessonScreen, receipt: ReceiptScreen, home: HomeScreen, recharge: RechargeScreen, stickers: StickersScreen, me: MeScreen,
+      practice: PracticeScreen, write: WriteScreen, snap: SnapScreen, report: ReportScreen, answer: AnswerScreen, repair: RepairScreen };
+    var Cur = screens[s.screen];
+    var idx = FLOW.map(function (f) { return f[0]; }).indexOf(s.screen);
+    var lastGroup = "";
+    return h("div", { className: "stage bb-grid-bg", style: { backgroundColor: "var(--desk)" } },
+      h("aside", { className: "panel" },
+        h("div", { className: "row" }, h(B.Kiki, { state: "idle", size: 40 }), h("span", { className: "eyebrow" }, "Clickable demo")),
+        h("h1", null, "Mid-sem onboarding demo"),
+        h("p", null, "Bikash, a first-year Electronics student, taps a class link, answers the onboarding questions, picks the mid-sem goal, learns one concept and lands on the revision map. Tap through the phone, or jump to any screen."),
+        h("ol", { className: "flow" }, FLOW.map(function (f, i) {
+          var out = [];
+          if (f[2] !== lastGroup) { lastGroup = f[2]; out.push(h("li", { key: "g" + i, className: "grp", "aria-hidden": "true" }, f[2].toUpperCase())); }
+          out.push(h("li", { key: f[0] }, h("button", { type: "button", "aria-current": i === idx ? "step" : undefined, onClick: function () { jump(f[0]); } }, h("span", { className: "num" }, i + 1), f[1])));
+          return out;
+        })),
+        h(B.Button, { variant: "tonal", icon: "restart_alt", onClick: function () { setS(initialState()); } }, "Restart demo"),
+        h("p", null, "Odia text is placeholder copy for a native speaker to review. Voice, camera and sign-in are simulated.")),
+      h("div", { className: "phone" },
+        h("div", { className: "screen-wrap" },
+          h("div", { className: "statusbar", "aria-hidden": "true" }, h("span", null, "9:41"), h("span", null, icon("signal_cellular_alt"), " 3G ", icon("battery_5_bar"))),
+          h("div", { className: "mobilebar" },
+            h("span", null, "Demo " + (idx + 1) + "/" + FLOW.length),
+            h("label", { className: "bb-visually-hidden", htmlFor: "jump" }, "Jump to screen"),
+            h("select", { id: "jump", value: s.screen, onChange: function (e) { jump(e.target.value); } }, FLOW.map(function (f, i) { return h("option", { key: f[0], value: f[0] }, (i + 1) + ". " + f[1]); })),
+            h("button", { type: "button", className: "iconbtn", "aria-label": "Restart demo", onClick: function () { setS(initialState()); }, style: { width: 32, height: 32 } }, icon("restart_alt"))),
+          h(Cur, ctx),
+          toast ? h("div", { className: "toast-zone" }, h(B.Snackbar, { message: toast.message, tone: toast.tone, icon: toast.icon })) : null)));
+  }
+
+  /* ---------- shared bits ---------- */
+  function Top(props) {
+    var i = ONBOARD.indexOf(props.step);
+    return h("div", { className: "topbar" },
+      props.onBack ? h("button", { type: "button", className: "iconbtn", "aria-label": props.closeIcon ? "Close" : "Back", onClick: props.onBack }, icon(props.closeIcon ? "close" : "arrow_back")) : h("span", { style: { width: 40 } }),
+      i >= 0 ? h("div", { className: "steps", role: "progressbar", "aria-label": "Setup", "aria-valuemin": 1, "aria-valuemax": ONBOARD.length, "aria-valuenow": i + 1 },
+        ONBOARD.map(function (k, j) { return h("span", { key: k, className: j <= i ? "on" : "" }); })) : h("div", { style: { flex: 1 } }, props.center || null),
+      props.right || h(B.Kiki, { state: props.kiki || "idle", size: 32 }));
+  }
+  function Foot(props) { return h("div", { className: "scr-foot" }, props.children); }
+  function KikiSays(props) { return h("div", { className: "kiki-line" }, h(B.Kiki, { state: props.state || "speaking", size: 40, lead: props.lead }), h("div", { className: "bubble" }, props.children)); }
+  function Nav(props) {
+    var items = [["home", "map", "Map"], ["stickers", "style", "Stickers"], ["me", "person", "Me"]];
+    return h("nav", { className: "nav", "aria-label": "Main" }, items.map(function (it) {
+      var cur = props.ctx.s.screen === it[0] || (it[0] === "home" && props.ctx.s.screen === "route");
+      return h("button", { key: it[0], type: "button", "aria-current": cur ? "page" : undefined, onClick: function () { props.ctx.go(it[0] === "home" && !props.ctx.s.lessonDone ? "route" : it[0]); } }, icon(it[1], cur), it[2]);
+    }));
+  }
+
+  /* ---------- 1. Class group link ---------- */
+  function ChatScreen(ctx) {
+    return h("div", { className: "chat" },
+      h("div", { className: "chat-head" }, h("div", { className: "avatar" }, "E1"),
+        h("div", { className: "grow", style: { minWidth: 0 } }, h("div", { style: { fontWeight: 700, fontSize: 15 } }, "ECE 1st sem · Section A"), h("div", { className: "note" }, "Example class group chat"))),
+      h("div", { className: "chat-body" },
+        h("div", { className: "msg" }, h("div", { className: "who" }, "Priya"), "Anyone has notes for diodes? Mid-sem is so close"),
+        h("div", { className: "msg" }, h("div", { className: "who" }, "Rohan (class rep)"), "Use this for Basic Electronics. It explains every topic in Odia and English, about 10 min each, in mid-sem order.",
+          h("button", { type: "button", className: "preview", onClick: function () { ctx.go("hello"); }, "aria-label": "Open the Basic Electronics mid-sem route" },
+            h("div", { className: "row" }, h(B.Kiki, { state: "idle", size: 34 }), h("div", { className: "grow" }, h("div", { style: { fontWeight: 700 } }, "Basic Electronics · Mid-sem route"), h("div", null, or("ମିଡ୍-ସେମ୍ ପାଇଁ ପ୍ରସ୍ତୁତି")))),
+            h("div", { className: "note" }, "10 min · Odia + English · 9 stops"),
+            h("div", { className: "url" }, "learn.example/route/basic-electronics?class=ECE1-A"))),
+        h("div", { className: "msg me" }, "thanks bhai"),
+        h("div", { className: "note", style: { textAlign: "center" } }, "Tap the link card to open it")),
+      h("div", { className: "chat-input", "aria-hidden": "true" }, "Message"));
+  }
+
+  /* ---------- 2. Kiki says hello ---------- */
+  function HelloScreen(ctx) {
+    var t = useState(false); var heard = t[0], setHeard = t[1];
+    var k = useState("idle"); var ks = k[0], setKs = k[1];
+    useEffect(function () { if (!heard) return undefined; setKs("speaking"); var id = setTimeout(function () { setKs("celebrating"); }, 2400); return function () { clearTimeout(id); }; }, [heard]);
+    return h("div", { className: "scr" },
+      h("div", { className: "scr-body", style: { alignContent: "center" } },
+        h("div", { className: "center" },
+          h(B.Kiki, { state: ks, size: 140 }),
+          heard ? h(React.Fragment, null,
+              h("p", { className: "title-or" }, "ନମସ୍କାର! ମୁଁ କିକି। Rohan ତୁମ ପାଇଁ Basic Electronics mid-sem route ପଠାଇଛନ୍ତି।"),
+              h("p", { className: "sub" }, "Hello! I'm Kiki. Rohan shared your Basic Electronics mid-sem route."),
+              h("div", { className: "banner" }, icon("group"), "Shared by Rohan · 38 classmates on this route"))
+            : h(React.Fragment, null,
+              h("p", { className: "title" }, "Hi there"),
+              h("p", { className: "sub" }, "Your friend sent you something. Turn your sound on.")))),
+      h(Foot, null, heard
+        ? h(B.Button, { icon: "arrow_forward", onClick: function () { ctx.go("promise"); } }, "Continue")
+        : h(React.Fragment, null, h(B.Button, { icon: "volume_up", onClick: function () { setHeard(true); } }, "Tap to hear Kiki"),
+            h("button", { type: "button", className: "bb-btn bb-btn-text", onClick: function () { setHeard(true); } }, "Read instead"))));
+  }
+
+  /* ---------- 3. The promise ---------- */
+  function PromiseScreen(ctx) {
+    return h("div", { className: "scr" },
+      h(Top, { onBack: function () { ctx.go("hello"); } }),
+      h("div", { className: "scr-body" },
+        h("div", { className: "card card-ink" },
+          h("span", { className: "eyebrow" }, "Basic Electronics · Mid-sem"),
+          h("div", { className: "row" }, h("span", { className: "big-num" }, "12 days"), h("span", { className: "sub" }, "until your mid-sem")),
+          h("span", { className: "sub" }, "9 stops · about " + fmtMin(TOTAL_MIN) + " in total")),
+        h("div", { className: "card" },
+          h("span", { className: "eyebrow" }, "Stop 1 · 10 minutes"),
+          h("div", { className: "row" }, h(B.MasteryRing, { size: 56, values: {} }), h("div", { className: "grow" }, h("div", { style: { fontWeight: 700, fontSize: 17 } }, "Diode: a one-way gate"), h("div", { className: "note" }, "Builds on Class 12 semiconductors")))),
+        h("div", { className: "card", style: { borderColor: "var(--blue)", borderWidth: 2 } },
+          h("span", { className: "eyebrow", style: { color: "var(--blue-ink)" } }, "In 10 minutes you'll be able to"),
+          h("div", { style: { fontSize: 18, lineHeight: 1.45, fontWeight: 600 } }, "explain in English why a diode lets current flow only one way.")),
+        h("p", { className: "note" }, "First, five quick questions so Kiki can set things up for you. About a minute.")),
+      h(Foot, null,
+        h(B.Button, { icon: "arrow_forward", onClick: function () { ctx.go("easy"); } }, "Start"),
+        h("button", { type: "button", className: "bb-btn bb-btn-text", onClick: function () { ctx.go("route"); } }, "Show me the whole map")));
+  }
+
+  /* ---------- 4. Which feels easy? ---------- */
+  var EASY = [
+    { level: 1, tag: "MOSTLY ODIA", text: "ଏକ conductor ରେ current, ତା ଦୁଇ ମୁଣ୍ଡ ମଧ୍ୟରେ ଥିବା voltage ସହିତ ସମାନୁପାତୀ।" },
+    { level: 3, tag: "HALF AND HALF", text: "Conductor ରେ current, voltage ସହିତ directly proportional। ଏହାକୁ Ohm's law କୁହାଯାଏ।" },
+    { level: 5, tag: "MOSTLY ENGLISH", text: "The current through a conductor is directly proportional to the voltage across it. This is Ohm's law." }
+  ];
+  function EasyScreen(ctx) {
+    var s = ctx.s;
+    return h("div", { className: "scr" },
+      h(Top, { step: "easy", onBack: function () { ctx.go("promise"); } }),
+      h("div", { className: "scr-body" },
+        h("div", null, h("h2", { className: "title" }, "Which feels easy?"), h("p", { className: "title-or" }, "କେଉଁଟି ସହଜ ଲାଗୁଛି?")),
+        h("p", { className: "sub" }, "The same Class 12 sentence, three ways. Pick the one you'd like to read every day. There is no wrong answer."),
+        EASY.map(function (e) {
+          return h("button", { key: e.level, type: "button", className: "choice", "aria-pressed": s.easyPick === e.level, onClick: function () { ctx.set({ easyPick: e.level, dial: e.level }); } },
+            h("span", { className: "tag" }, e.tag), h("span", null, B.MorphText ? withOdia(e.text) : e.text));
+        }),
+        s.easyPick ? h("div", { className: "card" }, h("span", { className: "note" }, "Your language dial starts here. You can change it in every lesson."), h(B.LanguageDial, { value: s.dial, onChange: function (v) { ctx.set({ dial: v }); } })) : null),
+      h(Foot, null, h(B.Button, { icon: "arrow_forward", disabled: !s.easyPick, onClick: function () { ctx.go("about"); } }, "Continue")));
+  }
+  function withOdia(text) {
+    return String(text).split(/([଀-୿][଀-୿\s।]*)/).map(function (p, i) { return /[଀-୿]/.test(p) ? h("span", { key: i, className: "bb-or", lang: "or" }, p) : p; });
+  }
+
+  /* ---------- 5. About you ---------- */
+  function AboutScreen(ctx) {
+    var s = ctx.s;
+    return h("div", { className: "scr" },
+      h(Top, { step: "about", onBack: function () { ctx.go("easy"); } }),
+      h("div", { className: "scr-body" },
+        h("div", null, h("h2", { className: "title" }, "About you"), h("p", { className: "title-or" }, "ତୁମ ବିଷୟରେ")),
+        h("div", { className: "banner" }, icon("link"), h("span", null, "Filled in from Rohan's class link. Check it's right.")),
+        h("div", { className: "card" }, h("span", { className: "eyebrow" }, "College"), h("div", { className: "row" }, icon("school"), h("span", { className: "grow", style: { fontWeight: 600 } }, "Your college (from the class link)"), h("button", { type: "button", className: "bb-btn bb-btn-text", style: { minHeight: 32 }, onClick: function () { ctx.say("In the app, this opens a college search.", { icon: "search" }); } }, "Change"))),
+        h("div", { className: "card" }, h("span", { className: "eyebrow" }, "Branch"),
+          h("div", { className: "chips" },
+            h("button", { type: "button", className: "chip", "aria-pressed": true }, "Electronics"),
+            h("button", { type: "button", className: "chip", disabled: true, title: "Coming soon" }, "Electrical · soon"),
+            h("button", { type: "button", className: "chip", disabled: true, title: "Coming soon" }, "Chemical · soon"))),
+        h("div", { className: "card" }, h("span", { className: "eyebrow" }, "Semester"),
+          h("div", { className: "chips" }, [1, 2, 3, 4].map(function (n) { return h("button", { key: n, type: "button", className: "chip", "aria-pressed": s.sem === n, onClick: function () { ctx.set({ sem: n }); } }, "Sem " + n); })))),
+      h(Foot, null, h(B.Button, { icon: "arrow_forward", onClick: function () { ctx.go("goal"); } }, "Looks right")));
+  }
+
+  /* ---------- 6. What do you need? ---------- */
+  var GOALS = [
+    { id: "midsem", icon: "event", title: "Mid-sem is coming", sub: "Tell me what to study, in what order" },
+    { id: "lab", icon: "science", title: "Lab is confusing", sub: "Help me get the experiment working" },
+    { id: "lost", icon: "help", title: "I'm lost in class", sub: "Explain this week's topic" },
+    { id: "interview", icon: "record_voice_over", title: "Get interview-ready", sub: "Explain concepts out loud in English" }
+  ];
+  function GoalScreen(ctx) {
+    var s = ctx.s;
+    return h("div", { className: "scr" },
+      h(Top, { step: "goal", onBack: function () { ctx.go("about"); } }),
+      h("div", { className: "scr-body" },
+        h("div", null, h("h2", { className: "title" }, "What do you need right now?"), h("p", { className: "title-or" }, "ବର୍ତ୍ତମାନ ତୁମକୁ କଣ ଦରକାର?")),
+        GOALS.map(function (g) {
+          return h("button", { key: g.id, type: "button", className: "choice", "aria-pressed": s.goal === g.id, onClick: function () { ctx.set({ goal: g.id }); } },
+            h("span", { className: "row" }, h("span", { className: "bb-icon", style: { fontSize: 26, color: "var(--blue-ink)" } }, g.icon),
+              h("span", { className: "grow" }, h("span", { style: { display: "block", fontWeight: 700, fontSize: 16 } }, g.title), h("span", { className: "note" }, g.sub)),
+              g.id === "midsem" ? h("span", { className: "tag" }, "FROM YOUR LINK") : null));
+        }),
+        s.goal !== "midsem" ? h("p", { className: "note" }, "This demo follows the mid-sem path. The other goals pick a different first step.") : null),
+      h(Foot, null, h(B.Button, { icon: "arrow_forward", disabled: s.goal !== "midsem", onClick: function () { ctx.go("plan"); } }, "Continue")));
+  }
+
+  /* ---------- 7. Mid-sem plan ---------- */
+  function PlanScreen(ctx) {
+    var s = ctx.s;
+    var r = useState(false); var reading = r[0], setReading = r[1];
+    var days = Math.ceil(TOTAL_MIN / s.daily);
+    var fits = days <= 12;
+    var finish = new Date(Date.UTC(2026, 9, 11 + days));
+    var finishTxt = finish.getUTCDate() + " Oct";
+    function snap() { setReading(true); setTimeout(function () { setReading(false); ctx.set({ synced: true }); ctx.say("Route updated: rectifiers are asked in every paper.", { tone: "route" }); }, 1800); }
+    return h("div", { className: "scr" },
+      h(Top, { step: "plan", onBack: function () { ctx.go("goal"); } }),
+      h("div", { className: "scr-body" },
+        h("div", null, h("h2", { className: "title" }, "Your mid-sem plan"), h("p", { className: "title-or" }, "ତୁମ mid-sem ଯୋଜନା")),
+        h("div", { className: "card" }, h("span", { className: "eyebrow" }, "Exam date"),
+          h("div", { className: "row" }, icon("event"), h("span", { className: "grow", style: { fontWeight: 600 } }, "Thu, 23 Oct · in 12 days"), h("span", { className: "note" }, "from your class"))),
+        h("div", { className: "card" }, h("span", { className: "eyebrow" }, "How much time a day?"),
+          h("div", { className: "chips" }, [15, 30, 60].map(function (m) { return h("button", { key: m, type: "button", className: "chip", "aria-pressed": s.daily === m, onClick: function () { ctx.set({ daily: m }); } }, m + " min"); })),
+          fits ? h("div", { className: "banner" }, icon("check_circle"), h("span", null, "9 stops, about " + fmtMin(TOTAL_MIN) + ". You'll finish by ", h("b", null, finishTxt), ", with time left to revise."))
+            : h("div", { className: "banner", style: { background: "var(--yellow-tint)" } }, icon("info"), h("span", null, "At 15 min a day this needs " + days + " days, and you have 12. Kiki will mark 3 low-weight stops as optional."))),
+        h("div", { className: "card" },
+          h("span", { className: "eyebrow" }, "Make it exact (optional)"),
+          s.synced ? h("div", { className: "row" }, icon("task_alt", true), h("span", { className: "grow" }, "Read 3 past papers. 9 topics found, all on your map. Each stop now shows how often it was asked."))
+            : reading ? h("div", { className: "row" }, h(B.Kiki, { state: "thinking", size: 40 }), h("span", null, "Reading 3 pages…"))
+            : h(React.Fragment, null, h("span", { className: "sub" }, "Snap your syllabus or past papers. Kiki will weight the route by what is actually asked."),
+                h(B.Button, { variant: "tonal", icon: "photo_camera", onClick: snap }, "Snap past papers")))),
+      h(Foot, null, h(B.Button, { icon: "arrow_forward", onClick: function () { ctx.go("before"); } }, "Continue")));
+  }
+
+  /* ---------- 8. The before question ---------- */
+  function BeforeScreen(ctx) {
+    var s = ctx.s;
+    return h("div", { className: "scr" },
+      h(Top, { step: "before", onBack: function () { ctx.go("plan"); } }),
+      h("div", { className: "scr-body" },
+        h(KikiSays, { state: s.before == null ? "asking" : "celebrating" }, s.before == null ? h(React.Fragment, null, "What do you think right now? No marks. ", or("ଯାହା ମନେ ହେଉଛି ବାଛ।")) : "Thanks! We'll come back to this at the end."),
+        h("div", { className: "card" }, h("span", { className: "eyebrow" }, "Before you start"), h("div", { style: { fontSize: 18, fontWeight: 600, lineHeight: 1.4 } }, "Why does a reverse-biased diode not conduct?")),
+        h("div", { className: "mcq" }, BEFORE_OPTIONS.map(function (o, i) {
+          return h("button", { key: i, type: "button", className: "choice", "aria-pressed": s.before === i, onClick: function () { ctx.set({ before: i }); } }, o);
+        }))),
+      h(Foot, null, h(B.Button, { icon: "map", disabled: s.before == null, onClick: function () { ctx.go("route"); } }, "Build my route")));
+  }
+
+  /* ---------- Route list (used by route and home) ---------- */
+  function RouteList(props) {
+    var s = props.s;
+    return h("div", { className: "route", role: "list", "aria-label": "Route to mid-sem" },
+      STOPS.map(function (st, i) {
+        var state = st.base ? (s.flicker ? "flicker" : "done") : st.id === "diode" ? (s.lessonDone ? "done" : "now") : (s.lessonDone && st.id === "vi" ? "now" : "todo");
+        var values = st.base ? { concept: 1, words: 1, english: 1, lab: 1 } : st.id === "diode" ? s.ring : {};
+        var stopNo = st.base ? null : i;
+        return h("div", { key: st.id, role: "listitem", className: "stop stop-" + state + (st.base ? " stop-skip" : "") },
+          state === "now" ? h("span", { className: "pin" }, h(B.Kiki, { state: "idle", size: 24, label: "You are here" })) : null,
+          h("div", { className: "stop-node" }, h("span", { className: "led", "aria-hidden": "true" }), h(B.MasteryRing, { size: 40, values: values, flicker: state === "flicker", locked: st.lab && !s.lessonDone ? [] : [] })),
+          h("div", { className: "grow", style: { minWidth: 0 } },
+            h("div", { className: "stop-name" }, st.name),
+            h("div", { className: "stop-meta" },
+              st.base ? h("span", null, s.flicker ? "From Class 12 · needs a recharge" : "From Class 12 · recharged") : h("span", null, "Stop " + stopNo + " · " + st.min + " min"),
+              s.synced || props.alwaysHeat ? h("span", { className: "heat", title: "Asked in " + st.heat + " past papers" }, st.heat) : null,
+              st.lab ? h("span", null, icon("science"), " lab") : null)),
+          state === "now" && props.onStart ? h(B.Button, { onClick: props.onStart, style: { minHeight: 40, padding: "0 16px" } }, "Go") : null);
+      }));
+  }
+
+  /* ---------- 9. Route reveal ---------- */
+  function RouteScreen(ctx) {
+    var s = ctx.s;
+    return h("div", { className: "scr" },
+      h(Top, { onBack: function () { ctx.go("before"); }, center: h("span", { style: { fontWeight: 700 } }, "Your route") }),
+      h("div", { className: "scr-body" },
+        h("div", { className: "card card-ink" },
+          h("span", { className: "eyebrow" }, "Mid-sem · Thu 23 Oct"),
+          h("div", { className: "row" }, h("span", { className: "big-num" }, "9 stops"), h("span", { className: "sub" }, fmtMin(TOTAL_MIN) + " · " + s.daily + " min a day"))),
+        h(KikiSays, { state: "pointing", lead: "concept" }, "Here's everything between you and the mid-sem. Semiconductor basics you already know from Class 12, so we start at the diode."),
+        h(RouteList, { s: s, onStart: function () { ctx.go("lesson", { beat: 0 }); } })),
+      h(Foot, null, h(B.Button, { icon: "play_arrow", onClick: function () { ctx.go("lesson", { beat: 0 }); } }, "Continue with Kiki")),
+      h(Nav, { ctx: ctx }));
+  }
+
+  /* ---------- 10. Lesson ---------- */
+  var BEATS = ["Hook", "Kiki explains", "Learn", "Explore", "Collect", "Try in English", "Say it", "Lab"];
+  function LessonScreen(ctx) {
+    var s = ctx.s, beat = s.beat;
+    function next(patch) { ctx.set(Object.assign({ beat: beat + 1 }, patch || {})); var el = document.querySelector(".scr-body"); if (el) el.scrollTop = 0; }
+    function ring(p) { return Object.assign({}, s.ring, p); }
+    var body = [HookBeat, ExplainBeat, LearnBeat, ExploreBeat, CollectBeat, EnglishBeat, SayBeat, TeaseBeat][beat];
+    return h("div", { className: "scr" },
+      h("div", { className: "topbar" },
+        h("button", { type: "button", className: "iconbtn", "aria-label": "Close lesson", onClick: function () { ctx.go("route"); } }, icon("close")),
+        h("div", { style: { flex: 1 } }, h(B.LessonProgress, { values: s.ring })),
+        h("span", { className: "bb-mono", style: { fontSize: 12, color: "var(--pencil)" } }, (beat + 1) + "/" + BEATS.length)),
+      h(body, { ctx: ctx, next: next, ring: ring }));
+  }
+  function Beat(props) {
+    return h(React.Fragment, null,
+      h("div", { className: "scr-body" }, h("div", { className: "beat" }, h("span", { className: "eyebrow" }, props.label), props.children)),
+      props.foot ? h(Foot, null, props.foot) : null);
+  }
+  function HookBeat(p) {
+    return h(Beat, { label: "Hook", foot: h(B.Button, { icon: "arrow_forward", onClick: function () { p.next(); } }, "Next") },
+      h("svg", { className: "charger", viewBox: "0 0 280 150", role: "img", "aria-label": "A phone charger between a wall socket and a phone" },
+        h("rect", { x: 10, y: 40, width: 60, height: 70, rx: 10, fill: "var(--paper-raised)", stroke: "var(--ink)", strokeWidth: 2.5 }),
+        h("circle", { cx: 32, cy: 75, r: 5, fill: "var(--ink)" }), h("circle", { cx: 48, cy: 75, r: 5, fill: "var(--ink)" }),
+        h("text", { x: 40, y: 130, textAnchor: "middle", fontSize: 13, fill: "var(--pencil)", fontFamily: "Roboto Mono, monospace" }, "AC"),
+        h("path", { d: "M70 75 C 95 75, 95 75, 110 75", stroke: "var(--ink)", strokeWidth: 3, fill: "none" }),
+        h("rect", { x: 110, y: 52, width: 56, height: 46, rx: 8, fill: "var(--ink)" }),
+        h("text", { x: 138, y: 80, textAnchor: "middle", fontSize: 18, fill: "var(--paper)", fontFamily: "Roboto Mono, monospace" }, "?"),
+        h("path", { d: "M166 75 C 190 75, 190 75, 205 75", stroke: "var(--ink)", strokeWidth: 3, fill: "none" }),
+        h("rect", { x: 205, y: 25, width: 56, height: 100, rx: 12, fill: "var(--paper-raised)", stroke: "var(--ink)", strokeWidth: 2.5 }),
+        h("rect", { x: 222, y: 40, width: 22, height: 8, rx: 2, fill: "var(--green)" }),
+        h("text", { x: 233, y: 145, textAnchor: "middle", fontSize: 13, fill: "var(--pencil)", fontFamily: "Roboto Mono, monospace" }, "DC")),
+      h(KikiSays, { state: "speaking" }, or("ସକେଟ୍ AC ଦିଏ, କିନ୍ତୁ ତୁମ ଫୋନ୍ DC ଚାହେଁ। current କେଉଁ ଦିଗରେ ଯିବ, ତାହା କିଏ ଠିକ୍ କରେ?")),
+      h("p", { className: "note" }, "The socket gives AC, but your phone needs DC. Who decides which way current flows?"));
+  }
+  function ExplainBeat(p) {
+    return h(Beat, { label: "Kiki explains · 6 sentences", foot: h(B.Button, { icon: "arrow_forward", onClick: function () { p.next(); } }, "Got it, next") },
+      h("p", { className: "sub" }, "Press play. Kiki's pointer marks each word as it explains: red for technical words, blue for the main idea, yellow for exam English. Tap any word, pause or step back at any time."),
+      h(B.KikiWalkthrough, { stepMs: 4200 }));
+  }
+  function Mcq(props) {
+    var a = useState(null); var pick = a[0], setPick = a[1];
+    var done = pick === props.right;
+    return h("div", { className: "card" },
+      h("span", { className: "eyebrow" }, "Quick check"),
+      h("div", { style: { fontWeight: 600, fontSize: 16 } }, props.q),
+      h("div", { className: "mcq" }, props.options.map(function (o, i) {
+        var cls = "choice" + (pick === i ? (i === props.right ? " right" : " notyet") : "");
+        return h("button", { key: i + "-" + (pick === i ? "p" : "n"), type: "button", className: cls, disabled: done && i !== props.right, onClick: function () { setPick(i); if (i === props.right && props.onRight) props.onRight(); } }, o);
+      })),
+      pick != null ? h("div", { className: "note", "aria-live": "polite" }, done ? props.yes : "Not yet. " + props.hint) : null);
+  }
+  function LearnBeat(p) {
+    var s = p.ctx.s;
+    var c = useState(false); var ok = c[0], setOk = c[1];
+    return h(Beat, { label: "Learn · a diode is a one-way gate", foot: h(B.Button, { icon: "arrow_forward", disabled: !ok, onClick: function () { p.next(); } }, "Next") },
+      h(B.LanguageDial, { value: s.dial, onChange: function (v) { p.ctx.set({ dial: v }); }, suggested: s.dial < 5 ? s.dial + 1 : null }),
+      h("div", { className: "card" }, h(B.MorphText, { level: s.dial })),
+      h(Mcq, { q: "In which bias does a diode conduct?", options: ["Forward bias", "Reverse bias"], right: 0, yes: "Yes. Blue grows: that's your concept skill.", hint: "Look at the paragraph again: which bias lets current through?",
+        onRight: function () { setOk(true); p.ctx.set({ ring: p.ring({ concept: 0.5 }) }); } }));
+  }
+  function ExploreBeat(p) {
+    var c = useState(false); var ok = c[0], setOk = c[1];
+    return h(Beat, { label: "Explore · drag the voltage", foot: h(B.Button, { icon: "arrow_forward", disabled: !ok, onClick: function () { p.next(); } }, "Next") },
+      h(B.DiodeExplorable, { defaultVoltage: 0.2 }),
+      h(Mcq, { q: "Below about how many volts does almost no current flow?", options: ["0.2 V", "0.7 V", "5 V"], right: 1, yes: "Right: that is the cut-in voltage.", hint: "Drag the slider and watch where the curve starts to rise.",
+        onRight: function () { setOk(true); p.ctx.set({ ring: p.ring({ concept: 1 }) }); } }));
+  }
+  function CollectBeat(p) {
+    var terms = ["forward bias", "reverse bias", "cut-in voltage"];
+    var c = useState([]); var got = c[0], setGot = c[1];
+    var all = got.length === terms.length;
+    return h(Beat, { label: "Collect · 3 new words", foot: h(B.Button, { icon: "arrow_forward", disabled: !all, onClick: function () { p.next(); } }, all ? "Next" : "Tap each sticker") },
+      h("p", { className: "sub" }, "Tap each sticker to flip it and hear the word. It goes into your deck."),
+      h("div", { className: "sticker-row" }, terms.map(function (t) {
+        var has = got.indexOf(t) >= 0;
+        return h("div", { key: t, style: { position: "relative" }, onClickCapture: function () {
+            try { if (window.speechSynthesis) { var u = new SpeechSynthesisUtterance(t); u.lang = "en-IN"; u.rate = 0.9; window.speechSynthesis.cancel(); window.speechSynthesis.speak(u); } } catch (e) {}
+            if (!has) { var n = got.concat([t]); setGot(n); p.ctx.set({ ring: p.ring({ words: n.length / terms.length * 0.6 }) }); }
+          } },
+          has ? h("span", { className: "collected-badge bb-icon bb-filled", "aria-label": "Collected" }, "check_circle") : null,
+          h(B.WordSticker, { term: t, state: has ? "collected" : "new" }));
+      })),
+      all ? h("div", { className: "banner", style: { background: "var(--red-tint)" } }, icon("style"), "3 new words in your deck. Red grows: that's your words skill.") : null);
+  }
+  var ANSWERS = [
+    { id: "solid", text: "In reverse bias the depletion region becomes wider, so the diode blocks current.", label: "A clear English answer" },
+    { id: "language", text: "diode not allow because depletion big in reverse", label: "Right idea, weak English" },
+    { id: "concept", text: "Because the current is too small to measure.", label: "A concept gap" }
+  ];
+  function EnglishBeat(p) {
+    var a = useState(null); var ans = a[0], setAns = a[1];
+    var t = useState(false); var thinking = t[0], setThinking = t[1];
+    function submit(x) { setAns(x); setThinking(true); setTimeout(function () { setThinking(false);
+      if (x.id === "solid") p.ctx.set({ ring: p.ring({ english: 0.5 }) });
+      if (x.id === "language") p.ctx.set({ ring: p.ring({ english: 0.3, words: 0.8 }) });
+      if (x.id === "concept") p.ctx.say("Rerouting… +1 stop, 6 min", { tone: "route" });
+    }, 1300); }
+    return h(Beat, { label: "Try it in English",
+        foot: ans && !thinking ? (ans.id === "concept" ? h(B.Button, { variant: "tonal", icon: "restart_alt", onClick: function () { setAns(null); } }, "Try another answer") : h(B.Button, { icon: "arrow_forward", onClick: function () { p.next(); } }, "Next")) : null },
+      h("div", { className: "card" }, h("span", { className: "eyebrow" }, "Exam-style question"), h("div", { style: { fontSize: 18, fontWeight: 600, lineHeight: 1.4 } }, "Why does a reverse-biased diode not conduct?"),
+        h("div", { className: "note" }, "Use your stickers: ", h(B.TermChip, { term: "reverse bias", state: "collected" }), " ", h(B.TermChip, { term: "forward bias", state: "collected" }))),
+      !ans ? h(React.Fragment, null,
+          h("p", { className: "note" }, "In the app you type or speak your answer. For this demo, pick one of three answers to see how Kiki diagnoses each."),
+          ANSWERS.map(function (x) { return h("button", { key: x.id, type: "button", className: "choice", onClick: function () { submit(x); } }, h("span", { className: "tag" }, x.label.toUpperCase()), h("span", { style: { fontFamily: "var(--font-hand)", fontSize: 18 } }, x.text)); }))
+        : thinking ? h(KikiSays, { state: "thinking" }, "Checking the idea and the English separately…")
+        : h(React.Fragment, null,
+            h("div", { className: "card" }, h("span", { className: "eyebrow" }, "Your answer"), h("span", { style: { fontFamily: "var(--font-hand)", fontSize: 18 } }, ans.text)),
+            h(B.DiagnosisCard, { variant: ans.id, onAction: function () { if (ans.id === "language") p.ctx.say("In the app: a 1-minute word drill, then an easier English version.", { icon: "style" }); else if (ans.id === "solid") p.next(); else p.ctx.say("In the app: a 6-minute stop on forward and reverse bias.", { tone: "route" }); } }),
+            ans.id === "language" ? h("div", { className: "card", style: { background: "var(--yellow-tint)", borderColor: "var(--yellow)" } }, h("span", { className: "eyebrow" }, "Exam-ready English"), h("span", null, "In reverse bias, the depletion region ", h("b", null, "widens"), ", so the diode ", h("b", null, "blocks"), " current."), h("span", { className: "note" }, or("ତୁମ ଉତ୍ତରର ଭାବନା ଠିକ୍। କେବଳ 'widens' ଓ 'blocks' ଶବ୍ଦ ବ୍ୟବହାର କର।"))) : null));
+  }
+  function SayBeat(p) {
+    return h(Beat, { label: "Say it", foot: h(B.Button, { icon: "check", onClick: function () { p.ctx.set({ ring: p.ring({ english: 0.7 }) }); p.next(); } }, "Keep it") },
+      h("p", { className: "sub" }, "Hold the button and say one sentence in English. Kiki plays it back."),
+      h(B.VoiceScope, { prompt: "A diode conducts when…" }),
+      h("p", { className: "note" }, "Recording is simulated in this demo."));
+  }
+  function TeaseBeat(p) {
+    var s = p.ctx.s;
+    return h(Beat, { label: "One more colour to go", foot: h(B.Button, { icon: "flag", onClick: function () { p.ctx.go("receipt", { lessonDone: true }); } }, "Finish session") },
+      h("div", { className: "center" },
+        h(B.MasteryRing, { size: 160, values: s.ring, locked: ["lab"], label: "Diode" }, h("span", { style: { fontWeight: 700 } }, "Diode")),
+        h("p", { className: "title", style: { fontSize: 22 } }, "Green is still locked"),
+        h("p", { className: "sub" }, "Build a half-wave rectifier in Tuesday's lab to complete this ring."),
+        h("button", { type: "button", className: "chip", onClick: function () { p.ctx.say("Reminder set: Monday 8 pm, 5-minute lab warm-up.", { icon: "alarm" }); } }, "Remind me Monday 8 pm")));
+  }
+
+  /* ---------- 11. Learning receipt ---------- */
+  function ReceiptScreen(ctx) {
+    var s = ctx.s;
+    var f = useState(false); var shown = f[0], setShown = f[1];
+    var c = useState(9); var stops = c[0], setStops = c[1];
+    useEffect(function () { var a = setTimeout(function () { setShown(true); }, 300); var b = setTimeout(function () { setStops(8); }, 1400); return function () { clearTimeout(a); clearTimeout(b); }; }, []);
+    var beforeText = s.before == null ? "I don't know yet." : BEFORE_OPTIONS[s.before];
+    return h("div", { className: "scr" },
+      h(Top, { center: h("span", { style: { fontWeight: 700 } }, "Session complete · 10 min"), kiki: "celebrating" }),
+      h("div", { className: "scr-body" },
+        h("span", { className: "eyebrow" }, "What changed"),
+        h(B.ReceiptCompare, { before: { time: "10 MINUTES AGO", answer: beforeText }, after: { time: "NOW", answer: "In reverse bias the depletion region widens, so the diode blocks current.", verdict: "Correct, in English" } }),
+        h("div", { className: "card" }, h("div", { className: "row" },
+          h("button", { type: "button", className: "iconbtn", style: { background: "var(--yellow)", color: "var(--on-yellow)" }, "aria-label": "Play your recording", onClick: function () { ctx.say("Playing your recording (simulated).", { icon: "volume_up" }); } }, icon("play_arrow", true)),
+          h("div", { className: "grow" }, h("div", { style: { fontWeight: 600 } }, "You said this, in English"), h("div", { className: "note" }, "“A diode conducts when it is forward biased and the voltage is more than 0.7 V.”")))),
+        h("div", { className: "center" }, h(B.MasteryRing, { size: 150, values: shown ? s.ring : {}, locked: ["lab"], label: "Diode" }, h("span", { style: { fontWeight: 700 } }, "Diode"))),
+        h("div", { className: "card card-ink" }, h("span", { className: "eyebrow" }, "Route to mid-sem"),
+          h("div", { className: "row" }, stops === 9 ? h("span", { className: "counter" }, "9") : h(React.Fragment, null, h("span", { className: "strike" }, "9"), h("span", { className: "counter" }, "8")), h("span", { className: "sub" }, "stops left · next: V-I characteristic, 12 min"))),
+        h("div", { className: "card" }, h("span", { className: "eyebrow" }, "3 new English words"), h("div", { className: "chips" }, ["forward bias", "reverse bias", "cut-in voltage"].map(function (t) { return h(B.TermChip, { key: t, term: t, state: "collected" }); }))),
+        h("div", { className: "card" }, h("span", { className: "eyebrow" }, "Keep your progress"), h(B.Button, { variant: "tonal", icon: "account_circle", onClick: function () { ctx.say("Saved to your Google account (simulated).", { icon: "cloud_done" }); } }, "Save with your Google account")),
+        h("div", { className: "share" }, h("span", { className: "eyebrow", style: { color: "var(--paper)", opacity: 0.75 } }, "Share card"), h("b", null, "I can explain diodes in English"), or("ମୁଁ ଡାୟୋଡ୍ ଇଂରାଜୀରେ ବୁଝାଇ ପାରିବି"),
+          h("div", null, h(B.Button, { variant: "tonal", icon: "share", onClick: function () { ctx.say("The phone's share sheet opens here.", { icon: "share" }); } }, "Share to class group")))),
+      h(Foot, null, h(B.Button, { icon: "map", onClick: function () { ctx.go("home"); } }, "Back to my map")));
+  }
+
+  /* ---------- 12. Map and revision ---------- */
+  function HomeScreen(ctx) {
+    var s = ctx.s;
+    return h("div", { className: "scr" },
+      h(Top, { center: h("span", { style: { fontWeight: 700 } }, "Basic Electronics") }),
+      h("div", { className: "scr-body" },
+        h("div", { className: "card card-ink" },
+          h("span", { className: "eyebrow" }, "Mid-sem · Thu 23 Oct · 12 days"),
+          h("div", { className: "row" }, h("span", { className: "big-num" }, "8 stops"), h("span", { className: "sub" }, fmtMin(TOTAL_MIN - 10) + " left · on track"))),
+        h(B.Button, { icon: "play_arrow", onClick: function () { ctx.say("Next stop: V-I characteristic (not built in this demo).", { tone: "route" }); } }, "Continue with Kiki: V-I characteristic"),
+        h("span", { className: "eyebrow" }, "Revise"),
+        !s.recharged ? h("div", { className: "card", style: { borderColor: "var(--green)" } },
+            h("div", { className: "row" }, h(B.MasteryRing, { size: 48, values: { concept: 1, words: 1, english: 1, lab: 1 }, flicker: true }),
+              h("div", { className: "grow" }, h("div", { style: { fontWeight: 700 } }, "Semiconductor basics is flickering"), h("div", { className: "note" }, "Class 12 topic · the diode builds on it"))),
+            h(B.Button, { variant: "tonal", icon: "bolt", onClick: function () { ctx.go("recharge"); } }, "2-minute recharge"))
+          : h("div", { className: "banner", style: { background: "var(--green-tint)" } }, icon("bolt", true), "Semiconductor basics recharged. Next flicker in 5 days."),
+        h("div", { className: "card", style: { borderColor: "var(--yellow)", borderWidth: 2 } },
+          h(KikiSays, { state: "asking", lead: "english" }, "Practise for the mid-sem? Write answers on paper like the real exam, snap them, and I'll show you exactly where the marks went."),
+          h(B.Button, { icon: "edit_note", onClick: function () { ctx.go("practice"); } }, "Practise for the mid-sem")),
+        h("div", { className: "card" }, h("div", { className: "row" }, h("span", { className: "bb-icon", style: { fontSize: 28, color: "var(--green-ink)" } }, "science"),
+            h("div", { className: "grow" }, h("div", { style: { fontWeight: 700 } }, "Lab on Tuesday: half-wave rectifier"), h("div", { className: "note" }, "5-minute warm-up on Monday at 8 pm")))),
+        h("div", { className: "card", style: { opacity: 0.75 } }, h("div", { className: "row" }, icon("lock"),
+            h("div", { className: "grow" }, h("div", { style: { fontWeight: 700 } }, "Exam-day revision"), h("div", { className: "note" }, "Opens on 23 Oct: 5 quick checks on your highest-weight topics")))),
+        h("span", { className: "eyebrow" }, "Your route"),
+        h(RouteList, { s: s, alwaysHeat: true })),
+      h(Nav, { ctx: ctx }));
+  }
+
+  /* ---------- Exam practice ---------- */
+  var SETS = [
+    { id: "mock", tag: "RECOMMENDED", title: "Kiki's mock on what you've covered", meta: "5 questions · 25 marks · 25 min", note: "Built from your route and your class's past papers" },
+    { id: "past", tag: "FROM YOUR CLASS", title: "Past paper: Basic Electronics, Nov 2025", meta: "5 questions · 50 marks · 60 min", note: "The real paper, marked the same way" },
+    { id: "one", tag: "QUICK", title: "Just one 5-mark answer", meta: "1 question · 8 min", note: "Good for a short break" }
+  ];
+  var PAPER = [
+    ["Q1", "Explain the working of a half-wave rectifier with a neat diagram.", 5],
+    ["Q2", "Why is a capacitor filter used after a rectifier? Explain how it smooths the output.", 5],
+    ["Q3", "Define ripple factor and state its value for a half-wave rectifier.", 5],
+    ["Q4", "Draw and explain the V-I characteristic of a silicon diode.", 5],
+    ["Q5", "Explain how a Zener diode works as a voltage regulator.", 5]
+  ];
+  function PracticeScreen(ctx) {
+    var p = useState("mock"); var pick = p[0], setPick = p[1];
+    return h("div", { className: "scr" },
+      h(Top, { onBack: function () { ctx.go("home"); }, center: h("span", { style: { fontWeight: 700 } }, "Mid-sem practice") }),
+      h("div", { className: "scr-body" },
+        h(KikiSays, { state: "asking", lead: "english" }, "You've covered enough for a mock. Want to practise like the real mid-sem? ", or("କାଗଜରେ ଲେଖ, ତା'ପରେ ଫଟୋ ନିଅ।")),
+        SETS.map(function (x) {
+          return h("button", { key: x.id, type: "button", className: "choice", "aria-pressed": pick === x.id, onClick: function () { setPick(x.id); } },
+            h("span", { className: "tag" }, x.tag), h("span", { style: { fontWeight: 700, fontSize: 16 } }, x.title), h("span", { className: "note" }, x.meta + " · " + x.note));
+        }),
+        h("div", { className: "card" }, h("span", { className: "eyebrow" }, "How it works"),
+          h("div", { className: "mile" }, icon("edit"), "Write your answers on paper, in English, like the exam"),
+          h("div", { className: "mile" }, icon("photo_camera"), "Snap each page when you're done"),
+          h("div", { className: "mile" }, icon("analytics"), "Kiki marks the concept and the English separately"),
+          h("div", { className: "mile" }, icon("build"), "You get a repair map for your weak spots"))),
+      h(Foot, null, h(B.Button, { icon: "timer", onClick: function () { ctx.go("write"); } }, pick === "mock" ? "Start the 25-minute timer" : "Start")));
+  }
+  function WriteScreen(ctx) {
+    var t = useState(25 * 60); var left = t[0], setLeft = t[1];
+    useEffect(function () { var id = setInterval(function () { setLeft(function (x) { return Math.max(0, x - 1); }); }, 1000); return function () { clearInterval(id); }; }, []);
+    var mm = String(Math.floor(left / 60)).padStart(2, "0"), ss = String(left % 60).padStart(2, "0");
+    return h("div", { className: "scr" },
+      h(Top, { onBack: function () { ctx.go("practice"); }, center: h("span", { className: "bb-mono", style: { fontWeight: 700, fontSize: 18 } }, mm + ":" + ss), right: h("button", { type: "button", className: "chip", onClick: function () { ctx.say("Timer paused (simulated).", { icon: "pause" }); } }, "Pause") }),
+      h("div", { className: "scr-body" },
+        h("div", { className: "card card-ink" }, h("span", { className: "eyebrow" }, "Kiki's mock · Basic Electronics"), h("span", { className: "sub" }, "Answer all questions. 5 marks each. Draw diagrams where asked.")),
+        PAPER.map(function (q) {
+          return h("div", { key: q[0], className: "card", style: { gap: 6 } },
+            h("div", { className: "row" }, h("span", { className: "bb-mono", style: { fontWeight: 700 } }, q[0]), h("span", { className: "grow" }), h("span", { className: "bb-mono note" }, "[" + q[2] + " marks]")),
+            h("div", { style: { fontSize: 16, lineHeight: 1.45 } }, q[1]));
+        }),
+        h("p", { className: "note" }, "Write on paper. In the app you can tap a question to read it in Odia; the answer still goes in English.")),
+      h(Foot, null, h(B.Button, { icon: "photo_camera", onClick: function () { ctx.go("snap"); } }, "I've finished writing")));
+  }
+  function PageThumb(props) {
+    return h("div", { style: { position: "relative", aspectRatio: "3 / 4", borderRadius: 10, padding: "10px 10px 10px 18px", background: "repeating-linear-gradient(#fffdf6 0 13px, #c9d7ee 13px 14px)", border: "1px solid #e3dccb", overflow: "hidden" } },
+      h("span", { style: { position: "absolute", left: 12, top: 0, bottom: 0, width: 1, background: "#e8a3a3" } }),
+      h("span", { style: { display: "block", font: "400 9px/14px var(--font-hand)", color: "#20304f" } }, props.text),
+      h("span", { className: "bb-label", style: { position: "absolute", right: 6, bottom: 6, background: "var(--ink)", color: "var(--paper)", borderRadius: 6, padding: "2px 6px" } }, "Page " + props.n));
+  }
+  var READ_STEPS = ["Reading your handwriting", "Matching answers to questions", "Marking the concept", "Marking the English"];
+  function SnapScreen(ctx) {
+    var n = useState(2); var pages = n[0], setPages = n[1];
+    var r = useState(-1); var reading = r[0], setReading = r[1];
+    useEffect(function () {
+      if (reading < 0) return undefined;
+      if (reading >= READ_STEPS.length) { var d = setTimeout(function () { ctx.go("report"); }, 500); return function () { clearTimeout(d); }; }
+      var id = setTimeout(function () { setReading(reading + 1); }, 700); return function () { clearTimeout(id); };
+    }, [reading]);
+    var texts = ["Q1. A half wave rectifier converts AC in to pulsating DC. In positive half cycle the diode is pass current...", "Q2. Capacitor is used for filter. It store charge... Q3. Ripple factor = ratio of ac and dc. For HWR it is 1.21", "Q4. (V-I graph) Forward bias current increase after 0.7 V... Q5. Zener diode in reverse bias..."];
+    return h("div", { className: "scr" },
+      h(Top, { onBack: function () { ctx.go("write"); }, center: h("span", { style: { fontWeight: 700 } }, "Snap your pages") }),
+      h("div", { className: "scr-body" },
+        reading < 0 ? h(React.Fragment, null,
+            h("p", { className: "sub" }, "Lay each page flat in good light. Kiki checks that every page is readable before marking."),
+            h("div", { style: { display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: 10 } },
+              Array.from({ length: pages }).map(function (_, i) { return h(PageThumb, { key: i, n: i + 1, text: texts[i] }); }),
+              pages < 3 ? h("button", { type: "button", onClick: function () { setPages(pages + 1); }, style: { aspectRatio: "3 / 4", borderRadius: 10, border: "2px dashed var(--pencil)", background: "transparent", color: "var(--pencil)", display: "grid", placeItems: "center", cursor: "pointer", font: "600 13px var(--font-body)" } }, h("span", null, icon("add_a_photo"), h("br"), "Add page")) : null),
+            h("div", { className: "banner" }, icon("lock"), "Photos stay private and are deleted after 30 days."))
+          : h("div", { className: "center", style: { paddingTop: 24 } },
+            h(B.KikiPointer, { state: "thinking", size: 110, lead: "english" }),
+            h("p", { className: "title", style: { fontSize: 22 } }, "Kiki is marking your answers"),
+            h("div", { className: "card", style: { width: "100%", textAlign: "left" } }, READ_STEPS.map(function (st, i) {
+              return h("div", { key: st, className: "mile", style: { opacity: i <= reading ? 1 : 0.4 } }, icon(i < reading ? "check_circle" : i === reading ? "progress_activity" : "radio_button_unchecked", i < reading), st);
+            })))),
+      reading < 0 ? h(Foot, null, h(B.Button, { icon: "send", disabled: pages < 3, onClick: function () { setReading(0); } }, pages < 3 ? "Add all 3 pages" : "Send to Kiki")) : null);
+  }
+  function ReportScreen(ctx) {
+    return h("div", { className: "scr" },
+      h(Top, { onBack: function () { ctx.go("home"); }, closeIcon: true, center: h("span", { style: { fontWeight: 700 } }, "Your analysis"), kiki: "pointing" }),
+      h("div", { className: "scr-body" },
+        h(KikiSays, { state: "speaking", lead: "english" }, "17 out of 25. You lost 3 marks only because of English. Those are the quickest marks to win back. ", or("ଇଂରାଜୀ ପାଇଁ 3 ମାର୍କ କଟିଛି।")),
+        h(B.PracticeReport, { onOpen: function (q) { if (q.n === "Q1") ctx.go("answer"); else ctx.say(q.n + ": opens your marked answer, like Q1.", { icon: "description" }); }, onRepair: function () { ctx.go("repair"); } })));
+  }
+  function AnswerScreen(ctx) {
+    return h("div", { className: "scr" },
+      h(Top, { onBack: function () { ctx.go("report"); }, center: h("span", { style: { fontWeight: 700 } }, "Q1 · 4 of 5") }),
+      h("div", { className: "scr-body" },
+        h(B.AnswerOverlay, {}),
+        h("div", { className: "card", style: { background: "var(--yellow-tint)", borderColor: "var(--yellow)" } }, h("span", { className: "eyebrow" }, "Exam-ready rewrite"),
+          h("span", null, "In the positive half-cycle, the diode is forward biased, so it ", h("b", null, "conducts"), " current. Once the voltage crosses 0.7 V, current ", h("b", null, "starts"), " to flow."))),
+      h(Foot, null, h(B.Button, { variant: "tonal", icon: "arrow_back", onClick: function () { ctx.go("report"); } }, "Back to the analysis")));
+  }
+  var REPAIRS = [
+    { name: "Filter capacitor", kind: "concept", lost: 3, fix: "8-min lesson: why the capacitor smooths the output", min: 8, pre: "Builds on: half-wave rectifier" },
+    { name: "Ripple factor", kind: "english", lost: 2, fix: "Words drill, then rewrite your answer in exam English", min: 6 },
+    { name: "Zener diode", kind: "concept", lost: 2, fix: "Draw the Zener regulator with Kiki, step by step", min: 10 },
+    { name: "Half-wave rectifier", kind: "english", lost: 1, fix: "One exam word: conducts", min: 2 }
+  ];
+  function RepairScreen(ctx) {
+    var total = REPAIRS.reduce(function (s, r) { return s + r.min; }, 0) + 12;
+    return h("div", { className: "scr" },
+      h(Top, { onBack: function () { ctx.go("report"); }, center: h("span", { style: { fontWeight: 700 } }, "Repair map") }),
+      h("div", { className: "scr-body" },
+        h("div", { className: "card card-ink" },
+          h("span", { className: "eyebrow" }, "From your practice set · before Thu 23 Oct"),
+          h("div", { className: "row" }, h("span", { className: "big-num" }, "4 fixes"), h("span", { className: "sub" }, "about " + total + " min, then a re-test"))),
+        h(KikiSays, { state: "pointing", lead: "concept" }, "Biggest marks first. When you pass the re-test, these stops light up on your main map."),
+        h("div", { className: "route", role: "list", "aria-label": "Repair map" },
+          REPAIRS.map(function (r, i) {
+            return h("div", { key: r.name, role: "listitem", className: "stop" + (i === 0 ? " stop-now" : "") },
+              i === 0 ? h("span", { className: "pin" }, h(B.KikiPointer, { state: "pointing", size: 30, lead: r.kind === "concept" ? "concept" : "english" })) : null,
+              h("div", { className: "stop-node", style: { borderStyle: "dashed", boxShadow: "none" } }, h("span", { className: "led", style: { background: "transparent", borderStyle: "dashed", borderColor: "var(--yellow-ink)" } }), icon(r.kind === "concept" ? "psychology" : "translate")),
+              h("div", { className: "grow", style: { minWidth: 0 } },
+                h("div", { className: "stop-name" }, r.name),
+                h("div", { className: "stop-meta" }, h("span", { className: "bb-pill " + (r.kind === "concept" ? "bb-pill-notyet" : "bb-pill-english-yes"), style: { padding: "2px 8px", fontSize: 11 } }, r.kind === "concept" ? "Concept" : "English"), h("span", null, "−" + r.lost + " marks · " + r.min + " min")),
+                h("div", { className: "note", style: { marginTop: 2 } }, r.fix + (r.pre ? " · " + r.pre : ""))));
+          }),
+          h("div", { role: "listitem", className: "stop" },
+            h("div", { className: "stop-node", style: { background: "var(--ink)" } }, h("span", { className: "bb-icon", style: { color: "var(--paper)" } }, "quiz")),
+            h("div", { className: "grow" }, h("div", { className: "stop-name" }, "Re-test"), h("div", { className: "stop-meta" }, "4 questions · 12 min · write and snap again"))))),
+      h(Foot, null,
+        h(B.Button, { icon: "build", onClick: function () { ctx.say("Repair 1: Filter capacitor (not built in this demo).", { tone: "route" }); } }, "Start repair"),
+        h("button", { type: "button", className: "bb-btn bb-btn-text", onClick: function () { ctx.go("home"); } }, "Back to my map")));
+  }
+
+  /* ---------- 13. Recharge ---------- */
+  var RQ = [
+    { dim: "words", q: h(React.Fragment, null, "Which English word means ", or("ବିଦ୍ୟୁତ୍ ପ୍ରବାହ"), "?"), options: ["current", "voltage", "resistance"], right: 0, yes: "Yes. Red stays bright." },
+    { dim: "concept", q: "In an n-type semiconductor, the majority carriers are…", options: ["electrons", "holes"], right: 0, yes: "Right. Blue stays bright." },
+    { dim: "english", q: "Pick the sentence you would write in the exam.", options: ["A p-type semiconductor has holes as its majority carriers.", "P-type have hole majority carrier."], right: 0, yes: "That's exam-ready English. Yellow stays bright." }
+  ];
+  function RechargeScreen(ctx) {
+    var s = ctx.s;
+    var q = useState(0); var i = q[0], setI = q[1];
+    var d = useState(false); var ok = d[0], setOk = d[1];
+    var finished = i >= RQ.length;
+    return h("div", { className: "scr" },
+      h(Top, { onBack: function () { ctx.go("home"); }, closeIcon: true, center: h("span", { style: { fontWeight: 700 } }, "2-minute recharge") }),
+      h("div", { className: "scr-body" },
+        h("div", { className: "row" }, h(B.MasteryRing, { size: 56, values: { concept: 1, words: 1, english: 1, lab: 1 }, flicker: !finished }), h("div", { className: "grow" }, h("div", { style: { fontWeight: 700 } }, "Semiconductor basics"), h("div", { className: "note" }, finished ? "Recharged" : "Question " + (i + 1) + " of 3 · less help this time"))),
+        !finished ? h(React.Fragment, null,
+            i === 0 ? h(KikiSays, { state: "speaking" }, "You know this one well. Try it with one notch more English?") : null,
+            i === 0 ? h(B.LanguageDial, { value: s.dial, onChange: function (v) { ctx.set({ dial: v }); }, suggested: s.dial < 5 ? s.dial + 1 : null }) : null,
+            h(Mcq, { key: i, q: RQ[i].q, options: RQ[i].options, right: RQ[i].right, yes: RQ[i].yes, hint: "Take another look; hints start one step later in a recharge.", onRight: function () { setOk(true); } }))
+          : h("div", { className: "center" }, h(B.Kiki, { state: "celebrating", size: 96 }), h("p", { className: "title", style: { fontSize: 22 } }, "Recharged"), h("p", { className: "sub" }, "The LED is back on. Next flicker in 5 days, then 12, then 30."))),
+      h(Foot, null, finished
+        ? h(B.Button, { icon: "map", onClick: function () { ctx.go("home", { flicker: false, recharged: true }); } }, "Back to my map")
+        : h(B.Button, { icon: "arrow_forward", disabled: !ok, onClick: function () { setOk(false); setI(i + 1); } }, i === RQ.length - 1 ? "Finish" : "Next")));
+  }
+
+  /* ---------- 14. Stickers ---------- */
+  function StickersScreen(ctx) {
+    var f = useState("all"); var filter = f[0], setFilter = f[1];
+    var deck = [["forward bias", "collected"], ["reverse bias", "collected"], ["cut-in voltage", "collected"], ["diode", "owned"], ["current", "owned"], ["conducts", "new"]];
+    var shown = deck.filter(function (d) { return filter === "all" || d[1] === filter; });
+    return h("div", { className: "scr" },
+      h(Top, { center: h("span", { style: { fontWeight: 700 } }, "Sticker deck") }),
+      h("div", { className: "scr-body" },
+        h("p", { className: "sub" }, "6 words · 2 owned. A word becomes owned when you use it correctly in English twice."),
+        h("div", { className: "chips" }, [["all", "All"], ["new", "New"], ["collected", "Collected"], ["owned", "Owned"]].map(function (x) { return h("button", { key: x[0], type: "button", className: "chip", "aria-pressed": filter === x[0], onClick: function () { setFilter(x[0]); } }, x[1]); })),
+        h("div", { style: { display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 12 } }, shown.map(function (d) { return h("div", { key: d[0], style: { display: "grid" } }, h(B.WordSticker, { term: d[0], state: d[1], className: "deck-sticker" })); })),
+        h(B.Button, { variant: "tonal", icon: "bolt", onClick: function () { ctx.say("Practise 5: a quick word game (not built in this demo).", { icon: "style" }); } }, "Practise 5")),
+      h(Nav, { ctx: ctx }));
+  }
+
+  /* ---------- 15. Me ---------- */
+  function MeScreen(ctx) {
+    var s = ctx.s;
+    var dims = [["Concept", "var(--blue)", 2, 10], ["Words", "var(--red)", 6, 30], ["English", "var(--yellow)", 1, 10], ["Lab", "var(--green)", 0, 4]];
+    return h("div", { className: "scr" },
+      h(Top, { center: h("span", { style: { fontWeight: 700 } }, "How far you've come") }),
+      h("div", { className: "scr-body" },
+        h("div", { className: "center" }, h(B.MasteryRing, { size: 140, values: { concept: 0.2, words: 0.2, english: 0.1, lab: 0 }, label: "Diodes and rectifiers" }, h("span", { style: { fontWeight: 700, fontSize: 13 } }, "Diodes and", h("br"), "rectifiers"))),
+        h("div", { className: "card bars" }, dims.map(function (d) {
+          return h("div", { key: d[0], className: "bar" }, h("span", { style: { fontWeight: 600 } }, d[0]), h("span", { className: "bar-track" }, h("span", { style: { width: (d[2] / d[3] * 100) + "%", background: d[1] } })), h("span", { className: "bb-mono", style: { fontSize: 12, textAlign: "right" } }, d[2] + "/" + d[3]));
+        })),
+        h("div", { className: "card" }, h("span", { className: "eyebrow" }, "Your English"),
+          h("div", { className: "row" }, h("span", { className: "big-num" }, s.dial + "/5"), h("span", { className: "sub" }, "dial today · started at " + (s.easyPick || s.dial))),
+          h("div", { className: "note" }, "2 words owned · 1 answer correct in English")),
+        h("div", { className: "card" }, h("span", { className: "eyebrow" }, "Milestones"),
+          h("div", { className: "mile" }, icon("flag", true), "First lesson finished"),
+          h("div", { className: "mile" }, icon("translate", true), "First answer correct in English"),
+          h("div", { className: "mile", style: { opacity: 0.55 } }, icon("lock"), "First concept without Odia")),
+        h("div", { className: "card" }, h("span", { className: "eyebrow" }, "Settings"),
+          ["Default language dial", "Sound and vibration", "Reminders", "Show my name on shares", "Delete my data"].map(function (t) { return h("div", { key: t, className: "row", style: { justifyContent: "space-between", fontSize: 14 } }, t, icon("chevron_right")); }))),
+      h(Nav, { ctx: ctx }));
+  }
+
+  ReactDOM.createRoot(document.getElementById("app")).render(h(App));
+})();
+</script>

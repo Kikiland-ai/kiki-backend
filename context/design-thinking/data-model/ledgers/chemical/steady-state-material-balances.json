@@ -1,0 +1,309 @@
+{
+ "schema": "lesson-ledger/v2",
+ "subjectProfile": {
+  "id": "chemical",
+  "label": "Chemical Engineering",
+  "practice": { "applies": true, "label": "Lab", "kinds": ["physical_lab", "simulation", "calculation_task"] },
+  "visualKinds": ["process_flow", "block", "graph", "table", "equation", "structure"],
+  "interactiveKinds": ["parameter_sweep", "step_through", "sort_steps", "label_parts"],
+  "unitsMatter": true,
+  "faultTypeLabels": { "Wrong connection": "Wrong stream or line-up", "Wrong tool setting": "Wrong instrument setting", "Wrong measurement": "Sampled or read at the wrong time" },
+  "checkMix": [
+   { "dimension": "concept", "anyOfTypes": ["mcq", "multi_select", "numerical", "diagram", "derivation", "order_steps", "label_diagram", "predict"], "when": "always" },
+   { "dimension": "words", "anyOfTypes": ["term_match", "fill_blank"], "when": "always" },
+   { "dimension": "english", "anyOfTypes": ["short_english", "spoken", "long_written"], "when": "always" },
+   { "dimension": "lab", "anyOfTypes": ["predict", "mcq", "numerical", "order_steps", "label_diagram"], "when": "has_practical" }
+  ]
+ },
+ "course": {
+  "id": "CRS-CH-ICE",
+  "title": "Introduction to Chemical Engineering",
+  "kind": "university",
+  "programme": "B.Tech",
+  "discipline": "Chemical Engineering",
+  "subjectProfileId": "chemical",
+  "term": { "semester": 2 },
+  "languages": { "source": "en", "support": ["or"], "dial": { "levels": 5, "labels": ["Mostly Odia", "Odia with English terms", "Half and half", "English with Odia help", "Exam English"] } },
+  "examProfileId": "EX-CH-SAMPLE",
+  "lessonPlanIds": ["LP-MB"]
+ },
+ "examProfile": {
+  "id": "EX-CH-SAMPLE",
+  "body": "Sample pattern; replace with the university's real pattern",
+  "exams": [{ "kind": "mid_sem", "durationMin": 60, "totalMarks": 20, "pattern": [{ "type": "short_english", "marks": 2, "count": 5 }, { "type": "numerical", "marks": 5, "count": 2 }] }],
+  "englishRubricId": "ER-DEFAULT"
+ },
+ "englishRubric": {
+  "id": "ER-DEFAULT",
+  "criteria": [
+   { "key": "terms", "label": "Uses the exact technical terms", "levels": ["Terms missing or replaced", "Most terms used", "Every key term used correctly"] },
+   { "key": "structure", "label": "Answer is in exam order: define, explain, show, conclude", "levels": ["No clear order", "Order partly followed", "Clear exam order"] },
+   { "key": "clarity", "label": "Each sentence says one thing clearly", "levels": ["Meaning is hard to follow", "Mostly clear", "Clear throughout"] },
+   { "key": "completeness", "label": "Answers every part of the question", "levels": ["Parts missing", "One part thin", "Every part answered"] }
+  ],
+  "neverPenalise": ["Spelling that does not change meaning", "Grammar that does not block meaning", "Indian English usage", "Handwriting style"]
+ },
+ "pastPapers": [
+  { "id": "PP-CH-A", "examProfileId": "EX-CH-SAMPLE", "examKind": "mid_sem", "title": "Sample paper A (illustrative)", "year": 2024, "questionIds": ["PQ-CH-A1", "PQ-CH-A2"] },
+  { "id": "PP-CH-B", "examProfileId": "EX-CH-SAMPLE", "examKind": "mid_sem", "title": "Sample paper B (illustrative)", "year": 2025, "questionIds": ["PQ-CH-B1"] }
+ ],
+ "pastQuestions": [
+  { "id": "PQ-CH-A1", "paperId": "PP-CH-A", "text": "Two streams of aqueous NaOH are mixed at steady state. Find the outlet flow and composition.", "type": "numerical", "marks": 5, "conceptIds": ["MB-1.1"] },
+  { "id": "PQ-CH-A2", "paperId": "PP-CH-A", "text": "An evaporator concentrates a sugar solution. Carry out a degree-of-freedom analysis and solve for the product flow.", "type": "numerical", "marks": 5, "conceptIds": ["MB-1.2"] },
+  { "id": "PQ-CH-B1", "paperId": "PP-CH-B", "text": "Define degrees of freedom for a process unit. What does a negative value mean?", "type": "short_english", "marks": 2, "conceptIds": ["MB-1.2"] }
+ ],
+ "lessonPlan": {
+  "id": "LP-MB",
+  "courseId": "CRS-CH-ICE",
+  "scope": "topic",
+  "title": "Material balances on steady, non-reacting processes",
+  "governingQuestion": "How do we find unknown flows and compositions in a process where nothing reacts and nothing builds up?",
+  "canDo": "Write and solve material balances for mixers and evaporators, and explain each step in exam English.",
+  "objectiveId": "O-MB-0",
+  "mece": {
+   "dimension": "Setting up the balance, then solving it",
+   "rationale": "Every balance problem has two jobs: writing the right equations (which balance, which terms vanish) and solving them (counting unknowns, choosing a basis). The first concept owns the equations and the second owns the procedure, so they do not overlap and together they cover a whole single-unit problem.",
+   "outOfScope": ["Reacting systems and extent of reaction", "Recycle, bypass and purge", "Unsteady-state balances", "Energy balances"]
+  },
+  "broadConceptIds": ["BC-MB-1"],
+  "syllabusLines": [
+   { "id": "S-MB-1", "text": "Material balance on non-reacting single-unit processes", "conceptIds": ["MB-1.1", "MB-1.2"] },
+   { "id": "S-MB-2", "text": "Degree of freedom analysis; basis of calculation", "conceptIds": ["MB-1.2"] }
+  ],
+  "requestId": "REQ-0042",
+  "estMinutes": 26,
+  "sources": [
+   { "origin": "student_notes", "sourceDocId": "DOC-NOTES-0042", "label": "Professor's notes, pages 1 to 6" },
+   { "origin": "generated", "label": "Gemini draft from the notes, validated" }
+  ],
+  "review": { "status": "auto_checked", "notes": "Kiki-made from the student's notes; shown with a label until a teacher checks it." }
+ },
+ "broadConcepts": [
+  {
+   "id": "BC-MB-1",
+   "lessonPlanId": "LP-MB",
+   "order": 1,
+   "title": "Balances on a single steady, non-reacting unit",
+   "governingQuestion": "Which equations describe a single steady, non-reacting unit, and how do we solve them?",
+   "objectiveId": "O-MB-1",
+   "mece": {
+    "dimension": "Equation, then procedure",
+    "rationale": "The balance equation and its simplification is one job; counting unknowns, choosing a basis and solving is the other. A topic-scope plan has one broad concept, so this split mirrors the plan's.",
+    "outOfScope": ["Multiple-unit processes"]
+   },
+   "conceptIds": ["MB-1.1", "MB-1.2"]
+  }
+ ],
+ "objectives": [
+  { "id": "O-MB-0", "statement": "Set up and solve material balances for steady, non-reacting single-unit processes.", "bloom": "apply", "parentId": null, "ownerId": "LP-MB" },
+  { "id": "O-MB-1", "statement": "Write the balances for one steady, non-reacting unit and solve them for unknown flows and compositions.", "bloom": "apply", "parentId": "O-MB-0", "ownerId": "BC-MB-1" },
+  { "id": "O-MB-1.1", "statement": "Write the general balance equation and reduce it for a steady, non-reacting process.", "bloom": "apply", "parentId": "O-MB-1", "ownerId": "MB-1.1" },
+  { "id": "O-MB-1.2", "statement": "Carry out a degree-of-freedom analysis and solve a single-unit balance on a chosen basis.", "bloom": "apply", "parentId": "O-MB-1", "ownerId": "MB-1.2" }
+ ],
+ "terms": [
+  { "id": "T-mb-balance-equation", "term": "general balance equation", "definition": "Input + generation − output − consumption = accumulation, written for any conserved quantity in a system.", "ownerConceptId": "MB-1.1" },
+  { "id": "T-mb-steady-state", "term": "steady state", "definition": "Nothing in the system changes with time, so accumulation is zero.", "ownerConceptId": "MB-1.1" },
+  { "id": "T-mb-mass-fraction", "term": "mass fraction", "symbol": "x", "definition": "The mass of one component divided by the total mass of the stream.", "ownerConceptId": "MB-1.1" },
+  { "id": "T-mb-dof", "term": "degrees of freedom", "aliases": ["DOF"], "definition": "The number of unknowns minus the number of independent equations; zero means the problem can be solved.", "ownerConceptId": "MB-1.2" },
+  { "id": "T-mb-basis", "term": "basis of calculation", "definition": "A chosen amount or flow rate of one stream from which all other quantities are calculated.", "ownerConceptId": "MB-1.2" },
+  { "id": "T-mb-tie-component", "term": "tie component", "definition": "A component that passes from one stream to another unchanged, linking them in one simple balance.", "ownerConceptId": "MB-1.2" }
+ ],
+ "practicals": [
+  {
+   "id": "PR-MB-MIX",
+   "title": "Steady-state salt balance on a mixing tank",
+   "kind": "physical_lab",
+   "conceptIds": ["MB-1.1"],
+   "aim": "Mix a salt solution with water in a continuous stirred tank and check the salt balance once the tank reaches steady state.",
+   "apparatus": ["Stirred tank with an overflow outlet", "Two feed lines with rotameters", "Salt solution of known concentration", "Conductivity meter and calibration chart", "Stopwatch, measuring cylinder and balance"],
+   "steps": [
+    { "n": 1, "instruction": "Calibrate the conductivity meter with the standard salt solutions at lab temperature.", "showMe": true, "checkpoint": "Calibration line drawn." },
+    { "n": 2, "instruction": "Start both feeds. Measure each flow by timed collection and weighing, not only from the rotameter.", "showMe": true, "checkpoint": "Both mass flows in kg/h." },
+    { "n": 3, "instruction": "Predict the outlet salt concentration from the salt balance.", "showMe": false, "checkpoint": "Prediction written down." },
+    { "n": 4, "instruction": "Read the outlet conductivity every 2 minutes until three readings in a row agree.", "showMe": false, "checkpoint": "Steady state reached." },
+    { "n": 5, "instruction": "Convert the steady reading to concentration and compare it with your prediction.", "showMe": false }
+   ],
+   "observations": { "columns": ["Time (min)", "Conductivity (mS/cm)", "Concentration (g/L)"], "rows": 8 },
+   "expected": "Readings rise and then settle. The settled outlet concentration is close to the value from the salt balance.",
+   "predictionPrompt": "Before you sample, write the outlet concentration you expect from the two inlet flows.",
+   "faultCards": [
+    { "id": "FC-MB-1", "type": "Wrong measurement", "symptom": "The measured outlet concentration is well below the prediction.", "cause": "Samples were taken before steady state, while the tank still held mostly the starting water.", "fix": "Keep sampling until three readings in a row agree.", "misconceptionId": "M-MB-1.1-c", "difficulty": 1 },
+    { "id": "FC-MB-2", "type": "Wrong tool setting", "symptom": "Every concentration is off by about the same factor.", "cause": "The conductivity meter was not calibrated for this salt, or temperature compensation is off.", "fix": "Recalibrate with standard solutions at lab temperature.", "difficulty": 2 },
+    { "id": "FC-MB-3", "type": "Wrong assumption", "symptom": "The balance does not close, even at steady state.", "cause": "Rotameter readings in L/h were added as if they were mass flows.", "fix": "Use mass flows: weigh a timed collection, or multiply each volume flow by its density.", "misconceptionId": "M-MB-1.1-a", "difficulty": 2 }
+   ],
+   "vivaPrompts": [
+    "How did you know the tank had reached steady state?",
+    "Why do we balance mass and not volume?",
+    "Which term of the general balance equation was not zero during start-up?",
+    "How would a leak in the outlet line change your result?"
+   ],
+   "sources": [{ "origin": "student_notes", "sourceDocId": "DOC-NOTES-0042", "locator": "page 6", "label": "Lab outline in the professor's notes" }]
+  }
+ ],
+ "concepts": [
+  {
+   "id": "MB-1.1",
+   "broadConceptId": "BC-MB-1",
+   "order": 1,
+   "title": "The balance equation for a steady, non-reacting process",
+   "canonicalKey": "steady-non-reacting-balance-equation",
+   "canDo": "Reduce the general balance equation to input = output and use it for total and component balances.",
+   "objectiveIds": ["O-MB-1.1"],
+   "prerequisiteIds": [],
+   "externalPrerequisites": [{ "title": "Mass percentage and concentration (Class 11)", "level": "school", "canonicalKey": "mass-percentage" }],
+   "termIds": ["T-mb-balance-equation", "T-mb-steady-state", "T-mb-mass-fraction"],
+   "usesTermIds": [],
+   "misconceptions": [
+    { "id": "M-MB-1.1-a", "statement": "Volumes add when liquids are mixed.", "correction": "Masses add; volumes may not (ethanol and water shrink when mixed).", "faultType": "Wrong assumption" },
+    { "id": "M-MB-1.1-b", "statement": "The outlet composition is the simple average of the inlet compositions.", "correction": "It is the flow-weighted average; the larger stream pulls the outlet towards its own composition.", "faultType": "Wrong value" },
+    { "id": "M-MB-1.1-c", "statement": "A sample taken right after start-up shows the steady-state composition.", "correction": "Accumulation is not zero until the tank contents have turned over several times; wait until readings stop changing.", "faultType": "Wrong measurement" }
+   ],
+   "explanation": {
+    "keyIdea": "For a steady, non-reacting process, what goes in must come out, for the total and for every component.",
+    "text": "Every material balance starts from one equation: input + generation − output − consumption = accumulation. It holds for the total mass and for each component. In a non-reacting process nothing is generated or consumed, so those two terms drop out. At steady state nothing builds up inside the unit, so accumulation is zero. The equation becomes simply input = output. For a mixer this gives one total mass balance and one balance for each component. A component's flow is its mass fraction times the stream flow. Always balance mass, never volume, because volumes do not always add when liquids mix.",
+    "modalities": {
+     "textImage": { "visual": { "kind": "process_flow", "description": "A box labelled Mixer with two inlet arrows (100 kg/h, 40% ethanol; 50 kg/h, 10% ethanol) and one outlet arrow (P kg/h, mass fraction x). Beside it the general balance equation with generation, consumption and accumulation crossed out, leaving input = output.", "alt": "Mixer with two inlets and one outlet, and the balance equation reduced to input equals output", "from": { "origin": "student_notes", "sourceDocId": "DOC-NOTES-0042", "locator": "page 2" } } },
+     "voice": { "walkthrough": [
+      { "target": "input + generation − output − consumption = accumulation", "mark": "marker", "dim": "concept", "say": "Every balance starts from this one equation." },
+      { "target": "non-reacting", "mark": "sweep", "dim": "words", "say": "Non-reacting means nothing is made or used up, so generation and consumption are zero." },
+      { "target": "steady state", "mark": "lens", "dim": "words", "say": "At steady state nothing builds up, so accumulation is zero too." },
+      { "target": "input = output", "mark": "circle", "dim": "concept", "say": "What is left is the rule you will use most: input equals output." },
+      { "target": "mass fraction", "mark": "sweep", "dim": "words", "say": "A component's flow is its mass fraction times the stream flow." },
+      { "target": "never volume", "mark": "marker", "dim": "concept", "say": "Balance mass, never volume." }
+     ] },
+     "interactive": {
+      "kind": "parameter_sweep",
+      "prompt": "Change the two inlet streams. What comes out of the mixer?",
+      "inputs": [
+       { "name": "F1", "label": "Stream 1 flow", "unit": "kg/h", "min": 10, "max": 200, "step": 10, "default": 100 },
+       { "name": "x1", "label": "Stream 1 mass fraction", "unit": "", "min": 0, "max": 1, "step": 0.05, "default": 0.4 },
+       { "name": "F2", "label": "Stream 2 flow", "unit": "kg/h", "min": 10, "max": 200, "step": 10, "default": 50 },
+       { "name": "x2", "label": "Stream 2 mass fraction", "unit": "", "min": 0, "max": 1, "step": 0.05, "default": 0.1 }
+      ],
+      "outputs": [
+       { "name": "P", "label": "Outlet flow", "unit": "kg/h", "formula": "F1+F2", "decimals": 0 },
+       { "name": "x", "label": "Outlet mass fraction", "unit": "", "formula": "(F1*x1+F2*x2)/(F1+F2)", "decimals": 3 }
+      ]
+     }
+    },
+    "defaultModality": "voice",
+    "from": { "origin": "student_notes", "sourceDocId": "DOC-NOTES-0042", "locator": "pages 1 to 2" }
+   },
+   "example": {
+    "title": "Making brine for pickling",
+    "scenario": "Dissolve 20 kg of salt in 80 kg of water. Nothing reacts and nothing is left behind, so 100 kg of brine comes out, and all 20 kg of salt is in it: the brine is 20% salt by mass.",
+    "takeaway": "Total in equals total out, and salt in equals salt out: two balances, no reaction, no build-up."
+   },
+   "workedQuestion": {
+    "id": "W-MB-1.1",
+    "type": "numerical",
+    "marks": 5,
+    "prompt": "A stream of 100 kg/h of 40% ethanol (by mass) is mixed with 50 kg/h of 10% ethanol at steady state. Find the flow rate and composition of the product stream. State the assumptions you use.",
+    "modelAnswer": [
+     "Assumptions: steady state (no accumulation) and no reaction (no generation or consumption), so input = output.",
+     "Let P be the product flow in kg/h and x its ethanol mass fraction.",
+     "Total mass balance: 100 + 50 = P, so P = 150 kg/h.",
+     "Ethanol balance: 0.40 × 100 + 0.10 × 50 = x × 150, so 40 + 5 = 150x.",
+     "x = 45 / 150 = 0.30.",
+     "The product is 150 kg/h of 30% (by mass) ethanol."
+    ],
+    "rubric": [
+     { "criterion": "States steady state and no reaction, reducing the equation to input = output", "marks": 1 },
+     { "criterion": "Correct total mass balance, P = 150 kg/h", "marks": 1 },
+     { "criterion": "Correct ethanol balance written with mass fractions", "marks": 2 },
+     { "criterion": "Correct composition, 30%, with a clear final statement", "marks": 1 }
+    ],
+    "examVocabulary": ["T-mb-steady-state", "T-mb-mass-fraction"]
+   },
+   "checks": [
+    { "id": "Q-MB-1.1-a", "type": "mcq", "dimension": "concept", "prompt": "For a steady process with no reaction, the general balance equation reduces to:", "options": ["Input = output", "Input = accumulation", "Output = generation", "Input − output = consumption"], "answer": "Input = output", "explanation": "Generation and consumption are zero without reaction, and accumulation is zero at steady state.", "objectiveIds": ["O-MB-1.1"], "difficulty": 1 },
+    { "id": "Q-MB-1.1-b", "type": "numerical", "dimension": "concept", "prompt": "200 kg/h of 25% sugar solution is mixed with 300 kg/h of pure water. What is the sugar percentage (by mass) in the product?", "answer": "10 %", "unit": "%", "tolerance": { "kind": "absolute", "value": 0.5 }, "explanation": "Sugar in = 0.25 × 200 = 50 kg/h; product = 500 kg/h; 50 / 500 = 10%.", "objectiveIds": ["O-MB-1.1"], "difficulty": 2 },
+    { "id": "Q-MB-1.1-c", "type": "term_match", "dimension": "words", "prompt": "Match the term: steady state", "options": ["Nothing in the system changes with time", "The process has no chemical reaction", "All streams have the same composition", "The flow rate is very small"], "answer": "Nothing in the system changes with time", "explanation": "Steady state is about time: no accumulation. No reaction is a separate assumption.", "objectiveIds": ["O-MB-1.1"], "difficulty": 1 },
+    { "id": "Q-MB-1.1-d", "type": "short_english", "dimension": "english", "prompt": "In two sentences, explain why we write balances in mass, not volume.", "answer": "Mass is conserved, so the masses of the inlet streams always add up to the mass of the outlet. Volumes do not always add when liquids mix, so a volume balance can give the wrong answer.", "explanation": "Look for: mass is conserved; volumes may not add.", "objectiveIds": ["O-MB-1.1"], "difficulty": 2 },
+    { "id": "Q-MB-1.1-e", "type": "predict", "dimension": "lab", "prompt": "Before sampling the mixing tank, predict the outlet salt concentration from the two inlet flows.", "answer": "The flow-weighted average of the inlet concentrations, from the salt balance.", "explanation": "Compared with the steady conductivity reading in the lab.", "objectiveIds": ["O-MB-1.1"], "difficulty": 2 }
+   ],
+   "practicalId": "PR-MB-MIX",
+   "examSignal": { "basis": "past_papers", "askedIn": 1, "outOf": 2, "avgMarks": 5 },
+   "estMinutes": 12,
+   "localization": { "perLanguage": { "or": { "status": "to_generate", "levels": [] } } },
+   "sources": [{ "origin": "student_notes", "sourceDocId": "DOC-NOTES-0042", "label": "Professor's notes" }, { "origin": "generated", "label": "Gemini draft, validated" }],
+   "review": { "status": "auto_checked" }
+  },
+  {
+   "id": "MB-1.2",
+   "broadConceptId": "BC-MB-1",
+   "order": 2,
+   "title": "Degrees of freedom and choosing a basis",
+   "canonicalKey": "degrees-of-freedom-and-basis",
+   "canDo": "Count unknowns and equations, pick a basis and a tie component, and solve a single-unit balance.",
+   "objectiveIds": ["O-MB-1.2"],
+   "prerequisiteIds": ["MB-1.1"],
+   "termIds": ["T-mb-dof", "T-mb-basis", "T-mb-tie-component"],
+   "usesTermIds": ["T-mb-steady-state", "T-mb-mass-fraction"],
+   "misconceptions": [
+    { "id": "M-MB-1.2-a", "statement": "For n components you can write n + 1 independent balances: n component balances plus the total.", "correction": "Only n are independent; the total balance is the sum of the component balances." },
+    { "id": "M-MB-1.2-b", "statement": "The basis must be the flow rate given in the question.", "correction": "Any convenient amount works; scale the answers at the end." }
+   ],
+   "explanation": {
+    "keyIdea": "Count unknowns and equations first; when the degrees of freedom are zero, pick a basis and start with the tie component.",
+    "text": "Before solving, count. The degrees of freedom are the number of unknowns minus the number of independent equations. For a single unit with n components you can write n independent balances: the total balance plus n − 1 component balances, or all n component balances. If the degrees of freedom are zero, the problem can be solved. If they are positive, information is missing; if negative, the data are redundant or contradict each other. Next, choose a basis of calculation, such as 100 kg/h of feed, and scale at the end if needed. Look for a tie component, such as salt in an evaporator, that passes from one stream to another unchanged: one balance on it often gives an unknown directly.",
+    "modalities": {
+     "textImage": { "visual": { "kind": "block", "description": "An evaporator box: feed 1000 kg/h, 10% NaCl in from the left; water vapour W out of the top; product P, 25% NaCl out of the bottom. A side table counts unknowns (P, W) and equations (total, NaCl): DOF = 2 − 2 = 0.", "alt": "Evaporator with feed, vapour and product streams, and a degree-of-freedom table showing zero" } },
+     "voice": { "walkthrough": [
+      { "target": "degrees of freedom", "mark": "sweep", "dim": "words", "say": "Degrees of freedom tell you whether a problem can be solved yet." },
+      { "target": "number of unknowns minus the number of independent equations", "mark": "marker", "dim": "concept", "say": "Count the unknowns, count the independent equations, and subtract." },
+      { "target": "n independent balances", "mark": "lens", "dim": "concept", "say": "With n components you get n independent balances, not one more." },
+      { "target": "basis of calculation", "mark": "sweep", "dim": "words", "say": "Pick a basis, an amount to calculate from, and scale at the end." },
+      { "target": "tie component", "mark": "circle", "dim": "words", "say": "A tie component passes through unchanged, so one balance on it gives an answer fast." }
+     ] },
+     "interactive": {
+      "kind": "sort_steps",
+      "prompt": "Put the steps of a balance calculation in order.",
+      "correctOrder": ["Draw and label the flowchart", "List the unknowns", "Count independent equations and find the degrees of freedom", "Choose a basis", "Write the tie-component balance", "Write the remaining balances and solve", "Check with a balance you did not use"]
+     }
+    },
+    "defaultModality": "textImage",
+    "from": { "origin": "student_notes", "sourceDocId": "DOC-NOTES-0042", "locator": "pages 3 to 5" }
+   },
+   "example": {
+    "title": "Concentrating fruit juice",
+    "scenario": "A juice plant evaporates water from juice with 12% solids to make concentrate with 48% solids. On a basis of 100 kg of juice, the solids are the tie component: 12 kg = 0.48 × P, so P = 25 kg of concentrate, and 75 kg of water is removed.",
+    "takeaway": "One tie-component balance gave the product directly; the total balance then gave the water removed."
+   },
+   "workedQuestion": {
+    "id": "W-MB-1.2",
+    "type": "numerical",
+    "marks": 5,
+    "prompt": "An evaporator concentrates 1000 kg/h of a 10% (by mass) NaCl solution to 25% NaCl. Do a degree-of-freedom analysis, then find the product flow rate and the rate of water evaporated.",
+    "modelAnswer": [
+     "Unknowns: product flow P and water evaporated W (2). Independent equations: total balance and NaCl balance (2). Degrees of freedom = 2 − 2 = 0, so the problem can be solved.",
+     "Basis: the given feed, 1000 kg/h. Assume steady state and no reaction.",
+     "NaCl is a tie component: it enters in the feed and leaves only in the product.",
+     "NaCl balance: 0.10 × 1000 = 0.25 × P, so P = 400 kg/h.",
+     "Total balance: 1000 = P + W, so W = 1000 − 400 = 600 kg/h.",
+     "Check with a water balance: 900 = 0.75 × 400 + 600 = 300 + 600. Correct."
+    ],
+    "rubric": [
+     { "criterion": "Correct degree-of-freedom analysis with its conclusion", "marks": 1 },
+     { "criterion": "States the basis and the assumptions", "marks": 1 },
+     { "criterion": "NaCl (tie component) balance giving P = 400 kg/h", "marks": 1 },
+     { "criterion": "Total balance giving W = 600 kg/h", "marks": 1 },
+     { "criterion": "Checks the answer with an unused balance", "marks": 1 }
+    ],
+    "examVocabulary": ["T-mb-dof", "T-mb-tie-component", "T-mb-steady-state"],
+    "from": { "origin": "past_paper", "label": "Same structure as Sample paper A, Q2" }
+   },
+   "checks": [
+    { "id": "Q-MB-1.2-a", "type": "mcq", "dimension": "concept", "prompt": "A single unit handles 3 components. How many independent material balances can you write for it?", "options": ["2", "3", "4", "6"], "answer": "3", "explanation": "One per component; the total balance is the sum of the component balances, not an extra one.", "objectiveIds": ["O-MB-1.2"], "difficulty": 1 },
+    { "id": "Q-MB-1.2-b", "type": "numerical", "dimension": "concept", "prompt": "A dryer takes 200 kg/h of wet solid with 40% water and dries it to 10% water. How much water is removed per hour?", "answer": "66.7 kg/h", "unit": "kg/h", "tolerance": { "kind": "percent", "value": 1 }, "explanation": "Dry solid = 120 kg/h = 0.90 × P, so P = 133.3 kg/h; water removed = 200 − 133.3 = 66.7 kg/h.", "objectiveIds": ["O-MB-1.2"], "difficulty": 2 },
+    { "id": "Q-MB-1.2-c", "type": "term_match", "dimension": "words", "prompt": "Match the term: tie component", "options": ["A component that passes from one stream to another unchanged", "The component with the largest flow", "A component that reacts in the unit", "The component chosen as the basis"], "answer": "A component that passes from one stream to another unchanged", "explanation": "It ties two streams together, so one balance on it links them.", "objectiveIds": ["O-MB-1.2"], "difficulty": 1 },
+    { "id": "Q-MB-1.2-d", "type": "short_english", "dimension": "english", "prompt": "In two sentences, explain what it means when the degrees of freedom are positive.", "answer": "Positive degrees of freedom mean there are more unknowns than independent equations. The problem cannot be solved until more information, such as another flow or composition, is given.", "explanation": "Look for: more unknowns than equations; more data needed.", "objectiveIds": ["O-MB-1.2"], "difficulty": 2 }
+   ],
+   "examSignal": { "basis": "past_papers", "askedIn": 2, "outOf": 2, "avgMarks": 3.5 },
+   "estMinutes": 14,
+   "localization": { "perLanguage": { "or": { "status": "to_generate", "levels": [] } } },
+   "sources": [{ "origin": "student_notes", "sourceDocId": "DOC-NOTES-0042", "label": "Professor's notes" }, { "origin": "generated", "label": "Gemini draft, validated" }],
+   "review": { "status": "auto_checked" }
+  }
+ ]
+}

@@ -1,0 +1,12 @@
+<!-- @dsCard group="Progress" height=90 subtitle="Four-colour progress across a lesson" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>LessonProgress preview</title></head>
+<body class="bb-grid-bg">
+<div id="root" class="bb-root" style="padding:16px;display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start"></div>
+<script>
+  var B = window.Breadboard, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div',{style:{display:'grid',gap:14,width:'100%',maxWidth:420}},h(B.LessonProgress,{values:{concept:1,words:0.6,english:0.2}}),h(B.LessonProgress,{values:{concept:1,words:1,english:1,lab:1}})));
+</script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+# Generated BB8 discovery wrapper metadata
+interface:
+  display_name: "Product Design"
+  short_description: "Route product thinking and design work"
+  brand_color: "#A23B72"
+  default_prompt: "Use $product-design to route this top-of-funnel product or design mission."
+policy:
+  allow_implicit_invocation: false

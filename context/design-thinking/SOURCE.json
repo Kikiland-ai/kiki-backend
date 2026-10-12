@@ -1,0 +1,527 @@
+{
+  "files": {
+    "AI_Builder_Cup_Product_Vision.docx": {
+      "bytes": 38560,
+      "sha256": "5ce929c5709ccedea65a65503a6d38b50b508e0b75450d4a9124f40b4c3c4bde"
+    },
+    "AI_Builder_Cup_Technical_Architecture.docx": {
+      "bytes": 39078,
+      "sha256": "7bf7693969fe8130cd45c919a332ce078b50c4ba926c5c71859b139eb748a82c"
+    },
+    "Audio Transcript.txt": {
+      "bytes": 6620,
+      "sha256": "574d12835f93176fafd8573c470086ecb556b4dab0858eb2d5c3ecd115bef11b"
+    },
+    "HANDOVER.md": {
+      "bytes": 13552,
+      "sha256": "b35a1a4c7c4d0dda32aaeebca64681d46018074cef92ac43f2c7563beef8c437"
+    },
+    "README.md": {
+      "bytes": 5972,
+      "sha256": "dcbc24f1f8440c66ea162af78fb22d67797824e6ef1c4e7cd47e91fdd22bb386"
+    },
+    "data-model/README.md": {
+      "bytes": 9303,
+      "sha256": "f59c6856921e0f454fcbaf7657913d05b069de31780b0b0cab94a6996cd099be"
+    },
+    "data-model/archive-v1/README.md": {
+      "bytes": 5650,
+      "sha256": "45242798827bcf939f23cdc86453fa13578d5862669195299d4e4014f420dd0c"
+    },
+    "data-model/archive-v1/diodes-and-rectifiers.ledger.json": {
+      "bytes": 87942,
+      "sha256": "b5287170d7274488c7e8a7088912a90d17bbc985516b7a7a82db09cb14a61edd"
+    },
+    "data-model/archive-v1/lesson-plan.types.ts": {
+      "bytes": 7863,
+      "sha256": "0377ecae647d690f54d0e1925becc98eb5ca2002e0453c03b01a3f3763d4bebd"
+    },
+    "data-model/archive-v1/validate.js": {
+      "bytes": 10601,
+      "sha256": "71110c0618b7404eba15aed458bf50a793a1184e165f4a41a0d706e58dee4e7b"
+    },
+    "data-model/ledgers/chemical/steady-state-material-balances.json": {
+      "bytes": 28049,
+      "sha256": "fee17af6796360db65de679a781c312edd4c63a1cbab049aea8b61d92508f58b"
+    },
+    "data-model/ledgers/electronics/diodes-and-rectifiers.json": {
+      "bytes": 109760,
+      "sha256": "6562ec477fdda954e298b1543923df671107ee201d6a44aeff81b4c9ca712071"
+    },
+    "data-model/ledgers/mathematics/eigenvalues-from-a-question.json": {
+      "bytes": 12265,
+      "sha256": "74606babdca6254fea836e2c958fd18a941330985cff85e2f57cab96b686dd65"
+    },
+    "data-model/subject-profiles.json": {
+      "bytes": 3133,
+      "sha256": "35b74c56947376cef4a2d195eb7025647c3631be98c08b62aa61df6a4f1c75b0"
+    },
+    "data-model/tools/migrate-v1-to-v2.js": {
+      "bytes": 13086,
+      "sha256": "68a9bca3cb282bf188b4984d9eac3bf892ff140f8a23c26f85e93f6cbbfd6cb5"
+    },
+    "data-model/tools/test-validator.js": {
+      "bytes": 3887,
+      "sha256": "0fc2dc5037590ef3ef4f72338ce484b8925d273d90fd86d14d0d9c6590aa80d8"
+    },
+    "data-model/types/content.ts": {
+      "bytes": 18897,
+      "sha256": "153314f02c2344f1e71631d724780c53ddc46f910f2ea1bbe86d1f995ffdec1b"
+    },
+    "data-model/types/intake.ts": {
+      "bytes": 5338,
+      "sha256": "faeb820ee5e191d0a848309474b94db5cf6eee8de50fe748ec82333ac6ff01b9"
+    },
+    "data-model/types/learner.ts": {
+      "bytes": 8166,
+      "sha256": "2b2f4e959767669a7aed0acbfc53124f3a8e72ddcb32db4739590d616e8d5174"
+    },
+    "data-model/validate.js": {
+      "bytes": 22519,
+      "sha256": "ec2e142defc1b9b6bd2aa9559c2d5aa668437aecda9af72323f8b1f24054ab13"
+    },
+    "design-system/archive-kiki-v1/README.md": {
+      "bytes": 894,
+      "sha256": "a88258484624166414002749f29e4f0b2638f4ae4b3aaf93fb19baa9e5cf67d1"
+    },
+    "design-system/archive-kiki-v1/kiki-dots.svg": {
+      "bytes": 349,
+      "sha256": "1b79cdf5a907a51bef92c4f0e493903f8cda94b2507e2a100d644c6b2fd7b151"
+    },
+    "design-system/archive-kiki-v1/kiki-pointer-asking.svg": {
+      "bytes": 735,
+      "sha256": "0f5823606fab8fced8f1d280743e61f5094783fe91126b206f2efbaffe791c9e"
+    },
+    "design-system/archive-kiki-v1/kiki-pointer-celebrating.svg": {
+      "bytes": 684,
+      "sha256": "7c5af45437eca0aa5516470b5f37037214c3c46e5dc49c13fe59f459543bf49b"
+    },
+    "design-system/archive-kiki-v1/kiki-pointer-dragging.svg": {
+      "bytes": 755,
+      "sha256": "e0fd04e1d999aa469f13fec01a84308a838e591199488e945ff5b9b72e0a55b8"
+    },
+    "design-system/archive-kiki-v1/kiki-pointer-idle.svg": {
+      "bytes": 621,
+      "sha256": "5cea34c36486ff0dd8f811cd0fbb7db49ed0d90c7b7bcf4acc1f4b857d2ded06"
+    },
+    "design-system/archive-kiki-v1/kiki-pointer-listening.svg": {
+      "bytes": 724,
+      "sha256": "b307ddcc3c0c12e3c99e210ddc9114253a7d22616d19acd78b683c34f9c5de0c"
+    },
+    "design-system/archive-kiki-v1/kiki-pointer-pointing.svg": {
+      "bytes": 658,
+      "sha256": "a0f5539d2e3338c5172cf5c224442353be2d3fd81965b8877df5a393914419bb"
+    },
+    "design-system/archive-kiki-v1/kiki-pointer-sheet.svg": {
+      "bytes": 9315,
+      "sha256": "cc9a60fafb06856a203701af67ab02764beeeaea887ced24be45478288a00071"
+    },
+    "design-system/archive-kiki-v1/kiki-pointer-tapping.svg": {
+      "bytes": 808,
+      "sha256": "b69af6557f2d74cc193ed71187a6943b81f13ad6eddeabdb1153846ffd30bb0f"
+    },
+    "design-system/archive-kiki-v1/kiki-pointer-thinking.svg": {
+      "bytes": 628,
+      "sha256": "2b7e53af2d9cd31e3e7fee156c691c333fe9e238760c61e030f567b1d814d06f"
+    },
+    "design-system/archive-kiki-v1/kiki-pointer-tracing.svg": {
+      "bytes": 738,
+      "sha256": "42b9819d894d27c8bf6359bb251e1f960a69633f0db066b50f19f012ed883102"
+    },
+    "design-system/archive-kiki-v1/kiki-pointer-unsure.svg": {
+      "bytes": 654,
+      "sha256": "1c888c83fb1e9970ed5a5b743d9ebb0c1b3f1df6971aca3b1d7d39f86c8505c4"
+    },
+    "design-system/archive-kiki-v1/kiki-pointer-waiting.svg": {
+      "bytes": 728,
+      "sha256": "580b96b70d65460d62574a8caf86d78c9e79a74e1a44445b5f4cc4b1362617ef"
+    },
+    "design-system/project/README.md": {
+      "bytes": 7895,
+      "sha256": "4a5df9e417fcca4023559d61d73db5300f68353b655c9c1414469cdde43e8665"
+    },
+    "design-system/project/assets/Kiki/README.md": {
+      "bytes": 3629,
+      "sha256": "97a90be1cb0bb31fea38bdfdac9f52740b183feaa3098da328132ab76d129557"
+    },
+    "design-system/project/assets/Kiki/kiki-dots.svg": {
+      "bytes": 355,
+      "sha256": "6a2028b6c050d750c12ac85aef95e50dc35e15040dc6a42f9379d6a08142cc6d"
+    },
+    "design-system/project/assets/Kiki/kiki-guide-ask.svg": {
+      "bytes": 17255,
+      "sha256": "bfb3cbf4e6c64eea4588a5ee3fb2810ca62cbf28b87d10cbf324dd063951fe71"
+    },
+    "design-system/project/assets/Kiki/kiki-guide-connect.svg": {
+      "bytes": 18351,
+      "sha256": "14de638e45397c0ea260571f097c7649b493ba1dfbb4cfec320740499e06f92c"
+    },
+    "design-system/project/assets/Kiki/kiki-guide-done.svg": {
+      "bytes": 17563,
+      "sha256": "6d69046d81cf9e7b4817ed743b6ea86428270f83032373f0e02faa79851808d2"
+    },
+    "design-system/project/assets/Kiki/kiki-guide-listening.svg": {
+      "bytes": 17236,
+      "sha256": "2e676f1901349c52fe4a02dbc3ba47341552cc1acf73097fa52c00278bd1cf31"
+    },
+    "design-system/project/assets/Kiki/kiki-guide-look.svg": {
+      "bytes": 17761,
+      "sha256": "bf3f13887b9616ce0e6106ebcaa39ed23ef354fe36e513cb99ee9a1457eff5d5"
+    },
+    "design-system/project/assets/Kiki/kiki-guide-path-ahead.svg": {
+      "bytes": 18161,
+      "sha256": "7ce8f3aa220a044bfc34b2eeb84035a7fa952a15a25f2c225484449c447ef70b"
+    },
+    "design-system/project/assets/Kiki/kiki-guide-redirect.svg": {
+      "bytes": 17723,
+      "sha256": "379e7fc37fa8fd537792e2af28388e4c079de326cb45d8a4d01e66d92d3aa0c3"
+    },
+    "design-system/project/assets/Kiki/kiki-guide-show-me.svg": {
+      "bytes": 18181,
+      "sha256": "83d57e5a7078fb94fd64e8109f5c5409d18b238e7d8144eae6b422ebf8c6c6d4"
+    },
+    "design-system/project/assets/Kiki/kiki-guide-storyboard.svg": {
+      "bytes": 72663,
+      "sha256": "d54a555d36c1ef1a24cd136d7db6d23e76c2ee63c321f00120b3883b58276bf3"
+    },
+    "design-system/project/assets/Kiki/kiki-guide-thinking.svg": {
+      "bytes": 17462,
+      "sha256": "399394d76a3f08ac5e220d20760c11e33e8df268f63009260c39660d0b7e4b5e"
+    },
+    "design-system/project/assets/Kiki/kiki-guide-trace.svg": {
+      "bytes": 17942,
+      "sha256": "6dfeb1c1846f9f55ea53f89d339b8f1a4e2b18b7ec89e2fc48b858512e2b2454"
+    },
+    "design-system/project/assets/Kiki/kiki-guide-unsure.svg": {
+      "bytes": 17563,
+      "sha256": "c75582659cda9e124dd77e89f884651106a3d11c51e7830c40e1535d6aafa2cc"
+    },
+    "design-system/project/assets/Kiki/kiki-guide-words.svg": {
+      "bytes": 16969,
+      "sha256": "8a0adc66cfa68d93d558bd6a1791963008a164728f8e6dc08ad67c3754515154"
+    },
+    "design-system/project/assets/Kiki/kiki-guide-your-turn.svg": {
+      "bytes": 17280,
+      "sha256": "63f4e7d0e277a2ea0c64d38d5ed99b55e14d3ffa244b412e4aafdd05124d1dad"
+    },
+    "design-system/project/assets/Kiki/kiki-pointer.svg": {
+      "bytes": 806,
+      "sha256": "65af2910e7a4db6b7a0d26e0f52ae6614aa6d6562292db32484cb1398178b769"
+    },
+    "design-system/project/assets/Kiki/kiki-sheet.svg": {
+      "bytes": 232668,
+      "sha256": "e47b371a0bd9fa0db8615147673ba9ca0490f4998e9bcc54615fc22cfcaf7561"
+    },
+    "design-system/project/components/AnswerOverlay/README.md": {
+      "bytes": 759,
+      "sha256": "bf311f5ef36c525a59f450dd0f88fb5907f5ed00814c3dfe44c230a4c592742f"
+    },
+    "design-system/project/components/AnswerOverlay/preview.html": {
+      "bytes": 520,
+      "sha256": "5b5fef1f90516eebcf916e32977445e76a15a5297144fc703bb6f02a6415a245"
+    },
+    "design-system/project/components/Button/README.md": {
+      "bytes": 637,
+      "sha256": "7c387249be949954c812038beb2510c8d48960e75f5c4fe7ccd7b62fda8d82cd"
+    },
+    "design-system/project/components/Button/preview.html": {
+      "bytes": 722,
+      "sha256": "fd57c79b4583c9fd1cfdef17cb70ddc3bf60a8b76c5e0457dbfd08d246826d42"
+    },
+    "design-system/project/components/ClassPulseBar/README.md": {
+      "bytes": 410,
+      "sha256": "b9f3e266be52414e72175333756553c8053a36e477f29275c18e86012bda58c7"
+    },
+    "design-system/project/components/ClassPulseBar/preview.html": {
+      "bytes": 909,
+      "sha256": "49c97975f0176a404cd10475676180481cce0fd1003928799b20216ad35ac850"
+    },
+    "design-system/project/components/Cover/preview.html": {
+      "bytes": 4861,
+      "sha256": "15e59e9595a2a8d9c538986b73858a512b0a3872dd1b6b364fef7fcc6be2e02d"
+    },
+    "design-system/project/components/DiagnosisCard/README.md": {
+      "bytes": 526,
+      "sha256": "1993996cc679368f35d04928b63c30754a25a01e02b66085f017b69d44ff2334"
+    },
+    "design-system/project/components/DiagnosisCard/preview.html": {
+      "bytes": 627,
+      "sha256": "0c3fa3913789af0e90b245c0a040b9b8a2d56421246d07412fb9f5581d28caff"
+    },
+    "design-system/project/components/DiodeExplorable/README.md": {
+      "bytes": 521,
+      "sha256": "ffcbf6178a92d4bfa8ad0211967804f13cef81642e98afe34a848eacf979c278"
+    },
+    "design-system/project/components/DiodeExplorable/preview.html": {
+      "bytes": 543,
+      "sha256": "5e982df25149a4a2a3a247542e9855e596c833ad334a2fb2be429807e4988e4f"
+    },
+    "design-system/project/components/FaultCard/README.md": {
+      "bytes": 525,
+      "sha256": "a6d8cdf53a51e2c85d7c8129ecf5eab1ac1a99562b2ce8df585caa8689dfcde5"
+    },
+    "design-system/project/components/FaultCard/preview.html": {
+      "bytes": 494,
+      "sha256": "2ebf2abfc00a871b286492882e6077391e68deedd0e84473627c5045d172684d"
+    },
+    "design-system/project/components/Kiki/README.md": {
+      "bytes": 746,
+      "sha256": "dbc605f4df889394f4c5e4ccc1951ff26e681daa5e22adda8b8dd1eb65187066"
+    },
+    "design-system/project/components/Kiki/preview.html": {
+      "bytes": 829,
+      "sha256": "7c8888a46cedff178f48c5daae80659f813d2a163e8a28f090ba7e67adee665a"
+    },
+    "design-system/project/components/KikiPointer/README.md": {
+      "bytes": 3611,
+      "sha256": "24907b67c880a5bf0a0b81b60a4634e4b04a1c1751a740e92c01c112085d8141"
+    },
+    "design-system/project/components/KikiPointer/preview.html": {
+      "bytes": 1432,
+      "sha256": "3e30a2fe46468bea1dc8527e28e37e60bf4e3d1bc2832657baeae232329e0f5e"
+    },
+    "design-system/project/components/KikiWalkthrough/README.md": {
+      "bytes": 1787,
+      "sha256": "fbee3281a3c67998249d51e73a254b08b9e5ac4f581451b87b8deffb22cde80c"
+    },
+    "design-system/project/components/KikiWalkthrough/preview.html": {
+      "bytes": 512,
+      "sha256": "859065ac40a5373d44a1ddbe3b9febdf849082cbe33e740a15c5fc6878c7d419"
+    },
+    "design-system/project/components/LabGuide/README.md": {
+      "bytes": 1299,
+      "sha256": "d657ee4af0565447ba0eae6ca9ef177c650d9415ad669082785305a877b00ded"
+    },
+    "design-system/project/components/LabGuide/preview.html": {
+      "bytes": 514,
+      "sha256": "1fbcd3b41f7d5c7871a0e1e0c0c5ac528ce629c39314d69851cb4e34a27a757e"
+    },
+    "design-system/project/components/LabStepper/README.md": {
+      "bytes": 341,
+      "sha256": "7f73dfab0d9b2935760413a436f4b00aafa40d607dbb171619af7ae344d24279"
+    },
+    "design-system/project/components/LabStepper/preview.html": {
+      "bytes": 1204,
+      "sha256": "709ab71b7d8dede6e623ad5b86bd5920b0ff51a3a395112ee537cac88abc36c7"
+    },
+    "design-system/project/components/LanguageDial/README.md": {
+      "bytes": 656,
+      "sha256": "b662c63a2897922eccc45d40d6c9d58ff8f46ed444dc7152971e980f65337cc9"
+    },
+    "design-system/project/components/LanguageDial/preview.html": {
+      "bytes": 701,
+      "sha256": "047a3ffc12ca74e4b2a462e6afaa65500b52a6a79bf5dba636c6f171720b20d2"
+    },
+    "design-system/project/components/LessonProgress/README.md": {
+      "bytes": 313,
+      "sha256": "26cc2852584a06dd6949b08c2c295c392ad95928574dcf1bc6bf855576617a3d"
+    },
+    "design-system/project/components/LessonProgress/preview.html": {
+      "bytes": 681,
+      "sha256": "c7c4c3866b432170146b37bde29910e3c0c20c44bfbe0253fc0897209815f06c"
+    },
+    "design-system/project/components/MapNode/README.md": {
+      "bytes": 607,
+      "sha256": "f807b70d9d13b0aedf2a33611ac273506d7adbebdfd789c4dec32d8b0d01b233"
+    },
+    "design-system/project/components/MapNode/preview.html": {
+      "bytes": 1368,
+      "sha256": "6028d388a960100d5d3316a843306ee4f36ab83af0863fd3977b530c33d97ce7"
+    },
+    "design-system/project/components/MasteryRing/README.md": {
+      "bytes": 673,
+      "sha256": "79dd0b8a4846c4a124842e2400cc9a58fdff8d051302db62d9df1ca287532f27"
+    },
+    "design-system/project/components/MasteryRing/preview.html": {
+      "bytes": 1698,
+      "sha256": "f3116d160f5c868d38c9f03d82c7f32c73833b327b51b3ea250251f7c03a4656"
+    },
+    "design-system/project/components/MorphText/README.md": {
+      "bytes": 579,
+      "sha256": "bbb6fbe36d06d8e93a9d104250490a8cc88ee3aa97c175c5c4b2ef3bc3010685"
+    },
+    "design-system/project/components/MorphText/preview.html": {
+      "bytes": 807,
+      "sha256": "8898393121b43c2c2485d2f6b49adb716be193600636f0304c74353541cc5e92"
+    },
+    "design-system/project/components/PracticeReport/README.md": {
+      "bytes": 853,
+      "sha256": "7b28d0d25e488d05665768226fe3a4db54939cbf1d5a2f847c6241e9f9faa845"
+    },
+    "design-system/project/components/PracticeReport/preview.html": {
+      "bytes": 545,
+      "sha256": "0a643d33302629ebeee4e61b8f9fd326a4f60ca55bf269f1065905bdaa43094c"
+    },
+    "design-system/project/components/PredictionCanvas/README.md": {
+      "bytes": 498,
+      "sha256": "819e5b018312a698b5c2e7bfd60e5516af327b04212ebf9c777565ef9e3029a4"
+    },
+    "design-system/project/components/PredictionCanvas/preview.html": {
+      "bytes": 567,
+      "sha256": "572474936e81e1248494fdd6c1fb3da1d3f3addeba2d34dbae4096b6098e15d7"
+    },
+    "design-system/project/components/ReceiptCompare/README.md": {
+      "bytes": 337,
+      "sha256": "c7700638e3333a9edc6520320599c5cde9a763759e7f2a130a0d3f8f83b1c564"
+    },
+    "design-system/project/components/ReceiptCompare/preview.html": {
+      "bytes": 518,
+      "sha256": "d2fb55c058d1f8440e96db9d65e774f6e81ec152955754101c3ab12e181f48cb"
+    },
+    "design-system/project/components/Snackbar/README.md": {
+      "bytes": 386,
+      "sha256": "080a37ffe6b238b8f2c01690215ce49b0b12be65c07562d4f0ebdd8f8cbbf0b0"
+    },
+    "design-system/project/components/Snackbar/preview.html": {
+      "bytes": 688,
+      "sha256": "01ae85d22a07b9b986d5e906ed01c011698ed29b7467bcec14f66956690e22eb"
+    },
+    "design-system/project/components/SourceTag/README.md": {
+      "bytes": 402,
+      "sha256": "6e31910bc042ad4117dae146961d435b65d2787725be0328b4ce49e451cc8dc6"
+    },
+    "design-system/project/components/SourceTag/preview.html": {
+      "bytes": 681,
+      "sha256": "6d02c3e64a36f68fc3a8e55d7b63a2c85a106ee8c28dfba58b703b80c1c4282a"
+    },
+    "design-system/project/components/Spotlight/README.md": {
+      "bytes": 462,
+      "sha256": "567d516d951244211969713c6d290d9a3a355d5378a2d1f9a103999cd596d57c"
+    },
+    "design-system/project/components/Spotlight/preview.html": {
+      "bytes": 1078,
+      "sha256": "23eeef14f8d4d0f82573c9b0a23a6084182531c4bc578bd72f64228a1272eb02"
+    },
+    "design-system/project/components/TermChip/README.md": {
+      "bytes": 622,
+      "sha256": "0ba02504b2da7ab03c3ad70da37c5435dd2b88f38d2a8411f5f6e7eb4ab683c1"
+    },
+    "design-system/project/components/TermChip/preview.html": {
+      "bytes": 747,
+      "sha256": "f41523855e689cfc07bbe17c84d2c02ef52c6702aeb09a4b65a12c29f5283bfe"
+    },
+    "design-system/project/components/VoiceScope/README.md": {
+      "bytes": 511,
+      "sha256": "e5747ee18e08c7fcd86011c518fdf925e9dc5826d963fda30de60e01d3fcf52f"
+    },
+    "design-system/project/components/VoiceScope/preview.html": {
+      "bytes": 556,
+      "sha256": "7b11cb444c692c852ebaf1fc4f69c9264025db0f86ba6cacc417d834bc9166e0"
+    },
+    "design-system/project/components/WordSticker/README.md": {
+      "bytes": 414,
+      "sha256": "090456206bf1417c189f8cfe03739da165219f30d5170d619d1c92f602f97b4b"
+    },
+    "design-system/project/components/WordSticker/preview.html": {
+      "bytes": 659,
+      "sha256": "d3e05dc14fe9c04dae6c18dc9112ad2a8a2e46290194bce4932d15ab5282ba67"
+    },
+    "design-system/project/components/bundle.css": {
+      "bytes": 36748,
+      "sha256": "99107884fc337aca752c6be51ed229125e72c8ee93594593106b01308684f68d"
+    },
+    "design-system/project/components/bundle.js": {
+      "bytes": 71656,
+      "sha256": "7923720392c521b08436e4d311099ab8a7507325620fe1db424118cc76aa199f"
+    },
+    "design-system/project/components/index.d.ts": {
+      "bytes": 8526,
+      "sha256": "0f43a0360edfce98dec6ec19ba16a4746057a26b06244c51e6703ae6715d8014"
+    },
+    "design-system/project/design-system.json": {
+      "bytes": 4916,
+      "sha256": "bff3567c0205afa133304b2babd190418e1751bb561194c8d42062d52018f1c0"
+    },
+    "design-system/project/tokens.json": {
+      "bytes": 8305,
+      "sha256": "983718f68a651ce0df37c1fa90d8ae647b7c312009f99fcc8c247e44a225af1a"
+    },
+    "design-system/tools/build-kiki.js": {
+      "bytes": 26150,
+      "sha256": "daea73782cfa55d265513b4ecbc962309f82944cba03879e016b1b7a445ac337"
+    },
+    "docs/archive/ux-working-doc-early-snapshot-2026-10-11.md": {
+      "bytes": 18336,
+      "sha256": "f3deb229458397157f4e3a67e363e8ca8b6b9ab692b6c1ec8567d632bc3f93dc"
+    },
+    "docs/diagrams/app-map.png": {
+      "bytes": 154853,
+      "sha256": "f38e969114df6af0617191e4942a7d229cb69e879efb877e78a5c7c2e35073c7"
+    },
+    "docs/diagrams/data-model.png": {
+      "bytes": 141452,
+      "sha256": "1cfccddbe319476852318849c912058d185f8e96c1b862d4220fe4a88d35e6d3"
+    },
+    "docs/diagrams/key-screens-wireframes.png": {
+      "bytes": 193574,
+      "sha256": "84560319df5ab56d997658a56dc1e605a64337649f5606be7e2bdc743c81ce11"
+    },
+    "docs/diagrams/learning-loop.png": {
+      "bytes": 80708,
+      "sha256": "d14f6b5f31fa20ab33e89409b683215f6b254b02c5e824273f20100bf452b333"
+    },
+    "docs/diagrams/lesson-pyramid.png": {
+      "bytes": 127008,
+      "sha256": "64670f7a14e1fc73ad8190e3ed614b421fa22df3679ea119e8acea0f0250b8f0"
+    },
+    "docs/diagrams/onboarding-journey.png": {
+      "bytes": 100117,
+      "sha256": "8567ba024075e5c7b40e21628d24fd45411a9e6eb2a083a8f38a2f399e158219"
+    },
+    "docs/plans/backend-prototype-handoff.md": {
+      "bytes": 9562,
+      "sha256": "9e92db28881d3b05bbb2a72b2b992bab2c40beae934a0e10b3187435d2b74c6c"
+    },
+    "docs/prototypes/backend-prototype-directions.md": {
+      "bytes": 31844,
+      "sha256": "51f89a9466719ce77e3363676ac7590e11389eab2b0c9a13a510385ce4fda1ed"
+    },
+    "docs/ux/experiment-recommendation-simulink.md": {
+      "bytes": 8382,
+      "sha256": "a28d09d10745337f3639e5314cf661cfa6482dc7043f440ea165ad158a1316af"
+    },
+    "docs/ux/student-journey-odia-ece.md": {
+      "bytes": 21016,
+      "sha256": "616766abc4d867d0a08b6812e4c4e36696b92457eb8011ae9315d061db2d6314"
+    },
+    "docs/working-doc/01-ux-working-doc.md": {
+      "bytes": 41481,
+      "sha256": "c1622dadee153befcf44db219d7418dd8b495da537cb14355362bb9680c66ace"
+    },
+    "docs/working-doc/02-student-journey.md": {
+      "bytes": 75725,
+      "sha256": "2a769e53c801d4524aae8de9677b7895ec67b955a931a8ed6c4a76b7a910e0e2"
+    },
+    "docs/working-doc/03-feature-journeys.md": {
+      "bytes": 65870,
+      "sha256": "df97a30ed3a43212544864887dfc65b0ca7955631e795d77c90b6ac340d42654"
+    },
+    "docs/working-doc/04-build-plan.md": {
+      "bytes": 11615,
+      "sha256": "5b764887127b30ceaa8938f26c964067f43e6440af8a0e80d28602964eb77793"
+    },
+    "docs/working-doc/05-data-model.md": {
+      "bytes": 15289,
+      "sha256": "387c712dcf1ad40821c10f8c16e11183b4b73b4ab5e0918549d471a60eebb58e"
+    },
+    "prototype/bundle.css": {
+      "bytes": 36748,
+      "sha256": "99107884fc337aca752c6be51ed229125e72c8ee93594593106b01308684f68d"
+    },
+    "prototype/bundle.js": {
+      "bytes": 71656,
+      "sha256": "7923720392c521b08436e4d311099ab8a7507325620fe1db424118cc76aa199f"
+    },
+    "prototype/claude-design-prompt.md": {
+      "bytes": 12604,
+      "sha256": "11c397830902e05b74ba584820e8ac1004be55169ae6e607d632be1b18fef230"
+    },
+    "prototype/index.html": {
+      "bytes": 78178,
+      "sha256": "e63d9e5f633fc6df2cb56c0ce219d68ba8a8db9d938e5a8bee244851a06a2cf7"
+    }
+  },
+  "repository": "https://github.com/Kikiland-ai/Design-Thinking",
+  "schema_version": 1,
+  "source_revision": "f4919cbcb5bde0ca011bb68180c8800c9772b894"
+}

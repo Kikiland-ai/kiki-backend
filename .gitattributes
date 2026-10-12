@@ -1,0 +1,3 @@
+* text=auto eol=lf
+context/design-thinking/** -text
+bb8/** -text

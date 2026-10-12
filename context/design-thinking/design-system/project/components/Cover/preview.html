@@ -1,0 +1,52 @@
+<!-- @dsCard height=288 -->
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Breadboard cover</title>
+<style>
+  html, body { margin: 0; background: var(--paper, #fbfaf7); }
+  .cover { position: relative; width: 960px; height: 288px; overflow: hidden; background: var(--paper, #fbfaf7); }
+  .cover svg { position: absolute; inset: 0; }
+  .blue { fill: var(--blue, #4285f4); }
+  .red { fill: var(--red, #ea4335); }
+  .yellow { fill: var(--yellow, #fbbc05); }
+  .green { fill: var(--green, #34a853); }
+  .board { fill: var(--ink, #1f1f1f); }
+  .hole { fill: var(--paper, #fbfaf7); }
+  .slab { rx: var(--radius-card, 24px); }
+  .node { rx: var(--radius-node, 16px); }
+  .text { position: absolute; left: 48px; bottom: 40px; max-width: 440px; }
+  .name { margin: 0; font: 700 72px/0.92 var(--font-display, "Baloo 2", "Baloo Bhaina 2", system-ui, sans-serif); color: var(--ink, #1f1f1f); letter-spacing: -0.01em; }
+  .tagline { margin: 12px 0 0; font: 400 14px/1.5 var(--font-body, "Noto Sans", system-ui, sans-serif); color: var(--pencil, #5f6368); }
+</style>
+</head>
+<body>
+<div class="cover">
+  <svg width="960" height="288" viewBox="0 0 960 288" aria-hidden="true">
+    <!--
+      blocks: blue slab 144x200 (radius-card), ink board 312x176 (radius-node), red pill 176x48 (radius-pill = half of 48), yellow disc r40, green node 64x64 (radius-node)
+      arrangement: one tall blue slab bleeding off the top, the ink board bleeding off the right edge, three small satellites along the bottom
+      pattern: dot grid, because the system is a breadboard: holes cut out of the ink board in paper colour at a 16px pitch (2 x space-2), 5 rows x 9
+      steps and radii: space-2 8px grid, positions on multiples of 8; radius-card 24, radius-node 16, pill radius 24
+    -->
+    <rect class="blue slab" x="496" y="-24" width="144" height="200" rx="24"></rect>
+    <rect class="board node" x="664" y="32" width="312" height="176" rx="16"></rect>
+    <g>
+      <circle class="hole" cx="704" cy="72" r="4"></circle><circle class="hole" cx="720" cy="72" r="4"></circle><circle class="hole" cx="736" cy="72" r="4"></circle><circle class="hole" cx="752" cy="72" r="4"></circle><circle class="hole" cx="768" cy="72" r="4"></circle><circle class="hole" cx="784" cy="72" r="4"></circle><circle class="hole" cx="800" cy="72" r="4"></circle><circle class="hole" cx="816" cy="72" r="4"></circle><circle class="hole" cx="832" cy="72" r="4"></circle>
+      <circle class="hole" cx="704" cy="88" r="4"></circle><circle class="hole" cx="720" cy="88" r="4"></circle><circle class="hole" cx="736" cy="88" r="4"></circle><circle class="hole" cx="752" cy="88" r="4"></circle><circle class="hole" cx="768" cy="88" r="4"></circle><circle class="hole" cx="784" cy="88" r="4"></circle><circle class="hole" cx="800" cy="88" r="4"></circle><circle class="hole" cx="816" cy="88" r="4"></circle><circle class="hole" cx="832" cy="88" r="4"></circle>
+      <circle class="hole" cx="704" cy="104" r="4"></circle><circle class="hole" cx="720" cy="104" r="4"></circle><circle class="hole" cx="736" cy="104" r="4"></circle><circle class="hole" cx="752" cy="104" r="4"></circle><circle class="hole" cx="768" cy="104" r="4"></circle><circle class="hole" cx="784" cy="104" r="4"></circle><circle class="hole" cx="800" cy="104" r="4"></circle><circle class="hole" cx="816" cy="104" r="4"></circle><circle class="hole" cx="832" cy="104" r="4"></circle>
+      <circle class="hole" cx="704" cy="152" r="4"></circle><circle class="hole" cx="720" cy="152" r="4"></circle><circle class="hole" cx="736" cy="152" r="4"></circle><circle class="hole" cx="752" cy="152" r="4"></circle><circle class="hole" cx="768" cy="152" r="4"></circle><circle class="hole" cx="784" cy="152" r="4"></circle><circle class="hole" cx="800" cy="152" r="4"></circle><circle class="hole" cx="816" cy="152" r="4"></circle><circle class="hole" cx="832" cy="152" r="4"></circle>
+      <circle class="hole" cx="704" cy="168" r="4"></circle><circle class="hole" cx="720" cy="168" r="4"></circle><circle class="hole" cx="736" cy="168" r="4"></circle><circle class="hole" cx="752" cy="168" r="4"></circle><circle class="hole" cx="768" cy="168" r="4"></circle><circle class="hole" cx="784" cy="168" r="4"></circle><circle class="hole" cx="800" cy="168" r="4"></circle><circle class="hole" cx="816" cy="168" r="4"></circle><circle class="hole" cx="832" cy="168" r="4"></circle>
+    </g>
+    <circle class="yellow" cx="560" cy="240" r="40"></circle>
+    <rect class="red" x="664" y="224" width="176" height="48" rx="24"></rect>
+    <rect class="green node" x="864" y="224" width="64" height="64" rx="16"></rect>
+  </svg>
+  <div class="text">
+    <h1 class="name">Breadboard</h1>
+    <p class="tagline">Colour is earned. A bilingual Odia and English system for learning engineering, one concept at a time.</p>
+  </div>
+</div>
+</body>
+</html>

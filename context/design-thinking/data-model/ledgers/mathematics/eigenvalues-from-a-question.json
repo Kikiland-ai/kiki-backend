@@ -1,0 +1,165 @@
+{
+ "schema": "lesson-ledger/v2",
+ "subjectProfile": {
+  "id": "mathematics",
+  "label": "Engineering Mathematics",
+  "practice": { "applies": false, "label": "Practical", "kinds": [] },
+  "visualKinds": ["graph", "equation", "table", "flowchart"],
+  "interactiveKinds": ["parameter_sweep", "step_through", "sort_steps"],
+  "unitsMatter": false,
+  "checkMix": [
+   { "dimension": "concept", "anyOfTypes": ["mcq", "multi_select", "numerical", "diagram", "derivation", "order_steps", "label_diagram", "predict"], "when": "always" },
+   { "dimension": "words", "anyOfTypes": ["term_match", "fill_blank"], "when": "always" },
+   { "dimension": "english", "anyOfTypes": ["short_english", "spoken", "long_written"], "when": "always" },
+   { "dimension": "lab", "anyOfTypes": ["predict", "mcq", "numerical", "order_steps", "label_diagram"], "when": "has_practical" }
+  ]
+ },
+ "course": {
+  "id": "CRS-SELF-L001",
+  "title": "My questions",
+  "kind": "self",
+  "discipline": "Engineering Mathematics",
+  "subjectProfileId": "mathematics",
+  "languages": { "source": "en", "support": ["or"], "dial": { "levels": 5, "labels": ["Mostly Odia", "Odia with English terms", "Half and half", "English with Odia help", "Exam English"] } },
+  "lessonPlanIds": ["LP-EV"]
+ },
+ "lessonPlan": {
+  "id": "LP-EV",
+  "courseId": "CRS-SELF-L001",
+  "scope": "concept",
+  "title": "Eigenvalues and eigenvectors of a 2 × 2 matrix",
+  "governingQuestion": "What is an eigenvalue, and how do I find the eigenvalues and eigenvectors of a 2 × 2 matrix?",
+  "canDo": "Find the eigenvalues and eigenvectors of a 2 × 2 matrix and explain what they mean in exam English.",
+  "objectiveId": "O-EV-0",
+  "mece": {
+   "dimension": "One concept, bounded by the student's question",
+   "rationale": "The question asks for the meaning and the method for 2 × 2 matrices. Both belong to one concept, so the plan has one broad concept and one concept.",
+   "outOfScope": ["Matrices larger than 2 × 2", "Diagonalisation and the Cayley-Hamilton theorem", "Complex eigenvalues"]
+  },
+  "broadConceptIds": ["BC-EV-1"],
+  "syllabusLines": [],
+  "requestId": "REQ-0107",
+  "estMinutes": 12,
+  "sources": [
+   { "origin": "student_question", "label": "Typed question: \"what is eigen value and how to find it\"" },
+   { "origin": "generated", "label": "Gemini draft, validated" }
+  ],
+  "review": { "status": "auto_checked", "notes": "Kiki-made: shown with a label until a teacher checks it." }
+ },
+ "broadConcepts": [
+  {
+   "id": "BC-EV-1",
+   "lessonPlanId": "LP-EV",
+   "order": 1,
+   "title": "Eigenvalues and eigenvectors",
+   "governingQuestion": "What are eigenvalues and eigenvectors, and how are they found?",
+   "objectiveId": "O-EV-1",
+   "mece": {
+    "dimension": "Single concept",
+    "rationale": "A concept-scope plan has one broad concept holding one concept.",
+    "outOfScope": []
+   },
+   "conceptIds": ["EV-1.1"]
+  }
+ ],
+ "objectives": [
+  { "id": "O-EV-0", "statement": "Explain what eigenvalues and eigenvectors are and compute them for 2 × 2 matrices.", "bloom": "apply", "parentId": null, "ownerId": "LP-EV" },
+  { "id": "O-EV-1", "statement": "Find the eigenvalues and eigenvectors of a given 2 × 2 matrix.", "bloom": "apply", "parentId": "O-EV-0", "ownerId": "BC-EV-1" },
+  { "id": "O-EV-1.1", "statement": "Solve the characteristic equation of a 2 × 2 matrix and find an eigenvector for each eigenvalue.", "bloom": "apply", "parentId": "O-EV-1", "ownerId": "EV-1.1" }
+ ],
+ "terms": [
+  { "id": "T-ev-eigenvalue", "term": "eigenvalue", "symbol": "λ", "definition": "A number λ for which Av = λv has a non-zero solution v.", "ownerConceptId": "EV-1.1" },
+  { "id": "T-ev-eigenvector", "term": "eigenvector", "definition": "A non-zero vector v that the matrix A only stretches or shrinks: Av = λv.", "ownerConceptId": "EV-1.1" },
+  { "id": "T-ev-characteristic-equation", "term": "characteristic equation", "definition": "det(A − λI) = 0; its roots are the eigenvalues.", "ownerConceptId": "EV-1.1" },
+  { "id": "T-ev-trace", "term": "trace", "definition": "The sum of the diagonal entries of a square matrix; it equals the sum of the eigenvalues.", "ownerConceptId": "EV-1.1" }
+ ],
+ "practicals": [],
+ "concepts": [
+  {
+   "id": "EV-1.1",
+   "broadConceptId": "BC-EV-1",
+   "order": 1,
+   "title": "Eigenvalues and eigenvectors of a 2 × 2 matrix",
+   "canonicalKey": "eigenvalues-eigenvectors-2x2",
+   "canDo": "Find the eigenvalues and eigenvectors of a 2 × 2 matrix and say what they mean.",
+   "objectiveIds": ["O-EV-1.1"],
+   "prerequisiteIds": [],
+   "externalPrerequisites": [
+    { "title": "Determinant of a 2 × 2 matrix (Class 12)", "level": "school", "canonicalKey": "determinant-2x2" },
+    { "title": "Solving quadratic equations (Class 10)", "level": "school", "canonicalKey": "quadratic-equations" }
+   ],
+   "termIds": ["T-ev-eigenvalue", "T-ev-eigenvector", "T-ev-characteristic-equation", "T-ev-trace"],
+   "usesTermIds": [],
+   "misconceptions": [
+    { "id": "M-EV-1.1-a", "statement": "The zero vector is an eigenvector.", "correction": "Eigenvectors must be non-zero; Av = λv holds for v = 0 with every λ, so it tells us nothing." },
+    { "id": "M-EV-1.1-b", "statement": "Each eigenvalue has exactly one eigenvector.", "correction": "Any non-zero multiple of an eigenvector is also an eigenvector; we give one representative." },
+    { "id": "M-EV-1.1-c", "statement": "The eigenvalues are always the diagonal entries.", "correction": "Only for diagonal or triangular matrices; otherwise solve the characteristic equation." }
+   ],
+   "explanation": {
+    "keyIdea": "Eigenvectors are the directions a matrix only stretches; the stretch factors are the eigenvalues, found from det(A − λI) = 0.",
+    "text": "A matrix A usually turns a vector to point in a new direction. An eigenvector is a non-zero vector v that A does not turn: it only stretches or shrinks it, so Av = λv. The number λ is the eigenvalue. To find the eigenvalues, rewrite this as (A − λI)v = 0. A non-zero v exists only if det(A − λI) = 0, the characteristic equation. For a 2 × 2 matrix this is a quadratic in λ: λ² − (trace)λ + det(A) = 0. Solve it for the two eigenvalues. Then, for each λ, put it back into (A − λI)v = 0 and solve for v. Any non-zero multiple of v is also an eigenvector.",
+    "modalities": {
+     "textImage": { "visual": { "kind": "graph", "description": "Axes with A = [[2, 1], [1, 2]]. Vector v = (1, 1) and Av = (3, 3) on the same line, labelled 'stretched by λ = 3'. Vector u = (1, 0) and Au = (2, 1) pointing a new way, labelled 'turned: not an eigenvector'.", "alt": "An eigenvector stays on its line and is stretched; another vector is turned" } },
+     "voice": { "walkthrough": [
+      { "target": "An eigenvector", "mark": "sweep", "dim": "words", "say": "An eigenvector is a direction the matrix does not turn." },
+      { "target": "Av = λv", "mark": "marker", "dim": "concept", "say": "A times v is just a number times v: stretched, not turned." },
+      { "target": "is the eigenvalue", "mark": "sweep", "dim": "words", "say": "That number, lambda, is the eigenvalue." },
+      { "target": "det(A − λI) = 0", "mark": "lens", "dim": "concept", "say": "A non-zero v exists only when this determinant is zero." },
+      { "target": "characteristic equation", "mark": "sweep", "dim": "words", "say": "We call it the characteristic equation." },
+      { "target": "λ² − (trace)λ + det(A) = 0", "mark": "circle", "dim": "concept", "say": "For a 2 by 2 matrix it is a quadratic: solve it and you have both eigenvalues." }
+     ] },
+     "interactive": {
+      "kind": "step_through",
+      "prompt": "Walk through one example, one step at a time.",
+      "steps": [
+       { "label": "Write A − λI", "detail": "For A = [[2, 1], [1, 2]]: A − λI = [[2 − λ, 1], [1, 2 − λ]]" },
+       { "label": "Set the determinant to zero", "detail": "(2 − λ)² − 1 = 0" },
+       { "label": "Solve the quadratic", "detail": "λ² − 4λ + 3 = 0, so λ = 1 or λ = 3" },
+       { "label": "Find v for λ = 3", "detail": "[[−1, 1], [1, −1]]v = 0 gives v = (1, 1)" },
+       { "label": "Find v for λ = 1", "detail": "[[1, 1], [1, 1]]v = 0 gives v = (1, −1)" }
+      ]
+     }
+    },
+    "defaultModality": "textImage"
+   },
+   "example": {
+    "title": "Stretching a rubber sheet",
+    "scenario": "Stretch a rubber sheet with A = [[3, 0], [0, 1]]: everything is pulled 3 times wider and kept the same height. A line along the x-axis stays on the x-axis and gets 3 times longer; a line along the y-axis does not change. A diagonal line turns.",
+    "takeaway": "The x and y directions are the eigenvectors, with eigenvalues 3 and 1; the diagonal is not an eigenvector."
+   },
+   "workedQuestion": {
+    "id": "W-EV-1.1",
+    "type": "numerical",
+    "marks": 5,
+    "prompt": "Find the eigenvalues and eigenvectors of A = [[4, 1], [2, 3]].",
+    "modelAnswer": [
+     "The characteristic equation is det(A − λI) = 0.",
+     "det [[4 − λ, 1], [2, 3 − λ]] = (4 − λ)(3 − λ) − 2 = λ² − 7λ + 10 = 0.",
+     "So (λ − 5)(λ − 2) = 0, and the eigenvalues are λ = 5 and λ = 2.",
+     "For λ = 5: (A − 5I)v = 0 gives −x + y = 0, so v = (1, 1).",
+     "For λ = 2: (A − 2I)v = 0 gives 2x + y = 0, so v = (1, −2).",
+     "Check: the eigenvalues add to 7, the trace of A, and multiply to 10, which is det(A)."
+    ],
+    "rubric": [
+     { "criterion": "Writes the characteristic equation", "marks": 1 },
+     { "criterion": "Expands it to the correct quadratic", "marks": 1 },
+     { "criterion": "Finds both eigenvalues", "marks": 1 },
+     { "criterion": "Finds an eigenvector for each eigenvalue", "marks": 2 }
+    ],
+    "examVocabulary": ["T-ev-characteristic-equation", "T-ev-eigenvalue", "T-ev-eigenvector"]
+   },
+   "checks": [
+    { "id": "Q-EV-1.1-a", "type": "mcq", "dimension": "concept", "prompt": "What are the eigenvalues of A = [[4, 0], [0, 7]]?", "options": ["4 and 7", "0 and 11", "11 and 28", "4 and 0"], "answer": "4 and 7", "explanation": "For a diagonal matrix the eigenvalues are the diagonal entries.", "objectiveIds": ["O-EV-1.1"], "difficulty": 1 },
+    { "id": "Q-EV-1.1-b", "type": "numerical", "dimension": "concept", "prompt": "What is the larger eigenvalue of A = [[3, 2], [1, 4]]?", "answer": "5", "tolerance": { "kind": "absolute", "value": 0 }, "explanation": "λ² − 7λ + 10 = 0, so λ = 2 or 5.", "objectiveIds": ["O-EV-1.1"], "difficulty": 2 },
+    { "id": "Q-EV-1.1-c", "type": "term_match", "dimension": "words", "prompt": "Match the term: characteristic equation", "options": ["det(A − λI) = 0, whose roots are the eigenvalues", "The equation Av = 0", "The sum of the diagonal entries", "An equation that has no solution"], "answer": "det(A − λI) = 0, whose roots are the eigenvalues", "explanation": "Its roots are exactly the eigenvalues.", "objectiveIds": ["O-EV-1.1"], "difficulty": 1 },
+    { "id": "Q-EV-1.1-d", "type": "short_english", "dimension": "english", "prompt": "In two sentences, explain what an eigenvector is.", "answer": "An eigenvector of a matrix A is a non-zero vector that A only stretches or shrinks without changing its direction. It satisfies Av = λv, where λ is the eigenvalue.", "explanation": "Look for: non-zero; direction unchanged; Av = λv.", "objectiveIds": ["O-EV-1.1"], "difficulty": 2 },
+    { "id": "Q-EV-1.1-e", "type": "spoken", "dimension": "english", "prompt": "Say aloud how you would find the eigenvalues of a 2 × 2 matrix.", "answer": "Subtract λ from the diagonal entries, set the determinant of A − λI to zero, and solve the quadratic for λ.", "explanation": "Three steps, in order, with the words determinant and characteristic equation.", "objectiveIds": ["O-EV-1.1"], "difficulty": 2 }
+   ],
+   "examSignal": { "basis": "none", "askedIn": 0, "outOf": 0, "note": "Personal question; no exam linked yet" },
+   "estMinutes": 12,
+   "localization": { "perLanguage": { "or": { "status": "to_generate", "levels": [] } } },
+   "sources": [{ "origin": "student_question", "label": "Typed question" }, { "origin": "generated", "label": "Gemini draft, validated" }],
+   "review": { "status": "auto_checked", "notes": "Kiki-made: shown with a label until a teacher checks it." }
+  }
+ ]
+}

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="-8 -8 96 96" role="img" aria-label="Kiki pointer, dragging">
+<title>Kiki pointer: dragging</title>
+
+<g><circle cx="44" cy="54" r="3.2" fill="#4285f4"/><circle cx="52" cy="60" r="3.2" fill="#ea4335"/><circle cx="60" cy="66" r="3.2" fill="#fbbc05"/><circle cx="68" cy="72" r="3.2" fill="#34a853"/></g>
+<g transform="rotate(-8 12 8)"><rect x="2" y="0" width="22" height="12" rx="4" fill="#e6f4ea" stroke="#34a853" stroke-width="2"/><path d="M12 8 L12 46 L21.5 37.5 L28.5 53 L35 50 L28 35 L40 35 Z" fill="#1f1f1f" stroke="#ffffff" stroke-width="3" stroke-linejoin="round"/><circle cx="16.8" cy="25" r="2.8" fill="#ffffff"/><circle cx="23.4" cy="25" r="2.8" fill="#ffffff"/></g>
+</svg>

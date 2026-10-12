@@ -1,0 +1,1231 @@
+{
+  "files": {
+    ".agents/plugins/marketplace.json": {
+      "bytes": 352,
+      "sha256": "bdfce6bc8707b026f1aeb692e173aef1b38da4b3ed32296da56e8809e6dd1163"
+    },
+    ".agents/skills/bb8/SKILL.md": {
+      "bytes": 996,
+      "sha256": "3e2a89e5f9ecc60f8dde2ced78bc75a38fe2ddccb57914012e2f3e62ef4e5dd3"
+    },
+    ".agents/skills/bb8/agents/openai.yaml": {
+      "bytes": 293,
+      "sha256": "2d36eb74199251cbf617abb45189b40f329e4f96d9ffc7456236c51dfbd25c69"
+    },
+    ".agents/skills/data-analysis/SKILL.md": {
+      "bytes": 1000,
+      "sha256": "12a19c88d82ed9857ffd79b21146864337898b20a84e1593d59a977aef7ee2b3"
+    },
+    ".agents/skills/data-analysis/agents/openai.yaml": {
+      "bytes": 313,
+      "sha256": "cfa5832af10d462171265dd1621a58c239ead6aaa1e750a0efc29cc2f4fbca2d"
+    },
+    ".agents/skills/deep-research/SKILL.md": {
+      "bytes": 989,
+      "sha256": "6c3b4a4cb25bd8582163f1bf98cf712e55efa4495c49b2a3da853d068c0d3d36"
+    },
+    ".agents/skills/deep-research/agents/openai.yaml": {
+      "bytes": 313,
+      "sha256": "e3d6a541cf043c47ad4d008016381aa8d25682aca4ca6d3a04a3c356c4273ad5"
+    },
+    ".agents/skills/design-critique/SKILL.md": {
+      "bytes": 969,
+      "sha256": "9747595b6a696ab8379faa6e2f7f968616668e07c650cd3469f8d9f3bbaf2602"
+    },
+    ".agents/skills/design-critique/agents/openai.yaml": {
+      "bytes": 325,
+      "sha256": "60f334a132b7ece7f44b6d23a3f43a68a48d16f6c321666638da6bc26777643e"
+    },
+    ".agents/skills/engineering-architecture/SKILL.md": {
+      "bytes": 997,
+      "sha256": "956d28335843b8daf3604ca8b484a9853764ab4a360d59d4c3d989aadc0a861a"
+    },
+    ".agents/skills/engineering-architecture/agents/openai.yaml": {
+      "bytes": 333,
+      "sha256": "50b075708d0f9e329187553ddcfbd35d91f5dbf04eb096da85b1af0cf5757da4"
+    },
+    ".agents/skills/engineering-debugging/SKILL.md": {
+      "bytes": 978,
+      "sha256": "0383beba15b9bb456504b5948a29335920b86302189020a1cff695f2843e66e7"
+    },
+    ".agents/skills/engineering-debugging/agents/openai.yaml": {
+      "bytes": 319,
+      "sha256": "7243f5b37541bb9d2e9ade8667abc9a436bf158c8b3474f495b0ca3e12971f8a"
+    },
+    ".agents/skills/engineering-implementation/SKILL.md": {
+      "bytes": 992,
+      "sha256": "4f9cdf1a077f6203240d86801309e7831a5bf490862b3b4ff9a108b6a7b5ade9"
+    },
+    ".agents/skills/engineering-implementation/agents/openai.yaml": {
+      "bytes": 325,
+      "sha256": "20d5454c76669c6ba4d33b5a1b0f1c4004d162ccf6cbc034d352164b581da16e"
+    },
+    ".agents/skills/engineering-review/SKILL.md": {
+      "bytes": 971,
+      "sha256": "3e748075699e427380f4bdbdc484a5cc3f60a3a1b160171deb3be4e87e4b5b43"
+    },
+    ".agents/skills/engineering-review/agents/openai.yaml": {
+      "bytes": 315,
+      "sha256": "b83d3ebc8631faac59032522ddcbcdb6fd65cf080c3ff040b5eca8c15843e489"
+    },
+    ".agents/skills/engineering-security/SKILL.md": {
+      "bytes": 990,
+      "sha256": "e6d2a1639d3c7350ae45be6d758ecb0256f79a3f3d58adfb442fbd2638fdaaef"
+    },
+    ".agents/skills/engineering-security/agents/openai.yaml": {
+      "bytes": 339,
+      "sha256": "3fc7b057e55784e868a02c19729a08a4ba7a0be25d6b94cc9c995182de921065"
+    },
+    ".agents/skills/engineering-testing/SKILL.md": {
+      "bytes": 983,
+      "sha256": "480297fac0f6f1a35f55a141680e23de4b1134d86cd07ecea2d3b1315f5045fd"
+    },
+    ".agents/skills/engineering-testing/agents/openai.yaml": {
+      "bytes": 320,
+      "sha256": "f979acc9bf27d6be4dee6954dcbefcb211cc061358d54f92b4283fab91a14251"
+    },
+    ".agents/skills/engineering/SKILL.md": {
+      "bytes": 1000,
+      "sha256": "d4cc8e3be80e48e82502b007e4067e44e2099ebbac39bab82ea4cb24cbc1ca0d"
+    },
+    ".agents/skills/engineering/agents/openai.yaml": {
+      "bytes": 311,
+      "sha256": "890e5ab7b26cf3118149c540fd4003377fac693770f97bb781c672200134de91"
+    },
+    ".agents/skills/experience-design/SKILL.md": {
+      "bytes": 965,
+      "sha256": "255951396c34d847b8580912e06e0f155525fe97b7f8ef71527f6e3065f626fc"
+    },
+    ".agents/skills/experience-design/agents/openai.yaml": {
+      "bytes": 323,
+      "sha256": "92041d2ac161270b80c65d8803d28c169349f8826a9f4441123ffe720ca3a15e"
+    },
+    ".agents/skills/experiment-design/SKILL.md": {
+      "bytes": 974,
+      "sha256": "811a347838a3d16a4954f6d5100cb38cbcfa5a8dce7660933afbe02f7a5cbff8"
+    },
+    ".agents/skills/experiment-design/agents/openai.yaml": {
+      "bytes": 319,
+      "sha256": "6d4360a8db97850b047bb6317d06881f0f392e002ec124c460acea49c01f5c7a"
+    },
+    ".agents/skills/minto-communication/SKILL.md": {
+      "bytes": 1033,
+      "sha256": "1935bed4f1cda8566d2206465c5f1c758a3a42fd89c722b7fa43f98342d9b930"
+    },
+    ".agents/skills/minto-communication/agents/openai.yaml": {
+      "bytes": 328,
+      "sha256": "b3ba0ad4800cf41002304dcdf20f9e8d5beefd8d708863f6e02242537b905d9c"
+    },
+    ".agents/skills/organise/SKILL.md": {
+      "bytes": 1119,
+      "sha256": "58069a22a4abdc5f8f271c11fe9143cb4091daf2f2b3117ba18afae0684ad068"
+    },
+    ".agents/skills/organise/agents/openai.yaml": {
+      "bytes": 318,
+      "sha256": "8bf9d039bbc9e0dcc540c18ab8d84079f8608a0c6cc8d42903009e39e95da2b9"
+    },
+    ".agents/skills/problem-solving/SKILL.md": {
+      "bytes": 1023,
+      "sha256": "c5b4ba13258b09615c1d605b15a4507f3c6992b97711a9d350a0f6c0110accee"
+    },
+    ".agents/skills/problem-solving/agents/openai.yaml": {
+      "bytes": 324,
+      "sha256": "f24cc175224aa49f7185bee4ff0b331a04d00533348b648acc001c4705f1bf65"
+    },
+    ".agents/skills/product-design/SKILL.md": {
+      "bytes": 969,
+      "sha256": "b0a84b9c2a5d3349aac2309d6a1016a2426cd1075250c84648fc3cd03a478924"
+    },
+    ".agents/skills/product-design/agents/openai.yaml": {
+      "bytes": 312,
+      "sha256": "f6dca85dec506a818e8058b30d353d95956713761c01dc20881b5182503efec5"
+    },
+    ".agents/skills/product-discovery/SKILL.md": {
+      "bytes": 1005,
+      "sha256": "ce44d324e7ba4245137091e966e78f650d2cef9a072901a148205cbfa3565577"
+    },
+    ".agents/skills/product-discovery/agents/openai.yaml": {
+      "bytes": 314,
+      "sha256": "c32062789e8d546a47116ce799b72b00b07883e135a540d7c25550939be6fb03"
+    },
+    ".agents/skills/product-strategy/SKILL.md": {
+      "bytes": 989,
+      "sha256": "afbacc9ebad460a54f19d52ab97b04775d70c178a89036eb29ecc21ef27fa799"
+    },
+    ".agents/skills/product-strategy/agents/openai.yaml": {
+      "bytes": 308,
+      "sha256": "f8d93cbdaa92a5d32c58ac01b77d95a37717601d5665b1c2bc58cddbf631d8c7"
+    },
+    ".agents/skills/strategic-storytelling/SKILL.md": {
+      "bytes": 1092,
+      "sha256": "1bda9eace2a30483a94555255d5675570d1fb6d3ca1b41c4f0be2031582dd475"
+    },
+    ".agents/skills/strategic-storytelling/agents/openai.yaml": {
+      "bytes": 355,
+      "sha256": "e37ddd0f6d61169582005d98bf1b32e6b0c9f01056dd59113ef8d3d542f56729"
+    },
+    ".agents/skills/transcript-insights-tofu/SKILL.md": {
+      "bytes": 1055,
+      "sha256": "ab09ce43f9e752a355a2323bbe80ba28fd22b5c25b18484a829a78459fac3a3a"
+    },
+    ".agents/skills/transcript-insights-tofu/agents/openai.yaml": {
+      "bytes": 339,
+      "sha256": "e18d32d8d386bd2306c1058651af2261793fc515bc3b71ee752db5f8ccd3ff70"
+    },
+    ".bb8-bootstrap.json": {
+      "bytes": 250,
+      "sha256": "3af203c9e55a2562ebd912b6d099f4ba4cf62a1f01ef822f84f93b99653de787"
+    },
+    ".claude/skills/bb8/SKILL.md": {
+      "bytes": 996,
+      "sha256": "3e2a89e5f9ecc60f8dde2ced78bc75a38fe2ddccb57914012e2f3e62ef4e5dd3"
+    },
+    ".claude/skills/data-analysis/SKILL.md": {
+      "bytes": 1000,
+      "sha256": "12a19c88d82ed9857ffd79b21146864337898b20a84e1593d59a977aef7ee2b3"
+    },
+    ".claude/skills/deep-research/SKILL.md": {
+      "bytes": 989,
+      "sha256": "6c3b4a4cb25bd8582163f1bf98cf712e55efa4495c49b2a3da853d068c0d3d36"
+    },
+    ".claude/skills/design-critique/SKILL.md": {
+      "bytes": 969,
+      "sha256": "9747595b6a696ab8379faa6e2f7f968616668e07c650cd3469f8d9f3bbaf2602"
+    },
+    ".claude/skills/engineering-architecture/SKILL.md": {
+      "bytes": 997,
+      "sha256": "956d28335843b8daf3604ca8b484a9853764ab4a360d59d4c3d989aadc0a861a"
+    },
+    ".claude/skills/engineering-debugging/SKILL.md": {
+      "bytes": 978,
+      "sha256": "0383beba15b9bb456504b5948a29335920b86302189020a1cff695f2843e66e7"
+    },
+    ".claude/skills/engineering-implementation/SKILL.md": {
+      "bytes": 992,
+      "sha256": "4f9cdf1a077f6203240d86801309e7831a5bf490862b3b4ff9a108b6a7b5ade9"
+    },
+    ".claude/skills/engineering-review/SKILL.md": {
+      "bytes": 971,
+      "sha256": "3e748075699e427380f4bdbdc484a5cc3f60a3a1b160171deb3be4e87e4b5b43"
+    },
+    ".claude/skills/engineering-security/SKILL.md": {
+      "bytes": 990,
+      "sha256": "e6d2a1639d3c7350ae45be6d758ecb0256f79a3f3d58adfb442fbd2638fdaaef"
+    },
+    ".claude/skills/engineering-testing/SKILL.md": {
+      "bytes": 983,
+      "sha256": "480297fac0f6f1a35f55a141680e23de4b1134d86cd07ecea2d3b1315f5045fd"
+    },
+    ".claude/skills/engineering/SKILL.md": {
+      "bytes": 1000,
+      "sha256": "d4cc8e3be80e48e82502b007e4067e44e2099ebbac39bab82ea4cb24cbc1ca0d"
+    },
+    ".claude/skills/experience-design/SKILL.md": {
+      "bytes": 965,
+      "sha256": "255951396c34d847b8580912e06e0f155525fe97b7f8ef71527f6e3065f626fc"
+    },
+    ".claude/skills/experiment-design/SKILL.md": {
+      "bytes": 974,
+      "sha256": "811a347838a3d16a4954f6d5100cb38cbcfa5a8dce7660933afbe02f7a5cbff8"
+    },
+    ".claude/skills/minto-communication/SKILL.md": {
+      "bytes": 1033,
+      "sha256": "1935bed4f1cda8566d2206465c5f1c758a3a42fd89c722b7fa43f98342d9b930"
+    },
+    ".claude/skills/organise/SKILL.md": {
+      "bytes": 1150,
+      "sha256": "d7adccb00e4f88adf390f2d43cb97dde20b0b73e1f59a91cd5ef42fcb750ff37"
+    },
+    ".claude/skills/problem-solving/SKILL.md": {
+      "bytes": 1023,
+      "sha256": "c5b4ba13258b09615c1d605b15a4507f3c6992b97711a9d350a0f6c0110accee"
+    },
+    ".claude/skills/product-design/SKILL.md": {
+      "bytes": 969,
+      "sha256": "b0a84b9c2a5d3349aac2309d6a1016a2426cd1075250c84648fc3cd03a478924"
+    },
+    ".claude/skills/product-discovery/SKILL.md": {
+      "bytes": 1005,
+      "sha256": "ce44d324e7ba4245137091e966e78f650d2cef9a072901a148205cbfa3565577"
+    },
+    ".claude/skills/product-strategy/SKILL.md": {
+      "bytes": 989,
+      "sha256": "afbacc9ebad460a54f19d52ab97b04775d70c178a89036eb29ecc21ef27fa799"
+    },
+    ".claude/skills/strategic-storytelling/SKILL.md": {
+      "bytes": 1092,
+      "sha256": "1bda9eace2a30483a94555255d5675570d1fb6d3ca1b41c4f0be2031582dd475"
+    },
+    ".claude/skills/transcript-insights-tofu/SKILL.md": {
+      "bytes": 1055,
+      "sha256": "ab09ce43f9e752a355a2323bbe80ba28fd22b5c25b18484a829a78459fac3a3a"
+    },
+    ".env.example": {
+      "bytes": 497,
+      "sha256": "e9a6267c5397f4b6ff5408928c9a057b991558524f4b94537a82685a7780fdb7"
+    },
+    ".gitattributes": {
+      "bytes": 65,
+      "sha256": "7dcff8005694e990d1ba2a2c055ff35518e3377a4e3f58e1b2e817d3c5d5a1b2"
+    },
+    ".github/workflows/bb8-check.yml": {
+      "bytes": 891,
+      "sha256": "82c46e566ee4c04c21a8dde2b47ed53e0e1a522d91f34660f337ce29cd59651a"
+    },
+    ".github/workflows/context-check.yml": {
+      "bytes": 871,
+      "sha256": "112f9a64ffea4054152067c01472b9cd2380043a2cba55ea3a84c9ac9342d615"
+    },
+    ".gitignore": {
+      "bytes": 150,
+      "sha256": "82856af23a0f20c37955201a7d595f526a798b4dbe4af4cfcdadf34fb02120fd"
+    },
+    ".nvmrc": {
+      "bytes": 3,
+      "sha256": "f14b4987904bcb5814e4459a057ed4d20f58a633152288a761214dcd28780b56"
+    },
+    ".python-version": {
+      "bytes": 5,
+      "sha256": "7b55f8e67b5623c4bef3fa691288da9437d79d3aba156de48d481db32ac7d16d"
+    },
+    "AGENTS.md": {
+      "bytes": 2554,
+      "sha256": "e29e0cddf62fd5d4961e3be6a82086889b17c5504fbf5e519f779456d6b66a51"
+    },
+    "BB8.md": {
+      "bytes": 2481,
+      "sha256": "4dd917bd8a046b99ef4b4b43ffe1dc569ad77587dd0de6070c891336a6d22240"
+    },
+    "CLAUDE.md": {
+      "bytes": 129,
+      "sha256": "2889a6e118f16d07afcf0cac3bc42b619d2f7425b48fea3265bff87d7212bf9c"
+    },
+    "README.md": {
+      "bytes": 1066,
+      "sha256": "80e6753d48087209c14119e93cc37007f609b41aceac416fa31e2e570079a62f"
+    },
+    "SETUP.md": {
+      "bytes": 7602,
+      "sha256": "bf78d382ab88ae91e8b62ab7c617549597a452c8d5a468d24de85e6b1298b766"
+    },
+    "bb8/.codex-plugin/plugin.json": {
+      "bytes": 863,
+      "sha256": "a15f51f9fb8f8d59c14a3b9f4e9bfe82856395aa158592d96858ffc4517bc9cf"
+    },
+    "bb8/AGENTS.md": {
+      "bytes": 3846,
+      "sha256": "168af6c32a49ecc29d032ae98e61d6b600b16c8c8518905fe274f0ccef494ff5"
+    },
+    "bb8/PORTABLE-START.md": {
+      "bytes": 1822,
+      "sha256": "c14036b0319fc148170f81c4c5ee1e27fec3e50124c7e8c83b2a86e1fb5c13d9"
+    },
+    "bb8/README.md": {
+      "bytes": 1386,
+      "sha256": "b422bb2108316d6b34a25c2cf017f7b4edb793a12cb1717a244d679f60f06934"
+    },
+    "bb8/SESSION-SETUP-RUNBOOK.md": {
+      "bytes": 5398,
+      "sha256": "3bd621347529684fee713ad07dee2b9057e90e7168aefe1315a2dd38e232efb8"
+    },
+    "bb8/adapters/CONTRACT.md": {
+      "bytes": 1695,
+      "sha256": "fb3b68bb3e91aee8b128be88222857858f21872916d203a778ed80adeb7e98a7"
+    },
+    "bb8/adapters/discovery/index.json": {
+      "bytes": 19219,
+      "sha256": "38abaa06479580f8dcac63bacad9e1d40606d43959ee9e30318715cc395be856"
+    },
+    "bb8/adapters/discovery/sync.py": {
+      "bytes": 5955,
+      "sha256": "bebd91bdf0d6a2933e13cbc546d373ec0b9933abbcb598d2d025d9e5c456b8c4"
+    },
+    "bb8/adapters/reference/README.md": {
+      "bytes": 2172,
+      "sha256": "3a30aaf89649ff7eeaf1ce62b9a4334170eb7db98c44d22afcc7ef4394df36fb"
+    },
+    "bb8/adapters/reference/bb8.py": {
+      "bytes": 10285,
+      "sha256": "b36714ff859d4b1571769d3e60ffd9acd5e009511abc921869dd603987416cdb"
+    },
+    "bb8/docs/AGENT-DISCOVERY.md": {
+      "bytes": 3715,
+      "sha256": "e7076f74ec094b999490b68210d5bc173af3633b141cac0573a53ed003c73b2d"
+    },
+    "bb8/docs/BB8-GUIDE.md": {
+      "bytes": 6381,
+      "sha256": "1710206cae73a48ab1e7f3f1ca83caa67d659323f45d21542307fec2f1409337"
+    },
+    "bb8/docs/CHATGPT-INSTALL.md": {
+      "bytes": 3371,
+      "sha256": "c74b2d9909004ae06971fe5cb592e34b9a27acf1a3c8ad9933a6d94cd78e74f1"
+    },
+    "bb8/docs/NEXT-STEPS.md": {
+      "bytes": 2350,
+      "sha256": "6476c8d7db15f6e6b61a522722759674211ff20a12ada3013e026b9b5e0b3288"
+    },
+    "bb8/docs/ORG-ROLLOUT.md": {
+      "bytes": 4913,
+      "sha256": "8e46418cb505db549ed2df7ab3da217b871dd1b02c03a9c62a9d93e18ac74cf3"
+    },
+    "bb8/docs/SETUP-REPORT.md": {
+      "bytes": 2666,
+      "sha256": "034a020afe8831bef2471f350e2b61ca9aeffcc608ed1eb5f35dc31e0029cf6e"
+    },
+    "bb8/docs/SKILL-PORT.md": {
+      "bytes": 3837,
+      "sha256": "2167eed26ef754eba270884df523388c54299700895581f919f4c7ba6f79a48b"
+    },
+    "bb8/harness/capability-registry.yaml": {
+      "bytes": 4864,
+      "sha256": "b51fc23cdeb240dfa7b970bb978dc0d4d5ef362570ed80b4bb0a1a467da733d1"
+    },
+    "bb8/harness/manifest.yaml": {
+      "bytes": 1115,
+      "sha256": "126b82327da273c37c36338f490b259a3ef664d3e006493bf8eef96dcc1e5c8d"
+    },
+    "bb8/harness/plan-template.md": {
+      "bytes": 3071,
+      "sha256": "f3e62fb05d3fae25b2608dfd4d9aa37f3445bddd0a9ea02bfdd8eab01c980cdd"
+    },
+    "bb8/harness/references/aggregation-disaggregation.md": {
+      "bytes": 1687,
+      "sha256": "42046866de5636729c4c23449e1e2d644662eb17c8e64edc4ab72d58d06e82c7"
+    },
+    "bb8/harness/references/engineering-principles.md": {
+      "bytes": 2352,
+      "sha256": "84444bafa737d1e41b523c7fedd3c6c7ad2b4385eb8900f14960355769254c5f"
+    },
+    "bb8/harness/references/intent-continuity.md": {
+      "bytes": 3506,
+      "sha256": "0f2902bc9874cd5d0b5dbc3354d298b000d1fcbb9ada3d736dceed77f37c2803"
+    },
+    "bb8/harness/references/product-principles.md": {
+      "bytes": 1324,
+      "sha256": "01019cd25ca981fc57c922c53186c6cbc720790a88676910e2d32ca3fcc7e410"
+    },
+    "bb8/harness/routing-contract.md": {
+      "bytes": 5688,
+      "sha256": "30b78efa620694fc7a5fffea5c1af016f72e9230f657b4c9fd6d80e06290b7d8"
+    },
+    "bb8/harness/skill-catalog.md": {
+      "bytes": 2606,
+      "sha256": "daccb85a1a7d20ed4fb89f8a608aa8f11a189362b991bb29917848af9301dccf"
+    },
+    "bb8/harness/system-prompt.md": {
+      "bytes": 12361,
+      "sha256": "28b42315cf9b03f42b1b4eb4a5dd4306e128420e7eee3f650a58bfeaf7e3bf75"
+    },
+    "bb8/plugin.json": {
+      "bytes": 1114,
+      "sha256": "7aa159fbbf94eed0734788b94cc1e3af4619c8c8717bf40b6da32afdc944217e"
+    },
+    "bb8/provisioning/AGENTS.fragment.md": {
+      "bytes": 1073,
+      "sha256": "815618b66f1a8219f9f726c72ba1e976edd6afa14df3447ccad4b633ca36e661"
+    },
+    "bb8/provisioning/bootstrap.py": {
+      "bytes": 16173,
+      "sha256": "7f7ca2ebc921165a11a0debec4917e54e6d7eb47b0f60bf402d96ce6605458d6"
+    },
+    "bb8/provisioning/config.json": {
+      "bytes": 248,
+      "sha256": "058f6f95d9cfb8e91580647369bfef8474f015eceb38af936958c368189b713c"
+    },
+    "bb8/skills/bb8/SKILL.md": {
+      "bytes": 1913,
+      "sha256": "3144e168d069c76c741accfa1349f009ce00aa0dffc969bdf19d1d3ebecebf04"
+    },
+    "bb8/skills/bb8/agents/openai.yaml": {
+      "bytes": 250,
+      "sha256": "d2c8cb17011d0e1eb9ddf04d00e0fb06eb5aa7178d70b7744aa73d5feb374e9a"
+    },
+    "bb8/skills/data-analysis/SKILL.md": {
+      "bytes": 2196,
+      "sha256": "09e81c831f1eca98a4201a26bdb42581c72d56c0d24da74ffc049907c8de1d7f"
+    },
+    "bb8/skills/data-analysis/agents/openai.yaml": {
+      "bytes": 270,
+      "sha256": "750e6c3388c5437dde93030be528be7977ee7279a7874578c19b2109c846e3d7"
+    },
+    "bb8/skills/data-analysis/references/analysis-protocol.md": {
+      "bytes": 1338,
+      "sha256": "5b15fbe6013264bef3f10d10531d5bbc7355be1cb8d1a856e33eaa1d23ec87fd"
+    },
+    "bb8/skills/deep-research/SKILL.md": {
+      "bytes": 1951,
+      "sha256": "213ba046ddc5d5fe592101abaeefbd29f68b55067bddedc1d73b00cf94c495e0"
+    },
+    "bb8/skills/deep-research/agents/openai.yaml": {
+      "bytes": 270,
+      "sha256": "37454707a213af4b62aab464cd569c6b5cd103e8740524f59cf14ea895d09653"
+    },
+    "bb8/skills/deep-research/references/evidence-protocol.md": {
+      "bytes": 1841,
+      "sha256": "ab00921f3fb9f27201fff0ccd075cb86818f5d50aa4be04c14c52ff8349cd7a9"
+    },
+    "bb8/skills/design-critique/SKILL.md": {
+      "bytes": 1364,
+      "sha256": "70d3a9ca132d9bbc1dd18996642f2af7e4fb12a4d29004f2601214d5be94ace5"
+    },
+    "bb8/skills/design-critique/agents/openai.yaml": {
+      "bytes": 282,
+      "sha256": "5525670768fff335099e7f9b15bf0d469b516acbd1aa57e0a055ebd2d2690378"
+    },
+    "bb8/skills/engineering-architecture/SKILL.md": {
+      "bytes": 1511,
+      "sha256": "0bbae7a4a35b7a4aa0d2f1fef449037caa6b9bd259def56c36f747354abb3286"
+    },
+    "bb8/skills/engineering-architecture/agents/openai.yaml": {
+      "bytes": 290,
+      "sha256": "3c7ad7d2b01220570c1dd30562eaa6d9c2518d49078b035c38150f34fefc0921"
+    },
+    "bb8/skills/engineering-debugging/SKILL.md": {
+      "bytes": 2750,
+      "sha256": "6338fdb3aaaf56c6301894e9f42f6cfbeba1ba0e12d161dbf4f4806bd93a5d73"
+    },
+    "bb8/skills/engineering-debugging/agents/openai.yaml": {
+      "bytes": 276,
+      "sha256": "e3d219b78315fb733182c20ac609b4119953cacefd4f2ef5df443976310c082a"
+    },
+    "bb8/skills/engineering-implementation/SKILL.md": {
+      "bytes": 1432,
+      "sha256": "541fa5e452851a5e147493e9086ff2f5c636337d192bc3b692af1339fd0bfc8b"
+    },
+    "bb8/skills/engineering-implementation/agents/openai.yaml": {
+      "bytes": 282,
+      "sha256": "da48447870b10a583d8ff8fbde8c0e557c64ad78475408a347c01eefe1fd6cf7"
+    },
+    "bb8/skills/engineering-review/SKILL.md": {
+      "bytes": 1347,
+      "sha256": "e4d9b32734240300f9cb5552aaf326a4e7cf04d2811ee7a01be6682684bc756e"
+    },
+    "bb8/skills/engineering-review/agents/openai.yaml": {
+      "bytes": 272,
+      "sha256": "b7bf66a8b1ee0b964aa357b6115f809c57957f281f3be8b5f19b7e1a0534a8e8"
+    },
+    "bb8/skills/engineering-security/SKILL.md": {
+      "bytes": 1425,
+      "sha256": "fe4f87e635d391c87855ab73eca2eb3e7e3b0ea3d8704a1e31fec97490854033"
+    },
+    "bb8/skills/engineering-security/agents/openai.yaml": {
+      "bytes": 296,
+      "sha256": "34036a57bb5e9e8f414c8a98b1c790ba168d614640820f6aa32f7d803a5f394d"
+    },
+    "bb8/skills/engineering-testing/SKILL.md": {
+      "bytes": 1423,
+      "sha256": "17b85c364f958a516cedcd04f98683a9d6c6f647a39ec6a196afbe5734d9f647"
+    },
+    "bb8/skills/engineering-testing/agents/openai.yaml": {
+      "bytes": 277,
+      "sha256": "1f74eba71eec26e4465429485869fb11167b8f05a067842b0fab108322b33529"
+    },
+    "bb8/skills/engineering/SKILL.md": {
+      "bytes": 1470,
+      "sha256": "50322cda05fe483c73f3afba7f309545effc6ddf8fe1cddfe1c24302dbb33c4b"
+    },
+    "bb8/skills/engineering/agents/openai.yaml": {
+      "bytes": 268,
+      "sha256": "664fd31fdcf4d0890649b5c972e060477a8f55df8072b77ac96c52a9a168d1f7"
+    },
+    "bb8/skills/experience-design/SKILL.md": {
+      "bytes": 1353,
+      "sha256": "4156dac0cb61b33d93915311aef61ad145531db6de3fe3df86e27ec9640bcf3f"
+    },
+    "bb8/skills/experience-design/agents/openai.yaml": {
+      "bytes": 280,
+      "sha256": "4e3d6b7730e915b2c72f5aa4a604c58c164df7d8cd2bd6d4a19ddbb2d1a7700b"
+    },
+    "bb8/skills/experiment-design/SKILL.md": {
+      "bytes": 1417,
+      "sha256": "917138b9db3ecfee8f877e277e6b59823cff40cae5be2abee2d93a072f27b9f9"
+    },
+    "bb8/skills/experiment-design/agents/openai.yaml": {
+      "bytes": 276,
+      "sha256": "1b2d680eec3b60305b1b5e02a688e2a0038a0a066bc8efa0aab905a28d052f95"
+    },
+    "bb8/skills/minto-communication/SKILL.md": {
+      "bytes": 1749,
+      "sha256": "f6548d11a83a06514622f0e39b7619485bcb596a725b3b18d923d8fe01e50d21"
+    },
+    "bb8/skills/minto-communication/agents/openai.yaml": {
+      "bytes": 285,
+      "sha256": "a93c82f4b600187a4419b999f675329b348a1e4a9e11f35222aeb963ed8713a1"
+    },
+    "bb8/skills/minto-communication/references/pyramid-protocol.md": {
+      "bytes": 1490,
+      "sha256": "6ee13caaf907900ba16c189d889fbf2072ca363ca647f59a4de4ccb3cf9e7a71"
+    },
+    "bb8/skills/organise/SKILL.md": {
+      "bytes": 4317,
+      "sha256": "80683cec83f8c85e60544b999017c2e7975c28eb637670a00648c46599a8216f"
+    },
+    "bb8/skills/organise/agents/openai.yaml": {
+      "bytes": 274,
+      "sha256": "b0742b2d0c6a29b2a8b406eec1c51a38dd72fb62e998f57bdb2b623c7fccbd23"
+    },
+    "bb8/skills/organise/references/curate.md": {
+      "bytes": 1056,
+      "sha256": "f23a00ab6a621b717ec2ce89b426cb7ed14059ef3893d74b736378ded4e59bbf"
+    },
+    "bb8/skills/organise/references/ingest.md": {
+      "bytes": 2277,
+      "sha256": "e04661052ea9a9a0ecbc421d45e1c699e1cac96f825ab2b94e8d341e1ef72bb6"
+    },
+    "bb8/skills/organise/references/maintain.md": {
+      "bytes": 1050,
+      "sha256": "e6986947976257f57b9e6d4dcd998d6436ad3602245f234b321f85c51b61fdb0"
+    },
+    "bb8/skills/organise/references/retrieve.md": {
+      "bytes": 903,
+      "sha256": "1ac4fd6294d7fb88fd9c40917d022f9b41c1474175fb606496e8e627b95d7948"
+    },
+    "bb8/skills/organise/references/schema.md": {
+      "bytes": 1743,
+      "sha256": "19de75607536f5a2d2a7b6c7f931d49cac3feab54b7b87ba83508f0cfba423b9"
+    },
+    "bb8/skills/organise/scripts/organise.py": {
+      "bytes": 16906,
+      "sha256": "b274b3e681273af5e1cf8c7a546a0e8d656ec5f95a848160cf0d210935b438dc"
+    },
+    "bb8/skills/problem-solving/SKILL.md": {
+      "bytes": 2007,
+      "sha256": "fa32c8120055ab690bf8a621b353621872d470b60b2d603b8ebc7197627817b5"
+    },
+    "bb8/skills/problem-solving/agents/openai.yaml": {
+      "bytes": 281,
+      "sha256": "695e1095dcbf43d166714b0671fd3d998ac934d1be685c59ee9f55072aa1badb"
+    },
+    "bb8/skills/problem-solving/references/root-cause.md": {
+      "bytes": 1582,
+      "sha256": "b326235e7d2ea4587c873dbc69c9827b11ea06a5428b3d9c99b0e78cf19c091a"
+    },
+    "bb8/skills/problem-solving/references/seven-step.md": {
+      "bytes": 1579,
+      "sha256": "6e0080631cb0ac988e951b98869c357ccf2cf37e2ccdd8d25e919f98912c3b8a"
+    },
+    "bb8/skills/product-design/SKILL.md": {
+      "bytes": 1268,
+      "sha256": "1cce5f34d86b73b95095920910bfa9af60a75018e522bcff8a20cc3975d1aa98"
+    },
+    "bb8/skills/product-design/agents/openai.yaml": {
+      "bytes": 269,
+      "sha256": "f4dd2688b167fb5747f34356a23eee92c7e1eb84e552e3336a19440b61c06abd"
+    },
+    "bb8/skills/product-discovery/SKILL.md": {
+      "bytes": 1493,
+      "sha256": "b8bfc7d762d9e3712955b7899166f4c6a78b246dcee9c35e2dba00d3bed82701"
+    },
+    "bb8/skills/product-discovery/agents/openai.yaml": {
+      "bytes": 271,
+      "sha256": "96cb61f7c615f8258c24b5ea08aa3dfec2d23453773e885f679d3024a8e872a5"
+    },
+    "bb8/skills/product-strategy/SKILL.md": {
+      "bytes": 1461,
+      "sha256": "1532b09c58ddc33865015cd6ab88a7861ccbb9ff3d9ed72c0aa5bdcbd63d1530"
+    },
+    "bb8/skills/product-strategy/agents/openai.yaml": {
+      "bytes": 265,
+      "sha256": "4e29d3d4ac246bbd1149aca6d38cfbcaad71245f249901839c2d0a5865e7b6a0"
+    },
+    "bb8/skills/strategic-storytelling/SKILL.md": {
+      "bytes": 3582,
+      "sha256": "5dd8613d15717fe4ec5e736e7eab4ded1b76920583a228e8c6553dc0608c1005"
+    },
+    "bb8/skills/strategic-storytelling/agents/openai.yaml": {
+      "bytes": 312,
+      "sha256": "ede98e863106766645fc4a98aeaaff75b08f043afe3dc4d3658af7be0afb848a"
+    },
+    "bb8/skills/strategic-storytelling/references/deliverables.md": {
+      "bytes": 2608,
+      "sha256": "f2de53189fd522cc32547d23ec05cc809b9361e37b807ba07c9af9703a1c0929"
+    },
+    "bb8/skills/strategic-storytelling/references/framework.md": {
+      "bytes": 5848,
+      "sha256": "97ece056de7cd1758fe73241a10aa28112be164739d94ed3113c41b9f1e209d5"
+    },
+    "bb8/skills/transcript-insights-tofu/SKILL.md": {
+      "bytes": 2069,
+      "sha256": "5d998c04e184e9fac776eddcd8c711e44a75229176bb61c219750c1fa7333573"
+    },
+    "bb8/skills/transcript-insights-tofu/agents/openai.yaml": {
+      "bytes": 296,
+      "sha256": "b53ea4529b1e1d2096485b1783883f792100bc13f90c54aee0589ef5ee987f69"
+    },
+    "bb8/skills/transcript-insights-tofu/references/findings-rubric.md": {
+      "bytes": 1524,
+      "sha256": "54cfa9b60f94c3c476f430a20ef2a506a8c1f8cbf7a7c0f1bd45891e279ef88c"
+    },
+    "bb8/skills/transcript-insights-tofu/references/pipeline.md": {
+      "bytes": 1642,
+      "sha256": "a4d7a124fcd72b0f88e71c46ee704fb94d7410f0a467bac84e336854bb491e61"
+    },
+    "bb8/tests/test_discovery.py": {
+      "bytes": 3565,
+      "sha256": "8319e095913ae6f044f2ff28605c3f64da0546126eac0f888fcc9ddf23a9d44a"
+    },
+    "bb8/tests/test_provisioning.py": {
+      "bytes": 10854,
+      "sha256": "ab586367587c0d44cb39f146139f668a0954d9012bd46d2e91ffc92262b9b832"
+    },
+    "bb8/tests/test_reference_adapter.py": {
+      "bytes": 4955,
+      "sha256": "515cbe49b169e78944dc691c72c1e57460bbb15ac13d96f3bf934f860a29dfc5"
+    },
+    "context/KNOWN-GAPS.md": {
+      "bytes": 1596,
+      "sha256": "5bf87500fc39854842e1df78e82fcac073d63ce5e268b295120942688a571be4"
+    },
+    "context/README.md": {
+      "bytes": 2702,
+      "sha256": "67c9a1defe57479a4318137abc0fc91a8d89dfab7206b595de75fb9dd530da80"
+    },
+    "context/design-thinking/AI_Builder_Cup_Product_Vision.docx": {
+      "bytes": 38560,
+      "sha256": "5ce929c5709ccedea65a65503a6d38b50b508e0b75450d4a9124f40b4c3c4bde"
+    },
+    "context/design-thinking/AI_Builder_Cup_Technical_Architecture.docx": {
+      "bytes": 39078,
+      "sha256": "7bf7693969fe8130cd45c919a332ce078b50c4ba926c5c71859b139eb748a82c"
+    },
+    "context/design-thinking/Audio Transcript.txt": {
+      "bytes": 6620,
+      "sha256": "574d12835f93176fafd8573c470086ecb556b4dab0858eb2d5c3ecd115bef11b"
+    },
+    "context/design-thinking/HANDOVER.md": {
+      "bytes": 13552,
+      "sha256": "b35a1a4c7c4d0dda32aaeebca64681d46018074cef92ac43f2c7563beef8c437"
+    },
+    "context/design-thinking/README.md": {
+      "bytes": 5972,
+      "sha256": "dcbc24f1f8440c66ea162af78fb22d67797824e6ef1c4e7cd47e91fdd22bb386"
+    },
+    "context/design-thinking/SOURCE.json": {
+      "bytes": 22051,
+      "sha256": "cbcfcdfaf8e6c6371e8c54b2031eb44a489bbd4b94932ace9139815957a7ad41"
+    },
+    "context/design-thinking/data-model/README.md": {
+      "bytes": 9303,
+      "sha256": "f59c6856921e0f454fcbaf7657913d05b069de31780b0b0cab94a6996cd099be"
+    },
+    "context/design-thinking/data-model/archive-v1/README.md": {
+      "bytes": 5650,
+      "sha256": "45242798827bcf939f23cdc86453fa13578d5862669195299d4e4014f420dd0c"
+    },
+    "context/design-thinking/data-model/archive-v1/diodes-and-rectifiers.ledger.json": {
+      "bytes": 87942,
+      "sha256": "b5287170d7274488c7e8a7088912a90d17bbc985516b7a7a82db09cb14a61edd"
+    },
+    "context/design-thinking/data-model/archive-v1/lesson-plan.types.ts": {
+      "bytes": 7863,
+      "sha256": "0377ecae647d690f54d0e1925becc98eb5ca2002e0453c03b01a3f3763d4bebd"
+    },
+    "context/design-thinking/data-model/archive-v1/validate.js": {
+      "bytes": 10601,
+      "sha256": "71110c0618b7404eba15aed458bf50a793a1184e165f4a41a0d706e58dee4e7b"
+    },
+    "context/design-thinking/data-model/ledgers/chemical/steady-state-material-balances.json": {
+      "bytes": 28049,
+      "sha256": "fee17af6796360db65de679a781c312edd4c63a1cbab049aea8b61d92508f58b"
+    },
+    "context/design-thinking/data-model/ledgers/electronics/diodes-and-rectifiers.json": {
+      "bytes": 109760,
+      "sha256": "6562ec477fdda954e298b1543923df671107ee201d6a44aeff81b4c9ca712071"
+    },
+    "context/design-thinking/data-model/ledgers/mathematics/eigenvalues-from-a-question.json": {
+      "bytes": 12265,
+      "sha256": "74606babdca6254fea836e2c958fd18a941330985cff85e2f57cab96b686dd65"
+    },
+    "context/design-thinking/data-model/subject-profiles.json": {
+      "bytes": 3133,
+      "sha256": "35b74c56947376cef4a2d195eb7025647c3631be98c08b62aa61df6a4f1c75b0"
+    },
+    "context/design-thinking/data-model/tools/migrate-v1-to-v2.js": {
+      "bytes": 13086,
+      "sha256": "68a9bca3cb282bf188b4984d9eac3bf892ff140f8a23c26f85e93f6cbbfd6cb5"
+    },
+    "context/design-thinking/data-model/tools/test-validator.js": {
+      "bytes": 3887,
+      "sha256": "0fc2dc5037590ef3ef4f72338ce484b8925d273d90fd86d14d0d9c6590aa80d8"
+    },
+    "context/design-thinking/data-model/types/content.ts": {
+      "bytes": 18897,
+      "sha256": "153314f02c2344f1e71631d724780c53ddc46f910f2ea1bbe86d1f995ffdec1b"
+    },
+    "context/design-thinking/data-model/types/intake.ts": {
+      "bytes": 5338,
+      "sha256": "faeb820ee5e191d0a848309474b94db5cf6eee8de50fe748ec82333ac6ff01b9"
+    },
+    "context/design-thinking/data-model/types/learner.ts": {
+      "bytes": 8166,
+      "sha256": "2b2f4e959767669a7aed0acbfc53124f3a8e72ddcb32db4739590d616e8d5174"
+    },
+    "context/design-thinking/data-model/validate.js": {
+      "bytes": 22519,
+      "sha256": "ec2e142defc1b9b6bd2aa9559c2d5aa668437aecda9af72323f8b1f24054ab13"
+    },
+    "context/design-thinking/design-system/archive-kiki-v1/README.md": {
+      "bytes": 894,
+      "sha256": "a88258484624166414002749f29e4f0b2638f4ae4b3aaf93fb19baa9e5cf67d1"
+    },
+    "context/design-thinking/design-system/archive-kiki-v1/kiki-dots.svg": {
+      "bytes": 349,
+      "sha256": "1b79cdf5a907a51bef92c4f0e493903f8cda94b2507e2a100d644c6b2fd7b151"
+    },
+    "context/design-thinking/design-system/archive-kiki-v1/kiki-pointer-asking.svg": {
+      "bytes": 735,
+      "sha256": "0f5823606fab8fced8f1d280743e61f5094783fe91126b206f2efbaffe791c9e"
+    },
+    "context/design-thinking/design-system/archive-kiki-v1/kiki-pointer-celebrating.svg": {
+      "bytes": 684,
+      "sha256": "7c5af45437eca0aa5516470b5f37037214c3c46e5dc49c13fe59f459543bf49b"
+    },
+    "context/design-thinking/design-system/archive-kiki-v1/kiki-pointer-dragging.svg": {
+      "bytes": 755,
+      "sha256": "e0fd04e1d999aa469f13fec01a84308a838e591199488e945ff5b9b72e0a55b8"
+    },
+    "context/design-thinking/design-system/archive-kiki-v1/kiki-pointer-idle.svg": {
+      "bytes": 621,
+      "sha256": "5cea34c36486ff0dd8f811cd0fbb7db49ed0d90c7b7bcf4acc1f4b857d2ded06"
+    },
+    "context/design-thinking/design-system/archive-kiki-v1/kiki-pointer-listening.svg": {
+      "bytes": 724,
+      "sha256": "b307ddcc3c0c12e3c99e210ddc9114253a7d22616d19acd78b683c34f9c5de0c"
+    },
+    "context/design-thinking/design-system/archive-kiki-v1/kiki-pointer-pointing.svg": {
+      "bytes": 658,
+      "sha256": "a0f5539d2e3338c5172cf5c224442353be2d3fd81965b8877df5a393914419bb"
+    },
+    "context/design-thinking/design-system/archive-kiki-v1/kiki-pointer-sheet.svg": {
+      "bytes": 9315,
+      "sha256": "cc9a60fafb06856a203701af67ab02764beeeaea887ced24be45478288a00071"
+    },
+    "context/design-thinking/design-system/archive-kiki-v1/kiki-pointer-tapping.svg": {
+      "bytes": 808,
+      "sha256": "b69af6557f2d74cc193ed71187a6943b81f13ad6eddeabdb1153846ffd30bb0f"
+    },
+    "context/design-thinking/design-system/archive-kiki-v1/kiki-pointer-thinking.svg": {
+      "bytes": 628,
+      "sha256": "2b7e53af2d9cd31e3e7fee156c691c333fe9e238760c61e030f567b1d814d06f"
+    },
+    "context/design-thinking/design-system/archive-kiki-v1/kiki-pointer-tracing.svg": {
+      "bytes": 738,
+      "sha256": "42b9819d894d27c8bf6359bb251e1f960a69633f0db066b50f19f012ed883102"
+    },
+    "context/design-thinking/design-system/archive-kiki-v1/kiki-pointer-unsure.svg": {
+      "bytes": 654,
+      "sha256": "1c888c83fb1e9970ed5a5b743d9ebb0c1b3f1df6971aca3b1d7d39f86c8505c4"
+    },
+    "context/design-thinking/design-system/archive-kiki-v1/kiki-pointer-waiting.svg": {
+      "bytes": 728,
+      "sha256": "580b96b70d65460d62574a8caf86d78c9e79a74e1a44445b5f4cc4b1362617ef"
+    },
+    "context/design-thinking/design-system/project/README.md": {
+      "bytes": 7895,
+      "sha256": "4a5df9e417fcca4023559d61d73db5300f68353b655c9c1414469cdde43e8665"
+    },
+    "context/design-thinking/design-system/project/assets/Kiki/README.md": {
+      "bytes": 3629,
+      "sha256": "97a90be1cb0bb31fea38bdfdac9f52740b183feaa3098da328132ab76d129557"
+    },
+    "context/design-thinking/design-system/project/assets/Kiki/kiki-dots.svg": {
+      "bytes": 355,
+      "sha256": "6a2028b6c050d750c12ac85aef95e50dc35e15040dc6a42f9379d6a08142cc6d"
+    },
+    "context/design-thinking/design-system/project/assets/Kiki/kiki-guide-ask.svg": {
+      "bytes": 17255,
+      "sha256": "bfb3cbf4e6c64eea4588a5ee3fb2810ca62cbf28b87d10cbf324dd063951fe71"
+    },
+    "context/design-thinking/design-system/project/assets/Kiki/kiki-guide-connect.svg": {
+      "bytes": 18351,
+      "sha256": "14de638e45397c0ea260571f097c7649b493ba1dfbb4cfec320740499e06f92c"
+    },
+    "context/design-thinking/design-system/project/assets/Kiki/kiki-guide-done.svg": {
+      "bytes": 17563,
+      "sha256": "6d69046d81cf9e7b4817ed743b6ea86428270f83032373f0e02faa79851808d2"
+    },
+    "context/design-thinking/design-system/project/assets/Kiki/kiki-guide-listening.svg": {
+      "bytes": 17236,
+      "sha256": "2e676f1901349c52fe4a02dbc3ba47341552cc1acf73097fa52c00278bd1cf31"
+    },
+    "context/design-thinking/design-system/project/assets/Kiki/kiki-guide-look.svg": {
+      "bytes": 17761,
+      "sha256": "bf3f13887b9616ce0e6106ebcaa39ed23ef354fe36e513cb99ee9a1457eff5d5"
+    },
+    "context/design-thinking/design-system/project/assets/Kiki/kiki-guide-path-ahead.svg": {
+      "bytes": 18161,
+      "sha256": "7ce8f3aa220a044bfc34b2eeb84035a7fa952a15a25f2c225484449c447ef70b"
+    },
+    "context/design-thinking/design-system/project/assets/Kiki/kiki-guide-redirect.svg": {
+      "bytes": 17723,
+      "sha256": "379e7fc37fa8fd537792e2af28388e4c079de326cb45d8a4d01e66d92d3aa0c3"
+    },
+    "context/design-thinking/design-system/project/assets/Kiki/kiki-guide-show-me.svg": {
+      "bytes": 18181,
+      "sha256": "83d57e5a7078fb94fd64e8109f5c5409d18b238e7d8144eae6b422ebf8c6c6d4"
+    },
+    "context/design-thinking/design-system/project/assets/Kiki/kiki-guide-storyboard.svg": {
+      "bytes": 72663,
+      "sha256": "d54a555d36c1ef1a24cd136d7db6d23e76c2ee63c321f00120b3883b58276bf3"
+    },
+    "context/design-thinking/design-system/project/assets/Kiki/kiki-guide-thinking.svg": {
+      "bytes": 17462,
+      "sha256": "399394d76a3f08ac5e220d20760c11e33e8df268f63009260c39660d0b7e4b5e"
+    },
+    "context/design-thinking/design-system/project/assets/Kiki/kiki-guide-trace.svg": {
+      "bytes": 17942,
+      "sha256": "6dfeb1c1846f9f55ea53f89d339b8f1a4e2b18b7ec89e2fc48b858512e2b2454"
+    },
+    "context/design-thinking/design-system/project/assets/Kiki/kiki-guide-unsure.svg": {
+      "bytes": 17563,
+      "sha256": "c75582659cda9e124dd77e89f884651106a3d11c51e7830c40e1535d6aafa2cc"
+    },
+    "context/design-thinking/design-system/project/assets/Kiki/kiki-guide-words.svg": {
+      "bytes": 16969,
+      "sha256": "8a0adc66cfa68d93d558bd6a1791963008a164728f8e6dc08ad67c3754515154"
+    },
+    "context/design-thinking/design-system/project/assets/Kiki/kiki-guide-your-turn.svg": {
+      "bytes": 17280,
+      "sha256": "63f4e7d0e277a2ea0c64d38d5ed99b55e14d3ffa244b412e4aafdd05124d1dad"
+    },
+    "context/design-thinking/design-system/project/assets/Kiki/kiki-pointer.svg": {
+      "bytes": 806,
+      "sha256": "65af2910e7a4db6b7a0d26e0f52ae6614aa6d6562292db32484cb1398178b769"
+    },
+    "context/design-thinking/design-system/project/assets/Kiki/kiki-sheet.svg": {
+      "bytes": 232668,
+      "sha256": "e47b371a0bd9fa0db8615147673ba9ca0490f4998e9bcc54615fc22cfcaf7561"
+    },
+    "context/design-thinking/design-system/project/components/AnswerOverlay/README.md": {
+      "bytes": 759,
+      "sha256": "bf311f5ef36c525a59f450dd0f88fb5907f5ed00814c3dfe44c230a4c592742f"
+    },
+    "context/design-thinking/design-system/project/components/AnswerOverlay/preview.html": {
+      "bytes": 520,
+      "sha256": "5b5fef1f90516eebcf916e32977445e76a15a5297144fc703bb6f02a6415a245"
+    },
+    "context/design-thinking/design-system/project/components/Button/README.md": {
+      "bytes": 637,
+      "sha256": "7c387249be949954c812038beb2510c8d48960e75f5c4fe7ccd7b62fda8d82cd"
+    },
+    "context/design-thinking/design-system/project/components/Button/preview.html": {
+      "bytes": 722,
+      "sha256": "fd57c79b4583c9fd1cfdef17cb70ddc3bf60a8b76c5e0457dbfd08d246826d42"
+    },
+    "context/design-thinking/design-system/project/components/ClassPulseBar/README.md": {
+      "bytes": 410,
+      "sha256": "b9f3e266be52414e72175333756553c8053a36e477f29275c18e86012bda58c7"
+    },
+    "context/design-thinking/design-system/project/components/ClassPulseBar/preview.html": {
+      "bytes": 909,
+      "sha256": "49c97975f0176a404cd10475676180481cce0fd1003928799b20216ad35ac850"
+    },
+    "context/design-thinking/design-system/project/components/Cover/preview.html": {
+      "bytes": 4861,
+      "sha256": "15e59e9595a2a8d9c538986b73858a512b0a3872dd1b6b364fef7fcc6be2e02d"
+    },
+    "context/design-thinking/design-system/project/components/DiagnosisCard/README.md": {
+      "bytes": 526,
+      "sha256": "1993996cc679368f35d04928b63c30754a25a01e02b66085f017b69d44ff2334"
+    },
+    "context/design-thinking/design-system/project/components/DiagnosisCard/preview.html": {
+      "bytes": 627,
+      "sha256": "0c3fa3913789af0e90b245c0a040b9b8a2d56421246d07412fb9f5581d28caff"
+    },
+    "context/design-thinking/design-system/project/components/DiodeExplorable/README.md": {
+      "bytes": 521,
+      "sha256": "ffcbf6178a92d4bfa8ad0211967804f13cef81642e98afe34a848eacf979c278"
+    },
+    "context/design-thinking/design-system/project/components/DiodeExplorable/preview.html": {
+      "bytes": 543,
+      "sha256": "5e982df25149a4a2a3a247542e9855e596c833ad334a2fb2be429807e4988e4f"
+    },
+    "context/design-thinking/design-system/project/components/FaultCard/README.md": {
+      "bytes": 525,
+      "sha256": "a6d8cdf53a51e2c85d7c8129ecf5eab1ac1a99562b2ce8df585caa8689dfcde5"
+    },
+    "context/design-thinking/design-system/project/components/FaultCard/preview.html": {
+      "bytes": 494,
+      "sha256": "2ebf2abfc00a871b286492882e6077391e68deedd0e84473627c5045d172684d"
+    },
+    "context/design-thinking/design-system/project/components/Kiki/README.md": {
+      "bytes": 746,
+      "sha256": "dbc605f4df889394f4c5e4ccc1951ff26e681daa5e22adda8b8dd1eb65187066"
+    },
+    "context/design-thinking/design-system/project/components/Kiki/preview.html": {
+      "bytes": 829,
+      "sha256": "7c8888a46cedff178f48c5daae80659f813d2a163e8a28f090ba7e67adee665a"
+    },
+    "context/design-thinking/design-system/project/components/KikiPointer/README.md": {
+      "bytes": 3611,
+      "sha256": "24907b67c880a5bf0a0b81b60a4634e4b04a1c1751a740e92c01c112085d8141"
+    },
+    "context/design-thinking/design-system/project/components/KikiPointer/preview.html": {
+      "bytes": 1432,
+      "sha256": "3e30a2fe46468bea1dc8527e28e37e60bf4e3d1bc2832657baeae232329e0f5e"
+    },
+    "context/design-thinking/design-system/project/components/KikiWalkthrough/README.md": {
+      "bytes": 1787,
+      "sha256": "fbee3281a3c67998249d51e73a254b08b9e5ac4f581451b87b8deffb22cde80c"
+    },
+    "context/design-thinking/design-system/project/components/KikiWalkthrough/preview.html": {
+      "bytes": 512,
+      "sha256": "859065ac40a5373d44a1ddbe3b9febdf849082cbe33e740a15c5fc6878c7d419"
+    },
+    "context/design-thinking/design-system/project/components/LabGuide/README.md": {
+      "bytes": 1299,
+      "sha256": "d657ee4af0565447ba0eae6ca9ef177c650d9415ad669082785305a877b00ded"
+    },
+    "context/design-thinking/design-system/project/components/LabGuide/preview.html": {
+      "bytes": 514,
+      "sha256": "1fbcd3b41f7d5c7871a0e1e0c0c5ac528ce629c39314d69851cb4e34a27a757e"
+    },
+    "context/design-thinking/design-system/project/components/LabStepper/README.md": {
+      "bytes": 341,
+      "sha256": "7f73dfab0d9b2935760413a436f4b00aafa40d607dbb171619af7ae344d24279"
+    },
+    "context/design-thinking/design-system/project/components/LabStepper/preview.html": {
+      "bytes": 1204,
+      "sha256": "709ab71b7d8dede6e623ad5b86bd5920b0ff51a3a395112ee537cac88abc36c7"
+    },
+    "context/design-thinking/design-system/project/components/LanguageDial/README.md": {
+      "bytes": 656,
+      "sha256": "b662c63a2897922eccc45d40d6c9d58ff8f46ed444dc7152971e980f65337cc9"
+    },
+    "context/design-thinking/design-system/project/components/LanguageDial/preview.html": {
+      "bytes": 701,
+      "sha256": "047a3ffc12ca74e4b2a462e6afaa65500b52a6a79bf5dba636c6f171720b20d2"
+    },
+    "context/design-thinking/design-system/project/components/LessonProgress/README.md": {
+      "bytes": 313,
+      "sha256": "26cc2852584a06dd6949b08c2c295c392ad95928574dcf1bc6bf855576617a3d"
+    },
+    "context/design-thinking/design-system/project/components/LessonProgress/preview.html": {
+      "bytes": 681,
+      "sha256": "c7c4c3866b432170146b37bde29910e3c0c20c44bfbe0253fc0897209815f06c"
+    },
+    "context/design-thinking/design-system/project/components/MapNode/README.md": {
+      "bytes": 607,
+      "sha256": "f807b70d9d13b0aedf2a33611ac273506d7adbebdfd789c4dec32d8b0d01b233"
+    },
+    "context/design-thinking/design-system/project/components/MapNode/preview.html": {
+      "bytes": 1368,
+      "sha256": "6028d388a960100d5d3316a843306ee4f36ab83af0863fd3977b530c33d97ce7"
+    },
+    "context/design-thinking/design-system/project/components/MasteryRing/README.md": {
+      "bytes": 673,
+      "sha256": "79dd0b8a4846c4a124842e2400cc9a58fdff8d051302db62d9df1ca287532f27"
+    },
+    "context/design-thinking/design-system/project/components/MasteryRing/preview.html": {
+      "bytes": 1698,
+      "sha256": "f3116d160f5c868d38c9f03d82c7f32c73833b327b51b3ea250251f7c03a4656"
+    },
+    "context/design-thinking/design-system/project/components/MorphText/README.md": {
+      "bytes": 579,
+      "sha256": "bbb6fbe36d06d8e93a9d104250490a8cc88ee3aa97c175c5c4b2ef3bc3010685"
+    },
+    "context/design-thinking/design-system/project/components/MorphText/preview.html": {
+      "bytes": 807,
+      "sha256": "8898393121b43c2c2485d2f6b49adb716be193600636f0304c74353541cc5e92"
+    },
+    "context/design-thinking/design-system/project/components/PracticeReport/README.md": {
+      "bytes": 853,
+      "sha256": "7b28d0d25e488d05665768226fe3a4db54939cbf1d5a2f847c6241e9f9faa845"
+    },
+    "context/design-thinking/design-system/project/components/PracticeReport/preview.html": {
+      "bytes": 545,
+      "sha256": "0a643d33302629ebeee4e61b8f9fd326a4f60ca55bf269f1065905bdaa43094c"
+    },
+    "context/design-thinking/design-system/project/components/PredictionCanvas/README.md": {
+      "bytes": 498,
+      "sha256": "819e5b018312a698b5c2e7bfd60e5516af327b04212ebf9c777565ef9e3029a4"
+    },
+    "context/design-thinking/design-system/project/components/PredictionCanvas/preview.html": {
+      "bytes": 567,
+      "sha256": "572474936e81e1248494fdd6c1fb3da1d3f3addeba2d34dbae4096b6098e15d7"
+    },
+    "context/design-thinking/design-system/project/components/ReceiptCompare/README.md": {
+      "bytes": 337,
+      "sha256": "c7700638e3333a9edc6520320599c5cde9a763759e7f2a130a0d3f8f83b1c564"
+    },
+    "context/design-thinking/design-system/project/components/ReceiptCompare/preview.html": {
+      "bytes": 518,
+      "sha256": "d2fb55c058d1f8440e96db9d65e774f6e81ec152955754101c3ab12e181f48cb"
+    },
+    "context/design-thinking/design-system/project/components/Snackbar/README.md": {
+      "bytes": 386,
+      "sha256": "080a37ffe6b238b8f2c01690215ce49b0b12be65c07562d4f0ebdd8f8cbbf0b0"
+    },
+    "context/design-thinking/design-system/project/components/Snackbar/preview.html": {
+      "bytes": 688,
+      "sha256": "01ae85d22a07b9b986d5e906ed01c011698ed29b7467bcec14f66956690e22eb"
+    },
+    "context/design-thinking/design-system/project/components/SourceTag/README.md": {
+      "bytes": 402,
+      "sha256": "6e31910bc042ad4117dae146961d435b65d2787725be0328b4ce49e451cc8dc6"
+    },
+    "context/design-thinking/design-system/project/components/SourceTag/preview.html": {
+      "bytes": 681,
+      "sha256": "6d02c3e64a36f68fc3a8e55d7b63a2c85a106ee8c28dfba58b703b80c1c4282a"
+    },
+    "context/design-thinking/design-system/project/components/Spotlight/README.md": {
+      "bytes": 462,
+      "sha256": "567d516d951244211969713c6d290d9a3a355d5378a2d1f9a103999cd596d57c"
+    },
+    "context/design-thinking/design-system/project/components/Spotlight/preview.html": {
+      "bytes": 1078,
+      "sha256": "23eeef14f8d4d0f82573c9b0a23a6084182531c4bc578bd72f64228a1272eb02"
+    },
+    "context/design-thinking/design-system/project/components/TermChip/README.md": {
+      "bytes": 622,
+      "sha256": "0ba02504b2da7ab03c3ad70da37c5435dd2b88f38d2a8411f5f6e7eb4ab683c1"
+    },
+    "context/design-thinking/design-system/project/components/TermChip/preview.html": {
+      "bytes": 747,
+      "sha256": "f41523855e689cfc07bbe17c84d2c02ef52c6702aeb09a4b65a12c29f5283bfe"
+    },
+    "context/design-thinking/design-system/project/components/VoiceScope/README.md": {
+      "bytes": 511,
+      "sha256": "e5747ee18e08c7fcd86011c518fdf925e9dc5826d963fda30de60e01d3fcf52f"
+    },
+    "context/design-thinking/design-system/project/components/VoiceScope/preview.html": {
+      "bytes": 556,
+      "sha256": "7b11cb444c692c852ebaf1fc4f69c9264025db0f86ba6cacc417d834bc9166e0"
+    },
+    "context/design-thinking/design-system/project/components/WordSticker/README.md": {
+      "bytes": 414,
+      "sha256": "090456206bf1417c189f8cfe03739da165219f30d5170d619d1c92f602f97b4b"
+    },
+    "context/design-thinking/design-system/project/components/WordSticker/preview.html": {
+      "bytes": 659,
+      "sha256": "d3e05dc14fe9c04dae6c18dc9112ad2a8a2e46290194bce4932d15ab5282ba67"
+    },
+    "context/design-thinking/design-system/project/components/bundle.css": {
+      "bytes": 36748,
+      "sha256": "99107884fc337aca752c6be51ed229125e72c8ee93594593106b01308684f68d"
+    },
+    "context/design-thinking/design-system/project/components/bundle.js": {
+      "bytes": 71656,
+      "sha256": "7923720392c521b08436e4d311099ab8a7507325620fe1db424118cc76aa199f"
+    },
+    "context/design-thinking/design-system/project/components/index.d.ts": {
+      "bytes": 8526,
+      "sha256": "0f43a0360edfce98dec6ec19ba16a4746057a26b06244c51e6703ae6715d8014"
+    },
+    "context/design-thinking/design-system/project/design-system.json": {
+      "bytes": 4916,
+      "sha256": "bff3567c0205afa133304b2babd190418e1751bb561194c8d42062d52018f1c0"
+    },
+    "context/design-thinking/design-system/project/tokens.json": {
+      "bytes": 8305,
+      "sha256": "983718f68a651ce0df37c1fa90d8ae647b7c312009f99fcc8c247e44a225af1a"
+    },
+    "context/design-thinking/design-system/tools/build-kiki.js": {
+      "bytes": 26150,
+      "sha256": "daea73782cfa55d265513b4ecbc962309f82944cba03879e016b1b7a445ac337"
+    },
+    "context/design-thinking/docs/archive/ux-working-doc-early-snapshot-2026-10-11.md": {
+      "bytes": 18336,
+      "sha256": "f3deb229458397157f4e3a67e363e8ca8b6b9ab692b6c1ec8567d632bc3f93dc"
+    },
+    "context/design-thinking/docs/diagrams/app-map.png": {
+      "bytes": 154853,
+      "sha256": "f38e969114df6af0617191e4942a7d229cb69e879efb877e78a5c7c2e35073c7"
+    },
+    "context/design-thinking/docs/diagrams/data-model.png": {
+      "bytes": 141452,
+      "sha256": "1cfccddbe319476852318849c912058d185f8e96c1b862d4220fe4a88d35e6d3"
+    },
+    "context/design-thinking/docs/diagrams/key-screens-wireframes.png": {
+      "bytes": 193574,
+      "sha256": "84560319df5ab56d997658a56dc1e605a64337649f5606be7e2bdc743c81ce11"
+    },
+    "context/design-thinking/docs/diagrams/learning-loop.png": {
+      "bytes": 80708,
+      "sha256": "d14f6b5f31fa20ab33e89409b683215f6b254b02c5e824273f20100bf452b333"
+    },
+    "context/design-thinking/docs/diagrams/lesson-pyramid.png": {
+      "bytes": 127008,
+      "sha256": "64670f7a14e1fc73ad8190e3ed614b421fa22df3679ea119e8acea0f0250b8f0"
+    },
+    "context/design-thinking/docs/diagrams/onboarding-journey.png": {
+      "bytes": 100117,
+      "sha256": "8567ba024075e5c7b40e21628d24fd45411a9e6eb2a083a8f38a2f399e158219"
+    },
+    "context/design-thinking/docs/plans/backend-prototype-handoff.md": {
+      "bytes": 9562,
+      "sha256": "9e92db28881d3b05bbb2a72b2b992bab2c40beae934a0e10b3187435d2b74c6c"
+    },
+    "context/design-thinking/docs/prototypes/backend-prototype-directions.md": {
+      "bytes": 31844,
+      "sha256": "51f89a9466719ce77e3363676ac7590e11389eab2b0c9a13a510385ce4fda1ed"
+    },
+    "context/design-thinking/docs/ux/experiment-recommendation-simulink.md": {
+      "bytes": 8382,
+      "sha256": "a28d09d10745337f3639e5314cf661cfa6482dc7043f440ea165ad158a1316af"
+    },
+    "context/design-thinking/docs/ux/student-journey-odia-ece.md": {
+      "bytes": 21016,
+      "sha256": "616766abc4d867d0a08b6812e4c4e36696b92457eb8011ae9315d061db2d6314"
+    },
+    "context/design-thinking/docs/working-doc/01-ux-working-doc.md": {
+      "bytes": 41481,
+      "sha256": "c1622dadee153befcf44db219d7418dd8b495da537cb14355362bb9680c66ace"
+    },
+    "context/design-thinking/docs/working-doc/02-student-journey.md": {
+      "bytes": 75725,
+      "sha256": "2a769e53c801d4524aae8de9677b7895ec67b955a931a8ed6c4a76b7a910e0e2"
+    },
+    "context/design-thinking/docs/working-doc/03-feature-journeys.md": {
+      "bytes": 65870,
+      "sha256": "df97a30ed3a43212544864887dfc65b0ca7955631e795d77c90b6ac340d42654"
+    },
+    "context/design-thinking/docs/working-doc/04-build-plan.md": {
+      "bytes": 11615,
+      "sha256": "5b764887127b30ceaa8938f26c964067f43e6440af8a0e80d28602964eb77793"
+    },
+    "context/design-thinking/docs/working-doc/05-data-model.md": {
+      "bytes": 15289,
+      "sha256": "387c712dcf1ad40821c10f8c16e11183b4b73b4ab5e0918549d471a60eebb58e"
+    },
+    "context/design-thinking/prototype/bundle.css": {
+      "bytes": 36748,
+      "sha256": "99107884fc337aca752c6be51ed229125e72c8ee93594593106b01308684f68d"
+    },
+    "context/design-thinking/prototype/bundle.js": {
+      "bytes": 71656,
+      "sha256": "7923720392c521b08436e4d311099ab8a7507325620fe1db424118cc76aa199f"
+    },
+    "context/design-thinking/prototype/claude-design-prompt.md": {
+      "bytes": 12604,
+      "sha256": "11c397830902e05b74ba584820e8ac1004be55169ae6e607d632be1b18fef230"
+    },
+    "context/design-thinking/prototype/index.html": {
+      "bytes": 78178,
+      "sha256": "e63d9e5f633fc6df2cb56c0ce219d68ba8a8db9d938e5a8bee244851a06a2cf7"
+    },
+    "docs/plans/active.md": {
+      "bytes": 2059,
+      "sha256": "4935b2f3ad3b724da2adcc516f21e25590fc199bff82fa8c8730075f0586df1d"
+    },
+    "firebase.json": {
+      "bytes": 288,
+      "sha256": "34b67a67d65131d38eb6a9536ff27cd22c779eff867d31c745bbf9035527e969"
+    },
+    "firestore.rules": {
+      "bytes": 163,
+      "sha256": "7bff2de50c73415a3b12a6783f42ff621b1b04803ffc4e2634e6ba68e5d655f9"
+    },
+    "scripts/verify-context.py": {
+      "bytes": 1440,
+      "sha256": "52a821b9a8a5aae05eb05caef30319bcf43c6a41690ce16452366c9a1190b0c6"
+    },
+    "storage.rules": {
+      "bytes": 146,
+      "sha256": "ed10206af6e9b728e394ae422f8ac963f411c37a8ca5e1737e89925b3f9b1f82"
+    }
+  },
+  "generator_sha256": "53b9443f175bd4713581bcc2526508635bcd3ad62944120a0c3d8726639a221d",
+  "schema_version": 1,
+  "source_revision": "f4919cbcb5bde0ca011bb68180c8800c9772b894"
+}

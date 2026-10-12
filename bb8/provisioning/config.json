@@ -1,0 +1,9 @@
+{
+  "organization": "Kikiland-ai",
+  "controller_repository": "Kikiland-ai/Design-Thinking",
+  "created_after": "2026-10-12T02:51:01Z",
+  "write_mode": "direct-with-pr-fallback",
+  "excluded_repositories": [
+    "Kikiland-ai/Design-Thinking"
+  ]
+}

@@ -1,0 +1,164 @@
+{
+  "v": 3,
+  "layout": "files",
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-10-11T10:57:34Z"
+  },
+  "title": "Breadboard",
+  "namespace": "Breadboard",
+  "libraries": [
+    {
+      "name": "react",
+      "version": "18"
+    },
+    {
+      "name": "react-dom",
+      "version": "18"
+    }
+  ],
+  "sections": {},
+  "groups": [
+    "Kiki"
+  ],
+  "assetGroups": {
+    "Kiki": {
+      "name": "Kiki",
+      "tile": "l",
+      "order": [
+        "kiki-guide-storyboard.svg",
+        "kiki-sheet.svg",
+        "kiki-guide-look.svg",
+        "kiki-guide-path-ahead.svg",
+        "kiki-guide-trace.svg",
+        "kiki-guide-connect.svg",
+        "kiki-guide-your-turn.svg",
+        "kiki-guide-redirect.svg",
+        "kiki-guide-show-me.svg",
+        "kiki-guide-ask.svg",
+        "kiki-guide-done.svg",
+        "kiki-guide-words.svg",
+        "kiki-guide-thinking.svg",
+        "kiki-guide-listening.svg",
+        "kiki-guide-unsure.svg",
+        "kiki-pointer.svg",
+        "kiki-dots.svg"
+      ],
+      "files": {
+        "kiki-guide-storyboard.svg": {
+          "name": "kiki-guide-storyboard.svg",
+          "blob": "b43217cc4a9b1fa6bb8b2fe6dce39bb2",
+          "size": 72663,
+          "type": "image/svg+xml"
+        },
+        "kiki-sheet.svg": {
+          "name": "kiki-sheet.svg",
+          "blob": "4c24a5740f70f0c55e4487c200238b8f",
+          "size": 232668,
+          "type": "image/svg+xml"
+        },
+        "kiki-guide-look.svg": {
+          "name": "kiki-guide-look.svg",
+          "blob": "8056f3811249a6ddb6f11909c0fdfd04",
+          "size": 17761,
+          "type": "image/svg+xml"
+        },
+        "kiki-guide-path-ahead.svg": {
+          "name": "kiki-guide-path-ahead.svg",
+          "blob": "6a30059ac3121296cbb4c25e15014e7b",
+          "size": 18161,
+          "type": "image/svg+xml"
+        },
+        "kiki-guide-trace.svg": {
+          "name": "kiki-guide-trace.svg",
+          "blob": "c87efeb8d284b33cc469b4b604881c9e",
+          "size": 17942,
+          "type": "image/svg+xml"
+        },
+        "kiki-guide-connect.svg": {
+          "name": "kiki-guide-connect.svg",
+          "blob": "5a29ad0d3bccc760dbb1522ed7593dec",
+          "size": 18351,
+          "type": "image/svg+xml"
+        },
+        "kiki-guide-your-turn.svg": {
+          "name": "kiki-guide-your-turn.svg",
+          "blob": "e680bd8d26b39f4bc07e37d99e723a69",
+          "size": 17280,
+          "type": "image/svg+xml"
+        },
+        "kiki-guide-redirect.svg": {
+          "name": "kiki-guide-redirect.svg",
+          "blob": "dd8da551a8166dffe63673ec988c71a5",
+          "size": 17723,
+          "type": "image/svg+xml"
+        },
+        "kiki-guide-show-me.svg": {
+          "name": "kiki-guide-show-me.svg",
+          "blob": "e4c4fa50751c2e86a5982e9fc8f5524b",
+          "size": 18181,
+          "type": "image/svg+xml"
+        },
+        "kiki-guide-ask.svg": {
+          "name": "kiki-guide-ask.svg",
+          "blob": "d6bbc6a6dd8eac2c75c9affaa38e0874",
+          "size": 17255,
+          "type": "image/svg+xml"
+        },
+        "kiki-guide-done.svg": {
+          "name": "kiki-guide-done.svg",
+          "blob": "995f58fd5cb7bba533b6e9b4f281bcb4",
+          "size": 17563,
+          "type": "image/svg+xml"
+        },
+        "kiki-guide-words.svg": {
+          "name": "kiki-guide-words.svg",
+          "blob": "c1e5af14dc9b2fa392bee49c3d946c54",
+          "size": 16969,
+          "type": "image/svg+xml"
+        },
+        "kiki-guide-thinking.svg": {
+          "name": "kiki-guide-thinking.svg",
+          "blob": "bb6b1605b4dd454eac0410aeb4768cc4",
+          "size": 17462,
+          "type": "image/svg+xml"
+        },
+        "kiki-guide-listening.svg": {
+          "name": "kiki-guide-listening.svg",
+          "blob": "095c3811c135ae252c98526cda97789c",
+          "size": 17236,
+          "type": "image/svg+xml"
+        },
+        "kiki-guide-unsure.svg": {
+          "name": "kiki-guide-unsure.svg",
+          "blob": "04b5c4ccd0c7b0511e34ebfc4f0d75d5",
+          "size": 17563,
+          "type": "image/svg+xml"
+        },
+        "kiki-pointer.svg": {
+          "name": "kiki-pointer.svg",
+          "blob": "abf6dc428a66a4400a54ee404627d150",
+          "size": 806,
+          "type": "image/svg+xml"
+        },
+        "kiki-dots.svg": {
+          "name": "kiki-dots.svg",
+          "blob": "c97538ad9a9b84d1fec1001c0a8850d5",
+          "size": 355,
+          "type": "image/svg+xml"
+        }
+      }
+    }
+  },
+  "blobs": {},
+  "docs": {
+    "readme": "project/README.md",
+    "sections": []
+  },
+  "lastChange": {
+    "by": "Arpan",
+    "via": "Claude Code",
+    "at": "2026-10-11T13:03:56Z",
+    "note": "Kiki redrawn as a companion-cursor guide (Clicky-style): 13 guide moves on one worked circuit (look, path ahead, trace, connect, your turn, redirect, show me, ask, done, words, thinking, listening, unsure), a storyboard and a sheet. Old pointer-state SVGs replaced."
+  }
+}

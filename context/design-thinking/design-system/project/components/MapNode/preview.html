@@ -1,0 +1,20 @@
+<!-- @dsCard group="Progress" height=190 subtitle="Concepts as components on the breadboard" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>MapNode preview</title></head>
+<body class="bb-grid-bg">
+<div id="root" class="bb-root" style="padding:16px;display:block"></div>
+<script>
+  var B = window.Breadboard, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render((function(){
+  function wire(on){ return h('svg',{width:36,height:20,viewBox:'0 0 36 20','aria-hidden':'true',style:{marginTop:30,flex:'none'}},h('line',{x1:0,y1:10,x2:36,y2:10,stroke:'var(--pencil)',strokeWidth:2.5}),on?h('line',{className:'bb-current',x1:0,y1:10,x2:36,y2:10,stroke:'var(--blue)',strokeWidth:4,style:{animationDuration:'0.9s'}}):null); }
+  return h('div',{className:'bb-grid-bg',style:{display:'flex',alignItems:'flex-start',padding:'28px 12px 12px',borderRadius:16,overflowX:'auto'}},
+    h(B.MapNode,{state:'mastered',label:'PN junction',heat:'3/5'}),wire(true),
+    h(B.MapNode,{state:'flicker',label:'Forward bias'}),wire(true),
+    h(B.MapNode,{state:'progress',label:'Diode',values:{concept:1,words:0.6,english:0.3},here:true,heat:'4/5'}),wire(false),
+    h(B.MapNode,{state:'available',label:'Half-wave rectifier',heat:'5/5'}),wire(false),
+    h(B.MapNode,{state:'locked',label:'Zener regulator'}));
+})());
+</script>
+</body>
+</html>

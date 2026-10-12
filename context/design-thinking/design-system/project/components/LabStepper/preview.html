@@ -1,0 +1,13 @@
+<!-- @dsCard group="Lab" height=230 subtitle="Predict, act, observe, explain, debug" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>LabStepper preview</title></head>
+<body class="bb-grid-bg">
+<div id="root" class="bb-root" style="padding:16px;display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start"></div>
+<script>
+  var B = window.Breadboard, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render((function(){ var hints=[['Draw what you expect','Sketch the output on the scope before you run anything.'],['Pick the diode from the parts panel','It is the triangle with a bar. Drag it between the transformer and the load.'],['Run and look at the scope','Compare the green trace with your blue sketch.'],['Why is the negative half missing?','Answer in English. Use your stickers if you need them.'],['Your lab partner changed something','Find what is wrong. Kiki will only ask questions.']];
+  function Demo(){ var s=React.useState(1); var i=s[0]; return h(B.LabStepper,{current:i,title:hints[i][0],hint:hints[i][1],onNext:function(){ s[1]((i+1)%5); },nextLabel:i<4?'Done, next step':'Start again'}); } return h(Demo); })());
+</script>
+</body>
+</html>

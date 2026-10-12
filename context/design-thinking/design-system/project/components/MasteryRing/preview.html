@@ -1,0 +1,17 @@
+<!-- @dsCard group="Progress" height=176 subtitle="Four segments: Concept, Words, English, Lab" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>MasteryRing preview</title></head>
+<body class="bb-grid-bg">
+<div id="root" class="bb-root" style="padding:16px;display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start"></div>
+<script>
+  var B = window.Breadboard, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h(React.Fragment,null,
+  h('div',{style:{display:'grid',justifyItems:'center',gap:6}},h(B.MasteryRing,{size:120,values:{concept:1,words:1,english:0.6},locked:['lab'],label:'Diode'},h('span',{className:'bb-label'},'Diode')),h('span',{className:'bb-label',style:{color:'var(--pencil)'}},'Lab locked')),
+  h('div',{style:{display:'grid',justifyItems:'center',gap:6}},h(B.MasteryRing,{size:120,values:{concept:1,words:1,english:1,lab:1},label:'Diode'},h('span',{className:'bb-icon bb-filled',style:{fontSize:28,color:'var(--blue-ink)'}},'bolt')),h('span',{className:'bb-label',style:{color:'var(--pencil)'}},'Complete')),
+  h('div',{style:{display:'grid',justifyItems:'center',gap:6}},h(B.MasteryRing,{size:72,values:{concept:1,words:1,english:1,lab:1},flicker:true}),h('span',{className:'bb-label',style:{color:'var(--pencil)'}},'Flickering')),
+  h('div',{style:{display:'grid',justifyItems:'center',gap:6}},h(B.MasteryRing,{size:44,values:{concept:0.4}}),h('span',{className:'bb-label',style:{color:'var(--pencil)'}},'XS on the map')),
+  h('div',{style:{display:'grid',justifyItems:'center',gap:6}},h(B.MasteryRing,{size:72,values:{}}),h('span',{className:'bb-label',style:{color:'var(--pencil)'}},'Empty'))));
+</script>
+</body>
+</html>

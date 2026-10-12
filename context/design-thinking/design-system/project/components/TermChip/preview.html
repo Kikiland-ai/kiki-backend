@@ -1,0 +1,12 @@
+<!-- @dsCard group="Language" height=150 subtitle="Canonical English terms, tap for the Odia meaning" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>TermChip preview</title></head>
+<body class="bb-grid-bg">
+<div id="root" class="bb-root" style="padding:16px;display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start"></div>
+<script>
+  var B = window.Breadboard, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('p',{className:'bb-morph',style:{margin:0}},'States: ',h(B.TermChip,{term:'cut-in voltage',state:'new'}),' new, ',h(B.TermChip,{term:'forward bias',state:'collected'}),' collected, ',h(B.TermChip,{term:'diode',state:'owned'}),' owned. Tap any chip.'));
+</script>
+</body>
+</html>

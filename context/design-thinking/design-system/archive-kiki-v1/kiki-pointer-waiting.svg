@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="-8 -8 96 96" role="img" aria-label="Kiki pointer, waiting">
+<title>Kiki pointer: waiting</title>
+<circle cx="12" cy="8" r="9" fill="none" stroke="#34a853" stroke-width="2.5" stroke-dasharray="4 3"/>
+<g><circle cx="46" cy="48" r="3.2" fill="#4285f4"/><circle cx="53" cy="53" r="3.2" fill="#ea4335"/><circle cx="60" cy="58" r="3.2" fill="#fbbc05"/><circle cx="67" cy="63" r="4.2" fill="#34a853"/></g>
+<g><path d="M12 8 L12 46 L21.5 37.5 L28.5 53 L35 50 L28 35 L40 35 Z" fill="#1f1f1f" stroke="#ffffff" stroke-width="3" stroke-linejoin="round"/><circle cx="16.8" cy="25" r="2.8" fill="#ffffff"/><circle cx="23.4" cy="25" r="2.8" fill="#ffffff"/></g>
+</svg>

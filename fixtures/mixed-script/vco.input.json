@@ -1,0 +1,30 @@
+{
+  "schema": "mixed-script-input/v1",
+  "id": "vco-fm-baseline",
+  "title": "A VCO in direct frequency modulation",
+  "source": {
+    "kind": "adapted_reference",
+    "review_status": "pending",
+    "references": [
+      {"title": "Analog Devices: FM Modulation", "url": "https://www.analog.com/en/resources/glossary/fm-modulator.html"},
+      {"title": "Analog Devices: Voltage Controlled Oscillator", "url": "https://wiki.analog.com/resources/tools-software/sigmastudio/toolbox/sources/vco"}
+    ]
+  },
+  "mix": {"support_language": "or", "script": "Odia", "level": "odia-led-english-terms"},
+  "glossary": [
+    {"id": "t-vco", "english": "VCO", "meaning_or": "ନିୟନ୍ତ୍ରଣ ଭୋଲ୍ଟେଜ୍ ଅନୁସାରେ ଆବୃତ୍ତି ବଦଳୁଥିବା ଦୋଳକ", "pronunciation_or": "ଭି ସି ଓ", "spoken_en": "V C O", "review_status": "pending"},
+    {"id": "t-frequency", "english": "output frequency", "meaning_or": "ଆଉଟପୁଟ୍ ସଙ୍କେତର ଆବୃତ୍ତି", "pronunciation_or": "ଆଉଟପୁଟ୍ ଫ୍ରିକ୍ୱେନ୍ସି", "spoken_en": "output frequency", "review_status": "pending"},
+    {"id": "t-control", "english": "control voltage", "meaning_or": "ଆବୃତ୍ତି ନିୟନ୍ତ୍ରଣ କରୁଥିବା ଭୋଲ୍ଟେଜ୍", "pronunciation_or": "କଣ୍ଟ୍ରୋଲ୍ ଭୋଲ୍ଟେଜ୍", "spoken_en": "control voltage", "review_status": "pending"},
+    {"id": "t-fm", "english": "FM", "meaning_or": "ବାହକ ସଙ୍କେତର ଆବୃତ୍ତି ବଦଳାଇ ସୂଚନା ପଠାଇବା", "pronunciation_or": "ଏଫ୍ ଏମ୍", "spoken_en": "F M", "review_status": "pending"},
+    {"id": "t-message", "english": "message signal", "meaning_or": "ପଠାଇବାକୁ ଥିବା ସୂଚନାର ସଙ୍କେତ", "pronunciation_or": "ମେସେଜ୍ ସିଗ୍ନାଲ୍", "spoken_en": "message signal", "review_status": "pending"},
+    {"id": "t-instantaneous", "english": "instantaneous frequency", "meaning_or": "ଏକ ନିର୍ଦ୍ଦିଷ୍ଟ କ୍ଷଣରେ ସଙ୍କେତର ଆବୃତ୍ତି", "pronunciation_or": "ଇନ୍ଷ୍ଟାଣ୍ଟେନିଅସ୍ ଫ୍ରିକ୍ୱେନ୍ସି", "spoken_en": "instantaneous frequency", "review_status": "pending"},
+    {"id": "t-amplitude", "english": "amplitude", "meaning_or": "ସଙ୍କେତର ବିସ୍ତାର", "pronunciation_or": "ଆମ୍ପ୍ଲିଟ୍ୟୁଡ୍", "spoken_en": "amplitude", "review_status": "pending"},
+    {"id": "t-carrier", "english": "carrier frequency", "meaning_or": "ବାହକ ସଙ୍କେତର ଆବୃତ୍ତି", "pronunciation_or": "କ୍ୟାରିଅର୍ ଫ୍ରିକ୍ୱେନ୍ସି", "spoken_en": "carrier frequency", "review_status": "pending"}
+  ],
+  "sentences": [
+    {"id": "s1", "english": "A voltage-controlled oscillator (VCO) changes its output frequency according to its control voltage.", "term_ids": ["t-vco", "t-frequency", "t-control"], "literals": []},
+    {"id": "s2", "english": "In direct frequency modulation (FM), the message signal drives the VCO's control input.", "term_ids": ["t-vco", "t-fm", "t-message"], "literals": []},
+    {"id": "s3", "english": "In an ideal linear model, f_i(t) = f_c + K_v m(t), so the carrier's instantaneous frequency varies while its amplitude remains constant.", "term_ids": ["t-instantaneous", "t-amplitude"], "literals": [{"text": "f_i(t) = f_c + K_v m(t)", "spoken": "f i of t equals f c plus K v times m of t"}]},
+    {"id": "s4", "english": "Here f_c is the carrier frequency, K_v is the VCO sensitivity in Hz/V, and m(t) is the message voltage.", "term_ids": ["t-vco", "t-carrier"], "literals": [{"text": "f_c", "spoken": "f c"}, {"text": "K_v", "spoken": "K v"}, {"text": "Hz/V", "spoken": "hertz per volt"}, {"text": "m(t)", "spoken": "m of t"}]}
+  ]
+}

@@ -9,6 +9,7 @@ __pycache__/
 .env.*
 !.env.example
 *.log
+work/
 .DS_Store
 service-account*.json
 *-credentials.json

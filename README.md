@@ -11,3 +11,5 @@ This starter carries the Design-Thinking product context and BB8 into a separate
 `context/design-thinking/SOURCE.json` records the source repo, exact commit, and SHA-256 for every copied product file. `STARTER-MANIFEST.json` describes the starter/handoff baseline, refreshed when commit identities were corrected; it is not a permanent freeze on new backend code. The source snapshot is a traceable baseline, while backend decisions and progress belong in this repository.
 
 No credentials, Google Cloud project, API access, native BB8 plugin activation, generated speech, graphics engine, or Simulink connection are established by importing these files.
+
+An authorized [mixed-script CLI experiment](prototypes/mixed_script/README.md) now runs a labelled VCO fixture and provides a two-request Gemini adapter. It does not yet establish live translation quality, audio synthesis, or a running backend API.

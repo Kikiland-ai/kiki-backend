@@ -10,6 +10,10 @@ This starter carries the Design-Thinking product context and BB8 into a separate
 
 `context/design-thinking/SOURCE.json` records the source repo, exact commit, and SHA-256 for every copied product file. `STARTER-MANIFEST.json` describes the starter/handoff baseline, refreshed when commit identities were corrected; it is not a permanent freeze on new backend code. The source snapshot is a traceable baseline, while backend decisions and progress belong in this repository.
 
-No credentials, Google Cloud project, API access, native BB8 plugin activation, generated speech, graphics engine, or Simulink connection are established by importing these files.
+Importing the source files alone does not establish credentials, API access, native BB8 activation, generated media or a real-tool connection. Subsequent authorized trials have generated live mixed-language scripts and actual speech; graphics and Simulink integration remain unimplemented.
 
-An authorized [mixed-script CLI experiment](prototypes/mixed_script/README.md) now runs a labelled VCO fixture and provides a two-request Gemini adapter. It does not yet establish live translation quality, audio synthesis, or a running backend API.
+The user has chosen the [English-to-mixed-language and audio pipeline](docs/decisions/0001-mixed-language-audio-pipeline.md) after listening to its prototype. Reuse the [existing text and speech modules](prototypes/mixed_script/README.md). Scientific/native-Odia review and generalization of the learner-profile prompt remain pending; the longer sample is a disclosed draft.
+
+FastAPI is the selected future backend framework. The [scalability and WPM assessment](docs/architecture/mixed-language-fastapi.md) is a design proposal, not a running API. Every future generation request must include independent Odia and English proficiency settings out of 10. The user explicitly requested **no backend building yet**.
+
+The next parallel session should use the [graphics, pointing and annotation handoff](docs/handoffs/graphics-and-annotation.md), which separates generated-content annotation from live-screen guidance and records the audio-alignment dependency. The user authorized publishing the session work; fetch current main and verify these files rather than stopping at the original pipeline commit. A [versioned evidence archive](prototypes/mixed_script/evidence/2026-10-13/README.md) preserves actual generated scripts, recordings and trial records; original scratch paths remain ignored.

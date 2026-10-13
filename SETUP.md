@@ -1,38 +1,38 @@
 # Start backend work without losing product context
 
-This is a context/runtime starter, not a running API. It carries the source documents and BB8 into `Kikiland-ai/kiki-backend`. The first session must load context through `CONTEXT-BOOT.md` and wait for the user's thoughts. The runtime/service instructions below are reference material for later authorized implementation, not startup actions.
+This repository contains working mixed-language text/speech prototypes and a chosen FastAPI/worker architecture, but no running API. The [README](README.md) is the current entry point; [the pipeline decision](docs/decisions/0001-mixed-language-audio-pipeline.md) and [architecture assessment](docs/architecture/mixed-language-fastapi.md) supersede older stack suggestions. New sessions load context through `CONTEXT-BOOT.md` and wait for direction. Backend building remains paused; future service instructions below are references, not startup actions.
 
 ## 1. Select this repo in the new environment
 
-After importing/committing the starter, select the private `Kikiland-ai/kiki-backend` repo and its `main` branch in the new work environment. Use the repo root as the working directory (for example `/workspace/kiki-backend`). Start a fresh session on that environment. The committed snapshot supplies context; conversation history, API credentials, tool access, and native BB8 installation do not automatically transfer.
+Select the private `Kikiland-ai/kiki-backend` repo and current `main` branch in the new work environment. Use the repo root as the working directory (for example `/workspace/kiki-backend`); verify the published docs, speech module and evidence archive are present. The committed snapshot supplies context; conversation history, API credentials, tool access and native BB8 installation do not automatically transfer.
 
 Runtime baseline:
 
-- Node.js 22, npm, Git, Python 3.12, and Java 21 for the Firestore emulator.
-- Commit a lockfile when scaffolding dependencies; subsequent setups use `npm ci`.
-- Recommended backend: TypeScript, Fastify, Zod runtime schemas, Firebase Admin SDK, and Vitest. Add the selected renderer/alignment libraries after the small media trials establish the choice.
-- Add FFmpeg when producing GIF/video derivatives from rendered frames. A browser renderer needs its browser/system dependencies installed explicitly; Node alone does not establish those capabilities.
+- Git and Python 3.12 for the existing standard-library prototypes and offline checks; no application dependencies need installing to run them.
+- FastAPI with durable job coordination and bounded stage workers is the selected future backend direction. Database, queue/actor framework, object storage and package-management/lockfile choices remain open; do not scaffold them during context loading.
+- Node.js 22 is needed only for the imported JavaScript ledger validator. npm and Java 21 are conditional tooling if the optional Firebase emulator reference below is selected later.
+- FFmpeg is used for WAV-to-MP3 conversion and may be used for future GIF/video derivatives. Browser rendering and alignment need separately chosen/installed dependencies; they are not established by this checkout.
 
 Check versions and source integrity before implementation:
 
 ```sh
-node --version
-npm --version
 python --version
-java -version
-python scripts/verify-context.py
-python bb8/adapters/reference/bb8.py validate
-python bb8/adapters/discovery/sync.py --check
-node context/design-thinking/data-model/validate.js context/design-thinking/data-model/ledgers
+python -B scripts/verify-context.py
+python -B bb8/adapters/reference/bb8.py validate
+python -B bb8/adapters/discovery/sync.py --check
 ```
+
+Offline execution, when requested: `python -B scripts/generate-mixed-script.py --mode fixture`; tests: `python -B -m unittest discover -s tests -v` and `python -B -m unittest discover -s bb8/tests -v`. Optional imported-ledger check with Node.js 22: `node context/design-thinking/data-model/validate.js context/design-thinking/data-model/ledgers`.
 
 BB8 repo wrappers support compatible Codex/Claude clients. Hosted ChatGPT `@bb8` availability is separate; see `bb8/docs/CHATGPT-INSTALL.md`. Use reference mode if native registration is unavailable.
 
 ## 2. Configure local services and real providers separately
 
-The starter includes `.env.example`, emulator configuration, and deny-client-access rules. Copy `.env.example` to an ignored local `.env` or set equivalent runtime variables through environment settings. The first backend implementation must validate/load this configuration; no starter script yet consumes the application variables.
+The starter includes `.env.example`, optional emulator configuration and deny-client-access rules. Its application/emulator variables are proposals, not an implemented configuration loader. Set Gemini credentials through runtime secrets/process variables; the existing CLI reads `GEMINI_API_KEY` and optionally `GEMINI_TEXT_MODEL` from the process environment and does **not** automatically load `.env`.
 
-The initial modes are fixtures for model, speech, and tool observations. They must be labelled fixtures and may not count as real speech/tool validation. The emulator project is `demo-kiki-backend`, distinct from a real development project. Use server-side ownership checks; client writes are denied by the supplied datastore rules.
+The text CLI explicitly selects `--mode fixture` or `--mode gemini`; fixtures are labelled synthetic and do not establish provider quality. The separate speech adapter has completed real Gemini trials, preserved in the [evidence archive](prototypes/mixed_script/evidence/2026-10-13/README.md). The historical `MODEL_MODE`, `SPEECH_MODE` and `LAB_OBSERVER_MODE` environment proposals do not wire these modules together. There is no real lab observer.
+
+The Firebase emulator setup below is optional, conditional on a later datastore choice. Its project is `demo-kiki-backend`, distinct from a real development project. Use server-side ownership checks; client writes are denied by the supplied datastore rules.
 
 After adding/locking `firebase-tools` as a development dependency:
 
@@ -40,9 +40,9 @@ After adding/locking `firebase-tools` as a development dependency:
 npx firebase emulators:start --project demo-kiki-backend --only auth,firestore,storage
 ```
 
-Emulator ports are Auth 9099, Firestore 8080, Storage 9199, and UI 4000. The API's suggested development port is 3000. Use the environment's supported port forwarding for access; container networking may require adjusted hostnames/bindings rather than assuming the host's loopback works inside another container.
+Emulator ports are Auth 9099, Firestore 8080, Storage 9199, and UI 4000. A FastAPI development port/start command has not been configured. Use the environment's supported port forwarding when a service is implemented; container networking may require adjusted hostnames/bindings rather than assuming the host's loopback works inside another container.
 
-For real-provider trials, create/select a separate development GCP project and configure the chosen Gemini/speech API credentials using environment secrets or supported workload identity. Do not put keys into the context bundle. API-key access and Google Cloud application-default credentials are different modes; the adapters must declare which they need. Use the configured identity normally, without printing or exporting credential values. Billing/quotas and actual Odia capability still need verification; this starter does not configure them.
+For authorized live trials, use the selected development project's Gemini Developer API key through environment secrets. The current text and Gemini TTS adapters use `GEMINI_API_KEY`; they do not require a Google Cloud service-account file. Google Cloud application-default credentials/workload identity are separate modes for any later connector that actually requires them. Do not put keys into the context bundle or print/export their values. Verify the selected runtime's host access, project quota and actual model generation access before calling it. Odia–English speech has been generated in the recorded trial; native quality and reliable alignment remain pending. See the prototype guide before overriding its unverified default model.
 
 In managed environments, allow network access through the supported environment configuration for:
 
@@ -57,7 +57,7 @@ These are required destinations for the selected adapters, not evidence of acces
 ## 3. Preserve context as implementation diverges
 
 - `context/design-thinking/` is the pinned upstream source. `context/README.md` establishes authority and reading order.
-- `contracts/` contains reconciled implementation schemas; do not edit the copied originals to pretend they already reflect the new runtime.
+- `contracts/` is the reserved location for future reconciled implementation schemas and does not exist yet; do not edit copied source types to pretend they reflect an implemented runtime.
 - `docs/decisions/` records consequential backend choices and deviations, linked to source sections.
 - `docs/plans/active.md` records completed work, actual checks, blockers, fixture/live status, and the next exact action.
 - Read the relevant component/source contracts for each feature; presence in the bundle does not mean every file is already loaded by the agent.
@@ -73,14 +73,16 @@ Context boot is complete when the agent reports the actual sources loaded and wa
 
 ## 5. Later implementation reference — only after the user requests building
 
-The earlier proposal suggested starting with a runtime-validated TypeScript API, reconciled lesson/speech/scene/annotation contracts, emulator configuration, a two-concept fixture pack, and a versioned lesson-package endpoint. Keep this as a possible slice, not a committed sequence. Discuss the user's intended direction first. Subsequent live speech/graphics and Simulink trials remain pending.
+The earlier TypeScript/Fastify/Firebase recommendation is superseded by the user's FastAPI decision. The planned first backend slice reuses existing text/speech code through a bounded job endpoint, with two independent Odia/English proficiency settings, durable checkpoints and owner-scoped artifacts. Concrete runtime schemas, datastore, queue/actor framework and timing/renderer libraries remain decisions to make. Current graphics/live-screen work is a separate [design handoff](docs/handoffs/graphics-and-annotation.md), not an instruction to build the backend.
+
+Live speech has been generated; formal scientific/native-Odia/pronunciation review and sentence alignment remain pending. Graphics rendering and real Simulink observation/overlay access are unimplemented. WPM is a future measured soft-target proposal; the current speech style is fixed.
 
 Once implementation is requested, the relevant setup acceptance criteria are:
 
 - Source integrity and BB8 checks pass; the imported source matches its manifest.
-- Backend install is reproducible from a committed lockfile and declared runtime versions.
-- One API starts, serves a fixture lesson package, and rejects invalid input through runtime schemas.
-- Emulator integration persists/reloads a versioned record and enforces learner ownership at the API boundary.
+- Backend dependencies/runtime versions and reproducible install are declared with the selected package manager.
+- One bounded FastAPI job API starts, validates source/profile input and exposes stage readiness.
+- The selected job store/queue preserves validated stage checkpoints across retries/restarts and enforces learner ownership at the API/asset boundary.
 - No real provider/tool is reported working until a documented smoke trial succeeds.
 - The active plan explicitly records unresolved TTS quality/timing, scientific graphics review, and real Simulink observation/overlay capability.
 - Future agents can continue from the active plan and files without this chat.

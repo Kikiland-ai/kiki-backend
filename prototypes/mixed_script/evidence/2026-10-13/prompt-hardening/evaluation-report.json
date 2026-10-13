@@ -1,0 +1,224 @@
+{
+  "skill": "prompt-design-engineering",
+  "model": "gemini-3.5-flash-lite",
+  "new_api_requests": 8,
+  "iterations": [
+    {
+      "run_id": "baseline-v0",
+      "case": "vco",
+      "version": "v0",
+      "model": "gemini-3.5-flash-lite",
+      "raw_output_validation": true,
+      "postprocessing": false,
+      "semantic_review": "pending",
+      "native_Odia_review": "pending",
+      "outcome": "failed",
+      "stage": "translation",
+      "error": "An English technical term was changed, added, or omitted.",
+      "term_count_diagnostics": [
+        {
+          "sentence_id": "s4",
+          "term": "VCO",
+          "expected": 1,
+          "display_count": 2,
+          "speech_count": 1
+        }
+      ],
+      "calls": [
+        {
+          "stage": "translation",
+          "request_sha256": "f5a2edd0f08444f766452910d0b8e23a8d37d13c3ff7523342c7b14840854a08",
+          "model_version": "gemini-3.5-flash-lite",
+          "usage": {
+            "promptTokenCount": 2273,
+            "candidatesTokenCount": 1475,
+            "totalTokenCount": 3748
+          }
+        }
+      ],
+      "stage_metrics": [
+        {
+          "stage": "translation",
+          "elapsed_seconds": 12.837
+        }
+      ]
+    },
+    {
+      "run_id": "examples-v1",
+      "case": "vco",
+      "version": "v1",
+      "model": "gemini-3.5-flash-lite",
+      "raw_output_validation": true,
+      "postprocessing": false,
+      "semantic_review": "pending",
+      "native_Odia_review": "pending",
+      "outcome": "failed",
+      "stage": "mixed",
+      "error": "Latin text was placed in an Odia span.",
+      "term_count_diagnostics": [],
+      "calls": [
+        {
+          "stage": "translation",
+          "request_sha256": "ebfde7980951a050eea683d9e42bfbd77a0a9643800741ddd4cb9a2cd8730c65",
+          "model_version": "gemini-3.5-flash-lite",
+          "usage": {
+            "promptTokenCount": 2859,
+            "candidatesTokenCount": 1069,
+            "totalTokenCount": 3928
+          }
+        },
+        {
+          "stage": "mixed",
+          "request_sha256": "f8837f31ab4271148cf833c387ca4fa3c33a09dc21595ff8616f70555e421f00",
+          "model_version": "gemini-3.5-flash-lite",
+          "usage": {
+            "promptTokenCount": 4094,
+            "candidatesTokenCount": 1391,
+            "totalTokenCount": 5485
+          }
+        }
+      ],
+      "stage_metrics": [
+        {
+          "stage": "translation",
+          "elapsed_seconds": 16.549
+        },
+        {
+          "stage": "mixed",
+          "elapsed_seconds": 14.651
+        }
+      ]
+    },
+    {
+      "run_id": "labels-v2",
+      "case": "vco",
+      "version": "v2",
+      "model": "gemini-3.5-flash-lite",
+      "raw_output_validation": true,
+      "postprocessing": false,
+      "semantic_review": "pending",
+      "native_Odia_review": "pending",
+      "outcome": "failed",
+      "stage": "mixed",
+      "error": "Gemini HTTP 503. No automatic retry was made.",
+      "term_count_diagnostics": [],
+      "calls": [
+        {
+          "stage": "translation",
+          "request_sha256": "11a45489825166faf8e75e15099ae8889fcfd98607eb81bcbb8040e3da60947c",
+          "model_version": "gemini-3.5-flash-lite",
+          "usage": {
+            "promptTokenCount": 3084,
+            "candidatesTokenCount": 1110,
+            "totalTokenCount": 4194
+          }
+        }
+      ],
+      "stage_metrics": [
+        {
+          "stage": "translation",
+          "elapsed_seconds": 8.251
+        },
+        {
+          "stage": "mixed",
+          "elapsed_seconds": 6.578
+        }
+      ]
+    },
+    {
+      "run_id": "heldout-v2",
+      "case": "heldout",
+      "version": "v2",
+      "model": "gemini-3.5-flash-lite",
+      "raw_output_validation": true,
+      "postprocessing": false,
+      "semantic_review": "pending",
+      "native_Odia_review": "pending",
+      "outcome": "passed_all_automated_checks",
+      "calls": [
+        {
+          "stage": "translation",
+          "request_sha256": "f874edafb94b9b4bfe5a0d47ecfbbf09404e753bd89364eb7f52bbb461f7db9d",
+          "model_version": "gemini-3.5-flash-lite",
+          "usage": {
+            "promptTokenCount": 2781,
+            "candidatesTokenCount": 521,
+            "totalTokenCount": 3302
+          }
+        },
+        {
+          "stage": "mixed",
+          "request_sha256": "9cf60871e8f5b00b86de19c642876d12b7464c9052e9e65283737c49154262c7",
+          "model_version": "gemini-3.5-flash-lite",
+          "usage": {
+            "promptTokenCount": 3433,
+            "candidatesTokenCount": 523,
+            "totalTokenCount": 3956
+          }
+        }
+      ],
+      "stage_metrics": [
+        {
+          "stage": "translation",
+          "elapsed_seconds": 1.975
+        },
+        {
+          "stage": "mixed",
+          "elapsed_seconds": 1.854
+        }
+      ]
+    },
+    {
+      "run_id": "labels-v2-resume",
+      "version": "v2",
+      "case": "vco",
+      "reused_translation_from": "labels-v2",
+      "backoff_seconds": 319.1,
+      "model": "gemini-3.5-flash-lite",
+      "postprocessing": false,
+      "semantic_review": "pending",
+      "native_Odia_review": "pending",
+      "outcome": "passed_all_automated_checks",
+      "same_mixed_request_retried": true,
+      "calls": [
+        {
+          "stage": "translation",
+          "request_sha256": "11a45489825166faf8e75e15099ae8889fcfd98607eb81bcbb8040e3da60947c",
+          "model_version": "gemini-3.5-flash-lite",
+          "usage": {
+            "promptTokenCount": 3084,
+            "candidatesTokenCount": 1110,
+            "totalTokenCount": 4194
+          }
+        },
+        {
+          "stage": "mixed",
+          "request_sha256": "53e5f26252acaebdfac5cc0eff395ef4cf011dbfcd8076a53cc0d434a9ef2cb0",
+          "model_version": "gemini-3.5-flash-lite",
+          "usage": {
+            "promptTokenCount": 4358,
+            "candidatesTokenCount": 953,
+            "totalTokenCount": 5311
+          }
+        }
+      ],
+      "stage_metrics": [
+        {
+          "stage": "translation",
+          "elapsed_seconds": 0,
+          "reused": true
+        },
+        {
+          "stage": "mixed",
+          "elapsed_seconds": 2.68
+        }
+      ],
+      "new_api_requests": 1
+    }
+  ],
+  "prompt_copy": "prototypes/mixed_script/prompts/learner-profile-v2.txt",
+  "prompt_sha256": "d967d254d5f196782e6b9507be0775e29bb1ccb6ddb5dcc94b018bc4959d3859",
+  "raw_validation": true,
+  "postprocessing": false,
+  "meaning_and_native_review": "pending"
+}

@@ -1,0 +1,32 @@
+{
+  "model": "gemini-3.8-flash-lite-tts",
+  "input": [
+    {
+      "type": "user_input",
+      "content": [
+        {
+          "type": "text",
+          "text": "ଗୋଟିଏ voltage-controlled oscillator କିମ୍ବା V C O ଏହାର control voltage ଅନୁସାରେ ଏହାର output frequency ବଦଳାଇଥାଏ। ଏକ direct frequency modulation ବା F M ରେ, message signal V C O ର control input କୁ ଚାଳିତ କରିଥାଏ। ଏକ ideal linear model ରେ, f i of t equals f c plus K v times m of t, ତେଣୁ the carrier ର instantaneous frequency ପରିବର୍ତ୍ତନ ହୁଏ କିନ୍ତୁ ଏହାର amplitude ସ୍ଥିର ରହେ। ଏଠାରେ f c ହେଉଛି carrier frequency, K v ହେଉଛି V C O sensitivity hertz per volt ରେ, ଏବଂ m of t ହେଉଛି message voltage।",
+          "annotations": [
+            {
+              "type": "speech_metadata",
+              "style": "clear, patient Odia-English teaching narration"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "response_format": {
+    "type": "audio",
+    "mime_type": "audio/wav",
+    "sample_rate": 24000
+  },
+  "generation_config": {
+    "speech_config": [
+      {
+        "voice": "Kore"
+      }
+    ]
+  }
+}

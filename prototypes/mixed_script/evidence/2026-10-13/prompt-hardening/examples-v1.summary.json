@@ -1,0 +1,46 @@
+{
+  "run_id": "examples-v1",
+  "case": "vco",
+  "version": "v1",
+  "model": "gemini-3.5-flash-lite",
+  "raw_output_validation": true,
+  "postprocessing": false,
+  "semantic_review": "pending",
+  "native_Odia_review": "pending",
+  "outcome": "failed",
+  "stage": "mixed",
+  "error": "Latin text was placed in an Odia span.",
+  "term_count_diagnostics": [],
+  "calls": [
+    {
+      "stage": "translation",
+      "request_sha256": "ebfde7980951a050eea683d9e42bfbd77a0a9643800741ddd4cb9a2cd8730c65",
+      "model_version": "gemini-3.5-flash-lite",
+      "usage": {
+        "promptTokenCount": 2859,
+        "candidatesTokenCount": 1069,
+        "totalTokenCount": 3928
+      }
+    },
+    {
+      "stage": "mixed",
+      "request_sha256": "f8837f31ab4271148cf833c387ca4fa3c33a09dc21595ff8616f70555e421f00",
+      "model_version": "gemini-3.5-flash-lite",
+      "usage": {
+        "promptTokenCount": 4094,
+        "candidatesTokenCount": 1391,
+        "totalTokenCount": 5485
+      }
+    }
+  ],
+  "stage_metrics": [
+    {
+      "stage": "translation",
+      "elapsed_seconds": 16.549
+    },
+    {
+      "stage": "mixed",
+      "elapsed_seconds": 14.651
+    }
+  ]
+}

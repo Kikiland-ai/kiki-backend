@@ -1,0 +1,548 @@
+{
+  "schema": "mixed-script-evidence-archive/v1",
+  "date": "2026-10-13",
+  "scope": "user-authorized session publication; experimental evidence, not production fixtures",
+  "credential_values_included": false,
+  "artifacts": [
+    {
+      "path": "gemini-access-investigation.json",
+      "original_runtime_path": "work/gemini-access-investigation.json",
+      "bytes": 33661,
+      "sha256": "fc15329b7c6ee80614e1fa6732598aa3ed7f8877775400e43904593abe88be40"
+    },
+    {
+      "path": "harden-profile-prompt.py",
+      "original_runtime_path": "work/harden-profile-prompt.py",
+      "bytes": 13082,
+      "sha256": "f8c1d4a7d57497cf7cb0f25779da9b8d88816e3bdf684edf4df708eeb3032610"
+    },
+    {
+      "path": "longer-vco-tts/audio.manifest.draft.json",
+      "original_runtime_path": "work/longer-vco-tts/audio.manifest.draft.json",
+      "bytes": 1831,
+      "sha256": "93862969bc1e1f1cb39cfca8e6deab38dce3ec41547ec0e8c391db20873b919d"
+    },
+    {
+      "path": "longer-vco-tts/bundle.draft.result.json",
+      "original_runtime_path": "work/longer-vco-tts/bundle.draft.result.json",
+      "bytes": 28159,
+      "sha256": "8fcad82b93634d550250c2e40091d82405502f8009fc1e2d084ca199b2624a5d"
+    },
+    {
+      "path": "longer-vco-tts/english-input.txt",
+      "original_runtime_path": "work/longer-vco-tts/english-input.txt",
+      "bytes": 879,
+      "sha256": "b2c491d18199444b9a97a1c0b4db52c993b34d516d26423875a3781f4d666488"
+    },
+    {
+      "path": "longer-vco-tts/input.json",
+      "original_runtime_path": "work/longer-vco-tts/input.json",
+      "bytes": 6730,
+      "sha256": "f2905dc6133820b4e1ae4982350e99075bcf9e55be3461c9a3824432e1fc1e44"
+    },
+    {
+      "path": "longer-vco-tts/mixed.refinement.request.json",
+      "original_runtime_path": "work/longer-vco-tts/mixed.refinement.request.json",
+      "bytes": 28728,
+      "sha256": "7aacd9eff8aafd71b87facad464095275b14e3b5c8f260ab48533174686b51e2"
+    },
+    {
+      "path": "longer-vco-tts/mixed.refinement.summary.json",
+      "original_runtime_path": "work/longer-vco-tts/mixed.refinement.summary.json",
+      "bytes": 821,
+      "sha256": "e3e182a296308ab0637d0858afd94c154c243778d381e40350a9c57bbb117847"
+    },
+    {
+      "path": "longer-vco-tts/script.attempt2.summary.json",
+      "original_runtime_path": "work/longer-vco-tts/script.attempt2.summary.json",
+      "bytes": 715,
+      "sha256": "ada9651af25818a9995fa6b503711469f359c5a45a7b5cc41dc8b10862c7506f"
+    },
+    {
+      "path": "longer-vco-tts/script.attempt3.summary.json",
+      "original_runtime_path": "work/longer-vco-tts/script.attempt3.summary.json",
+      "bytes": 710,
+      "sha256": "62e7fad1a51288c2c6464316fa647af773d34d9ae66df2dad12c119ca42fcbe0"
+    },
+    {
+      "path": "longer-vco-tts/script.attempt4.summary.json",
+      "original_runtime_path": "work/longer-vco-tts/script.attempt4.summary.json",
+      "bytes": 1023,
+      "sha256": "31b603c08f2a86f98ee05d9f5e06378dce5c7cfb40b52f6b7bf47c7561a869c9"
+    },
+    {
+      "path": "longer-vco-tts/script.draft.result.json",
+      "original_runtime_path": "work/longer-vco-tts/script.draft.result.json",
+      "bytes": 27823,
+      "sha256": "439cb66807037585416c213fba77459e5384f8154bb06eab195ac71d98a4e4d2"
+    },
+    {
+      "path": "longer-vco-tts/script.summary.json",
+      "original_runtime_path": "work/longer-vco-tts/script.summary.json",
+      "bytes": 703,
+      "sha256": "deb260b4f69be9da69acaa9e37c4b0a28bc42900f8857e79393e3f7e33c896d0"
+    },
+    {
+      "path": "longer-vco-tts/speech-draft.mp3",
+      "original_runtime_path": "work/longer-vco-tts/speech-draft.mp3",
+      "bytes": 839084,
+      "sha256": "4b74cbd6bb25ddf5929e0187e1c1e20de87dab4b35b7326a14cd9824c1c93b54"
+    },
+    {
+      "path": "longer-vco-tts/speech-draft.wav",
+      "original_runtime_path": "work/longer-vco-tts/speech-draft.wav",
+      "bytes": 5036514,
+      "sha256": "d0860812969321a3a0dd43be9a937a4d549e9d8c9482cf2c1c5f3b82cef0af91"
+    },
+    {
+      "path": "longer-vco-tts/speech-ready.draft.txt",
+      "original_runtime_path": "work/longer-vco-tts/speech-ready.draft.txt",
+      "bytes": 1945,
+      "sha256": "38449e4ed6dc5ea8c62baee42141e0f7262e1dc09538c0128a2d8a16dd942d3f"
+    },
+    {
+      "path": "longer-vco-tts/speech.draft.attempt1.summary.json",
+      "original_runtime_path": "work/longer-vco-tts/speech.draft.attempt1.summary.json",
+      "bytes": 753,
+      "sha256": "c5b9a1656b3c3c6cfdfe6501f62c4a9822e40774ee755e6fb64efa95c5f2cab9"
+    },
+    {
+      "path": "longer-vco-tts/speech.draft.request.json",
+      "original_runtime_path": "work/longer-vco-tts/speech.draft.request.json",
+      "bytes": 2523,
+      "sha256": "fcd0481abb467872cdc88da1ff8330c932da73806a74102b64b5210ef5da8a84"
+    },
+    {
+      "path": "longer-vco-tts/translation.attempt2.request.json",
+      "original_runtime_path": "work/longer-vco-tts/translation.attempt2.request.json",
+      "bytes": 17026,
+      "sha256": "0e77872ba88d4c308e0a9757b7ba1acaa4e406330556dd17926ddd130c6cbde8"
+    },
+    {
+      "path": "longer-vco-tts/translation.attempt3.request.json",
+      "original_runtime_path": "work/longer-vco-tts/translation.attempt3.request.json",
+      "bytes": 17026,
+      "sha256": "0e77872ba88d4c308e0a9757b7ba1acaa4e406330556dd17926ddd130c6cbde8"
+    },
+    {
+      "path": "longer-vco-tts/translation.attempt4.normalized.json",
+      "original_runtime_path": "work/longer-vco-tts/translation.attempt4.normalized.json",
+      "bytes": 13422,
+      "sha256": "787d968791a537c2b83443f7a9a32ef9bb684aa6b26535d144f01a41fcb7c270"
+    },
+    {
+      "path": "longer-vco-tts/translation.attempt4.raw.json",
+      "original_runtime_path": "work/longer-vco-tts/translation.attempt4.raw.json",
+      "bytes": 10855,
+      "sha256": "da676e12eaae877d9ecb9c5fbb1bfdd2fe75c02140c0fcaf8b6371c2eb058ae0"
+    },
+    {
+      "path": "longer-vco-tts/translation.attempt4.request.json",
+      "original_runtime_path": "work/longer-vco-tts/translation.attempt4.request.json",
+      "bytes": 17026,
+      "sha256": "0e77872ba88d4c308e0a9757b7ba1acaa4e406330556dd17926ddd130c6cbde8"
+    },
+    {
+      "path": "longer-vco-tts/translation.draft.txt",
+      "original_runtime_path": "work/longer-vco-tts/translation.draft.txt",
+      "bytes": 1758,
+      "sha256": "7361ddd83bb86963df012d49367eb2a675ae58105d17f4ae661e95d20eb3bd98"
+    },
+    {
+      "path": "longer-vco-tts/translation.request.json",
+      "original_runtime_path": "work/longer-vco-tts/translation.request.json",
+      "bytes": 17026,
+      "sha256": "0e77872ba88d4c308e0a9757b7ba1acaa4e406330556dd17926ddd130c6cbde8"
+    },
+    {
+      "path": "probe-gemini-access.py",
+      "original_runtime_path": "work/probe-gemini-access.py",
+      "bytes": 2749,
+      "sha256": "fe3bd54c06ca56be343e23798710a665097d163d0d3cad05ea6a1c36d4c5d81e"
+    },
+    {
+      "path": "prompt-hardening/baseline-v0-translation.raw.json",
+      "original_runtime_path": "work/prompt-hardening/baseline-v0-translation.raw.json",
+      "bytes": 5773,
+      "sha256": "5372ded4e2ae5be8c7d77ead7998134979416b68994cf9784a7378fe6bbe9b2e"
+    },
+    {
+      "path": "prompt-hardening/baseline-v0-translation.request.json",
+      "original_runtime_path": "work/prompt-hardening/baseline-v0-translation.request.json",
+      "bytes": 11002,
+      "sha256": "e90d0bd7c1e86c2cdce57213e2b2c3c8f173652987c072f882d5678bc41d0c93"
+    },
+    {
+      "path": "prompt-hardening/baseline-v0.summary.json",
+      "original_runtime_path": "work/prompt-hardening/baseline-v0.summary.json",
+      "bytes": 945,
+      "sha256": "09518e7738b72b65eb0687ec28d4070aba7feca865c66ea7c5155932e3ffb19f"
+    },
+    {
+      "path": "prompt-hardening/bb8-reference-packet.md.gz",
+      "original_runtime_path": "work/prompt-hardening/bb8-reference-packet.md",
+      "bytes": 14790,
+      "sha256": "3c6e46ff46280ba9392d6ed92ab60864fd97677dcc0a198f2ecfe9a5c9a6a6eb",
+      "storage_format": "gzip",
+      "original_bytes": 43067,
+      "original_sha256": "0599662eaf20096243acda3e179ebad6a0fd930151d505eb249414d5548114f9"
+    },
+    {
+      "path": "prompt-hardening/evaluation-report.json",
+      "original_runtime_path": "work/prompt-hardening/evaluation-report.json",
+      "bytes": 6472,
+      "sha256": "20f0231a0c5c2bde591ed7a21138fb29961afedaddeaed6e9e8ba6b47e47a633"
+    },
+    {
+      "path": "prompt-hardening/examples-v1-mixed.raw.json",
+      "original_runtime_path": "work/prompt-hardening/examples-v1-mixed.raw.json",
+      "bytes": 5467,
+      "sha256": "1d9d1e2d69fa9c171cc75e7e75546cb8ec5aa25056dcbc664d0e11ce8261d2d2"
+    },
+    {
+      "path": "prompt-hardening/examples-v1-mixed.request.json",
+      "original_runtime_path": "work/prompt-hardening/examples-v1-mixed.request.json",
+      "bytes": 18170,
+      "sha256": "ad95657684622f08e2f5762aae583e90d2248c1341c4ce2bc723b3c7e8f7705a"
+    },
+    {
+      "path": "prompt-hardening/examples-v1-translation.raw.json",
+      "original_runtime_path": "work/prompt-hardening/examples-v1-translation.raw.json",
+      "bytes": 5473,
+      "sha256": "2106121ae01aaa29454063a955fbc97dca0194857382e5bfc9414866d762ed36"
+    },
+    {
+      "path": "prompt-hardening/examples-v1-translation.request.json",
+      "original_runtime_path": "work/prompt-hardening/examples-v1-translation.request.json",
+      "bytes": 13666,
+      "sha256": "a5071cde12a648e4727e4b6e5985c3c0c6e18c72ab1885ebab8c1c2837e7fa9b"
+    },
+    {
+      "path": "prompt-hardening/examples-v1.summary.json",
+      "original_runtime_path": "work/prompt-hardening/examples-v1.summary.json",
+      "bytes": 1161,
+      "sha256": "9825b51d062d3f5eef2fcd3e885b22eaae6cd5df580b42467b996b3a50268303"
+    },
+    {
+      "path": "prompt-hardening/heldout-v2-mixed.raw.json",
+      "original_runtime_path": "work/prompt-hardening/heldout-v2-mixed.raw.json",
+      "bytes": 2741,
+      "sha256": "e524a00e700fff35a920f349e90a19d0a1c57384ce89dda1bff62ce3796a5cd0"
+    },
+    {
+      "path": "prompt-hardening/heldout-v2-mixed.request.json",
+      "original_runtime_path": "work/prompt-hardening/heldout-v2-mixed.request.json",
+      "bytes": 16191,
+      "sha256": "0c43a40e45f33a0690f981a7366d702073a4867f4e9193f9a12a6f3bed4bdf31"
+    },
+    {
+      "path": "prompt-hardening/heldout-v2-translation.raw.json",
+      "original_runtime_path": "work/prompt-hardening/heldout-v2-translation.raw.json",
+      "bytes": 2741,
+      "sha256": "c077387da10ff863c2786d6dedaadafefcad916c9e188fe764826361fd01ef18"
+    },
+    {
+      "path": "prompt-hardening/heldout-v2-translation.request.json",
+      "original_runtime_path": "work/prompt-hardening/heldout-v2-translation.request.json",
+      "bytes": 13750,
+      "sha256": "73a6b3b4c7d18b0947fadaefdaa14b34d6627eea49815a28042852d6b1ea743c"
+    },
+    {
+      "path": "prompt-hardening/heldout-v2.result.json",
+      "original_runtime_path": "work/prompt-hardening/heldout-v2.result.json",
+      "bytes": 17538,
+      "sha256": "f475a9c20705da3a6bf195129d24b7388a1f410b6572de1c07ec29b1730373ec"
+    },
+    {
+      "path": "prompt-hardening/heldout-v2.summary.json",
+      "original_runtime_path": "work/prompt-hardening/heldout-v2.summary.json",
+      "bytes": 1076,
+      "sha256": "2f0ded3ffda239df917b632d1ebfd514c4eae4761b712d4b61d1d20333c4bd39"
+    },
+    {
+      "path": "prompt-hardening/heldout.input.json",
+      "original_runtime_path": "work/prompt-hardening/heldout.input.json",
+      "bytes": 4070,
+      "sha256": "5895deb75fa1a4dd84b30d771535ed42a0b563b398da27b6c9dd22c19764f4dd"
+    },
+    {
+      "path": "prompt-hardening/labels-v2-mixed.request.json",
+      "original_runtime_path": "work/prompt-hardening/labels-v2-mixed.request.json",
+      "bytes": 19410,
+      "sha256": "2b5804e5055fa2d1044fff29d942e5ef91b2cb77f12f5e998a9888472f5ba845"
+    },
+    {
+      "path": "prompt-hardening/labels-v2-resume-mixed.raw.json",
+      "original_runtime_path": "work/prompt-hardening/labels-v2-resume-mixed.raw.json",
+      "bytes": 5708,
+      "sha256": "308824ea5067febefdfee474c9ea7d04ed61e89cc14c1733d761e0e4837fdf00"
+    },
+    {
+      "path": "prompt-hardening/labels-v2-resume-mixed.request.json",
+      "original_runtime_path": "work/prompt-hardening/labels-v2-resume-mixed.request.json",
+      "bytes": 19410,
+      "sha256": "2b5804e5055fa2d1044fff29d942e5ef91b2cb77f12f5e998a9888472f5ba845"
+    },
+    {
+      "path": "prompt-hardening/labels-v2-resume.result.json",
+      "original_runtime_path": "work/prompt-hardening/labels-v2-resume.result.json",
+      "bytes": 29817,
+      "sha256": "4170c9b0c07dcdf6a70ed28dff686ecd9e6763b046d248c5993de14bed2efea1"
+    },
+    {
+      "path": "prompt-hardening/labels-v2-resume.summary.json",
+      "original_runtime_path": "work/prompt-hardening/labels-v2-resume.summary.json",
+      "bytes": 1196,
+      "sha256": "49badc2d9838bcd53dc7aa30071e3cbac53c11a938b46881eb8236b5d3c972c9"
+    },
+    {
+      "path": "prompt-hardening/labels-v2-translation.raw.json",
+      "original_runtime_path": "work/prompt-hardening/labels-v2-translation.raw.json",
+      "bytes": 5715,
+      "sha256": "7eeede23d4f1e98343ab9295d66698c0cf9e930f77a47cdf70bd5eb283314568"
+    },
+    {
+      "path": "prompt-hardening/labels-v2-translation.request.json",
+      "original_runtime_path": "work/prompt-hardening/labels-v2-translation.request.json",
+      "bytes": 14699,
+      "sha256": "4d47fec315b66a26256ee6ba83576b9d62c7007e1f8fcdb6a01e281c745b8850"
+    },
+    {
+      "path": "prompt-hardening/labels-v2.summary.json",
+      "original_runtime_path": "work/prompt-hardening/labels-v2.summary.json",
+      "bytes": 858,
+      "sha256": "29d0a56d93143a8daad41106ac22ed45d1edb2552f618422dc271254769846c1"
+    },
+    {
+      "path": "prompt-hardening/semantic-negative-control.json",
+      "original_runtime_path": "work/prompt-hardening/semantic-negative-control.json",
+      "bytes": 5568,
+      "sha256": "d201619916277717d002e6b5638291dc53502958c3a6fe0af24d7294138a05ea"
+    },
+    {
+      "path": "prompt-hardening/v0-system-prompt.txt",
+      "original_runtime_path": "work/prompt-hardening/v0-system-prompt.txt",
+      "bytes": 3193,
+      "sha256": "06e894cd5b6b808c3af08babaf34e1dedd0eb5c019b220a70a1979d21ee879d5"
+    },
+    {
+      "path": "prompt-hardening/v0-translation.template.json",
+      "original_runtime_path": "work/prompt-hardening/v0-translation.template.json",
+      "bytes": 11002,
+      "sha256": "e90d0bd7c1e86c2cdce57213e2b2c3c8f173652987c072f882d5678bc41d0c93"
+    },
+    {
+      "path": "prompt-hardening/v1-system-prompt.txt.gz",
+      "original_runtime_path": "work/prompt-hardening/v1-system-prompt.txt",
+      "bytes": 2309,
+      "sha256": "b915ae4cb04891bf52737e4bbfd06484480b410007e52f4b5ba942a891663508",
+      "storage_format": "gzip",
+      "original_bytes": 5641,
+      "original_sha256": "4facf795bf7897beeb42d320b59344e42bb0611e67ad7aa3713bcf64e1202612"
+    },
+    {
+      "path": "prompt-hardening/v1-translation.template.json",
+      "original_runtime_path": "work/prompt-hardening/v1-translation.template.json",
+      "bytes": 13666,
+      "sha256": "a5071cde12a648e4727e4b6e5985c3c0c6e18c72ab1885ebab8c1c2837e7fa9b"
+    },
+    {
+      "path": "prompt-hardening/v2-system-prompt.txt",
+      "original_runtime_path": "work/prompt-hardening/v2-system-prompt.txt",
+      "bytes": 6595,
+      "sha256": "d967d254d5f196782e6b9507be0775e29bb1ccb6ddb5dcc94b018bc4959d3859"
+    },
+    {
+      "path": "refine-longer-vco-draft.py",
+      "original_runtime_path": "work/refine-longer-vco-draft.py",
+      "bytes": 5832,
+      "sha256": "39abc861b0f8ccd2130a29da14d2059a0e66384448714cd3adcdc164681b80d2"
+    },
+    {
+      "path": "resume-hardened-profile.py",
+      "original_runtime_path": "work/resume-hardened-profile.py",
+      "bytes": 3476,
+      "sha256": "16e5c10e039b07999e1e4e4eaa5f24e38d3e6fb414e8d4156c4dd1b3900e2334"
+    },
+    {
+      "path": "run-longer-vco-draft-speech.py",
+      "original_runtime_path": "work/run-longer-vco-draft-speech.py",
+      "bytes": 3687,
+      "sha256": "7ae21c635ffaf3abc320c4984154961e6724780587b2cebe0b49b0a14b708374"
+    },
+    {
+      "path": "run-longer-vco-script-attempt2.py",
+      "original_runtime_path": "work/run-longer-vco-script-attempt2.py",
+      "bytes": 3272,
+      "sha256": "a66e7b7bb04587fc1bebc1d29979836c2317757021fc4333265b032341f2ca0f"
+    },
+    {
+      "path": "run-longer-vco-script-attempt3.py",
+      "original_runtime_path": "work/run-longer-vco-script-attempt3.py",
+      "bytes": 3307,
+      "sha256": "f736d22d17262d61b7aa2b093373f921d040c5952003f967bfd0ecd52c412bd7"
+    },
+    {
+      "path": "run-longer-vco-script-attempt4.py",
+      "original_runtime_path": "work/run-longer-vco-script-attempt4.py",
+      "bytes": 3312,
+      "sha256": "b507c4affa01f20505e8dbf2bff1119093612030b012b6b50938a577760e80ca"
+    },
+    {
+      "path": "run-longer-vco-script.py",
+      "original_runtime_path": "work/run-longer-vco-script.py",
+      "bytes": 3180,
+      "sha256": "d81eaee3d8115ed64aee2afc3133232526e18c866d0d83e45a9d40053cd1fc1f"
+    },
+    {
+      "path": "run-longer-vco-speech.py",
+      "original_runtime_path": "work/run-longer-vco-speech.py",
+      "bytes": 3223,
+      "sha256": "ecff00ba4d85edf00ea20a1e1e4b3de11b22373cca50c234d8371a0ca94a76ad"
+    },
+    {
+      "path": "run-vco-tts-smoke.py",
+      "original_runtime_path": "work/run-vco-tts-smoke.py",
+      "bytes": 3256,
+      "sha256": "8dba097d526251e118d661383470f4a360627899131e799b74edc4d362432cb5"
+    },
+    {
+      "path": "trial-learner-language-profile-attempt2.py.gz",
+      "original_runtime_path": "work/trial-learner-language-profile-attempt2.py",
+      "bytes": 2836,
+      "sha256": "f5aa962a6d490727f810968bfb4dc528cb3ede367d7aa87dcf9d9ab3a069fd7e",
+      "storage_format": "gzip",
+      "original_bytes": 7014,
+      "original_sha256": "ea4ea8e0b126ec883ff7c85ce5103e49d2d529233d95bb3870d988f88118ddc7"
+    },
+    {
+      "path": "trial-learner-language-profile-attempt3.py.gz",
+      "original_runtime_path": "work/trial-learner-language-profile-attempt3.py",
+      "bytes": 3161,
+      "sha256": "2513e9c22af62b693cf6a1fdd23bcb55436caa458f4e00540a6eba91cc8506e6",
+      "storage_format": "gzip",
+      "original_bytes": 8069,
+      "original_sha256": "94affc3790f3f6d663ba0be9b4f102401b7bb4124f66e3408c5d065280b26189"
+    },
+    {
+      "path": "trial-learner-language-profile-attempt4.py.gz",
+      "original_runtime_path": "work/trial-learner-language-profile-attempt4.py",
+      "bytes": 3195,
+      "sha256": "c472041a5fef175bdc996ddc17f69788861d51a3e212f10b520c9bd0367a90f3",
+      "storage_format": "gzip",
+      "original_bytes": 8197,
+      "original_sha256": "56debd81c7d4c5aa65350dbd7ccfb78e50d4081963183e2fb99d300d7ad034f7"
+    },
+    {
+      "path": "trial-learner-language-profile.py.gz",
+      "original_runtime_path": "work/trial-learner-language-profile.py",
+      "bytes": 2296,
+      "sha256": "c4c2c41fe099859de0ee38e81d92b2fbefce2320e98147052c879ff242cf1148",
+      "storage_format": "gzip",
+      "original_bytes": 5320,
+      "original_sha256": "8756aa91a0dc25dfd7503b3ec8796c4a8e03e50ce4b4542f9d204552afc1b871"
+    },
+    {
+      "path": "vco-live.json",
+      "original_runtime_path": "work/vco-live.json",
+      "bytes": 19891,
+      "sha256": "b825bd2f7f9e8c3045d2f1eb86e1cd9e8de4f0773f693bdc81fc1ac854c7b43c"
+    },
+    {
+      "path": "vco-profile-en5-or7-attempt2-translation.raw.json",
+      "original_runtime_path": "work/vco-profile-en5-or7-attempt2-translation.raw.json",
+      "bytes": 5730,
+      "sha256": "2511d84e506aaf2b0fc0f3608ecf10f1735088f08b2fb3fa75ad1841627a9d01"
+    },
+    {
+      "path": "vco-profile-en5-or7-attempt3-translation.raw.json",
+      "original_runtime_path": "work/vco-profile-en5-or7-attempt3-translation.raw.json",
+      "bytes": 5964,
+      "sha256": "65c733ef7ef7aceb683c02130dbeb03afdf7d924611dcc58f03e70b950b84d8f"
+    },
+    {
+      "path": "vco-profile-en5-or7-sentence-comparison.json",
+      "original_runtime_path": "work/vco-profile-en5-or7-sentence-comparison.json",
+      "bytes": 7252,
+      "sha256": "f132d7f5832692cce730b75cc9db21de74de1ae0182260669b00ca519e9e75f0"
+    },
+    {
+      "path": "vco-tts-smoke/audio.manifest.json",
+      "original_runtime_path": "work/vco-tts-smoke/audio.manifest.json",
+      "bytes": 1355,
+      "sha256": "6e625994eb9b0b7bfd18cfa848efe5f5a5824adcf9ce42ce6ecd6ae12fca415e"
+    },
+    {
+      "path": "vco-tts-smoke/bundle.result.json",
+      "original_runtime_path": "work/vco-tts-smoke/bundle.result.json",
+      "bytes": 30135,
+      "sha256": "c42a87704b2ca77f4e8d026b89d5fe3b276532556a8ebd8806b05396ada5ad16"
+    },
+    {
+      "path": "vco-tts-smoke/script.result.json",
+      "original_runtime_path": "work/vco-tts-smoke/script.result.json",
+      "bytes": 29817,
+      "sha256": "4170c9b0c07dcdf6a70ed28dff686ecd9e6763b046d248c5993de14bed2efea1"
+    },
+    {
+      "path": "vco-tts-smoke/speech.attempt1.summary.json",
+      "original_runtime_path": "work/vco-tts-smoke/speech.attempt1.summary.json",
+      "bytes": 649,
+      "sha256": "c58a5b93a363e315b0e01c52317a9ec701a8c8100a7eddbfbf06f2576b62304f"
+    },
+    {
+      "path": "vco-tts-smoke/speech.mp3",
+      "original_runtime_path": "work/vco-tts-smoke/speech.mp3",
+      "bytes": 414188,
+      "sha256": "9e48831dfe457647e4d62000b23f48883ba47f1206d0aa12cab40e961c6afc43"
+    },
+    {
+      "path": "vco-tts-smoke/speech.request.json",
+      "original_runtime_path": "work/vco-tts-smoke/speech.request.json",
+      "bytes": 1306,
+      "sha256": "1a5242c560ea4e7c8a3f473758866b96c077c19c81dfb27eb24ed9e0dea84e55"
+    },
+    {
+      "path": "vco-tts-smoke/speech.wav",
+      "original_runtime_path": "work/vco-tts-smoke/speech.wav",
+      "bytes": 2486754,
+      "sha256": "614251a3855f2b6e488d9f3a69549ea46162aacecc406c051514a7964604e32f"
+    },
+    {
+      "path": "listening-site/index.html",
+      "original_runtime_path": "/workspace/sites/kiki-vco-listening-draft/checkout/dist/index.html",
+      "bytes": 6350,
+      "sha256": "ebd8be1b08a8fb6a7210fa0ad41ada1ad773d8ded6555e719f5ecc42148dc719"
+    },
+    {
+      "path": "listening-site/speech-draft.mp3",
+      "original_runtime_path": "/workspace/sites/kiki-vco-listening-draft/checkout/dist/speech-draft.mp3",
+      "bytes": 839084,
+      "sha256": "4b74cbd6bb25ddf5929e0187e1c1e20de87dab4b35b7326a14cd9824c1c93b54"
+    },
+    {
+      "path": "listening-site/hosting.json",
+      "original_runtime_path": "/workspace/sites/kiki-vco-listening-draft/checkout/.openai/hosting.json",
+      "bytes": 106,
+      "sha256": "7fecc605ec4b12103e51d61bb164838811eb732b98464819aa3a1245bb59b1d1"
+    },
+    {
+      "path": "listening-site/deployment-result.json",
+      "original_runtime_path": "/workspace/sites/kiki-vco-listening-draft/work/deployment-result.json",
+      "bytes": 917,
+      "sha256": "de08773b74a66ac6a3a168d339e67f7f7cecc59391d123947df807c9d3074998"
+    },
+    {
+      "path": "listening-site/source-result.json",
+      "original_runtime_path": "/workspace/sites/kiki-vco-listening-draft/work/source-result.json",
+      "bytes": 342,
+      "sha256": "5102f7aceed9e957980f889c3a61780432d605bf97e23d7c3d1fa2a5f52cbfac"
+    },
+    {
+      "path": "listening-site/publish-player.py",
+      "original_runtime_path": "/workspace/sites/kiki-vco-listening-draft/work/publish-player.py",
+      "bytes": 3653,
+      "sha256": "aca316ef050247db3129098b83c8ea824035e6bef559a25cf7ecbeb444c64fae"
+    }
+  ]
+}

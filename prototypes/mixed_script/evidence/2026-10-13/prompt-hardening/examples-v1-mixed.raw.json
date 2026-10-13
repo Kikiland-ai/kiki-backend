@@ -1,0 +1,216 @@
+{
+  "response": {
+    "sentences": [
+      {
+        "id": "s1",
+        "spans": [
+          {
+            "language": "or",
+            "text": "ଗୋଟିଏ "
+          },
+          {
+            "language": "en",
+            "text": "voltage-controlled oscillator"
+          },
+          {
+            "language": "or",
+            "text": " ("
+          },
+          {
+            "language": "en",
+            "text": "VCO"
+          },
+          {
+            "language": "or",
+            "text": ") ଏହାର "
+          },
+          {
+            "language": "en",
+            "text": "output frequency"
+          },
+          {
+            "language": "or",
+            "text": " କୁ ଏହାର "
+          },
+          {
+            "language": "en",
+            "text": "control voltage"
+          },
+          {
+            "language": "or",
+            "text": " ଅନୁସାରେ ବଦଳାଇଥାଏ।"
+          }
+        ],
+        "speech_text": "ଗୋଟିଏ voltage-controlled oscillator V C O ଏହାର output frequency କୁ ଏହାର control voltage ଅନୁସାରେ ବଦଳାଇଥାଏ।"
+      },
+      {
+        "id": "s2",
+        "spans": [
+          {
+            "language": "or",
+            "text": "ଏକ "
+          },
+          {
+            "language": "en",
+            "text": "direct frequency modulation"
+          },
+          {
+            "language": "or",
+            "text": " ("
+          },
+          {
+            "language": "en",
+            "text": "FM"
+          },
+          {
+            "language": "or",
+            "text": ") ରେ, "
+          },
+          {
+            "language": "en",
+            "text": "message signal"
+          },
+          {
+            "language": "or",
+            "text": " "
+          },
+          {
+            "language": "en",
+            "text": "VCO"
+          },
+          {
+            "language": "or",
+            "text": " ର "
+          },
+          {
+            "language": "en",
+            "text": "control input"
+          },
+          {
+            "language": "or",
+            "text": " କୁ ଚଳାଇଥାଏ।"
+          }
+        ],
+        "speech_text": "ଏକ direct frequency modulation F M ରେ, message signal V C O ର control input କୁ ଚଳାଇଥାଏ।"
+      },
+      {
+        "id": "s3",
+        "spans": [
+          {
+            "language": "or",
+            "text": "ଏକ "
+          },
+          {
+            "language": "en",
+            "text": "ideal linear model"
+          },
+          {
+            "language": "or",
+            "text": " ରେ, "
+          },
+          {
+            "language": "en",
+            "text": "f_i(t) = f_c + K_v m(t)"
+          },
+          {
+            "language": "or",
+            "text": ", ତେଣୁ the carrier ର "
+          },
+          {
+            "language": "en",
+            "text": "instantaneous frequency"
+          },
+          {
+            "language": "or",
+            "text": " ବଦଳିଥାଏ କିନ୍ତୁ ଏହାର "
+          },
+          {
+            "language": "en",
+            "text": "amplitude"
+          },
+          {
+            "language": "or",
+            "text": " ସମାନ ରହିଥାଏ।"
+          }
+        ],
+        "speech_text": "ଏକ ideal linear model ରେ, f i of t equals f c plus K v times m of t, ତେଣୁ the carrier ର instantaneous frequency ବଦଳିଥାଏ କିନ୍ତୁ ଏହାର amplitude ସମାନ ରହିଥାଏ।"
+      },
+      {
+        "id": "s4",
+        "spans": [
+          {
+            "language": "or",
+            "text": "ଏଠାରେ "
+          },
+          {
+            "language": "en",
+            "text": "f_c"
+          },
+          {
+            "language": "or",
+            "text": " ହେଉଛି "
+          },
+          {
+            "language": "en",
+            "text": "carrier frequency"
+          },
+          {
+            "language": "or",
+            "text": ", "
+          },
+          {
+            "language": "en",
+            "text": "K_v"
+          },
+          {
+            "language": "or",
+            "text": " ହେଉଛି "
+          },
+          {
+            "language": "en",
+            "text": "VCO sensitivity"
+          },
+          {
+            "language": "or",
+            "text": " "
+          },
+          {
+            "language": "en",
+            "text": "Hz/V"
+          },
+          {
+            "language": "or",
+            "text": " ରେ, ଏବଂ "
+          },
+          {
+            "language": "en",
+            "text": "m(t)"
+          },
+          {
+            "language": "or",
+            "text": " ହେଉଛି "
+          },
+          {
+            "language": "en",
+            "text": "message voltage"
+          },
+          {
+            "language": "or",
+            "text": "।"
+          }
+        ],
+        "speech_text": "ଏଠାରେ f c ହେଉଛି carrier frequency, K v ହେଉଛି V C O sensitivity hertz per volt ରେ, ଏବଂ m of t ହେଉଛି message voltage।"
+      }
+    ]
+  },
+  "call": {
+    "stage": "mixed",
+    "request_sha256": "f8837f31ab4271148cf833c387ca4fa3c33a09dc21595ff8616f70555e421f00",
+    "model_version": "gemini-3.5-flash-lite",
+    "usage": {
+      "promptTokenCount": 4094,
+      "candidatesTokenCount": 1391,
+      "totalTokenCount": 5485
+    }
+  }
+}

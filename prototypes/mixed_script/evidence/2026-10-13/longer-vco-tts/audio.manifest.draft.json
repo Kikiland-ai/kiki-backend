@@ -1,0 +1,65 @@
+{
+  "schema": "mixed-script-audio-trial/v1",
+  "status": "generated",
+  "provider": "Gemini Developer API",
+  "api": "Interactions REST v1beta",
+  "model": "gemini-3.8-flash-lite-tts",
+  "returned_model": "gemini-3.8-flash-lite-tts",
+  "voice": "Kore",
+  "request_sha256": "1be3e84d474ac493998809b7fc0995b0baa14a0b8f19d44de20cd66a24d10069",
+  "speech_script_sha256": "eb054fc5c55a618c5983e5705341d5408904da0e9ad3e2fb9c8710a5a2e526b4",
+  "usage": {
+    "total_tokens": 3106,
+    "total_input_tokens": 486,
+    "total_cached_tokens": 0,
+    "total_output_tokens": 2620,
+    "total_tool_use_tokens": 0,
+    "total_thought_tokens": 0
+  },
+  "audio": {
+    "format": "WAV PCM",
+    "sample_rate_hz": 24000,
+    "channels": 1,
+    "sample_width_bytes": 2,
+    "frames": 2515200,
+    "duration_seconds": 104.8,
+    "peak_pcm": 29196,
+    "rms_pcm": 4102.594780031683,
+    "sha256": "d0860812969321a3a0dd43be9a937a4d549e9d8c9482cf2c1c5f3b82cef0af91",
+    "bytes": 5036514
+  },
+  "timing_cues": null,
+  "alignment_status": "not_performed",
+  "review": {
+    "pronunciation": "pending",
+    "native_Odia": "pending",
+    "spoken_fidelity": "pending"
+  },
+  "script_result_file": "script.draft.result.json",
+  "script_stage": "translation_draft",
+  "mixed_refinement": "blocked_HTTP503",
+  "phrase_warnings": [
+    {
+      "sentence_id": "s5",
+      "phrase": "ideal linear model",
+      "expected": 0,
+      "actual": 1
+    },
+    {
+      "sentence_id": "s7",
+      "phrase": "ideal linear model",
+      "expected": 0,
+      "actual": 1
+    },
+    {
+      "sentence_id": "s8",
+      "phrase": "ideal linear model",
+      "expected": 0,
+      "actual": 1
+    }
+  ],
+  "wav_file": "speech-draft.wav",
+  "mp3_file": "speech-draft.mp3",
+  "mp3_sha256": "4b74cbd6bb25ddf5929e0187e1c1e20de87dab4b35b7326a14cd9824c1c93b54",
+  "mp3_bytes": 839084
+}

@@ -1,0 +1,43 @@
+{
+  "run_id": "heldout-v2",
+  "case": "heldout",
+  "version": "v2",
+  "model": "gemini-3.5-flash-lite",
+  "raw_output_validation": true,
+  "postprocessing": false,
+  "semantic_review": "pending",
+  "native_Odia_review": "pending",
+  "outcome": "passed_all_automated_checks",
+  "calls": [
+    {
+      "stage": "translation",
+      "request_sha256": "f874edafb94b9b4bfe5a0d47ecfbbf09404e753bd89364eb7f52bbb461f7db9d",
+      "model_version": "gemini-3.5-flash-lite",
+      "usage": {
+        "promptTokenCount": 2781,
+        "candidatesTokenCount": 521,
+        "totalTokenCount": 3302
+      }
+    },
+    {
+      "stage": "mixed",
+      "request_sha256": "9cf60871e8f5b00b86de19c642876d12b7464c9052e9e65283737c49154262c7",
+      "model_version": "gemini-3.5-flash-lite",
+      "usage": {
+        "promptTokenCount": 3433,
+        "candidatesTokenCount": 523,
+        "totalTokenCount": 3956
+      }
+    }
+  ],
+  "stage_metrics": [
+    {
+      "stage": "translation",
+      "elapsed_seconds": 1.975
+    },
+    {
+      "stage": "mixed",
+      "elapsed_seconds": 1.854
+    }
+  ]
+}

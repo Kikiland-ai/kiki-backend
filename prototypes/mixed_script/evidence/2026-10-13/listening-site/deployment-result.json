@@ -1,0 +1,20 @@
+{
+  "id": "appgdep_6ace3139ac9881919148098be087778f",
+  "project_id": "appgprj_6ace304b6b148191bb933b144a6706fb",
+  "title": "Kiki VCO listening draft",
+  "version_id": "appgprj_6ace304b6b148191bb933b144a6706fb~appgver_c0cdcb8b63e481919d45fdec25b6413b",
+  "type": "publish",
+  "status": "succeeded",
+  "url": "https://kiki-vco-listening-draft.woodsycarp256.chatgpt.site",
+  "has_mcp": false,
+  "screenshot_asset_pointer": null,
+  "provider_deployment_id": "site---6ace304b6b148191bb933b144a6706fb",
+  "failure_message": null,
+  "env_set_revision": 0,
+  "updated_at": "2026-10-13T13:25:31.962806+00:00",
+  "commit_sha": "09538106b299218855c129b2c2906835aea61fd8",
+  "archive": "/workspace/sites/kiki-vco-listening-draft/work/listening-player.tar",
+  "audience": "owner_private",
+  "browser_playback": "not_automatically_verified",
+  "audio_sha256": "4b74cbd6bb25ddf5929e0187e1c1e20de87dab4b35b7326a14cd9824c1c93b54"
+}

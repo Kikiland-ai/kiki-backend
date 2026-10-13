@@ -1,0 +1,36 @@
+{
+  "run_id": "labels-v2",
+  "case": "vco",
+  "version": "v2",
+  "model": "gemini-3.5-flash-lite",
+  "raw_output_validation": true,
+  "postprocessing": false,
+  "semantic_review": "pending",
+  "native_Odia_review": "pending",
+  "outcome": "failed",
+  "stage": "mixed",
+  "error": "Gemini HTTP 503. No automatic retry was made.",
+  "term_count_diagnostics": [],
+  "calls": [
+    {
+      "stage": "translation",
+      "request_sha256": "11a45489825166faf8e75e15099ae8889fcfd98607eb81bcbb8040e3da60947c",
+      "model_version": "gemini-3.5-flash-lite",
+      "usage": {
+        "promptTokenCount": 3084,
+        "candidatesTokenCount": 1110,
+        "totalTokenCount": 4194
+      }
+    }
+  ],
+  "stage_metrics": [
+    {
+      "stage": "translation",
+      "elapsed_seconds": 8.251
+    },
+    {
+      "stage": "mixed",
+      "elapsed_seconds": 6.578
+    }
+  ]
+}

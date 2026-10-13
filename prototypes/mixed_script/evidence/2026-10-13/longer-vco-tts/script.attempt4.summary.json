@@ -1,0 +1,43 @@
+{
+  "model": "gemini-3.1-flash-lite",
+  "attempt": 4,
+  "timeout_seconds": 180,
+  "prompt_version": "learner-profile-fewshot/v2",
+  "source_words": 151,
+  "source_sentence_ids": [
+    "s1",
+    "s2",
+    "s3",
+    "s4",
+    "s5",
+    "s6",
+    "s7",
+    "s8"
+  ],
+  "source_provenance": "assistant-authored adapted reference with synthetic ideal numerical example",
+  "raw_validation": true,
+  "postprocessing": false,
+  "scientific_and_native_review": "pending",
+  "outcome": "failed",
+  "stage": "translation",
+  "error": "Latin text was placed in an Odia span.",
+  "count_diagnostics": [],
+  "calls": [
+    {
+      "stage": "translation",
+      "request_sha256": "059cd44224d24aac0fdafaeba9e337129faee3ce197897b27f8eb97c93f731c2",
+      "model_version": "gemini-3.1-flash-lite",
+      "usage": {
+        "promptTokenCount": 3816,
+        "candidatesTokenCount": 2029,
+        "totalTokenCount": 5845
+      }
+    }
+  ],
+  "stage_metrics": [
+    {
+      "stage": "translation",
+      "elapsed_seconds": 11.818
+    }
+  ]
+}

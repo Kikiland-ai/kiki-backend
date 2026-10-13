@@ -1,0 +1,40 @@
+{
+  "run_id": "baseline-v0",
+  "case": "vco",
+  "version": "v0",
+  "model": "gemini-3.5-flash-lite",
+  "raw_output_validation": true,
+  "postprocessing": false,
+  "semantic_review": "pending",
+  "native_Odia_review": "pending",
+  "outcome": "failed",
+  "stage": "translation",
+  "error": "An English technical term was changed, added, or omitted.",
+  "term_count_diagnostics": [
+    {
+      "sentence_id": "s4",
+      "term": "VCO",
+      "expected": 1,
+      "display_count": 2,
+      "speech_count": 1
+    }
+  ],
+  "calls": [
+    {
+      "stage": "translation",
+      "request_sha256": "f5a2edd0f08444f766452910d0b8e23a8d37d13c3ff7523342c7b14840854a08",
+      "model_version": "gemini-3.5-flash-lite",
+      "usage": {
+        "promptTokenCount": 2273,
+        "candidatesTokenCount": 1475,
+        "totalTokenCount": 3748
+      }
+    }
+  ],
+  "stage_metrics": [
+    {
+      "stage": "translation",
+      "elapsed_seconds": 12.837
+    }
+  ]
+}

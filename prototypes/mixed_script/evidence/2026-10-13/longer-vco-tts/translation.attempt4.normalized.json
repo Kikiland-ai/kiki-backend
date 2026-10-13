@@ -1,0 +1,504 @@
+{
+  "response": {
+    "sentences": [
+      {
+        "id": "s1",
+        "spans": [
+          {
+            "language": "or",
+            "text": "ଗୋଟିଏ "
+          },
+          {
+            "language": "en",
+            "text": "voltage-controlled oscillator"
+          },
+          {
+            "language": "or",
+            "text": " ("
+          },
+          {
+            "language": "en",
+            "text": "VCO"
+          },
+          {
+            "language": "or",
+            "text": ") ତାହାର "
+          },
+          {
+            "language": "en",
+            "text": "output frequency"
+          },
+          {
+            "language": "or",
+            "text": " କୁ ତାହାର "
+          },
+          {
+            "language": "en",
+            "text": "control voltage"
+          },
+          {
+            "language": "or",
+            "text": " ଅନୁସାରେ ପରିବର୍ତ୍ତନ କରେ।"
+          }
+        ],
+        "speech_text": "ଗୋଟିଏ voltage-controlled oscillator V C O ତାହାର output frequency କୁ ତାହାର control voltage ଅନୁସାରେ ପରିବର୍ତ୍ତନ କରେ।"
+      },
+      {
+        "id": "s2",
+        "spans": [
+          {
+            "language": "or",
+            "text": "ସିଧାସଳଖ "
+          },
+          {
+            "language": "en",
+            "text": "direct frequency modulation"
+          },
+          {
+            "language": "or",
+            "text": " ("
+          },
+          {
+            "language": "en",
+            "text": "FM"
+          },
+          {
+            "language": "or",
+            "text": ") ରେ, "
+          },
+          {
+            "language": "en",
+            "text": "message signal"
+          },
+          {
+            "language": "or",
+            "text": " ଗୁଡିକ "
+          },
+          {
+            "language": "en",
+            "text": "VCO"
+          },
+          {
+            "language": "or",
+            "text": "'"
+          },
+          {
+            "language": "en",
+            "text": "s "
+          },
+          {
+            "language": "en",
+            "text": "control input"
+          },
+          {
+            "language": "or",
+            "text": " କୁ ଚଳାଇଥାଏ।"
+          }
+        ],
+        "speech_text": "ସିଧାସଳଖ direct frequency modulation F M ରେ, message signal ଗୁଡିକ V C O 's control input କୁ ଚଳାଇଥାଏ।"
+      },
+      {
+        "id": "s3",
+        "spans": [
+          {
+            "language": "or",
+            "text": "ଏକ "
+          },
+          {
+            "language": "en",
+            "text": "ideal linear model"
+          },
+          {
+            "language": "or",
+            "text": " ରେ, "
+          },
+          {
+            "language": "en",
+            "text": "f_i(t) = f_c + K_v m(t)"
+          },
+          {
+            "language": "or",
+            "text": ", ତେଣୁ ବାହକର "
+          },
+          {
+            "language": "en",
+            "text": "instantaneous frequency"
+          },
+          {
+            "language": "or",
+            "text": " ପରିବର୍ତ୍ତନ ହୁଏ କିନ୍ତୁ ଏହାର "
+          },
+          {
+            "language": "en",
+            "text": "amplitude"
+          },
+          {
+            "language": "or",
+            "text": " ସ୍ଥିର ରହେ।"
+          }
+        ],
+        "speech_text": "ଏକ ideal linear model ରେ, f i of t equals f c plus K v times m of t, ତେଣୁ ବାହକର instantaneous frequency ପରିବର୍ତ୍ତନ ହୁଏ କିନ୍ତୁ ଏହାର amplitude ସ୍ଥିର ରହେ।"
+      },
+      {
+        "id": "s4",
+        "spans": [
+          {
+            "language": "or",
+            "text": "ଏଠାରେ "
+          },
+          {
+            "language": "en",
+            "text": "f_c"
+          },
+          {
+            "language": "or",
+            "text": " ହେଉଛି "
+          },
+          {
+            "language": "en",
+            "text": "carrier frequency"
+          },
+          {
+            "language": "or",
+            "text": ", "
+          },
+          {
+            "language": "en",
+            "text": "K_v"
+          },
+          {
+            "language": "or",
+            "text": " ହେଉଛି "
+          },
+          {
+            "language": "en",
+            "text": "VCO sensitivity"
+          },
+          {
+            "language": "or",
+            "text": " "
+          },
+          {
+            "language": "en",
+            "text": "Hz/V"
+          },
+          {
+            "language": "or",
+            "text": " ରେ, ଏବଂ "
+          },
+          {
+            "language": "en",
+            "text": "m(t)"
+          },
+          {
+            "language": "or",
+            "text": " ହେଉଛି "
+          },
+          {
+            "language": "en",
+            "text": "message voltage"
+          },
+          {
+            "language": "or",
+            "text": "।"
+          }
+        ],
+        "speech_text": "ଏଠାରେ f c ହେଉଛି carrier frequency, K v ହେଉଛି V C O sensitivity hertz per volt ରେ, ଏବଂ m of t ହେଉଛି message voltage।"
+      },
+      {
+        "id": "s5",
+        "spans": [
+          {
+            "language": "or",
+            "text": "ଉଦାହରଣ ସ୍ୱରୂପ, ଏହି "
+          },
+          {
+            "language": "en",
+            "text": "ideal linear model"
+          },
+          {
+            "language": "or",
+            "text": " ରେ, ଧରିନିଅନ୍ତୁ "
+          },
+          {
+            "language": "en",
+            "text": "f_c = 1000 Hz"
+          },
+          {
+            "language": "or",
+            "text": ", "
+          },
+          {
+            "language": "en",
+            "text": "K_v = 100 Hz/V"
+          },
+          {
+            "language": "or",
+            "text": ", ଏବଂ "
+          },
+          {
+            "language": "en",
+            "text": "m(t) = 0.5 V"
+          },
+          {
+            "language": "or",
+            "text": "।"
+          }
+        ],
+        "speech_text": "ଉଦାହରଣ ସ୍ୱରୂପ, ଏହି ideal linear model ରେ, ଧରିନିଅନ୍ତୁ f c equals one thousand hertz, K v equals one hundred hertz per volt, ଏବଂ m of t equals zero point five volts।"
+      },
+      {
+        "id": "s6",
+        "spans": [
+          {
+            "language": "or",
+            "text": "ଏହି ମୂଲ୍ୟଗୁଡ଼ିକୁ ବ୍ୟବହାର କରିବା ଦ୍ୱାରା "
+          },
+          {
+            "language": "en",
+            "text": "f_i(t) = 1050 Hz"
+          },
+          {
+            "language": "or",
+            "text": " ମିଳେ, ଯାହା "
+          },
+          {
+            "language": "en",
+            "text": "f_c"
+          },
+          {
+            "language": "or",
+            "text": " ଠାରୁ "
+          },
+          {
+            "language": "en",
+            "text": "50 Hz"
+          },
+          {
+            "language": "or",
+            "text": " ଅଧିକ।"
+          }
+        ],
+        "speech_text": "ଏହି ମୂଲ୍ୟଗୁଡ଼ିକୁ ବ୍ୟବହାର କରିବା ଦ୍ୱାରା f i of t equals one thousand fifty hertz ମିଳେ, ଯାହା f c ଠାରୁ fifty hertz ଅଧିକ।"
+      },
+      {
+        "id": "s7",
+        "spans": [
+          {
+            "language": "or",
+            "text": "ଯଦି "
+          },
+          {
+            "language": "en",
+            "text": "m(t) = -0.5 V"
+          },
+          {
+            "language": "or",
+            "text": " ବଦଳରେ ଥାଏ, ତେବେ ସେହି "
+          },
+          {
+            "language": "en",
+            "text": "ideal linear model"
+          },
+          {
+            "language": "or",
+            "text": " ଟି "
+          },
+          {
+            "language": "en",
+            "text": "f_i(t) = 950 Hz"
+          },
+          {
+            "language": "or",
+            "text": " ଦେଇଥାଏ, ଯାହା "
+          },
+          {
+            "language": "en",
+            "text": "f_c"
+          },
+          {
+            "language": "or",
+            "text": " ଠାରୁ "
+          },
+          {
+            "language": "en",
+            "text": "50 Hz"
+          },
+          {
+            "language": "or",
+            "text": " କମ୍।"
+          }
+        ],
+        "speech_text": "ଯଦି m of t equals minus zero point five volts ବଦଳରେ ଥାଏ, ତେବେ ସେହି ideal linear model ଟି f i of t equals nine hundred fifty hertz ଦେଇଥାଏ, ଯାହା f c ଠାରୁ fifty hertz କମ୍।"
+      },
+      {
+        "id": "s8",
+        "spans": [
+          {
+            "language": "or",
+            "text": "ଏହି ଉଦାହରଣଗୁଡ଼ିକ ଏକ ସମ୍ଭାବ୍ୟ "
+          },
+          {
+            "language": "en",
+            "text": "ideal linear model"
+          },
+          {
+            "language": "or",
+            "text": " କୁ ବର୍ଣ୍ଣନା କରେ, କିନ୍ତୁ ଏହା ଗ୍ୟାରେଣ୍ଟି ଦିଏ ନାହିଁ ଯେ ପ୍ରତ୍ୟେକ ପ୍ରକୃତ "
+          },
+          {
+            "language": "en",
+            "text": "VCO"
+          },
+          {
+            "language": "or",
+            "text": " ରେ ଏକ ସଂପୂର୍ଣ୍ଣ ରୈଖିକ ପ୍ରତିକ୍ରିୟା ବା ଏହାର ସମଗ୍ର କାର୍ଯ୍ୟକ୍ଷମ ପରିସରରେ ସ୍ଥିର "
+          },
+          {
+            "language": "en",
+            "text": "amplitude"
+          },
+          {
+            "language": "or",
+            "text": " ଥାଏ।"
+          }
+        ],
+        "speech_text": "ଏହି ଉଦାହରଣଗୁଡ଼ିକ ଏକ ସମ୍ଭାବ୍ୟ ideal linear model କୁ ବର୍ଣ୍ଣନା କରେ, କିନ୍ତୁ ଏହା ଗ୍ୟାରେଣ୍ଟି ଦିଏ ନାହିଁ ଯେ ପ୍ରତ୍ୟେକ ପ୍ରକୃତ V C O ରେ ଏକ ସଂପୂର୍ଣ୍ଣ ରୈଖିକ ପ୍ରତିକ୍ରିୟା ବା ଏହାର ସମଗ୍ର କାର୍ଯ୍ୟକ୍ଷମ ପରିସରରେ ସ୍ଥିର amplitude ଥାଏ।"
+      }
+    ]
+  },
+  "repairs": [
+    {
+      "stage": "translation",
+      "sentence_id": "s2",
+      "before": [
+        {
+          "language": "or",
+          "text": "ସିଧାସଳଖ "
+        },
+        {
+          "language": "en",
+          "text": "direct frequency modulation"
+        },
+        {
+          "language": "or",
+          "text": " ("
+        },
+        {
+          "language": "en",
+          "text": "FM"
+        },
+        {
+          "language": "or",
+          "text": ") ରେ, "
+        },
+        {
+          "language": "en",
+          "text": "message signal"
+        },
+        {
+          "language": "or",
+          "text": " ଗୁଡିକ "
+        },
+        {
+          "language": "en",
+          "text": "VCO"
+        },
+        {
+          "language": "or",
+          "text": "'s "
+        },
+        {
+          "language": "en",
+          "text": "control input"
+        },
+        {
+          "language": "or",
+          "text": " କୁ ଚଳାଇଥାଏ।"
+        }
+      ],
+      "after": [
+        {
+          "language": "or",
+          "text": "ସିଧାସଳଖ "
+        },
+        {
+          "language": "en",
+          "text": "direct frequency modulation"
+        },
+        {
+          "language": "or",
+          "text": " ("
+        },
+        {
+          "language": "en",
+          "text": "FM"
+        },
+        {
+          "language": "or",
+          "text": ") ରେ, "
+        },
+        {
+          "language": "en",
+          "text": "message signal"
+        },
+        {
+          "language": "or",
+          "text": " ଗୁଡିକ "
+        },
+        {
+          "language": "en",
+          "text": "VCO"
+        },
+        {
+          "language": "or",
+          "text": "'"
+        },
+        {
+          "language": "en",
+          "text": "s "
+        },
+        {
+          "language": "en",
+          "text": "control input"
+        },
+        {
+          "language": "or",
+          "text": " କୁ ଚଳାଇଥାଏ।"
+        }
+      ],
+      "text_unchanged": true
+    }
+  ],
+  "call": {
+    "stage": "translation",
+    "request_sha256": "059cd44224d24aac0fdafaeba9e337129faee3ce197897b27f8eb97c93f731c2",
+    "model_version": "gemini-3.1-flash-lite",
+    "usage": {
+      "promptTokenCount": 3816,
+      "candidatesTokenCount": 2029,
+      "totalTokenCount": 5845
+    }
+  },
+  "core_validation": "passed",
+  "additional_phrase_warnings": [
+    {
+      "sentence_id": "s5",
+      "phrase": "ideal linear model",
+      "expected": 0,
+      "actual": 1
+    },
+    {
+      "sentence_id": "s7",
+      "phrase": "ideal linear model",
+      "expected": 0,
+      "actual": 1
+    },
+    {
+      "sentence_id": "s8",
+      "phrase": "ideal linear model",
+      "expected": 0,
+      "actual": 1
+    }
+  ]
+}

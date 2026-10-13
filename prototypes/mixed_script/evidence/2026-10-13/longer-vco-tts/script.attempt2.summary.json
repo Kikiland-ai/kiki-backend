@@ -1,0 +1,32 @@
+{
+  "model": "gemini-3.5-flash-lite",
+  "attempt": 2,
+  "timeout_seconds": 180,
+  "prompt_version": "learner-profile-fewshot/v2",
+  "source_words": 151,
+  "source_sentence_ids": [
+    "s1",
+    "s2",
+    "s3",
+    "s4",
+    "s5",
+    "s6",
+    "s7",
+    "s8"
+  ],
+  "source_provenance": "assistant-authored adapted reference with synthetic ideal numerical example",
+  "raw_validation": true,
+  "postprocessing": false,
+  "scientific_and_native_review": "pending",
+  "outcome": "failed",
+  "stage": "translation",
+  "error": "Gemini HTTP 503. No automatic retry was made.",
+  "count_diagnostics": [],
+  "calls": [],
+  "stage_metrics": [
+    {
+      "stage": "translation",
+      "elapsed_seconds": 1.239
+    }
+  ]
+}

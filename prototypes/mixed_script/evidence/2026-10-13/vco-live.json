@@ -1,0 +1,577 @@
+{
+  "schema": "mixed-script/v1",
+  "created_at": "2026-10-13T10:31:05.019184+00:00",
+  "input_sha256": "c5c72e3230bfdca87e1e855ef94cb8b7b403679cfa5e8876bef64ecc7f3feb59",
+  "prompt_version": "vco-odia-mix/1",
+  "provenance": {
+    "mode": "gemini",
+    "provider": "Gemini Developer API",
+    "model": "gemini-3.5-flash-lite",
+    "calls": [
+      {
+        "stage": "translation",
+        "request_sha256": "54d387cca18d0c27200afc88a8878cf06d559b8e5e73104f19ff546d2d63cd0f",
+        "model_version": "gemini-3.5-flash-lite",
+        "usage": {
+          "promptTokenCount": 1483,
+          "candidatesTokenCount": 1298,
+          "totalTokenCount": 2781
+        }
+      },
+      {
+        "stage": "mixed",
+        "request_sha256": "4f2ef7748f43043f66b2a5c2c9966a43091bbbd1aaf211f0e16833fd7307f8b9",
+        "model_version": "gemini-3.5-flash-lite",
+        "usage": {
+          "promptTokenCount": 2768,
+          "candidatesTokenCount": 1298,
+          "totalTokenCount": 4066
+        }
+      }
+    ]
+  },
+  "source": {
+    "schema": "mixed-script-input/v1",
+    "id": "vco-fm-baseline",
+    "title": "A VCO in direct frequency modulation",
+    "source": {
+      "kind": "adapted_reference",
+      "review_status": "pending",
+      "references": [
+        {
+          "title": "Analog Devices: FM Modulation",
+          "url": "https://www.analog.com/en/resources/glossary/fm-modulator.html"
+        },
+        {
+          "title": "Analog Devices: Voltage Controlled Oscillator",
+          "url": "https://wiki.analog.com/resources/tools-software/sigmastudio/toolbox/sources/vco"
+        }
+      ]
+    },
+    "mix": {
+      "support_language": "or",
+      "script": "Odia",
+      "level": "odia-led-english-terms"
+    },
+    "glossary": [
+      {
+        "id": "t-vco",
+        "english": "VCO",
+        "meaning_or": "ନିୟନ୍ତ୍ରଣ ଭୋଲ୍ଟେଜ୍ ଅନୁସାରେ ଆବୃତ୍ତି ବଦଳୁଥିବା ଦୋଳକ",
+        "pronunciation_or": "ଭି ସି ଓ",
+        "spoken_en": "V C O",
+        "review_status": "pending"
+      },
+      {
+        "id": "t-frequency",
+        "english": "output frequency",
+        "meaning_or": "ଆଉଟପୁଟ୍ ସଙ୍କେତର ଆବୃତ୍ତି",
+        "pronunciation_or": "ଆଉଟପୁଟ୍ ଫ୍ରିକ୍ୱେନ୍ସି",
+        "spoken_en": "output frequency",
+        "review_status": "pending"
+      },
+      {
+        "id": "t-control",
+        "english": "control voltage",
+        "meaning_or": "ଆବୃତ୍ତି ନିୟନ୍ତ୍ରଣ କରୁଥିବା ଭୋଲ୍ଟେଜ୍",
+        "pronunciation_or": "କଣ୍ଟ୍ରୋଲ୍ ଭୋଲ୍ଟେଜ୍",
+        "spoken_en": "control voltage",
+        "review_status": "pending"
+      },
+      {
+        "id": "t-fm",
+        "english": "FM",
+        "meaning_or": "ବାହକ ସଙ୍କେତର ଆବୃତ୍ତି ବଦଳାଇ ସୂଚନା ପଠାଇବା",
+        "pronunciation_or": "ଏଫ୍ ଏମ୍",
+        "spoken_en": "F M",
+        "review_status": "pending"
+      },
+      {
+        "id": "t-message",
+        "english": "message signal",
+        "meaning_or": "ପଠାଇବାକୁ ଥିବା ସୂଚନାର ସଙ୍କେତ",
+        "pronunciation_or": "ମେସେଜ୍ ସିଗ୍ନାଲ୍",
+        "spoken_en": "message signal",
+        "review_status": "pending"
+      },
+      {
+        "id": "t-instantaneous",
+        "english": "instantaneous frequency",
+        "meaning_or": "ଏକ ନିର୍ଦ୍ଦିଷ୍ଟ କ୍ଷଣରେ ସଙ୍କେତର ଆବୃତ୍ତି",
+        "pronunciation_or": "ଇନ୍ଷ୍ଟାଣ୍ଟେନିଅସ୍ ଫ୍ରିକ୍ୱେନ୍ସି",
+        "spoken_en": "instantaneous frequency",
+        "review_status": "pending"
+      },
+      {
+        "id": "t-amplitude",
+        "english": "amplitude",
+        "meaning_or": "ସଙ୍କେତର ବିସ୍ତାର",
+        "pronunciation_or": "ଆମ୍ପ୍ଲିଟ୍ୟୁଡ୍",
+        "spoken_en": "amplitude",
+        "review_status": "pending"
+      },
+      {
+        "id": "t-carrier",
+        "english": "carrier frequency",
+        "meaning_or": "ବାହକ ସଙ୍କେତର ଆବୃତ୍ତି",
+        "pronunciation_or": "କ୍ୟାରିଅର୍ ଫ୍ରିକ୍ୱେନ୍ସି",
+        "spoken_en": "carrier frequency",
+        "review_status": "pending"
+      }
+    ],
+    "sentences": [
+      {
+        "id": "s1",
+        "english": "A voltage-controlled oscillator (VCO) changes its output frequency according to its control voltage.",
+        "term_ids": [
+          "t-vco",
+          "t-frequency",
+          "t-control"
+        ],
+        "literals": []
+      },
+      {
+        "id": "s2",
+        "english": "In direct frequency modulation (FM), the message signal drives the VCO's control input.",
+        "term_ids": [
+          "t-vco",
+          "t-fm",
+          "t-message"
+        ],
+        "literals": []
+      },
+      {
+        "id": "s3",
+        "english": "In an ideal linear model, f_i(t) = f_c + K_v m(t), so the carrier's instantaneous frequency varies while its amplitude remains constant.",
+        "term_ids": [
+          "t-instantaneous",
+          "t-amplitude"
+        ],
+        "literals": [
+          {
+            "text": "f_i(t) = f_c + K_v m(t)",
+            "spoken": "f i of t equals f c plus K v times m of t"
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "english": "Here f_c is the carrier frequency, K_v is the VCO sensitivity in Hz/V, and m(t) is the message voltage.",
+        "term_ids": [
+          "t-vco",
+          "t-carrier"
+        ],
+        "literals": [
+          {
+            "text": "f_c",
+            "spoken": "f c"
+          },
+          {
+            "text": "K_v",
+            "spoken": "K v"
+          },
+          {
+            "text": "Hz/V",
+            "spoken": "hertz per volt"
+          },
+          {
+            "text": "m(t)",
+            "spoken": "m of t"
+          }
+        ]
+      }
+    ]
+  },
+  "translation": {
+    "sentences": [
+      {
+        "id": "s1",
+        "spans": [
+          {
+            "language": "or",
+            "text": "ଗୋଟିଏ "
+          },
+          {
+            "language": "en",
+            "text": "VCO"
+          },
+          {
+            "language": "or",
+            "text": " ଏହାର "
+          },
+          {
+            "language": "en",
+            "text": "control voltage"
+          },
+          {
+            "language": "or",
+            "text": " ଅନୁସାରେ ଏହାର "
+          },
+          {
+            "language": "en",
+            "text": "output frequency"
+          },
+          {
+            "language": "or",
+            "text": " ବଦଳାଇଥାଏ।"
+          }
+        ],
+        "speech_text": "ଗୋଟିଏ V C O ଏହାର control voltage ଅନୁସାରେ ଏହାର output frequency ବଦଳାଇଥାଏ।",
+        "display_text": "ଗୋଟିଏ VCO ଏହାର control voltage ଅନୁସାରେ ଏହାର output frequency ବଦଳାଇଥାଏ।",
+        "term_ids": [
+          "t-vco",
+          "t-frequency",
+          "t-control"
+        ]
+      },
+      {
+        "id": "s2",
+        "spans": [
+          {
+            "language": "or",
+            "text": "ସିଧାସଳଖ "
+          },
+          {
+            "language": "en",
+            "text": "FM"
+          },
+          {
+            "language": "or",
+            "text": " ରେ, "
+          },
+          {
+            "language": "en",
+            "text": "message signal"
+          },
+          {
+            "language": "or",
+            "text": " "
+          },
+          {
+            "language": "en",
+            "text": "VCO"
+          },
+          {
+            "language": "or",
+            "text": " ର କଣ୍ଟ୍ରୋଲ୍ ଇନ୍ପୁଟ୍କୁ ଚାଳିତ କରିଥାଏ।"
+          }
+        ],
+        "speech_text": "ସିଧାସଳଖ F M ରେ, message signal V C O ର କଣ୍ଟ୍ରୋଲ୍ ଇନ୍ପୁଟ୍କୁ ଚାଳିତ କରିଥାଏ।",
+        "display_text": "ସିଧାସଳଖ FM ରେ, message signal VCO ର କଣ୍ଟ୍ରୋଲ୍ ଇନ୍ପୁଟ୍କୁ ଚାଳିତ କରିଥାଏ।",
+        "term_ids": [
+          "t-vco",
+          "t-fm",
+          "t-message"
+        ]
+      },
+      {
+        "id": "s3",
+        "spans": [
+          {
+            "language": "or",
+            "text": "ଏକ ଆଦର୍ଶ ରେଖୀୟ ମଡେଲରେ, "
+          },
+          {
+            "language": "en",
+            "text": "f_i(t) = f_c + K_v m(t)"
+          },
+          {
+            "language": "or",
+            "text": " ଅଟେ, ତେଣୁ ବାହକର "
+          },
+          {
+            "language": "en",
+            "text": "instantaneous frequency"
+          },
+          {
+            "language": "or",
+            "text": " ପରିବର୍ତ୍ତନ ହୋଇଥାଏ ଯେତେବେଳେ କି ଏହାର "
+          },
+          {
+            "language": "en",
+            "text": "amplitude"
+          },
+          {
+            "language": "or",
+            "text": " ସ୍ଥିର ରହିଥାଏ।"
+          }
+        ],
+        "speech_text": "ଏକ ଆଦର୍ଶ ରେଖୀୟ ମଡେଲରେ, f i of t equals f c plus K v times m of t ଅଟେ, ତେଣୁ ବାହକର instantaneous frequency ପରିବର୍ତ୍ତନ ହୋଇଥାଏ ଯେତେବେଳେ କି ଏହାର amplitude ସ୍ଥିର ରହିଥାଏ।",
+        "display_text": "ଏକ ଆଦର୍ଶ ରେଖୀୟ ମଡେଲରେ, f_i(t) = f_c + K_v m(t) ଅଟେ, ତେଣୁ ବାହକର instantaneous frequency ପରିବର୍ତ୍ତନ ହୋଇଥାଏ ଯେତେବେଳେ କି ଏହାର amplitude ସ୍ଥିର ରହିଥାଏ।",
+        "term_ids": [
+          "t-instantaneous",
+          "t-amplitude"
+        ]
+      },
+      {
+        "id": "s4",
+        "spans": [
+          {
+            "language": "or",
+            "text": "ଏଠାରେ "
+          },
+          {
+            "language": "en",
+            "text": "f_c"
+          },
+          {
+            "language": "or",
+            "text": " ହେଉଛି "
+          },
+          {
+            "language": "en",
+            "text": "carrier frequency"
+          },
+          {
+            "language": "or",
+            "text": ", "
+          },
+          {
+            "language": "en",
+            "text": "K_v"
+          },
+          {
+            "language": "or",
+            "text": " ହେଉଛି "
+          },
+          {
+            "language": "en",
+            "text": "VCO"
+          },
+          {
+            "language": "or",
+            "text": " ସମ୍ବେଦନଶୀଳତା "
+          },
+          {
+            "language": "en",
+            "text": "Hz/V"
+          },
+          {
+            "language": "or",
+            "text": " ରେ, ଏବଂ "
+          },
+          {
+            "language": "en",
+            "text": "m(t)"
+          },
+          {
+            "language": "or",
+            "text": " ହେଉଛି ମେସେଜ୍ ଭୋଲ୍ଟେଜ୍।"
+          }
+        ],
+        "speech_text": "ଏଠାରେ f c ହେଉଛି carrier frequency, K v ହେଉଛି V C O ସମ୍ବେଦନଶୀଳତା hertz per volt ରେ, ଏବଂ m of t ହେଉଛି ମେସେଜ୍ ଭୋଲ୍ଟେଜ୍।",
+        "display_text": "ଏଠାରେ f_c ହେଉଛି carrier frequency, K_v ହେଉଛି VCO ସମ୍ବେଦନଶୀଳତା Hz/V ରେ, ଏବଂ m(t) ହେଉଛି ମେସେଜ୍ ଭୋଲ୍ଟେଜ୍।",
+        "term_ids": [
+          "t-vco",
+          "t-carrier"
+        ]
+      }
+    ]
+  },
+  "mixed": {
+    "sentences": [
+      {
+        "id": "s1",
+        "spans": [
+          {
+            "language": "or",
+            "text": "ଗୋଟିଏ "
+          },
+          {
+            "language": "en",
+            "text": "VCO"
+          },
+          {
+            "language": "or",
+            "text": " ଏହାର "
+          },
+          {
+            "language": "en",
+            "text": "control voltage"
+          },
+          {
+            "language": "or",
+            "text": " ଅନୁସାରେ ଏହାର "
+          },
+          {
+            "language": "en",
+            "text": "output frequency"
+          },
+          {
+            "language": "or",
+            "text": " ବଦଳାଇଥାଏ।"
+          }
+        ],
+        "speech_text": "ଗୋଟିଏ V C O ଏହାର control voltage ଅନୁସାରେ ଏହାର output frequency ବଦଳାଇଥାଏ।",
+        "display_text": "ଗୋଟିଏ VCO ଏହାର control voltage ଅନୁସାରେ ଏହାର output frequency ବଦଳାଇଥାଏ।",
+        "term_ids": [
+          "t-vco",
+          "t-frequency",
+          "t-control"
+        ]
+      },
+      {
+        "id": "s2",
+        "spans": [
+          {
+            "language": "or",
+            "text": "ସିଧାସଳଖ "
+          },
+          {
+            "language": "en",
+            "text": "FM"
+          },
+          {
+            "language": "or",
+            "text": " ରେ, "
+          },
+          {
+            "language": "en",
+            "text": "message signal"
+          },
+          {
+            "language": "or",
+            "text": " "
+          },
+          {
+            "language": "en",
+            "text": "VCO"
+          },
+          {
+            "language": "or",
+            "text": " ର କଣ୍ଟ୍ରୋଲ୍ ଇନ୍ପୁଟ୍କୁ ଚାଳିତ କରିଥାଏ।"
+          }
+        ],
+        "speech_text": "ସିଧାସଳଖ F M ରେ, message signal V C O ର କଣ୍ଟ୍ରୋଲ୍ ଇନ୍ପୁଟ୍କୁ ଚାଳିତ କରିଥାଏ।",
+        "display_text": "ସିଧାସଳଖ FM ରେ, message signal VCO ର କଣ୍ଟ୍ରୋଲ୍ ଇନ୍ପୁଟ୍କୁ ଚାଳିତ କରିଥାଏ।",
+        "term_ids": [
+          "t-vco",
+          "t-fm",
+          "t-message"
+        ]
+      },
+      {
+        "id": "s3",
+        "spans": [
+          {
+            "language": "or",
+            "text": "ଏକ ଆଦର୍ଶ ରେଖୀୟ ମଡେଲରେ, "
+          },
+          {
+            "language": "en",
+            "text": "f_i(t) = f_c + K_v m(t)"
+          },
+          {
+            "language": "or",
+            "text": " ଅଟେ, ତେଣୁ ବାହକର "
+          },
+          {
+            "language": "en",
+            "text": "instantaneous frequency"
+          },
+          {
+            "language": "or",
+            "text": " ପରିବର୍ତ୍ତନ ହୋଇଥାଏ ଯେତେବେଳେ କି ଏହାର "
+          },
+          {
+            "language": "en",
+            "text": "amplitude"
+          },
+          {
+            "language": "or",
+            "text": " ସ୍ଥିର ରହିଥାଏ।"
+          }
+        ],
+        "speech_text": "ଏକ ଆଦର୍ଶ ରେଖୀୟ ମଡେଲରେ, f i of t equals f c plus K v times m of t ଅଟେ, ତେଣୁ ବାହକର instantaneous frequency ପରିବର୍ତ୍ତନ ହୋଇଥାଏ ଯେତେବେଳେ କି ଏହାର amplitude ସ୍ଥିର ରହିଥାଏ।",
+        "display_text": "ଏକ ଆଦର୍ଶ ରେଖୀୟ ମଡେଲରେ, f_i(t) = f_c + K_v m(t) ଅଟେ, ତେଣୁ ବାହକର instantaneous frequency ପରିବର୍ତ୍ତନ ହୋଇଥାଏ ଯେତେବେଳେ କି ଏହାର amplitude ସ୍ଥିର ରହିଥାଏ।",
+        "term_ids": [
+          "t-instantaneous",
+          "t-amplitude"
+        ]
+      },
+      {
+        "id": "s4",
+        "spans": [
+          {
+            "language": "or",
+            "text": "ଏଠାରେ "
+          },
+          {
+            "language": "en",
+            "text": "f_c"
+          },
+          {
+            "language": "or",
+            "text": " ହେଉଛି "
+          },
+          {
+            "language": "en",
+            "text": "carrier frequency"
+          },
+          {
+            "language": "or",
+            "text": ", "
+          },
+          {
+            "language": "en",
+            "text": "K_v"
+          },
+          {
+            "language": "or",
+            "text": " ହେଉଛି "
+          },
+          {
+            "language": "en",
+            "text": "VCO"
+          },
+          {
+            "language": "or",
+            "text": " ସମ୍ବେଦନଶୀଳତା "
+          },
+          {
+            "language": "en",
+            "text": "Hz/V"
+          },
+          {
+            "language": "or",
+            "text": " ରେ, ଏବଂ "
+          },
+          {
+            "language": "en",
+            "text": "m(t)"
+          },
+          {
+            "language": "or",
+            "text": " ହେଉଛି ମେସେଜ୍ ଭୋଲ୍ଟେଜ୍।"
+          }
+        ],
+        "speech_text": "ଏଠାରେ f c ହେଉଛି carrier frequency, K v ହେଉଛି V C O ସମ୍ବେଦନଶୀଳତା hertz per volt ରେ, ଏବଂ m of t ହେଉଛି ମେସେଜ୍ ଭୋଲ୍ଟେଜ୍।",
+        "display_text": "ଏଠାରେ f_c ହେଉଛି carrier frequency, K_v ହେଉଛି VCO ସମ୍ବେଦନଶୀଳତା Hz/V ରେ, ଏବଂ m(t) ହେଉଛି ମେସେଜ୍ ଭୋଲ୍ଟେଜ୍।",
+        "term_ids": [
+          "t-vco",
+          "t-carrier"
+        ]
+      }
+    ]
+  },
+  "paragraph": "ଗୋଟିଏ VCO ଏହାର control voltage ଅନୁସାରେ ଏହାର output frequency ବଦଳାଇଥାଏ। ସିଧାସଳଖ FM ରେ, message signal VCO ର କଣ୍ଟ୍ରୋଲ୍ ଇନ୍ପୁଟ୍କୁ ଚାଳିତ କରିଥାଏ। ଏକ ଆଦର୍ଶ ରେଖୀୟ ମଡେଲରେ, f_i(t) = f_c + K_v m(t) ଅଟେ, ତେଣୁ ବାହକର instantaneous frequency ପରିବର୍ତ୍ତନ ହୋଇଥାଏ ଯେତେବେଳେ କି ଏହାର amplitude ସ୍ଥିର ରହିଥାଏ। ଏଠାରେ f_c ହେଉଛି carrier frequency, K_v ହେଉଛି VCO ସମ୍ବେଦନଶୀଳତା Hz/V ରେ, ଏବଂ m(t) ହେଉଛି ମେସେଜ୍ ଭୋଲ୍ଟେଜ୍।",
+  "speech_script": "ଗୋଟିଏ V C O ଏହାର control voltage ଅନୁସାରେ ଏହାର output frequency ବଦଳାଇଥାଏ। ସିଧାସଳଖ F M ରେ, message signal V C O ର କଣ୍ଟ୍ରୋଲ୍ ଇନ୍ପୁଟ୍କୁ ଚାଳିତ କରିଥାଏ। ଏକ ଆଦର୍ଶ ରେଖୀୟ ମଡେଲରେ, f i of t equals f c plus K v times m of t ଅଟେ, ତେଣୁ ବାହକର instantaneous frequency ପରିବର୍ତ୍ତନ ହୋଇଥାଏ ଯେତେବେଳେ କି ଏହାର amplitude ସ୍ଥିର ରହିଥାଏ। ଏଠାରେ f c ହେଉଛି carrier frequency, K v ହେଉଛି V C O ସମ୍ବେଦନଶୀଳତା hertz per volt ରେ, ଏବଂ m of t ହେଉଛି ମେସେଜ୍ ଭୋଲ୍ଟେଜ୍।",
+  "validation": {
+    "automated": "passed",
+    "checks": [
+      "sentence_ids",
+      "language_spans",
+      "Odia_script",
+      "English_terms",
+      "protected_literals",
+      "numeric_values",
+      "spoken_expansions"
+    ],
+    "meaning_review": "pending",
+    "native_Odia_review": "pending"
+  },
+  "audio": {
+    "status": "not_generated",
+    "timing_cues": null
+  }
+}

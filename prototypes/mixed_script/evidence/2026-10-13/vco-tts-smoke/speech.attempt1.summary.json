@@ -1,0 +1,22 @@
+{
+  "model": "gemini-3.8-flash-lite-tts",
+  "voice": "Kore",
+  "script_sha256": "e26fc46d2f99d766eaf81a654a673548f23cec7ad7ab7cfe0ffcb4571ff16a64",
+  "script_automated_validation": "passed",
+  "scientific_and_native_review": "pending",
+  "outcome": "generated",
+  "audio": {
+    "format": "WAV PCM",
+    "sample_rate_hz": 24000,
+    "channels": 1,
+    "sample_width_bytes": 2,
+    "frames": 1240320,
+    "duration_seconds": 51.68,
+    "peak_pcm": 29222,
+    "rms_pcm": 4621.228031818258,
+    "sha256": "614251a3855f2b6e488d9f3a69549ea46162aacecc406c051514a7964604e32f",
+    "bytes": 2486754
+  },
+  "mp3_bytes": 414188,
+  "elapsed_seconds": 13.556
+}

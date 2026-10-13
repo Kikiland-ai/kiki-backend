@@ -1,0 +1,47 @@
+{
+  "run_id": "labels-v2-resume",
+  "version": "v2",
+  "case": "vco",
+  "reused_translation_from": "labels-v2",
+  "backoff_seconds": 319.1,
+  "model": "gemini-3.5-flash-lite",
+  "postprocessing": false,
+  "semantic_review": "pending",
+  "native_Odia_review": "pending",
+  "outcome": "passed_all_automated_checks",
+  "same_mixed_request_retried": true,
+  "calls": [
+    {
+      "stage": "translation",
+      "request_sha256": "11a45489825166faf8e75e15099ae8889fcfd98607eb81bcbb8040e3da60947c",
+      "model_version": "gemini-3.5-flash-lite",
+      "usage": {
+        "promptTokenCount": 3084,
+        "candidatesTokenCount": 1110,
+        "totalTokenCount": 4194
+      }
+    },
+    {
+      "stage": "mixed",
+      "request_sha256": "53e5f26252acaebdfac5cc0eff395ef4cf011dbfcd8076a53cc0d434a9ef2cb0",
+      "model_version": "gemini-3.5-flash-lite",
+      "usage": {
+        "promptTokenCount": 4358,
+        "candidatesTokenCount": 953,
+        "totalTokenCount": 5311
+      }
+    }
+  ],
+  "stage_metrics": [
+    {
+      "stage": "translation",
+      "elapsed_seconds": 0,
+      "reused": true
+    },
+    {
+      "stage": "mixed",
+      "elapsed_seconds": 2.68
+    }
+  ],
+  "new_api_requests": 1
+}

@@ -1,0 +1,151 @@
+{
+  "kind": "selected-sentence-comparison-not-completed-profile-pipeline",
+  "profile": {
+    "english_self_reported_confidence": 5,
+    "odia_self_reported_confidence": 7,
+    "scale": 10,
+    "preferred_language": "or",
+    "retain_english_phrases": [
+      "voltage-controlled oscillator",
+      "direct frequency modulation",
+      "control input",
+      "ideal linear model",
+      "VCO sensitivity",
+      "message voltage"
+    ],
+    "phrase_familiarity": "proposed, not independently known"
+  },
+  "examples": [
+    {
+      "id": "s1",
+      "english": "A voltage-controlled oscillator (VCO) changes its output frequency according to its control voltage.",
+      "baseline_display": "ଗୋଟିଏ VCO ଏହାର control voltage ଅନୁସାରେ ଏହାର output frequency ବଦଳାଇଥାଏ।",
+      "profile_display": "ଗୋଟିଏ voltage-controlled oscillator (VCO) ଏହାର output frequencyକୁ ଏହାର control voltage ଅନୁସାରେ ବଦଳାଇଥାଏ।",
+      "profile_speech_text": "ଗୋଟିଏ voltage-controlled oscillator ( V C O ) ଏହାର output frequency କୁ ଏହାର control voltage ଅନୁସାରେ ବଦଳାଇଥାଏ।",
+      "source_response": "work/vco-profile-en5-or7-attempt2-translation.raw.json",
+      "source_call": {
+        "stage": "translation",
+        "request_sha256": "6c1ef0bd26f856afe727fb516734197b3dd0b988b2b6ac78d30b011e79fc49d5",
+        "model_version": "gemini-3.5-flash-lite",
+        "usage": {
+          "promptTokenCount": 1921,
+          "candidatesTokenCount": 1458,
+          "totalTokenCount": 3379
+        }
+      },
+      "sentence_automated_validation": "passed",
+      "phrase_checks": [
+        {
+          "phrase": "voltage-controlled oscillator",
+          "expected": 1,
+          "display_count": 1,
+          "speech_count": 1,
+          "all_in_english_span": true
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "english": "In direct frequency modulation (FM), the message signal drives the VCO's control input.",
+      "baseline_display": "ସିଧାସଳଖ FM ରେ, message signal VCO ର କଣ୍ଟ୍ରୋଲ୍ ଇନ୍ପୁଟ୍କୁ ଚାଳିତ କରିଥାଏ।",
+      "profile_display": "ସିଧାସଳଖ direct frequency modulation (FM) ରେ, message signal VCO ର control inputକୁ ଚାଳିତ କରିଥାଏ।",
+      "profile_speech_text": "ସିଧାସଳଖ direct frequency modulation ( F M ) ରେ, message signal V C O ର control input କୁ ଚାଳିତ କରିଥାଏ।",
+      "source_response": "work/vco-profile-en5-or7-attempt2-translation.raw.json",
+      "source_call": {
+        "stage": "translation",
+        "request_sha256": "6c1ef0bd26f856afe727fb516734197b3dd0b988b2b6ac78d30b011e79fc49d5",
+        "model_version": "gemini-3.5-flash-lite",
+        "usage": {
+          "promptTokenCount": 1921,
+          "candidatesTokenCount": 1458,
+          "totalTokenCount": 3379
+        }
+      },
+      "sentence_automated_validation": "passed",
+      "phrase_checks": [
+        {
+          "phrase": "direct frequency modulation",
+          "expected": 1,
+          "display_count": 1,
+          "speech_count": 1,
+          "all_in_english_span": true
+        },
+        {
+          "phrase": "control input",
+          "expected": 1,
+          "display_count": 1,
+          "speech_count": 1,
+          "all_in_english_span": true
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "english": "In an ideal linear model, f_i(t) = f_c + K_v m(t), so the carrier's instantaneous frequency varies while its amplitude remains constant.",
+      "baseline_display": "ଏକ ଆଦର୍ଶ ରେଖୀୟ ମଡେଲରେ, f_i(t) = f_c + K_v m(t) ଅଟେ, ତେଣୁ ବାହକର instantaneous frequency ପରିବର୍ତ୍ତନ ହୋଇଥାଏ ଯେତେବେଳେ କି ଏହାର amplitude ସ୍ଥିର ରହିଥାଏ।",
+      "profile_display": "ଏକ ideal linear model ରେ, f_i(t) = f_c + K_v m(t), ତେଣୁ ସେଥିପାଇଁ carrier ର instantaneous frequency ବଦଳୁଥିବାବେଳେ ଏହାର amplitude ସ୍ଥିର ରହିଥାଏ।",
+      "profile_speech_text": "ଏକ ideal linear model ରେ, f i of t equals f c plus K v times m of t, ତେଣୁ ସେଥିପାଇଁ carrier ର instantaneous frequency ବଦଳୁଥିବାବେଳେ ଏହାର amplitude ସ୍ଥିର ରହିଥାଏ।",
+      "source_response": "work/vco-profile-en5-or7-attempt3-translation.raw.json",
+      "source_call": {
+        "stage": "translation",
+        "request_sha256": "f5a2edd0f08444f766452910d0b8e23a8d37d13c3ff7523342c7b14840854a08",
+        "model_version": "gemini-3.5-flash-lite",
+        "usage": {
+          "promptTokenCount": 2273,
+          "candidatesTokenCount": 1520,
+          "totalTokenCount": 3793
+        }
+      },
+      "sentence_automated_validation": "passed",
+      "phrase_checks": [
+        {
+          "phrase": "ideal linear model",
+          "expected": 1,
+          "display_count": 1,
+          "speech_count": 1,
+          "all_in_english_span": true
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "english": "Here f_c is the carrier frequency, K_v is the VCO sensitivity in Hz/V, and m(t) is the message voltage.",
+      "baseline_display": "ଏଠାରେ f_c ହେଉଛି carrier frequency, K_v ହେଉଛି VCO ସମ୍ବେଦନଶୀଳତା Hz/V ରେ, ଏବଂ m(t) ହେଉଛି ମେସେଜ୍ ଭୋଲ୍ଟେଜ୍।",
+      "profile_display": "ଏଠାରେ f_c ହେଉଛି carrier frequency, K_v ହେଉଛି VCO sensitivity Hz/V ରେ, ଏବଂ m(t) ହେଉଛି message voltage।",
+      "profile_speech_text": "ଏଠାରେ f c ହେଉଛି carrier frequency , K v ହେଉଛି V C O sensitivity hertz per volt ରେ, ଏବଂ m of t ହେଉଛି message voltage ।",
+      "source_response": "work/vco-profile-en5-or7-attempt2-translation.raw.json",
+      "source_call": {
+        "stage": "translation",
+        "request_sha256": "6c1ef0bd26f856afe727fb516734197b3dd0b988b2b6ac78d30b011e79fc49d5",
+        "model_version": "gemini-3.5-flash-lite",
+        "usage": {
+          "promptTokenCount": 1921,
+          "candidatesTokenCount": 1458,
+          "totalTokenCount": 3379
+        }
+      },
+      "sentence_automated_validation": "passed",
+      "phrase_checks": [
+        {
+          "phrase": "VCO sensitivity",
+          "expected": 1,
+          "display_count": 1,
+          "speech_count": 1,
+          "all_in_english_span": true
+        },
+        {
+          "phrase": "message voltage",
+          "expected": 1,
+          "display_count": 1,
+          "speech_count": 1,
+          "all_in_english_span": true
+        }
+      ]
+    }
+  ],
+  "profile_pipeline_status": "not_completed",
+  "selection_note": "Valid individual sentences selected across attempts 2 and 3. No full captured profile response passed validation; no mixed-stage request was sent. These are not a single successful pipeline result.",
+  "meaning_review": "pending",
+  "native_Odia_review": "pending",
+  "audio": "not_generated"
+}

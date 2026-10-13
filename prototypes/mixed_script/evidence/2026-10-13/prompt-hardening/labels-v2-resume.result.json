@@ -1,0 +1,1040 @@
+{
+  "schema": "mixed-script/v1",
+  "created_at": "2026-10-13T11:17:43.630384+00:00",
+  "input_sha256": "c5c72e3230bfdca87e1e855ef94cb8b7b403679cfa5e8876bef64ecc7f3feb59",
+  "prompt_version": "learner-profile-fewshot/v2",
+  "provenance": {
+    "mode": "gemini",
+    "provider": "Gemini Developer API",
+    "model": "gemini-3.5-flash-lite",
+    "calls": [
+      {
+        "stage": "translation",
+        "request_sha256": "11a45489825166faf8e75e15099ae8889fcfd98607eb81bcbb8040e3da60947c",
+        "model_version": "gemini-3.5-flash-lite",
+        "usage": {
+          "promptTokenCount": 3084,
+          "candidatesTokenCount": 1110,
+          "totalTokenCount": 4194
+        }
+      },
+      {
+        "stage": "mixed",
+        "request_sha256": "53e5f26252acaebdfac5cc0eff395ef4cf011dbfcd8076a53cc0d434a9ef2cb0",
+        "model_version": "gemini-3.5-flash-lite",
+        "usage": {
+          "promptTokenCount": 4358,
+          "candidatesTokenCount": 953,
+          "totalTokenCount": 5311
+        }
+      }
+    ]
+  },
+  "source": {
+    "schema": "mixed-script-input/v1",
+    "id": "vco-fm-baseline",
+    "title": "A VCO in direct frequency modulation",
+    "source": {
+      "kind": "adapted_reference",
+      "review_status": "pending",
+      "references": [
+        {
+          "title": "Analog Devices: FM Modulation",
+          "url": "https://www.analog.com/en/resources/glossary/fm-modulator.html"
+        },
+        {
+          "title": "Analog Devices: Voltage Controlled Oscillator",
+          "url": "https://wiki.analog.com/resources/tools-software/sigmastudio/toolbox/sources/vco"
+        }
+      ]
+    },
+    "mix": {
+      "support_language": "or",
+      "script": "Odia",
+      "level": "odia-led-english-terms"
+    },
+    "glossary": [
+      {
+        "id": "t-vco",
+        "english": "VCO",
+        "meaning_or": "ନିୟନ୍ତ୍ରଣ ଭୋଲ୍ଟେଜ୍ ଅନୁସାରେ ଆବୃତ୍ତି ବଦଳୁଥିବା ଦୋଳକ",
+        "pronunciation_or": "ଭି ସି ଓ",
+        "spoken_en": "V C O",
+        "review_status": "pending"
+      },
+      {
+        "id": "t-frequency",
+        "english": "output frequency",
+        "meaning_or": "ଆଉଟପୁଟ୍ ସଙ୍କେତର ଆବୃତ୍ତି",
+        "pronunciation_or": "ଆଉଟପୁଟ୍ ଫ୍ରିକ୍ୱେନ୍ସି",
+        "spoken_en": "output frequency",
+        "review_status": "pending"
+      },
+      {
+        "id": "t-control",
+        "english": "control voltage",
+        "meaning_or": "ଆବୃତ୍ତି ନିୟନ୍ତ୍ରଣ କରୁଥିବା ଭୋଲ୍ଟେଜ୍",
+        "pronunciation_or": "କଣ୍ଟ୍ରୋଲ୍ ଭୋଲ୍ଟେଜ୍",
+        "spoken_en": "control voltage",
+        "review_status": "pending"
+      },
+      {
+        "id": "t-fm",
+        "english": "FM",
+        "meaning_or": "ବାହକ ସଙ୍କେତର ଆବୃତ୍ତି ବଦଳାଇ ସୂଚନା ପଠାଇବା",
+        "pronunciation_or": "ଏଫ୍ ଏମ୍",
+        "spoken_en": "F M",
+        "review_status": "pending"
+      },
+      {
+        "id": "t-message",
+        "english": "message signal",
+        "meaning_or": "ପଠାଇବାକୁ ଥିବା ସୂଚନାର ସଙ୍କେତ",
+        "pronunciation_or": "ମେସେଜ୍ ସିଗ୍ନାଲ୍",
+        "spoken_en": "message signal",
+        "review_status": "pending"
+      },
+      {
+        "id": "t-instantaneous",
+        "english": "instantaneous frequency",
+        "meaning_or": "ଏକ ନିର୍ଦ୍ଦିଷ୍ଟ କ୍ଷଣରେ ସଙ୍କେତର ଆବୃତ୍ତି",
+        "pronunciation_or": "ଇନ୍ଷ୍ଟାଣ୍ଟେନିଅସ୍ ଫ୍ରିକ୍ୱେନ୍ସି",
+        "spoken_en": "instantaneous frequency",
+        "review_status": "pending"
+      },
+      {
+        "id": "t-amplitude",
+        "english": "amplitude",
+        "meaning_or": "ସଙ୍କେତର ବିସ୍ତାର",
+        "pronunciation_or": "ଆମ୍ପ୍ଲିଟ୍ୟୁଡ୍",
+        "spoken_en": "amplitude",
+        "review_status": "pending"
+      },
+      {
+        "id": "t-carrier",
+        "english": "carrier frequency",
+        "meaning_or": "ବାହକ ସଙ୍କେତର ଆବୃତ୍ତି",
+        "pronunciation_or": "କ୍ୟାରିଅର୍ ଫ୍ରିକ୍ୱେନ୍ସି",
+        "spoken_en": "carrier frequency",
+        "review_status": "pending"
+      }
+    ],
+    "sentences": [
+      {
+        "id": "s1",
+        "english": "A voltage-controlled oscillator (VCO) changes its output frequency according to its control voltage.",
+        "term_ids": [
+          "t-vco",
+          "t-frequency",
+          "t-control"
+        ],
+        "literals": []
+      },
+      {
+        "id": "s2",
+        "english": "In direct frequency modulation (FM), the message signal drives the VCO's control input.",
+        "term_ids": [
+          "t-vco",
+          "t-fm",
+          "t-message"
+        ],
+        "literals": []
+      },
+      {
+        "id": "s3",
+        "english": "In an ideal linear model, f_i(t) = f_c + K_v m(t), so the carrier's instantaneous frequency varies while its amplitude remains constant.",
+        "term_ids": [
+          "t-instantaneous",
+          "t-amplitude"
+        ],
+        "literals": [
+          {
+            "text": "f_i(t) = f_c + K_v m(t)",
+            "spoken": "f i of t equals f c plus K v times m of t"
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "english": "Here f_c is the carrier frequency, K_v is the VCO sensitivity in Hz/V, and m(t) is the message voltage.",
+        "term_ids": [
+          "t-vco",
+          "t-carrier"
+        ],
+        "literals": [
+          {
+            "text": "f_c",
+            "spoken": "f c"
+          },
+          {
+            "text": "K_v",
+            "spoken": "K v"
+          },
+          {
+            "text": "Hz/V",
+            "spoken": "hertz per volt"
+          },
+          {
+            "text": "m(t)",
+            "spoken": "m of t"
+          }
+        ]
+      }
+    ]
+  },
+  "translation": {
+    "sentences": [
+      {
+        "id": "s1",
+        "spans": [
+          {
+            "language": "or",
+            "text": "ଗୋଟିଏ "
+          },
+          {
+            "language": "en",
+            "text": "voltage-controlled oscillator"
+          },
+          {
+            "language": "or",
+            "text": " କିମ୍ବା "
+          },
+          {
+            "language": "en",
+            "text": "VCO"
+          },
+          {
+            "language": "or",
+            "text": " ଏହାର "
+          },
+          {
+            "language": "en",
+            "text": "control voltage"
+          },
+          {
+            "language": "or",
+            "text": " ଅନୁସାରେ ଏହାର "
+          },
+          {
+            "language": "en",
+            "text": "output frequency"
+          },
+          {
+            "language": "or",
+            "text": " ବଦଳାଇଥାଏ।"
+          }
+        ],
+        "speech_text": "ଗୋଟିଏ voltage-controlled oscillator କିମ୍ବା V C O ଏହାର control voltage ଅନୁସାରେ ଏହାର output frequency ବଦଳାଇଥାଏ।",
+        "display_text": "ଗୋଟିଏ voltage-controlled oscillator କିମ୍ବା VCO ଏହାର control voltage ଅନୁସାରେ ଏହାର output frequency ବଦଳାଇଥାଏ।",
+        "term_ids": [
+          "t-vco",
+          "t-frequency",
+          "t-control"
+        ]
+      },
+      {
+        "id": "s2",
+        "spans": [
+          {
+            "language": "or",
+            "text": "ଏକ "
+          },
+          {
+            "language": "en",
+            "text": "direct frequency modulation"
+          },
+          {
+            "language": "or",
+            "text": " ବା "
+          },
+          {
+            "language": "en",
+            "text": "FM"
+          },
+          {
+            "language": "or",
+            "text": " ରେ, "
+          },
+          {
+            "language": "en",
+            "text": "message signal"
+          },
+          {
+            "language": "or",
+            "text": " "
+          },
+          {
+            "language": "en",
+            "text": "VCO"
+          },
+          {
+            "language": "or",
+            "text": " ର "
+          },
+          {
+            "language": "en",
+            "text": "control input"
+          },
+          {
+            "language": "or",
+            "text": " କୁ ଚାଳିତ କରିଥାଏ।"
+          }
+        ],
+        "speech_text": "ଏକ direct frequency modulation ବା F M ରେ, message signal V C O ର control input କୁ ଚାଳିତ କରିଥାଏ।",
+        "display_text": "ଏକ direct frequency modulation ବା FM ରେ, message signal VCO ର control input କୁ ଚାଳିତ କରିଥାଏ।",
+        "term_ids": [
+          "t-vco",
+          "t-fm",
+          "t-message"
+        ]
+      },
+      {
+        "id": "s3",
+        "spans": [
+          {
+            "language": "or",
+            "text": "ଏକ "
+          },
+          {
+            "language": "en",
+            "text": "ideal linear model"
+          },
+          {
+            "language": "or",
+            "text": " ରେ, "
+          },
+          {
+            "language": "en",
+            "text": "f_i(t) = f_c + K_v m(t)"
+          },
+          {
+            "language": "or",
+            "text": ", ତେଣୁ "
+          },
+          {
+            "language": "en",
+            "text": "the carrier"
+          },
+          {
+            "language": "or",
+            "text": " ର "
+          },
+          {
+            "language": "en",
+            "text": "instantaneous frequency"
+          },
+          {
+            "language": "or",
+            "text": " ପରିବର୍ତ୍ତନ ହୁଏ କିନ୍ତୁ ଏହାର "
+          },
+          {
+            "language": "en",
+            "text": "amplitude"
+          },
+          {
+            "language": "or",
+            "text": " ସ୍ଥିର ରହେ।"
+          }
+        ],
+        "speech_text": "ଏକ ideal linear model ରେ, f i of t equals f c plus K v times m of t, ତେଣୁ the carrier ର instantaneous frequency ପରିବର୍ତ୍ତନ ହୁଏ କିନ୍ତୁ ଏହାର amplitude ସ୍ଥିର ରହେ।",
+        "display_text": "ଏକ ideal linear model ରେ, f_i(t) = f_c + K_v m(t), ତେଣୁ the carrier ର instantaneous frequency ପରିବର୍ତ୍ତନ ହୁଏ କିନ୍ତୁ ଏହାର amplitude ସ୍ଥିର ରହେ।",
+        "term_ids": [
+          "t-instantaneous",
+          "t-amplitude"
+        ]
+      },
+      {
+        "id": "s4",
+        "spans": [
+          {
+            "language": "or",
+            "text": "ଏଠାରେ "
+          },
+          {
+            "language": "en",
+            "text": "f_c"
+          },
+          {
+            "language": "or",
+            "text": " ହେଉଛି "
+          },
+          {
+            "language": "en",
+            "text": "carrier frequency"
+          },
+          {
+            "language": "or",
+            "text": ", "
+          },
+          {
+            "language": "en",
+            "text": "K_v"
+          },
+          {
+            "language": "or",
+            "text": " ହେଉଛି "
+          },
+          {
+            "language": "en",
+            "text": "VCO sensitivity"
+          },
+          {
+            "language": "or",
+            "text": " "
+          },
+          {
+            "language": "en",
+            "text": "Hz/V"
+          },
+          {
+            "language": "or",
+            "text": " ରେ, ଏବଂ "
+          },
+          {
+            "language": "en",
+            "text": "m(t)"
+          },
+          {
+            "language": "or",
+            "text": " ହେଉଛି "
+          },
+          {
+            "language": "en",
+            "text": "message voltage"
+          },
+          {
+            "language": "or",
+            "text": "।"
+          }
+        ],
+        "speech_text": "ଏଠାରେ f c ହେଉଛି carrier frequency, K v ହେଉଛି V C O sensitivity hertz per volt ରେ, ଏବଂ m of t ହେଉଛି message voltage।",
+        "display_text": "ଏଠାରେ f_c ହେଉଛି carrier frequency, K_v ହେଉଛି VCO sensitivity Hz/V ରେ, ଏବଂ m(t) ହେଉଛି message voltage।",
+        "term_ids": [
+          "t-vco",
+          "t-carrier"
+        ]
+      }
+    ]
+  },
+  "mixed": {
+    "sentences": [
+      {
+        "id": "s1",
+        "spans": [
+          {
+            "language": "or",
+            "text": "ଗୋଟିଏ "
+          },
+          {
+            "language": "en",
+            "text": "voltage-controlled oscillator"
+          },
+          {
+            "language": "or",
+            "text": " କିମ୍ବା "
+          },
+          {
+            "language": "en",
+            "text": "VCO"
+          },
+          {
+            "language": "or",
+            "text": " ଏହାର "
+          },
+          {
+            "language": "en",
+            "text": "control voltage"
+          },
+          {
+            "language": "or",
+            "text": " ଅନୁସାରେ ଏହାର "
+          },
+          {
+            "language": "en",
+            "text": "output frequency"
+          },
+          {
+            "language": "or",
+            "text": " ବଦଳାଇଥାଏ।"
+          }
+        ],
+        "speech_text": "ଗୋଟିଏ voltage-controlled oscillator କିମ୍ବା V C O ଏହାର control voltage ଅନୁସାରେ ଏହାର output frequency ବଦଳାଇଥାଏ।",
+        "display_text": "ଗୋଟିଏ voltage-controlled oscillator କିମ୍ବା VCO ଏହାର control voltage ଅନୁସାରେ ଏହାର output frequency ବଦଳାଇଥାଏ।",
+        "term_ids": [
+          "t-vco",
+          "t-frequency",
+          "t-control"
+        ]
+      },
+      {
+        "id": "s2",
+        "spans": [
+          {
+            "language": "or",
+            "text": "ଏକ "
+          },
+          {
+            "language": "en",
+            "text": "direct frequency modulation"
+          },
+          {
+            "language": "or",
+            "text": " ବା "
+          },
+          {
+            "language": "en",
+            "text": "FM"
+          },
+          {
+            "language": "or",
+            "text": " ରେ, "
+          },
+          {
+            "language": "en",
+            "text": "message signal"
+          },
+          {
+            "language": "or",
+            "text": " "
+          },
+          {
+            "language": "en",
+            "text": "VCO"
+          },
+          {
+            "language": "or",
+            "text": " ର "
+          },
+          {
+            "language": "en",
+            "text": "control input"
+          },
+          {
+            "language": "or",
+            "text": " କୁ ଚାଳିତ କରିଥାଏ।"
+          }
+        ],
+        "speech_text": "ଏକ direct frequency modulation ବା F M ରେ, message signal V C O ର control input କୁ ଚାଳିତ କରିଥାଏ।",
+        "display_text": "ଏକ direct frequency modulation ବା FM ରେ, message signal VCO ର control input କୁ ଚାଳିତ କରିଥାଏ।",
+        "term_ids": [
+          "t-vco",
+          "t-fm",
+          "t-message"
+        ]
+      },
+      {
+        "id": "s3",
+        "spans": [
+          {
+            "language": "or",
+            "text": "ଏକ "
+          },
+          {
+            "language": "en",
+            "text": "ideal linear model"
+          },
+          {
+            "language": "or",
+            "text": " ରେ, "
+          },
+          {
+            "language": "en",
+            "text": "f_i(t) = f_c + K_v m(t)"
+          },
+          {
+            "language": "or",
+            "text": ", ତେଣୁ "
+          },
+          {
+            "language": "en",
+            "text": "the carrier"
+          },
+          {
+            "language": "or",
+            "text": " ର "
+          },
+          {
+            "language": "en",
+            "text": "instantaneous frequency"
+          },
+          {
+            "language": "or",
+            "text": " ପରିବର୍ତ୍ତନ ହୁଏ କିନ୍ତୁ ଏହାର "
+          },
+          {
+            "language": "en",
+            "text": "amplitude"
+          },
+          {
+            "language": "or",
+            "text": " ସ୍ଥିର ରହେ।"
+          }
+        ],
+        "speech_text": "ଏକ ideal linear model ରେ, f i of t equals f c plus K v times m of t, ତେଣୁ the carrier ର instantaneous frequency ପରିବର୍ତ୍ତନ ହୁଏ କିନ୍ତୁ ଏହାର amplitude ସ୍ଥିର ରହେ।",
+        "display_text": "ଏକ ideal linear model ରେ, f_i(t) = f_c + K_v m(t), ତେଣୁ the carrier ର instantaneous frequency ପରିବର୍ତ୍ତନ ହୁଏ କିନ୍ତୁ ଏହାର amplitude ସ୍ଥିର ରହେ।",
+        "term_ids": [
+          "t-instantaneous",
+          "t-amplitude"
+        ]
+      },
+      {
+        "id": "s4",
+        "spans": [
+          {
+            "language": "or",
+            "text": "ଏଠାରେ "
+          },
+          {
+            "language": "en",
+            "text": "f_c"
+          },
+          {
+            "language": "or",
+            "text": " ହେଉଛି "
+          },
+          {
+            "language": "en",
+            "text": "carrier frequency"
+          },
+          {
+            "language": "or",
+            "text": ", "
+          },
+          {
+            "language": "en",
+            "text": "K_v"
+          },
+          {
+            "language": "or",
+            "text": " ହେଉଛି "
+          },
+          {
+            "language": "en",
+            "text": "VCO sensitivity"
+          },
+          {
+            "language": "or",
+            "text": " "
+          },
+          {
+            "language": "en",
+            "text": "Hz/V"
+          },
+          {
+            "language": "or",
+            "text": " ରେ, ଏବଂ "
+          },
+          {
+            "language": "en",
+            "text": "m(t)"
+          },
+          {
+            "language": "or",
+            "text": " ହେଉଛି "
+          },
+          {
+            "language": "en",
+            "text": "message voltage"
+          },
+          {
+            "language": "or",
+            "text": "।"
+          }
+        ],
+        "speech_text": "ଏଠାରେ f c ହେଉଛି carrier frequency, K v ହେଉଛି V C O sensitivity hertz per volt ରେ, ଏବଂ m of t ହେଉଛି message voltage।",
+        "display_text": "ଏଠାରେ f_c ହେଉଛି carrier frequency, K_v ହେଉଛି VCO sensitivity Hz/V ରେ, ଏବଂ m(t) ହେଉଛି message voltage।",
+        "term_ids": [
+          "t-vco",
+          "t-carrier"
+        ]
+      }
+    ]
+  },
+  "paragraph": "ଗୋଟିଏ voltage-controlled oscillator କିମ୍ବା VCO ଏହାର control voltage ଅନୁସାରେ ଏହାର output frequency ବଦଳାଇଥାଏ। ଏକ direct frequency modulation ବା FM ରେ, message signal VCO ର control input କୁ ଚାଳିତ କରିଥାଏ। ଏକ ideal linear model ରେ, f_i(t) = f_c + K_v m(t), ତେଣୁ the carrier ର instantaneous frequency ପରିବର୍ତ୍ତନ ହୁଏ କିନ୍ତୁ ଏହାର amplitude ସ୍ଥିର ରହେ। ଏଠାରେ f_c ହେଉଛି carrier frequency, K_v ହେଉଛି VCO sensitivity Hz/V ରେ, ଏବଂ m(t) ହେଉଛି message voltage।",
+  "speech_script": "ଗୋଟିଏ voltage-controlled oscillator କିମ୍ବା V C O ଏହାର control voltage ଅନୁସାରେ ଏହାର output frequency ବଦଳାଇଥାଏ। ଏକ direct frequency modulation ବା F M ରେ, message signal V C O ର control input କୁ ଚାଳିତ କରିଥାଏ। ଏକ ideal linear model ରେ, f i of t equals f c plus K v times m of t, ତେଣୁ the carrier ର instantaneous frequency ପରିବର୍ତ୍ତନ ହୁଏ କିନ୍ତୁ ଏହାର amplitude ସ୍ଥିର ରହେ। ଏଠାରେ f c ହେଉଛି carrier frequency, K v ହେଉଛି V C O sensitivity hertz per volt ରେ, ଏବଂ m of t ହେଉଛି message voltage।",
+  "validation": {
+    "automated": "passed",
+    "checks": [
+      "sentence_ids",
+      "language_spans",
+      "Odia_script",
+      "English_terms",
+      "protected_literals",
+      "numeric_values",
+      "spoken_expansions"
+    ],
+    "meaning_review": "pending",
+    "native_Odia_review": "pending"
+  },
+  "audio": {
+    "status": "not_generated",
+    "timing_cues": null
+  },
+  "language_profile": {
+    "self_reported_confidence": {
+      "english": 5,
+      "odia": 7,
+      "scale": 10
+    },
+    "preferred_explanation_language": "or",
+    "odia_style": "simple conversational Odia; avoid unnecessary formal or literary wording",
+    "english_style": "plain English technical phrases; avoid extra academic filler",
+    "retain_english_phrases": [
+      "voltage-controlled oscillator",
+      "direct frequency modulation",
+      "control input",
+      "ideal linear model",
+      "VCO sensitivity",
+      "message voltage"
+    ],
+    "phrase_preference_status": "proposed for this hypothetical learner, not verified word familiarity",
+    "switch_at": "natural phrase boundaries; keep Odia grammar and useful simple Odia connecting words",
+    "mix_ratio": null
+  },
+  "experiment": {
+    "run_id": "labels-v2-resume",
+    "reused_translation_from": "labels-v2",
+    "same_mixed_request_retried": true,
+    "new_api_requests": 1,
+    "phrase_checks": [
+      {
+        "stage": "translation",
+        "sentence_id": "s1",
+        "phrase": "voltage-controlled oscillator",
+        "count": 1,
+        "passed": true
+      },
+      {
+        "stage": "translation",
+        "sentence_id": "s1",
+        "phrase": "direct frequency modulation",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "translation",
+        "sentence_id": "s1",
+        "phrase": "control input",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "translation",
+        "sentence_id": "s1",
+        "phrase": "ideal linear model",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "translation",
+        "sentence_id": "s1",
+        "phrase": "VCO sensitivity",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "translation",
+        "sentence_id": "s1",
+        "phrase": "message voltage",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "translation",
+        "sentence_id": "s2",
+        "phrase": "voltage-controlled oscillator",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "translation",
+        "sentence_id": "s2",
+        "phrase": "direct frequency modulation",
+        "count": 1,
+        "passed": true
+      },
+      {
+        "stage": "translation",
+        "sentence_id": "s2",
+        "phrase": "control input",
+        "count": 1,
+        "passed": true
+      },
+      {
+        "stage": "translation",
+        "sentence_id": "s2",
+        "phrase": "ideal linear model",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "translation",
+        "sentence_id": "s2",
+        "phrase": "VCO sensitivity",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "translation",
+        "sentence_id": "s2",
+        "phrase": "message voltage",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "translation",
+        "sentence_id": "s3",
+        "phrase": "voltage-controlled oscillator",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "translation",
+        "sentence_id": "s3",
+        "phrase": "direct frequency modulation",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "translation",
+        "sentence_id": "s3",
+        "phrase": "control input",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "translation",
+        "sentence_id": "s3",
+        "phrase": "ideal linear model",
+        "count": 1,
+        "passed": true
+      },
+      {
+        "stage": "translation",
+        "sentence_id": "s3",
+        "phrase": "VCO sensitivity",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "translation",
+        "sentence_id": "s3",
+        "phrase": "message voltage",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "translation",
+        "sentence_id": "s4",
+        "phrase": "voltage-controlled oscillator",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "translation",
+        "sentence_id": "s4",
+        "phrase": "direct frequency modulation",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "translation",
+        "sentence_id": "s4",
+        "phrase": "control input",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "translation",
+        "sentence_id": "s4",
+        "phrase": "ideal linear model",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "translation",
+        "sentence_id": "s4",
+        "phrase": "VCO sensitivity",
+        "count": 1,
+        "passed": true
+      },
+      {
+        "stage": "translation",
+        "sentence_id": "s4",
+        "phrase": "message voltage",
+        "count": 1,
+        "passed": true
+      },
+      {
+        "stage": "mixed",
+        "sentence_id": "s1",
+        "phrase": "voltage-controlled oscillator",
+        "count": 1,
+        "passed": true
+      },
+      {
+        "stage": "mixed",
+        "sentence_id": "s1",
+        "phrase": "direct frequency modulation",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "mixed",
+        "sentence_id": "s1",
+        "phrase": "control input",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "mixed",
+        "sentence_id": "s1",
+        "phrase": "ideal linear model",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "mixed",
+        "sentence_id": "s1",
+        "phrase": "VCO sensitivity",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "mixed",
+        "sentence_id": "s1",
+        "phrase": "message voltage",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "mixed",
+        "sentence_id": "s2",
+        "phrase": "voltage-controlled oscillator",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "mixed",
+        "sentence_id": "s2",
+        "phrase": "direct frequency modulation",
+        "count": 1,
+        "passed": true
+      },
+      {
+        "stage": "mixed",
+        "sentence_id": "s2",
+        "phrase": "control input",
+        "count": 1,
+        "passed": true
+      },
+      {
+        "stage": "mixed",
+        "sentence_id": "s2",
+        "phrase": "ideal linear model",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "mixed",
+        "sentence_id": "s2",
+        "phrase": "VCO sensitivity",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "mixed",
+        "sentence_id": "s2",
+        "phrase": "message voltage",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "mixed",
+        "sentence_id": "s3",
+        "phrase": "voltage-controlled oscillator",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "mixed",
+        "sentence_id": "s3",
+        "phrase": "direct frequency modulation",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "mixed",
+        "sentence_id": "s3",
+        "phrase": "control input",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "mixed",
+        "sentence_id": "s3",
+        "phrase": "ideal linear model",
+        "count": 1,
+        "passed": true
+      },
+      {
+        "stage": "mixed",
+        "sentence_id": "s3",
+        "phrase": "VCO sensitivity",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "mixed",
+        "sentence_id": "s3",
+        "phrase": "message voltage",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "mixed",
+        "sentence_id": "s4",
+        "phrase": "voltage-controlled oscillator",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "mixed",
+        "sentence_id": "s4",
+        "phrase": "direct frequency modulation",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "mixed",
+        "sentence_id": "s4",
+        "phrase": "control input",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "mixed",
+        "sentence_id": "s4",
+        "phrase": "ideal linear model",
+        "count": 0,
+        "passed": true
+      },
+      {
+        "stage": "mixed",
+        "sentence_id": "s4",
+        "phrase": "VCO sensitivity",
+        "count": 1,
+        "passed": true
+      },
+      {
+        "stage": "mixed",
+        "sentence_id": "s4",
+        "phrase": "message voltage",
+        "count": 1,
+        "passed": true
+      }
+    ],
+    "postprocessing": false,
+    "scientific_and_native_review": "pending"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "model": "gemini-3.1-flash-lite",
+  "reused_translation": "translation.attempt4.raw.json",
+  "translation_core_validation": "passed_after_label_only_repair",
+  "translation_preference_warnings": [
+    {
+      "sentence_id": "s5",
+      "phrase": "ideal linear model",
+      "expected": 0,
+      "actual": 1
+    },
+    {
+      "sentence_id": "s7",
+      "phrase": "ideal linear model",
+      "expected": 0,
+      "actual": 1
+    },
+    {
+      "sentence_id": "s8",
+      "phrase": "ideal linear model",
+      "expected": 0,
+      "actual": 1
+    }
+  ],
+  "new_translation_requests": 0,
+  "text_repair": false,
+  "span_label_normalization": true,
+  "scientific_and_native_review": "pending",
+  "outcome": "failed",
+  "error": "Gemini HTTP 503. No automatic retry was made.",
+  "calls": [],
+  "elapsed_seconds": 0.921
+}

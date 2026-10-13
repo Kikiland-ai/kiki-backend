@@ -1,0 +1,43 @@
+{
+  "schema": "mixed-script-audio-trial/v1",
+  "status": "generated",
+  "provider": "Gemini Developer API",
+  "api": "Interactions REST v1beta",
+  "model": "gemini-3.8-flash-lite-tts",
+  "returned_model": "gemini-3.8-flash-lite-tts",
+  "voice": "Kore",
+  "request_sha256": "6de6a2eab6dd1417dd91df1af8101912e0ae8b363c5d1c1533c3e9cea0791149",
+  "speech_script_sha256": "e26fc46d2f99d766eaf81a654a673548f23cec7ad7ab7cfe0ffcb4571ff16a64",
+  "usage": {
+    "total_tokens": 1466,
+    "total_input_tokens": 174,
+    "total_cached_tokens": 0,
+    "total_output_tokens": 1292,
+    "total_tool_use_tokens": 0,
+    "total_thought_tokens": 0
+  },
+  "audio": {
+    "format": "WAV PCM",
+    "sample_rate_hz": 24000,
+    "channels": 1,
+    "sample_width_bytes": 2,
+    "frames": 1240320,
+    "duration_seconds": 51.68,
+    "peak_pcm": 29222,
+    "rms_pcm": 4621.228031818258,
+    "sha256": "614251a3855f2b6e488d9f3a69549ea46162aacecc406c051514a7964604e32f",
+    "bytes": 2486754
+  },
+  "timing_cues": null,
+  "alignment_status": "not_performed",
+  "review": {
+    "pronunciation": "pending",
+    "native_Odia": "pending",
+    "spoken_fidelity": "pending"
+  },
+  "script_result_file": "script.result.json",
+  "wav_file": "speech.wav",
+  "mp3_file": "speech.mp3",
+  "mp3_sha256": "9e48831dfe457647e4d62000b23f48883ba47f1206d0aa12cab40e961c6afc43",
+  "mp3_bytes": 414188
+}

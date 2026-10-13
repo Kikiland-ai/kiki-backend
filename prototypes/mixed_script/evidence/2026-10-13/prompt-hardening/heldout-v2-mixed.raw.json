@@ -1,0 +1,100 @@
+{
+  "response": {
+    "sentences": [
+      {
+        "id": "h1",
+        "spans": [
+          {
+            "language": "or",
+            "text": "ଏହି ଦୃଷ୍ଟାନ୍ତମୂଳକ ଉଦାହରଣରେ, "
+          },
+          {
+            "language": "en",
+            "text": "0.7 V"
+          },
+          {
+            "language": "or",
+            "text": " ର "
+          },
+          {
+            "language": "en",
+            "text": "control voltage"
+          },
+          {
+            "language": "or",
+            "text": " ପାଖରେ, "
+          },
+          {
+            "language": "en",
+            "text": "VCO"
+          },
+          {
+            "language": "or",
+            "text": " ର "
+          },
+          {
+            "language": "en",
+            "text": "output frequency"
+          },
+          {
+            "language": "or",
+            "text": " ହେଉଛି "
+          },
+          {
+            "language": "en",
+            "text": "1000 Hz"
+          },
+          {
+            "language": "or",
+            "text": "।"
+          }
+        ],
+        "speech_text": "ଏହି ଦୃଷ୍ଟାନ୍ତମୂଳକ ଉଦାହରଣରେ, zero point seven volts ର control voltage ପାଖରେ, V C O ର output frequency ହେଉଛି one thousand hertz।"
+      },
+      {
+        "id": "h2",
+        "spans": [
+          {
+            "language": "or",
+            "text": "ଗୋଟିଏ ପ୍ରକୃତ "
+          },
+          {
+            "language": "en",
+            "text": "VCO"
+          },
+          {
+            "language": "or",
+            "text": " ରେ "
+          },
+          {
+            "language": "en",
+            "text": "control voltage"
+          },
+          {
+            "language": "or",
+            "text": " ର ପରିବର୍ତ୍ତନ କେବଳ ନିଜେ ଏହା ସ୍ଥିର କରେ ନାହିଁ ଯେ "
+          },
+          {
+            "language": "en",
+            "text": "amplitude"
+          },
+          {
+            "language": "or",
+            "text": " ସ୍ଥିର ରହେ।"
+          }
+        ],
+        "speech_text": "ଗୋଟିଏ ପ୍ରକୃତ V C O ରେ control voltage ର ପରିବର୍ତ୍ତନ କେବଳ ନିଜେ ଏହା ସ୍ଥିର କରେ ନାହିଁ ଯେ amplitude ସ୍ଥିର ରହେ।"
+      }
+    ]
+  },
+  "call": {
+    "stage": "mixed",
+    "request_sha256": "9cf60871e8f5b00b86de19c642876d12b7464c9052e9e65283737c49154262c7",
+    "model_version": "gemini-3.5-flash-lite",
+    "usage": {
+      "promptTokenCount": 3433,
+      "candidatesTokenCount": 523,
+      "totalTokenCount": 3956
+    }
+  }
+}

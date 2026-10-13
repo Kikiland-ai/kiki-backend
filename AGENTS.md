@@ -27,6 +27,10 @@ python -B bb8/tests/test_reference_adapter.py
 
 ## Kiki backend context and implementation
 
+### Commit identity
+
+All new commits made for this user must use `arpanvihan5-sketch` (GitHub user id `317357476`). Before committing, set this repo's `user.name` to `arpanvihan5-sketch` and `user.email` to `317357476+arpanvihan5-sketch@users.noreply.github.com`; check `git var GIT_AUTHOR_IDENT` and `git var GIT_COMMITTER_IDENT`. Verify the connected GitHub login with an authenticated profile tool before pushing when available. Do not inherit an unrelated global/image identity or inspect credential values. These checks/configuration apply when committing is authorized, not during read-only context boot.
+
 ### First-session boundary: load context and wait
 
 At the start of a new session, follow `CONTEXT-BOOT.md` in read-only mode. Load and verify the core sources, report what was actually read or missing, then wait for the user's thoughts. Do not automatically scaffold, install, configure, run services/live trials, or change files. Earlier build suggestions in source handoffs are background, not implementation authorization. Begin building only when the user requests implementation; design discussion alone is not a request to execute.

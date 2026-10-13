@@ -8,6 +8,6 @@ This starter carries the Design-Thinking product context and BB8 into a separate
 4. Read [the seven prototype directions](context/design-thinking/docs/prototypes/backend-prototype-directions.md).
 5. Run `python scripts/verify-context.py` to check the imported source snapshot if command access is available.
 
-`context/design-thinking/SOURCE.json` records the source repo, exact commit, and SHA-256 for every copied product file. `STARTER-MANIFEST.json` describes the initial starter bundle; it is not a permanent freeze on new backend code. The source snapshot is a traceable baseline, while backend decisions and progress belong in this repository.
+`context/design-thinking/SOURCE.json` records the source repo, exact commit, and SHA-256 for every copied product file. `STARTER-MANIFEST.json` describes the starter/handoff baseline, refreshed when commit identities were corrected; it is not a permanent freeze on new backend code. The source snapshot is a traceable baseline, while backend decisions and progress belong in this repository.
 
 No credentials, Google Cloud project, API access, native BB8 plugin activation, generated speech, graphics engine, or Simulink connection are established by importing these files.

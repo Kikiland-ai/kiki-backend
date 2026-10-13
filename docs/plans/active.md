@@ -10,7 +10,7 @@ Establish the product context before the user chooses how to proceed toward the 
 
 Read `context/README.md` and `context/design-thinking/SOURCE.json` for source authority and exact upstream revision. `SETUP.md` contains environment requirements and the first-session prompt. BB8 is bundled; native hosted registration is not established by these files.
 
-The remote is now available and the initial source import was pushed successfully. The current product snapshot contains 130 files pinned to `9a7f369192aaa1be49eeff8535b24d2543be45b8`. The earlier creation/push errors below are resolved historical setup notes.
+The remote is now available and the initial source import was pushed successfully. The current product snapshot contains 130 files pinned to `73d16c0d967a5d81dd74f1f28ef0defc48c8a778`. The earlier creation/push errors below are resolved historical setup notes.
 
 ## Now
 
@@ -35,7 +35,7 @@ Exact next action: load context through CONTEXT-BOOT.md, report the files actual
 
 ## Setup execution: 12 October 2026
 
-- Source snapshot: 130 product files pinned to `f4919cbcb5bde0ca011bb68180c8800c9772b894`; integrity check passed.
+- Source snapshot: 130 product files pinned to `aeca76b77c7cc943c8951a8183e4017a0ee2fe7b`; integrity check passed.
 - BB8 package and discovery checks passed; 11 reference-adapter and 18 provisioning tests passed. All three copied ledgers validate (diode exam weights remain estimates).
 - Local Git repo is initialized on `main`, with remote `https://github.com/Kikiland-ai/kiki-backend.git` and committed starter files.
 - GitHub CLI creation returned `Forbidden`; pushing this starter returned `Repository not found`. Remote hosting/CI therefore remain unverified.
@@ -47,7 +47,7 @@ The earlier proposed API/fixture startup is superseded by the user's context-onl
 
 ## Explicit source refresh: 12 October 2026
 
-Refreshed the unchanged source snapshot to `9a7f369192aaa1be49eeff8535b24d2543be45b8` after reviewing three upstream component/guide/artwork commits. This retains all revised prototype documents while carrying current green-concept/blue-practical references. SOURCE.json and source hashes were regenerated together; the source integrity check must pass after refresh. The original starter manifest remains the historical initial-import record. No runtime/API implementation was added.
+Refreshed the unchanged source snapshot to `73d16c0d967a5d81dd74f1f28ef0defc48c8a778` after reviewing three upstream component/guide/artwork commits. This retains all revised prototype documents while carrying current green-concept/blue-practical references. SOURCE.json and source hashes were regenerated together; the source integrity check must pass after refresh. No runtime/API implementation was added. The starter manifest was subsequently refreshed during the explicit identity correction below.
 
 ## Remote handoff complete: 12 October 2026
 
@@ -60,3 +60,9 @@ Refreshed the unchanged source snapshot to `9a7f369192aaa1be49eeff8535b24d2543be
 ## User clarification: context before action — 12 October 2026
 
 The user wants the start of a session to load the right context, with no automatic building. Updated AGENTS.md, README.md, SETUP.md, and this plan to make that boundary explicit; CONTEXT-BOOT.md provides the required reading order and an inspectable readiness report. Runtime configuration and the previously suggested first implementation slice remain later reference material, requiring an implementation request. Pinned source files were not changed.
+
+## Commit identity correction — 13 October 2026
+
+The connected GitHub account is verified as `arpanvihan5-sketch` (id `317357476`). The inherited Git author/committer configuration was incorrect; at the user's request, five backend and four source-repo commit identities were corrected. Their file trees/messages/timestamps were preserved, with descendant parent/hash changes handled explicitly. Global and repository-local defaults now use the verified user's noreply identity, and root instructions enforce it for future authorized commits.
+
+SOURCE.json now points to the corrected source baseline `73d16c0d967a5d81dd74f1f28ef0defc48c8a778`, whose product file tree is identical to the previously pinned baseline. All 130 source files are unchanged; hashes remain authoritative. BB8/starter provenance was reconciled. See docs/commit-identity-correction.md for recovery and verification details. The user's context-only startup boundary remains in force.

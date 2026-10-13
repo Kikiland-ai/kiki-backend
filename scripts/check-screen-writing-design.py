@@ -144,5 +144,6 @@ for name in ['single.request.json','single.packet.json','multi.request.json','mu
 report={'status':'PASS','schema':'screen-writing/v0.2','acceptance_count':len(passed),'cases':cases,
  'actual_renderer':'not_implemented','live_simulink_overlay_verified':False,'synthetic_geometry':True}
 (P/'acceptance-manifest.json').write_text(json.dumps({'schema':'screen-writing-acceptance/v0.2','synthetic':True,'cases':cases},indent=2)+'\n')
+(ROOT/'work').mkdir(exist_ok=True)
 (ROOT/'work/screen-writing-v02-check.json').write_text(json.dumps(report,indent=2)+'\n')
 print(json.dumps(report,indent=2))

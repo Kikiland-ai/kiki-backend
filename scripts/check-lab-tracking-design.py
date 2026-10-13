@@ -31,6 +31,7 @@ def check(value):
     assert concepts==set(definition['readiness']['required_concept_ids']), 'Required concept state missing'
     evidence={e['id']:e for e in value['evidence']}
     assert len(evidence)==len(value['evidence']), 'Duplicate evidence id'
+    assert value['observation']['view_revision']==value['workspace']['view_revision'], 'Observation belongs to an old view'
     queue=value['queue'];current=queue['current_checkpoint_id']
     upcoming=queue['upcoming_checkpoint_ids'];done=queue['done_checkpoint_ids']
     assert not set(done)&set(upcoming) and current not in done+upcoming, 'Conflicting queue membership'
@@ -93,6 +94,7 @@ mutations={
     'overlapping_timing':lambda v:v['steps'][2]['timing'].update(wall_ms=1000,tracking_active_ms=900,paused_ms=200),
     'missing_evidence':lambda v:v['steps'][0]['criteria'][0].update(evidence_ids=['missing']),
     'wrong_parameter_revision':lambda v:v['evidence'][0].update(parameter_revision=99),
+    'wrong_view_revision':lambda v:v['observation'].update(view_revision=99),
 }
 for name,mutate in mutations.items():
     value=copy.deepcopy(example);mutate(value)

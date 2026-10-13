@@ -27,7 +27,8 @@
     "capture_session_id": "fixture-capture-1",
     "capture_epoch": 1,
     "parameter_revision": 1,
-    "condition": "baseline"
+    "condition": "baseline",
+    "view_revision": 1
   },
   "observation": {
     "observation_id": "fixture-observation-2",
@@ -36,7 +37,8 @@
     "capture_epoch": 1,
     "source_received_at": "2026-10-14T00:30:00+05:30",
     "age_ms": 0,
-    "status": "available"
+    "status": "available",
+    "view_revision": 1
   },
   "queue": {
     "current_checkpoint_id": "CP-DSB-03",

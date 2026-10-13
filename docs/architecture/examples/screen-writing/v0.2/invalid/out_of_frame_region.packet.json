@@ -1,0 +1,76 @@
+{
+  "schema": "screen-writing/v0.2",
+  "message_type": "resolved_packet",
+  "packet_id": "synthetic-packet-1",
+  "request_id": "synthetic-request-1",
+  "guidance_stream_id": "synthetic-stream",
+  "cue_sequence": 1,
+  "context": {
+    "lab_session_id": "synthetic-lab",
+    "experiment_id": "PR-AM-DSB",
+    "checkpoint_id": "CP-DSB-03",
+    "visit_id": "synthetic-visit-3",
+    "lab_revision": 7,
+    "workspace_id": "synthetic-model",
+    "capture_epoch": 1,
+    "parameter_revision": 2,
+    "view_revision": 4,
+    "condition": "baseline"
+  },
+  "frame": {
+    "observation_id": "synthetic-observation-7",
+    "frame_id": "synthetic-frame-7",
+    "sha256": "41e69b29daf4b70a2635a472fb20ac3f08f19013110d694fd62dc7527438c261",
+    "byte_count": 725,
+    "encoded_width": 96,
+    "encoded_height": 54,
+    "capture_elapsed_ms": 2000,
+    "capture_time_authority": "capture_client_monotonic",
+    "received_at": "2026-10-14T00:30:00+05:30",
+    "admitted_at": "2026-10-14T00:30:00.500+05:30",
+    "receipt_time_authority": "observer_server_utc",
+    "view_revision": 4
+  },
+  "resolved_targets": [
+    {
+      "target_id": "message.frequency",
+      "status": "resolved",
+      "method": "human_review",
+      "region": {
+        "x": 0.9,
+        "y": 0.3,
+        "width": 0.3,
+        "height": 0.06
+      },
+      "reason": "Authored synthetic acceptance-test region, not visual detection."
+    }
+  ],
+  "relationships": [],
+  "operations": [
+    {
+      "kind": "box",
+      "cue_id": "synthetic-cue-1",
+      "meaning": "lab",
+      "accessible_label": "Message frequency field",
+      "target_id": "message.frequency"
+    }
+  ],
+  "replacement": "replace_complete_guidance_layer",
+  "delivery": {
+    "surface": "captured_frame",
+    "coordinate_space": "normalized_encoded_frame",
+    "adapter_binding_id": null,
+    "transform_revision": null,
+    "pointer_events": "none",
+    "clip_to_frame": true
+  },
+  "validity": {
+    "created_at": "2026-10-14T00:30:01+05:30",
+    "expires_at": "2026-10-14T00:30:09+05:30",
+    "max_frame_age_ms": 20000
+  },
+  "fallback": {
+    "instruction": "Set Message Frequency to 2*pi*100 rad/s.",
+    "reason": "none"
+  }
+}

@@ -153,6 +153,10 @@
             "phase_fault",
             "restored_baseline"
           ]
+        },
+        "view_revision": {
+          "type": "integer",
+          "minimum": 1
         }
       },
       "required": [
@@ -163,7 +167,8 @@
         "capture_session_id",
         "capture_epoch",
         "parameter_revision",
-        "condition"
+        "condition",
+        "view_revision"
       ]
     },
     "observation": {
@@ -217,6 +222,10 @@
             "failed",
             "disconnected"
           ]
+        },
+        "view_revision": {
+          "type": "integer",
+          "minimum": 1
         }
       },
       "required": [
@@ -226,7 +235,8 @@
         "capture_epoch",
         "source_received_at",
         "age_ms",
-        "status"
+        "status",
+        "view_revision"
       ]
     },
     "queue": {

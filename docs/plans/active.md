@@ -1,6 +1,6 @@
 # Backend implementation continuation
 
-Status: session publication authorized and prepared with Arpan identity; pipeline/BB8/evidence/docs preserved; FastAPI/worker design accepted; graphics handoff ready; backend implementation paused by user
+Status: session work published to origin/main with verified Arpan identity; pipeline/BB8/evidence/docs preserved; FastAPI/worker design accepted; graphics handoff ready; backend implementation paused by user
 
 ## Objective
 
@@ -20,7 +20,7 @@ The text CLI/validators, v2 prompt and speech adapter remain unchanged in this p
 
 ## Next
 
-The user authorized committing/pushing the session work. After publication, the other session should fetch current main and use the graphics handoff to investigate a bounded semantic scene plus distinct teaching-canvas/live-screen annotation contracts. Verify the new files and use the repository evidence archive when original ignored artifacts are absent. Agree source-input shape, job store/queue, target traffic/budget and soft-versus-exact pace requirements before any backend implementation authorization.
+The session work is published. The other session should fetch current main and use the graphics handoff to investigate a bounded semantic scene plus distinct teaching-canvas/live-screen annotation contracts. Verify the new files and use the repository evidence archive when original ignored artifacts are absent. Agree source-input shape, job store/queue, target traffic/budget and soft-versus-exact pace requirements before any backend implementation authorization.
 
 Preserve pending scientific/native review, the longer trial's s2/s8 wording concerns and s5/s7/s8 phrase warnings. Any later authorized refinement should reuse the cached translation. Any implementation must generalize/evaluate the VCO-specific profile prompt, preserve student choice and reuse existing validators. The current commit/push is authorized; building or new deployment remains outside scope.
 
@@ -35,7 +35,7 @@ Preserve pending scientific/native review, the longer trial's s2/s8 wording conc
 
 ## Session log and exact next action
 
-Current authorized work: commit/push the completed BB8 skill integration, prompt/speech code, pipeline/architecture/handoff docs and session evidence using the verified Arpan author identity. Backend building and new live trials remain paused. Keys remain process-only and excluded from publication.
+Current authorized publication is complete: BB8 skill integration, prompt/speech code, pipeline/architecture/handoff docs and session evidence are on main using the verified Arpan identity. Backend building and new live trials remain paused. Keys remain process-only and excluded from publication. Await the user's thoughts and the other session's bounded graphics investigation.
 
 ## User-authorized session publication — 13 October 2026
 
@@ -45,6 +45,7 @@ Current authorized work: commit/push the completed BB8 skill integration, prompt
 - **Evidence:** exported 87 session artifacts to `prototypes/mixed_script/evidence/2026-10-13/`, including actual WAV/MP3 recordings, generated scripts, raw requests/candidates/failure summaries, prompt iterations, model-access investigation, historical drivers and the separate Site publication/source record. Original payloads total 10,348,991 bytes before archive README/manifest; six historical text records are losslessly gzip-compressed because their original whitespace failed the staged whitespace check. Decompression is verified byte for byte; source whitespace validation is unchanged. The manifest records stored/original hashes and paths. The longer result remains a labelled draft; no stage/semantic review was fabricated. Scratch originals remain ignored and credential values are excluded.
 - **Pre-publication checks:** 25 pipeline tests and 36 BB8 tests passed; source integrity passed for all 130 files; BB8 package/discovery passed. All 87 exported artifact hashes match; completed text and the longer draft's canonical stage checks passed, and both exported WAV/MP3 pairs match their manifests. All 57 original tracked canonical skill resources match the starting HEAD; the supplied skill hash matches the uploaded original. All 129 changed/new files passed process-key, common API/bearer/private-key checks and JSON parsing where applicable. Eight documents passed balanced-fence checks and 69 local links/fragments resolved; `git diff --check` passed. No new provider trial or backend implementation occurred.
 - **Commit grouping:** supplied BB8 skill integration; prompt/speech code and preserved session evidence; then pipeline/architecture/handoff documentation. Push the resulting current-history tip to `origin/main` without force and verify the remote SHA and author/committer identities afterward. If the remote moves, preserve local commits and inspect/reconcile that exact change before attempting publication again.
+- **Actual publication result:** fast-forward push to `origin/main` succeeded from `00fbd8f` through `d194e5cbfed320485a9fb6f00ca49054bebdb49b`. Commits: `7641704a42cdcd6b17ba45fc6600f85608238bd9` (BB8), `63f79a51e71a567349b8e7d8decc66d8b794fafc` (speech/prompts/evidence), and `d194e5cbfed320485a9fb6f00ca49054bebdb49b` (pipeline/FastAPI/graphics docs). Independently queried `git ls-remote origin refs/heads/main` and confirmed it matched local HEAD; working tree was clean. All three author/committer identities matched the verified Arpan account. This follow-up receipt records the actual publication for cold pickup; no force push or history rewrite occurred. Local checks passed; no CI outcome is claimed.
 - **Exact next action after verified push:** the other session fetches current main, loads `docs/handoffs/graphics-and-annotation.md` and the evidence archive, then performs the bounded graphics/annotation design investigation. FastAPI implementation remains paused; no further commit/push/deployment is implied for that session.
 
 ## Accepted pipeline, FastAPI assessment and graphics handoff — 13 October 2026

@@ -1,3 +1,5 @@
+> Historical 0.2.1 setup/port notes. The user-authorized 0.2.2 extension adds prompt-design-engineering; the current package has 22 skills. Use the current manifests, registry, and runbook for acceptance.
+
 # Portable skill port
 
 Use the existing `skills/bb8/SKILL.md` as the coordinator entrypoint and retain

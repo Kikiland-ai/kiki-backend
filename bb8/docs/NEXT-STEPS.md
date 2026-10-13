@@ -1,3 +1,5 @@
+> Historical 0.2.1 setup/port notes. The user-authorized 0.2.2 extension adds prompt-design-engineering; the current package has 22 skills. Use the current manifests, registry, and runbook for acceptance.
+
 # Platform-agnostic rollout
 
 Scope: the uploaded BB8 plugin repository only. No application repository,

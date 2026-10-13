@@ -17,7 +17,7 @@ class DiscoveryTests(unittest.TestCase):
         loader = discovery.adapter(PLUGIN)
         for host in ['.agents', '.claude']:
             paths = [name for name in outputs if name.startswith(host + '/') and name.endswith('/SKILL.md')]
-            self.assertEqual(len(paths), 21)
+            self.assertEqual(len(paths), 22)
             names = {loader.frontmatter(outputs[path].decode())['name'] for path in paths}
             self.assertEqual(names, loader.EXPECTED)
             for path in paths:
@@ -27,7 +27,7 @@ class DiscoveryTests(unittest.TestCase):
     def test_write_check_and_detect_stale_wrapper(self):
         with tempfile.TemporaryDirectory() as temporary:
             repo = Path(temporary)
-            self.assertEqual(discovery.sync(repo, PLUGIN, True)['files_written'], 64)
+            self.assertEqual(discovery.sync(repo, PLUGIN, True)['files_written'], 67)
             self.assertEqual(discovery.sync(repo, PLUGIN)['status'], 'PASS')
             path = repo / '.claude/skills/bb8/SKILL.md'
             path.write_text(path.read_text() + '\nStale change\n')
@@ -63,7 +63,7 @@ class DiscoveryTests(unittest.TestCase):
 
     def test_resource_catalogue_hashes_all_original_package_files(self):
         index = json.loads(discovery.outputs(PLUGIN)['bb8/adapters/discovery/index.json'])
-        self.assertEqual(len(index['resources']), 71)
+        self.assertEqual(len(index['resources']), 73)
         for resource in index['resources']:
             raw = (PLUGIN.parent / resource['path']).read_bytes()
             self.assertEqual(resource['bytes'], len(raw))

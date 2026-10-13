@@ -22,7 +22,7 @@ def request(**overrides):
 class AdapterChecks(unittest.TestCase):
     def test_exact_inventory_and_links(self):
         result = adapter.validate(ROOT)
-        self.assertEqual(result['packaged_skills'], 21)
+        self.assertEqual(result['packaged_skills'], 22)
         self.assertEqual(result['resolved_skill_links'], 33)
         self.assertEqual(result['native_registration'], 'not_checked')
 
@@ -34,6 +34,15 @@ class AdapterChecks(unittest.TestCase):
         self.assertIn('Packaged reference: skills/engineering-review/SKILL.md', packet)
         self.assertNotIn('Packaged reference: skills/organise/SKILL.md', packet)
         self.assertNotIn('Packaged reference: skills/product-discovery/SKILL.md', packet)
+
+    def test_prompt_design_skill_can_be_prepared_in_reference_mode(self):
+        packet = adapter.prepare(request(skill='prompt-design-engineering',
+                                         scope=['prototypes/mixed_script/pipeline.py']), ROOT)
+        self.assertIn('Packaged reference: skills/prompt-design-engineering/SKILL.md', packet)
+        self.assertIn('Six-layer prompt architecture', packet)
+        self.assertIn('A held-out set checks overfitting.', packet)
+        self.assertIn('"native_plugin_active": false', packet)
+        self.assertNotIn('Packaged reference: skills/organise/SKILL.md', packet)
 
     def test_scope_traversal_and_absolute_paths_rejected(self):
         for value in ['../outside', '/absolute', 'C:/outside', 'a\\..\\outside', '']:

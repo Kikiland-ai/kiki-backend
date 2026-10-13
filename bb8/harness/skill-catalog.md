@@ -36,6 +36,12 @@ Use `$engineering` when you want the family router.
 | `$engineering-testing` | Risk-based test and verification strategy. |
 | `$engineering-security` | Authorized threat modeling, review, and hardening. |
 
+## Prompt design and engineering
+
+| Skill | Use it for |
+|---|---|
+| `$prompt-design-engineering` | Prompt contracts, failure diagnosis, controlled optimization, held-out evaluation, and multi-prompt coherence. |
+
 ## Product-design TOFU family
 
 Use `$product-design` when you want the family router.

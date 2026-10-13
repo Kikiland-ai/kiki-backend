@@ -74,6 +74,10 @@ Use to turn established reasoning into answer-first, logically grouped communica
 
 Use to build or audit the causal chain between purpose, customer benefits, experience, and features. Choose it when the user needs a strategy narrative, roadmap rationale, feature-to-outcome traceability, or an integrity check for orphan features and unsupported value claims. It may use Minto communication afterward, but it owns the underlying strategy model.
 
+### Prompt design and engineering
+
+Use `prompt-design-engineering` for designing, debugging, reviewing, or optimizing LLM prompts, including structured generators and tool descriptions. Keep canonical schemas and facts in code/data; use measured one-change iterations and held-out checks. Pair with engineering-testing when code validation or evaluation boundaries need review.
+
 ### Engineering family
 
 Use `$engineering` as an explicit front door when the technical route is unclear. Otherwise route directly to architecture, implementation, debugging, review, testing, or security. BB8 owns the mission frame, constraints, priorities, and reintegration—not the specialist's technical procedure.

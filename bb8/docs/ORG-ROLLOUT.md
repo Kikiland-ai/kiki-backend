@@ -9,7 +9,7 @@ verified by this setup. The code is ready for an administrator's normal rollout.
 - `bb8/provisioning/bootstrap.py`: guarded, repeatable repository bootstrap.
 - `bb8/provisioning/config.json`: organization, creation cutoff, write policy, and controller exclusion.
 - `.github/workflows/bb8-check.yml`: package, discovery, and test validation.
-- `bb8/adapters/discovery/sync.py`: 21 wrappers per host and resource catalogue.
+- `bb8/adapters/discovery/sync.py`: 22 wrappers per host and resource catalogue.
 
 The scheduled job runs only when `BB8_BOOTSTRAP_ENABLED=true`. It restricts
 work to Kikiland-ai repos accessible to the configured installation and created
@@ -53,7 +53,7 @@ or inspected in this task.
 2. Review config.json's creation cutoff and direct-write policy.
 3. Set the controller variable `BB8_BOOTSTRAP_ENABLED=true`.
 4. Run **BB8 organization bootstrap** against a designated new test repo with dry run enabled; review its result, then apply.
-5. Confirm the commit, marker, 21 wrappers per host, and validation workflow. Test empty and protected repos too.
+5. Confirm the commit, marker, 22 wrappers per host, and validation workflow. Test empty and protected repos too.
 6. Allow scheduled reconciliation and monitor failures or pending PRs.
 
 This session has no tool to install an organization App or configure its identity.

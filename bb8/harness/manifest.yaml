@@ -1,6 +1,6 @@
 schema_version: 1
 name: "bb8"
-version: "0.2.0"
+version: "0.2.2"
 description: "Portable local-first executive thinking partner and capability router."
 entrypoints:
   system_prompt: "./system-prompt.md"

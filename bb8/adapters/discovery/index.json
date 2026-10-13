@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generator": "Generated BB8 discovery wrapper",
   "plugin": "bb8",
-  "plugin_version": "0.2.1",
+  "plugin_version": "0.2.2",
   "skills": [
     {
       "name": "bb8",
@@ -138,6 +138,13 @@
       "claude": ".claude/skills/product-strategy/SKILL.md"
     },
     {
+      "name": "prompt-design-engineering",
+      "canonical": "bb8/skills/prompt-design-engineering/SKILL.md",
+      "sha256": "523bea00286b0011441383f84df21740108a68602ef318ff6412f3897bf910de",
+      "codex": ".agents/skills/prompt-design-engineering/SKILL.md",
+      "claude": ".claude/skills/prompt-design-engineering/SKILL.md"
+    },
+    {
       "name": "strategic-storytelling",
       "canonical": "bb8/skills/strategic-storytelling/SKILL.md",
       "sha256": "5dd8613d15717fe4ec5e736e7eab4ded1b76920583a228e8c6553dc0608c1005",
@@ -156,27 +163,27 @@
     {
       "path": "bb8/.codex-plugin/plugin.json",
       "bytes": 863,
-      "sha256": "a15f51f9fb8f8d59c14a3b9f4e9bfe82856395aa158592d96858ffc4517bc9cf"
+      "sha256": "3079398035cb5702bc12b602e74c9eff967ad66ebbb31c0584658bd3d7280922"
     },
     {
       "path": "bb8/README.md",
-      "bytes": 1386,
-      "sha256": "b422bb2108316d6b34a25c2cf017f7b4edb793a12cb1717a244d679f60f06934"
+      "bytes": 1657,
+      "sha256": "c45935778c5dd272374da467032e15e9cdd018cd36a68f22d661340b920e0ec6"
     },
     {
       "path": "bb8/SESSION-SETUP-RUNBOOK.md",
-      "bytes": 5398,
-      "sha256": "3bd621347529684fee713ad07dee2b9057e90e7168aefe1315a2dd38e232efb8"
+      "bytes": 5431,
+      "sha256": "a3b7fc6c7678db19a68e0f1015555b9f1228db070c8eff453d996fed453b2840"
     },
     {
       "path": "bb8/harness/capability-registry.yaml",
-      "bytes": 4864,
-      "sha256": "b51fc23cdeb240dfa7b970bb978dc0d4d5ef362570ed80b4bb0a1a467da733d1"
+      "bytes": 5125,
+      "sha256": "6d0da227e21a3bb9bd2bbd3fa94f8112ba60a0b126bda4f9258c09434018c52d"
     },
     {
       "path": "bb8/harness/manifest.yaml",
       "bytes": 1115,
-      "sha256": "126b82327da273c37c36338f490b259a3ef664d3e006493bf8eef96dcc1e5c8d"
+      "sha256": "7d870e40a0e14c99f57e382fe2cc0243490b155a440b88126203c02d1d6dcd8c"
     },
     {
       "path": "bb8/harness/plan-template.md",
@@ -205,13 +212,13 @@
     },
     {
       "path": "bb8/harness/routing-contract.md",
-      "bytes": 5688,
-      "sha256": "30b78efa620694fc7a5fffea5c1af016f72e9230f657b4c9fd6d80e06290b7d8"
+      "bytes": 6067,
+      "sha256": "e79adea7b488768c8139268a92a2706acc1f0087ce17927412eaa395528d3bb5"
     },
     {
       "path": "bb8/harness/skill-catalog.md",
-      "bytes": 2606,
-      "sha256": "daccb85a1a7d20ed4fb89f8a608aa8f11a189362b991bb29917848af9301dccf"
+      "bytes": 2820,
+      "sha256": "b1f46d2e41c63100a5481c5b56b10e66e504e563e81112abc61301de65d482b4"
     },
     {
       "path": "bb8/harness/system-prompt.md",
@@ -221,7 +228,7 @@
     {
       "path": "bb8/plugin.json",
       "bytes": 1114,
-      "sha256": "7aa159fbbf94eed0734788b94cc1e3af4619c8c8717bf40b6da32afdc944217e"
+      "sha256": "1de82f6399507b7e70bbc2322c0e3c6849c74ab24271fdec3e8a9b859fe41bf9"
     },
     {
       "path": "bb8/skills/bb8/SKILL.md",
@@ -467,6 +474,16 @@
       "path": "bb8/skills/product-strategy/agents/openai.yaml",
       "bytes": 265,
       "sha256": "4e29d3d4ac246bbd1149aca6d38cfbcaad71245f249901839c2d0a5865e7b6a0"
+    },
+    {
+      "path": "bb8/skills/prompt-design-engineering/SKILL.md",
+      "bytes": 12119,
+      "sha256": "523bea00286b0011441383f84df21740108a68602ef318ff6412f3897bf910de"
+    },
+    {
+      "path": "bb8/skills/prompt-design-engineering/agents/openai.yaml",
+      "bytes": 324,
+      "sha256": "e60c9e4b6f113ef0dba8225191cb40b5f65fef045a8befa0d9630993b323bfe1"
     },
     {
       "path": "bb8/skills/strategic-storytelling/SKILL.md",

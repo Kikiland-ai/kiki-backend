@@ -156,7 +156,7 @@ def plan_files(files, current, existing_text, revision):
         else:
             planned[name] = content
     marker = {'schema_version': 1, 'status': 'complete', 'plugin': 'bb8',
-              'plugin_version': '0.2.1', 'source_revision': revision,
+              'plugin_version': '0.2.2', 'source_revision': revision,
               'bundle_sha256': bundle_digest(files)}
     planned[MARKER] = (json.dumps(marker, indent=2) + '\n').encode()
     return planned, 'ready'
@@ -281,7 +281,7 @@ def main():
             raise ValueError('Source revision must be a pinned 40-character commit SHA')
         if args.command == 'package':
             files[MARKER] = (json.dumps({'schema_version': 1, 'status': 'complete',
-                'plugin': 'bb8', 'plugin_version': '0.2.1', 'source_revision': args.source_revision,
+                'plugin': 'bb8', 'plugin_version': '0.2.2', 'source_revision': args.source_revision,
                 'bundle_sha256': bundle_digest(files)}, indent=2) + '\n').encode()
             output = Path(args.output)
             if output.exists():

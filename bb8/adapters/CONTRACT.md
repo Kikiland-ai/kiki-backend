@@ -1,8 +1,8 @@
 # BB8 host adapter contract
 
-Adapter version: 0.1.0. Underlying BB8 plugin identity: 0.2.1.
+Adapter version: 0.1.0. Underlying BB8 plugin identity: 0.2.2.
 
-The core source is the unchanged `skills/` and `harness/`. Adapters must separate:
+The core source is `skills/` and `harness/`; 0.2.2 adds one user-supplied skill and its registry/catalog entries while preserving the original skill texts. Adapters must separate:
 
 1. Packaged inventory: files exist and pass validation.
 2. Reference loading: the host receives selected BB8 instructions as documents.

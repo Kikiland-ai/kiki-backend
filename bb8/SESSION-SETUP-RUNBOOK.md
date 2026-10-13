@@ -27,9 +27,9 @@ the skills, not project context.
    - `.codex-plugin/plugin.json`
 2. Confirm both manifests have:
    - name: `bb8`
-   - version: `0.2.1`
+   - version: `0.2.2`
    - description: `Local-first executive thinking partner, planner, and capability router.`
-3. Confirm `skills/` contains exactly these 21 directories:
+3. Confirm `skills/` contains exactly these 22 directories:
    - `bb8`
    - `data-analysis`
    - `deep-research`
@@ -49,6 +49,7 @@ the skills, not project context.
    - `product-design`
    - `product-discovery`
    - `product-strategy`
+   - `prompt-design-engineering`
    - `strategic-storytelling`
    - `transcript-insights-tofu`
 4. Confirm every listed directory contains `SKILL.md` with `name` and
@@ -104,8 +105,8 @@ installation method.
 
 ## Later: acceptance test in a fresh session
 
-1. List the active plugin and confirm the identity is `bb8` version `0.2.1`.
-2. List its discovered skills and compare them exactly with the 21-item list
+1. List the active plugin and confirm the identity is `bb8` version `0.2.2`.
+2. List its discovered skills and compare them exactly with the 22-item list
    above.
 3. Invoke BB8 with: `Use BB8 to frame a consequential decision in Now, Next,
    Later form and tell me which specialist skill you would route to.`
@@ -118,7 +119,7 @@ installation method.
    - does not invent a knowledge-root location.
 5. Invoke one specialist directly, for example:
    `Use the problem-solving skill to structure a generic ambiguous problem.`
-6. Report pass/fail for manifest discovery, 21-skill discovery, BB8 routing,
+6. Report pass/fail for manifest discovery, 22-skill discovery, BB8 routing,
    direct specialist invocation, and context isolation.
 
 ## Completion report

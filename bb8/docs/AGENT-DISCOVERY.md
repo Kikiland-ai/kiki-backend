@@ -6,7 +6,7 @@ BB8 for supported local clients to install; it does not install itself into
 a running hosted chat. ChatGPT uses `@` selection, Codex CLI/IDE uses `/skills`
 or `$bb8`, and Claude Code uses `/bb8`.
 
-The original BB8 skills and harness remain unchanged. Small generated project
+The original 21 skill texts remain unchanged; the 0.2.2 registry/catalog add the user-supplied prompt-design-engineering skill. Small generated project
 skills expose their names and descriptions in each host's discovery location.
 
 | Surface | Files | Behavior |
@@ -19,13 +19,13 @@ skills expose their names and descriptions in each host's discovery location.
 
 Wrappers are ordinary files, so Windows clones need no symlink support. They
 are generated from canonical metadata and do not install another plugin.
-All 21 names remain the same. Knowledge operations remain excluded; `organise`
+The original 21 names remain the same; prompt-design-engineering is the 22nd. Knowledge operations remain excluded; `organise`
 is not implicitly enabled by the generated host metadata.
 
 ## Indexing and integrity
 
-`bb8/adapters/discovery/index.json` lists 21 skills, their host entrypoints, and
-hashes for all 71 original package files. It is a deterministic catalogue,
+`bb8/adapters/discovery/index.json` lists 22 skills, their host entrypoints, and
+hashes for all 73 canonical package files. It is a deterministic catalogue,
 not an embedding index or evidence that an agent read every file. Repository
 files cannot force a proprietary host index or full-context loading.
 

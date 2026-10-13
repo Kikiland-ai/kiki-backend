@@ -5,7 +5,7 @@ agent-plugin hosts.
 
 It contains:
 
-- the complete 21-skill BB8 suite;
+- the 22-skill BB8 suite (the original 21 plus the user-supplied prompt-design-engineering skill);
 - the BB8 harness files required by those skills;
 - a portable root `plugin.json` manifest;
 - a Codex-compatible `.codex-plugin/plugin.json` manifest;
@@ -44,3 +44,6 @@ capability directory.
 19. `product-strategy`
 20. `strategic-storytelling`
 21. `transcript-insights-tofu`
+22. `prompt-design-engineering`
+
+The 0.2.2 extension preserves the supplied skill text byte for byte. Existing canonical skill texts remain unchanged. Native hosted activation is a separate acceptance step.

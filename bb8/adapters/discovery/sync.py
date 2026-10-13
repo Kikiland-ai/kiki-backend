@@ -68,7 +68,7 @@ def outputs(plugin=PLUGIN):
         resources.append({'path': 'bb8/' + path.relative_to(plugin).as_posix(),
                           'bytes': len(raw), 'sha256': hashlib.sha256(raw).hexdigest()})
     result['bb8/adapters/discovery/index.json'] = (json.dumps({'schema_version': 1,
-        'generator': MARKER, 'plugin': 'bb8', 'plugin_version': '0.2.1',
+        'generator': MARKER, 'plugin': 'bb8', 'plugin_version': loader.IDENTITY['version'],
         'skills': index, 'resources': resources}, indent=2) + '\n').encode()
     return result
 
@@ -106,7 +106,9 @@ def sync(repo=REPO, plugin=PLUGIN, write=False):
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_bytes(planned[relative])
     return {'status': 'PASS' if write or not differences else 'FAIL',
-            'packaged_skills': 21, 'codex_wrappers': 21, 'claude_wrappers': 21,
+            'packaged_skills': len(adapter(plugin).inventory(plugin)),
+            'codex_wrappers': sum(path.startswith('.agents/') and path.endswith('/SKILL.md') for path in planned),
+            'claude_wrappers': sum(path.startswith('.claude/') and path.endswith('/SKILL.md') for path in planned),
             'files_written': len(differences) if write else 0,
             'missing_or_stale': [] if write else differences,
             'host_runtime_discovery': 'not_tested'}

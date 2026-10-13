@@ -185,8 +185,8 @@ class ProvisioningTests(unittest.TestCase):
         marketplace = json.loads(files['.agents/plugins/marketplace.json'])
         self.assertEqual([plugin['name'] for plugin in marketplace['plugins']], ['bb8'])
         self.assertEqual(marketplace['plugins'][0]['source']['path'], './bb8')
-        self.assertEqual(len([path for path in files if path.startswith('.claude/') and path.endswith('SKILL.md')]), 21)
-        self.assertEqual(len([path for path in files if path.startswith('.agents/') and path.endswith('SKILL.md')]), 21)
+        self.assertEqual(len([path for path in files if path.startswith('.claude/') and path.endswith('SKILL.md')]), 22)
+        self.assertEqual(len([path for path in files if path.startswith('.agents/') and path.endswith('SKILL.md')]), 22)
 
     def test_excluded_runtime_files_are_not_bundled(self):
         with tempfile.TemporaryDirectory() as temporary:

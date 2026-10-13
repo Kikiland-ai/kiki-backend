@@ -127,3 +127,9 @@ capabilities:
     role: "specialist"
     description: "Top-of-funnel transcript context reconstruction, evidence extraction, and finding development."
     entrypoint: "../skills/transcript-insights-tofu/SKILL.md"
+
+  - id: "prompt-design-engineering"
+    status: "active"
+    role: "specialist"
+    description: "Design, debug, review, and optimize LLM prompts as versioned contracts with measured evaluations."
+    entrypoint: "../skills/prompt-design-engineering/SKILL.md"

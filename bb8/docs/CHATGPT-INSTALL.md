@@ -26,7 +26,7 @@ Restart the ChatGPT desktop app. Open the Plugins Directory, select **Kikiland
 BB8**, and install **BB8**. Start a fresh Work chat, type `@`, and select BB8
 from the picker. Merely typing the string `@bb8` cannot select an absent skill.
 
-Verify the plugin identifies as BB8 0.2.1, exposes its 21 skills, and can frame
+Verify the plugin identifies as BB8 0.2.2, exposes its 22 skills, and can frame
 a generic decision using the packaged harness without prior context. This
 task prepares the installation source; it does not modify the desktop user's
 profile, install a plugin into that account, or prove UI registration succeeded.

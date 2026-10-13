@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "bb8",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Local-first executive thinking partner, planner, and capability router.",
   "author": {
     "name": "Personal"

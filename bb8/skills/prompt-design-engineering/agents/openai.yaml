@@ -1,0 +1,7 @@
+interface:
+  display_name: "Prompt Design and Engineering"
+  short_description: "Design and evaluate prompts as testable contracts"
+  brand_color: "#34495E"
+  default_prompt: "Use $prompt-design-engineering to harden this prompt with measured iterations and a held-out evaluation."
+policy:
+  allow_implicit_invocation: true

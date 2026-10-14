@@ -1,3 +1,11 @@
+# Prepared TOON streaming branch — paused
+
+Baseline commit: `681ad52d37ac0bfced86ceadeaaed6ef8128caf5`. This branch changes only experiment preparation documents/configuration. The original observer/acceptance/hosted baseline is unchanged. Read [IMPLEMENTATION.md](../experiments/IMPLEMENTATION.md) for the next scoped build, and [the shared protocol](../experiments/screen-reader-streaming-comparison.md) for identical controls/gates. The config is descriptive, not a runtime flag. No stream implementation, paid trial, experimental deployment or baseline Site change has happened.
+
+Last completed action: prepared an isolated experiment from the same frozen baseline as the other arm. Exact next action when work resumes: implement the selected streaming adapter/router behind an explicit experiment path, pass offline replay/semantic gates, then run a separately resumed controlled trial. Python cloud hosting and frontend production connection remain pending.
+
+---
+
 # Current pause: baseline recorded, API consolidated, streaming experiments prepared
 
 14 October 2026. The user reported completing at least eight Simulink steps with intuitive, understandable guidance. Recognition/tracking works; verification latency remains the next optimization. This report is usability evidence, not a certified eight-step transcript or mastery assessment.

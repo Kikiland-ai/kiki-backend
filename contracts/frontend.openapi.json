@@ -119,11 +119,11 @@
             }
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Invalid request fields; submitted source is never echoed",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/SafeValidationError"
                 }
               }
             }
@@ -154,11 +154,11 @@
             }
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Invalid request fields; submitted source is never echoed",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/SafeValidationError"
                 }
               }
             }
@@ -211,11 +211,11 @@
             }
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Invalid request fields; submitted source is never echoed",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/SafeValidationError"
                 }
               }
             }
@@ -248,11 +248,11 @@
             }
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Invalid request fields; submitted source is never echoed",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/SafeValidationError"
                 }
               }
             }
@@ -285,11 +285,11 @@
             }
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Invalid request fields; submitted source is never echoed",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/SafeValidationError"
                 }
               }
             }
@@ -332,11 +332,11 @@
             }
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Invalid request fields; submitted source is never echoed",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/SafeValidationError"
                 }
               }
             }
@@ -379,11 +379,11 @@
             }
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Invalid request fields; submitted source is never echoed",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/SafeValidationError"
                 }
               }
             }
@@ -426,11 +426,11 @@
             }
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Invalid request fields; submitted source is never echoed",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/SafeValidationError"
                 }
               }
             }
@@ -473,11 +473,11 @@
             }
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Invalid request fields; submitted source is never echoed",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/SafeValidationError"
                 }
               }
             }
@@ -520,11 +520,11 @@
             }
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Invalid request fields; submitted source is never echoed",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/SafeValidationError"
                 }
               }
             }
@@ -566,11 +566,11 @@
             }
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Invalid request fields; submitted source is never echoed",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/SafeValidationError"
                 }
               }
             }
@@ -619,11 +619,11 @@
             }
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Invalid request fields; submitted source is never echoed",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/SafeValidationError"
                 }
               }
             }
@@ -672,11 +672,11 @@
             }
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Invalid request fields; submitted source is never echoed",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/SafeValidationError"
                 }
               }
             }
@@ -709,11 +709,11 @@
             }
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Invalid request fields; submitted source is never echoed",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/SafeValidationError"
                 }
               }
             }
@@ -766,11 +766,11 @@
             }
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Invalid request fields; submitted source is never echoed",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/SafeValidationError"
                 }
               }
             }
@@ -803,11 +803,11 @@
             }
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Invalid request fields; submitted source is never echoed",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/SafeValidationError"
                 }
               }
             }
@@ -855,11 +855,11 @@
             }
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Invalid request fields; submitted source is never echoed",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/SafeValidationError"
                 }
               }
             }
@@ -897,11 +897,11 @@
             }
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Invalid request fields; submitted source is never echoed",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/SafeValidationError"
                 }
               }
             }
@@ -939,11 +939,11 @@
             }
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Invalid request fields; submitted source is never echoed",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/SafeValidationError"
                 }
               }
             }
@@ -979,11 +979,11 @@
             }
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Invalid request fields; submitted source is never echoed",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/SafeValidationError"
                 }
               }
             }
@@ -1021,11 +1021,11 @@
             }
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Invalid request fields; submitted source is never echoed",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/SafeValidationError"
                 }
               }
             }
@@ -1063,11 +1063,11 @@
             }
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Invalid request fields; submitted source is never echoed",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/SafeValidationError"
                 }
               }
             }
@@ -1645,6 +1645,17 @@
         ],
         "title": "ContextChange",
         "type": "object"
+      },
+      "SafeValidationError": {
+        "type": "object",
+        "properties": {
+          "detail": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "detail"
+        ]
       }
     }
   }

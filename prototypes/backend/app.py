@@ -41,6 +41,7 @@ def create_app(data_dir=Path('work/backend'), *, analyzer=None, text_factory=Non
     @app.get('/health',tags=['runtime'])
     async def health():
         value=await original_health()
+        value['mode']='screen_lab_and_mixed_language_jobs'
         value['api_schema']='kiki-prototype-api/v1'
         value['mixed_language']={'text_configured':jobs.text_configured,'speech_configured':jobs.speech_configured,
             'text_model':jobs.text_model,'speech_model':jobs.speech_model,'voice':jobs.voice,'workers':jobs.workers,
@@ -60,6 +61,11 @@ def create_app(data_dir=Path('work/backend'), *, analyzer=None, text_factory=Non
             shape=model.model_json_schema(ref_template='#/components/schemas/{model}')
             components.update(shape.pop('$defs',{})); components[model.__name__]=shape
             schema['paths'][path]['post']['requestBody']={'required':True,'content':{'application/json':{'schema':{'$ref':'#/components/schemas/'+model.__name__}}}}
+        components['SafeValidationError']={'type':'object','properties':{'detail':{'type':'string'}},'required':['detail']}
+        for path in schema['paths'].values():
+            for operation in path.values():
+                if isinstance(operation,dict) and 'responses' in operation and '422' in operation['responses']:
+                    operation['responses']['422']={'description':'Invalid request fields; submitted source is never echoed','content':{'application/json':{'schema':{'$ref':'#/components/schemas/SafeValidationError'}}}}
         app.openapi_schema=schema
         return schema
     app.openapi=openapi

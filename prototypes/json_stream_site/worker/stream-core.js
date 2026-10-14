@@ -22,14 +22,14 @@ function streamValue(text,start=0){
 }
 function streamStrictJSON(text){const parsed=streamValue(text+' ',0);if(text.slice(parsed.end).trim())throw Error('invalid_output');return parsed.value;}
 class FindingParserJS{
- constructor(cp,actions){this.expected={criteria:new Set(cp.completion_criteria.map(c=>c.id)),action_findings:new Set(actions.map(a=>a.id))};this.seen={criteria:new Set(),action_findings:new Set()};this.completed=new Set();this.keys=new Set();this.text='';this.pos=0;this.state='start';this.field=null;this.closed=false;}
+ constructor(cp,actions,decisionOnly=false){this.fields=new Set(decisionOnly?['criteria','action_findings','uncertainties']:['criteria','action_findings','uncertainties','summary']);this.expected={criteria:new Set(cp.completion_criteria.map(c=>c.id)),action_findings:new Set(actions.map(a=>a.id))};this.seen={criteria:new Set(),action_findings:new Set()};this.completed=new Set();this.keys=new Set();this.text='';this.pos=0;this.state='start';this.field=null;this.closed=false;}
  feed(text){this.text+=text;if(this.text.length>262144)throw Error('invalid_output');return this.parse();}
  parse(){const events=[],bad=()=>{throw Error('invalid_output');};
   while(true){while(this.pos<this.text.length&&/[\t\r\n ]/.test(this.text[this.pos]))this.pos++;if(this.pos>=this.text.length)return events;
    const ch=this.text[this.pos];let parsed;
    const read=()=>{try{return streamValue(this.text,this.pos);}catch(e){if(e.incomplete)return null;throw e;}};
    if(this.state==='start'){if(ch!=='{')bad();this.pos++;this.state='key';}
-   else if(this.state==='key'){parsed=read();if(!parsed)return events;const key=parsed.value;if(!['criteria','action_findings','uncertainties','summary'].includes(key)||this.keys.has(key))bad();this.keys.add(key);this.field=key;this.pos=parsed.end;this.state='colon';}
+   else if(this.state==='key'){parsed=read();if(!parsed)return events;const key=parsed.value;if(!this.fields.has(key)||this.keys.has(key))bad();this.keys.add(key);this.field=key;this.pos=parsed.end;this.state='colon';}
    else if(this.state==='colon'){if(ch!==':')bad();this.pos++;this.state=this.expected[this.field]?'array_start':'value';}
    else if(this.state==='array_start'){if(ch!=='[')bad();this.pos++;this.state='row_or_end';}
    else if(['row','row_or_end'].includes(this.state)){
@@ -46,7 +46,7 @@ class FindingParserJS{
   }
  }
  finishArray(){if(this.seen[this.field].size!==this.expected[this.field].size)throw Error('invalid_output');this.completed.add(this.field);this.pos++;this.state='field_delim';}
- finish(){this.parse();if(!this.closed||this.text.slice(this.pos).trim()||this.keys.size!==4||!this.completed.has('action_findings'))throw Error('invalid_output');return streamStrictJSON(this.text);}
+ finish(){this.parse();if(!this.closed||this.text.slice(this.pos).trim()||this.keys.size!==this.fields.size||![...this.fields].every(k=>this.completed.has(k)))throw Error('invalid_output');return streamStrictJSON(this.text);}
 }
 class SSEDecoderJS{
  constructor(){this.decoder=new TextDecoder('utf-8',{fatal:true});this.pending='';this.data=[];this.total=0;}

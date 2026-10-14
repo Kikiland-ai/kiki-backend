@@ -5,7 +5,7 @@ import {randomBytes} from 'node:crypto';
 import worker from '../dist/server/index.js';
 import {localDB} from './local-db.mjs';
 import {FindingParserJS,SSEDecoderJS,streamStrictJSON} from '../worker/stream-core.js';
-import {consumeAnalysisStream} from '../assets/json-stream-client.js';
+import {consumeAnalysisStream,startAnalysisStream} from '../assets/json-stream-client.js';
 const definition=JSON.parse(await readFile('data/experiment.json','utf8')),policy=JSON.parse(await readFile('data/guided-policy.json','utf8'));
 const cp=definition.checkpoints[4],actions=policy.procedures[cp.id];
 const findings=(cp,actions,status='unknown')=>({criteria:cp.completion_criteria.map(c=>({criterion_id:c.id,status,evidence:'Controlled field: "pi/2", ଓଡ଼ିଆ; no real Simulink claim.'})),action_findings:actions.map(a=>({action_id:a.id,status,evidence:'Controlled action fixture.'})),uncertainties:[],summary:'Controlled fixture, not a real learner screen.'});
@@ -40,15 +40,15 @@ async function prepare(t){t.mock.timers.enable({apis:['Date'],now:Date.UTC(2026,
 }
 function fixtureTransport(env,{gate=null,finish='STOP'}={}){let call=0;env.LAB_STREAM_FETCH=async(url,options)=>{
  assert.match(url,/:streamGenerateContent\?alt=sse$/);const body=JSON.parse(options.body),context=JSON.parse(body.contents[0].parts[0].text),cp=context.checkpoint,actions=context.procedure;
- assert.deepEqual(Object.keys(body.generationConfig.responseJsonSchema.properties),['criteria','action_findings','uncertainties','summary']);call++;
- const value=findings(cp,actions),whole=JSON.stringify(value),prefix='{"criteria":['+JSON.stringify(value.criteria[0]);const encoder=new TextEncoder();
+ assert.deepEqual(Object.keys(body.generationConfig.responseJsonSchema.properties),['criteria','action_findings','uncertainties']);call++;
+ const value=findings(cp,actions);delete value.summary;const whole=JSON.stringify(value),prefix='{"criteria":['+JSON.stringify(value.criteria[0]);const encoder=new TextEncoder();
  return new Response(new ReadableStream({async start(controller){
   const send=(text,stop=false)=>controller.enqueue(encoder.encode('data: '+JSON.stringify({candidates:[{content:{parts:[{text}]},...(stop?{finishReason:finish}:{})}]} )+'\n\n'));
   const abort=()=>controller.error(new DOMException('Cancelled','AbortError'));options.signal.addEventListener('abort',abort,{once:true});
   try{send(prefix);if(gate)await gate;send(whole.slice(prefix.length),true);controller.close();}catch{}finally{options.signal.removeEventListener('abort',abort);}
  }}),{headers:{'Content-Type':'text/event-stream'}});
  };return ()=>call;}
-function streamRequest(s,cookie){return request(`/lab-sessions/${s.lab_session_id}/check-stream`,'POST',image,cookie,{'Content-Type':'image/jpeg','X-Capture-Frame':JSON.stringify(meta)});}
+function streamRequest(s,cookie,m=meta){return request(`/lab-sessions/${s.lab_session_id}/check-stream`,'POST',image,cookie,{'Content-Type':'image/jpeg','X-Capture-Frame':JSON.stringify(m)});}
 function events(raw){return raw.split('\n\n').filter(Boolean).map(s=>JSON.parse(s.slice(6)));}
 test('real tracker stream sends trusted admission and tentative row before generation finishes; guidance precedes snapshot',async t=>{
  const p=await prepare(t);let release;const gate=new Promise(resolve=>release=resolve);fixtureTransport(p.env,{gate});
@@ -58,7 +58,28 @@ test('real tracker stream sends trusted admission and tentative row before gener
  const during=await(await worker.fetch(request(`/lab-sessions/${p.state.lab_session_id}`),p.env)).json();assert.equal(during.runtime.analysis_status,'checking');assert.equal(during.queue.done_checkpoint_ids.length,0);assert.equal(during.runtime.candidate,null);
  release();let suffix='';while(true){const {value,done}=await reader.read();if(done)break;suffix+=new TextDecoder().decode(value);}
  const all=events(prefix+suffix),types=all.map(e=>e.type);assert.ok(types.indexOf('guidance_committed')<types.indexOf('state_snapshot'));assert.equal(types.at(-1),'stream_complete');
- const result=all.find(e=>e.type==='state_snapshot').state;assert.equal(result.runtime.candidate.prompt_version,'dsb-step-observer/v3-json-stream2');assert.equal(result.queue.done_checkpoint_ids.length,0);assert.ok(result.runtime.last_analysis_timing.first_finding_ms!==null);
+ const result=all.find(e=>e.type==='state_snapshot').state;assert.equal(result.runtime.candidate.prompt_version,'dsb-step-observer/v4-short-decision1');assert.equal(result.queue.done_checkpoint_ids.length,0);assert.ok(result.runtime.last_analysis_timing.first_finding_ms!==null);
+});
+test('short decision rejects summary injection and is complete without model prose',()=>{
+ const value=structuredClone(valid);delete value.summary;const parser=new FindingParserJS(cp,actions,true);parser.feed(JSON.stringify(value));assert.deepEqual(JSON.parse(JSON.stringify(parser.finish())),value);
+ assert.throws(()=>{const bad=new FindingParserJS(cp,actions,true);bad.feed(text);bad.finish();});
+});
+test('committed core starts another owned check while the old auxiliary tail is blocked',async t=>{
+ const p=await prepare(t);fixtureTransport(p.env);let release;const gate=new Promise(resolve=>release=resolve);let tails=0;
+ p.env.LAB_STREAM_AUXILIARY=async()=>{if(++tails===1)await gate;};
+ const r=await worker.fetch(streamRequest(p.state,p.cookie),p.env),seen=[];
+ const pipe=startAnalysisStream(r,{expectedFrame:p.frame,expectedContext:{lab_session_id:p.state.lab_session_id},onEvent:e=>seen.push(e.type)});
+ const core=await pipe.committed;assert.equal(core.projection,'committed-decision/v1');assert.ok(!('evidence' in core));assert.ok(!seen.includes('stream_complete'));
+ assert.equal((await p.env.DB.prepare('SELECT lease_owner FROM provider_rotation').first()).lease_owner,null);
+ t.mock.timers.tick(3100);const m={...meta,sequence:2,captured_elapsed_ms:3120};let response=await worker.fetch(request(`/screen-sessions/${core.workspace.capture_session_id}/frame`,'POST',image,p.cookie,{'Content-Type':'image/jpeg','X-Capture-Frame':JSON.stringify(m)}),p.env);const cookie=cookieOf(response);
+ const next=events(await(await worker.fetch(streamRequest(core,cookie,m),p.env)).text()).find(e=>e.type==='guidance_committed').state;
+ assert.ok(next.revision>core.revision);release();const old=await pipe.completion;assert.equal(old.revision,core.revision);
+ const current=await(await worker.fetch(request(`/lab-sessions/${core.lab_session_id}`),p.env)).json();assert.equal(current.revision,next.revision);
+});
+test('failure of auxiliary delivery cannot reject or roll back the committed core',async t=>{
+ const p=await prepare(t);fixtureTransport(p.env);p.env.LAB_STREAM_AUXILIARY=async()=>{throw Error('controlled_tail_failure');};
+ const pipe=startAnalysisStream(await worker.fetch(streamRequest(p.state,p.cookie),p.env),{expectedFrame:p.frame,expectedContext:{lab_session_id:p.state.lab_session_id},onEvent(){}});
+ const core=await pipe.committed;await assert.rejects(pipe.completion);const current=await(await worker.fetch(request(`/lab-sessions/${core.lab_session_id}`),p.env)).json();assert.equal(current.revision,core.revision);assert.equal(current.runtime.analysis_status,'available');
 });
 test('non-STOP response never becomes evidence or canonical guidance',async t=>{
  const p=await prepare(t);fixtureTransport(p.env,{finish:'MAX_TOKENS'});const all=events(await(await worker.fetch(streamRequest(p.state,p.cookie),p.env)).text());

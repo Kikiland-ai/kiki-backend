@@ -8,9 +8,10 @@ from .parser import FindingParser,SSEDecoder,unique_object
 from .provider import StreamingProviderPool
 
 STREAM_SINK=ContextVar('json_stream_sink',default=None)
-PROMPT_VERSION='dsb-step-observer/v3-json-stream2'
+SHORT_DECISION=ContextVar('json_short_decision',default=True)
+PROMPT_VERSION='dsb-step-observer/v4-short-decision1'
 
-def priority_request(pixels,checkpoint,state,model):
+def priority_request(pixels,checkpoint,state,model,decision_only=False):
     body=build_request(pixels,checkpoint,state,model)
     schema=body['generationConfig']['responseJsonSchema']
     order=('criteria','action_findings','uncertainties','summary')
@@ -19,6 +20,9 @@ def priority_request(pixels,checkpoint,state,model):
     schema['properties']['criteria']['minItems']=len(checkpoint['completion_criteria'])
     schema['properties']['action_findings']['minItems']=len(PROCEDURES[checkpoint['id']])
     body['systemInstruction']['parts'][0]['text']+='\nSerialize top-level JSON fields in this order: criteria, action_findings, uncertainties, summary. Put the complete authored checkpoint decision findings first, then complete action findings, then critical uncertainties, and the short visible summary last. Keep every ID, status and supporting evidence. Do not emit a completion claim or generate next-step instructions.\nOcclusion check is mandatory before any wire or receiver_structure match: inspect the ENTIRE path from the named source output to the named destination input. A foreground settings dialog, panel or other window covering ANY part of that path makes the connection UNKNOWN, even when both endpoints and line pieces on both sides are visible and appear aligned. Never mentally join separated line fragments through an opaque window. receiver_structure requires BOTH receiver input paths fully visible end-to-end. modulated-wire and local-wire must each be unknown when their own paths are partly covered. Expected circuit topology, aligned line pieces and block names are not visible connection evidence.'
+    if decision_only:
+        schema['properties'].pop('summary');schema['required'].remove('summary')
+        body['systemInstruction']['parts'][0]['text']+='\nSHORT DECISION CONTRACT overrides the earlier summary/serialization instruction: return exactly criteria, action_findings, uncertainties, in that order, then close the JSON object and finish. Include EVERY authored criterion and action exactly once. Keep all decisive evidence and critical uncertainties, with concise factual evidence clauses. Do not generate a summary, explanation, teaching instruction, history or auxiliary text. The server derives display prose after the complete decision. A match is not a checkpoint completion claim.'
     return body
 
 class JsonStreamingAnalyzer(GeminiAnalyzer):
@@ -28,10 +32,11 @@ class JsonStreamingAnalyzer(GeminiAnalyzer):
         self.provider=StreamingProviderPool(api_key=api_key,transport=transport)
     @property
     def prompt_version(self):
-        return PROMPT_VERSION if STREAM_SINK.get() is not None else OBSERVER_VERSION
+        return (PROMPT_VERSION if SHORT_DECISION.get() else 'dsb-step-observer/v3-json-stream2') if STREAM_SINK.get() is not None else OBSERVER_VERSION
     async def analyze(self,pixels,checkpoint,state):
         sink=STREAM_SINK.get()
         if sink is None:return await super().analyze(pixels,checkpoint,state)
+        short=SHORT_DECISION.get()
         started=time.monotonic();attempt=0;first_byte=None;first_finding=None;critical_ms=None
         await sink({'type':'admitted','state':state})
         async def reset():
@@ -41,7 +46,7 @@ class JsonStreamingAnalyzer(GeminiAnalyzer):
             if attempt>1:await sink({'type':'attempt_reset','attempt':attempt})
         async def consume(response):
             nonlocal first_byte,first_finding,critical_ms
-            parser=FindingParser(checkpoint);sse=SSEDecoder();stopped=False;usage={};critical=False
+            parser=FindingParser(checkpoint,decision_only=short);sse=SSEDecoder();stopped=False;usage={};critical=False
             async for chunk in response.aiter_bytes():
                 if first_byte is None:first_byte=round((time.monotonic()-started)*1000)
                 for data in sse.feed(chunk):
@@ -70,7 +75,7 @@ class JsonStreamingAnalyzer(GeminiAnalyzer):
             if not stopped:raise AnalysisFailure('incomplete_output')
             return parser.finish(),usage
         try:
-            result,usage=await self.provider.stream(self.model,priority_request(pixels,checkpoint,state,self.model),consume,reset)
-            return AnalysisFindings(result,{'provider_ms':round((time.monotonic()-started)*1000),'first_byte_ms':first_byte,'first_finding_ms':first_finding,'critical_fields_ms':critical_ms,'output_tokens':usage.get('candidatesTokenCount'),'wire_format':'lab-observer-json-stream/v1','observer_prompt_version':PROMPT_VERSION})
+            result,usage=await self.provider.stream(self.model,priority_request(pixels,checkpoint,state,self.model,decision_only=short),consume,reset)
+            return AnalysisFindings(result,{'provider_ms':round((time.monotonic()-started)*1000),'decision_validated_ms':round((time.monotonic()-started)*1000),'first_byte_ms':first_byte,'first_finding_ms':first_finding,'critical_fields_ms':critical_ms,'output_tokens':usage.get('candidatesTokenCount'),'wire_format':'lab-observer-decision/v1' if short else 'lab-observer-json-stream/v1','observer_prompt_version':self.prompt_version})
         except AnalysisFailure:raise
         except (ValueError,TypeError,KeyError,IndexError):raise AnalysisFailure('invalid_output') from None

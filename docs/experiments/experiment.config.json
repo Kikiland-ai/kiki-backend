@@ -24,13 +24,18 @@
   "wire_representation_proposed": "structured_JSON_with_full_authored_IDs",
   "codec_version": "bounded-json-parser/v1",
   "critical_first_order_requested": true,
-  "observer_prompt_experiment": "dsb-step-observer/v3-json-stream2",
+  "observer_prompt_experiment": "dsb-step-observer/v4-short-decision1",
   "stream_api": "POST /lab-sessions/{lab_id}/check-stream",
   "hosted_adapter": "prototypes/json_stream_site",
   "site_project_id": "appgprj_6acfd4c6e6e48191b9110067ba86d556",
-  "hosted_source_commit": "cbaec32e47bbb53e49aa5d1a1f6f02d76ad81adc",
-  "deployment_id": "appgdep_6acfddb9682081918e30cf9f9c558939",
-  "saved_version_id": "appgprj_6acfd4c6e6e48191b9110067ba86d556~appgver_3120e7798fe48191bb0f4d4c6119a877",
+  "hosted_source_commit": "958fd7fb4ae94e0af5ffe592a2fcb09f406af5fb",
+  "deployment_id": "appgdep_6ad006becae081919d16fa678134c2f6",
+  "saved_version_id": "appgprj_6acfd4c6e6e48191b9110067ba86d556~appgver_1ddf6e67d61c8191ac9d10abf8e058da",
   "site_url": "https://kiki-json-stream.woodsycarp256.chatgpt.site",
-  "site_environment_revision": 8
+  "site_environment_revision": 8,
+  "stream_protocol": "lab-analysis-stream/v2",
+  "model_wire_format": "lab-observer-decision/v1",
+  "commit_before_auxiliary": true,
+  "pre_change_runtime_commit": "b0a00033038ed8d2558ab6bf55c3ea7d229d9312",
+  "pre_change_evidence_commit": "47ae4669efac7ea281aa862891723167727e0d08"
 }

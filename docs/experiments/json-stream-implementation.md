@@ -1,5 +1,7 @@
 # JSON streaming implementation and test record
 
+Current continuation: [short-decision implementation](short-decision-implementation.md) introduces the complete three-field decision and `lab-analysis-stream/v2` committed-state handoff. The original v1 implementation/trials below are retained as historical comparison evidence.
+
 The [pre-short-decision latency checkpoint](json-stream-latency-checkpoint.md) records the first real user trial, sanitized timing evidence, timeout/cooldown findings and the code-level gap between early recognition and checkpoint advancement. It preserves the frozen baseline comparison and the requirements for the next experiment. No verified progression-latency improvement is claimed.
 
 15 October 2026 (Asia/Calcutta). Implemented on `experiment/screen-reader-json-stream`; separate private test Site at https://kiki-json-stream.woodsycarp256.chatgpt.site. Native deployment appgdep_6acfddb9682081918e30cf9f9c558939 succeeded with environment revision 8 and MCP enabled. The frozen baseline branch and its working Site are unchanged; TOON remains prepared only.

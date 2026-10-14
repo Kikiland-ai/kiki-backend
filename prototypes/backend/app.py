@@ -2,9 +2,9 @@
 from contextlib import asynccontextmanager
 import os
 from pathlib import Path
-from fastapi import HTTPException
+from fastapi import HTTPException,Request
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse,FileResponse
 from fastapi.openapi.utils import get_openapi
 from contracts.lab_tracking import StartLab, AttachCapture, CheckFrame, ReviewCriteria, StudentResponse, ContextChange
 from prototypes.screen_capture.server import create_app as screen_app, COOKIE, same_origin
@@ -33,6 +33,22 @@ def create_app(data_dir=Path('work/backend'), *, analyzer=None, text_factory=Non
     app.include_router(stream_router(app.state.lab,owner_of,mutation_origin))
     app.add_middleware(MixedBodyLimit)
 
+    if getattr(app.state.lab.analyzer,'supports_stream',False):
+        assets=Path(__file__).resolve().parents[1]/'json_stream_site'/'assets'
+        root_route=next(route for route in app.routes if getattr(route,'path',None)=='/')
+        original_page=root_route.endpoint;app.routes.remove(root_route)
+        @app.get('/')
+        async def stream_page(request:Request):
+            previous=await original_page(request)
+            return FileResponse(assets/'index.html',headers=dict(previous.headers))
+        static_route=next(route for route in app.routes if getattr(route,'path',None)=='/static/{name}')
+        original_asset=static_route.endpoint;app.routes.remove(static_route)
+        @app.get('/static/{name}')
+        async def stream_asset(name:str):
+            if name in ('lab.js','json-stream-client.js'):return FileResponse(assets/name)
+            # Python retains its native WebSocket capture transport.
+            return await original_asset(name)
+
     @app.exception_handler(RequestValidationError)
     async def validation_error(request, error):
         return JSONResponse({'detail':'Invalid request fields'},status_code=422)
@@ -46,7 +62,7 @@ def create_app(data_dir=Path('work/backend'), *, analyzer=None, text_factory=Non
         value=await original_health()
         value['mode']='screen_lab_and_mixed_language_jobs'
         value['api_schema']='kiki-prototype-api/v1'
-        value['json_stream']={'available':bool(getattr(app.state.lab.analyzer,'supports_stream',False)),'wire_format':'lab-analysis-stream/v1','priority':['criteria','action_findings','uncertainties','summary']}
+        value['json_stream']={'available':bool(getattr(app.state.lab.analyzer,'supports_stream',False)),'wire_format':'lab-analysis-stream/v2','priority':['criteria','action_findings','uncertainties'],'commit_before_auxiliary':True}
         value['mixed_language']={'text_configured':jobs.text_configured,'speech_configured':jobs.speech_configured,
             'text_model':jobs.text_model,'speech_model':jobs.speech_model,'voice':jobs.voice,'workers':jobs.workers,
             'mode':jobs.mode,'key_rotation':False}

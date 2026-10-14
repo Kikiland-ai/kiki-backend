@@ -1,38 +1,37 @@
 import {verificationCadence} from '/static/lab-cadence.js';
-import {consumeAnalysisStream} from '/static/json-stream-client.js';
+import {startAnalysisStream} from '/static/json-stream-client.js';
 /* Shared browser transport/display. Progress decisions come from the backend. */
 (() => {
  const $=id=>document.getElementById(id);
  let state=null,definition=null,policy=null,python=false,latest=null,captureId=null,attaching=null,busy=false,editing=false,viewChanging=false,generation=0;
- let streamEnabled=true,streamController=null,streamRows=[],priorityGuidance=null;
- const clearStream=()=>{streamRows=[];priorityGuidance=null;$('lab-stream-feedback').hidden=true;};
- function invalidateStream(){generation++;streamController?.abort();clearStream();}
- function renderPriority(){if(!priorityGuidance)return;const g=priorityGuidance.guidance,a=g.current_action;
-  $('lab-current').textContent=g.instruction||'';$('lab-next').textContent=g.next_instruction?`Coming next: ${g.next_instruction}`:'';
-  $('lab-where').textContent=a?.where||'';$('lab-how').replaceChildren(...(a?.how||[]).map(t=>{const li=document.createElement('li');li.textContent=t;return li;}));
-  $('lab-result').textContent=a?.expected_result||'';
-  const cp=definition.checkpoints.find(c=>c.id===priorityGuidance.queue.current_checkpoint_id);$('lab-progress').textContent=`Stage ${cp?.order||12} of 12 · ${priorityGuidance.queue.done_checkpoint_ids.length} stages tracked`;
- }
+ let streamEnabled=true,streamRows=[],activeStream=null;
+ const pendingStreams=new Set();
+ const clearStream=()=>{streamRows=[];$('lab-stream-feedback').hidden=true;};
+ function invalidateStream(){generation++;for(const item of pendingStreams)item.controller.abort();activeStream=null;clearStream();}
  async function streamedCheck(id,selected,version){
-  clearStream();streamController=new AbortController();const started=performance.now();let firstFinding=null,firstGuidance=null;
+  clearStream();const item={controller:new AbortController(),committed:false,first:null,core:null,tail:null};activeStream=item;
+  // Only auxiliary delivery is cancelled here; its durable decision is final.
+  for(const old of pendingStreams)if(old.committed)old.controller.abort();
+  pendingStreams.add(item);const started=performance.now();
+  const showTiming=()=>{if(activeStream===item&&version===generation)$('lab-stream-timing').textContent=`This check: first feedback ${item.first===null?'—':(item.first/1000).toFixed(2)+' s'}; committed guidance ${item.core===null?'—':(item.core/1000).toFixed(2)+' s'}; auxiliary ${item.tail===null?'pending':(item.tail/1000).toFixed(2)+' s'}. Verification resumes from the committed decision.`;};
   const context={lab_session_id:id,checkpoint_id:state.queue.current_checkpoint_id,visit_id:python?state.current_visit_id:step().current_visit_id,workspace_id:state.workspace.id,capture_epoch:state.workspace.capture_epoch,view_revision:state.workspace.view_revision,parameter_revision:state.workspace.parameter_revision,condition:state.workspace.condition};
   const request=python?{headers:{'Content-Type':'application/json'},body:JSON.stringify({revision:state.revision,frame_id:selected.frame.frame_id,view_revision:selected.frame.view_revision})}:{headers:{'Content-Type':'image/jpeg','X-Capture-Frame':JSON.stringify(selected.meta)},body:selected.blob};
-  const r=await fetch(`/lab-sessions/${id}/check-stream`,{method:'POST',credentials:'same-origin',...request,signal:AbortSignal.any([streamController.signal,AbortSignal.timeout(25000)])});
-  const result=await consumeAnalysisStream(r,{expectedFrame:selected.frame,expectedContext:context,signal:streamController.signal,onEvent:event=>{
-   if(version!==generation||state?.lab_session_id!==id)return;
-   if(event.type==='attempt_reset'){firstFinding=firstGuidance=null;streamRows=[];$('lab-stream-findings').replaceChildren();$('lab-stream-progress').textContent='Trying another available connection…';}
+  let r;try{r=await fetch(`/lab-sessions/${id}/check-stream`,{method:'POST',credentials:'same-origin',...request,signal:AbortSignal.any([item.controller.signal,AbortSignal.timeout(25000)])});}catch(error){pendingStreams.delete(item);throw error;}
+  const pipe=startAnalysisStream(r,{expectedFrame:selected.frame,expectedContext:context,signal:item.controller.signal,onEvent:event=>{
+   if(version!==generation||state?.lab_session_id!==id||activeStream!==item)return;
+   if(event.type==='attempt_reset'){item.first=item.core=null;streamRows=[];$('lab-stream-findings').replaceChildren();$('lab-stream-progress').textContent='Trying another available connection…';}
    if(event.type==='admitted'){$('lab-stream-feedback').hidden=false;$('lab-stream-label').textContent='READING THIS FRAME';$('lab-stream-progress').textContent='Checking the visible settings and connections…';}
-   if(event.type==='provisional_findings'){if(firstFinding===null)firstFinding=performance.now()-started;streamRows.push(event.finding);
+   if(event.type==='provisional_findings'){if(item.first===null)item.first=performance.now()-started;streamRows.push(event.finding);
     $('lab-stream-findings').replaceChildren(...streamRows.filter(v=>v.evidence).slice(-3).map(v=>{const li=document.createElement('li');li.textContent=`${v.status==='match'?'Visible':v.status==='mismatch'?'Check this':'Not established'}: ${v.evidence}`;return li;}));
     $('lab-stream-label').textContent='TENTATIVE SCREEN CHECK';$('lab-stream-progress').textContent='Finishing verification before tracking progress…';}
    if(event.type==='critical_fields_ready')$('lab-stream-progress').textContent='Settings and action checks received. Finishing verification…';
-   if(event.type==='guidance_committed'){priorityGuidance=event;if(firstGuidance===null)firstGuidance=performance.now()-started;renderPriority();$('lab-stream-progress').textContent='Verified guidance received. Loading the remaining session details…';}
-   if(event.type==='state_snapshot'){priorityGuidance=null;clearStream();}
+   if(event.type==='guidance_committed'){item.core=performance.now()-started;}
+   // v2 snapshots are an auxiliary historical projection, never a state update.
   }});
-  $('lab-stream-timing').textContent=`This check: first feedback ${firstFinding===null?'—':(firstFinding/1000).toFixed(2)+' s'}; confirmed guidance ${firstGuidance===null?'—':(firstGuidance/1000).toFixed(2)+' s'}; full response ${((performance.now()-started)/1000).toFixed(2)} s.`;
-  return result;
+  void pipe.completion.then(()=>{item.tail=performance.now()-started;showTiming();}).catch(()=>{if(item.committed&&activeStream===item&&version===generation)$('lab-stream-timing').textContent+=' Auxiliary delivery interrupted; the committed decision is retained.';}).finally(()=>pendingStreams.delete(item));
+  const result=await pipe.committed;item.committed=true;if(item.core===null)item.core=performance.now()-started;showTiming();return result;
  }
- let nextRetryAt=0,lastCheck=0,lastHash=null,lastCheckpoint=null,lastHeartbeat=0;
+ let nextRetryAt=0,lastCheck=0,lastHash=null,lastCheckpoint=null,lastHeartbeat=0,lastCheckFrameId=null;
  const storage=()=>python?'kiki-python-lab-id':'kiki-last-lab-id';
  function retryDeadline(data){if(data?.runtime?.analysis_status==='waiting_for_provider')nextRetryAt=Date.now()+Math.max(0,data.runtime.retry_after_ms||0);else if(data?.runtime)nextRetryAt=0;}
  const message=text=>{$('lab-status').textContent=text;};
@@ -89,7 +88,7 @@ import {consumeAnalysisStream} from '/static/json-stream-client.js';
   $('lab-pause').textContent=state.status==='paused'?'Resume guidance':'Pause guidance';
   $('lab-criteria').replaceChildren(...(cp?.completion_criteria||[]).map(c=>{const row=document.createElement('li'),stored=currentStep.criteria.find(v=>v.criterion_id===c.id);row.textContent=`${stored.state==='satisfied'?'Tracked':'Waiting'}: ${c.description}`;return row;}));
   $('lab-ledger').replaceChildren(...definition.checkpoints.map(c=>{const option=document.createElement('option');option.value=c.id;option.textContent=`${c.order}. ${c.instruction.en}`;option.selected=c.id===cp?.id;return option;}));
-  $('lab-history-link').href=`/lab-sessions/${state.lab_session_id}/events`;renderPriority();
+  $('lab-history-link').href=`/lab-sessions/${state.lab_session_id}/events`;
  }
  async function refresh(){if(!state)return;const id=state.lab_session_id,data=await api(`/lab-sessions/${id}`);if(state?.lab_session_id===id&&data.revision>=state.revision){state=data;render();}}
  async function action(name,extra={}){
@@ -117,7 +116,7 @@ import {consumeAnalysisStream} from '/static/json-stream-client.js';
   try{
    if(attaching)await attaching;
    if(python)await refresh();if(version!==generation||!latest)return;
-   const selected=latest;lastHash=selected.frame?.sha256;lastCheckpoint=state.queue.current_checkpoint_id;
+   const selected=latest;lastHash=selected.frame?.sha256;lastCheckpoint=state.queue.current_checkpoint_id;lastCheckFrameId=selected.frame?.frame_id;
    let data;const checkStarted=performance.now();
    if(streamEnabled)data=await streamedCheck(id,selected,version);
    else if(python)data=await api(`/lab-sessions/${id}/check`,'POST',{revision:state.revision,frame_id:selected.frame.frame_id,view_revision:selected.frame.view_revision});
@@ -127,7 +126,11 @@ import {consumeAnalysisStream} from '/static/json-stream-client.js';
    state=data;retryDeadline(data);if(state.runtime.analysis_status==='waiting_for_provider')lastHash=null;
    message(state.runtime.analysis_status==='waiting_for_provider'?'Analysis is waiting for the provider. Keep working; sharing and progress continue, and I’ll retry automatically.':state.runtime.analysis_status==='failed'?'I couldn’t read that frame. Keep sharing; I’ll try a later view.':state.queue.current_checkpoint_id!==lastCheckpoint?'That step is tracked. Here’s what to do next.':'I’m following along. Steps advance when there is enough visible evidence.');
   }catch(e){lastHash=null;nextRetryAt=Date.now()+(e.retry_after_ms|| (e.status===409?0:policy.fast_interval_ms||3000));if(version===generation){message(e.message);await refresh().catch(()=>{});}}
-  finally{streamController=null;clearStream();busy=false;render();}
+  finally{clearStream();busy=false;render();
+   // A newer received frame can already be waiting. Do not wait for another
+   // capture tick or reuse the same source frame as the second observation.
+   if(version===generation&&latest?.frame?.frame_id!==undefined&&latest.frame.frame_id!==lastCheckFrameId)setTimeout(()=>void check(),Math.max(0,(policy.fast_interval_ms||3000)-(Date.now()-lastCheck)));
+  }
  }
  window.KikiLab={
   viewRevision(){return state?.workspace.view_revision||1;},

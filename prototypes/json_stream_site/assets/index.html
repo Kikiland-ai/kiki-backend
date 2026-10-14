@@ -13,7 +13,7 @@
     <header><a class="brand" href="/">Kiki<span class="dots">● ● ● ●</span></a><span class="tag">Guided Simulink prototype</span></header>
     <section class="intro">
       <div class="eyebrow">LEARN BY BUILDING</div>
-      <h1>Build your model.<br>I’ll follow along.</h1><p class="note">JSON streaming experiment · your baseline run is separate.</p>
+      <h1>Build your model.<br>I’ll follow along.</h1><p class="note">Short-decision experiment · your saved progress continues.</p>
       <p>Start the lab below, then share your Simulink tab. Keep working in Simulink; the guide will read your screen and update what comes next.</p>
       <div class="controls">
         <button id="share">Share screen</button>
@@ -51,7 +51,7 @@
         <p id="lab-next" class="guide-next"></p>
         <div class="controls guide-secondary"><button id="lab-pause" class="secondary">Pause guidance</button><button id="lab-correction" class="secondary">That’s not what I did</button></div>
         <details class="guide-details"><summary>Progress and technical details</summary>
-          <label for="lab-stream-mode">Analysis comparison</label><select id="lab-stream-mode"><option value="stream">JSON stream</option><option value="baseline">Baseline JSON</option></select><p id="lab-stream-timing" class="note"></p><p id="lab-model" class="note"></p><p id="lab-budget" class="note"></p><ul id="lab-criteria"></ul>
+          <label for="lab-stream-mode">Analysis comparison</label><select id="lab-stream-mode"><option value="stream">Short decision + async details</option><option value="baseline">Baseline JSON</option></select><p id="lab-stream-timing" class="note"></p><p id="lab-model" class="note"></p><p id="lab-budget" class="note"></p><ul id="lab-criteria"></ul>
           <button id="lab-check" class="secondary" disabled>Look again now</button>
           <img id="lab-checked" class="checked-frame" alt="Latest frame used for the guide’s observation" hidden>
           <div class="controls"><select id="lab-ledger" aria-label="Step to revisit"></select><button id="lab-revisit" class="secondary">Return to this step</button><button id="lab-view-changed" class="secondary">Report view change</button><button id="lab-parameters" class="secondary">Report settings change</button></div>

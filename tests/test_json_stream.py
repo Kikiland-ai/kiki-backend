@@ -14,6 +14,8 @@ from prototypes.json_stream.analysis import JsonStreamingAnalyzer,STREAM_SINK,pr
 def findings(cp):
  return {'criteria':[{'criterion_id':c['id'],'status':'unknown','evidence':'Controlled "phase", ଓଡ଼ିଆ.'} for c in cp['completion_criteria']], 'action_findings':[{'action_id':a['id'],'status':'unknown','evidence':'Controlled action.'} for a in PROCEDURES[cp['id']]],'uncertainties':[],'summary':'Controlled fixture, not a real lab.'}
 
+def decision(cp):return {key:value for key,value in findings(cp).items() if key!='summary'}
+
 class ParserTests(unittest.TestCase):
  def setUp(self):self.cp=CHECKPOINTS['CP-DSB-05'];self.value=findings(self.cp)
  def test_each_byte_boundary_and_early_row(self):
@@ -37,6 +39,11 @@ class ParserTests(unittest.TestCase):
  def test_priority_schema_retains_full_authored_identifiers(self):
   body=priority_request(b'fixture',self.cp,{'workspace':{'condition':'baseline','model_name':'fixture'},'steps':{self.cp['id']:{'criteria':[]}},'responses':[],'current_visit_id':'visit'},'gemini-3.5-flash-lite')
   schema=body['generationConfig']['responseJsonSchema'];self.assertEqual(list(schema['properties']),['criteria','action_findings','uncertainties','summary']);self.assertEqual(schema['properties']['action_findings']['minItems'],5)
+ def test_short_decision_is_independently_complete_and_rejects_auxiliary_fields(self):
+  parser=FindingParser(self.cp,decision_only=True);parser.feed(json.dumps(decision(self.cp)).encode());result=parser.finish()
+  self.assertTrue(result['summary'].startswith('Not established: Controlled'));self.assertEqual(result['criteria'],self.value['criteria'])
+  with self.assertRaises(AnalysisFailure):
+   parser=FindingParser(self.cp,decision_only=True);parser.feed(json.dumps(self.value).encode());parser.finish()
 
 class BytesStream(httpx.AsyncByteStream):
  def __init__(self,prefix,suffix,release=None):self.prefix=prefix;self.suffix=suffix;self.release=release
@@ -51,7 +58,7 @@ class PipelineTests(unittest.IsolatedAsyncioTestCase):
   buffer=io.BytesIO();Image.new('RGB',(96,54),'white').save(buffer,'JPEG');self.pixels=buffer.getvalue()
   self.capture={'status':'sharing','pixels':self.pixels,'frame':{'frame_id':'capture:1:1','view_revision':1,'capture_epoch':1,'sequence':1,'byte_count':len(self.pixels),'width':96,'height':54,'sha256':hashlib.sha256(self.pixels).hexdigest(),'server_received_unix':self.now,'server_received_at':'fixture'}}
   async def transport(request):
-   self.calls.append(request);body=json.loads(request.content);cp=json.loads(body['contents'][0]['parts'][0]['text'])['checkpoint'];value=json.dumps(findings(cp));prefix='{"criteria": ['+json.dumps(findings(cp)['criteria'][0]);
+   self.calls.append(request);body=json.loads(request.content);cp=json.loads(body['contents'][0]['parts'][0]['text'])['checkpoint'];value=json.dumps(decision(cp));prefix='{"criteria": ['+json.dumps(findings(cp)['criteria'][0]);
    def event(text,finish=None):return ('data: '+json.dumps({'candidates':[{'content':{'parts':[{'text':text}]},**({'finishReason':finish} if finish else {})}]})+'\n\n').encode()
    return httpx.Response(200,stream=BytesStream(event(prefix),event(value[len(prefix):],'MAX_TOKENS' if self.nonstop else 'STOP'),self.release))
   self.analyzer=JsonStreamingAnalyzer(api_key='fixture',transport=httpx.MockTransport(transport))
@@ -71,7 +78,37 @@ class PipelineTests(unittest.IsolatedAsyncioTestCase):
   task=asyncio.create_task(self.run_check(sink));await seen.wait();state=self.service.load(self.id,'owner')
   self.assertIsNone(state['runtime']['candidate']);self.assertEqual(state['queue']['done_checkpoint_ids'],[]);self.assertFalse(state.get('procedure_tracking'))
   self.release.set();result=await task
-  self.assertEqual(result['runtime']['candidate']['prompt_version'],'dsb-step-observer/v3-json-stream2');self.assertIn('admitted',events);self.assertEqual(result['runtime']['last_analysis_timing']['wire_format'],'lab-observer-json-stream/v1')
+  self.assertEqual(result['runtime']['candidate']['prompt_version'],'dsb-step-observer/v4-short-decision1');self.assertIn('admitted',events);self.assertEqual(result['runtime']['last_analysis_timing']['wire_format'],'lab-observer-decision/v1')
+ async def test_committed_core_releases_latch_and_provider_before_auxiliary_tail(self):
+  from prototypes.json_stream.api import stream_router
+  release=asyncio.Event();calls=0
+  async def auxiliary(state):
+   nonlocal calls
+   calls+=1
+   if calls==1:await release.wait()
+  self.service.stream_auxiliary_hook=auxiliary
+  endpoint=stream_router(self.service,lambda request:'owner',lambda request:None).routes[0].endpoint
+  class Request:
+   def __init__(request,body):request.body=body
+   async def stream(request):yield json.dumps(request.body).encode()
+  async def open_stream():
+   state=self.service.load(self.id,'owner')
+   response=await endpoint(self.id,Request({'revision':state['revision'],'frame_id':self.capture['frame']['frame_id'],'view_revision':1}))
+   return response.body_iterator
+  async def committed(iterator):
+   while True:
+    event=json.loads((await anext(iterator))[6:])
+    if event['type']=='guidance_committed':return event
+  first=await open_stream();core=await committed(first)
+  self.assertEqual(core['schema'],'lab-analysis-stream/v2');self.assertEqual(core['state']['projection'],'committed-decision/v1');self.assertNotIn('evidence',core['state'])
+  self.assertIsNone(self.service.load(self.id,'owner')['runtime']['analysis_token'])
+  self.assertIsNone(self.service.store.db.execute('SELECT lease_owner FROM provider_rotation').fetchone()[0])
+  self.now+=3.1;self.capture['frame'].update(frame_id='capture:1:2',sequence=2,server_received_unix=self.now)
+  second=await open_stream();newer=await committed(second);self.assertGreater(newer['revision'],core['revision'])
+  async for event in second:pass
+  release.set()
+  async for event in first:pass
+  self.assertEqual(self.service.load(self.id,'owner')['revision'],newer['revision'],'Late auxiliary delivery cannot save an older revision')
  async def test_nonstop_has_no_candidate_and_preserves_progress(self):
   self.nonstop=True
   async def sink(event):pass
@@ -103,7 +140,7 @@ class StreamApiTests(unittest.TestCase):
   from prototypes.backend.app import create_app
   import time
   async def transport(request):
-   body=json.loads(request.content);cp=json.loads(body['contents'][0]['parts'][0]['text'])['checkpoint'];text=json.dumps(findings(cp))
+   body=json.loads(request.content);cp=json.loads(body['contents'][0]['parts'][0]['text'])['checkpoint'];text=json.dumps(decision(cp))
    data=('data: '+json.dumps({'candidates':[{'content':{'parts':[{'text':text}]},'finishReason':'STOP'}]})+'\n\n').encode()
    return httpx.Response(200,stream=BytesStream(data,b''))
   with tempfile.TemporaryDirectory() as directory:
@@ -112,6 +149,9 @@ class StreamApiTests(unittest.TestCase):
    app.state.lab.capture=lambda sid,owner:capture
    with TestClient(app) as client:
     client.get('/');headers={'origin':'http://testserver'}
+    self.assertIn('Short decision + async details',client.get('/').text)
+    self.assertIn('startAnalysisStream',client.get('/static/lab.js').text)
+    self.assertEqual(client.get('/static/json-stream-client.js').status_code,200)
     response_types=client.get('/openapi.json').json()['paths']['/lab-sessions/{lab_id}/check-stream']['post']['responses']['200']['content']
     self.assertIn('text/event-stream',response_types);self.assertNotIn('application/json',response_types)
     state=client.post('/lab-sessions',headers=headers,json={'model_name':'synthetic','operator_trial':True,'progression_mode':'screen_guided'}).json();lab_id=state['lab_session_id']

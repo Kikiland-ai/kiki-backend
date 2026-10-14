@@ -11,3 +11,12 @@ The Site is still Worker/D1 because Python hosting is unconnected. The same stre
 Open the Site in its own tab, start a new lab, and share Simulink. JSON stream is the default. Progress and technical details shows feedback/confirmed-guidance/full-response timings and an optional Baseline JSON reference mode. Use separate runs for stage-duration comparisons; switching modes does not reset progress. The reference mode retains the frozen prompt, whereas the automated priority-buffered control uses the repaired streaming prompt.
 
 Source and evidence: https://github.com/Kikiland-ai/kiki-backend/tree/experiment/screen-reader-json-stream
+# Short-decision continuation — 15 October 2026
+
+The experiment now uses `lab-observer-decision/v1` and `lab-analysis-stream/v2`. The model emits every required criterion/action finding and uncertainty, closes the short object and finishes with STOP. Validated evidence still needs two distinct matching frames; canonical instructions remain tracker-owned. Display summary prose is derived from validated evidence, without another model request.
+
+Only after durable commit, `guidance_committed.state` supplies a bounded current projection. The client releases its verification slot from this event and can check a newer received frame while the state/timing tail continues. Tail errors or old snapshots cannot restore older guidance. Existing sessions, private audience and key pool are preserved; refresh old v1 clients. Provider deadlines/cooldown are unchanged. `commit_finished_ms` is post-save; auxiliary completion is timed separately.
+
+The pre-change evidence record was published first in Kikiland-ai/kiki-backend at `47ae4669efac7ea281aa862891723167727e0d08`, `docs/experiments/json-stream-latency-checkpoint.md`. The current build record is `docs/experiments/short-decision-implementation.md` on `experiment/screen-reader-json-stream`. Five paired synthetic cases passed in both arms; this is not actual Simulink/browser latency acceptance.
+
+The earlier implementation record below is historical.

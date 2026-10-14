@@ -5,6 +5,7 @@ from contracts.lab_tracking import CriterionFinding, ActionFinding
 from prototypes.lab_tracking.analysis import validate_result
 from prototypes.lab_tracking.provider import AnalysisFailure
 from prototypes.lab_tracking.procedure import PROCEDURES
+from .decision import decision_summary
 
 def unique_object(pairs):
     result={}
@@ -14,8 +15,10 @@ def unique_object(pairs):
     return result
 
 class FindingParser:
-    def __init__(self, checkpoint):
+    def __init__(self, checkpoint, decision_only=False):
         self.checkpoint=checkpoint
+        self.fields={'criteria','action_findings','uncertainties'} | (set() if decision_only else {'summary'})
+        self.decision_only=decision_only
         self.expected={'criteria':{c['id'] for c in checkpoint['completion_criteria']},
                        'action_findings':{a['id'] for a in PROCEDURES[checkpoint['id']]}}
         self.seen={key:set() for key in self.expected};self.keys=set();self.completed=set()
@@ -47,7 +50,7 @@ class FindingParser:
                 value=self._value()
                 if value is None:return events
                 key,end=value
-                if key not in ('criteria','action_findings','uncertainties','summary') or key in self.keys:raise ValueError('field')
+                if key not in self.fields or key in self.keys:raise ValueError('field')
                 self.field=key;self.keys.add(key);self.pos=end;self.state='colon'
             elif self.state=='colon':
                 if ch!=':':raise ValueError('colon')
@@ -90,8 +93,9 @@ class FindingParser:
     def finish(self):
         try:
             self.text+=self.utf8.decode(b'',final=True);self._parse();self._skip()
-            if not self.closed or self.pos!=len(self.text) or self.keys!=set(('criteria','action_findings','uncertainties','summary')):raise ValueError('incomplete')
+            if not self.closed or self.pos!=len(self.text) or self.keys!=self.fields:raise ValueError('incomplete')
             value=self.decoder.decode(self.text)
+            if self.decision_only:value['summary']=decision_summary(value)
             if self.seen['action_findings']!=self.expected['action_findings']:raise ValueError('missing actions')
             return validate_result(value,self.checkpoint)
         except (ValueError,UnicodeError) as error:raise AnalysisFailure('invalid_output') from error

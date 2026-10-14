@@ -578,59 +578,6 @@
         }
       }
     },
-    "/": {
-      "get": {
-        "summary": "Page",
-        "operationId": "page__get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          }
-        }
-      }
-    },
-    "/static/{name}": {
-      "get": {
-        "summary": "Asset",
-        "operationId": "asset_static__name__get",
-        "parameters": [
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Name"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Invalid request fields; submitted source is never echoed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SafeValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/screen-sessions": {
       "post": {
         "summary": "New Session",
@@ -1095,7 +1042,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Owned ordered lab-analysis-stream/v1 SSE events",
+            "description": "Owned lab-analysis-stream/v2: complete decision commits before auxiliary delivery",
             "content": {
               "text/event-stream": {
                 "schema": {
@@ -1147,6 +1094,59 @@
                 ],
                 "title": "CheckFrame",
                 "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "summary": "Stream Page",
+        "operationId": "stream_page__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/static/{name}": {
+      "get": {
+        "summary": "Stream Asset",
+        "operationId": "stream_asset_static__name__get",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Name"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid request fields; submitted source is never echoed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SafeValidationError"
+                }
               }
             }
           }

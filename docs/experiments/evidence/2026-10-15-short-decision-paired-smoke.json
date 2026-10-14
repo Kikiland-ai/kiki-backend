@@ -1,0 +1,345 @@
+{
+  "schema": "json-stream-smoke/v1",
+  "synthetic_only": true,
+  "real_simulink_accuracy_claim": false,
+  "production_latency_claim": false,
+  "repeats_per_case_arm": 1,
+  "records": [
+    {
+      "prompt_sha256": "2c7095ee2dc86cc3a28594fd3a3ba364c01a77c4764f881d71c9a94931b12128",
+      "request_sha256": "e9c1f48f94edcc7c23441c34ed7d9d89bf25751033bf88f1cb16c3d79d2ba488",
+      "case": "local-settings",
+      "arm": "stream-reference",
+      "image_sha256": "db56a0faf3931efb193f41f4c9b8c46ad9cd1405e4ea82073a14a208208ffeae",
+      "model": "gemini-3.5-flash-lite",
+      "expected": {
+        "local_parameters": "match",
+        "local-create": "match",
+        "local-settings": "match"
+      },
+      "status": "success",
+      "passed": true,
+      "actual": {
+        "local_parameters": "match",
+        "local-create": "match",
+        "local-settings": "match"
+      },
+      "total_seconds": 8.71,
+      "first_feedback_seconds": 7.84,
+      "metrics": {
+        "provider_ms": 8677,
+        "decision_validated_ms": 8677,
+        "first_byte_ms": 7638,
+        "first_finding_ms": 7806,
+        "critical_fields_ms": 8635,
+        "output_tokens": 531,
+        "wire_format": "lab-observer-json-stream/v1",
+        "observer_prompt_version": "dsb-step-observer/v3-json-stream2"
+      }
+    },
+    {
+      "prompt_sha256": "5dc012e6ebec4384d5bf2eaf20ce48c62abd53105b9bfb912aa63cc08a809711",
+      "request_sha256": "ee55704e69300f406ddf14cce90125cf4d500cbaf2e6efc5a0a29eebd3eaada6",
+      "case": "local-settings",
+      "arm": "stream",
+      "image_sha256": "db56a0faf3931efb193f41f4c9b8c46ad9cd1405e4ea82073a14a208208ffeae",
+      "model": "gemini-3.5-flash-lite",
+      "expected": {
+        "local_parameters": "match",
+        "local-create": "match",
+        "local-settings": "match"
+      },
+      "status": "success",
+      "passed": true,
+      "actual": {
+        "local_parameters": "match",
+        "local-create": "match",
+        "local-settings": "match"
+      },
+      "total_seconds": 6.289,
+      "first_feedback_seconds": 5.384,
+      "metrics": {
+        "provider_ms": 6288,
+        "decision_validated_ms": 6288,
+        "first_byte_ms": 5283,
+        "first_finding_ms": 5383,
+        "critical_fields_ms": 6275,
+        "output_tokens": 473,
+        "wire_format": "lab-observer-decision/v1",
+        "observer_prompt_version": "dsb-step-observer/v4-short-decision1"
+      }
+    },
+    {
+      "prompt_sha256": "5dc012e6ebec4384d5bf2eaf20ce48c62abd53105b9bfb912aa63cc08a809711",
+      "request_sha256": "7d8b3ecead976fd6a33d9584e4e63dc97b9836f4111a532fe506dae755e5ac7c",
+      "case": "wrong-local-phase-heldout",
+      "arm": "stream",
+      "image_sha256": "aeb206dea885d5f330562cabcd06061b8589753128a237b907b4bd98682fc59d",
+      "model": "gemini-3.5-flash-lite",
+      "expected": {
+        "local_parameters": "mismatch",
+        "local-create": "match",
+        "local-settings": "mismatch"
+      },
+      "status": "success",
+      "passed": true,
+      "actual": {
+        "local_parameters": "mismatch",
+        "local-create": "match",
+        "local-settings": "mismatch"
+      },
+      "total_seconds": 5.574,
+      "first_feedback_seconds": 4.664,
+      "metrics": {
+        "provider_ms": 5573,
+        "decision_validated_ms": 5573,
+        "first_byte_ms": 4538,
+        "first_finding_ms": 4663,
+        "critical_fields_ms": 5565,
+        "output_tokens": 471,
+        "wire_format": "lab-observer-decision/v1",
+        "observer_prompt_version": "dsb-step-observer/v4-short-decision1"
+      }
+    },
+    {
+      "prompt_sha256": "2c7095ee2dc86cc3a28594fd3a3ba364c01a77c4764f881d71c9a94931b12128",
+      "request_sha256": "cf53def4b92ff87777bb7459a0a0b4537ad588540ba1739c6fb36366c45576d2",
+      "case": "wrong-local-phase-heldout",
+      "arm": "stream-reference",
+      "image_sha256": "aeb206dea885d5f330562cabcd06061b8589753128a237b907b4bd98682fc59d",
+      "model": "gemini-3.5-flash-lite",
+      "expected": {
+        "local_parameters": "mismatch",
+        "local-create": "match",
+        "local-settings": "mismatch"
+      },
+      "status": "success",
+      "passed": true,
+      "actual": {
+        "local_parameters": "mismatch",
+        "local-create": "match",
+        "local-settings": "mismatch"
+      },
+      "total_seconds": 6.324,
+      "first_feedback_seconds": 5.461,
+      "metrics": {
+        "provider_ms": 6323,
+        "decision_validated_ms": 6323,
+        "first_byte_ms": 5334,
+        "first_finding_ms": 5460,
+        "critical_fields_ms": 6269,
+        "output_tokens": 490,
+        "wire_format": "lab-observer-json-stream/v1",
+        "observer_prompt_version": "dsb-step-observer/v3-json-stream2"
+      }
+    },
+    {
+      "prompt_sha256": "2c7095ee2dc86cc3a28594fd3a3ba364c01a77c4764f881d71c9a94931b12128",
+      "request_sha256": "c26cfb7c36fb07ddc95aaf4690328e8c2833437f3378e34abfdcffeb981b1a04",
+      "case": "carrier-at-receiver",
+      "arm": "stream-reference",
+      "image_sha256": "54dc1858e16e8b465a995ee37b4e9f77a198d4cde6862bb1c974669f99236cdb",
+      "model": "gemini-3.5-flash-lite",
+      "expected": {
+        "local_parameters": "unknown",
+        "local-create": "unknown",
+        "local-settings": "unknown"
+      },
+      "status": "success",
+      "passed": true,
+      "actual": {
+        "local_parameters": "unknown",
+        "local-create": "unknown",
+        "local-settings": "unknown"
+      },
+      "total_seconds": 6.725,
+      "first_feedback_seconds": 5.933,
+      "metrics": {
+        "provider_ms": 6724,
+        "decision_validated_ms": 6724,
+        "first_byte_ms": 5794,
+        "first_finding_ms": 5931,
+        "critical_fields_ms": 6616,
+        "output_tokens": 466,
+        "wire_format": "lab-observer-json-stream/v1",
+        "observer_prompt_version": "dsb-step-observer/v3-json-stream2"
+      }
+    },
+    {
+      "prompt_sha256": "5dc012e6ebec4384d5bf2eaf20ce48c62abd53105b9bfb912aa63cc08a809711",
+      "request_sha256": "19b0ef9215039b2f289becf221fee5efeb1d562fe0557927e68bc23394b278d5",
+      "case": "carrier-at-receiver",
+      "arm": "stream",
+      "image_sha256": "54dc1858e16e8b465a995ee37b4e9f77a198d4cde6862bb1c974669f99236cdb",
+      "model": "gemini-3.5-flash-lite",
+      "expected": {
+        "local_parameters": "unknown",
+        "local-create": "unknown",
+        "local-settings": "unknown"
+      },
+      "status": "success",
+      "passed": true,
+      "actual": {
+        "local_parameters": "unknown",
+        "local-create": "unknown",
+        "local-settings": "unknown"
+      },
+      "total_seconds": 3.71,
+      "first_feedback_seconds": 3.008,
+      "metrics": {
+        "provider_ms": 3709,
+        "decision_validated_ms": 3709,
+        "first_byte_ms": 2850,
+        "first_finding_ms": 3007,
+        "critical_fields_ms": 3703,
+        "output_tokens": 427,
+        "wire_format": "lab-observer-decision/v1",
+        "observer_prompt_version": "dsb-step-observer/v4-short-decision1"
+      }
+    },
+    {
+      "prompt_sha256": "5dc012e6ebec4384d5bf2eaf20ce48c62abd53105b9bfb912aa63cc08a809711",
+      "request_sha256": "6d5db9e10072a2d08bdbd7cfe21662c2873befe3d9250e8a680e88f5a32cd8c6",
+      "case": "hidden-wires-heldout",
+      "arm": "stream",
+      "image_sha256": "9085ea48fb3f66f9b17157805db3c1aa7bc59867ee8b9190888b2237ff4929b8",
+      "model": "gemini-3.5-flash-lite",
+      "expected": {
+        "receiver_structure": "unknown",
+        "modulated-wire": "unknown",
+        "local-wire": "unknown"
+      },
+      "status": "success",
+      "passed": true,
+      "actual": {
+        "receiver_structure": "unknown",
+        "modulated-wire": "unknown",
+        "local-wire": "unknown"
+      },
+      "total_seconds": 6.038,
+      "first_feedback_seconds": 5.337,
+      "metrics": {
+        "provider_ms": 6037,
+        "decision_validated_ms": 6037,
+        "first_byte_ms": 5207,
+        "first_finding_ms": 5335,
+        "critical_fields_ms": 6024,
+        "output_tokens": 423,
+        "wire_format": "lab-observer-decision/v1",
+        "observer_prompt_version": "dsb-step-observer/v4-short-decision1"
+      }
+    },
+    {
+      "prompt_sha256": "2c7095ee2dc86cc3a28594fd3a3ba364c01a77c4764f881d71c9a94931b12128",
+      "request_sha256": "c2002674ef7288119ce6afe0eb3ab43baf0920eca62d79985ea95a73f4371563",
+      "case": "hidden-wires-heldout",
+      "arm": "stream-reference",
+      "image_sha256": "9085ea48fb3f66f9b17157805db3c1aa7bc59867ee8b9190888b2237ff4929b8",
+      "model": "gemini-3.5-flash-lite",
+      "expected": {
+        "receiver_structure": "unknown",
+        "modulated-wire": "unknown",
+        "local-wire": "unknown"
+      },
+      "status": "success",
+      "passed": true,
+      "actual": {
+        "receiver_structure": "unknown",
+        "modulated-wire": "unknown",
+        "local-wire": "unknown"
+      },
+      "total_seconds": 4.968,
+      "first_feedback_seconds": 4.12,
+      "metrics": {
+        "provider_ms": 4967,
+        "decision_validated_ms": 4967,
+        "first_byte_ms": 3961,
+        "first_finding_ms": 4119,
+        "critical_fields_ms": 4876,
+        "output_tokens": 464,
+        "wire_format": "lab-observer-json-stream/v1",
+        "observer_prompt_version": "dsb-step-observer/v3-json-stream2"
+      }
+    },
+    {
+      "prompt_sha256": "2c7095ee2dc86cc3a28594fd3a3ba364c01a77c4764f881d71c9a94931b12128",
+      "request_sha256": "994cc6b0ed89557112c2825295906010039a5f78d923ef0981de6c2734576864",
+      "case": "clear-wires-heldout",
+      "arm": "stream-reference",
+      "image_sha256": "07745205c2a39104b28f40fb8e2c0291dc0c2c27eba84a5fd96db37a5a54c7ba",
+      "model": "gemini-3.5-flash-lite",
+      "expected": {
+        "receiver_structure": "match",
+        "local-create": "match",
+        "receiver-create": "match",
+        "modulated-wire": "match",
+        "local-wire": "match",
+        "local_parameters": "unknown",
+        "local-settings": "unknown"
+      },
+      "status": "success",
+      "passed": true,
+      "actual": {
+        "receiver_structure": "match",
+        "local-create": "match",
+        "receiver-create": "match",
+        "modulated-wire": "match",
+        "local-wire": "match",
+        "local_parameters": "unknown",
+        "local-settings": "unknown"
+      },
+      "total_seconds": 6.749,
+      "first_feedback_seconds": 5.996,
+      "metrics": {
+        "provider_ms": 6747,
+        "decision_validated_ms": 6747,
+        "first_byte_ms": 5822,
+        "first_finding_ms": 5994,
+        "critical_fields_ms": 6693,
+        "output_tokens": 446,
+        "wire_format": "lab-observer-json-stream/v1",
+        "observer_prompt_version": "dsb-step-observer/v3-json-stream2"
+      }
+    },
+    {
+      "prompt_sha256": "5dc012e6ebec4384d5bf2eaf20ce48c62abd53105b9bfb912aa63cc08a809711",
+      "request_sha256": "77cfdf88bb7b6560bee1e07fe6d11b595370d652f0c8345d87fbb248aa889632",
+      "case": "clear-wires-heldout",
+      "arm": "stream",
+      "image_sha256": "07745205c2a39104b28f40fb8e2c0291dc0c2c27eba84a5fd96db37a5a54c7ba",
+      "model": "gemini-3.5-flash-lite",
+      "expected": {
+        "receiver_structure": "match",
+        "local-create": "match",
+        "receiver-create": "match",
+        "modulated-wire": "match",
+        "local-wire": "match",
+        "local_parameters": "unknown",
+        "local-settings": "unknown"
+      },
+      "status": "success",
+      "passed": true,
+      "actual": {
+        "receiver_structure": "match",
+        "local-create": "match",
+        "receiver-create": "match",
+        "modulated-wire": "match",
+        "local-wire": "match",
+        "local_parameters": "unknown",
+        "local-settings": "unknown"
+      },
+      "total_seconds": 4.21,
+      "first_feedback_seconds": 3.526,
+      "metrics": {
+        "provider_ms": 4209,
+        "decision_validated_ms": 4209,
+        "first_byte_ms": 3373,
+        "first_finding_ms": 3524,
+        "critical_fields_ms": 4195,
+        "output_tokens": 428,
+        "wire_format": "lab-observer-decision/v1",
+        "observer_prompt_version": "dsb-step-observer/v4-short-decision1"
+      }
+    }
+  ]
+}

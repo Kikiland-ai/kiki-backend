@@ -1,3 +1,13 @@
+# Pre-short-decision evidence checkpoint — 15 October 2026
+
+The user reports that the streamed guide feels considerably faster, with a remaining wait before next-step guidance, and selected the short complete decision / independent auxiliary-tail approach. They explicitly asked to document the existing improvement/comparison first. Read [the latency checkpoint](../experiments/json-stream-latency-checkpoint.md) and its sanitized JSON report before making runtime changes. Current runtime remains GitHub `b0a00033038ed8d2558ab6bf55c3ea7d229d9312`, exact Site source `cbaec32e47bbb53e49aa5d1a1f6f02d76ad81adc`.
+
+Measured early-delivery lead in four successful recent live checks: 2.905–3.144 s from parser-ready first finding to provider return, median 3.025 s. Historical baseline Worker wall median 9.599 s (13 successes) versus latest stream 10.920 s (four successes) is unpaired, so it establishes no causal full-response speedup/regression. The latest bounded tail also includes two timed-out checks/four failed key attempts and a sixty-second cycle cooldown, with continued capture. Full checkpoint/browser-display timing is not captured. Internal total_ms is assigned before final guidedObserve/labSave; do not call it a durable-commit timestamp.
+
+Read-only checks: thirteen stream/cadence tests plus the distinct-frame advancement test passed; published source is unchanged. The next implementation must preserve complete core JSON/provider STOP, authored IDs, current context, two distinct matches and canonical server-owned now/next. Release the UI slot from trusted committed bounded state; auxiliary work and late snapshots must not mutate a newer run. Provider reservation ends after the short decision, not after optional work. No extra summary model call is required by this design. Exact next action: commit/push the evidence record first, then build and test the selected variant before a new private Site publication.
+
+---
+
 # JSON streaming experiment — live private test, 15 October 2026
 
 The user resumed JSON implementation/live trials/publication, after giving the frozen baseline to the parallel writer. The JSON branch is implemented; TOON, frozen baseline branch and original Site are unchanged.

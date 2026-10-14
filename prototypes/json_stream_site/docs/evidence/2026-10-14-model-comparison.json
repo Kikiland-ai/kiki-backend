@@ -1,0 +1,112 @@
+{
+  "controlled_fixture_only": true,
+  "prompt_sha256": "67521820163eebccb697446338f73850660292df999f6c0aa5ca96c949bfa319",
+  "single_configured_key": true,
+  "automatic_retries": false,
+  "records": [
+    {
+      "model": "gemini-3.1-flash-lite",
+      "case": "local-settings",
+      "image_sha256": "db56a0faf3931efb193f41f4c9b8c46ad9cd1405e4ea82073a14a208208ffeae",
+      "expected_local_parameters": "match",
+      "started_at": "2026-10-14T15:07:23Z",
+      "http_status": 503,
+      "error_category": "provider_http_503",
+      "passed": false,
+      "elapsed_seconds": 10.93
+    },
+    {
+      "model": "gemini-3.5-flash-lite",
+      "case": "local-settings",
+      "image_sha256": "db56a0faf3931efb193f41f4c9b8c46ad9cd1405e4ea82073a14a208208ffeae",
+      "expected_local_parameters": "match",
+      "started_at": "2026-10-14T15:07:34Z",
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "schema_valid": true,
+      "observed_local_parameters": "match",
+      "passed": true,
+      "elapsed_seconds": 2.92
+    },
+    {
+      "model": "gemini-3.8-flash",
+      "case": "local-settings",
+      "image_sha256": "db56a0faf3931efb193f41f4c9b8c46ad9cd1405e4ea82073a14a208208ffeae",
+      "expected_local_parameters": "match",
+      "started_at": "2026-10-14T15:07:37Z",
+      "error_category": "provider_timeout_or_network_error",
+      "passed": false,
+      "elapsed_seconds": 20.02
+    },
+    {
+      "model": "gemini-3.1-flash-lite",
+      "case": "wrong-local-phase-heldout",
+      "image_sha256": "aeb206dea885d5f330562cabcd06061b8589753128a237b907b4bd98682fc59d",
+      "expected_local_parameters": "mismatch",
+      "started_at": "2026-10-14T15:07:57Z",
+      "http_status": 503,
+      "error_category": "provider_http_503",
+      "passed": false,
+      "elapsed_seconds": 5.29
+    },
+    {
+      "model": "gemini-3.5-flash-lite",
+      "case": "wrong-local-phase-heldout",
+      "image_sha256": "aeb206dea885d5f330562cabcd06061b8589753128a237b907b4bd98682fc59d",
+      "expected_local_parameters": "mismatch",
+      "started_at": "2026-10-14T15:08:02Z",
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "schema_valid": true,
+      "observed_local_parameters": "mismatch",
+      "passed": true,
+      "elapsed_seconds": 3.09
+    },
+    {
+      "model": "gemini-3.8-flash",
+      "case": "wrong-local-phase-heldout",
+      "image_sha256": "aeb206dea885d5f330562cabcd06061b8589753128a237b907b4bd98682fc59d",
+      "expected_local_parameters": "mismatch",
+      "started_at": "2026-10-14T15:08:05Z",
+      "http_status": 503,
+      "error_category": "provider_http_503",
+      "passed": false,
+      "elapsed_seconds": 0.64
+    },
+    {
+      "model": "gemini-3.1-flash-lite",
+      "case": "carrier-at-receiver",
+      "image_sha256": "54dc1858e16e8b465a995ee37b4e9f77a198d4cde6862bb1c974669f99236cdb",
+      "expected_local_parameters": "unknown",
+      "started_at": "2026-10-14T15:08:06Z",
+      "http_status": 503,
+      "error_category": "provider_http_503",
+      "passed": false,
+      "elapsed_seconds": 1.17
+    },
+    {
+      "model": "gemini-3.5-flash-lite",
+      "case": "carrier-at-receiver",
+      "image_sha256": "54dc1858e16e8b465a995ee37b4e9f77a198d4cde6862bb1c974669f99236cdb",
+      "expected_local_parameters": "unknown",
+      "started_at": "2026-10-14T15:08:07Z",
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "schema_valid": true,
+      "observed_local_parameters": "unknown",
+      "passed": true,
+      "elapsed_seconds": 5.48
+    },
+    {
+      "model": "gemini-3.8-flash",
+      "case": "carrier-at-receiver",
+      "image_sha256": "54dc1858e16e8b465a995ee37b4e9f77a198d4cde6862bb1c974669f99236cdb",
+      "expected_local_parameters": "unknown",
+      "started_at": "2026-10-14T15:08:12Z",
+      "http_status": 503,
+      "error_category": "provider_http_503",
+      "passed": false,
+      "elapsed_seconds": 0.83
+    }
+  ]
+}

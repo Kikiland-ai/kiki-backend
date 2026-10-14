@@ -12,6 +12,8 @@
 !prototypes/lab_tracking/**
 !prototypes/backend/
 !prototypes/backend/**
+!prototypes/json_stream/
+!prototypes/json_stream/**
 !prototypes/mixed_language/
 !prototypes/mixed_language/**
 !prototypes/mixed_script/

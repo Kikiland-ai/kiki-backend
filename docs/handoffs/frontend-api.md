@@ -1,3 +1,7 @@
+# JSON branch addition
+
+This branch adds `POST /lab-sessions/{lab_id}/check-stream` with the same CheckFrame JSON request and owned SSE response. OpenAPI now has 29 HTTP paths. See [the stream implementation/protocol](../experiments/json-stream-implementation.md). The test Site runs its Worker adapter; Python cloud hosting is still pending. Original nonstream endpoints below remain available.
+
 # Frontend API handoff — unified FastAPI prototype
 
 14 October 2026. Local implementation verified; cloud Python deployment and Site bridge activation pending. Read [the screen baseline](../baselines/screen-reader-v1.md) for the actual user-tested hosted path.

@@ -1075,6 +1075,82 @@
         }
       }
     },
+    "/lab-sessions/{lab_id}/check-stream": {
+      "post": {
+        "tags": [
+          "screen-json-stream"
+        ],
+        "summary": "Check Stream",
+        "operationId": "check_stream_lab_sessions__lab_id__check_stream_post",
+        "parameters": [
+          {
+            "name": "lab_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Lab Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid request fields; submitted source is never echoed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SafeValidationError"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "properties": {
+                  "revision": {
+                    "minimum": 1,
+                    "title": "Revision",
+                    "type": "integer"
+                  },
+                  "frame_id": {
+                    "maxLength": 128,
+                    "minLength": 1,
+                    "title": "Frame Id",
+                    "type": "string"
+                  },
+                  "view_revision": {
+                    "maximum": 9007199254740991,
+                    "minimum": 1,
+                    "title": "View Revision",
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "revision",
+                  "frame_id",
+                  "view_revision"
+                ],
+                "title": "CheckFrame",
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
     "/health": {
       "get": {
         "tags": [

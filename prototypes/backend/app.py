@@ -10,10 +10,12 @@ from contracts.lab_tracking import StartLab, AttachCapture, CheckFrame, ReviewCr
 from prototypes.screen_capture.server import create_app as screen_app, COOKIE, same_origin
 from prototypes.mixed_language.service import MixedLanguageService
 from prototypes.mixed_language.api import mixed_language_router, MixedBodyLimit
+from prototypes.json_stream.analysis import JsonStreamingAnalyzer
+from prototypes.json_stream.api import stream_router
 
 def create_app(data_dir=Path('work/backend'), *, analyzer=None, text_factory=None, speech_factory=None, proxy_secret=None):
     secret=os.environ.get('KIKI_PROXY_SECRET','') if proxy_secret is None else proxy_secret
-    app=screen_app(data_dir,analyzer=analyzer,proxy_secret=secret)
+    app=screen_app(data_dir,analyzer=analyzer if analyzer is not None else JsonStreamingAnalyzer(),proxy_secret=secret)
     app.title='Kiki unified prototype API'; app.version='0.1.0'
     jobs=MixedLanguageService(data_dir,text_factory=text_factory,speech_factory=speech_factory)
     app.state.mixed_language=jobs
@@ -28,6 +30,7 @@ def create_app(data_dir=Path('work/backend'), *, analyzer=None, text_factory=Non
             raise HTTPException(403,'Same-origin request required')
 
     app.include_router(mixed_language_router(jobs,owner_of,mutation_origin))
+    app.include_router(stream_router(app.state.lab,owner_of,mutation_origin))
     app.add_middleware(MixedBodyLimit)
 
     @app.exception_handler(RequestValidationError)
@@ -43,6 +46,7 @@ def create_app(data_dir=Path('work/backend'), *, analyzer=None, text_factory=Non
         value=await original_health()
         value['mode']='screen_lab_and_mixed_language_jobs'
         value['api_schema']='kiki-prototype-api/v1'
+        value['json_stream']={'available':bool(getattr(app.state.lab.analyzer,'supports_stream',False)),'wire_format':'lab-analysis-stream/v1','priority':['criteria','action_findings','uncertainties','summary']}
         value['mixed_language']={'text_configured':jobs.text_configured,'speech_configured':jobs.speech_configured,
             'text_model':jobs.text_model,'speech_model':jobs.speech_model,'voice':jobs.voice,'workers':jobs.workers,
             'mode':jobs.mode,'key_rotation':False}

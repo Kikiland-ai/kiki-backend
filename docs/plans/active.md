@@ -1,3 +1,21 @@
+# JSON streaming experiment — live private test, 15 October 2026
+
+The user resumed JSON implementation/live trials/publication, after giving the frozen baseline to the parallel writer. The JSON branch is implemented; TOON, frozen baseline branch and original Site are unchanged.
+
+Live private test: https://kiki-json-stream.woodsycarp256.chatgpt.site . Project `appgprj_6acfd4c6e6e48191b9110067ba86d556`; source `cbaec32e47bbb53e49aa5d1a1f6f02d76ad81adc`; saved version `appgprj_6acfd4c6e6e48191b9110067ba86d556~appgver_3120e7798fe48191bb0f4d4c6119a877`; successful deployment `appgdep_6acfddb9682081918e30cf9f9c558939`, environment revision 8, MCP true, owner-private. The user configured GEMINI_API_KEYS on this new Site; a separate receipt signer was set. Secret values never enter source/artifacts/output. Initial archive layout was rejected; repackaging the exact pushed build with dist/server/index.js succeeded.
+
+Implemented Python stream parser/provider/analyzer and owned POST /lab-sessions/{lab_id}/check-stream around existing LabService. Immediate trusted frame/context, tentative full-ID findings, then committed canonical guidance before the state tail. Full output/provider STOP/current context/freshness/two-frame gates remain. Hosted Worker adapter and UI are copied in prototypes/json_stream_site; original frozen files still hash-match. The actual Site remains Worker/D1; Python cloud hosting is not claimed. No broad branch merge or infrastructure host was provisioned.
+
+Evidence: [implementation/trials](../experiments/json-stream-implementation.md). First eight-call trial caught occluded-wire false matches in both baseline/v1; retained/rejected. The first v2 trial had one invalid response; retained. Exact array counts and mandatory entire-path occlusion wording now pass five synthetic cases in both stream/same-prompt buffered control. Across all final five cases median first feedback 2.178 vs 2.307 s, completion 2.861 vs 2.307 s, with an 8.626 s stream outlier. Every stream exposed its first complete finding 0.683–0.897 s before final output. This is early-delivery evidence, not a reliable latency win or actual Simulink acceptance. All 22 paid smoke calls/results, including negative/slow cases, are recorded.
+
+Checks: 105 Python tests (nine new stream/parser/tracker/API), 61 Node tests (ten new stream/client/provider cases), 31 frozen Python and 43 hosted source hashes, four original fixture hashes/definition/policy parity, 130 pinned sources; OpenAPI now 29 HTTP paths. Screen-writing/v0.2 and source datasets are unchanged. Browser-control tooling absent; no improvised browser launched. Native deploy success verifies publication; real browser capture/SSE and Simulink progression are the user's next test.
+
+Ownership: observation/progress/canonical now-next remain here; resolution/rendering/transforms/cancellation/delivery ACKs remain in parallel writing session. Analysis SSE is not a cue stream; provisional rows cannot become cue evidence or finish checkpoints. Use committed observation + exact frame handle for writer integration.
+
+Last completed action: published the private experimental Site and verified native status. Exact next action: user starts a separate test session, shares Simulink and checks early field feedback/canonical progression; inspect the new Site's safe timing logs on request. A larger balanced benchmark, actual Simulink overlay acceptance, shared text/TTS/screen quotas and Python cloud origin remain separate work.
+
+---
+
 # Prepared JSON streaming branch — paused
 
 Baseline commit: `681ad52d37ac0bfced86ceadeaaed6ef8128caf5`. This branch changes only experiment preparation documents/configuration. The original observer/acceptance/hosted baseline is unchanged. Read [IMPLEMENTATION.md](../experiments/IMPLEMENTATION.md) for the next scoped build, and [the shared protocol](../experiments/screen-reader-streaming-comparison.md) for identical controls/gates. The config is descriptive, not a runtime flag. No stream implementation, paid trial, experimental deployment or baseline Site change has happened.

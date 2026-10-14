@@ -1,3 +1,7 @@
+# Current execution status
+
+The JSON branch now implements the protocol and has completed bounded synthetic trials; see [the implementation record](json-stream-implementation.md). Its private test Site is a separate experiment, and a reliable progression-latency gain is not established. TOON remains prepared. The original preparation-time status below is historical.
+
 # JSON streaming vs TOON streaming — shared experiment protocol
 
 14 October 2026. Status: **prepared only**. No streaming runtime, paid trial or experimental deployment was added. Both branches must start from the same exact baseline commit and keep the [hosted baseline](../baselines/screen-reader-v1.md) available.

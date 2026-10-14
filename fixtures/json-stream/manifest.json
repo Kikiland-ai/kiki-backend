@@ -1,0 +1,77 @@
+{
+  "schema": "screen-reader-fixtures/v1",
+  "synthetic": true,
+  "real_user_pixels": false,
+  "cases": [
+    {
+      "id": "local-settings",
+      "image": "fixtures/screen-reader-baseline/local-settings.jpg",
+      "sha256": "db56a0faf3931efb193f41f4c9b8c46ad9cd1405e4ea82073a14a208208ffeae",
+      "checkpoint_id": "CP-DSB-05",
+      "condition": "baseline",
+      "expected_focused_findings": {
+        "local_parameters": "match",
+        "local-create": "match",
+        "local-settings": "match"
+      },
+      "synthetic": true
+    },
+    {
+      "id": "wrong-local-phase-heldout",
+      "image": "fixtures/screen-reader-baseline/wrong-local-phase-heldout.jpg",
+      "sha256": "aeb206dea885d5f330562cabcd06061b8589753128a237b907b4bd98682fc59d",
+      "checkpoint_id": "CP-DSB-05",
+      "condition": "baseline",
+      "expected_focused_findings": {
+        "local_parameters": "mismatch",
+        "local-create": "match",
+        "local-settings": "mismatch"
+      },
+      "synthetic": true
+    },
+    {
+      "id": "carrier-at-receiver",
+      "image": "fixtures/screen-reader-baseline/carrier-at-receiver.jpg",
+      "sha256": "54dc1858e16e8b465a995ee37b4e9f77a198d4cde6862bb1c974669f99236cdb",
+      "checkpoint_id": "CP-DSB-05",
+      "condition": "baseline",
+      "expected_focused_findings": {
+        "local_parameters": "unknown",
+        "local-create": "unknown",
+        "local-settings": "unknown"
+      },
+      "synthetic": true
+    },
+    {
+      "id": "hidden-wires-heldout",
+      "image": "fixtures/screen-reader-baseline/hidden-wires-heldout.jpg",
+      "sha256": "9085ea48fb3f66f9b17157805db3c1aa7bc59867ee8b9190888b2237ff4929b8",
+      "checkpoint_id": "CP-DSB-05",
+      "condition": "baseline",
+      "expected_focused_findings": {
+        "receiver_structure": "unknown",
+        "modulated-wire": "unknown",
+        "local-wire": "unknown"
+      },
+      "synthetic": true
+    },
+    {
+      "id": "clear-wires-heldout",
+      "image": "fixtures/json-stream/clear-wires-heldout.jpg",
+      "sha256": "07745205c2a39104b28f40fb8e2c0291dc0c2c27eba84a5fd96db37a5a54c7ba",
+      "checkpoint_id": "CP-DSB-05",
+      "condition": "baseline",
+      "synthetic": true,
+      "expected_focused_findings": {
+        "receiver_structure": "match",
+        "local-create": "match",
+        "receiver-create": "match",
+        "modulated-wire": "match",
+        "local-wire": "match",
+        "local_parameters": "unknown",
+        "local-settings": "unknown"
+      }
+    }
+  ],
+  "source_note": "Four frozen fixtures plus a supplemental positive wiring fixture authored after the occlusion prompt was frozen. Not a real Simulink acceptance corpus."
+}

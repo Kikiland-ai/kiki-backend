@@ -1,3 +1,7 @@
+# Current JSON implementation
+
+The streaming path is implemented and live at https://kiki-json-stream.woodsycarp256.chatgpt.site. Read [implementation, measured results and limits](json-stream-implementation.md) and [active.md](../plans/active.md). The original preparation plan below is historical; the user explicitly resumed implementation/provider checks/publication.
+
 # Experiment A — structured JSON streaming
 
 Status: prepared, not implemented or deployed. Baseline: `681ad52d37ac0bfced86ceadeaaed6ef8128caf5`. Branch: `experiment/screen-reader-json-stream`.

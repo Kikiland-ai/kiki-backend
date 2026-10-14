@@ -7,6 +7,7 @@ COPY contracts/__init__.py contracts/screen_capture.py contracts/lab_tracking.py
 COPY prototypes/screen_capture/ /app/prototypes/screen_capture/
 COPY prototypes/lab_tracking/ /app/prototypes/lab_tracking/
 COPY prototypes/backend/ /app/prototypes/backend/
+COPY prototypes/json_stream/ /app/prototypes/json_stream/
 COPY prototypes/mixed_language/ /app/prototypes/mixed_language/
 COPY prototypes/mixed_script/pipeline.py prototypes/mixed_script/speech.py /app/prototypes/mixed_script/
 COPY docs/architecture/examples/dsb-sc.demo-definition.json /app/docs/architecture/examples/dsb-sc.demo-definition.json

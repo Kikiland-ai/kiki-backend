@@ -9,7 +9,7 @@ from prototypes.lab_tracking.provider import AnalysisFailure
 
 def stream_router(service,owner_of,mutation_origin):
     router=APIRouter(tags=['screen-json-stream'])
-    @router.post('/lab-sessions/{lab_id}/check-stream',openapi_extra={'requestBody':{'required':True,'content':{'application/json':{'schema':CheckFrame.model_json_schema()}}}})
+    @router.post('/lab-sessions/{lab_id}/check-stream',response_class=StreamingResponse,responses={200:{'description':'Owned ordered lab-analysis-stream/v1 SSE events','content':{'text/event-stream':{'schema':{'type':'string'}}}}},openapi_extra={'requestBody':{'required':True,'content':{'application/json':{'schema':CheckFrame.model_json_schema()}}}})
     async def check_stream(lab_id:str,request:Request):
         owner=owner_of(request);mutation_origin(request)
         if not getattr(service.analyzer,'supports_stream',False):raise HTTPException(503,'The configured analyzer has no JSON stream adapter')

@@ -112,6 +112,8 @@ class StreamApiTests(unittest.TestCase):
    app.state.lab.capture=lambda sid,owner:capture
    with TestClient(app) as client:
     client.get('/');headers={'origin':'http://testserver'}
+    response_types=client.get('/openapi.json').json()['paths']['/lab-sessions/{lab_id}/check-stream']['post']['responses']['200']['content']
+    self.assertIn('text/event-stream',response_types);self.assertNotIn('application/json',response_types)
     state=client.post('/lab-sessions',headers=headers,json={'model_name':'synthetic','operator_trial':True,'progression_mode':'screen_guided'}).json();lab_id=state['lab_session_id']
     state=client.post(f'/lab-sessions/{lab_id}/attach',headers=headers,json={'revision':state['revision'],'capture_session_id':'capture'}).json()
     body={'revision':state['revision'],'frame_id':'capture:1:1','view_revision':1}

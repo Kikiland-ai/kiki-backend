@@ -1095,10 +1095,12 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful Response",
+            "description": "Owned ordered lab-analysis-stream/v1 SSE events",
             "content": {
-              "application/json": {
-                "schema": {}
+              "text/event-stream": {
+                "schema": {
+                  "type": "string"
+                }
               }
             }
           },

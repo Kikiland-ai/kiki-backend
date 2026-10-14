@@ -1,0 +1,21 @@
+{
+  "schema": "screen-writing/v0.2",
+  "message_type": "cancel",
+  "cancel_id": "synthetic-cancel-2",
+  "guidance_stream_id": "synthetic-stream",
+  "cue_sequence": 2,
+  "context": {
+    "lab_session_id": "synthetic-lab",
+    "experiment_id": "PR-AM-DSB",
+    "checkpoint_id": "CP-DSB-03",
+    "visit_id": "synthetic-visit-3",
+    "lab_revision": 7,
+    "workspace_id": "synthetic-model",
+    "capture_epoch": 1,
+    "parameter_revision": 2,
+    "view_revision": 5,
+    "condition": "baseline"
+  },
+  "reason": "view_change",
+  "issued_at": "2026-10-14T00:30:03+05:30"
+}

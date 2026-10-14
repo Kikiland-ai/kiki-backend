@@ -1,0 +1,215 @@
+{
+  "schema": "screen-writing-targets/v0.2",
+  "experiment_id": "PR-AM-DSB",
+  "status": "authored_provisional_catalog",
+  "targets": [
+    {
+      "target_id": "workspace.canvas",
+      "semantic_label": "Selected Simulink model canvas",
+      "kind": "workspace",
+      "block_id": null,
+      "parameter_name": null,
+      "criterion_ids": [
+        "CP-DSB-01:workspace"
+      ]
+    },
+    {
+      "target_id": "workspace.model_title",
+      "semantic_label": "Saved model title/reference",
+      "kind": "readout",
+      "block_id": null,
+      "parameter_name": null,
+      "criterion_ids": [
+        "CP-DSB-01:project_ref"
+      ]
+    },
+    {
+      "target_id": "message.block",
+      "semantic_label": "Message Sine Wave block",
+      "kind": "block",
+      "block_id": "B-MESSAGE",
+      "parameter_name": null,
+      "criterion_ids": [
+        "CP-DSB-02:message"
+      ]
+    },
+    {
+      "target_id": "carrier.block",
+      "semantic_label": "Carrier Sine Wave block",
+      "kind": "block",
+      "block_id": "B-CARRIER",
+      "parameter_name": null,
+      "criterion_ids": [
+        "CP-DSB-02:carrier"
+      ]
+    },
+    {
+      "target_id": "message.frequency",
+      "semantic_label": "Message Frequency field",
+      "kind": "parameter_field",
+      "block_id": "B-MESSAGE",
+      "parameter_name": "Frequency",
+      "criterion_ids": [
+        "CP-DSB-03:message_parameters"
+      ]
+    },
+    {
+      "target_id": "carrier.frequency",
+      "semantic_label": "Transmitter Carrier Frequency field",
+      "kind": "parameter_field",
+      "block_id": "B-CARRIER",
+      "parameter_name": "Frequency",
+      "criterion_ids": [
+        "CP-DSB-03:carrier_parameters"
+      ]
+    },
+    {
+      "target_id": "local_carrier.phase",
+      "semantic_label": "Local carrier Phase field",
+      "kind": "parameter_field",
+      "block_id": "B-LOCAL",
+      "parameter_name": "Phase",
+      "criterion_ids": [
+        "CP-DSB-05:local_parameters",
+        "CP-DSB-11:phase_fault_parameters",
+        "CP-DSB-12:restored_parameters"
+      ]
+    },
+    {
+      "target_id": "local_carrier.frequency",
+      "semantic_label": "Local carrier Frequency field",
+      "kind": "parameter_field",
+      "block_id": "B-LOCAL",
+      "parameter_name": "Frequency",
+      "criterion_ids": [
+        "CP-DSB-05:local_parameters"
+      ]
+    },
+    {
+      "target_id": "modulator.message_input",
+      "semantic_label": "Modulator input port 1",
+      "kind": "port",
+      "block_id": "B-MOD",
+      "parameter_name": "input:1",
+      "criterion_ids": [
+        "CP-DSB-04:transmitter_connections"
+      ]
+    },
+    {
+      "target_id": "receiver.modulated_input",
+      "semantic_label": "Receiver input port 1",
+      "kind": "port",
+      "block_id": "B-DET",
+      "parameter_name": "input:1",
+      "criterion_ids": [
+        "CP-DSB-05:receiver_structure"
+      ]
+    },
+    {
+      "target_id": "lowpass.numerator",
+      "semantic_label": "Lowpass numerator field",
+      "kind": "parameter_field",
+      "block_id": "B-LPF",
+      "parameter_name": "Numerator",
+      "criterion_ids": [
+        "CP-DSB-06:filter_parameters"
+      ]
+    },
+    {
+      "target_id": "lowpass.denominator",
+      "semantic_label": "Lowpass denominator field",
+      "kind": "parameter_field",
+      "block_id": "B-LPF",
+      "parameter_name": "Denominator",
+      "criterion_ids": [
+        "CP-DSB-06:filter_parameters"
+      ]
+    },
+    {
+      "target_id": "recovery_gain.value",
+      "semantic_label": "Recovery gain field",
+      "kind": "parameter_field",
+      "block_id": "B-GAIN",
+      "parameter_name": "Gain",
+      "criterion_ids": [
+        "CP-DSB-06:gain_parameters"
+      ]
+    },
+    {
+      "target_id": "simulation.stop_time",
+      "semantic_label": "Model stop time",
+      "kind": "parameter_field",
+      "block_id": null,
+      "parameter_name": "StopTime",
+      "criterion_ids": [
+        "CP-DSB-08:stop_time"
+      ]
+    },
+    {
+      "target_id": "simulation.solver",
+      "semantic_label": "Model solver",
+      "kind": "parameter_field",
+      "block_id": null,
+      "parameter_name": "Solver",
+      "criterion_ids": [
+        "CP-DSB-08:solver"
+      ]
+    },
+    {
+      "target_id": "simulation.max_step",
+      "semantic_label": "Maximum solver step",
+      "kind": "parameter_field",
+      "block_id": null,
+      "parameter_name": "MaxStep",
+      "criterion_ids": [
+        "CP-DSB-08:max_step"
+      ]
+    },
+    {
+      "target_id": "simulation.run_control",
+      "semantic_label": "Simulation run/status control",
+      "kind": "control",
+      "block_id": null,
+      "parameter_name": null,
+      "criterion_ids": [
+        "CP-DSB-09:baseline_run",
+        "CP-DSB-11:phase_fault_run",
+        "CP-DSB-12:restored_run"
+      ]
+    },
+    {
+      "target_id": "recovery_scope.original_trace",
+      "semantic_label": "Original message trace in Recovery comparison",
+      "kind": "trace",
+      "block_id": "B-SCOPE-OUT",
+      "parameter_name": "input:1",
+      "criterion_ids": [
+        "CP-DSB-10:recovery_reading",
+        "CP-DSB-11:phase_fault_result",
+        "CP-DSB-12:restored_recovery"
+      ]
+    },
+    {
+      "target_id": "recovery_scope.recovered_trace",
+      "semantic_label": "Recovered message trace in Recovery comparison",
+      "kind": "trace",
+      "block_id": "B-SCOPE-OUT",
+      "parameter_name": "input:2",
+      "criterion_ids": [
+        "CP-DSB-10:recovery_reading",
+        "CP-DSB-11:phase_fault_result",
+        "CP-DSB-12:restored_recovery"
+      ]
+    },
+    {
+      "target_id": "model.save_control",
+      "semantic_label": "Model save/status control",
+      "kind": "control",
+      "block_id": null,
+      "parameter_name": null,
+      "criterion_ids": [
+        "CP-DSB-12:saved_model"
+      ]
+    }
+  ]
+}

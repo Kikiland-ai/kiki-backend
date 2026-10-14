@@ -1,0 +1,683 @@
+{
+  "schema": "lab-python/v1",
+  "lab_session_id": "5820b634-684a-4ce0-9481-41159690eb55",
+  "experiment_id": "PR-AM-DSB",
+  "definition": {
+    "definition_id": "DEMO-PR-AM-DSB-v1",
+    "definition_sha256": "5ca32d343a4fb4e849c42ac8cb14702650ead4e2e2617a950fa038472f2f1543",
+    "source": {
+      "repository": "Kikiland-ai/Design-Thinking",
+      "commit": "2a6c843448d81062f89596b941516f8b7817ec79",
+      "case_id": "CASE-AC-AM-ODIA",
+      "practical_id": "PR-AM-DSB",
+      "files": [
+        {
+          "path": "data-model/ledgers/electronics/analog-modulation.json",
+          "git_blob_sha": "7e54eabba9aee6108bf0f3d3b742fb8e6da1c797",
+          "schema": "lesson-ledger/v2"
+        },
+        {
+          "path": "data-model/cases/analog-modulation-odia.json",
+          "git_blob_sha": "78b47d2e7cd4f84b7f7f586f4af5dcfa6631acee",
+          "schema": "learning-case/v1"
+        }
+      ]
+    }
+  },
+  "revision": 1,
+  "status": "active",
+  "synthetic": false,
+  "mode": "operator_trial",
+  "progression_mode": "screen_guided",
+  "auto_tracking": {},
+  "readiness": {
+    "required_concept_gate": "unknown",
+    "operator_trial_override": true
+  },
+  "learner_state": {
+    "concepts": [
+      {
+        "concept_id": "C-AM-01",
+        "understanding": "unknown",
+        "assessment_run_ids": []
+      },
+      {
+        "concept_id": "C-AM-02",
+        "understanding": "unknown",
+        "assessment_run_ids": []
+      },
+      {
+        "concept_id": "C-AM-03",
+        "understanding": "unknown",
+        "assessment_run_ids": []
+      },
+      {
+        "concept_id": "C-AM-04",
+        "understanding": "unknown",
+        "assessment_run_ids": []
+      },
+      {
+        "concept_id": "C-AM-06",
+        "understanding": "unknown",
+        "assessment_run_ids": []
+      },
+      {
+        "concept_id": "C-AM-07",
+        "understanding": "unknown",
+        "assessment_run_ids": []
+      },
+      {
+        "concept_id": "C-AM-08",
+        "understanding": "unknown",
+        "assessment_run_ids": []
+      }
+    ]
+  },
+  "workspace": {
+    "id": "d4b52c11-02de-43bc-a1a6-fa13219d1f0a",
+    "model_name": "synthetic_dsb_fixture",
+    "software": "simulink_online",
+    "confirmed": false,
+    "capture_session_id": null,
+    "capture_epoch": 0,
+    "view_revision": 1,
+    "parameter_revision": 0,
+    "condition": "baseline",
+    "geometry_detection": "dimensions_and_manual_reports_only"
+  },
+  "queue": {
+    "current_checkpoint_id": "CP-DSB-01",
+    "upcoming_checkpoint_ids": [
+      "CP-DSB-02",
+      "CP-DSB-03",
+      "CP-DSB-04",
+      "CP-DSB-05",
+      "CP-DSB-06",
+      "CP-DSB-07",
+      "CP-DSB-08",
+      "CP-DSB-09",
+      "CP-DSB-10",
+      "CP-DSB-11",
+      "CP-DSB-12"
+    ],
+    "done_checkpoint_ids": []
+  },
+  "current_visit_id": "cadb685d-7e01-4ba1-8b46-6623bd2fabce",
+  "steps": {
+    "CP-DSB-01": {
+      "checkpoint_id": "CP-DSB-01",
+      "status": "in_progress",
+      "current_visit_id": "cadb685d-7e01-4ba1-8b46-6623bd2fabce",
+      "visits": [
+        "cadb685d-7e01-4ba1-8b46-6623bd2fabce"
+      ],
+      "attempt_count": 1,
+      "criteria": [
+        {
+          "criterion_id": "CP-DSB-01:workspace",
+          "state": "unknown",
+          "evidence_ids": [],
+          "parameter_revision": null
+        },
+        {
+          "criterion_id": "CP-DSB-01:project_ref",
+          "state": "unknown",
+          "evidence_ids": [],
+          "parameter_revision": null
+        }
+      ],
+      "timing": {
+        "wall_ms": 0,
+        "tracking_active_ms": 0,
+        "paused_ms": 0,
+        "disconnected_ms": 0,
+        "valid_observation_ms": 0
+      },
+      "telemetry": {
+        "analysis_attempts": 0,
+        "analysis_failures": 0,
+        "answer_count": 0,
+        "help_request_count": 0
+      }
+    },
+    "CP-DSB-02": {
+      "checkpoint_id": "CP-DSB-02",
+      "status": "upcoming",
+      "current_visit_id": null,
+      "visits": [],
+      "attempt_count": 0,
+      "criteria": [
+        {
+          "criterion_id": "CP-DSB-02:message",
+          "state": "unknown",
+          "evidence_ids": [],
+          "parameter_revision": null
+        },
+        {
+          "criterion_id": "CP-DSB-02:carrier",
+          "state": "unknown",
+          "evidence_ids": [],
+          "parameter_revision": null
+        }
+      ],
+      "timing": {
+        "wall_ms": 0,
+        "tracking_active_ms": 0,
+        "paused_ms": 0,
+        "disconnected_ms": 0,
+        "valid_observation_ms": 0
+      },
+      "telemetry": {
+        "analysis_attempts": 0,
+        "analysis_failures": 0,
+        "answer_count": 0,
+        "help_request_count": 0
+      }
+    },
+    "CP-DSB-03": {
+      "checkpoint_id": "CP-DSB-03",
+      "status": "upcoming",
+      "current_visit_id": null,
+      "visits": [],
+      "attempt_count": 0,
+      "criteria": [
+        {
+          "criterion_id": "CP-DSB-03:message_parameters",
+          "state": "unknown",
+          "evidence_ids": [],
+          "parameter_revision": null
+        },
+        {
+          "criterion_id": "CP-DSB-03:carrier_parameters",
+          "state": "unknown",
+          "evidence_ids": [],
+          "parameter_revision": null
+        }
+      ],
+      "timing": {
+        "wall_ms": 0,
+        "tracking_active_ms": 0,
+        "paused_ms": 0,
+        "disconnected_ms": 0,
+        "valid_observation_ms": 0
+      },
+      "telemetry": {
+        "analysis_attempts": 0,
+        "analysis_failures": 0,
+        "answer_count": 0,
+        "help_request_count": 0
+      }
+    },
+    "CP-DSB-04": {
+      "checkpoint_id": "CP-DSB-04",
+      "status": "upcoming",
+      "current_visit_id": null,
+      "visits": [],
+      "attempt_count": 0,
+      "criteria": [
+        {
+          "criterion_id": "CP-DSB-04:modulator",
+          "state": "unknown",
+          "evidence_ids": [],
+          "parameter_revision": null
+        },
+        {
+          "criterion_id": "CP-DSB-04:transmitter_connections",
+          "state": "unknown",
+          "evidence_ids": [],
+          "parameter_revision": null
+        }
+      ],
+      "timing": {
+        "wall_ms": 0,
+        "tracking_active_ms": 0,
+        "paused_ms": 0,
+        "disconnected_ms": 0,
+        "valid_observation_ms": 0
+      },
+      "telemetry": {
+        "analysis_attempts": 0,
+        "analysis_failures": 0,
+        "answer_count": 0,
+        "help_request_count": 0
+      }
+    },
+    "CP-DSB-05": {
+      "checkpoint_id": "CP-DSB-05",
+      "status": "upcoming",
+      "current_visit_id": null,
+      "visits": [],
+      "attempt_count": 0,
+      "criteria": [
+        {
+          "criterion_id": "CP-DSB-05:local_parameters",
+          "state": "unknown",
+          "evidence_ids": [],
+          "parameter_revision": null
+        },
+        {
+          "criterion_id": "CP-DSB-05:receiver_structure",
+          "state": "unknown",
+          "evidence_ids": [],
+          "parameter_revision": null
+        }
+      ],
+      "timing": {
+        "wall_ms": 0,
+        "tracking_active_ms": 0,
+        "paused_ms": 0,
+        "disconnected_ms": 0,
+        "valid_observation_ms": 0
+      },
+      "telemetry": {
+        "analysis_attempts": 0,
+        "analysis_failures": 0,
+        "answer_count": 0,
+        "help_request_count": 0
+      }
+    },
+    "CP-DSB-06": {
+      "checkpoint_id": "CP-DSB-06",
+      "status": "upcoming",
+      "current_visit_id": null,
+      "visits": [],
+      "attempt_count": 0,
+      "criteria": [
+        {
+          "criterion_id": "CP-DSB-06:filter_parameters",
+          "state": "unknown",
+          "evidence_ids": [],
+          "parameter_revision": null
+        },
+        {
+          "criterion_id": "CP-DSB-06:gain_parameters",
+          "state": "unknown",
+          "evidence_ids": [],
+          "parameter_revision": null
+        },
+        {
+          "criterion_id": "CP-DSB-06:receiver_chain",
+          "state": "unknown",
+          "evidence_ids": [],
+          "parameter_revision": null
+        }
+      ],
+      "timing": {
+        "wall_ms": 0,
+        "tracking_active_ms": 0,
+        "paused_ms": 0,
+        "disconnected_ms": 0,
+        "valid_observation_ms": 0
+      },
+      "telemetry": {
+        "analysis_attempts": 0,
+        "analysis_failures": 0,
+        "answer_count": 0,
+        "help_request_count": 0
+      }
+    },
+    "CP-DSB-07": {
+      "checkpoint_id": "CP-DSB-07",
+      "status": "upcoming",
+      "current_visit_id": null,
+      "visits": [],
+      "attempt_count": 0,
+      "criteria": [
+        {
+          "criterion_id": "CP-DSB-07:scope_ports",
+          "state": "unknown",
+          "evidence_ids": [],
+          "parameter_revision": null
+        },
+        {
+          "criterion_id": "CP-DSB-07:scope_connections",
+          "state": "unknown",
+          "evidence_ids": [],
+          "parameter_revision": null
+        }
+      ],
+      "timing": {
+        "wall_ms": 0,
+        "tracking_active_ms": 0,
+        "paused_ms": 0,
+        "disconnected_ms": 0,
+        "valid_observation_ms": 0
+      },
+      "telemetry": {
+        "analysis_attempts": 0,
+        "analysis_failures": 0,
+        "answer_count": 0,
+        "help_request_count": 0
+      }
+    },
+    "CP-DSB-08": {
+      "checkpoint_id": "CP-DSB-08",
+      "status": "upcoming",
+      "current_visit_id": null,
+      "visits": [],
+      "attempt_count": 0,
+      "criteria": [
+        {
+          "criterion_id": "CP-DSB-08:stop_time",
+          "state": "unknown",
+          "evidence_ids": [],
+          "parameter_revision": null
+        },
+        {
+          "criterion_id": "CP-DSB-08:solver",
+          "state": "unknown",
+          "evidence_ids": [],
+          "parameter_revision": null
+        },
+        {
+          "criterion_id": "CP-DSB-08:max_step",
+          "state": "unknown",
+          "evidence_ids": [],
+          "parameter_revision": null
+        }
+      ],
+      "timing": {
+        "wall_ms": 0,
+        "tracking_active_ms": 0,
+        "paused_ms": 0,
+        "disconnected_ms": 0,
+        "valid_observation_ms": 0
+      },
+      "telemetry": {
+        "analysis_attempts": 0,
+        "analysis_failures": 0,
+        "answer_count": 0,
+        "help_request_count": 0
+      }
+    },
+    "CP-DSB-09": {
+      "checkpoint_id": "CP-DSB-09",
+      "status": "upcoming",
+      "current_visit_id": null,
+      "visits": [],
+      "attempt_count": 0,
+      "criteria": [
+        {
+          "criterion_id": "CP-DSB-09:baseline_run",
+          "state": "unknown",
+          "evidence_ids": [],
+          "parameter_revision": null
+        }
+      ],
+      "timing": {
+        "wall_ms": 0,
+        "tracking_active_ms": 0,
+        "paused_ms": 0,
+        "disconnected_ms": 0,
+        "valid_observation_ms": 0
+      },
+      "telemetry": {
+        "analysis_attempts": 0,
+        "analysis_failures": 0,
+        "answer_count": 0,
+        "help_request_count": 0
+      }
+    },
+    "CP-DSB-10": {
+      "checkpoint_id": "CP-DSB-10",
+      "status": "upcoming",
+      "current_visit_id": null,
+      "visits": [],
+      "attempt_count": 0,
+      "criteria": [
+        {
+          "criterion_id": "CP-DSB-10:recovery_reading",
+          "state": "unknown",
+          "evidence_ids": [],
+          "parameter_revision": null
+        },
+        {
+          "criterion_id": "CP-DSB-10:observation_record",
+          "state": "unknown",
+          "evidence_ids": [],
+          "parameter_revision": null
+        }
+      ],
+      "timing": {
+        "wall_ms": 0,
+        "tracking_active_ms": 0,
+        "paused_ms": 0,
+        "disconnected_ms": 0,
+        "valid_observation_ms": 0
+      },
+      "telemetry": {
+        "analysis_attempts": 0,
+        "analysis_failures": 0,
+        "answer_count": 0,
+        "help_request_count": 0
+      }
+    },
+    "CP-DSB-11": {
+      "checkpoint_id": "CP-DSB-11",
+      "status": "upcoming",
+      "current_visit_id": null,
+      "visits": [],
+      "attempt_count": 0,
+      "criteria": [
+        {
+          "criterion_id": "CP-DSB-11:phase_fault_parameters",
+          "state": "unknown",
+          "evidence_ids": [],
+          "parameter_revision": null
+        },
+        {
+          "criterion_id": "CP-DSB-11:phase_fault_run",
+          "state": "unknown",
+          "evidence_ids": [],
+          "parameter_revision": null
+        },
+        {
+          "criterion_id": "CP-DSB-11:phase_fault_result",
+          "state": "unknown",
+          "evidence_ids": [],
+          "parameter_revision": null
+        },
+        {
+          "criterion_id": "CP-DSB-11:phase_fault_observation",
+          "state": "unknown",
+          "evidence_ids": [],
+          "parameter_revision": null
+        }
+      ],
+      "timing": {
+        "wall_ms": 0,
+        "tracking_active_ms": 0,
+        "paused_ms": 0,
+        "disconnected_ms": 0,
+        "valid_observation_ms": 0
+      },
+      "telemetry": {
+        "analysis_attempts": 0,
+        "analysis_failures": 0,
+        "answer_count": 0,
+        "help_request_count": 0
+      }
+    },
+    "CP-DSB-12": {
+      "checkpoint_id": "CP-DSB-12",
+      "status": "upcoming",
+      "current_visit_id": null,
+      "visits": [],
+      "attempt_count": 0,
+      "criteria": [
+        {
+          "criterion_id": "CP-DSB-12:restored_parameters",
+          "state": "unknown",
+          "evidence_ids": [],
+          "parameter_revision": null
+        },
+        {
+          "criterion_id": "CP-DSB-12:restored_run",
+          "state": "unknown",
+          "evidence_ids": [],
+          "parameter_revision": null
+        },
+        {
+          "criterion_id": "CP-DSB-12:restored_recovery",
+          "state": "unknown",
+          "evidence_ids": [],
+          "parameter_revision": null
+        },
+        {
+          "criterion_id": "CP-DSB-12:saved_model",
+          "state": "unknown",
+          "evidence_ids": [],
+          "parameter_revision": null
+        },
+        {
+          "criterion_id": "CP-DSB-12:explanation",
+          "state": "unknown",
+          "evidence_ids": [],
+          "parameter_revision": null
+        }
+      ],
+      "timing": {
+        "wall_ms": 0,
+        "tracking_active_ms": 0,
+        "paused_ms": 0,
+        "disconnected_ms": 0,
+        "valid_observation_ms": 0
+      },
+      "telemetry": {
+        "analysis_attempts": 0,
+        "analysis_failures": 0,
+        "answer_count": 0,
+        "help_request_count": 0
+      }
+    }
+  },
+  "evidence": [],
+  "responses": [],
+  "observation": null,
+  "runtime": {
+    "capture_status": "disconnected",
+    "last_accounted": 1792003107.2290149,
+    "last_analysis_started": null,
+    "analysis_attempts": 0,
+    "analysis_status": "not_checked",
+    "candidate": null,
+    "provider_configured": true,
+    "check_budget": null,
+    "retry_after_ms": 0,
+    "minimum_interval_seconds": 3
+  },
+  "guidance": {
+    "state": "disconnected",
+    "instruction": "Open a blank model for this experiment.",
+    "reason": "Pointer targets must belong to this experiment.",
+    "expected": "Confirm the selected experiment and saved model reference before pointing.",
+    "next_instruction": "Save the model with the name you entered in the guide.",
+    "context": {
+      "lab_session_id": "5820b634-684a-4ce0-9481-41159690eb55",
+      "experiment_id": "PR-AM-DSB",
+      "checkpoint_id": "CP-DSB-01",
+      "visit_id": "cadb685d-7e01-4ba1-8b46-6623bd2fabce",
+      "lab_revision": 1,
+      "workspace_id": "d4b52c11-02de-43bc-a1a6-fa13219d1f0a",
+      "capture_epoch": 0,
+      "view_revision": 1,
+      "parameter_revision": 0,
+      "condition": "baseline"
+    },
+    "pointer_active": false,
+    "procedure": [
+      {
+        "id": "CP-DSB-01/create",
+        "title": "Open a blank model for this experiment.",
+        "where": "Your Simulink Online model workspace.",
+        "how": [
+          "From the Simulink start page, choose Blank Model.",
+          "Use the model name you entered in this guide when you save."
+        ],
+        "expected_result": "A blank model workspace is open for your experiment.",
+        "evidence_rule": "Correct selected model workspace is visible; saving is not established.",
+        "satisfied_by": [],
+        "kind": "visible",
+        "settings": [],
+        "implied_by_any": [
+          "CP-DSB-01:workspace"
+        ],
+        "already_done_help": "If you already did this, show the named block, its settings or its connections so I can check it. A hidden target is not proof that it is missing.",
+        "verify_title": "Open a blank model for this experiment.",
+        "tracked": false,
+        "tracking_basis": null
+      },
+      {
+        "id": "CP-DSB-01/save",
+        "title": "Save the model with the name you entered in the guide.",
+        "where": "The model toolbar: Save or Ctrl+S.",
+        "how": [
+          "Save the new model using your chosen name.",
+          "Then use the confirmation button below."
+        ],
+        "expected_result": "Your model is saved, and you have confirmed its identity.",
+        "evidence_rule": "Requires explicit student confirmation; always unknown from pixels.",
+        "satisfied_by": [
+          "CP-DSB-01:workspace",
+          "CP-DSB-01:project_ref"
+        ],
+        "kind": "confirmation",
+        "settings": [],
+        "implied_by_any": [],
+        "already_done_help": null,
+        "verify_title": "Save the model with the name you entered in the guide.",
+        "tracked": false,
+        "tracking_basis": null
+      }
+    ],
+    "current_action": {
+      "id": "CP-DSB-01/create",
+      "title": "Open a blank model for this experiment.",
+      "where": "Your Simulink Online model workspace.",
+      "how": [
+        "From the Simulink start page, choose Blank Model.",
+        "Use the model name you entered in this guide when you save."
+      ],
+      "expected_result": "A blank model workspace is open for your experiment.",
+      "evidence_rule": "Correct selected model workspace is visible; saving is not established.",
+      "satisfied_by": [],
+      "kind": "visible",
+      "settings": [],
+      "implied_by_any": [
+        "CP-DSB-01:workspace"
+      ],
+      "already_done_help": "If you already did this, show the named block, its settings or its connections so I can check it. A hidden target is not proof that it is missing.",
+      "verify_title": "Open a blank model for this experiment.",
+      "tracked": false,
+      "tracking_basis": null
+    },
+    "next_action": {
+      "id": "CP-DSB-01/save",
+      "title": "Save the model with the name you entered in the guide.",
+      "where": "The model toolbar: Save or Ctrl+S.",
+      "how": [
+        "Save the new model using your chosen name.",
+        "Then use the confirmation button below."
+      ],
+      "expected_result": "Your model is saved, and you have confirmed its identity.",
+      "evidence_rule": "Requires explicit student confirmation; always unknown from pixels.",
+      "satisfied_by": [
+        "CP-DSB-01:workspace",
+        "CP-DSB-01:project_ref"
+      ],
+      "kind": "confirmation",
+      "settings": [],
+      "implied_by_any": [],
+      "already_done_help": null,
+      "verify_title": "Save the model with the name you entered in the guide.",
+      "tracked": false,
+      "tracking_basis": null
+    },
+    "action_position": 1,
+    "procedure_version": "dsb-beginner-procedure/v1",
+    "tracked_in_stage": [],
+    "already_tracked": null,
+    "already_tracked_basis": "earlier_checkpoint_record_not_new_screen_claim",
+    "progress_basis": "screen_inferred_or_student_report_not_assessment"
+  }
+}

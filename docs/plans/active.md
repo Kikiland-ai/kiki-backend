@@ -1,3 +1,30 @@
+# Current pause: baseline recorded, API consolidated, streaming experiments prepared
+
+14 October 2026. The user reported completing at least eight Simulink steps with intuitive, understandable guidance. Recognition/tracking works; verification latency remains the next optimization. This report is usability evidence, not a certified eight-step transcript or mastery assessment.
+
+## Current deliverables
+
+- [End-to-end screen-reader baseline](../baselines/screen-reader-v1.md) and exact source/deployment/hash manifest. Hosted source is 4e1d0c3d132ff2778216e5d7e4d987d3e04d7145; deployed environment revision 6. Working private Site is still Worker/D1.
+- Preserved Python capture/lab code and unchanged screen-writing/v0.2 contracts, with a portable hosted source snapshot and four controlled synthetic screenshots.
+- [Frontend API handoff](../handoffs/frontend-api.md), unified Python entry point `prototypes.backend`, prepared-source text/audio job routes, typed request/response contracts, exported OpenAPI and controlled examples. Blocking adapters use a bounded executor; durable stage checkpoints, owner-scoped idempotency, separate readiness, explicit retry and cancellation are implemented locally.
+- [Shared streaming comparison protocol](../experiments/screen-reader-streaming-comparison.md). JSON and TOON branches will be prepared from the same baseline commit. No stream implementation, paid experiment or production deployment during this pause.
+
+## Verification performed
+
+96 Python tests passed, including nine unified API/job acceptances. The unchanged hosted copy passed 51 Worker tests and deterministic build. Lab-design checks and 39 synthetic v0.2 writer acceptances passed. 130 pinned source files unchanged; BB8 package/discovery and twelve reference checks passed. Frozen 31 Python screen files and 43 hosted source files match the manifest, with definition/policy parity and four matching fixture hashes. The prepared proxy passes idempotency/identity/Origin checks. OpenAPI exports 28 HTTP paths. `git diff --check` passed. Providers were fixtures; zero live provider calls and zero Site deployments. Actual Python container/cloud/browser/Simulink acceptance was not rerun.
+
+## Remaining responsibilities and exact pickup
+
+The current chat owns observation, checkpoint evidence/progress and canonical now/next instructions. The writer session owns anchor resolution, rendering, transforms, cancellation and ACK delivery; rendering never completes a checkpoint. No actual live Simulink overlay is proved. Keep the screen-writing v0.2 handoff unchanged while building the observation stream.
+
+Python hosting remains unconnected. Before giving the frontend a real API base, host one persistent instance, apply the prepared idempotency-preserving edge helper and verify signed-in HTTP/WebSocket/job/WAV isolation. Text/TTS still use GEMINI_API_KEY; screen uses the rotating list. Shared quota/key coordination, production auth/retention, generic language-policy live quality and audio alignment remain open. The new local API must not be called live merely because the earlier Worker Site works.
+
+Last completed action: baseline and API source/docs verified locally. Exact next action: publish this baseline and two preparation-only branches, record their exact SHAs, then pause. When resumed, implement/test each stream branch independently against the same protocol and untouched baseline; measure provisional feedback and verified advancement separately.
+
+---
+
+The previous plan below is historical context and has not been used to restart paused work automatically.
+
 # Backend implementation continuation
 
 Status: session work published to origin/main with verified Arpan identity; pipeline/BB8/evidence/docs preserved; FastAPI/worker design accepted; graphics handoff ready; backend implementation paused by user

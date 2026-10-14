@@ -1,0 +1,49 @@
+{
+  "schema": "mixed-language-job/v1",
+  "job_id": "acb55c86-fe11-4899-a63d-ccf016ab7bf2",
+  "revision": 7,
+  "status": "ready",
+  "created_at": "2026-10-14T18:38:27.235581+00:00",
+  "updated_at": "2026-10-14T18:38:27.323373+00:00",
+  "profile": {
+    "english_proficiency": 5.0,
+    "odia_proficiency": 7.0
+  },
+  "stages": {
+    "translation": {
+      "status": "ready"
+    },
+    "mixed": {
+      "status": "ready"
+    },
+    "audio": {
+      "status": "disabled"
+    }
+  },
+  "attempts": 1,
+  "error": null,
+  "source_id": "vco-fm-baseline",
+  "source_sha256": "c5c72e3230bfdca87e1e855ef94cb8b7b403679cfa5e8876bef64ecc7f3feb59",
+  "text_ready": true,
+  "audio_ready": false,
+  "provenance": {
+    "mode": "injected_test_adapter",
+    "text_model": "gemini-3.5-flash-lite",
+    "speech_model": "gemini-3.8-flash-lite-tts",
+    "prompt_version": "vco-odia-mix/1",
+    "profile_policy_version": "mixed-language-profile/v1"
+  },
+  "review": {
+    "meaning": "pending",
+    "native_Odia": "pending",
+    "pronunciation": "pending",
+    "alignment": "not_performed"
+  },
+  "links": {
+    "status": "/v1/mixed-language-jobs/acb55c86-fe11-4899-a63d-ccf016ab7bf2",
+    "result": "/v1/mixed-language-jobs/acb55c86-fe11-4899-a63d-ccf016ab7bf2/result",
+    "audio": null,
+    "retry": "/v1/mixed-language-jobs/acb55c86-fe11-4899-a63d-ccf016ab7bf2/retry",
+    "cancel": "/v1/mixed-language-jobs/acb55c86-fe11-4899-a63d-ccf016ab7bf2/cancel"
+  }
+}

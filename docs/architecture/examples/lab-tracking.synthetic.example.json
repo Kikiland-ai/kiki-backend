@@ -1,0 +1,727 @@
+{
+  "schema": "lab-tracking/v1",
+  "mode": "operator_trial",
+  "synthetic": true,
+  "lab_session_id": "fixture-lab-session",
+  "owner_id": "fixture-owner",
+  "revision": 3,
+  "definition": {
+    "definition_id": "DEMO-PR-AM-DSB-v1",
+    "repository": "Kikiland-ai/Design-Thinking",
+    "commit": "2a6c843448d81062f89596b941516f8b7817ec79",
+    "definition_sha256": "ac8a73f3dda6dfb51448fbb346f076879cbeb99a3c381893c50ef08a4dd2ba9d"
+  },
+  "experiment_id": "PR-AM-DSB",
+  "status": "active",
+  "readiness": {
+    "required_concept_gate": "unknown",
+    "operator_trial_override": true,
+    "override_reason": "Synthetic operator-trial example; does not assert passed prerequisites.",
+    "chapter_test_required": false
+  },
+  "workspace": {
+    "id": "fixture-dsb-sc",
+    "software": "simulink_online",
+    "confirmed": true,
+    "external_project_ref": "synthetic://saved-model/dsb-sc",
+    "capture_session_id": "fixture-capture-1",
+    "capture_epoch": 1,
+    "parameter_revision": 1,
+    "condition": "baseline",
+    "view_revision": 1
+  },
+  "observation": {
+    "observation_id": "fixture-observation-2",
+    "source_frame_id": "fixture-capture-1:1:2",
+    "latest_frame_id": "fixture-capture-1:1:3",
+    "capture_epoch": 1,
+    "source_received_at": "2026-10-14T00:30:00+05:30",
+    "age_ms": 0,
+    "status": "available",
+    "view_revision": 1
+  },
+  "queue": {
+    "current_checkpoint_id": "CP-DSB-03",
+    "upcoming_checkpoint_ids": [
+      "CP-DSB-04",
+      "CP-DSB-05",
+      "CP-DSB-06",
+      "CP-DSB-07",
+      "CP-DSB-08",
+      "CP-DSB-09",
+      "CP-DSB-10",
+      "CP-DSB-11",
+      "CP-DSB-12"
+    ],
+    "done_checkpoint_ids": [
+      "CP-DSB-01",
+      "CP-DSB-02"
+    ],
+    "support_items": []
+  },
+  "steps": [
+    {
+      "checkpoint_id": "CP-DSB-01",
+      "status": "done",
+      "current_visit_id": "fixture-visit-1",
+      "visits": [
+        "fixture-visit-1"
+      ],
+      "attempt_count": 1,
+      "criteria": [
+        {
+          "criterion_id": "CP-DSB-01:workspace",
+          "state": "satisfied",
+          "evidence_ids": [
+            "fixture-evidence-1"
+          ],
+          "review_basis": "reviewed_visual",
+          "parameter_revision": 1
+        },
+        {
+          "criterion_id": "CP-DSB-01:project_ref",
+          "state": "satisfied",
+          "evidence_ids": [
+            "fixture-evidence-1"
+          ],
+          "review_basis": "reviewed_visual",
+          "parameter_revision": 1
+        }
+      ],
+      "timing": {
+        "entered_at": "2026-10-14T00:30:00+05:30",
+        "wall_ms": 0,
+        "tracking_active_ms": 0,
+        "paused_ms": 0,
+        "disconnected_ms": 0,
+        "valid_observation_ms": 0
+      },
+      "telemetry": {
+        "help_request_count": 0,
+        "hint_shown_count": 0,
+        "answer_count": 0,
+        "correction_count": 0,
+        "run_attempt_count": 0,
+        "run_error_count": 0,
+        "analysis_failure_count": 0
+      }
+    },
+    {
+      "checkpoint_id": "CP-DSB-02",
+      "status": "done",
+      "current_visit_id": "fixture-visit-2",
+      "visits": [
+        "fixture-visit-2"
+      ],
+      "attempt_count": 1,
+      "criteria": [
+        {
+          "criterion_id": "CP-DSB-02:message",
+          "state": "satisfied",
+          "evidence_ids": [
+            "fixture-evidence-2"
+          ],
+          "review_basis": "reviewed_visual",
+          "parameter_revision": 1
+        },
+        {
+          "criterion_id": "CP-DSB-02:carrier",
+          "state": "satisfied",
+          "evidence_ids": [
+            "fixture-evidence-2"
+          ],
+          "review_basis": "reviewed_visual",
+          "parameter_revision": 1
+        }
+      ],
+      "timing": {
+        "entered_at": "2026-10-14T00:30:00+05:30",
+        "wall_ms": 0,
+        "tracking_active_ms": 0,
+        "paused_ms": 0,
+        "disconnected_ms": 0,
+        "valid_observation_ms": 0
+      },
+      "telemetry": {
+        "help_request_count": 0,
+        "hint_shown_count": 0,
+        "answer_count": 0,
+        "correction_count": 0,
+        "run_attempt_count": 0,
+        "run_error_count": 0,
+        "analysis_failure_count": 0
+      }
+    },
+    {
+      "checkpoint_id": "CP-DSB-03",
+      "status": "in_progress",
+      "current_visit_id": "fixture-visit-3",
+      "visits": [
+        "fixture-visit-3"
+      ],
+      "attempt_count": 1,
+      "criteria": [
+        {
+          "criterion_id": "CP-DSB-03:message_parameters",
+          "state": "unknown",
+          "evidence_ids": [],
+          "review_basis": null,
+          "parameter_revision": null
+        },
+        {
+          "criterion_id": "CP-DSB-03:carrier_parameters",
+          "state": "unknown",
+          "evidence_ids": [],
+          "review_basis": null,
+          "parameter_revision": null
+        }
+      ],
+      "timing": {
+        "entered_at": "2026-10-14T00:30:00+05:30",
+        "wall_ms": 0,
+        "tracking_active_ms": 0,
+        "paused_ms": 0,
+        "disconnected_ms": 0,
+        "valid_observation_ms": 0
+      },
+      "telemetry": {
+        "help_request_count": 0,
+        "hint_shown_count": 0,
+        "answer_count": 0,
+        "correction_count": 0,
+        "run_attempt_count": 0,
+        "run_error_count": 0,
+        "analysis_failure_count": 0
+      }
+    },
+    {
+      "checkpoint_id": "CP-DSB-04",
+      "status": "upcoming",
+      "current_visit_id": null,
+      "visits": [],
+      "attempt_count": 0,
+      "criteria": [
+        {
+          "criterion_id": "CP-DSB-04:modulator",
+          "state": "unknown",
+          "evidence_ids": [],
+          "review_basis": null,
+          "parameter_revision": null
+        },
+        {
+          "criterion_id": "CP-DSB-04:transmitter_connections",
+          "state": "unknown",
+          "evidence_ids": [],
+          "review_basis": null,
+          "parameter_revision": null
+        }
+      ],
+      "timing": {
+        "entered_at": null,
+        "wall_ms": 0,
+        "tracking_active_ms": 0,
+        "paused_ms": 0,
+        "disconnected_ms": 0,
+        "valid_observation_ms": 0
+      },
+      "telemetry": {
+        "help_request_count": 0,
+        "hint_shown_count": 0,
+        "answer_count": 0,
+        "correction_count": 0,
+        "run_attempt_count": 0,
+        "run_error_count": 0,
+        "analysis_failure_count": 0
+      }
+    },
+    {
+      "checkpoint_id": "CP-DSB-05",
+      "status": "upcoming",
+      "current_visit_id": null,
+      "visits": [],
+      "attempt_count": 0,
+      "criteria": [
+        {
+          "criterion_id": "CP-DSB-05:local_parameters",
+          "state": "unknown",
+          "evidence_ids": [],
+          "review_basis": null,
+          "parameter_revision": null
+        },
+        {
+          "criterion_id": "CP-DSB-05:receiver_structure",
+          "state": "unknown",
+          "evidence_ids": [],
+          "review_basis": null,
+          "parameter_revision": null
+        }
+      ],
+      "timing": {
+        "entered_at": null,
+        "wall_ms": 0,
+        "tracking_active_ms": 0,
+        "paused_ms": 0,
+        "disconnected_ms": 0,
+        "valid_observation_ms": 0
+      },
+      "telemetry": {
+        "help_request_count": 0,
+        "hint_shown_count": 0,
+        "answer_count": 0,
+        "correction_count": 0,
+        "run_attempt_count": 0,
+        "run_error_count": 0,
+        "analysis_failure_count": 0
+      }
+    },
+    {
+      "checkpoint_id": "CP-DSB-06",
+      "status": "upcoming",
+      "current_visit_id": null,
+      "visits": [],
+      "attempt_count": 0,
+      "criteria": [
+        {
+          "criterion_id": "CP-DSB-06:filter_parameters",
+          "state": "unknown",
+          "evidence_ids": [],
+          "review_basis": null,
+          "parameter_revision": null
+        },
+        {
+          "criterion_id": "CP-DSB-06:gain_parameters",
+          "state": "unknown",
+          "evidence_ids": [],
+          "review_basis": null,
+          "parameter_revision": null
+        },
+        {
+          "criterion_id": "CP-DSB-06:receiver_chain",
+          "state": "unknown",
+          "evidence_ids": [],
+          "review_basis": null,
+          "parameter_revision": null
+        }
+      ],
+      "timing": {
+        "entered_at": null,
+        "wall_ms": 0,
+        "tracking_active_ms": 0,
+        "paused_ms": 0,
+        "disconnected_ms": 0,
+        "valid_observation_ms": 0
+      },
+      "telemetry": {
+        "help_request_count": 0,
+        "hint_shown_count": 0,
+        "answer_count": 0,
+        "correction_count": 0,
+        "run_attempt_count": 0,
+        "run_error_count": 0,
+        "analysis_failure_count": 0
+      }
+    },
+    {
+      "checkpoint_id": "CP-DSB-07",
+      "status": "upcoming",
+      "current_visit_id": null,
+      "visits": [],
+      "attempt_count": 0,
+      "criteria": [
+        {
+          "criterion_id": "CP-DSB-07:scope_ports",
+          "state": "unknown",
+          "evidence_ids": [],
+          "review_basis": null,
+          "parameter_revision": null
+        },
+        {
+          "criterion_id": "CP-DSB-07:scope_connections",
+          "state": "unknown",
+          "evidence_ids": [],
+          "review_basis": null,
+          "parameter_revision": null
+        }
+      ],
+      "timing": {
+        "entered_at": null,
+        "wall_ms": 0,
+        "tracking_active_ms": 0,
+        "paused_ms": 0,
+        "disconnected_ms": 0,
+        "valid_observation_ms": 0
+      },
+      "telemetry": {
+        "help_request_count": 0,
+        "hint_shown_count": 0,
+        "answer_count": 0,
+        "correction_count": 0,
+        "run_attempt_count": 0,
+        "run_error_count": 0,
+        "analysis_failure_count": 0
+      }
+    },
+    {
+      "checkpoint_id": "CP-DSB-08",
+      "status": "upcoming",
+      "current_visit_id": null,
+      "visits": [],
+      "attempt_count": 0,
+      "criteria": [
+        {
+          "criterion_id": "CP-DSB-08:stop_time",
+          "state": "unknown",
+          "evidence_ids": [],
+          "review_basis": null,
+          "parameter_revision": null
+        },
+        {
+          "criterion_id": "CP-DSB-08:solver",
+          "state": "unknown",
+          "evidence_ids": [],
+          "review_basis": null,
+          "parameter_revision": null
+        },
+        {
+          "criterion_id": "CP-DSB-08:max_step",
+          "state": "unknown",
+          "evidence_ids": [],
+          "review_basis": null,
+          "parameter_revision": null
+        }
+      ],
+      "timing": {
+        "entered_at": null,
+        "wall_ms": 0,
+        "tracking_active_ms": 0,
+        "paused_ms": 0,
+        "disconnected_ms": 0,
+        "valid_observation_ms": 0
+      },
+      "telemetry": {
+        "help_request_count": 0,
+        "hint_shown_count": 0,
+        "answer_count": 0,
+        "correction_count": 0,
+        "run_attempt_count": 0,
+        "run_error_count": 0,
+        "analysis_failure_count": 0
+      }
+    },
+    {
+      "checkpoint_id": "CP-DSB-09",
+      "status": "upcoming",
+      "current_visit_id": null,
+      "visits": [],
+      "attempt_count": 0,
+      "criteria": [
+        {
+          "criterion_id": "CP-DSB-09:baseline_run",
+          "state": "unknown",
+          "evidence_ids": [],
+          "review_basis": null,
+          "parameter_revision": null
+        }
+      ],
+      "timing": {
+        "entered_at": null,
+        "wall_ms": 0,
+        "tracking_active_ms": 0,
+        "paused_ms": 0,
+        "disconnected_ms": 0,
+        "valid_observation_ms": 0
+      },
+      "telemetry": {
+        "help_request_count": 0,
+        "hint_shown_count": 0,
+        "answer_count": 0,
+        "correction_count": 0,
+        "run_attempt_count": 0,
+        "run_error_count": 0,
+        "analysis_failure_count": 0
+      }
+    },
+    {
+      "checkpoint_id": "CP-DSB-10",
+      "status": "upcoming",
+      "current_visit_id": null,
+      "visits": [],
+      "attempt_count": 0,
+      "criteria": [
+        {
+          "criterion_id": "CP-DSB-10:recovery_reading",
+          "state": "unknown",
+          "evidence_ids": [],
+          "review_basis": null,
+          "parameter_revision": null
+        },
+        {
+          "criterion_id": "CP-DSB-10:observation_record",
+          "state": "unknown",
+          "evidence_ids": [],
+          "review_basis": null,
+          "parameter_revision": null
+        }
+      ],
+      "timing": {
+        "entered_at": null,
+        "wall_ms": 0,
+        "tracking_active_ms": 0,
+        "paused_ms": 0,
+        "disconnected_ms": 0,
+        "valid_observation_ms": 0
+      },
+      "telemetry": {
+        "help_request_count": 0,
+        "hint_shown_count": 0,
+        "answer_count": 0,
+        "correction_count": 0,
+        "run_attempt_count": 0,
+        "run_error_count": 0,
+        "analysis_failure_count": 0
+      }
+    },
+    {
+      "checkpoint_id": "CP-DSB-11",
+      "status": "upcoming",
+      "current_visit_id": null,
+      "visits": [],
+      "attempt_count": 0,
+      "criteria": [
+        {
+          "criterion_id": "CP-DSB-11:phase_fault_parameters",
+          "state": "unknown",
+          "evidence_ids": [],
+          "review_basis": null,
+          "parameter_revision": null
+        },
+        {
+          "criterion_id": "CP-DSB-11:phase_fault_run",
+          "state": "unknown",
+          "evidence_ids": [],
+          "review_basis": null,
+          "parameter_revision": null
+        },
+        {
+          "criterion_id": "CP-DSB-11:phase_fault_result",
+          "state": "unknown",
+          "evidence_ids": [],
+          "review_basis": null,
+          "parameter_revision": null
+        },
+        {
+          "criterion_id": "CP-DSB-11:phase_fault_observation",
+          "state": "unknown",
+          "evidence_ids": [],
+          "review_basis": null,
+          "parameter_revision": null
+        }
+      ],
+      "timing": {
+        "entered_at": null,
+        "wall_ms": 0,
+        "tracking_active_ms": 0,
+        "paused_ms": 0,
+        "disconnected_ms": 0,
+        "valid_observation_ms": 0
+      },
+      "telemetry": {
+        "help_request_count": 0,
+        "hint_shown_count": 0,
+        "answer_count": 0,
+        "correction_count": 0,
+        "run_attempt_count": 0,
+        "run_error_count": 0,
+        "analysis_failure_count": 0
+      }
+    },
+    {
+      "checkpoint_id": "CP-DSB-12",
+      "status": "upcoming",
+      "current_visit_id": null,
+      "visits": [],
+      "attempt_count": 0,
+      "criteria": [
+        {
+          "criterion_id": "CP-DSB-12:restored_parameters",
+          "state": "unknown",
+          "evidence_ids": [],
+          "review_basis": null,
+          "parameter_revision": null
+        },
+        {
+          "criterion_id": "CP-DSB-12:restored_run",
+          "state": "unknown",
+          "evidence_ids": [],
+          "review_basis": null,
+          "parameter_revision": null
+        },
+        {
+          "criterion_id": "CP-DSB-12:restored_recovery",
+          "state": "unknown",
+          "evidence_ids": [],
+          "review_basis": null,
+          "parameter_revision": null
+        },
+        {
+          "criterion_id": "CP-DSB-12:saved_model",
+          "state": "unknown",
+          "evidence_ids": [],
+          "review_basis": null,
+          "parameter_revision": null
+        },
+        {
+          "criterion_id": "CP-DSB-12:explanation",
+          "state": "unknown",
+          "evidence_ids": [],
+          "review_basis": null,
+          "parameter_revision": null
+        }
+      ],
+      "timing": {
+        "entered_at": null,
+        "wall_ms": 0,
+        "tracking_active_ms": 0,
+        "paused_ms": 0,
+        "disconnected_ms": 0,
+        "valid_observation_ms": 0
+      },
+      "telemetry": {
+        "help_request_count": 0,
+        "hint_shown_count": 0,
+        "answer_count": 0,
+        "correction_count": 0,
+        "run_attempt_count": 0,
+        "run_error_count": 0,
+        "analysis_failure_count": 0
+      }
+    }
+  ],
+  "learner_state": {
+    "language_preference": null,
+    "dimensions": {
+      "concept": null,
+      "words": null,
+      "english": null,
+      "lab": null
+    },
+    "concepts": [
+      {
+        "concept_id": "C-AM-01",
+        "theory_check": "unknown",
+        "assessment_run_ids": [],
+        "understanding": "unknown",
+        "evidence_ids": [],
+        "self_confidence": null
+      },
+      {
+        "concept_id": "C-AM-02",
+        "theory_check": "unknown",
+        "assessment_run_ids": [],
+        "understanding": "unknown",
+        "evidence_ids": [],
+        "self_confidence": null
+      },
+      {
+        "concept_id": "C-AM-03",
+        "theory_check": "unknown",
+        "assessment_run_ids": [],
+        "understanding": "unknown",
+        "evidence_ids": [],
+        "self_confidence": null
+      },
+      {
+        "concept_id": "C-AM-04",
+        "theory_check": "unknown",
+        "assessment_run_ids": [],
+        "understanding": "unknown",
+        "evidence_ids": [],
+        "self_confidence": null
+      },
+      {
+        "concept_id": "C-AM-06",
+        "theory_check": "unknown",
+        "assessment_run_ids": [],
+        "understanding": "unknown",
+        "evidence_ids": [],
+        "self_confidence": null
+      },
+      {
+        "concept_id": "C-AM-07",
+        "theory_check": "unknown",
+        "assessment_run_ids": [],
+        "understanding": "unknown",
+        "evidence_ids": [],
+        "self_confidence": null
+      },
+      {
+        "concept_id": "C-AM-08",
+        "theory_check": "unknown",
+        "assessment_run_ids": [],
+        "understanding": "unknown",
+        "evidence_ids": [],
+        "self_confidence": null
+      }
+    ],
+    "inference_candidates": []
+  },
+  "evidence": [
+    {
+      "id": "fixture-evidence-1",
+      "kind": "workspace",
+      "origin": "reviewer",
+      "captured_at": "2026-10-14T00:30:00+05:30",
+      "capture_epoch": 1,
+      "workspace_id": "fixture-dsb-sc",
+      "parameter_revision": 1,
+      "checkpoint_id": "CP-DSB-01",
+      "visit_id": "fixture-visit-1",
+      "observation_id": "fixture-observation-1",
+      "frame_ids": [
+        "fixture-capture-1:1:1"
+      ],
+      "review_status": "accepted",
+      "reviewed_by": "fixture-reviewer",
+      "synthetic": true,
+      "summary": "Synthetic reviewed fixture; not a real user observation."
+    },
+    {
+      "id": "fixture-evidence-2",
+      "kind": "model_structure",
+      "origin": "reviewer",
+      "captured_at": "2026-10-14T00:30:00+05:30",
+      "capture_epoch": 1,
+      "workspace_id": "fixture-dsb-sc",
+      "parameter_revision": 1,
+      "checkpoint_id": "CP-DSB-02",
+      "visit_id": "fixture-visit-2",
+      "observation_id": "fixture-observation-2",
+      "frame_ids": [
+        "fixture-capture-1:1:2"
+      ],
+      "review_status": "accepted",
+      "reviewed_by": "fixture-reviewer",
+      "synthetic": true,
+      "summary": "Synthetic reviewed fixture; not a real user observation."
+    }
+  ],
+  "history": {
+    "last_event_sequence": 5,
+    "event_log_ref": "synthetic://fixture-lab-session/events",
+    "event_count": 5,
+    "coverage": "sampled_frames",
+    "capture_gap_count": 0,
+    "truncated": false
+  },
+  "guidance": {
+    "state": "current_step",
+    "now_checkpoint_id": "CP-DSB-03",
+    "next_checkpoint_id": "CP-DSB-04",
+    "instruction": "Set source frequencies, amplitudes and phases",
+    "reason": "The time-based source uses rad/s; pi/2 makes its sine output a cosine.",
+    "based_on_observation_id": "fixture-observation-2",
+    "based_on_visit_id": "fixture-visit-3",
+    "valid_until": "2026-10-14T00:30:20+05:30",
+    "pointer_active": false
+  }
+}

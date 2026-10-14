@@ -1,0 +1,27 @@
+# Send only this deployment's source to a container builder.
+**
+!contracts/
+!contracts/__init__.py
+!contracts/screen_capture.py
+!contracts/lab_tracking.py
+!contracts/mixed_language.py
+!prototypes/
+!prototypes/screen_capture/
+!prototypes/screen_capture/**
+!prototypes/lab_tracking/
+!prototypes/lab_tracking/**
+!prototypes/backend/
+!prototypes/backend/**
+!prototypes/mixed_language/
+!prototypes/mixed_language/**
+!prototypes/mixed_script/
+!prototypes/mixed_script/pipeline.py
+!prototypes/mixed_script/speech.py
+!docs/
+!docs/architecture/
+!docs/architecture/examples/
+!docs/architecture/examples/dsb-sc.demo-definition.json
+**/__pycache__/**
+**/*.pyc
+**/.env*
+**/*credentials*

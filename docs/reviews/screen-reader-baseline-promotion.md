@@ -1,4 +1,13 @@
-# Screen-reader improvements proposed for baseline
+# Reader baseline promotion outcome
+
+15 October 2026. **PR #1 merged following explicit user authorization.** Merge commit [`7c986dfb86daa2d8d939061db42ab576c7d4a183`](https://github.com/Kikiland-ai/kiki-backend/commit/7c986dfb86daa2d8d939061db42ab576c7d4a183) incorporates checked head `ae234dcdd78b91ef7d6e6b528b14f2e9196808bb` into `baseline/screen-reader-v1`. Hosted acceptance run [38718998905](https://github.com/Kikiland-ai/kiki-backend/actions/runs/38718998905) passed. There were no reviews or unresolved review threads at merge. The earlier CI failure remains in the trace below.
+
+The user's later merge instruction supersedes the draft/wait status in the archived review below. It does not establish unreported native checklist results or full twelve-checkpoint acceptance. No Site was deployed and `main` was unchanged. Original baseline commit `681ad52d37ac0bfced86ceadeaaed6ef8128caf5` remains the immutable original comparison point.
+
+The producer experiment incorporates this baseline merge separately. Continue producer/renderer integration and measured acceptance, promote accepted combined changes into baseline, then promote the tested baseline into `main`. See the [producer v1 build and integration boundaries](../handoffs/analysis-owned-guidance-producer-v1-build.md). This outcome is recorded on the producer continuation branch; the merge commit itself retains the historical review text.
+
+## Archived pre-merge review record
+
 
 Draft PR: [Kikiland-ai/kiki-backend#1](https://github.com/Kikiland-ai/kiki-backend/pull/1).
 

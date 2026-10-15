@@ -40,5 +40,25 @@
     "contract_reference": 50,
     "paired_replay_requests": 20
   },
-  "implementation_handoff": "docs/handoffs/analysis-owned-guidance-producer-v1-build.md"
+  "implementation_handoff": "docs/handoffs/analysis-owned-guidance-producer-v1-build.md",
+  "baseline_foundation": {
+    "branch": "baseline/screen-reader-v1",
+    "merge_commit": "7c986dfb86daa2d8d939061db42ab576c7d4a183",
+    "pr": 1,
+    "checked_reader_head": "ae234dcdd78b91ef7d6e6b528b14f2e9196808bb",
+    "original_baseline": "681ad52d37ac0bfced86ceadeaaed6ef8128caf5",
+    "merge_authorized_by_user": true,
+    "latest_pr_ci_run": 38718998905,
+    "latest_pr_ci_conclusion": "success",
+    "full_native_acceptance_report_recorded": false,
+    "site_redeployed": false
+  },
+  "promotion_path": {
+    "current": "Reader PR #1 is merged into baseline; producer branch incorporates that merge without runtime changes.",
+    "next": "Continue producer/renderer implementation separately, combine on integration/analysis-owned-guidance, and validate negotiated delivery, stale-result/cancellation races, actual paint ACKs and matched latency before promotion.",
+    "later": "Promote the accepted integrated producer/renderer change into baseline, run combined regressions, then promote baseline to main.",
+    "main_at_reader_merge": "2f8eb62bb837fbf7a57f785fdfd9728f4f5e5fb6",
+    "main_changed": false,
+    "producer_promoted_to_baseline": false
+  }
 }

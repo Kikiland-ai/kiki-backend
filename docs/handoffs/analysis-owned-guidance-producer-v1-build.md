@@ -2,6 +2,12 @@
 
 15 October 2026. Branch `experiment/analysis-owned-guidance-producer`. Builds on the published contract proposal `08229428a712a5cd3c71847490d09502a7a8d5da` and its [interface handoff](analysis-owned-guidance-producer-v0.1.md). “Producer v1” names this first implementation; wire contracts remain the proposed `lab-observer-drawing/v1`, `analysis-owned-guidance/v0.1`, `lab-analysis-stream/v3`, `committed-decision/v2` and unchanged `screen-writing/v0.2`. It is not a silent protocol promotion or evidence of renderer agreement.
 
+## Baseline foundation and promotion sequence
+
+The user authorized PR #1 to merge on 15 October 2026. The checked reader head `ae234dcdd78b91ef7d6e6b528b14f2e9196808bb` is now in `baseline/screen-reader-v1` via merge commit `7c986dfb86daa2d8d939061db42ab576c7d4a183`; this producer branch incorporates that merge. Its tree matches the already inherited reader control, so the sync adds history/documentation without changing producer or reader runtime. The original baseline `681ad52d37ac0bfced86ceadeaaed6ef8128caf5` and frozen fixture references remain available. Existing Sites are unchanged.
+
+Continue producer and renderer work on their experiment branches, combine and test on the integration branch, then promote the accepted combined work into baseline before baseline-to-main promotion. The producer v1 offline result alone is not that integration gate. `main` remains at `2f8eb62bb837fbf7a57f785fdfd9728f4f5e5fb6` at this milestone. Unreported native checklist coverage remains unverified; merge authorization does not fill it as passed.
+
 ## Implemented boundary
 
 Python and isolated Worker adapters make one streaming model request for findings and bounded typed drawing candidates. Findings serialize first. Complete four-field JSON, all authored findings, drawing validation and provider STOP are required before findings reach the tracker. Invalid drawing tails reject the complete analysis. The existing three-field control stays the default, with its prompt/decision policy preserved. Drawing validators are lazy imports on the control path; the experiment's additional Python dependencies are isolated in [contract requirements](../../contracts/analysis_owned_guidance.v0_1.requirements.txt).

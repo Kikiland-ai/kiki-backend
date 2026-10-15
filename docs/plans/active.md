@@ -4,7 +4,7 @@ The user requested a PR with all cumulative improvements against `baseline/scree
 
 The runtime under test remains the successful private Site source `c83ec7e6664025b7ca01d06f208af009269f8ad2` at https://kiki-json-stream.woodsycarp256.chatgpt.site . This PR preparation changes documentation only; no redeploy, baseline merge, audience/secret change, reset or auto-merge is authorized/performed. Recorded local runtime gate is 117 Python/87 Node plus full automated lab replays and retained benchmarks. The user will test the live guide once; manual acceptance is pending and must be recorded honestly, with actual checkpoint range and unexercised items.
 
-Current action: prepare/push this trace and open a draft PR from the current branch to the verified baseline. Exact next action after PR creation: retain its URL, observe available PR checks and await the user's test result; do not merge until subsequently authorized. Older entries below are historical.
+Draft PR opened: https://github.com/Kikiland-ai/kiki-backend/pull/1 . Verified open/draft/unmerged, base `baseline/screen-reader-v1` at `681ad52`, head `experiment/stream-context-batch`. Last completed action: pushed review documentation and opened the requested PR. Exact next action: observe available PR checks and await the user's recorded manual test result; do not merge or enable auto-merge until subsequently authorized. Older entries below are historical.
 
 ---
 

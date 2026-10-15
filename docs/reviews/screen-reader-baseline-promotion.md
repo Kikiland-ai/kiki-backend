@@ -1,5 +1,7 @@
 # Screen-reader improvements proposed for baseline
 
+Draft PR: [Kikiland-ai/kiki-backend#1](https://github.com/Kikiland-ai/kiki-backend/pull/1).
+
 15 October 2026, Asia/Calcutta. Status: **draft PR; manual acceptance pending; do not merge yet**. The user requested the accumulated improvements be proposed to baseline, with a traceable record, and will do one manual acceptance run before deciding to merge.
 
 ## Exact review and test targets

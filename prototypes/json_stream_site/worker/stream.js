@@ -14,9 +14,10 @@ async function analyzeLabFrameStream(bytes,cp,state,env,emit){
  schema.properties.criteria.minItems=cp.completion_criteria.length;schema.properties.action_findings.minItems=GUIDED_POLICY.procedures[cp.id].length;
  body.systemInstruction.parts[0].text+="\nSerialize top-level JSON fields in this order: criteria, action_findings, uncertainties, summary. Put the complete authored checkpoint decision findings first, then complete action findings, then critical uncertainties, and the short visible summary last. Keep every ID, status and supporting evidence. Do not emit a completion claim or generate next-step instructions.\nOcclusion check is mandatory before any wire or receiver_structure match: inspect the ENTIRE path from the named source output to the named destination input. A foreground settings dialog, panel or other window covering ANY part of that path makes the connection UNKNOWN, even when both endpoints and line pieces on both sides are visible and appear aligned. Never mentally join separated line fragments through an opaque window. receiver_structure requires BOTH receiver input paths fully visible end-to-end. modulated-wire and local-wire must each be unknown when their own paths are partly covered. Expected circuit topology, aligned line pieces and block names are not visible connection evidence.";
  body.systemInstruction.parts[0].text+='\nSHORT DECISION CONTRACT overrides the earlier summary/serialization instruction: return exactly criteria, action_findings, uncertainties, in that order, then close the JSON object and finish. Include EVERY authored criterion and action exactly once. Keep all decisive evidence and critical uncertainties, with concise factual evidence clauses. Do not generate a summary, explanation, teaching instruction, history or auxiliary text. The server derives display prose after the complete decision. A match is not a checkpoint completion claim.';
- const started=Date.now();let attempt=0,firstByte=null,firstFinding=null,criticalMs=null;
+ const started=Date.now();let attempt=0,firstByte=null,firstFinding=null,criticalMs=null,providerMetrics={};
  const fetcher=typeof env.LAB_STREAM_FETCH==='function'?env.LAB_STREAM_FETCH:fetch;
  const consumed=await providerRequest(env,model,body,fetcher,{signal:emit.signal,
+  onMetrics(value){providerMetrics=value;},
   async reset(){attempt++;firstByte=firstFinding=criticalMs=null;if(attempt>1)await emit({type:'attempt_reset',attempt});},
   async consume(response){const parser=new FindingParserJS(cp,GUIDED_POLICY.procedures[cp.id],true),decoder=new SSEDecoderJS(),reader=response.body.getReader();let stopped=false,usage={},critical=false;
    try{while(true){const {value,done}=await reader.read();if(done)break;if(firstByte===null)firstByte=Date.now()-started;
@@ -34,7 +35,8 @@ async function analyzeLabFrameStream(bytes,cp,state,env,emit){
    }decoder.finish();if(!stopped)throw Error('incomplete_output');const value=parser.finish();return {value:validateLabResult({...value,summary:decisionSummary(value)},cp,true),usage};
    }finally{await reader.cancel().catch(()=>{});}
   }});
- return {result:consumed.value,model,timing:{provider_ms:Date.now()-started,decision_validated_ms:Date.now()-started,first_byte_ms:firstByte,first_finding_ms:firstFinding,critical_fields_ms:criticalMs,stream_attempts:attempt,output_tokens:consumed.usage.candidatesTokenCount??null,wire_format:'lab-observer-decision/v1'}};
+ const usage=consumed.usage,count=name=>Number.isSafeInteger(usage[name])&&usage[name]>=0?usage[name]:null;
+ return {result:consumed.value,model,timing:{...providerMetrics,...emit.metrics,provider_ms:Date.now()-started,decision_validated_ms:Date.now()-started,first_byte_ms:firstByte,first_finding_ms:firstFinding,critical_fields_ms:criticalMs,stream_attempts:attempt,input_tokens:count('promptTokenCount'),cached_tokens:count('cachedContentTokenCount'),thinking_tokens:count('thoughtsTokenCount'),output_tokens:count('candidatesTokenCount'),total_tokens:count('totalTokenCount'),input_token_modalities:Array.isArray(usage.promptTokensDetails)?usage.promptTokensDetails.filter(v=>['TEXT','IMAGE','AUDIO','VIDEO'].includes(v.modality)&&Number.isSafeInteger(v.tokenCount)&&v.tokenCount>=0).map(v=>({modality:v.modality,tokens:v.tokenCount})):null,image_bytes:bytes.byteLength,request_text_characters:body.systemInstruction.parts[0].text.length+body.contents[0].parts[0].text.length+JSON.stringify(schema).length,wire_format:'lab-observer-decision/v1'}};
 }
 async function labStreamRoute(request,env,owner,executionContext){
  const url=new URL(request.url),match=/^\/lab-sessions\/([a-f0-9-]{36})\/check-stream$/.exec(url.pathname);
@@ -46,12 +48,13 @@ async function labStreamRoute(request,env,owner,executionContext){
  const requestId=crypto.randomUUID(),started=Date.now();let task;
  const stream=new ReadableStream({start(controller){
   const push=event=>{if(closed||abort.signal.aborted)return;controller.enqueue(new TextEncoder().encode('data: '+JSON.stringify({schema:'lab-analysis-stream/v2',request_id:requestId,event_sequence:++sequence,server_time:nowISO(),context:admitted,...event})+'\n\n'));};
+  const contextMetrics={context_db_reads:0,context_db_ms:0};
   const emit=Object.assign(async event=>{
    if(abort.signal.aborted)throw Error('analysis_cancelled');
    if(event.type==='admitted')admitted=event.context;
-   else if(admitted){const current=await labLoad(env,id,owner);if(!current.runtime.capture_active||current.status!=='active'||JSON.stringify(streamContext(current))!==JSON.stringify(admitted))throw Error('stale_context');}
+   else if(admitted){const start=performance.now();let current;contextMetrics.context_db_reads++;try{current=await labLoad(env,id,owner);}finally{contextMetrics.context_db_ms=Math.round(contextMetrics.context_db_ms+performance.now()-start);}if(!current.runtime.capture_active||current.status!=='active'||JSON.stringify(streamContext(current))!==JSON.stringify(admitted))throw Error('stale_context');}
    push({...event,provisional:event.type!=='admitted'});
-  },{signal:abort.signal});
+  },{signal:abort.signal,metrics:contextMetrics});
   task=(async()=>{try{
    const result=await labAnalyze(env,s,request,owner,meta,capture,emit),commitFinishedMs=Date.now()-started;
    if(abort.signal.aborted)return;

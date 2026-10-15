@@ -29,10 +29,13 @@ def stream_router(service,owner_of,mutation_origin):
                 context=service.context(event['state'])
                 event={'type':'admitted','frame':frame,'admitted_at':service.timestamp(event['state']['runtime']['last_analysis_started'])}
             else:
-                current=service.load(lab_id,owner)
+                started_load=time.monotonic();sink.metrics['context_db_reads']+=1
+                try:current=service.load(lab_id,owner)
+                finally:sink.metrics['context_db_ms']+=round((time.monotonic()-started_load)*1000)
                 if context is None or service.context(current)!=context or current['status']!='active':
                     raise AnalysisFailure('stale_stream_context')
             await queue.put({**event,'context':context,'provisional':event['type'] not in ('admitted',)})
+        sink.metrics={'context_db_reads':0,'context_db_ms':0}
         async def work():
             token=STREAM_SINK.set(sink)
             try:

@@ -1,3 +1,19 @@
+# Provider DB experiment live; automated acceptance ready — 15 October 2026
+
+The user asked for separate latency experiments, maximum-leverage implementation and a regression mechanism that does not require repeated manual lab runs. Implemented `provider-db-io/v1` on isolated branch `experiment/provider-db-io`; see [registry](../experiments/latency-experiment-registry.json) and [implementation/testing](../experiments/provider-db-io-implementation.md). Prepared three separate refs at `42afb87f48905734557411167bcad7c7e4506502`: `experiment/stream-context-batch`, `experiment/verifier-context`, `experiment/targeted-vision`. Those arms are not implemented/live. Original JSON, frozen baseline and TOON branches stay unchanged.
+
+Same private live URL: https://kiki-json-stream.woodsycarp256.chatgpt.site . Exact Site source `c67fc3a5537ddcf98b8d8bfacbb606749687f693`, successful deployment `appgdep_6ad019222c308191b14bd7e3b41d19a9`, saved version `appgprj_6acfd4c6e6e48191b9110067ba86d556~appgver_3e3f9ce91a9c819198e7b36a25b7a7b6`; environment revision 8, MCP true, same private audience/keys/sessions/schema. No learner reset or new key is needed. Previous source `958fd7fb4ae94e0af5ffe592a2fcb09f406af5fb` is the rollback baseline.
+
+Python streamed routing and hosted D1 routing now use atomic acquisition, bulk deduplicated health reads refreshed on retry and combined success/release. Healthy four-key provider DB count is 17 -> 4, before HTTP 15 -> 3. Same model/prompt/decision/SSE/two-frame/current-context gates. Timings now distinguish routing and context DB work and record actual prompt/cache/thinking/output/total usage. Artificial 20 ms DB delay confirms removed serial operations; no production end-to-end speedup is asserted. Input prompt remains unchanged. Python FastAPI mirror is tested, not cloud-hosted; Site remains Worker/D1.
+
+`python scripts/run-screen-reader-evaluation.py` passes 112 Python and 69 Node tests, complete twelve-checkpoint synthetic replays in serial and batched modes, injected wrong-setting/support-reset scenario, A/B database-delay reports and source integrity. It writes machine-readable results and fails on regressions. CI is configured to run this free command and retain artifacts without provider secrets. `--live` opts into five paid synthetic recognition analyses and requires all outcomes to pass. No new paid calls this turn. Native Simulink/browser capture and broader vision recognition remain sampled release acceptance; mocked findings and DOM stubs do not establish those capabilities.
+
+Also passed pinned 130 sources/frozen baseline parity, lab design, writer v0.2 39 cases, BB8 validation/discovery/twelve tests. OpenAPI export unchanged at 29 paths. Rendering still cannot complete checkpoints.
+
+Last completed action: implemented, locally verified and privately published DB arm. Exact next action: observe first GitHub Actions evaluation, then collect new production phase timings before advancing the separate streamed-context-read arm. Verifier-only inputs need a broader labelled recognition gate; targeted vision additionally needs explicit crop/target provenance. Current evaluation artifacts and [offline evidence](../experiments/evidence/2026-10-15-provider-db-io-offline.json) distinguish synthetic mechanism results from production performance.
+
+---
+
 # Short-decision experiment published — 15 October 2026
 
 User selected the short complete decision / independent auxiliary-tail approach and asked to document existing latency evidence first. That evidence was committed/pushed first at `47ae4669efac7ea281aa862891723167727e0d08`; the pre-change [latency checkpoint](../experiments/json-stream-latency-checkpoint.md) remains the comparison reference. The implementation is now complete; see [short-decision record](../experiments/short-decision-implementation.md).

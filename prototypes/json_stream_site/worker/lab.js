@@ -172,7 +172,7 @@ async function labAnalyze(env,s,request,owner,metadata,capture,emit=null){
   if(current.revision!==working.revision){await labDiscardCheck(env,current,working,'stale_context');labError(409,'Lab changed during analysis; result ignored.');}
   if(emit?.signal.aborted){current.runtime.analysis_status='cancelled';delete current.runtime.retry_at_ms;return labSave(env,current,current.revision,'analysis_cancelled');}
   current.runtime.retry_at_ms=error.retry_at_ms||Date.now()+10000;current.runtime.analysis_status='waiting_for_provider';current.runtime.analysis_error=/^(provider_[a-z0-9_]+|invalid_provider_configuration|invalid_model_configuration|invalid_output|incomplete_output)$/.test(error.message)?error.message:'provider_timeout_or_network_error';
-  current.runtime.last_analysis_timing={frame_id:capture.latest.frame_id,total_ms:Date.now()-working.runtime.last_analysis_started_ms,received_to_result_ms:Date.now()-capture.latest.server_received_unix_ms,status:'failed'};
+  current.runtime.last_analysis_timing={...error.provider_metrics,...emit?.metrics,frame_id:capture.latest.frame_id,total_ms:Date.now()-working.runtime.last_analysis_started_ms,received_to_result_ms:Date.now()-capture.latest.server_received_unix_ms,status:'failed'};
   current.steps.find(v=>v.checkpoint_id===cp.id).telemetry.analysis_failure_count++;
   return labSave(env,current,current.revision,'analysis_failed',{error:current.runtime.analysis_error});}
  const current=await labLoad(env,s.lab_session_id,owner);

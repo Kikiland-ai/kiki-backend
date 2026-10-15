@@ -2717,9 +2717,10 @@ async function providerHealth(env,id,retryAt=null){
  }
  const health=providerLocal(env).health;if(retryAt!==null)health.set(id,Math.max(health.get(id)||0,retryAt));return health.get(id)||0;
 }
-async function providerAcquire(env,id,owner){
+async function providerAcquire(env,id,owner,mode='serial'){
  const now=Date.now();
  if(env.DB){
+  if(mode==='batched')return await env.DB.prepare('INSERT INTO provider_rotation(router_id,lease_owner,lease_until) VALUES(?,?,?) ON CONFLICT(router_id) DO UPDATE SET lease_owner=excluded.lease_owner,lease_until=excluded.lease_until WHERE provider_rotation.lease_until<=? RETURNING *').bind(id,owner,now+30000,now).first();
   await env.DB.prepare('INSERT OR IGNORE INTO provider_rotation(router_id) VALUES(?)').bind(id).run();
   return await env.DB.prepare('UPDATE provider_rotation SET lease_owner=?,lease_until=? WHERE router_id=? AND lease_until<=? RETURNING *').bind(owner,now+30000,id,now).first();
  }
@@ -2741,20 +2742,36 @@ function providerRetryAfter(value){
  if(!value)return null;const seconds=Number(value);if(Number.isFinite(seconds)&&seconds>=0)return seconds*1000;
  const date=Date.parse(value);return Number.isFinite(date)?Math.max(0,date-Date.now()):null;
 }
+function providerMeasuredDB(db,metrics){
+ const measured=async action=>{const started=performance.now();metrics.provider_db_operations++;try{return await action();}finally{metrics.provider_db_ms+=performance.now()-started;}};
+ const wrap=statement=>({bind(...values){return wrap(statement.bind(...values));},first(...args){return measured(()=>statement.first(...args));},run(...args){return measured(()=>statement.run(...args));},all(...args){return measured(()=>statement.all(...args));}});
+ return {prepare(sql){return wrap(db.prepare(sql));}};
+}
+async function providerHealthSnapshot(env,ids){
+ const unique=[...new Set(ids)];
+ if(!env.DB)return new Map(unique.map(id=>[id,providerLocal(env).health.get(id)||0]));
+ const result=await env.DB.prepare(`SELECT pool_id,retry_at FROM provider_cooldowns WHERE pool_id IN (${unique.map(()=>'?').join(',')})`).bind(...unique).all();
+ return new Map(result.results.map(row=>[row.pool_id,row.retry_at]));
+}
 async function providerRequest(env,model,body,fetcher=fetch,stream=null){
+ const mode=env.KIKI_PROVIDER_IO||'batched';if(!['serial','batched'].includes(mode))throw Error('invalid_provider_configuration');
+ const metrics={provider_io_mode:mode,provider_db_operations:0,provider_db_ms:0,provider_http_attempts:0,provider_http_ms:0},allStarted=performance.now();
+ if(env.DB)env={...env,DB:providerMeasuredDB(env.DB,metrics)};
  const keys=providerKeys(env);if(!keys.length)throw Error('provider_not_configured');
  for(const key of keys)key.id=await providerHash(key.key);
  const routerId=await providerHash('rotation/v1:'+keys.map(v=>v.id+':'+v.quota_pool).sort().join(',')),owner=crypto.randomUUID();
- const row=await providerAcquire(env,routerId,owner);if(!row)throw providerWait('provider_rotation_busy',Date.now()+5000);
+ const row=await providerAcquire(env,routerId,owner,mode);if(!row)throw providerWait('provider_rotation_busy',Date.now()+5000);
  try{
   if(row.retry_at>Date.now())throw providerWait(row.last_error||'provider_cycle_cooldown',row.retry_at);
   if(row.retry_at)Object.assign(row,{failed_keys:'[]',retry_at:0,last_error:null});
   const failed=new Set(JSON.parse(row.failed_keys)),deadline=Date.now()+20000;let last=row.last_error||'provider_cooldown';
   while(true){
    const start=keys.findIndex(v=>v.id===row.last_key)+1,ordered=[...keys.slice(start),...keys.slice(0,start)],eligible=[],future=[];
+   const healthIds=mode==='batched'?await Promise.all(ordered.map(async item=>({item,quotaId:await providerHash(model+':'+item.quota_pool),keyId:await providerHash('key:'+item.id),modelId:await providerHash('model:'+model)}))):null;
+   const snapshot=healthIds?await providerHealthSnapshot(env,healthIds.flatMap(v=>[v.quotaId,v.keyId,v.modelId])):null;
    for(const item of ordered){
-    const quotaId=await providerHash(model+':'+item.quota_pool),keyId=await providerHash('key:'+item.id),modelId=await providerHash('model:'+model);
-    const retryAt=Math.max(await providerHealth(env,quotaId),await providerHealth(env,keyId),await providerHealth(env,modelId));
+    const ids=healthIds?.find(v=>v.item===item),quotaId=ids?.quotaId||await providerHash(model+':'+item.quota_pool),keyId=ids?.keyId||await providerHash('key:'+item.id),modelId=ids?.modelId||await providerHash('model:'+model);
+    const retryAt=snapshot?Math.max(snapshot.get(quotaId)||0,snapshot.get(keyId)||0,snapshot.get(modelId)||0):Math.max(await providerHealth(env,quotaId),await providerHealth(env,keyId),await providerHealth(env,modelId));
     if(keys.length>1&&item.id===row.last_key)continue;
     future.push(retryAt);
     if(failed.has(item.id)||retryAt>Date.now())continue;
@@ -2766,8 +2783,9 @@ async function providerRequest(env,model,body,fetcher=fetch,stream=null){
    }
    const remaining=deadline-Date.now();if(remaining<=0){await providerPersist(env,routerId,row,owner);throw providerWait(last,Date.now()+5000);}
    const {item,quotaId,keyId,modelId}=eligible[0];row.last_key=item.id;await providerPersist(env,routerId,row,owner);
-   let response,streamResult;const started=Date.now();if(stream)await stream.reset();try{response=await fetcher(`https://generativelanguage.googleapis.com/v1beta/models/${model}:${stream?'streamGenerateContent?alt=sse':'generateContent'}`,{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':item.key},body:JSON.stringify(body),signal:stream?AbortSignal.any([stream.signal,AbortSignal.timeout(Math.min(keys.length>1?8000:20000,remaining))]):AbortSignal.timeout(Math.min(keys.length>1?8000:20000,remaining))});if(response?.ok&&stream)streamResult=await stream.consume(response);}catch(error){if(stream?.signal.aborted)throw Error('analysis_cancelled');if(['invalid_output','incomplete_output','stale_context'].includes(error.message))throw error;response=null;last='provider_timeout_or_network_error';}
-   if(response?.ok){Object.assign(row,{failed_keys:'[]',retry_at:0,last_error:null});await providerPersist(env,routerId,row,owner);return stream?streamResult:response;}
+   let response,streamResult;const started=Date.now();if(stream)await stream.reset();const httpStarted=performance.now();metrics.provider_http_attempts++;metrics.provider_last_dispatch_ms=httpStarted-allStarted;metrics.provider_first_dispatch_ms??=metrics.provider_last_dispatch_ms;
+   try{response=await fetcher(`https://generativelanguage.googleapis.com/v1beta/models/${model}:${stream?'streamGenerateContent?alt=sse':'generateContent'}`,{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':item.key},body:JSON.stringify(body),signal:stream?AbortSignal.any([stream.signal,AbortSignal.timeout(Math.min(keys.length>1?8000:20000,remaining))]):AbortSignal.timeout(Math.min(keys.length>1?8000:20000,remaining))});metrics.provider_headers_ms=performance.now()-httpStarted;if(response?.ok&&stream)streamResult=await stream.consume(response);}catch(error){if(stream?.signal.aborted)throw Error('analysis_cancelled');if(['invalid_output','incomplete_output','stale_context'].includes(error.message))throw error;response=null;last='provider_timeout_or_network_error';}finally{metrics.provider_http_ms+=performance.now()-httpStarted;}
+   if(response?.ok){Object.assign(row,{failed_keys:'[]',retry_at:0,last_error:null});if(mode==='serial')await providerPersist(env,routerId,row,owner);return stream?streamResult:response;}
    if(response)last=`provider_http_${response.status}`;
    console.error(JSON.stringify({event:'provider_attempt_failed',model,key_id:item.id.slice(0,12),category:last,elapsed_ms:Date.now()-started}));
    failed.add(item.id);Object.assign(row,{failed_keys:JSON.stringify([...failed].sort()),last_error:last});await providerPersist(env,routerId,row,owner);
@@ -2777,7 +2795,12 @@ async function providerRequest(env,model,body,fetcher=fetch,stream=null){
    else if(status&&status<500){await providerHealth(env,modelId,Date.now()+900000);throw providerWait(last,Date.now()+900000);}
    else if(advised!==null)await providerHealth(env,keyId,Date.now()+Math.max(10000,advised));
   }
- }finally{await providerPersist(env,routerId,row,owner,true);}
+ }catch(error){error.provider_metrics=metrics;throw error;}finally{
+  try{await providerPersist(env,routerId,row,owner,true);}finally{
+   for(const key of Object.keys(metrics))if(typeof metrics[key]==='number')metrics[key]=Math.round(metrics[key]);
+   if(typeof stream?.onMetrics==='function')stream.onMetrics({...metrics});
+  }
+ }
 }
 export {providerRequest,providerConfigured};
 
@@ -3126,7 +3149,7 @@ async function labAnalyze(env,s,request,owner,metadata,capture,emit=null){
   if(current.revision!==working.revision){await labDiscardCheck(env,current,working,'stale_context');labError(409,'Lab changed during analysis; result ignored.');}
   if(emit?.signal.aborted){current.runtime.analysis_status='cancelled';delete current.runtime.retry_at_ms;return labSave(env,current,current.revision,'analysis_cancelled');}
   current.runtime.retry_at_ms=error.retry_at_ms||Date.now()+10000;current.runtime.analysis_status='waiting_for_provider';current.runtime.analysis_error=/^(provider_[a-z0-9_]+|invalid_provider_configuration|invalid_model_configuration|invalid_output|incomplete_output)$/.test(error.message)?error.message:'provider_timeout_or_network_error';
-  current.runtime.last_analysis_timing={frame_id:capture.latest.frame_id,total_ms:Date.now()-working.runtime.last_analysis_started_ms,received_to_result_ms:Date.now()-capture.latest.server_received_unix_ms,status:'failed'};
+  current.runtime.last_analysis_timing={...error.provider_metrics,...emit?.metrics,frame_id:capture.latest.frame_id,total_ms:Date.now()-working.runtime.last_analysis_started_ms,received_to_result_ms:Date.now()-capture.latest.server_received_unix_ms,status:'failed'};
   current.steps.find(v=>v.checkpoint_id===cp.id).telemetry.analysis_failure_count++;
   return labSave(env,current,current.revision,'analysis_failed',{error:current.runtime.analysis_error});}
  const current=await labLoad(env,s.lab_session_id,owner);
@@ -3225,9 +3248,10 @@ async function analyzeLabFrameStream(bytes,cp,state,env,emit){
  schema.properties.criteria.minItems=cp.completion_criteria.length;schema.properties.action_findings.minItems=GUIDED_POLICY.procedures[cp.id].length;
  body.systemInstruction.parts[0].text+="\nSerialize top-level JSON fields in this order: criteria, action_findings, uncertainties, summary. Put the complete authored checkpoint decision findings first, then complete action findings, then critical uncertainties, and the short visible summary last. Keep every ID, status and supporting evidence. Do not emit a completion claim or generate next-step instructions.\nOcclusion check is mandatory before any wire or receiver_structure match: inspect the ENTIRE path from the named source output to the named destination input. A foreground settings dialog, panel or other window covering ANY part of that path makes the connection UNKNOWN, even when both endpoints and line pieces on both sides are visible and appear aligned. Never mentally join separated line fragments through an opaque window. receiver_structure requires BOTH receiver input paths fully visible end-to-end. modulated-wire and local-wire must each be unknown when their own paths are partly covered. Expected circuit topology, aligned line pieces and block names are not visible connection evidence.";
  body.systemInstruction.parts[0].text+='\nSHORT DECISION CONTRACT overrides the earlier summary/serialization instruction: return exactly criteria, action_findings, uncertainties, in that order, then close the JSON object and finish. Include EVERY authored criterion and action exactly once. Keep all decisive evidence and critical uncertainties, with concise factual evidence clauses. Do not generate a summary, explanation, teaching instruction, history or auxiliary text. The server derives display prose after the complete decision. A match is not a checkpoint completion claim.';
- const started=Date.now();let attempt=0,firstByte=null,firstFinding=null,criticalMs=null;
+ const started=Date.now();let attempt=0,firstByte=null,firstFinding=null,criticalMs=null,providerMetrics={};
  const fetcher=typeof env.LAB_STREAM_FETCH==='function'?env.LAB_STREAM_FETCH:fetch;
  const consumed=await providerRequest(env,model,body,fetcher,{signal:emit.signal,
+  onMetrics(value){providerMetrics=value;},
   async reset(){attempt++;firstByte=firstFinding=criticalMs=null;if(attempt>1)await emit({type:'attempt_reset',attempt});},
   async consume(response){const parser=new FindingParserJS(cp,GUIDED_POLICY.procedures[cp.id],true),decoder=new SSEDecoderJS(),reader=response.body.getReader();let stopped=false,usage={},critical=false;
    try{while(true){const {value,done}=await reader.read();if(done)break;if(firstByte===null)firstByte=Date.now()-started;
@@ -3245,7 +3269,8 @@ async function analyzeLabFrameStream(bytes,cp,state,env,emit){
    }decoder.finish();if(!stopped)throw Error('incomplete_output');const value=parser.finish();return {value:validateLabResult({...value,summary:decisionSummary(value)},cp,true),usage};
    }finally{await reader.cancel().catch(()=>{});}
   }});
- return {result:consumed.value,model,timing:{provider_ms:Date.now()-started,decision_validated_ms:Date.now()-started,first_byte_ms:firstByte,first_finding_ms:firstFinding,critical_fields_ms:criticalMs,stream_attempts:attempt,output_tokens:consumed.usage.candidatesTokenCount??null,wire_format:'lab-observer-decision/v1'}};
+ const usage=consumed.usage,count=name=>Number.isSafeInteger(usage[name])&&usage[name]>=0?usage[name]:null;
+ return {result:consumed.value,model,timing:{...providerMetrics,...emit.metrics,provider_ms:Date.now()-started,decision_validated_ms:Date.now()-started,first_byte_ms:firstByte,first_finding_ms:firstFinding,critical_fields_ms:criticalMs,stream_attempts:attempt,input_tokens:count('promptTokenCount'),cached_tokens:count('cachedContentTokenCount'),thinking_tokens:count('thoughtsTokenCount'),output_tokens:count('candidatesTokenCount'),total_tokens:count('totalTokenCount'),input_token_modalities:Array.isArray(usage.promptTokensDetails)?usage.promptTokensDetails.filter(v=>['TEXT','IMAGE','AUDIO','VIDEO'].includes(v.modality)&&Number.isSafeInteger(v.tokenCount)&&v.tokenCount>=0).map(v=>({modality:v.modality,tokens:v.tokenCount})):null,image_bytes:bytes.byteLength,request_text_characters:body.systemInstruction.parts[0].text.length+body.contents[0].parts[0].text.length+JSON.stringify(schema).length,wire_format:'lab-observer-decision/v1'}};
 }
 async function labStreamRoute(request,env,owner,executionContext){
  const url=new URL(request.url),match=/^\/lab-sessions\/([a-f0-9-]{36})\/check-stream$/.exec(url.pathname);
@@ -3257,12 +3282,13 @@ async function labStreamRoute(request,env,owner,executionContext){
  const requestId=crypto.randomUUID(),started=Date.now();let task;
  const stream=new ReadableStream({start(controller){
   const push=event=>{if(closed||abort.signal.aborted)return;controller.enqueue(new TextEncoder().encode('data: '+JSON.stringify({schema:'lab-analysis-stream/v2',request_id:requestId,event_sequence:++sequence,server_time:nowISO(),context:admitted,...event})+'\n\n'));};
+  const contextMetrics={context_db_reads:0,context_db_ms:0};
   const emit=Object.assign(async event=>{
    if(abort.signal.aborted)throw Error('analysis_cancelled');
    if(event.type==='admitted')admitted=event.context;
-   else if(admitted){const current=await labLoad(env,id,owner);if(!current.runtime.capture_active||current.status!=='active'||JSON.stringify(streamContext(current))!==JSON.stringify(admitted))throw Error('stale_context');}
+   else if(admitted){const start=performance.now();let current;contextMetrics.context_db_reads++;try{current=await labLoad(env,id,owner);}finally{contextMetrics.context_db_ms=Math.round(contextMetrics.context_db_ms+performance.now()-start);}if(!current.runtime.capture_active||current.status!=='active'||JSON.stringify(streamContext(current))!==JSON.stringify(admitted))throw Error('stale_context');}
    push({...event,provisional:event.type!=='admitted'});
-  },{signal:abort.signal});
+  },{signal:abort.signal,metrics:contextMetrics});
   task=(async()=>{try{
    const result=await labAnalyze(env,s,request,owner,meta,capture,emit),commitFinishedMs=Date.now()-started;
    if(abort.signal.aborted)return;
@@ -3474,7 +3500,7 @@ export default {
       if(request.method==='GET' && url.pathname==='/static/lab.js') return response(ASSETS.labjs,200,{'Content-Type':'application/javascript'});
       if (request.method === 'GET' && url.pathname === '/health') {
         let keys=[],configuration_valid=true;try{keys=providerKeys(env);}catch{configuration_valid=false;}
-        return json({json_stream:{available:true,wire_format:'lab-analysis-stream/v2',priority:['criteria','action_findings','uncertainties'],commit_before_auxiliary:true},status:'ok',mode:'hosted_frame_receipt',sample_hz:.5,image_storage:'none',analysis:{provider:'gemini',configured:providerConfigured(env),configuration_valid,key_count:keys.length,rotation_enabled:keys.length>1,quota_pool_count:new Set(keys.map(v=>v.quota_pool)).size,model:env.GEMINI_SCREEN_MODEL||ANALYSIS_MODEL,lab_model:env.GEMINI_LAB_MODEL||env.GEMINI_SCREEN_MODEL||ANALYSIS_MODEL}});
+        return json({latency_experiment:{id:'provider-db-io/v1',provider_io_mode:env.KIKI_PROVIDER_IO||'batched'},json_stream:{available:true,wire_format:'lab-analysis-stream/v2',priority:['criteria','action_findings','uncertainties'],commit_before_auxiliary:true},status:'ok',mode:'hosted_frame_receipt',sample_hz:.5,image_storage:'none',analysis:{provider:'gemini',configured:providerConfigured(env),configuration_valid,key_count:keys.length,rotation_enabled:keys.length>1,quota_pool_count:new Set(keys.map(v=>v.quota_pool)).size,model:env.GEMINI_SCREEN_MODEL||ANALYSIS_MODEL,lab_model:env.GEMINI_LAB_MODEL||env.GEMINI_SCREEN_MODEL||ANALYSIS_MODEL}});
       }
       const owner = request.headers.get('oai-authenticated-user-id');
       if(url.pathname==='/mcp' && request.method==='POST') return await labMCP(request,env,owner);

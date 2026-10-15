@@ -1,3 +1,15 @@
+# Provider database I/O arm — 15 October 2026
+
+Current source implements `provider-db-io/v1`. `KIKI_PROVIDER_IO=batched` is the default; `serial` selects the unchanged routing control. The model prompt, three-field decision schema, SSE v2, authored IDs, complete STOP and two-frame gates are unchanged. Healthy four-key routing uses four DB calls rather than seventeen, including three before HTTP rather than fifteen. This count reduction is not a production end-to-end latency claim.
+
+Private timings now include provider DB operations/time, first dispatch, HTTP headers/consumption, context DB reads/time, actual prompt/cache/thinking/output/total token usage, image bytes and text characters. Null token fields mean the provider did not supply a valid count. HTTP duration includes awaited stream parsing/context checks; these phase timings overlap and must not be summed. `/health.latency_experiment` identifies the selected mode.
+
+Run `node scripts/replay-lab.mjs --io-mode batched` and again with `serial` for a full twelve-checkpoint synthetic replay through the actual Worker/receiver/tracker. This uses mocked vision, explicit simulated student confirmations and two distinct matching frames. It injects contradictory settings to verify support reset. `node scripts/benchmark-provider-io.mjs` is an offline DB-delay simulation, not a live provider benchmark. Existing `node --test scripts/test-*.mjs` covers stale contexts, cancellation, lease contention and quota/failover semantics. No default command calls a paid API.
+
+The backend experiment branch contains the combined evaluation command, CI workflow, experiment registry and optional five-case live vision smoke. The existing Site remains Worker/D1; the Python FastAPI mirror is implemented/tested but not hosted. Native browser sharing and real Simulink readability still require sampled integration acceptance.
+
+---
+
 # JSON streaming experiment
 
 This is the private hosted compatibility adapter for the Python implementation on `experiment/screen-reader-json-stream`. The frozen baseline Site is unchanged.

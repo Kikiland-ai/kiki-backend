@@ -27,9 +27,9 @@ def priority_request(pixels,checkpoint,state,model,decision_only=False):
 
 class JsonStreamingAnalyzer(GeminiAnalyzer):
     supports_stream=True
-    def __init__(self,api_key=None,transport=None,model=None):
+    def __init__(self,api_key=None,transport=None,model=None,io_mode=None):
         super().__init__(api_key,transport,model)
-        self.provider=StreamingProviderPool(api_key=api_key,transport=transport)
+        self.provider=StreamingProviderPool(api_key=api_key,transport=transport,io_mode=io_mode)
     @property
     def prompt_version(self):
         return (PROMPT_VERSION if SHORT_DECISION.get() else 'dsb-step-observer/v3-json-stream2') if STREAM_SINK.get() is not None else OBSERVER_VERSION
@@ -37,7 +37,7 @@ class JsonStreamingAnalyzer(GeminiAnalyzer):
         sink=STREAM_SINK.get()
         if sink is None:return await super().analyze(pixels,checkpoint,state)
         short=SHORT_DECISION.get()
-        started=time.monotonic();attempt=0;first_byte=None;first_finding=None;critical_ms=None
+        started=time.monotonic();attempt=0;first_byte=None;first_finding=None;critical_ms=None;provider_metrics={}
         await sink({'type':'admitted','state':state})
         async def reset():
             nonlocal attempt,first_byte,first_finding,critical_ms
@@ -75,7 +75,9 @@ class JsonStreamingAnalyzer(GeminiAnalyzer):
             if not stopped:raise AnalysisFailure('incomplete_output')
             return parser.finish(),usage
         try:
-            result,usage=await self.provider.stream(self.model,priority_request(pixels,checkpoint,state,self.model,decision_only=short),consume,reset)
-            return AnalysisFindings(result,{'provider_ms':round((time.monotonic()-started)*1000),'decision_validated_ms':round((time.monotonic()-started)*1000),'first_byte_ms':first_byte,'first_finding_ms':first_finding,'critical_fields_ms':critical_ms,'output_tokens':usage.get('candidatesTokenCount'),'wire_format':'lab-observer-decision/v1' if short else 'lab-observer-json-stream/v1','observer_prompt_version':self.prompt_version})
+            body=priority_request(pixels,checkpoint,state,self.model,decision_only=short)
+            result,usage=await self.provider.stream(self.model,body,consume,reset,provider_metrics.update)
+            counts={target:usage.get(source) if type(usage.get(source)) is int and usage[source]>=0 else None for target,source in {'input_tokens':'promptTokenCount','cached_tokens':'cachedContentTokenCount','thinking_tokens':'thoughtsTokenCount','output_tokens':'candidatesTokenCount','total_tokens':'totalTokenCount'}.items()}
+            return AnalysisFindings(result,{**provider_metrics,**getattr(sink,'metrics',{}),**counts,'image_bytes':len(pixels),'request_text_characters':len(body['systemInstruction']['parts'][0]['text'])+len(body['contents'][0]['parts'][0]['text'])+len(json.dumps(body['generationConfig']['responseJsonSchema'])),'provider_ms':round((time.monotonic()-started)*1000),'decision_validated_ms':round((time.monotonic()-started)*1000),'first_byte_ms':first_byte,'first_finding_ms':first_finding,'critical_fields_ms':critical_ms,'wire_format':'lab-observer-decision/v1' if short else 'lab-observer-json-stream/v1','observer_prompt_version':self.prompt_version})
         except AnalysisFailure:raise
         except (ValueError,TypeError,KeyError,IndexError):raise AnalysisFailure('invalid_output') from None

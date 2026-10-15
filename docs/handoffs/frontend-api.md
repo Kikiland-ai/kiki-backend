@@ -1,3 +1,9 @@
+# Provider I/O experiment addition — 15 October 2026
+
+Branch `experiment/provider-db-io` adds private timing/usage diagnostics and `/health.latency_experiment` metadata. Existing endpoints, SSE `lab-analysis-stream/v2`, complete decision and committed guidance semantics stay unchanged. `KIKI_PROVIDER_IO=batched` is the default for the Python streaming pool and hosted provider adapter; `serial` selects the routing control. Python's inherited nonstream pool remains unchanged. See [implementation and automated acceptance](../experiments/provider-db-io-implementation.md). Other latency arms are prepared separately. The live Site remains Worker/D1; no Python origin has been deployed.
+
+---
+
 # JSON branch addition
 
 This branch adds `POST /lab-sessions/{lab_id}/check-stream` with the same CheckFrame JSON request and owned SSE response. OpenAPI now has 29 HTTP paths. See [the stream implementation/protocol](../experiments/json-stream-implementation.md). The test Site runs its Worker adapter; Python cloud hosting is still pending. Original nonstream endpoints below remain available.

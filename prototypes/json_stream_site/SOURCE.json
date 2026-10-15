@@ -1,8 +1,10 @@
 {
   "schema": "hosted-experiment-source/v1",
   "project_id": "appgprj_6acfd4c6e6e48191b9110067ba86d556",
-  "source_commit": "958fd7fb4ae94e0af5ffe592a2fcb09f406af5fb",
+  "source_commit": "c67fc3a5537ddcf98b8d8bfacbb606749687f693",
   "baseline_source_commit": "4e1d0c3d132ff2778216e5d7e4d987d3e04d7145",
   "note": "Tracked source copied from the live experimental Site. BASELINE.md and old README sections are historical template records; current experiment operation is documented in docs/json-stream-experiment.md. This provenance marker is added in the backend repo only.",
-  "previous_stream_source_commit": "cbaec32e47bbb53e49aa5d1a1f6f02d76ad81adc"
+  "previous_stream_source_commit": "cbaec32e47bbb53e49aa5d1a1f6f02d76ad81adc",
+  "previous_short_decision_source_commit": "958fd7fb4ae94e0af5ffe592a2fcb09f406af5fb",
+  "experiment": "provider-db-io/v1"
 }

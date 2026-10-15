@@ -5,16 +5,58 @@
   "baseline_site_source": "958fd7fb4ae94e0af5ffe592a2fcb09f406af5fb",
   "baseline_record": "docs/experiments/short-decision-implementation.md",
   "experiments": [
-    {"id": "provider-db-io/v1", "branch": "experiment/provider-db-io", "status": "implementing", "change": "Batch provider health reads, atomically acquire rotation lease and combine successful release writes.", "control": "KIKI_PROVIDER_IO=serial", "candidate": "KIKI_PROVIDER_IO=batched", "primary_measure": "database round trips and admitted-to-committed latency", "model_prompt_change": false},
-    {"id": "stream-context-batch/v1", "branch": "experiment/stream-context-batch", "status": "prepared", "change": "Bound context-validation work per decoded chunk while retaining final authoritative checks and cancellation.", "primary_measure": "context database reads and stream-consumption duration", "model_prompt_change": false},
-    {"id": "verifier-context/v1", "branch": "experiment/verifier-context", "status": "prepared", "change": "Remove teaching/UI-only material from verifier inputs; preserve target identity, expected values, critical rules and all current finding IDs.", "primary_measure": "actual input/image/cache/thinking tokens, recognition acceptance and complete decision latency", "model_prompt_change": true},
-    {"id": "targeted-vision/v1", "branch": "experiment/targeted-vision", "status": "prepared", "change": "Explicit requested-target verification and provenance-bound crops; requires a new decision contract and expanded labelled screen corpus.", "primary_measure": "vision tokens, target accuracy and two-frame next-action latency", "model_prompt_change": true}
+    {
+      "id": "provider-db-io/v1",
+      "branch": "experiment/provider-db-io",
+      "status": "live",
+      "change": "Batch provider health reads, atomically acquire rotation lease and combine successful release writes.",
+      "control": "KIKI_PROVIDER_IO=serial",
+      "candidate": "KIKI_PROVIDER_IO=batched",
+      "primary_measure": "database round trips and admitted-to-committed latency",
+      "model_prompt_change": false,
+      "site_source_commit": "c67fc3a5537ddcf98b8d8bfacbb606749687f693",
+      "implementation_record": "docs/experiments/provider-db-io-implementation.md",
+      "deployment_id": "appgdep_6ad019222c308191b14bd7e3b41d19a9"
+    },
+    {
+      "id": "stream-context-batch/v1",
+      "branch": "experiment/stream-context-batch",
+      "status": "prepared",
+      "change": "Bound context-validation work per decoded chunk while retaining final authoritative checks and cancellation.",
+      "primary_measure": "context database reads and stream-consumption duration",
+      "model_prompt_change": false
+    },
+    {
+      "id": "verifier-context/v1",
+      "branch": "experiment/verifier-context",
+      "status": "prepared",
+      "change": "Remove teaching/UI-only material from verifier inputs; preserve target identity, expected values, critical rules and all current finding IDs.",
+      "primary_measure": "actual input/image/cache/thinking tokens, recognition acceptance and complete decision latency",
+      "model_prompt_change": true
+    },
+    {
+      "id": "targeted-vision/v1",
+      "branch": "experiment/targeted-vision",
+      "status": "prepared",
+      "change": "Explicit requested-target verification and provenance-bound crops; requires a new decision contract and expanded labelled screen corpus.",
+      "primary_measure": "vision tokens, target accuracy and two-frame next-action latency",
+      "model_prompt_change": true
+    }
   ],
   "automation": {
     "offline": "No keys or paid model calls; provider fault/latency simulation, tracker and UI replay.",
     "live": "Explicit bounded opt-in against labelled synthetic images; reports every outcome and prompt/image hashes.",
     "human": "Native Simulink integration and usability remain sampled acceptance, not the regression test runner."
   },
-  "invariants": ["stable finding IDs", "complete JSON and provider STOP", "two distinct matching frames", "current owner/visit/view/condition", "no stale adoption", "canonical tracker-owned now/next", "shared-project quota and failed-cycle cooldown", "rendering never completes checkpoints"],
+  "invariants": [
+    "stable finding IDs",
+    "complete JSON and provider STOP",
+    "two distinct matching frames",
+    "current owner/visit/view/condition",
+    "no stale adoption",
+    "canonical tracker-owned now/next",
+    "shared-project quota and failed-cycle cooldown",
+    "rendering never completes checkpoints"
+  ],
   "promotion": "One changed experiment at a time. No deployment speedup claim from simulated database delay. Recognition-affecting variants must pass held-out semantic checks before publication."
 }

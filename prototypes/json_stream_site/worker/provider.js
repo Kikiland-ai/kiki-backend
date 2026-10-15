@@ -18,9 +18,10 @@ async function providerHealth(env,id,retryAt=null){
  }
  const health=providerLocal(env).health;if(retryAt!==null)health.set(id,Math.max(health.get(id)||0,retryAt));return health.get(id)||0;
 }
-async function providerAcquire(env,id,owner){
+async function providerAcquire(env,id,owner,mode='serial'){
  const now=Date.now();
  if(env.DB){
+  if(mode==='batched')return await env.DB.prepare('INSERT INTO provider_rotation(router_id,lease_owner,lease_until) VALUES(?,?,?) ON CONFLICT(router_id) DO UPDATE SET lease_owner=excluded.lease_owner,lease_until=excluded.lease_until WHERE provider_rotation.lease_until<=? RETURNING *').bind(id,owner,now+30000,now).first();
   await env.DB.prepare('INSERT OR IGNORE INTO provider_rotation(router_id) VALUES(?)').bind(id).run();
   return await env.DB.prepare('UPDATE provider_rotation SET lease_owner=?,lease_until=? WHERE router_id=? AND lease_until<=? RETURNING *').bind(owner,now+30000,id,now).first();
  }
@@ -42,20 +43,36 @@ function providerRetryAfter(value){
  if(!value)return null;const seconds=Number(value);if(Number.isFinite(seconds)&&seconds>=0)return seconds*1000;
  const date=Date.parse(value);return Number.isFinite(date)?Math.max(0,date-Date.now()):null;
 }
+function providerMeasuredDB(db,metrics){
+ const measured=async action=>{const started=performance.now();metrics.provider_db_operations++;try{return await action();}finally{metrics.provider_db_ms+=performance.now()-started;}};
+ const wrap=statement=>({bind(...values){return wrap(statement.bind(...values));},first(...args){return measured(()=>statement.first(...args));},run(...args){return measured(()=>statement.run(...args));},all(...args){return measured(()=>statement.all(...args));}});
+ return {prepare(sql){return wrap(db.prepare(sql));}};
+}
+async function providerHealthSnapshot(env,ids){
+ const unique=[...new Set(ids)];
+ if(!env.DB)return new Map(unique.map(id=>[id,providerLocal(env).health.get(id)||0]));
+ const result=await env.DB.prepare(`SELECT pool_id,retry_at FROM provider_cooldowns WHERE pool_id IN (${unique.map(()=>'?').join(',')})`).bind(...unique).all();
+ return new Map(result.results.map(row=>[row.pool_id,row.retry_at]));
+}
 async function providerRequest(env,model,body,fetcher=fetch,stream=null){
+ const mode=env.KIKI_PROVIDER_IO||'batched';if(!['serial','batched'].includes(mode))throw Error('invalid_provider_configuration');
+ const metrics={provider_io_mode:mode,provider_db_operations:0,provider_db_ms:0,provider_http_attempts:0,provider_http_ms:0},allStarted=performance.now();
+ if(env.DB)env={...env,DB:providerMeasuredDB(env.DB,metrics)};
  const keys=providerKeys(env);if(!keys.length)throw Error('provider_not_configured');
  for(const key of keys)key.id=await providerHash(key.key);
  const routerId=await providerHash('rotation/v1:'+keys.map(v=>v.id+':'+v.quota_pool).sort().join(',')),owner=crypto.randomUUID();
- const row=await providerAcquire(env,routerId,owner);if(!row)throw providerWait('provider_rotation_busy',Date.now()+5000);
+ const row=await providerAcquire(env,routerId,owner,mode);if(!row)throw providerWait('provider_rotation_busy',Date.now()+5000);
  try{
   if(row.retry_at>Date.now())throw providerWait(row.last_error||'provider_cycle_cooldown',row.retry_at);
   if(row.retry_at)Object.assign(row,{failed_keys:'[]',retry_at:0,last_error:null});
   const failed=new Set(JSON.parse(row.failed_keys)),deadline=Date.now()+20000;let last=row.last_error||'provider_cooldown';
   while(true){
    const start=keys.findIndex(v=>v.id===row.last_key)+1,ordered=[...keys.slice(start),...keys.slice(0,start)],eligible=[],future=[];
+   const healthIds=mode==='batched'?await Promise.all(ordered.map(async item=>({item,quotaId:await providerHash(model+':'+item.quota_pool),keyId:await providerHash('key:'+item.id),modelId:await providerHash('model:'+model)}))):null;
+   const snapshot=healthIds?await providerHealthSnapshot(env,healthIds.flatMap(v=>[v.quotaId,v.keyId,v.modelId])):null;
    for(const item of ordered){
-    const quotaId=await providerHash(model+':'+item.quota_pool),keyId=await providerHash('key:'+item.id),modelId=await providerHash('model:'+model);
-    const retryAt=Math.max(await providerHealth(env,quotaId),await providerHealth(env,keyId),await providerHealth(env,modelId));
+    const ids=healthIds?.find(v=>v.item===item),quotaId=ids?.quotaId||await providerHash(model+':'+item.quota_pool),keyId=ids?.keyId||await providerHash('key:'+item.id),modelId=ids?.modelId||await providerHash('model:'+model);
+    const retryAt=snapshot?Math.max(snapshot.get(quotaId)||0,snapshot.get(keyId)||0,snapshot.get(modelId)||0):Math.max(await providerHealth(env,quotaId),await providerHealth(env,keyId),await providerHealth(env,modelId));
     if(keys.length>1&&item.id===row.last_key)continue;
     future.push(retryAt);
     if(failed.has(item.id)||retryAt>Date.now())continue;
@@ -67,8 +84,9 @@ async function providerRequest(env,model,body,fetcher=fetch,stream=null){
    }
    const remaining=deadline-Date.now();if(remaining<=0){await providerPersist(env,routerId,row,owner);throw providerWait(last,Date.now()+5000);}
    const {item,quotaId,keyId,modelId}=eligible[0];row.last_key=item.id;await providerPersist(env,routerId,row,owner);
-   let response,streamResult;const started=Date.now();if(stream)await stream.reset();try{response=await fetcher(`https://generativelanguage.googleapis.com/v1beta/models/${model}:${stream?'streamGenerateContent?alt=sse':'generateContent'}`,{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':item.key},body:JSON.stringify(body),signal:stream?AbortSignal.any([stream.signal,AbortSignal.timeout(Math.min(keys.length>1?8000:20000,remaining))]):AbortSignal.timeout(Math.min(keys.length>1?8000:20000,remaining))});if(response?.ok&&stream)streamResult=await stream.consume(response);}catch(error){if(stream?.signal.aborted)throw Error('analysis_cancelled');if(['invalid_output','incomplete_output','stale_context'].includes(error.message))throw error;response=null;last='provider_timeout_or_network_error';}
-   if(response?.ok){Object.assign(row,{failed_keys:'[]',retry_at:0,last_error:null});await providerPersist(env,routerId,row,owner);return stream?streamResult:response;}
+   let response,streamResult;const started=Date.now();if(stream)await stream.reset();const httpStarted=performance.now();metrics.provider_http_attempts++;metrics.provider_last_dispatch_ms=httpStarted-allStarted;metrics.provider_first_dispatch_ms??=metrics.provider_last_dispatch_ms;
+   try{response=await fetcher(`https://generativelanguage.googleapis.com/v1beta/models/${model}:${stream?'streamGenerateContent?alt=sse':'generateContent'}`,{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':item.key},body:JSON.stringify(body),signal:stream?AbortSignal.any([stream.signal,AbortSignal.timeout(Math.min(keys.length>1?8000:20000,remaining))]):AbortSignal.timeout(Math.min(keys.length>1?8000:20000,remaining))});metrics.provider_headers_ms=performance.now()-httpStarted;if(response?.ok&&stream)streamResult=await stream.consume(response);}catch(error){if(stream?.signal.aborted)throw Error('analysis_cancelled');if(['invalid_output','incomplete_output','stale_context'].includes(error.message))throw error;response=null;last='provider_timeout_or_network_error';}finally{metrics.provider_http_ms+=performance.now()-httpStarted;}
+   if(response?.ok){Object.assign(row,{failed_keys:'[]',retry_at:0,last_error:null});if(mode==='serial')await providerPersist(env,routerId,row,owner);return stream?streamResult:response;}
    if(response)last=`provider_http_${response.status}`;
    console.error(JSON.stringify({event:'provider_attempt_failed',model,key_id:item.id.slice(0,12),category:last,elapsed_ms:Date.now()-started}));
    failed.add(item.id);Object.assign(row,{failed_keys:JSON.stringify([...failed].sort()),last_error:last});await providerPersist(env,routerId,row,owner);
@@ -78,6 +96,11 @@ async function providerRequest(env,model,body,fetcher=fetch,stream=null){
    else if(status&&status<500){await providerHealth(env,modelId,Date.now()+900000);throw providerWait(last,Date.now()+900000);}
    else if(advised!==null)await providerHealth(env,keyId,Date.now()+Math.max(10000,advised));
   }
- }finally{await providerPersist(env,routerId,row,owner,true);}
+ }catch(error){error.provider_metrics=metrics;throw error;}finally{
+  try{await providerPersist(env,routerId,row,owner,true);}finally{
+   for(const key of Object.keys(metrics))if(typeof metrics[key]==='number')metrics[key]=Math.round(metrics[key]);
+   if(typeof stream?.onMetrics==='function')stream.onMetrics({...metrics});
+  }
+ }
 }
 export {providerRequest,providerConfigured};

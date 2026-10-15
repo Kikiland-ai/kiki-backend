@@ -1,0 +1,970 @@
+{
+  "fixture_kind": "Synthetic protocol/observer fixture; not a learner or actual paint record",
+  "state": {
+    "schema": "lab-demo/v1",
+    "lab_session_id": "ea8e8aad-ada8-4101-bf1d-a576e2b2c8e1",
+    "experiment_id": "PR-AM-DSB",
+    "revision": 4,
+    "status": "active",
+    "progression_mode": "screen_guided",
+    "workspace": {
+      "id": "1b3804ca-3848-40ae-a4cb-4ede96771982",
+      "software": "simulink_online",
+      "confirmed": false,
+      "external_project_ref": "model-name:explicit_fixture",
+      "capture_session_id": "1486584e-1553-4c5e-b40e-3a9931ed8a4b",
+      "capture_epoch": 1,
+      "view_revision": 1,
+      "geometry_detection": "dimensions_and_manual_reports_only",
+      "parameter_revision": 0,
+      "condition": "baseline"
+    },
+    "queue": {
+      "current_checkpoint_id": "CP-DSB-03",
+      "upcoming_checkpoint_ids": [
+        "CP-DSB-04",
+        "CP-DSB-05",
+        "CP-DSB-06",
+        "CP-DSB-07",
+        "CP-DSB-08",
+        "CP-DSB-09",
+        "CP-DSB-10",
+        "CP-DSB-11",
+        "CP-DSB-12"
+      ],
+      "done_checkpoint_ids": [],
+      "support_items": []
+    },
+    "guidance": {
+      "state": "current_step",
+      "now_checkpoint_id": "CP-DSB-03",
+      "next_checkpoint_id": "CP-DSB-04",
+      "instruction": "Set the Message signal to 100 Hz.",
+      "reason": "The time-based source uses rad/s; pi/2 makes its sine output a cosine.",
+      "based_on_observation_id": "9ae68b29-7d39-441e-a821-d4d789be50b5",
+      "based_on_visit_id": "cdcc4736-e2d4-4dee-b9b2-edbd4024057f",
+      "procedure": [
+        {
+          "id": "CP-DSB-03/message-settings",
+          "title": "Set the Message signal to 100 Hz.",
+          "where": "Double-click the block labelled Message.",
+          "how": [
+            "Enter the values in the table below. Frequency is in rad/sec, so type 2*pi*100.",
+            "Click Apply if enabled. Keep the dialog open while the guide reads it; click OK when the next action appears."
+          ],
+          "expected_result": "Message has amplitude 1 and frequency 100 Hz.",
+          "evidence_rule": "All listed Message fields are readable in its named dialog.",
+          "satisfied_by": [
+            "CP-DSB-03:message_parameters"
+          ],
+          "kind": "visible",
+          "settings": [
+            {
+              "field": "Sine type",
+              "value": "Time based"
+            },
+            {
+              "field": "Time (t)",
+              "value": "Use simulation time"
+            },
+            {
+              "field": "Amplitude",
+              "value": "1"
+            },
+            {
+              "field": "Bias",
+              "value": "0"
+            },
+            {
+              "field": "Frequency (rad/sec)",
+              "value": "2*pi*100"
+            },
+            {
+              "field": "Phase (rad)",
+              "value": "0"
+            },
+            {
+              "field": "Sample time",
+              "value": "0"
+            }
+          ],
+          "implied_by_any": [],
+          "already_done_help": "If you already did this, show the named block, its settings or its connections so I can check it. A hidden target is not proof that it is missing.",
+          "verify_title": "Show Message settings again for a final check.",
+          "tracked": false,
+          "tracking_basis": null
+        },
+        {
+          "id": "CP-DSB-03/carrier-settings",
+          "title": "Set the Carrier signal to 2000 Hz.",
+          "where": "Double-click the original block labelled Carrier.",
+          "how": [
+            "Enter the values in the table below. Type pi/2 in Phase.",
+            "Click Apply if enabled, keep the settings visible for the guide, then click OK when the next action appears."
+          ],
+          "expected_result": "Carrier has amplitude 1, frequency 2000 Hz and phase pi/2.",
+          "evidence_rule": "All listed Carrier fields are readable in its named dialog.",
+          "satisfied_by": [
+            "CP-DSB-03:carrier_parameters"
+          ],
+          "kind": "visible",
+          "settings": [
+            {
+              "field": "Sine type",
+              "value": "Time based"
+            },
+            {
+              "field": "Time (t)",
+              "value": "Use simulation time"
+            },
+            {
+              "field": "Amplitude",
+              "value": "1"
+            },
+            {
+              "field": "Bias",
+              "value": "0"
+            },
+            {
+              "field": "Frequency (rad/sec)",
+              "value": "2*pi*2000"
+            },
+            {
+              "field": "Phase (rad)",
+              "value": "pi/2"
+            },
+            {
+              "field": "Sample time",
+              "value": "0"
+            }
+          ],
+          "implied_by_any": [],
+          "already_done_help": "If you already did this, show the named block, its settings or its connections so I can check it. A hidden target is not proof that it is missing.",
+          "verify_title": "Show Carrier settings again for a final check.",
+          "tracked": false,
+          "tracking_basis": null
+        }
+      ],
+      "current_action": {
+        "id": "CP-DSB-03/message-settings",
+        "title": "Set the Message signal to 100 Hz.",
+        "where": "Double-click the block labelled Message.",
+        "how": [
+          "Enter the values in the table below. Frequency is in rad/sec, so type 2*pi*100.",
+          "Click Apply if enabled. Keep the dialog open while the guide reads it; click OK when the next action appears."
+        ],
+        "expected_result": "Message has amplitude 1 and frequency 100 Hz.",
+        "evidence_rule": "All listed Message fields are readable in its named dialog.",
+        "satisfied_by": [
+          "CP-DSB-03:message_parameters"
+        ],
+        "kind": "visible",
+        "settings": [
+          {
+            "field": "Sine type",
+            "value": "Time based"
+          },
+          {
+            "field": "Time (t)",
+            "value": "Use simulation time"
+          },
+          {
+            "field": "Amplitude",
+            "value": "1"
+          },
+          {
+            "field": "Bias",
+            "value": "0"
+          },
+          {
+            "field": "Frequency (rad/sec)",
+            "value": "2*pi*100"
+          },
+          {
+            "field": "Phase (rad)",
+            "value": "0"
+          },
+          {
+            "field": "Sample time",
+            "value": "0"
+          }
+        ],
+        "implied_by_any": [],
+        "already_done_help": "If you already did this, show the named block, its settings or its connections so I can check it. A hidden target is not proof that it is missing.",
+        "verify_title": "Show Message settings again for a final check.",
+        "tracked": false,
+        "tracking_basis": null
+      },
+      "next_action": {
+        "id": "CP-DSB-03/carrier-settings",
+        "title": "Set the Carrier signal to 2000 Hz.",
+        "where": "Double-click the original block labelled Carrier.",
+        "how": [
+          "Enter the values in the table below. Type pi/2 in Phase.",
+          "Click Apply if enabled, keep the settings visible for the guide, then click OK when the next action appears."
+        ],
+        "expected_result": "Carrier has amplitude 1, frequency 2000 Hz and phase pi/2.",
+        "evidence_rule": "All listed Carrier fields are readable in its named dialog.",
+        "satisfied_by": [
+          "CP-DSB-03:carrier_parameters"
+        ],
+        "kind": "visible",
+        "settings": [
+          {
+            "field": "Sine type",
+            "value": "Time based"
+          },
+          {
+            "field": "Time (t)",
+            "value": "Use simulation time"
+          },
+          {
+            "field": "Amplitude",
+            "value": "1"
+          },
+          {
+            "field": "Bias",
+            "value": "0"
+          },
+          {
+            "field": "Frequency (rad/sec)",
+            "value": "2*pi*2000"
+          },
+          {
+            "field": "Phase (rad)",
+            "value": "pi/2"
+          },
+          {
+            "field": "Sample time",
+            "value": "0"
+          }
+        ],
+        "implied_by_any": [],
+        "already_done_help": "If you already did this, show the named block, its settings or its connections so I can check it. A hidden target is not proof that it is missing.",
+        "verify_title": "Show Carrier settings again for a final check.",
+        "tracked": false,
+        "tracking_basis": null
+      },
+      "action_position": 1,
+      "procedure_version": "dsb-beginner-procedure/v1",
+      "tracked_in_stage": [],
+      "already_tracked": null,
+      "already_tracked_basis": "earlier_checkpoint_record_not_new_screen_claim",
+      "valid_until": "2026-10-15T17:48:08.991Z",
+      "pointer_active": false,
+      "next_instruction": "Set the Carrier signal to 2000 Hz."
+    },
+    "observation": {
+      "observation_id": "9ae68b29-7d39-441e-a821-d4d789be50b5",
+      "source_frame_id": "1486584e-1553-4c5e-b40e-3a9931ed8a4b:1:1",
+      "latest_frame_id": "1486584e-1553-4c5e-b40e-3a9931ed8a4b:1:1",
+      "capture_epoch": 1,
+      "view_revision": 1,
+      "source_received_at": "2026-10-15T17:48:00.965Z",
+      "age_ms": 26,
+      "status": "available"
+    },
+    "auto_tracking": {},
+    "procedure_tracking": {},
+    "procedure_history": {},
+    "steps": [
+      {
+        "checkpoint_id": "CP-DSB-01",
+        "status": "in_progress",
+        "current_visit_id": "cae6e389-2680-4e9b-97a3-d72f34621de5",
+        "criteria": [
+          {
+            "criterion_id": "CP-DSB-01:workspace",
+            "state": "unknown",
+            "evidence_ids": [],
+            "review_basis": null,
+            "parameter_revision": null
+          },
+          {
+            "criterion_id": "CP-DSB-01:project_ref",
+            "state": "unknown",
+            "evidence_ids": [],
+            "review_basis": null,
+            "parameter_revision": null
+          }
+        ],
+        "timing": {
+          "entered_at": "2026-10-15T17:48:00.958Z",
+          "wall_ms": 2,
+          "tracking_active_ms": 0,
+          "paused_ms": 0,
+          "disconnected_ms": 2,
+          "valid_observation_ms": 0
+        },
+        "attempt_count": 1
+      },
+      {
+        "checkpoint_id": "CP-DSB-02",
+        "status": "upcoming",
+        "current_visit_id": null,
+        "criteria": [
+          {
+            "criterion_id": "CP-DSB-02:message",
+            "state": "unknown",
+            "evidence_ids": [],
+            "review_basis": null,
+            "parameter_revision": null
+          },
+          {
+            "criterion_id": "CP-DSB-02:carrier",
+            "state": "unknown",
+            "evidence_ids": [],
+            "review_basis": null,
+            "parameter_revision": null
+          }
+        ],
+        "timing": {
+          "entered_at": null,
+          "wall_ms": 0,
+          "tracking_active_ms": 0,
+          "paused_ms": 0,
+          "disconnected_ms": 0,
+          "valid_observation_ms": 0
+        },
+        "attempt_count": 0
+      },
+      {
+        "checkpoint_id": "CP-DSB-03",
+        "status": "in_progress",
+        "current_visit_id": "cdcc4736-e2d4-4dee-b9b2-edbd4024057f",
+        "criteria": [
+          {
+            "criterion_id": "CP-DSB-03:message_parameters",
+            "state": "unknown",
+            "evidence_ids": [],
+            "review_basis": null,
+            "parameter_revision": null
+          },
+          {
+            "criterion_id": "CP-DSB-03:carrier_parameters",
+            "state": "unknown",
+            "evidence_ids": [],
+            "review_basis": null,
+            "parameter_revision": null
+          }
+        ],
+        "timing": {
+          "entered_at": "2026-10-15T17:48:00.961Z",
+          "wall_ms": 31,
+          "tracking_active_ms": 20,
+          "paused_ms": 0,
+          "disconnected_ms": 11,
+          "valid_observation_ms": 12
+        },
+        "attempt_count": 0
+      },
+      {
+        "checkpoint_id": "CP-DSB-04",
+        "status": "upcoming",
+        "current_visit_id": null,
+        "criteria": [
+          {
+            "criterion_id": "CP-DSB-04:modulator",
+            "state": "unknown",
+            "evidence_ids": [],
+            "review_basis": null,
+            "parameter_revision": null
+          },
+          {
+            "criterion_id": "CP-DSB-04:transmitter_connections",
+            "state": "unknown",
+            "evidence_ids": [],
+            "review_basis": null,
+            "parameter_revision": null
+          }
+        ],
+        "timing": {
+          "entered_at": null,
+          "wall_ms": 0,
+          "tracking_active_ms": 0,
+          "paused_ms": 0,
+          "disconnected_ms": 0,
+          "valid_observation_ms": 0
+        },
+        "attempt_count": 0
+      },
+      {
+        "checkpoint_id": "CP-DSB-05",
+        "status": "upcoming",
+        "current_visit_id": null,
+        "criteria": [
+          {
+            "criterion_id": "CP-DSB-05:local_parameters",
+            "state": "unknown",
+            "evidence_ids": [],
+            "review_basis": null,
+            "parameter_revision": null
+          },
+          {
+            "criterion_id": "CP-DSB-05:receiver_structure",
+            "state": "unknown",
+            "evidence_ids": [],
+            "review_basis": null,
+            "parameter_revision": null
+          }
+        ],
+        "timing": {
+          "entered_at": null,
+          "wall_ms": 0,
+          "tracking_active_ms": 0,
+          "paused_ms": 0,
+          "disconnected_ms": 0,
+          "valid_observation_ms": 0
+        },
+        "attempt_count": 0
+      },
+      {
+        "checkpoint_id": "CP-DSB-06",
+        "status": "upcoming",
+        "current_visit_id": null,
+        "criteria": [
+          {
+            "criterion_id": "CP-DSB-06:filter_parameters",
+            "state": "unknown",
+            "evidence_ids": [],
+            "review_basis": null,
+            "parameter_revision": null
+          },
+          {
+            "criterion_id": "CP-DSB-06:gain_parameters",
+            "state": "unknown",
+            "evidence_ids": [],
+            "review_basis": null,
+            "parameter_revision": null
+          },
+          {
+            "criterion_id": "CP-DSB-06:receiver_chain",
+            "state": "unknown",
+            "evidence_ids": [],
+            "review_basis": null,
+            "parameter_revision": null
+          }
+        ],
+        "timing": {
+          "entered_at": null,
+          "wall_ms": 0,
+          "tracking_active_ms": 0,
+          "paused_ms": 0,
+          "disconnected_ms": 0,
+          "valid_observation_ms": 0
+        },
+        "attempt_count": 0
+      },
+      {
+        "checkpoint_id": "CP-DSB-07",
+        "status": "upcoming",
+        "current_visit_id": null,
+        "criteria": [
+          {
+            "criterion_id": "CP-DSB-07:scope_ports",
+            "state": "unknown",
+            "evidence_ids": [],
+            "review_basis": null,
+            "parameter_revision": null
+          },
+          {
+            "criterion_id": "CP-DSB-07:scope_connections",
+            "state": "unknown",
+            "evidence_ids": [],
+            "review_basis": null,
+            "parameter_revision": null
+          }
+        ],
+        "timing": {
+          "entered_at": null,
+          "wall_ms": 0,
+          "tracking_active_ms": 0,
+          "paused_ms": 0,
+          "disconnected_ms": 0,
+          "valid_observation_ms": 0
+        },
+        "attempt_count": 0
+      },
+      {
+        "checkpoint_id": "CP-DSB-08",
+        "status": "upcoming",
+        "current_visit_id": null,
+        "criteria": [
+          {
+            "criterion_id": "CP-DSB-08:stop_time",
+            "state": "unknown",
+            "evidence_ids": [],
+            "review_basis": null,
+            "parameter_revision": null
+          },
+          {
+            "criterion_id": "CP-DSB-08:solver",
+            "state": "unknown",
+            "evidence_ids": [],
+            "review_basis": null,
+            "parameter_revision": null
+          },
+          {
+            "criterion_id": "CP-DSB-08:max_step",
+            "state": "unknown",
+            "evidence_ids": [],
+            "review_basis": null,
+            "parameter_revision": null
+          }
+        ],
+        "timing": {
+          "entered_at": null,
+          "wall_ms": 0,
+          "tracking_active_ms": 0,
+          "paused_ms": 0,
+          "disconnected_ms": 0,
+          "valid_observation_ms": 0
+        },
+        "attempt_count": 0
+      },
+      {
+        "checkpoint_id": "CP-DSB-09",
+        "status": "upcoming",
+        "current_visit_id": null,
+        "criteria": [
+          {
+            "criterion_id": "CP-DSB-09:baseline_run",
+            "state": "unknown",
+            "evidence_ids": [],
+            "review_basis": null,
+            "parameter_revision": null
+          }
+        ],
+        "timing": {
+          "entered_at": null,
+          "wall_ms": 0,
+          "tracking_active_ms": 0,
+          "paused_ms": 0,
+          "disconnected_ms": 0,
+          "valid_observation_ms": 0
+        },
+        "attempt_count": 0
+      },
+      {
+        "checkpoint_id": "CP-DSB-10",
+        "status": "upcoming",
+        "current_visit_id": null,
+        "criteria": [
+          {
+            "criterion_id": "CP-DSB-10:recovery_reading",
+            "state": "unknown",
+            "evidence_ids": [],
+            "review_basis": null,
+            "parameter_revision": null
+          },
+          {
+            "criterion_id": "CP-DSB-10:observation_record",
+            "state": "unknown",
+            "evidence_ids": [],
+            "review_basis": null,
+            "parameter_revision": null
+          }
+        ],
+        "timing": {
+          "entered_at": null,
+          "wall_ms": 0,
+          "tracking_active_ms": 0,
+          "paused_ms": 0,
+          "disconnected_ms": 0,
+          "valid_observation_ms": 0
+        },
+        "attempt_count": 0
+      },
+      {
+        "checkpoint_id": "CP-DSB-11",
+        "status": "upcoming",
+        "current_visit_id": null,
+        "criteria": [
+          {
+            "criterion_id": "CP-DSB-11:phase_fault_parameters",
+            "state": "unknown",
+            "evidence_ids": [],
+            "review_basis": null,
+            "parameter_revision": null
+          },
+          {
+            "criterion_id": "CP-DSB-11:phase_fault_run",
+            "state": "unknown",
+            "evidence_ids": [],
+            "review_basis": null,
+            "parameter_revision": null
+          },
+          {
+            "criterion_id": "CP-DSB-11:phase_fault_result",
+            "state": "unknown",
+            "evidence_ids": [],
+            "review_basis": null,
+            "parameter_revision": null
+          },
+          {
+            "criterion_id": "CP-DSB-11:phase_fault_observation",
+            "state": "unknown",
+            "evidence_ids": [],
+            "review_basis": null,
+            "parameter_revision": null
+          }
+        ],
+        "timing": {
+          "entered_at": null,
+          "wall_ms": 0,
+          "tracking_active_ms": 0,
+          "paused_ms": 0,
+          "disconnected_ms": 0,
+          "valid_observation_ms": 0
+        },
+        "attempt_count": 0
+      },
+      {
+        "checkpoint_id": "CP-DSB-12",
+        "status": "upcoming",
+        "current_visit_id": null,
+        "criteria": [
+          {
+            "criterion_id": "CP-DSB-12:restored_parameters",
+            "state": "unknown",
+            "evidence_ids": [],
+            "review_basis": null,
+            "parameter_revision": null
+          },
+          {
+            "criterion_id": "CP-DSB-12:restored_run",
+            "state": "unknown",
+            "evidence_ids": [],
+            "review_basis": null,
+            "parameter_revision": null
+          },
+          {
+            "criterion_id": "CP-DSB-12:restored_recovery",
+            "state": "unknown",
+            "evidence_ids": [],
+            "review_basis": null,
+            "parameter_revision": null
+          },
+          {
+            "criterion_id": "CP-DSB-12:saved_model",
+            "state": "unknown",
+            "evidence_ids": [],
+            "review_basis": null,
+            "parameter_revision": null
+          },
+          {
+            "criterion_id": "CP-DSB-12:explanation",
+            "state": "unknown",
+            "evidence_ids": [],
+            "review_basis": null,
+            "parameter_revision": null
+          }
+        ],
+        "timing": {
+          "entered_at": null,
+          "wall_ms": 0,
+          "tracking_active_ms": 0,
+          "paused_ms": 0,
+          "disconnected_ms": 0,
+          "valid_observation_ms": 0
+        },
+        "attempt_count": 0
+      }
+    ],
+    "runtime": {
+      "capture_active": true,
+      "analysis_attempts": 1,
+      "analysis_status": "available",
+      "retry_after_ms": 0,
+      "last_analysis_timing": {
+        "provider_io_mode": "batched",
+        "provider_db_operations": 4,
+        "provider_db_ms": 0,
+        "provider_http_attempts": 1,
+        "provider_http_ms": 5,
+        "provider_last_dispatch_ms": 1,
+        "provider_first_dispatch_ms": 1,
+        "provider_headers_ms": 1,
+        "context_validation_mode": "per_chunk",
+        "context_db_reads": 1,
+        "context_db_ms": 0,
+        "context_batches": 1,
+        "context_events": 5,
+        "context_max_batch": 5,
+        "provider_chunks": 2,
+        "provider_ms": 9,
+        "decision_validated_ms": 9,
+        "first_byte_ms": 5,
+        "first_finding_ms": 6,
+        "critical_fields_ms": 6,
+        "provider_stop_ms": 7,
+        "drawing_fields_ms": 7,
+        "validation_ms": 1,
+        "request_prepared_ms": 2,
+        "drawing_tail_ms": 3,
+        "stream_attempts": 1,
+        "input_tokens": null,
+        "cached_tokens": null,
+        "thinking_tokens": null,
+        "output_tokens": null,
+        "total_tokens": null,
+        "input_token_modalities": null,
+        "image_bytes": 725,
+        "request_text_characters": 17367,
+        "wire_format": "lab-observer-drawing/v1",
+        "observer_prompt_version": "dsb-step-observer/v5-drawing1",
+        "frame_id": "1486584e-1553-4c5e-b40e-3a9931ed8a4b:1:1",
+        "status": "available",
+        "total_ms": 11,
+        "received_to_result_ms": 25
+      },
+      "candidate": {
+        "criteria": [
+          {
+            "criterion_id": "CP-DSB-03:message_parameters",
+            "status": "unknown",
+            "evidence": "Controlled offline fixture."
+          },
+          {
+            "criterion_id": "CP-DSB-03:carrier_parameters",
+            "status": "unknown",
+            "evidence": "Controlled offline fixture."
+          }
+        ],
+        "action_findings": [
+          {
+            "action_id": "CP-DSB-03/message-settings",
+            "status": "unknown",
+            "evidence": "Controlled offline fixture."
+          },
+          {
+            "action_id": "CP-DSB-03/carrier-settings",
+            "status": "unknown",
+            "evidence": "Controlled offline fixture."
+          }
+        ],
+        "uncertainties": [],
+        "summary": "Not established: Controlled offline fixture.",
+        "observation_id": "9ae68b29-7d39-441e-a821-d4d789be50b5",
+        "source_frame": {
+          "capture_epoch": 1,
+          "view_revision": 1,
+          "sequence": 1,
+          "captured_elapsed_ms": 100,
+          "width": 96,
+          "height": 54,
+          "source_width": 96,
+          "source_height": 54,
+          "byte_count": 725,
+          "mime_type": "image/jpeg",
+          "frame_id": "1486584e-1553-4c5e-b40e-3a9931ed8a4b:1:1",
+          "event_id": "1486584e-1553-4c5e-b40e-3a9931ed8a4b:2",
+          "sha256": "41e69b29daf4b70a2635a472fb20ac3f08f19013110d694fd62dc7527438c261",
+          "previous_frame_sha256": null,
+          "skipped_sequences": 0,
+          "server_received_at": "2026-10-15T17:48:00.965Z",
+          "server_received_unix_ms": 1792086480965
+        },
+        "visit_id": "cdcc4736-e2d4-4dee-b9b2-edbd4024057f",
+        "capture_epoch": 1,
+        "view_revision": 1,
+        "admitted_context": {
+          "lab_session_id": "ea8e8aad-ada8-4101-bf1d-a576e2b2c8e1",
+          "experiment_id": "PR-AM-DSB",
+          "checkpoint_id": "CP-DSB-03",
+          "visit_id": "cdcc4736-e2d4-4dee-b9b2-edbd4024057f",
+          "lab_revision": 3,
+          "workspace_id": "1b3804ca-3848-40ae-a4cb-4ede96771982",
+          "capture_epoch": 1,
+          "view_revision": 1,
+          "parameter_revision": 0,
+          "condition": "baseline"
+        },
+        "admitted_at": "2026-10-15T17:48:00.979Z",
+        "completed_at": "2026-10-15T17:48:00.990Z",
+        "frame_handle": {
+          "handle_id": "611e85e1-88cd-4ff6-8813-1ae248749af7",
+          "expires_at": "2026-10-15T17:48:20.965Z",
+          "media_type": "image/jpeg",
+          "access_policy": "same_owner_ephemeral"
+        },
+        "parameter_revision": 0,
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "dsb-step-observer/v5-drawing1"
+      }
+    },
+    "projection": "committed-decision/v2",
+    "screen_guidance": {
+      "schema": "analysis-owned-guidance/v0.1",
+      "message_type": "committed_guidance",
+      "model_contract": "lab-observer-drawing/v1",
+      "stream_contract": "lab-analysis-stream/v3",
+      "projection_contract": "committed-decision/v2",
+      "analysis_request_id": "7a712074-2a04-40b3-abed-e46a8471b57e",
+      "guidance_stream_id": "e6cc2046-7120-47f8-a892-597a36bfc401",
+      "cue_sequence": 2,
+      "context": {
+        "lab_session_id": "ea8e8aad-ada8-4101-bf1d-a576e2b2c8e1",
+        "experiment_id": "PR-AM-DSB",
+        "checkpoint_id": "CP-DSB-03",
+        "visit_id": "cdcc4736-e2d4-4dee-b9b2-edbd4024057f",
+        "lab_revision": 4,
+        "workspace_id": "1b3804ca-3848-40ae-a4cb-4ede96771982",
+        "capture_epoch": 1,
+        "view_revision": 1,
+        "parameter_revision": 0,
+        "condition": "baseline"
+      },
+      "admitted_context": {
+        "lab_session_id": "ea8e8aad-ada8-4101-bf1d-a576e2b2c8e1",
+        "experiment_id": "PR-AM-DSB",
+        "checkpoint_id": "CP-DSB-03",
+        "visit_id": "cdcc4736-e2d4-4dee-b9b2-edbd4024057f",
+        "lab_revision": 3,
+        "workspace_id": "1b3804ca-3848-40ae-a4cb-4ede96771982",
+        "capture_epoch": 1,
+        "view_revision": 1,
+        "parameter_revision": 0,
+        "condition": "baseline"
+      },
+      "action_id": "CP-DSB-03/message-settings",
+      "frame": {
+        "observation_id": "9ae68b29-7d39-441e-a821-d4d789be50b5",
+        "frame_id": "1486584e-1553-4c5e-b40e-3a9931ed8a4b:1:1",
+        "sha256": "41e69b29daf4b70a2635a472fb20ac3f08f19013110d694fd62dc7527438c261",
+        "byte_count": 725,
+        "encoded_width": 96,
+        "encoded_height": 54,
+        "capture_elapsed_ms": 100,
+        "capture_time_authority": "capture_client_monotonic",
+        "received_at": "2026-10-15T17:48:00.965Z",
+        "admitted_at": "2026-10-15T17:48:00.979Z",
+        "receipt_time_authority": "observer_server_utc",
+        "view_revision": 1
+      },
+      "frame_handle": {
+        "handle_id": "611e85e1-88cd-4ff6-8813-1ae248749af7",
+        "expires_at": "2026-10-15T17:48:20.965Z",
+        "media_type": "image/jpeg",
+        "access_policy": "same_owner_ephemeral"
+      },
+      "source_binding": {
+        "binding_id": "3a59837c-307c-4c6d-8c0a-2f5980a29cba",
+        "binding_revision": 3,
+        "surface": "live_workspace",
+        "transform_revision": 3
+      },
+      "replacement": "replace_complete_guidance_layer",
+      "validity": {
+        "created_at": "2026-10-15T17:48:00.992Z",
+        "expires_at": "2026-10-15T17:48:08.992Z",
+        "max_frame_age_ms": 20000
+      },
+      "outcome": "annotate",
+      "reason": "none",
+      "teaching_intent": "highlight_parameter",
+      "target_criteria": [
+        {
+          "target_id": "message.frequency",
+          "criterion_ids": [
+            "CP-DSB-03:message_parameters"
+          ]
+        }
+      ],
+      "text_bindings": [
+        {
+          "cue_id": "note",
+          "text_ref": "canonical_instruction"
+        }
+      ],
+      "packet": {
+        "schema": "screen-writing/v0.2",
+        "message_type": "resolved_packet",
+        "packet_id": "c70645f0-a8a6-4ea7-9a0c-680d331c16fa",
+        "request_id": "7a712074-2a04-40b3-abed-e46a8471b57e",
+        "guidance_stream_id": "e6cc2046-7120-47f8-a892-597a36bfc401",
+        "cue_sequence": 2,
+        "context": {
+          "lab_session_id": "ea8e8aad-ada8-4101-bf1d-a576e2b2c8e1",
+          "experiment_id": "PR-AM-DSB",
+          "checkpoint_id": "CP-DSB-03",
+          "visit_id": "cdcc4736-e2d4-4dee-b9b2-edbd4024057f",
+          "lab_revision": 4,
+          "workspace_id": "1b3804ca-3848-40ae-a4cb-4ede96771982",
+          "capture_epoch": 1,
+          "view_revision": 1,
+          "parameter_revision": 0,
+          "condition": "baseline"
+        },
+        "frame": {
+          "observation_id": "9ae68b29-7d39-441e-a821-d4d789be50b5",
+          "frame_id": "1486584e-1553-4c5e-b40e-3a9931ed8a4b:1:1",
+          "sha256": "41e69b29daf4b70a2635a472fb20ac3f08f19013110d694fd62dc7527438c261",
+          "byte_count": 725,
+          "encoded_width": 96,
+          "encoded_height": 54,
+          "capture_elapsed_ms": 100,
+          "capture_time_authority": "capture_client_monotonic",
+          "received_at": "2026-10-15T17:48:00.965Z",
+          "admitted_at": "2026-10-15T17:48:00.979Z",
+          "receipt_time_authority": "observer_server_utc",
+          "view_revision": 1
+        },
+        "resolved_targets": [
+          {
+            "target_id": "message.frequency",
+            "status": "resolved",
+            "region": {
+              "x": 0.25,
+              "y": 0.325,
+              "width": 0.18,
+              "height": 0.07
+            },
+            "method": "model_vision",
+            "reason": "Located in the admitted analysis frame."
+          }
+        ],
+        "relationships": [],
+        "operations": [
+          {
+            "kind": "box",
+            "cue_id": "focus",
+            "target_id": "message.frequency",
+            "meaning": "lab",
+            "accessible_label": "Message Frequency field"
+          },
+          {
+            "kind": "text",
+            "cue_id": "note",
+            "anchor": {
+              "target_id": "message.frequency",
+              "u": 0,
+              "v": 1
+            },
+            "meaning": "lab",
+            "accessible_label": "Message Frequency field",
+            "text": "Set the Message signal to 100 Hz."
+          }
+        ],
+        "replacement": "replace_complete_guidance_layer",
+        "delivery": {
+          "surface": "live_workspace",
+          "coordinate_space": "normalized_encoded_frame",
+          "adapter_binding_id": "3a59837c-307c-4c6d-8c0a-2f5980a29cba",
+          "transform_revision": 3,
+          "pointer_events": "none",
+          "clip_to_frame": true
+        },
+        "validity": {
+          "created_at": "2026-10-15T17:48:00.992Z",
+          "expires_at": "2026-10-15T17:48:08.992Z",
+          "max_frame_age_ms": 20000
+        },
+        "fallback": {
+          "instruction": "Set the Message signal to 100 Hz.",
+          "reason": "none"
+        }
+      }
+    }
+  }
+}

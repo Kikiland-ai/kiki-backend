@@ -1,0 +1,12 @@
+// Pure consumer compatibility; actual compositor/native-capture checks are separate.
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import '../assets/guidance-protocol.js';
+const P=globalThis.KikiGuidanceProtocol;
+const load=()=>JSON.parse(readFileSync(new URL('./fixtures/guidance-renderer.json',import.meta.url))).state;
+test('actual committed state is accepted and compiles only supplied marks',()=>{const state=load(),e=state.screen_guidance;P.validate(e,state);const ops=P.compile(e);assert.deepEqual(ops[0].region,e.packet.resolved_targets[0].region);assert.equal(ops[1].text,state.guidance.instruction);assert.equal(ops.length,2);});
+for(const key of ['view_revision','parameter_revision','capture_epoch','condition'])test('obsolete '+key+' rejects the whole cue',()=>{const state=load(),e=structuredClone(state.screen_guidance);state.workspace[key]=key==='condition'?'phase_fault':99;assert.throws(()=>P.validate(e,state),/Stale/);});
+test('foreign action, observation and fallback are rejected',()=>{for(const which of ['action','observation','instruction']){const state=load();if(which==='action')state.screen_guidance.action_id='CP-DSB-03/carrier-settings';if(which==='observation')state.screen_guidance.frame.observation_id='foreign';if(which==='instruction')state.screen_guidance.packet.fallback.instruction='Invented next action';assert.throws(()=>P.validate(state.screen_guidance,state),/Stale|Foreign/);}});
+test('arrow coordinates are target-relative and out-of-frame geometry is rejected',()=>{const state=load(),e=state.screen_guidance,first=e.packet.resolved_targets[0];e.packet.resolved_targets.push({...first,target_id:'carrier.frequency',region:{x:.6,y:.2,width:.1,height:.1}});e.packet.operations=[{kind:'arrow',cue_id:'compare',meaning:'lab',accessible_label:'Compare',from:{target_id:first.target_id,u:1,v:.5},to:{target_id:'carrier.frequency',u:0,v:.5}}];const arrow=P.compile(e)[0];assert.equal(arrow.anchors[1].x,.6);first.region.x=.99;assert.throws(()=>P.compile(e),/Unresolved/);});
+test('text-only has no anchored marks and stale text is rejected',()=>{const state=load(),e=state.screen_guidance;e.outcome='text_only';e.packet.operations=[];e.packet.fallback.reason='unresolved_required_target';e.packet.resolved_targets[0].status='unresolved';e.packet.resolved_targets[0].region=null;P.validate(e,state);state.revision++;assert.throws(()=>P.validate(e,state),/Stale/);});

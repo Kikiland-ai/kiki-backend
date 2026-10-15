@@ -1,0 +1,91 @@
+{
+  "schema": "analysis-owned-guidance/v0.1",
+  "message_type": "analysis_input",
+  "model_contract": "lab-observer-drawing/v1",
+  "analysis_request_id": "synthetic-analysis-1",
+  "admitted_context": {
+    "lab_session_id": "synthetic-lab",
+    "experiment_id": "PR-AM-DSB",
+    "checkpoint_id": "CP-DSB-03",
+    "visit_id": "synthetic-visit-03",
+    "lab_revision": 7,
+    "workspace_id": "synthetic-model",
+    "capture_epoch": 1,
+    "parameter_revision": 2,
+    "view_revision": 4,
+    "condition": "baseline"
+  },
+  "current_action_id": "CP-DSB-03/message-settings",
+  "frame": {
+    "observation_id": "synthetic-observation-7",
+    "frame_id": "synthetic-frame-7",
+    "sha256": "41e69b29daf4b70a2635a472fb20ac3f08f19013110d694fd62dc7527438c261",
+    "byte_count": 725,
+    "encoded_width": 96,
+    "encoded_height": 54,
+    "capture_elapsed_ms": 2000,
+    "capture_time_authority": "capture_client_monotonic",
+    "received_at": "2026-10-15T00:00:00Z",
+    "admitted_at": "2026-10-15T00:00:00.500Z",
+    "receipt_time_authority": "observer_server_utc",
+    "view_revision": 4
+  },
+  "frame_handle": {
+    "handle_id": "synthetic-handle-7",
+    "expires_at": "2026-10-15T00:00:09Z",
+    "media_type": "image/jpeg",
+    "access_policy": "same_owner_ephemeral"
+  },
+  "source_binding": {
+    "binding_id": "synthetic-mounted-frame",
+    "binding_revision": 1,
+    "surface": "captured_frame",
+    "transform_revision": null
+  },
+  "eligible_actions": [
+    {
+      "action_id": "CP-DSB-03/message-settings",
+      "checkpoint_id": "CP-DSB-03",
+      "teaching_intent": "highlight_parameter",
+      "canonical_instruction": "Set the Message signal to 100 Hz.",
+      "canonical_reason": "Message has amplitude 1 and frequency 100 Hz.",
+      "required_target_ids": [
+        "message.frequency"
+      ],
+      "target_labels": {
+        "message.frequency": "message frequency"
+      },
+      "subcriteria": {
+        "message.frequency": [
+          "CP-DSB-03:message_parameters"
+        ]
+      },
+      "overlay_texts": {
+        "canonical_instruction": "Set the Message signal to 100 Hz."
+      },
+      "relationships": []
+    },
+    {
+      "action_id": "CP-DSB-03/carrier-settings",
+      "checkpoint_id": "CP-DSB-03",
+      "teaching_intent": "highlight_parameter",
+      "canonical_instruction": "Set the Carrier signal to 2000 Hz.",
+      "canonical_reason": "Carrier has amplitude 1, frequency 2000 Hz and phase pi/2.",
+      "required_target_ids": [
+        "carrier.frequency"
+      ],
+      "target_labels": {
+        "carrier.frequency": "carrier frequency"
+      },
+      "subcriteria": {
+        "carrier.frequency": [
+          "CP-DSB-03:carrier_parameters"
+        ]
+      },
+      "overlay_texts": {
+        "canonical_instruction": "Set the Carrier signal to 2000 Hz."
+      },
+      "relationships": []
+    }
+  ]
+}

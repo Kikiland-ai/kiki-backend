@@ -1,0 +1,108 @@
+{
+  "synthetic_only": true,
+  "now": "2026-10-15T00:00:02Z",
+  "session_status": "active",
+  "observation_status": "available",
+  "admitted_context": {
+    "lab_session_id": "synthetic-lab",
+    "experiment_id": "PR-AM-DSB",
+    "checkpoint_id": "CP-DSB-10",
+    "visit_id": "synthetic-visit-10",
+    "lab_revision": 7,
+    "workspace_id": "synthetic-model",
+    "capture_epoch": 1,
+    "parameter_revision": 2,
+    "view_revision": 4,
+    "condition": "baseline"
+  },
+  "current_context": {
+    "lab_session_id": "synthetic-lab",
+    "experiment_id": "PR-AM-DSB",
+    "checkpoint_id": "CP-DSB-10",
+    "visit_id": "synthetic-visit-10",
+    "lab_revision": 8,
+    "workspace_id": "synthetic-model",
+    "capture_epoch": 1,
+    "parameter_revision": 2,
+    "view_revision": 4,
+    "condition": "baseline"
+  },
+  "current_action_id": "CP-DSB-10/compare",
+  "eligible_actions": [
+    {
+      "action_id": "CP-DSB-10/compare",
+      "checkpoint_id": "CP-DSB-10",
+      "teaching_intent": "compare_waveforms",
+      "canonical_instruction": "Compare the two signals after the starting transient.",
+      "canonical_reason": "Readable traces support recovery of the original 100 Hz message.",
+      "required_target_ids": [
+        "recovery_scope.original_trace",
+        "recovery_scope.recovered_trace"
+      ],
+      "target_labels": {
+        "recovery_scope.original_trace": "recovery scope original trace",
+        "recovery_scope.recovered_trace": "recovery scope recovered trace"
+      },
+      "subcriteria": {
+        "recovery_scope.original_trace": [
+          "CP-DSB-10:recovery_reading"
+        ],
+        "recovery_scope.recovered_trace": [
+          "CP-DSB-10:recovery_reading"
+        ]
+      },
+      "overlay_texts": {
+        "canonical_instruction": "Compare the two signals after the starting transient."
+      },
+      "relationships": [
+        {
+          "relationship_id": "recovery.compare",
+          "kind": "compares_with",
+          "from_target_id": "recovery_scope.original_trace",
+          "to_target_id": "recovery_scope.recovered_trace"
+        }
+      ]
+    }
+  ],
+  "frame": {
+    "observation_id": "synthetic-observation-7",
+    "frame_id": "synthetic-frame-7",
+    "sha256": "41e69b29daf4b70a2635a472fb20ac3f08f19013110d694fd62dc7527438c261",
+    "byte_count": 725,
+    "encoded_width": 96,
+    "encoded_height": 54,
+    "capture_elapsed_ms": 2000,
+    "capture_time_authority": "capture_client_monotonic",
+    "received_at": "2026-10-15T00:00:00Z",
+    "admitted_at": "2026-10-15T00:00:00.500Z",
+    "receipt_time_authority": "observer_server_utc",
+    "view_revision": 4
+  },
+  "frame_handle": {
+    "handle_id": "synthetic-handle-7",
+    "expires_at": "2026-10-15T00:00:09Z",
+    "media_type": "image/jpeg",
+    "access_policy": "same_owner_ephemeral"
+  },
+  "source_binding": {
+    "binding_id": "synthetic-mounted-frame",
+    "binding_revision": 1,
+    "surface": "captured_frame",
+    "transform_revision": null
+  },
+  "analysis_request_id": "synthetic-analysis-1",
+  "guidance_stream_id": "synthetic-guidance-stream",
+  "last_cue_sequence": 0,
+  "expected_criterion_ids": [
+    "CP-DSB-10:recovery_reading",
+    "CP-DSB-10:observation_record"
+  ],
+  "expected_action_ids": [
+    "CP-DSB-10/open-scope",
+    "CP-DSB-10/compare",
+    "CP-DSB-10/record"
+  ],
+  "provider_finish_reason": "STOP",
+  "max_payload_bytes": 32768,
+  "owner_id": "synthetic-owner"
+}

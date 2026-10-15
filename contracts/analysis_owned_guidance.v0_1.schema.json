@@ -1,0 +1,691 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:kiki:analysis-owned-guidance:v0.1",
+  "title": "PROPOSED analysis-owned-guidance/v0.1 committed/cancel payload",
+  "$comment": "Not a live implementation. Resolve screen-writing/v0.2 by its pinned local URN; no network schema retrieval. All trust/ordering/action checks in the handoff are mandatory.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/analysis_input"
+    },
+    {
+      "$ref": "#/$defs/committed_guidance"
+    },
+    {
+      "$ref": "#/$defs/cancel"
+    }
+  ],
+  "$defs": {
+    "committed_guidance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema": {
+          "const": "analysis-owned-guidance/v0.1"
+        },
+        "message_type": {
+          "const": "committed_guidance"
+        },
+        "model_contract": {
+          "const": "lab-observer-drawing/v1"
+        },
+        "stream_contract": {
+          "const": "lab-analysis-stream/v3"
+        },
+        "projection_contract": {
+          "const": "committed-decision/v2"
+        },
+        "analysis_request_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "guidance_stream_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "cue_sequence": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "context": {
+          "$ref": "urn:kiki:screen-writing:v0.2#/$defs/context"
+        },
+        "admitted_context": {
+          "$ref": "urn:kiki:screen-writing:v0.2#/$defs/context"
+        },
+        "action_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^CP-DSB-(0[1-9]|1[0-2])/[a-z][a-z0-9-]*$"
+        },
+        "frame": {
+          "$ref": "urn:kiki:screen-writing:v0.2#/$defs/frame"
+        },
+        "frame_handle": {
+          "$ref": "urn:kiki:screen-writing:v0.2#/$defs/handle"
+        },
+        "source_binding": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "binding_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "binding_revision": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "surface": {
+              "enum": [
+                "captured_frame",
+                "live_workspace"
+              ]
+            },
+            "transform_revision": {
+              "oneOf": [
+                {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 9007199254740991
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "binding_id",
+            "binding_revision",
+            "surface",
+            "transform_revision"
+          ]
+        },
+        "replacement": {
+          "const": "replace_complete_guidance_layer"
+        },
+        "validity": {
+          "$ref": "urn:kiki:screen-writing:v0.2#/$defs/validity"
+        },
+        "outcome": {
+          "enum": [
+            "annotate",
+            "text_only",
+            "none"
+          ]
+        },
+        "reason": {
+          "enum": [
+            "none",
+            "unresolved_required_target",
+            "no_matching_candidate",
+            "model_declined"
+          ]
+        },
+        "text_bindings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "cue_id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64,
+                "pattern": "^[a-zA-Z][a-zA-Z0-9_.:-]*$"
+              },
+              "text_ref": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80,
+                "pattern": "^[a-z][a-z0-9_.]*$"
+              }
+            },
+            "required": [
+              "cue_id",
+              "text_ref"
+            ]
+          },
+          "minItems": 0,
+          "maxItems": 4
+        },
+        "packet": {
+          "oneOf": [
+            {
+              "$ref": "urn:kiki:screen-writing:v0.2#/$defs/resolved_packet"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "teaching_intent": {
+          "enum": [
+            "show_action_target",
+            "highlight_parameter",
+            "explain_relationship",
+            "compare_waveforms"
+          ]
+        },
+        "target_criteria": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 2,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "target_id": {
+                "enum": [
+                  "workspace.canvas",
+                  "workspace.model_title",
+                  "message.block",
+                  "carrier.block",
+                  "message.frequency",
+                  "carrier.frequency",
+                  "local_carrier.phase",
+                  "local_carrier.frequency",
+                  "modulator.message_input",
+                  "receiver.modulated_input",
+                  "lowpass.numerator",
+                  "lowpass.denominator",
+                  "recovery_gain.value",
+                  "simulation.stop_time",
+                  "simulation.solver",
+                  "simulation.max_step",
+                  "simulation.run_control",
+                  "recovery_scope.original_trace",
+                  "recovery_scope.recovered_trace",
+                  "model.save_control"
+                ]
+              },
+              "criterion_ids": {
+                "type": "array",
+                "minItems": 0,
+                "maxItems": 4,
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 120,
+                  "pattern": "^CP-DSB-(0[1-9]|1[0-2]):[a-z][a-z0-9_]*$"
+                }
+              }
+            },
+            "required": [
+              "target_id",
+              "criterion_ids"
+            ]
+          }
+        }
+      },
+      "required": [
+        "schema",
+        "message_type",
+        "model_contract",
+        "stream_contract",
+        "projection_contract",
+        "analysis_request_id",
+        "guidance_stream_id",
+        "cue_sequence",
+        "context",
+        "admitted_context",
+        "action_id",
+        "frame",
+        "frame_handle",
+        "source_binding",
+        "replacement",
+        "validity",
+        "outcome",
+        "reason",
+        "text_bindings",
+        "packet",
+        "teaching_intent",
+        "target_criteria"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "outcome": {
+                "const": "none"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "packet": {
+                "type": "null"
+              },
+              "text_bindings": {
+                "maxItems": 0
+              },
+              "reason": {
+                "enum": [
+                  "no_matching_candidate",
+                  "model_declined"
+                ]
+              },
+              "target_criteria": {
+                "maxItems": 0
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "packet": {
+                "$ref": "urn:kiki:screen-writing:v0.2#/$defs/resolved_packet"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "outcome": {
+                "const": "annotate"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "reason": {
+                "const": "none"
+              },
+              "packet": {
+                "properties": {
+                  "operations": {
+                    "minItems": 1,
+                    "maxItems": 4
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "outcome": {
+                "const": "text_only"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "reason": {
+                "const": "unresolved_required_target"
+              },
+              "text_bindings": {
+                "maxItems": 0
+              },
+              "packet": {
+                "properties": {
+                  "operations": {
+                    "maxItems": 0
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "outcome": {
+                "enum": [
+                  "annotate",
+                  "text_only"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "packet": {
+                "properties": {
+                  "resolved_targets": {
+                    "minItems": 1,
+                    "maxItems": 2
+                  },
+                  "relationships": {
+                    "maxItems": 1
+                  },
+                  "operations": {
+                    "maxItems": 4
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "cancel": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema": {
+          "const": "analysis-owned-guidance/v0.1"
+        },
+        "message_type": {
+          "const": "cancel"
+        },
+        "cancel_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "guidance_stream_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "cue_sequence": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "context": {
+          "$ref": "urn:kiki:screen-writing:v0.2#/$defs/context"
+        },
+        "reason": {
+          "enum": [
+            "pause",
+            "disconnect",
+            "step_change",
+            "workspace_change",
+            "parameter_change",
+            "view_change",
+            "observation_change",
+            "expiry",
+            "stream_retired"
+          ]
+        },
+        "issued_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "schema",
+        "message_type",
+        "cancel_id",
+        "guidance_stream_id",
+        "cue_sequence",
+        "context",
+        "reason",
+        "issued_at"
+      ]
+    },
+    "analysis_input": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema": {
+          "const": "analysis-owned-guidance/v0.1"
+        },
+        "message_type": {
+          "const": "analysis_input"
+        },
+        "model_contract": {
+          "const": "lab-observer-drawing/v1"
+        },
+        "analysis_request_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "admitted_context": {
+          "$ref": "urn:kiki:screen-writing:v0.2#/$defs/context"
+        },
+        "current_action_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^CP-DSB-(0[1-9]|1[0-2])/[a-z][a-z0-9-]*$"
+        },
+        "frame": {
+          "$ref": "urn:kiki:screen-writing:v0.2#/$defs/frame"
+        },
+        "frame_handle": {
+          "$ref": "urn:kiki:screen-writing:v0.2#/$defs/handle"
+        },
+        "source_binding": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "binding_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "binding_revision": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "surface": {
+              "enum": [
+                "captured_frame",
+                "live_workspace"
+              ]
+            },
+            "transform_revision": {
+              "oneOf": [
+                {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 9007199254740991
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "binding_id",
+            "binding_revision",
+            "surface",
+            "transform_revision"
+          ]
+        },
+        "eligible_actions": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 2,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "action_id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100,
+                "pattern": "^CP-DSB-(0[1-9]|1[0-2])/[a-z][a-z0-9-]*$"
+              },
+              "checkpoint_id": {
+                "type": "string",
+                "pattern": "^CP-DSB-(0[1-9]|1[0-2])$"
+              },
+              "teaching_intent": {
+                "enum": [
+                  "show_action_target",
+                  "highlight_parameter",
+                  "explain_relationship",
+                  "compare_waveforms"
+                ]
+              },
+              "canonical_instruction": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1000
+              },
+              "canonical_reason": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1000
+              },
+              "required_target_ids": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 2,
+                "items": {
+                  "enum": [
+                    "workspace.canvas",
+                    "workspace.model_title",
+                    "message.block",
+                    "carrier.block",
+                    "message.frequency",
+                    "carrier.frequency",
+                    "local_carrier.phase",
+                    "local_carrier.frequency",
+                    "modulator.message_input",
+                    "receiver.modulated_input",
+                    "lowpass.numerator",
+                    "lowpass.denominator",
+                    "recovery_gain.value",
+                    "simulation.stop_time",
+                    "simulation.solver",
+                    "simulation.max_step",
+                    "simulation.run_control",
+                    "recovery_scope.original_trace",
+                    "recovery_scope.recovered_trace",
+                    "model.save_control"
+                  ]
+                }
+              },
+              "target_labels": {
+                "type": "object",
+                "minProperties": 1,
+                "maxProperties": 2,
+                "propertyNames": {
+                  "enum": [
+                    "workspace.canvas",
+                    "workspace.model_title",
+                    "message.block",
+                    "carrier.block",
+                    "message.frequency",
+                    "carrier.frequency",
+                    "local_carrier.phase",
+                    "local_carrier.frequency",
+                    "modulator.message_input",
+                    "receiver.modulated_input",
+                    "lowpass.numerator",
+                    "lowpass.denominator",
+                    "recovery_gain.value",
+                    "simulation.stop_time",
+                    "simulation.solver",
+                    "simulation.max_step",
+                    "simulation.run_control",
+                    "recovery_scope.original_trace",
+                    "recovery_scope.recovered_trace",
+                    "model.save_control"
+                  ]
+                },
+                "additionalProperties": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 160
+                }
+              },
+              "subcriteria": {
+                "type": "object",
+                "minProperties": 1,
+                "maxProperties": 2,
+                "propertyNames": {
+                  "enum": [
+                    "workspace.canvas",
+                    "workspace.model_title",
+                    "message.block",
+                    "carrier.block",
+                    "message.frequency",
+                    "carrier.frequency",
+                    "local_carrier.phase",
+                    "local_carrier.frequency",
+                    "modulator.message_input",
+                    "receiver.modulated_input",
+                    "lowpass.numerator",
+                    "lowpass.denominator",
+                    "recovery_gain.value",
+                    "simulation.stop_time",
+                    "simulation.solver",
+                    "simulation.max_step",
+                    "simulation.run_control",
+                    "recovery_scope.original_trace",
+                    "recovery_scope.recovered_trace",
+                    "model.save_control"
+                  ]
+                },
+                "additionalProperties": {
+                  "type": "array",
+                  "minItems": 0,
+                  "maxItems": 4,
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 120,
+                    "pattern": "^CP-DSB-(0[1-9]|1[0-2]):[a-z][a-z0-9_]*$"
+                  }
+                }
+              },
+              "overlay_texts": {
+                "type": "object",
+                "minProperties": 1,
+                "maxProperties": 4,
+                "propertyNames": {
+                  "type": "string",
+                  "pattern": "^[a-z][a-z0-9_.]*$",
+                  "maxLength": 80
+                },
+                "additionalProperties": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 160
+                }
+              },
+              "relationships": {
+                "type": "array",
+                "minItems": 0,
+                "maxItems": 1,
+                "items": {
+                  "$ref": "urn:kiki:screen-writing:v0.2#/$defs/relationship"
+                }
+              }
+            },
+            "required": [
+              "action_id",
+              "checkpoint_id",
+              "teaching_intent",
+              "canonical_instruction",
+              "canonical_reason",
+              "required_target_ids",
+              "target_labels",
+              "subcriteria",
+              "overlay_texts",
+              "relationships"
+            ]
+          }
+        }
+      },
+      "required": [
+        "schema",
+        "message_type",
+        "model_contract",
+        "analysis_request_id",
+        "admitted_context",
+        "current_action_id",
+        "frame",
+        "frame_handle",
+        "source_binding",
+        "eligible_actions"
+      ]
+    }
+  }
+}

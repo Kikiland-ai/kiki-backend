@@ -1,0 +1,56 @@
+{
+  "criteria": [
+    {
+      "criterion_id": "CP-DSB-10:recovery_reading",
+      "status": "unknown",
+      "evidence": "Synthetic contract fixture; not real visual evidence."
+    },
+    {
+      "criterion_id": "CP-DSB-10:observation_record",
+      "status": "unknown",
+      "evidence": "Synthetic contract fixture; not real visual evidence."
+    }
+  ],
+  "action_findings": [
+    {
+      "action_id": "CP-DSB-10/open-scope",
+      "status": "unknown",
+      "evidence": "Synthetic contract fixture."
+    },
+    {
+      "action_id": "CP-DSB-10/compare",
+      "status": "unknown",
+      "evidence": "Synthetic contract fixture."
+    },
+    {
+      "action_id": "CP-DSB-10/record",
+      "status": "unknown",
+      "evidence": "Synthetic contract fixture."
+    }
+  ],
+  "uncertainties": [],
+  "screen_guidance": [
+    {
+      "action_id": "CP-DSB-10/compare",
+      "mode": "text_only",
+      "targets": [
+        {
+          "target_id": "recovery_scope.original_trace",
+          "status": "resolved",
+          "region": {
+            "x": 0.2,
+            "y": 0.2,
+            "width": 0.25,
+            "height": 0.1
+          }
+        },
+        {
+          "target_id": "recovery_scope.recovered_trace",
+          "status": "ambiguous",
+          "region": null
+        }
+      ],
+      "marks": []
+    }
+  ]
+}

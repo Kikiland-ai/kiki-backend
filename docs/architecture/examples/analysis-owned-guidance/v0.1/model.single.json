@@ -1,0 +1,62 @@
+{
+  "criteria": [
+    {
+      "criterion_id": "CP-DSB-03:message_parameters",
+      "status": "unknown",
+      "evidence": "Synthetic contract fixture; not real visual evidence."
+    },
+    {
+      "criterion_id": "CP-DSB-03:carrier_parameters",
+      "status": "unknown",
+      "evidence": "Synthetic contract fixture; not real visual evidence."
+    }
+  ],
+  "action_findings": [
+    {
+      "action_id": "CP-DSB-03/message-settings",
+      "status": "unknown",
+      "evidence": "Synthetic contract fixture."
+    },
+    {
+      "action_id": "CP-DSB-03/carrier-settings",
+      "status": "unknown",
+      "evidence": "Synthetic contract fixture."
+    }
+  ],
+  "uncertainties": [],
+  "screen_guidance": [
+    {
+      "action_id": "CP-DSB-03/message-settings",
+      "mode": "annotate",
+      "targets": [
+        {
+          "target_id": "message.frequency",
+          "status": "resolved",
+          "region": {
+            "x": 0.2,
+            "y": 0.2,
+            "width": 0.25,
+            "height": 0.1
+          }
+        }
+      ],
+      "marks": [
+        {
+          "kind": "box",
+          "cue_id": "focus-0",
+          "target_id": "message.frequency"
+        },
+        {
+          "kind": "text",
+          "cue_id": "note",
+          "anchor": {
+            "target_id": "message.frequency",
+            "u": 0,
+            "v": 1
+          },
+          "text_ref": "canonical_instruction"
+        }
+      ]
+    }
+  ]
+}

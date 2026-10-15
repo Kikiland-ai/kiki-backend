@@ -1,0 +1,142 @@
+{
+  "schema": "analysis-owned-guidance/v0.1",
+  "message_type": "committed_guidance",
+  "model_contract": "lab-observer-drawing/v1",
+  "stream_contract": "lab-analysis-stream/v3",
+  "projection_contract": "committed-decision/v2",
+  "analysis_request_id": "synthetic-analysis-1",
+  "guidance_stream_id": "synthetic-guidance-stream",
+  "cue_sequence": 1,
+  "context": {
+    "lab_session_id": "synthetic-lab",
+    "experiment_id": "PR-AM-DSB",
+    "checkpoint_id": "CP-DSB-03",
+    "visit_id": "synthetic-visit-03",
+    "lab_revision": 8,
+    "workspace_id": "synthetic-model",
+    "capture_epoch": 1,
+    "parameter_revision": 2,
+    "view_revision": 5,
+    "condition": "baseline"
+  },
+  "admitted_context": {
+    "lab_session_id": "synthetic-lab",
+    "experiment_id": "PR-AM-DSB",
+    "checkpoint_id": "CP-DSB-03",
+    "visit_id": "synthetic-visit-03",
+    "lab_revision": 7,
+    "workspace_id": "synthetic-model",
+    "capture_epoch": 1,
+    "parameter_revision": 2,
+    "view_revision": 4,
+    "condition": "baseline"
+  },
+  "action_id": "CP-DSB-03/message-settings",
+  "frame": {
+    "observation_id": "synthetic-observation-7",
+    "frame_id": "synthetic-frame-7",
+    "sha256": "41e69b29daf4b70a2635a472fb20ac3f08f19013110d694fd62dc7527438c261",
+    "byte_count": 725,
+    "encoded_width": 96,
+    "encoded_height": 54,
+    "capture_elapsed_ms": 2000,
+    "capture_time_authority": "capture_client_monotonic",
+    "received_at": "2026-10-15T00:00:00Z",
+    "admitted_at": "2026-10-15T00:00:00.500Z",
+    "receipt_time_authority": "observer_server_utc",
+    "view_revision": 4
+  },
+  "frame_handle": {
+    "handle_id": "synthetic-handle-7",
+    "expires_at": "2026-10-15T00:00:09Z",
+    "media_type": "image/jpeg",
+    "access_policy": "same_owner_ephemeral"
+  },
+  "source_binding": {
+    "binding_id": "synthetic-mounted-frame",
+    "binding_revision": 1,
+    "surface": "captured_frame",
+    "transform_revision": null
+  },
+  "replacement": "replace_complete_guidance_layer",
+  "validity": {
+    "created_at": "2026-10-15T00:00:01Z",
+    "expires_at": "2026-10-15T00:00:09Z",
+    "max_frame_age_ms": 20000
+  },
+  "outcome": "text_only",
+  "reason": "unresolved_required_target",
+  "text_bindings": [],
+  "packet": {
+    "schema": "screen-writing/v0.2",
+    "message_type": "resolved_packet",
+    "packet_id": "synthetic-packet-1",
+    "request_id": "synthetic-analysis-1",
+    "guidance_stream_id": "synthetic-guidance-stream",
+    "cue_sequence": 1,
+    "context": {
+      "lab_session_id": "synthetic-lab",
+      "experiment_id": "PR-AM-DSB",
+      "checkpoint_id": "CP-DSB-03",
+      "visit_id": "synthetic-visit-03",
+      "lab_revision": 8,
+      "workspace_id": "synthetic-model",
+      "capture_epoch": 1,
+      "parameter_revision": 2,
+      "view_revision": 4,
+      "condition": "baseline"
+    },
+    "frame": {
+      "observation_id": "synthetic-observation-7",
+      "frame_id": "synthetic-frame-7",
+      "sha256": "41e69b29daf4b70a2635a472fb20ac3f08f19013110d694fd62dc7527438c261",
+      "byte_count": 725,
+      "encoded_width": 96,
+      "encoded_height": 54,
+      "capture_elapsed_ms": 2000,
+      "capture_time_authority": "capture_client_monotonic",
+      "received_at": "2026-10-15T00:00:00Z",
+      "admitted_at": "2026-10-15T00:00:00.500Z",
+      "receipt_time_authority": "observer_server_utc",
+      "view_revision": 4
+    },
+    "resolved_targets": [
+      {
+        "target_id": "message.frequency",
+        "status": "unresolved",
+        "region": null,
+        "method": "model_vision",
+        "reason": "Synthetic localization fixture; not model recognition."
+      }
+    ],
+    "relationships": [],
+    "operations": [],
+    "replacement": "replace_complete_guidance_layer",
+    "delivery": {
+      "surface": "captured_frame",
+      "coordinate_space": "normalized_encoded_frame",
+      "adapter_binding_id": null,
+      "transform_revision": null,
+      "pointer_events": "none",
+      "clip_to_frame": true
+    },
+    "validity": {
+      "created_at": "2026-10-15T00:00:01Z",
+      "expires_at": "2026-10-15T00:00:09Z",
+      "max_frame_age_ms": 20000
+    },
+    "fallback": {
+      "instruction": "Set the Message signal to 100 Hz.",
+      "reason": "unresolved_required_target"
+    }
+  },
+  "teaching_intent": "highlight_parameter",
+  "target_criteria": [
+    {
+      "target_id": "message.frequency",
+      "criterion_ids": [
+        "CP-DSB-03:message_parameters"
+      ]
+    }
+  ]
+}

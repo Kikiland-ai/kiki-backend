@@ -1,0 +1,261 @@
+{
+  "schema": "analysis-owned-guidance-contract-acceptance/v0.1",
+  "proposal_only": true,
+  "runtime_implemented": false,
+  "renderer_interoperability_verified": false,
+  "paint_ack_verified": false,
+  "paid_model_calls": 0,
+  "acceptance_count": 50,
+  "cases": [
+    {
+      "name": "trusted_input_single",
+      "outcome": "accepted",
+      "effect": "validated_input"
+    },
+    {
+      "name": "trusted_input_comparison",
+      "outcome": "accepted",
+      "effect": "validated_input"
+    },
+    {
+      "name": "trusted_input_action-advance",
+      "outcome": "accepted",
+      "effect": "validated_input"
+    },
+    {
+      "name": "single",
+      "outcome": "accepted",
+      "effect": "annotate"
+    },
+    {
+      "name": "text-only",
+      "outcome": "accepted",
+      "effect": "text_only"
+    },
+    {
+      "name": "none",
+      "outcome": "accepted",
+      "effect": "clear_only"
+    },
+    {
+      "name": "declined",
+      "outcome": "accepted",
+      "effect": "clear_only"
+    },
+    {
+      "name": "action-advance",
+      "outcome": "accepted",
+      "effect": "annotate"
+    },
+    {
+      "name": "comparison",
+      "outcome": "accepted",
+      "effect": "annotate"
+    },
+    {
+      "name": "multi-unresolved",
+      "outcome": "accepted",
+      "effect": "text_only"
+    },
+    {
+      "name": "advance_without_successor_clears",
+      "outcome": "accepted",
+      "effect": "clear_only"
+    },
+    {
+      "name": "stale_view",
+      "outcome": "rejected",
+      "reason": "stale_context"
+    },
+    {
+      "name": "stale_visit",
+      "outcome": "rejected",
+      "reason": "stale_context"
+    },
+    {
+      "name": "stale_condition",
+      "outcome": "rejected",
+      "reason": "stale_context"
+    },
+    {
+      "name": "stale_parameter",
+      "outcome": "rejected",
+      "reason": "stale_context"
+    },
+    {
+      "name": "foreign_frame",
+      "outcome": "rejected",
+      "reason": "foreign_frame_provenance"
+    },
+    {
+      "name": "foreign_hash",
+      "outcome": "rejected",
+      "reason": "foreign_frame_provenance"
+    },
+    {
+      "name": "wrong_dimensions",
+      "outcome": "rejected",
+      "reason": "foreign_frame_provenance"
+    },
+    {
+      "name": "foreign_source_binding",
+      "outcome": "rejected",
+      "reason": "foreign_source_binding"
+    },
+    {
+      "name": "wrong_action",
+      "outcome": "rejected",
+      "reason": "stale_action"
+    },
+    {
+      "name": "old_sequence",
+      "outcome": "rejected",
+      "reason": "older_or_cancelled_sequence"
+    },
+    {
+      "name": "foreign_note",
+      "outcome": "rejected",
+      "reason": "changed_operation_or_note"
+    },
+    {
+      "name": "unrelated_operation",
+      "outcome": "rejected",
+      "reason": "changed_operation_or_note"
+    },
+    {
+      "name": "stale_unresolved_has_no_text_fallback",
+      "outcome": "rejected",
+      "reason": "stale_context"
+    },
+    {
+      "name": "duplicate_packet_id",
+      "outcome": "rejected",
+      "reason": "duplicate_packet_id"
+    },
+    {
+      "name": "inactive_session",
+      "outcome": "rejected",
+      "reason": "inactive_context"
+    },
+    {
+      "name": "expired_packet",
+      "outcome": "rejected",
+      "reason": "invalid_or_expired_timestamp"
+    },
+    {
+      "name": "out_of_frame_region",
+      "outcome": "rejected",
+      "reason": "out_of_frame_region"
+    },
+    {
+      "name": "duplicate_cue_ids",
+      "outcome": "rejected",
+      "reason": "duplicate_cue"
+    },
+    {
+      "name": "untrusted_note_reference",
+      "outcome": "rejected",
+      "reason": "foreign_text_reference"
+    },
+    {
+      "name": "missing_stop",
+      "outcome": "rejected",
+      "reason": "missing_provider_stop"
+    },
+    {
+      "name": "late_malformed_output",
+      "outcome": "rejected",
+      "reason": "Extra data: line 1 column 993 (char 992)"
+    },
+    {
+      "name": "duplicate_json_fields",
+      "outcome": "rejected",
+      "reason": "duplicate_json_key"
+    },
+    {
+      "name": "nonfinite_geometry",
+      "outcome": "rejected",
+      "reason": "nonfinite_json_number"
+    },
+    {
+      "name": "overflowing_json_number",
+      "outcome": "rejected",
+      "reason": "nonfinite_json_number"
+    },
+    {
+      "name": "old_three_field_response_not_silently_upgraded",
+      "outcome": "rejected",
+      "reason": "'screen_guidance' is a required property"
+    },
+    {
+      "name": "raw_svg_forbidden",
+      "outcome": "rejected",
+      "reason": "{'kind': 'box', 'cue_id': 'focus-0', 'target_id': 'message.frequency', 'svg': '<svg/>'} is not valid under any of the given schemas"
+    },
+    {
+      "name": "duplicate_action_candidate",
+      "outcome": "rejected",
+      "reason": "duplicate_candidate"
+    },
+    {
+      "name": "view_cancel",
+      "outcome": "accepted",
+      "effect": "clear_only"
+    },
+    {
+      "name": "late_packet_after_cancel",
+      "outcome": "rejected",
+      "reason": "stale_context"
+    },
+    {
+      "name": "out_of_order_cancel",
+      "outcome": "rejected",
+      "reason": "older_or_cancelled_sequence"
+    },
+    {
+      "name": "duplicate_cancel_id",
+      "outcome": "rejected",
+      "reason": "duplicate_cancel_id"
+    },
+    {
+      "name": "resolved_packet_relabelled_for_advanced_action",
+      "outcome": "rejected",
+      "reason": "stale_action"
+    },
+    {
+      "name": "missing_live_adapter_capability",
+      "outcome": "rejected",
+      "reason": "unverified_live_binding"
+    },
+    {
+      "name": "fixture_stale-view",
+      "outcome": "rejected",
+      "reason": "stale_context"
+    },
+    {
+      "name": "fixture_stale-visit",
+      "outcome": "rejected",
+      "reason": "stale_context"
+    },
+    {
+      "name": "fixture_stale-condition",
+      "outcome": "rejected",
+      "reason": "stale_context"
+    },
+    {
+      "name": "fixture_stale_text_only",
+      "outcome": "rejected",
+      "reason": "stale_context"
+    },
+    {
+      "name": "boolean_live_adapter_flag_is_not_proof",
+      "outcome": "rejected",
+      "reason": "unverified_live_binding"
+    },
+    {
+      "name": "newer_sequence_cannot_revive_old_view",
+      "outcome": "rejected",
+      "reason": "stale_context"
+    }
+  ]
+}

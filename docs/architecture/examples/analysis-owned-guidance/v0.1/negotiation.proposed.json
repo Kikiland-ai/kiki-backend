@@ -1,0 +1,15 @@
+{
+  "proposal_only": true,
+  "live_connection_enabled": false,
+  "controller_origin": null,
+  "model_contract": "lab-observer-drawing/v1",
+  "stream_contract": "lab-analysis-stream/v3",
+  "projection_contract": "committed-decision/v2",
+  "payload_contract": "analysis-owned-guidance/v0.1",
+  "drawing_and_ack_contract": "screen-writing/v0.2",
+  "analysis_transport": "same_origin_owned_post_sse",
+  "frame_transport": "retained_selected_jpeg_with_owner_bound_handle_fallback",
+  "source_proof_proposal": "native_capture_handle_and_pixel_match",
+  "max_clock_uncertainty_ms": 250,
+  "max_capture_paint_reservation_ms": 500
+}

@@ -1,0 +1,568 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:kiki:lab-observer-drawing:v1",
+  "title": "PROPOSED lab-observer-drawing/v1 model response; exactly four fields",
+  "$comment": "Contract proposal, not enabled in any runtime. Stable IDs/sets and geometry relationships require the documented runtime checks.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "criteria": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "criterion_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120,
+            "pattern": "^CP-DSB-(0[1-9]|1[0-2]):[a-z][a-z0-9_]*$"
+          },
+          "status": {
+            "enum": [
+              "match",
+              "mismatch",
+              "unknown"
+            ]
+          },
+          "evidence": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          }
+        },
+        "required": [
+          "criterion_id",
+          "status",
+          "evidence"
+        ]
+      },
+      "minItems": 1,
+      "maxItems": 12
+    },
+    "action_findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "action_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^CP-DSB-(0[1-9]|1[0-2])/[a-z][a-z0-9-]*$"
+          },
+          "status": {
+            "enum": [
+              "match",
+              "mismatch",
+              "unknown"
+            ]
+          },
+          "evidence": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          }
+        },
+        "required": [
+          "action_id",
+          "status",
+          "evidence"
+        ]
+      },
+      "minItems": 1,
+      "maxItems": 12
+    },
+    "uncertainties": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 150
+      },
+      "minItems": 0,
+      "maxItems": 3
+    },
+    "screen_guidance": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "action_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^CP-DSB-(0[1-9]|1[0-2])/[a-z][a-z0-9-]*$"
+          },
+          "mode": {
+            "enum": [
+              "annotate",
+              "text_only",
+              "none"
+            ]
+          },
+          "targets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "target_id": {
+                  "enum": [
+                    "workspace.canvas",
+                    "workspace.model_title",
+                    "message.block",
+                    "carrier.block",
+                    "message.frequency",
+                    "carrier.frequency",
+                    "local_carrier.phase",
+                    "local_carrier.frequency",
+                    "modulator.message_input",
+                    "receiver.modulated_input",
+                    "lowpass.numerator",
+                    "lowpass.denominator",
+                    "recovery_gain.value",
+                    "simulation.stop_time",
+                    "simulation.solver",
+                    "simulation.max_step",
+                    "simulation.run_control",
+                    "recovery_scope.original_trace",
+                    "recovery_scope.recovered_trace",
+                    "model.save_control"
+                  ]
+                },
+                "status": {
+                  "enum": [
+                    "resolved",
+                    "unresolved",
+                    "ambiguous"
+                  ]
+                },
+                "region": {
+                  "oneOf": [
+                    {
+                      "$ref": "urn:kiki:screen-writing:v0.2#/$defs/region"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "target_id",
+                "status",
+                "region"
+              ],
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "status": {
+                        "const": "resolved"
+                      }
+                    }
+                  },
+                  "then": {
+                    "properties": {
+                      "region": {
+                        "$ref": "urn:kiki:screen-writing:v0.2#/$defs/region"
+                      }
+                    }
+                  },
+                  "else": {
+                    "properties": {
+                      "region": {
+                        "type": "null"
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            "minItems": 0,
+            "maxItems": 2
+          },
+          "marks": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "kind": {
+                      "const": "box"
+                    },
+                    "cue_id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 64,
+                      "pattern": "^[a-zA-Z][a-zA-Z0-9_.:-]*$"
+                    },
+                    "target_id": {
+                      "enum": [
+                        "workspace.canvas",
+                        "workspace.model_title",
+                        "message.block",
+                        "carrier.block",
+                        "message.frequency",
+                        "carrier.frequency",
+                        "local_carrier.phase",
+                        "local_carrier.frequency",
+                        "modulator.message_input",
+                        "receiver.modulated_input",
+                        "lowpass.numerator",
+                        "lowpass.denominator",
+                        "recovery_gain.value",
+                        "simulation.stop_time",
+                        "simulation.solver",
+                        "simulation.max_step",
+                        "simulation.run_control",
+                        "recovery_scope.original_trace",
+                        "recovery_scope.recovered_trace",
+                        "model.save_control"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "cue_id",
+                    "target_id"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "kind": {
+                      "const": "ellipse"
+                    },
+                    "cue_id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 64,
+                      "pattern": "^[a-zA-Z][a-zA-Z0-9_.:-]*$"
+                    },
+                    "target_id": {
+                      "enum": [
+                        "workspace.canvas",
+                        "workspace.model_title",
+                        "message.block",
+                        "carrier.block",
+                        "message.frequency",
+                        "carrier.frequency",
+                        "local_carrier.phase",
+                        "local_carrier.frequency",
+                        "modulator.message_input",
+                        "receiver.modulated_input",
+                        "lowpass.numerator",
+                        "lowpass.denominator",
+                        "recovery_gain.value",
+                        "simulation.stop_time",
+                        "simulation.solver",
+                        "simulation.max_step",
+                        "simulation.run_control",
+                        "recovery_scope.original_trace",
+                        "recovery_scope.recovered_trace",
+                        "model.save_control"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "cue_id",
+                    "target_id"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "kind": {
+                      "const": "arrow"
+                    },
+                    "cue_id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 64,
+                      "pattern": "^[a-zA-Z][a-zA-Z0-9_.:-]*$"
+                    },
+                    "relationship_id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 200
+                    },
+                    "from": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "target_id": {
+                          "enum": [
+                            "workspace.canvas",
+                            "workspace.model_title",
+                            "message.block",
+                            "carrier.block",
+                            "message.frequency",
+                            "carrier.frequency",
+                            "local_carrier.phase",
+                            "local_carrier.frequency",
+                            "modulator.message_input",
+                            "receiver.modulated_input",
+                            "lowpass.numerator",
+                            "lowpass.denominator",
+                            "recovery_gain.value",
+                            "simulation.stop_time",
+                            "simulation.solver",
+                            "simulation.max_step",
+                            "simulation.run_control",
+                            "recovery_scope.original_trace",
+                            "recovery_scope.recovered_trace",
+                            "model.save_control"
+                          ]
+                        },
+                        "u": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "v": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        }
+                      },
+                      "required": [
+                        "target_id",
+                        "u",
+                        "v"
+                      ]
+                    },
+                    "to": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "target_id": {
+                          "enum": [
+                            "workspace.canvas",
+                            "workspace.model_title",
+                            "message.block",
+                            "carrier.block",
+                            "message.frequency",
+                            "carrier.frequency",
+                            "local_carrier.phase",
+                            "local_carrier.frequency",
+                            "modulator.message_input",
+                            "receiver.modulated_input",
+                            "lowpass.numerator",
+                            "lowpass.denominator",
+                            "recovery_gain.value",
+                            "simulation.stop_time",
+                            "simulation.solver",
+                            "simulation.max_step",
+                            "simulation.run_control",
+                            "recovery_scope.original_trace",
+                            "recovery_scope.recovered_trace",
+                            "model.save_control"
+                          ]
+                        },
+                        "u": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "v": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        }
+                      },
+                      "required": [
+                        "target_id",
+                        "u",
+                        "v"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "cue_id",
+                    "relationship_id",
+                    "from",
+                    "to"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "kind": {
+                      "const": "text"
+                    },
+                    "cue_id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 64,
+                      "pattern": "^[a-zA-Z][a-zA-Z0-9_.:-]*$"
+                    },
+                    "anchor": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "target_id": {
+                          "enum": [
+                            "workspace.canvas",
+                            "workspace.model_title",
+                            "message.block",
+                            "carrier.block",
+                            "message.frequency",
+                            "carrier.frequency",
+                            "local_carrier.phase",
+                            "local_carrier.frequency",
+                            "modulator.message_input",
+                            "receiver.modulated_input",
+                            "lowpass.numerator",
+                            "lowpass.denominator",
+                            "recovery_gain.value",
+                            "simulation.stop_time",
+                            "simulation.solver",
+                            "simulation.max_step",
+                            "simulation.run_control",
+                            "recovery_scope.original_trace",
+                            "recovery_scope.recovered_trace",
+                            "model.save_control"
+                          ]
+                        },
+                        "u": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "v": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        }
+                      },
+                      "required": [
+                        "target_id",
+                        "u",
+                        "v"
+                      ]
+                    },
+                    "text_ref": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 80,
+                      "pattern": "^[a-z][a-z0-9_.]*$"
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "cue_id",
+                    "anchor",
+                    "text_ref"
+                  ]
+                }
+              ]
+            },
+            "minItems": 0,
+            "maxItems": 4
+          }
+        },
+        "required": [
+          "action_id",
+          "mode",
+          "targets",
+          "marks"
+        ],
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "mode": {
+                  "const": "annotate"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "targets": {
+                  "minItems": 1,
+                  "items": {
+                    "properties": {
+                      "status": {
+                        "const": "resolved"
+                      }
+                    }
+                  }
+                },
+                "marks": {
+                  "minItems": 1
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "mode": {
+                  "const": "text_only"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "targets": {
+                  "minItems": 1,
+                  "contains": {
+                    "properties": {
+                      "status": {
+                        "enum": [
+                          "unresolved",
+                          "ambiguous"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "marks": {
+                  "maxItems": 0
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "mode": {
+                  "const": "none"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "targets": {
+                  "maxItems": 0
+                },
+                "marks": {
+                  "maxItems": 0
+                }
+              }
+            }
+          }
+        ]
+      },
+      "minItems": 0,
+      "maxItems": 2
+    }
+  },
+  "required": [
+    "criteria",
+    "action_findings",
+    "uncertainties",
+    "screen_guidance"
+  ]
+}

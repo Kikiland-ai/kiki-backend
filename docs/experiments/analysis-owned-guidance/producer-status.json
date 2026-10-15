@@ -1,0 +1,23 @@
+{
+  "experiment": "analysis-owned-screen-guidance",
+  "branch": "experiment/analysis-owned-guidance-producer",
+  "coordination_base": "c805d3799dbef5cfd734c9dd9844b9d9b075e677",
+  "status": "contract_proposal_published_for_renderer_review",
+  "contract_agreed": false,
+  "runtime_implemented": false,
+  "site_deployed": false,
+  "renderer_interoperability_verified": false,
+  "live_acceptance_passed": false,
+  "model_contract": "lab-observer-drawing/v1",
+  "payload_contract": "analysis-owned-guidance/v0.1",
+  "stream_contract_proposal": "lab-analysis-stream/v3",
+  "projection_contract_proposal": "committed-decision/v2",
+  "unchanged_dependency": {
+    "schema": "screen-writing/v0.2",
+    "sha256": "c275e8dc34ca83b8eb51b6842e132aa6cdc85a9e7e00fd9b49f1df93123a3aed"
+  },
+  "handoff": "docs/handoffs/analysis-owned-guidance-producer-v0.1.md",
+  "offline_check": "python scripts/check-analysis-owned-guidance-contract.py",
+  "reference_acceptance_count": 50,
+  "next_action": "Renderer reviews fixtures; producer next implements explicitly versioned parsing/admission without shared integration wiring."
+}

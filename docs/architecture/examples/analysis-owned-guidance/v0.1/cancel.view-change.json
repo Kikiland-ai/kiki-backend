@@ -1,0 +1,21 @@
+{
+  "schema": "analysis-owned-guidance/v0.1",
+  "message_type": "cancel",
+  "cancel_id": "synthetic-view-cancel",
+  "guidance_stream_id": "synthetic-guidance-stream",
+  "cue_sequence": 2,
+  "context": {
+    "lab_session_id": "synthetic-lab",
+    "experiment_id": "PR-AM-DSB",
+    "checkpoint_id": "CP-DSB-03",
+    "visit_id": "synthetic-visit-03",
+    "lab_revision": 9,
+    "workspace_id": "synthetic-model",
+    "capture_epoch": 1,
+    "parameter_revision": 2,
+    "view_revision": 5,
+    "condition": "baseline"
+  },
+  "reason": "view_change",
+  "issued_at": "2026-10-15T00:00:02Z"
+}

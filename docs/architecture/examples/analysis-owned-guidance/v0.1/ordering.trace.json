@@ -1,0 +1,25 @@
+{
+  "synthetic_only": true,
+  "steps": [
+    {
+      "file": "committed.single.json",
+      "cue_sequence": 1,
+      "expected": "replace"
+    },
+    {
+      "file": "cancel.view-change.json",
+      "cue_sequence": 2,
+      "expected": "clear_and_advance_fence"
+    },
+    {
+      "file": "committed.single.json",
+      "cue_sequence": 1,
+      "expected": "reject_no_display"
+    },
+    {
+      "file": "committed.single.json",
+      "cue_sequence_override": 3,
+      "expected": "reject_stale_view_even_with_newer_sequence"
+    }
+  ]
+}

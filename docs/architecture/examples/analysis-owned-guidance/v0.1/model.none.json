@@ -1,0 +1,28 @@
+{
+  "criteria": [
+    {
+      "criterion_id": "CP-DSB-03:message_parameters",
+      "status": "unknown",
+      "evidence": "Synthetic contract fixture; not real visual evidence."
+    },
+    {
+      "criterion_id": "CP-DSB-03:carrier_parameters",
+      "status": "unknown",
+      "evidence": "Synthetic contract fixture; not real visual evidence."
+    }
+  ],
+  "action_findings": [
+    {
+      "action_id": "CP-DSB-03/message-settings",
+      "status": "unknown",
+      "evidence": "Synthetic contract fixture."
+    },
+    {
+      "action_id": "CP-DSB-03/carrier-settings",
+      "status": "unknown",
+      "evidence": "Synthetic contract fixture."
+    }
+  ],
+  "uncertainties": [],
+  "screen_guidance": []
+}

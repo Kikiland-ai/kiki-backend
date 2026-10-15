@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "Kiki Shared Tab Guidance",
+  "version": "0.4.0",
+  "minimum_chrome_version": "116",
+  "description": "Connect the shared Simulink tab to the Kiki reader and draw temporary source-bound guidance.",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "tabCapture",
+    "offscreen",
+    "storage"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Guide this tab"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://kiki-screen-writing-demo.woodsycarp256.chatgpt.site/*",
+        "https://kiki-screen-receiver.woodsycarp256.chatgpt.site/*"
+      ],
+      "js": [
+        "bridge.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "commands": {
+    "show-live-drawing": {
+      "suggested_key": {
+        "default": "Alt+Shift+K"
+      },
+      "description": "Draw the live annotation demo on the connected tab"
+    }
+  }
+}

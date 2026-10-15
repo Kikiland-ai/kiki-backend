@@ -1,3 +1,25 @@
+# Separate analysis-owned guidance experiment — 15 October 2026
+
+The user requested coordination with the reader chat and clear branch separation.
+Read [the handoff](../handoffs/analysis-owned-guidance-experiment.md) and the
+[branch registry](../experiments/analysis-owned-guidance/branches.json).
+New producer, renderer and integration branches share a documentation-only base
+on reader control `ae234dcdd78b91ef7d6e6b528b14f2e9196808bb`. Runtime, latency
+control, baselines, draft PR #1 and existing Sites are unchanged. The design is a
+proposal; no cross-session agreement or live interoperability is claimed.
+
+Coordination checks passed: 130 pinned source files, all 31 Python/43 hosted
+frozen baseline files and fixture/policy parity, BB8 package/discovery and twelve
+reference-adapter cases, branch-registry JSON and whitespace. No runtime changes
+were made, so model or browser suites were not rerun for this handoff.
+
+Next: reader session publishes the versioned drawing schema/examples and its
+commit SHA on the producer branch; writer develops the deterministic consumer on
+the renderer branch. Shared client/build/routes are wired on integration after
+the interface is agreed. No message has been sent into the linked chat by a tool.
+
+---
+
 # Baseline promotion PR requested; manual acceptance pending — 15 October 2026
 
 The user requested a PR with all cumulative improvements against `baseline/screen-reader-v1`, then one manual test before deciding to merge. Target verified at `681ad52d37ac0bfced86ceadeaaed6ef8128caf5`; head `experiment/stream-context-batch` contains nine implementation/evidence commits through `9af91d6d3019b602d506d4f3ef2a31662fe4c998`. Read the [promotion review record](../reviews/screen-reader-baseline-promotion.md) for the cumulative scope, reviewer map, source/deployment/evidence chain, compatibility, rollback and uncompleted manual checklist.

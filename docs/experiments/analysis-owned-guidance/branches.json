@@ -1,0 +1,23 @@
+{
+  "experiment": "analysis-owned-screen-guidance",
+  "status": "coordination_prepared_runtime_not_implemented",
+  "base_reader_branch": "experiment/stream-context-batch",
+  "base_reader_commit": "ae234dcdd78b91ef7d6e6b528b14f2e9196808bb",
+  "branches": {
+    "producer": "experiment/analysis-owned-guidance-producer",
+    "renderer": "experiment/analysis-owned-guidance-renderer",
+    "integration": "integration/analysis-owned-guidance"
+  },
+  "protected_references": [
+    "baseline/screen-reader-v1",
+    "baseline/screen-writer-v1",
+    "experiment/stream-context-batch"
+  ],
+  "handoff": "docs/handoffs/analysis-owned-guidance-experiment.md",
+  "design": "docs/decisions/0007-analysis-owned-screen-guidance.md",
+  "reader_thread": "codex://threads/01a135c7-476f-70c3-bd7e-9c109051706e?hostId=durable",
+  "runtime_changed": false,
+  "site_deployed": false,
+  "contract_agreed": false,
+  "live_acceptance_passed": false
+}

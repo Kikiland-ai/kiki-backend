@@ -1,3 +1,13 @@
+# Baseline promotion PR requested; manual acceptance pending — 15 October 2026
+
+The user requested a PR with all cumulative improvements against `baseline/screen-reader-v1`, then one manual test before deciding to merge. Target verified at `681ad52d37ac0bfced86ceadeaaed6ef8128caf5`; head `experiment/stream-context-batch` contains nine implementation/evidence commits through `9af91d6d3019b602d506d4f3ef2a31662fe4c998`. Read the [promotion review record](../reviews/screen-reader-baseline-promotion.md) for the cumulative scope, reviewer map, source/deployment/evidence chain, compatibility, rollback and uncompleted manual checklist.
+
+The runtime under test remains the successful private Site source `c83ec7e6664025b7ca01d06f208af009269f8ad2` at https://kiki-json-stream.woodsycarp256.chatgpt.site . This PR preparation changes documentation only; no redeploy, baseline merge, audience/secret change, reset or auto-merge is authorized/performed. Recorded local runtime gate is 117 Python/87 Node plus full automated lab replays and retained benchmarks. The user will test the live guide once; manual acceptance is pending and must be recorded honestly, with actual checkpoint range and unexercised items.
+
+Current action: prepare/push this trace and open a draft PR from the current branch to the verified baseline. Exact next action after PR creation: retain its URL, observe available PR checks and await the user's test result; do not merge until subsequently authorized. Older entries below are historical.
+
+---
+
 # Context batching live; automated testing requires no manual lab rerun — 15 October 2026
 
 The user authorized continued implementation but cannot guarantee manual testing. The automated runner is the gate for this orchestration change. Branch `experiment/stream-context-batch` builds from frozen provider-I/O control `4c3dd6f57b3da435b8b74ab534a926e4255f6850`; provider routing is held batched for both new context arms. No original branch history was rewritten. Read [implementation, latency mapping and rollback](../experiments/stream-context-batch-implementation.md) and [registry](../experiments/latency-experiment-registry.json).

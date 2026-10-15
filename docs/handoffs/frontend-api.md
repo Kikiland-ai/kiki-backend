@@ -1,3 +1,19 @@
+# Stream context batching addition — 15 October 2026
+
+`experiment/stream-context-batch` retains the provider-I/O control and adds fresh per-chunk context validation, with `KIKI_STREAM_CONTEXT_MODE=per_event` as rollback. Endpoints and SSE v2 events remain unchanged. A network byte chunk may contain multiple SSE messages; consume SSE delimiters rather than network chunk boundaries. New timing counters record context batches/events and transport chunks; Python-only delivery counters appear in the completion tail. Canonical guidance still requires the full final tracker checks. See [implementation and automated gates](../experiments/stream-context-batch-implementation.md).
+
+---
+
+# Provider I/O experiment addition — 15 October 2026
+
+Branch `experiment/provider-db-io` adds private timing/usage diagnostics and `/health.latency_experiment` metadata. Existing endpoints, SSE `lab-analysis-stream/v2`, complete decision and committed guidance semantics stay unchanged. `KIKI_PROVIDER_IO=batched` is the default for the Python streaming pool and hosted provider adapter; `serial` selects the routing control. Python's inherited nonstream pool remains unchanged. See [implementation and automated acceptance](../experiments/provider-db-io-implementation.md). Other latency arms are prepared separately. The live Site remains Worker/D1; no Python origin has been deployed.
+
+---
+
+# JSON branch addition
+
+This branch adds `POST /lab-sessions/{lab_id}/check-stream` with the same CheckFrame JSON request and owned SSE response. OpenAPI now has 29 HTTP paths. See [the stream implementation/protocol](../experiments/json-stream-implementation.md). The test Site runs its Worker adapter; Python cloud hosting is still pending. Original nonstream endpoints below remain available.
+
 # Frontend API handoff — unified FastAPI prototype
 
 14 October 2026. Local implementation verified; cloud Python deployment and Site bridge activation pending. Read [the screen baseline](../baselines/screen-reader-v1.md) for the actual user-tested hosted path.
@@ -122,3 +138,6 @@ Still required before a cloud frontend launch: host one persistent Python instan
 ## Verification boundary
 
 Offline acceptance tests exercise one-app route discovery, real prepared-source validation, owner-scoped idempotency/conflicts, input bounds, profile snapshot, text-before-audio, TTS failure/retry without repeated text calls, restart checkpoint reuse, cancellation of late completion, WAV inspection and cloud owner/proxy protection. Providers are explicit injected fixtures; no paid call, new Site deploy, actual container-host smoke or browser acceptance is implied. Counts and exact checks are in [active.md](../plans/active.md).
+# Short-decision streaming continuation
+
+The experimental `/lab-sessions/{lab_id}/check-stream` now emits **`lab-analysis-stream/v2`**. See [short-decision implementation and compatibility](../experiments/short-decision-implementation.md). Await `guidance_committed.state` to apply the bounded committed projection and release the verification slot; continue the `state_snapshot`/timing tail independently. Never install a late snapshot over newer state. Full state/journal remain available via owned reads. The model's complete three-field decision still requires provider STOP, full validation and all existing evidence gates; a provisional match cannot complete a checkpoint. The original `/check` and screen-writing/v0.2 are unchanged. Refresh old v1 clients for this experimental protocol change. Python code is implemented; the live Site remains Worker/D1.

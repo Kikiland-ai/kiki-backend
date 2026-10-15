@@ -1,0 +1,111 @@
+{
+  "schema": "json-stream-smoke/v1",
+  "synthetic_only": true,
+  "real_simulink_accuracy_claim": false,
+  "production_latency_claim": false,
+  "repeats_per_case_arm": 1,
+  "records": [
+    {
+      "case": "local-settings",
+      "arm": "stream",
+      "image_sha256": "db56a0faf3931efb193f41f4c9b8c46ad9cd1405e4ea82073a14a208208ffeae",
+      "model": "gemini-3.5-flash-lite",
+      "expected": {
+        "local_parameters": "match",
+        "local-create": "match",
+        "local-settings": "match"
+      },
+      "status": "failure",
+      "category": "invalid_output",
+      "passed": false,
+      "total_seconds": 1.364
+    },
+    {
+      "case": "wrong-local-phase-heldout",
+      "arm": "stream",
+      "image_sha256": "aeb206dea885d5f330562cabcd06061b8589753128a237b907b4bd98682fc59d",
+      "model": "gemini-3.5-flash-lite",
+      "expected": {
+        "local_parameters": "mismatch",
+        "local-create": "match",
+        "local-settings": "mismatch"
+      },
+      "status": "success",
+      "passed": true,
+      "actual": {
+        "local_parameters": "mismatch",
+        "local-create": "match",
+        "local-settings": "mismatch"
+      },
+      "total_seconds": 3.347,
+      "first_feedback_seconds": 2.484,
+      "metrics": {
+        "provider_ms": 3347,
+        "first_byte_ms": 2366,
+        "first_finding_ms": 2484,
+        "critical_fields_ms": 3280,
+        "output_tokens": 495,
+        "wire_format": "lab-observer-json-stream/v1",
+        "observer_prompt_version": "dsb-step-observer/v3-json-stream2"
+      }
+    },
+    {
+      "case": "carrier-at-receiver",
+      "arm": "stream",
+      "image_sha256": "54dc1858e16e8b465a995ee37b4e9f77a198d4cde6862bb1c974669f99236cdb",
+      "model": "gemini-3.5-flash-lite",
+      "expected": {
+        "local_parameters": "unknown",
+        "local-create": "unknown",
+        "local-settings": "unknown"
+      },
+      "status": "success",
+      "passed": true,
+      "actual": {
+        "local_parameters": "unknown",
+        "local-create": "unknown",
+        "local-settings": "unknown"
+      },
+      "total_seconds": 1.959,
+      "first_feedback_seconds": 1.307,
+      "metrics": {
+        "provider_ms": 1959,
+        "first_byte_ms": 1188,
+        "first_finding_ms": 1307,
+        "critical_fields_ms": 1911,
+        "output_tokens": 425,
+        "wire_format": "lab-observer-json-stream/v1",
+        "observer_prompt_version": "dsb-step-observer/v3-json-stream2"
+      }
+    },
+    {
+      "case": "hidden-wires-heldout",
+      "arm": "stream",
+      "image_sha256": "9085ea48fb3f66f9b17157805db3c1aa7bc59867ee8b9190888b2237ff4929b8",
+      "model": "gemini-3.5-flash-lite",
+      "expected": {
+        "receiver_structure": "unknown",
+        "modulated-wire": "unknown",
+        "local-wire": "unknown"
+      },
+      "status": "success",
+      "passed": true,
+      "actual": {
+        "receiver_structure": "unknown",
+        "modulated-wire": "unknown",
+        "local-wire": "unknown"
+      },
+      "total_seconds": 1.69,
+      "first_feedback_seconds": 0.973,
+      "metrics": {
+        "provider_ms": 1690,
+        "first_byte_ms": 844,
+        "first_finding_ms": 973,
+        "critical_fields_ms": 1593,
+        "output_tokens": 463,
+        "wire_format": "lab-observer-json-stream/v1",
+        "observer_prompt_version": "dsb-step-observer/v3-json-stream2"
+      }
+    }
+  ]
+}

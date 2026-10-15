@@ -1,0 +1,200 @@
+{
+  "schema": "screen-reader-latency-observation/v1",
+  "recorded_date": "2026-10-15",
+  "display_timezone": "Asia/Calcutta",
+  "site": {
+    "url": "https://kiki-json-stream.woodsycarp256.chatgpt.site",
+    "project_id": "appgprj_6acfd4c6e6e48191b9110067ba86d556",
+    "source_commit": "cbaec32e47bbb53e49aa5d1a1f6f02d76ad81adc",
+    "github_runtime_commit": "b0a00033038ed8d2558ab6bf55c3ea7d229d9312",
+    "deployment_id": "appgdep_6acfddb9682081918e30cf9f9c558939",
+    "environment_revision": 8,
+    "backend": "Worker/D1",
+    "model": "gemini-3.5-flash-lite",
+    "prompt": "dsb-step-observer/v3-json-stream2"
+  },
+  "comparison_type": "descriptive_unpaired_historical_and_current_samples",
+  "production_improvement_claim": false,
+  "checkpoint_latency_improvement_established": false,
+  "user_report": {
+    "responsiveness": "the steps were considerably faster",
+    "remaining_delay": "verification for the current step completes faster than before but it takes time to move to the next step",
+    "independently_certified": false
+  },
+  "historical_baseline": {
+    "source_document": "docs/baselines/screen-reader-v1.md#measured-latency-and-rejected-alternatives",
+    "source_commit": "681ad52d37ac0bfced86ceadeaaed6ef8128caf5",
+    "site_source_commit": "4e1d0c3d132ff2778216e5d7e4d987d3e04d7145",
+    "window_utc": [
+      "2026-10-14T18:08:28Z",
+      "2026-10-14T18:10:56Z"
+    ],
+    "successful_request_count": 13,
+    "worker_wall_ms": {
+      "median": 9599,
+      "min": 8197,
+      "max": 10502
+    },
+    "early_findings_available": false,
+    "old_requests_not_retrievable_in_current_native_log_sample": true
+  },
+  "collection": {
+    "tool": "sites_get_site_worker_logs",
+    "since_minutes": 180,
+    "limit": 100,
+    "errors_only": false,
+    "returned_event_count": 100,
+    "window_note": "Latest bounded page; frame uploads dominate it. Four successful and two failed admitted check timings are visible. A repeated analysis_waiting event carrying old timing is excluded; this is not an entire-session failure rate.",
+    "no_user_images_or_credentials_copied": true
+  },
+  "checks": [
+    {
+      "completed_at_utc": "2026-10-14T22:16:26.573Z",
+      "request_id": "5e23fc58-2992-4cc8-bace-836af22cd428",
+      "worker_request_id": "81a88067107e9b583e502b9d3897a345",
+      "checkpoint_id": "CP-DSB-05",
+      "status": "available",
+      "analysis_status": "available",
+      "first_finding_ms": 6376,
+      "critical_fields_ms": 8424,
+      "provider_ms": 9281,
+      "internal_before_commit_ms": 9888,
+      "receipt_to_before_commit_ms": 10423,
+      "worker_wall_ms": 11174,
+      "worker_outcome": "ok",
+      "output_tokens": 485
+    },
+    {
+      "completed_at_utc": "2026-10-14T22:16:42.388Z",
+      "request_id": "ead1dc24-0b4a-421d-8f96-dd05ca668b88",
+      "worker_request_id": "e54956b62022c8dedc16f5290531a2e0",
+      "checkpoint_id": "CP-DSB-05",
+      "status": "available",
+      "analysis_status": "available",
+      "first_finding_ms": 7113,
+      "critical_fields_ms": 9194,
+      "provider_ms": 10054,
+      "internal_before_commit_ms": 10656,
+      "receipt_to_before_commit_ms": 11148,
+      "worker_wall_ms": 11302,
+      "worker_outcome": "ok",
+      "output_tokens": 492
+    },
+    {
+      "completed_at_utc": "2026-10-14T22:16:54.248Z",
+      "request_id": "2f48f873-7fd5-4b35-a8f8-949a250caa06",
+      "worker_request_id": "bafdc24df478faf3739c00928c38e9a8",
+      "checkpoint_id": "CP-DSB-06",
+      "status": "available",
+      "analysis_status": "available",
+      "first_finding_ms": 6065,
+      "critical_fields_ms": 8302,
+      "provider_ms": 9174,
+      "internal_before_commit_ms": 9775,
+      "receipt_to_before_commit_ms": 10276,
+      "worker_wall_ms": 10666,
+      "worker_outcome": "ok",
+      "output_tokens": 537
+    },
+    {
+      "completed_at_utc": "2026-10-14T22:17:05.512Z",
+      "request_id": "51f2e5a3-056b-41fb-8e2d-c817062baf76",
+      "worker_request_id": "986d9a594872b7779d7239ce596a0659",
+      "checkpoint_id": "CP-DSB-06",
+      "status": "available",
+      "analysis_status": "available",
+      "first_finding_ms": 5877,
+      "critical_fields_ms": 8178,
+      "provider_ms": 9021,
+      "internal_before_commit_ms": 9647,
+      "receipt_to_before_commit_ms": 10169,
+      "worker_wall_ms": 10595,
+      "worker_outcome": "ok",
+      "output_tokens": 500
+    },
+    {
+      "completed_at_utc": "2026-10-14T22:17:32.684Z",
+      "request_id": "52b09ef0-78a3-4455-bb08-221799f55dd8",
+      "worker_request_id": "e9facf28d4bc9c835bbdc5257aa5a3a6",
+      "checkpoint_id": "CP-DSB-06",
+      "status": "failed",
+      "analysis_status": "waiting_for_provider",
+      "first_finding_ms": null,
+      "critical_fields_ms": null,
+      "provider_ms": null,
+      "internal_before_commit_ms": 25920,
+      "receipt_to_before_commit_ms": 26402,
+      "worker_wall_ms": 26567,
+      "worker_outcome": "canceled",
+      "output_tokens": null
+    },
+    {
+      "completed_at_utc": "2026-10-14T22:18:03.469Z",
+      "request_id": "387d55bf-f156-49b3-ac1b-de4693673f3f",
+      "worker_request_id": "fc02e7797c452606522154d6e845981b",
+      "checkpoint_id": "CP-DSB-06",
+      "status": "failed",
+      "analysis_status": "waiting_for_provider",
+      "first_finding_ms": null,
+      "critical_fields_ms": null,
+      "provider_ms": null,
+      "internal_before_commit_ms": 25957,
+      "receipt_to_before_commit_ms": 26473,
+      "worker_wall_ms": 26586,
+      "worker_outcome": "canceled",
+      "output_tokens": null
+    }
+  ],
+  "successful_sample_summary": {
+    "count": 4,
+    "worker_wall_ms": {
+      "median": 10920,
+      "min": 10595,
+      "max": 11302
+    },
+    "first_finding_parser_ready_ms": {
+      "median": 6220.5,
+      "min": 5877,
+      "max": 7113
+    },
+    "first_finding_to_provider_return_ms": {
+      "median": 3025,
+      "min": 2905,
+      "max": 3144
+    },
+    "critical_fields_to_provider_return_ms": {
+      "median": 858.5,
+      "min": 843,
+      "max": 872
+    }
+  },
+  "measurement_boundaries": {
+    "first_finding_ms": "Inside analyzer, before awaited context check and delivery. Not a browser paint timestamp.",
+    "critical_fields_ms": "Inside analyzer when required arrays and uncertainties are parsed; still provisional.",
+    "provider_ms": "Routing/storage plus consuming provider stream; not isolated inference.",
+    "internal_before_commit_ms": "Captured before guidedObserve and final labSave. Does not include durable checkpoint commit or browser display.",
+    "worker_wall_ms": "Native Worker invocation wall time; not calibrated capture-to-display latency.",
+    "missing": [
+      "exact database commit finish",
+      "browser-rendered finding/next instruction",
+      "paired two-frame checkpoint transition durations"
+    ]
+  },
+  "failures": {
+    "admitted_failed_check_count_in_page": 2,
+    "timeout_key_attempt_count": 4,
+    "http_429_seen_for_these_attempts": false,
+    "http_503_seen_for_these_attempts": false,
+    "category": "provider_timeout_or_network_error",
+    "pool_failed_key_count": 4,
+    "pool_lease_released": true,
+    "pool_retry_at_utc": "2026-10-14T22:19:02.244Z",
+    "cooldown_rule_seconds": 60
+  },
+  "limits": [
+    "Different images/checkpoints and provider-load windows; historical baseline has 13 successes and current page has four.",
+    "No browser telemetry or complete per-stage transcript captured in this sample.",
+    "No causal speedup percentage or production p95 can be inferred.",
+    "The two failed checks remain in the record; successful-only medians must not be treated as whole-session results."
+  ]
+}

@@ -12,6 +12,11 @@
 !prototypes/lab_tracking/**
 !prototypes/backend/
 !prototypes/backend/**
+!prototypes/json_stream/
+!prototypes/json_stream/**
+!prototypes/json_stream_site/
+!prototypes/json_stream_site/assets/
+!prototypes/json_stream_site/assets/**
 !prototypes/mixed_language/
 !prototypes/mixed_language/**
 !prototypes/mixed_script/

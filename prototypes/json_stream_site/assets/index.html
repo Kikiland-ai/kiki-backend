@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JSON streaming · Kiki · Screen receiver</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script type="module" src="/static/lab.js"></script>
+  <script defer src="/static/capture.js"></script>
+</head>
+<body>
+  <main>
+    <header><a class="brand" href="/">Kiki<span class="dots">● ● ● ●</span></a><span class="tag">Guided Simulink prototype</span></header>
+    <section class="intro">
+      <div class="eyebrow">LEARN BY BUILDING</div>
+      <h1>Build your model.<br>I’ll follow along.</h1><p class="note">Short-decision experiment · your saved progress continues.</p>
+      <p>Start the lab below, then share your Simulink tab. Keep working in Simulink; the guide will read your screen and update what comes next.</p>
+      <div class="controls">
+        <button id="share">Share screen</button>
+        <button id="pause" class="secondary" disabled>Pause</button>
+        <button id="stop" class="secondary" disabled>Stop sharing</button>
+      </div>
+      <p id="status" role="status" aria-live="polite">Ready to share.</p>
+      <details class="guide-details"><summary>Screen-sharing details</summary><label class="analysis-toggle"><input type="checkbox" id="enable-analysis" checked> Describe frames outside lab mode</label>
+      <p class="note">Analysis sends selected images to Gemini, at most once every ten seconds, without a fixed read limit. Generic capture frames are not archived; a lab retains only its latest checked image as described below. Provider throttling pauses analysis with automatic retries; capture and saved progress continue.</p></details>
+    </section>
+    <section class="panel lab-panel">
+      <div class="panel-head"><h2>Your Simulink guide</h2><span id="lab-watch-state">READY</span></div>
+      <div class="analysis-body" id="lab-start">
+        <p>We’ll build one DSB-SC experiment together. I’ll watch your shared model and guide you one action at a time.</p>
+        <label>Model name <input id="lab-model-name" type="text" maxlength="160" placeholder="dsb_sc_demo"></label>
+        <p class="note">Prototype run: progress is inferred from your screen and responses; prerequisite knowledge isn’t assessed.</p>
+        <button id="lab-begin">Start guided lab</button>
+      </div>
+      <div class="analysis-body" id="lab-run" hidden>
+        <p id="lab-progress" class="guide-progress"></p>
+        <p id="lab-done" class="guide-done" hidden></p><p id="lab-action-history" class="note" hidden></p>
+        <div class="now-label">DO THIS NOW</div><h3 id="lab-current"></h3>
+        <p id="lab-why" class="guide-reason"></p>
+        <div id="lab-action-details" class="guide-action-details" hidden>
+          <p><strong>Where:</strong> <span id="lab-where"></span></p>
+          <ol id="lab-how"></ol>
+          <table id="lab-settings" class="guide-settings" hidden><caption>Values to enter</caption><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody></tbody></table>
+          <p class="guide-result"><strong>You should see:</strong> <span id="lab-result"></span></p>
+          <details id="lab-already-help"><summary>I already did this</summary><p id="lab-already-copy"></p></details>
+        </div>
+        <details id="lab-stage-plan" class="guide-stage-plan"><summary>See this stage in order</summary><ol id="lab-procedure"></ol></details>
+        <div id="lab-stream-feedback" class="guide-sees" hidden aria-live="polite"><span id="lab-stream-label">READING THIS FRAME</span><ul id="lab-stream-findings"></ul><p id="lab-stream-progress" class="note"></p></div><div class="guide-sees"><span>WHAT I CAN SEE</span><p id="lab-observation">Share your model so I can follow along.</p></div>
+        <div id="lab-confirmation" hidden><p id="lab-confirmation-copy"></p><button id="lab-confirm"></button></div>
+        <div id="lab-response" hidden><label id="lab-response-label" for="lab-answer"></label><textarea id="lab-answer" rows="2" maxlength="2000" placeholder="A short answer is enough."></textarea><button id="lab-save-answer">Send answer</button></div>
+        <p id="lab-next" class="guide-next"></p>
+        <div class="controls guide-secondary"><button id="lab-pause" class="secondary">Pause guidance</button><button id="lab-correction" class="secondary">That’s not what I did</button></div>
+        <details class="guide-details"><summary>Progress and technical details</summary>
+          <label for="lab-stream-mode">Analysis comparison</label><select id="lab-stream-mode"><option value="stream">Short decision + async details</option><option value="baseline">Baseline JSON</option></select><p id="lab-stream-timing" class="note"></p><p id="lab-model" class="note"></p><p id="lab-budget" class="note"></p><ul id="lab-criteria"></ul>
+          <button id="lab-check" class="secondary" disabled>Look again now</button>
+          <img id="lab-checked" class="checked-frame" alt="Latest frame used for the guide’s observation" hidden>
+          <div class="controls"><select id="lab-ledger" aria-label="Step to revisit"></select><button id="lab-revisit" class="secondary">Return to this step</button><button id="lab-view-changed" class="secondary">Report view change</button><button id="lab-parameters" class="secondary">Report settings change</button></div>
+          <div class="controls"><button id="lab-export" class="secondary">Download journal</button><a id="lab-history-link" target="_blank" rel="noopener">Open events</a><button id="lab-delete" class="secondary">Delete this run</button></div>
+        </details>
+      </div>
+      <p class="analysis-body" id="lab-status" role="status" aria-live="polite">Start the guide, then share your Simulink tab.</p>
+    </section>
+    <details class="guide-details diagnostics"><summary>Screen preview and diagnostic details</summary>
+    <section class="metrics" aria-label="Receiver statistics">
+      <div><span>Frames received</span><strong id="count">0</strong></div>
+      <div><span>Latest frame</span><strong id="dimensions">—</strong></div>
+      <div><span>Last received</span><strong id="received">—</strong></div>
+    </section>
+    <section class="views">
+      <article class="panel"><div class="panel-head"><h2>Your shared surface</h2><span>LOCAL PREVIEW</span></div>
+        <div class="media"><video id="preview" autoplay muted playsinline></video><p id="local-empty">Your selection will appear here.</p></div>
+      </article>
+      <article class="panel"><div class="panel-head"><h2>Server received</h2><span>ACTUAL RECEIVED FRAME</span></div>
+        <div class="media"><img id="remote" alt="Latest screen image received from the server" hidden><p id="remote-empty">Waiting for the first frame.</p></div>
+      </article>
+    </section>
+    <section class="panel analysis-panel" aria-label="Frame analysis">
+      <div class="panel-head"><h2>What the model sees</h2><span id="analysis-state" role="status" aria-live="polite">WAITING FOR A FRAME</span></div>
+      <div class="analysis-body"><p id="analysis-summary">A description will appear after the first selected frame is analyzed.</p>
+        <ul id="analysis-facts"></ul><p id="analysis-changes" hidden></p>
+        <ul id="analysis-uncertainties"></ul><p id="analysis-source" class="note"></p>
+      </div>
+    </section>
+    <section class="panel details"><div class="panel-head"><h2>Observation JSON</h2><a id="json-link" hidden target="_blank" rel="noopener">Open endpoint ↗</a></div>
+      <pre id="json">No session yet.</pre>
+    </section>
+    </details>
+    <footer>Open this site in its own browser tab for screen sharing. Sharing stops when you press Stop sharing, use the browser’s stop button, or close this page. Observations are sampled descriptions, so brief actions between frames can be missed.</footer>
+  </main>
+</body>
+</html>

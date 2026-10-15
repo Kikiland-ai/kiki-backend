@@ -1,0 +1,46 @@
+{
+  "schema": "guidance-integration-deployment/v1",
+  "recorded_at": "2026-10-15T18:08:05.899312Z",
+  "user_date_timezone": "Asia/Kolkata",
+  "project_id": "appgprj_6ace6ce34218819198dfd778a822aed5",
+  "url": "https://kiki-screen-receiver.woodsycarp256.chatgpt.site",
+  "version_number": 16,
+  "version_id": "appgprj_6ace6ce34218819198dfd778a822aed5~appgver_73f2f0ca5b048191aaccd39d96934aef",
+  "deployment_id": "appgdep_6ad11678384c8191a401d7c184052603",
+  "status": "succeeded",
+  "env_set_revision": 7,
+  "backend_code_revision": "150ea24d514aaebab169a2910db33c55579675e1",
+  "source_commit": "e8d37605dec2cba66e49735cccbcef3d3c2afac9",
+  "renderer_commit": "e916986",
+  "producer_pinned_commit": "1c658b63ef0a0ebce827168040bc057d92fa4c77",
+  "producer_later_head_reviewed": "482d4c28345c23f85f5cced8259209d75b74412d",
+  "producer_later_delta": "Documentation/promotion metadata only; no runtime delta from pinned implementation. Other session merged PR #1 independently. This session did not modify that PR or baseline branches.",
+  "owner_private_preserved": true,
+  "secret_names_preserved": [
+    "CAPTURE_RECEIPT_KEY",
+    "GEMINI_API_KEY",
+    "GEMINI_API_KEYS"
+  ],
+  "archive_sha256": "8fabee4226da57ba48be3c4cd6e7096968d2d34fe9c18adbd97fcfcea47bda08",
+  "worker_artifact_sha256": "794a08863972ebd6b9332da87eb06b46e49303256490a1accc582a69f650be60",
+  "standalone_node_checks": {
+    "passed": 114,
+    "failed": 0
+  },
+  "native_publication_verified": true,
+  "postdeploy_http_check": {
+    "status": "blocked",
+    "reason": "Managed environment proxy denied CONNECT to the Site host with HTTP 403. No bypass or public access change attempted."
+  },
+  "worker_log_note": "Native deployment discovery probe POST /mcp returned HTTP 400, Worker outcome ok; this is not a drawing request or uncaught Worker exception.",
+  "installed_extension_tested": false,
+  "real_simulink_tested": false,
+  "unused_new_project_remains_unpublished": true,
+  "native_d1_schema_verified": true,
+  "guidance_tables_present": [
+    "guidance_acks",
+    "guidance_outbox",
+    "guidance_streams"
+  ],
+  "existing_lab_tables_present": true
+}

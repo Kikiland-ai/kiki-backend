@@ -1,6 +1,6 @@
 # Analysis-owned guidance integration v1
 
-Updated 15 October 2026, Asia/Kolkata. Deployment receipt is appended after publication.
+Updated 15 October 2026, Asia/Kolkata. Published deployment receipt is recorded below.
 
 The user authorized combining producer `1c658b63ef0a0ebce827168040bc057d92fa4c77` with the independent renderer on `integration/analysis-owned-guidance`. The renderer branch ends at `e916986`; the integration uses explicit merges, so its Worker/client/build changes do not enter the producer branch. Baselines, the latency-control branch/Site and PR #1 are unchanged. The user explicitly selected updating **https://kiki-screen-receiver.woodsycarp256.chatgpt.site** instead of provisioning another set of model secrets. Preserve its private audience, secrets and D1 sessions. The separately allocated `kiki-guidance-experiment` project is unpublished and unused.
 
@@ -46,3 +46,11 @@ Chrome API dispatch and model localization are explicit fixtures. The streamed b
 Download adapter **0.4.0** from the receiver, reload the unpacked extension and refresh both tabs so old service workers/bridges cannot persist. Connect the MATLAB tab, share that same tab from the receiver and start the lab. Status distinguishes capture, analysis and delivery; the annotation trace retains bounded connection/rejection/paint events. Drawing is conditional on a current validated model intent, not a fixed smoke test. If it declines or fails, retain the reason and frame/request IDs rather than inventing a shape.
 
 Next acceptance is the installed adapter on an actual MATLAB/Simulink task: confirm correct target placement and semantically correct canonical direction, move/resize the view to prove clearance, and retain analysis-to-commit plus commit-to-paint logs. Existing Site secrets are reused; do not copy masked values or ask for keys in chat. Pause/stop should clear guidance. Practical progress and concept assessment remain separate.
+
+## Deployment receipt
+
+Existing receiver **version 16** succeeded at 18:08 UTC on 15 October 2026 (23:38 Asia/Kolkata), using environment revision 7. Backend code: `150ea24d514aaebab169a2910db33c55579675e1`; pushed standalone Site source: `e8d37605dec2cba66e49735cccbcef3d3c2afac9`. The source checkout passed all 114 Node tests; its generated Worker is byte-identical to the tested backend artifact. Source-helper scripts were unavailable in the image, so the retained fallback performed preflight remote-head checks, hidden-stdin credential handling, exact-source push verification and packaging. The archive uses root `.openai/hosting.json`, `drizzle/` and `dist/server/index.js`.
+
+Native publication, owner-private audience and presence of all three new guidance D1 tables alongside existing lab tables were confirmed. Existing secrets are preserved. The optional postdeploy HTTP asset check was blocked by the managed outbound proxy (CONNECT 403); no network-policy bypass or audience change was attempted. Native logs show the deployment's `/mcp` discovery probe returning 400 with Worker outcome `ok`; this does not establish a runtime drawing error or an end-user draw. Actual installed-extension/Simulink acceptance remains pending. Full identifiers and checks: [deployment.json](../experiments/analysis-owned-guidance/integration-v1-evidence/deployment.json).
+
+While preparing publication, remote producer head advanced to `482d4c2` after the other session's baseline promotion/PR #1 merge. Its changes relative to the requested `1c658b6` are documentation and status only; no runtime compatibility delta. This session used the requested pinned runtime and did not alter those baseline/PR references.

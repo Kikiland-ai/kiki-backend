@@ -42,7 +42,7 @@ python scripts/run-screen-reader-evaluation.py --live
 
 This adds five analyses of the saved synthetic local-carrier images using server-side environment keys and the configured/default model. Every failure, mismatch or unknown remains in the report; all five expected outcomes must pass. Provider retries can mean more HTTP attempts than analyses. These narrow fixtures cannot certify recognition at every checkpoint. No new paid smoke was run for this DB-only arm because its model input/output is unchanged. Broader labelled real-screen recognition coverage, browser sharing and actual Simulink usability remain sampled release gates.
 
-GitHub Actions workflow `screen-reader-evaluation.yml` runs the offline command on branch pushes, relevant pull requests and manual dispatch, with no API secrets. It retains reports for fourteen days even when a check fails. A failure in the replay or tests should be debugged from its artifact before asking the user to repeat a manual lab run. CI is configured; its first hosted run must be observed separately from local passing results.
+GitHub Actions workflow `screen-reader-evaluation.yml` runs the offline command on branch pushes, relevant pull requests and manual dispatch, with no API secrets. It retains reports for fourteen days even when a check fails. A failure in the replay or tests should be debugged from its artifact before asking the user to repeat a manual lab run. CI is configured; its first hosted run is not verified here. GitHub CLI run-list access returned Forbidden, and the available connected workflow-list tool filters to pull-request runs (none for this branch commit). Local acceptance is passing; no CI success is asserted.
 
 ## Verification and hosting boundary
 

@@ -10,6 +10,8 @@ Python streamed routing and hosted D1 routing now use atomic acquisition, bulk d
 
 Also passed pinned 130 sources/frozen baseline parity, lab design, writer v0.2 39 cases, BB8 validation/discovery/twelve tests. OpenAPI export unchanged at 29 paths. Rendering still cannot complete checkpoints.
 
+CI observation limit: GitHub CLI run-list access returned Forbidden; the connected workflow-list tool only lists pull-request runs and returned none. The pushed workflow is configured, not verified as executed.
+
 Last completed action: implemented, locally verified and privately published DB arm. Exact next action: observe first GitHub Actions evaluation, then collect new production phase timings before advancing the separate streamed-context-read arm. Verifier-only inputs need a broader labelled recognition gate; targeted vision additionally needs explicit crop/target provenance. Current evaluation artifacts and [offline evidence](../experiments/evidence/2026-10-15-provider-db-io-offline.json) distinguish synthetic mechanism results from production performance.
 
 ---

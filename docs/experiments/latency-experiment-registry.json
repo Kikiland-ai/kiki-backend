@@ -8,7 +8,7 @@
     {
       "id": "provider-db-io/v1",
       "branch": "experiment/provider-db-io",
-      "status": "live",
+      "status": "validated_control_preserved",
       "change": "Batch provider health reads, atomically acquire rotation lease and combine successful release writes.",
       "control": "KIKI_PROVIDER_IO=serial",
       "candidate": "KIKI_PROVIDER_IO=batched",
@@ -21,10 +21,18 @@
     {
       "id": "stream-context-batch/v1",
       "branch": "experiment/stream-context-batch",
-      "status": "prepared",
+      "status": "live",
       "change": "Bound context-validation work per decoded chunk while retaining final authoritative checks and cancellation.",
       "primary_measure": "context database reads and stream-consumption duration",
-      "model_prompt_change": false
+      "model_prompt_change": false,
+      "parent_runtime_commit": "4c3dd6f57b3da435b8b74ab534a926e4255f6850",
+      "control_site_source": "c67fc3a5537ddcf98b8d8bfacbb606749687f693",
+      "site_source_commit": "c83ec7e6664025b7ca01d06f208af009269f8ad2",
+      "control": "KIKI_STREAM_CONTEXT_MODE=per_event",
+      "candidate": "KIKI_STREAM_CONTEXT_MODE=per_chunk",
+      "provider_io_fixed": "batched",
+      "implementation_record": "docs/experiments/stream-context-batch-implementation.md",
+      "deployment_id": "appgdep_6ad0a54cafe881919db038cc07bf6f61"
     },
     {
       "id": "verifier-context/v1",

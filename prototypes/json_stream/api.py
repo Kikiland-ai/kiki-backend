@@ -1,5 +1,5 @@
 """Owned SSE delivery around the existing admission/atomic checkpoint service."""
-import asyncio,copy,json,time
+import asyncio,copy,json,time,os
 from uuid import uuid4
 from fastapi import APIRouter,HTTPException,Request
 from fastapi.responses import StreamingResponse
@@ -7,8 +7,11 @@ from contracts.lab_tracking import CheckFrame
 from .analysis import STREAM_SINK
 from prototypes.lab_tracking.provider import AnalysisFailure
 from .decision import committed_projection
+from .context_batch import ContextBatch
 
-def stream_router(service,owner_of,mutation_origin):
+def stream_router(service,owner_of,mutation_origin,*,context_mode=None):
+    mode=context_mode or os.environ.get("KIKI_STREAM_CONTEXT_MODE","per_chunk")
+    if mode not in ("per_chunk","per_event"):raise ValueError("invalid_stream_context_configuration")
     router=APIRouter(tags=['screen-json-stream'])
     @router.post('/lab-sessions/{lab_id}/check-stream',response_class=StreamingResponse,responses={200:{'description':'Owned lab-analysis-stream/v2: complete decision commits before auxiliary delivery','content':{'text/event-stream':{'schema':{'type':'string'}}}}},openapi_extra={'requestBody':{'required':True,'content':{'application/json':{'schema':CheckFrame.model_json_schema()}}}})
     async def check_stream(lab_id:str,request:Request):
@@ -23,19 +26,19 @@ def stream_router(service,owner_of,mutation_origin):
         state=service.load(lab_id,owner);service.expect(state,body.revision)
         frame=copy.deepcopy(service.capture(state['workspace']['capture_session_id'],owner)['frame'])
         request_id=str(uuid4());queue=asyncio.Queue(maxsize=64);context=None;sequence=0;started=time.monotonic()
+        async def publish(group):
+            await queue.put([{**event,'context':context,'provisional':True} for event in group])
+        def valid(current):
+            return context is not None and service.context(current)==context and current['status']=='active' and current['runtime']['capture_status']=='sharing'
+        gate=ContextBatch(mode,lambda:service.load(lab_id,owner),valid,publish)
         async def sink(event):
             nonlocal context
             if event['type']=='admitted':
                 context=service.context(event['state'])
-                event={'type':'admitted','frame':frame,'admitted_at':service.timestamp(event['state']['runtime']['last_analysis_started'])}
-            else:
-                started_load=time.monotonic();sink.metrics['context_db_reads']+=1
-                try:current=service.load(lab_id,owner)
-                finally:sink.metrics['context_db_ms']+=round((time.monotonic()-started_load)*1000)
-                if context is None or service.context(current)!=context or current['status']!='active':
-                    raise AnalysisFailure('stale_stream_context')
-            await queue.put({**event,'context':context,'provisional':event['type'] not in ('admitted',)})
-        sink.metrics={'context_db_reads':0,'context_db_ms':0}
+                await queue.put({'type':'admitted','frame':frame,'admitted_at':service.timestamp(event['state']['runtime']['last_analysis_started']),'context':context,'provisional':False})
+            else:await gate.batch([event])
+        sink.metrics=gate.metrics
+        sink.batch=gate.batch
         async def work():
             token=STREAM_SINK.set(sink)
             try:
@@ -67,12 +70,20 @@ def stream_router(service,owner_of,mutation_origin):
                 while True:
                     event=await queue.get()
                     if event is None:break
-                    if event.get('provisional') and context is not None:
-                        current=service.load(lab_id,owner)
-                        if service.context(current)!=context:continue
-                    sequence+=1
-                    value={'schema':'lab-analysis-stream/v2','request_id':request_id,'event_sequence':sequence,'server_time':service.timestamp(),**event}
-                    yield 'data: '+json.dumps(value,ensure_ascii=False)+'\n\n'
+                    group=event if isinstance(event,list) else [event]
+                    if any(item.get('provisional') for item in group) and context is not None:
+                        load_started=time.monotonic();gate.metrics['context_delivery_db_reads']+=1
+                        try:current=service.load(lab_id,owner)
+                        finally:gate.metrics['context_delivery_db_ms']+=round((time.monotonic()-load_started)*1000)
+                        if not valid(current):continue
+                    # One yield for the group: no per-row delivery reads or TTL cache.
+                    packets=[]
+                    for item in group:
+                        if item['type']=='stream_complete':item={**item,'timing':{**item['timing'],**{k:v for k,v in gate.metrics.items() if k.startswith('context_delivery_')}}}
+                        sequence+=1
+                        value={'schema':'lab-analysis-stream/v2','request_id':request_id,'event_sequence':sequence,'server_time':service.timestamp(),**item}
+                        packets.append('data: '+json.dumps(value,ensure_ascii=False)+'\n\n')
+                    yield ''.join(packets)
             finally:
                 if not task.done():task.cancel()
                 await asyncio.gather(task,return_exceptions=True)

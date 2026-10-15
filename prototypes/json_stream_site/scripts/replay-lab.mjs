@@ -7,10 +7,10 @@ import {fileURLToPath} from 'node:url';
 import {randomBytes} from 'node:crypto';
 import worker from '../dist/server/index.js';
 import {localDB} from './local-db.mjs';
-export async function replayLab({ioMode='batched'}={}){
+export async function replayLab({ioMode='batched',contextMode='per_chunk'}={}){
  const definition=JSON.parse(await readFile('data/experiment.json','utf8')),policy=JSON.parse(await readFile('data/guided-policy.json','utf8'));
  const image=Buffer.from(await readFile('scripts/fixtures/jpeg.txt','utf8'),'base64'),DB=localDB();
- const records=[],env={DB,KIKI_PROVIDER_IO:ioMode,CAPTURE_RECEIPT_KEY:randomBytes(32).toString('hex'),GEMINI_API_KEYS:'["fixture-a","fixture-b","fixture-c","fixture-d"]'};
+ const records=[],env={DB,KIKI_PROVIDER_IO:ioMode,KIKI_STREAM_CONTEXT_MODE:contextMode,CAPTURE_RECEIPT_KEY:randomBytes(32).toString('hex'),GEMINI_API_KEYS:'["fixture-a","fixture-b","fixture-c","fixture-d"]'};
  let sequence=0,cookie,state,capture,mismatch=false,modelCalls=0;
  const req=(path,method='GET',body=null,extra={})=>new Request('https://receiver.test'+path,{method,headers:{'oai-authenticated-user-id':'replay-owner',Origin:'https://receiver.test',...(cookie?{Cookie:cookie}:{}),...(body?{'Content-Type':'application/json'}:{}),...extra},...(body?{body:body instanceof Uint8Array?body:JSON.stringify(body)}:{})});
  const call=async(path,method='GET',body=null,extra={})=>{const r=await worker.fetch(req(path,method,body,extra),env);if(r.headers.get('set-cookie'))cookie=r.headers.get('set-cookie').split(';')[0];assert.ok(r.ok,`${path}: ${r.status} ${r.ok?'':await r.text()}`);return r;};
@@ -29,6 +29,8 @@ export async function replayLab({ioMode='batched'}={}){
   state=events.find(e=>e.type==='state_snapshot').state;
   assert.equal(state.runtime.last_analysis_timing.provider_db_operations,ioMode==='batched'?4:17);
   assert.equal(state.runtime.last_analysis_timing.input_tokens,123);
+  assert.equal(state.runtime.last_analysis_timing.context_validation_mode,contextMode);
+  assert.equal(state.runtime.last_analysis_timing.context_db_reads,contextMode==='per_chunk'?1:state.runtime.last_analysis_timing.context_events);
   records.push({frame_sequence:sequence,checkpoint:state.queue.current_checkpoint_id,done_count:state.queue.done_checkpoint_ids.length,revision:state.revision,mismatch,metrics:state.runtime.last_analysis_timing});
  };
  const originalInfo=console.info;console.info=()=>{};mock.timers.enable({apis:['Date'],now:Date.UTC(2026,9,15)});
@@ -61,10 +63,10 @@ export async function replayLab({ioMode='batched'}={}){
    assert.equal(state.queue.done_checkpoint_ids.length,before+1,`${cp.id} must advance once`);
   }
   assert.equal(state.status,'completed');assert.equal(state.queue.done_checkpoint_ids.length,12);
-  return {schema:'lab-replay/v1',passed:true,synthetic_only:true,vision_mocked:true,real_simulink_accuracy_claim:false,paid_model_calls:0,mocked_model_calls:modelCalls,io_mode:ioMode,checkpoints_completed:12,records};
+  return {schema:'lab-replay/v1',passed:true,synthetic_only:true,vision_mocked:true,real_simulink_accuracy_claim:false,paid_model_calls:0,mocked_model_calls:modelCalls,io_mode:ioMode,context_mode:contextMode,checkpoints_completed:12,records};
  }finally{console.info=originalInfo;mock.timers.reset();DB.close();}
 }
 if(process.argv[1]===fileURLToPath(import.meta.url)){
  const arg=(name,fallback)=>{const i=process.argv.indexOf(name);return i<0?fallback:process.argv[i+1];};
- const result=await replayLab({ioMode:arg('--io-mode','batched')}),output=arg('--output','work/lab-replay.json');await mkdir(dirname(output),{recursive:true});await writeFile(output,JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify({passed:result.passed,checkpoints_completed:result.checkpoints_completed,paid_model_calls:0,report:output}));
+ const result=await replayLab({ioMode:arg('--io-mode','batched'),contextMode:arg('--context-mode','per_chunk')}),output=arg('--output','work/lab-replay.json');await mkdir(dirname(output),{recursive:true});await writeFile(output,JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify({passed:result.passed,checkpoints_completed:result.checkpoints_completed,paid_model_calls:0,report:output}));
 }

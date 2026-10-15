@@ -3232,6 +3232,31 @@ async function labMCP(request,env,owner){
  return json({jsonrpc:'2.0',id:rpc.id,error:{code:-32601,message:'Method not found'}},400);
 }
 
+// One current-state read per group of findings already decoded from one transport
+// chunk. No timer, TTL cache or speculative canonical state. Per-event is control.
+function streamContextBatch({mode='per_chunk',signal,read,valid,push}){
+ if(!['per_chunk','per_event'].includes(mode))throw Error('invalid_stream_context_configuration');
+ const metrics={context_validation_mode:mode,context_db_reads:0,context_db_ms:0,context_batches:0,context_events:0,context_max_batch:0,provider_chunks:0};
+ async function group(events){
+  if(signal.aborted)throw Error('analysis_cancelled');
+  const started=performance.now();let current;metrics.context_db_reads++;
+  try{current=await read();}finally{metrics.context_db_ms=Math.round(metrics.context_db_ms+performance.now()-started);}
+  if(signal.aborted)throw Error('analysis_cancelled');
+  if(!valid(current))throw Error('stale_context');
+  metrics.context_batches++;metrics.context_events+=events.length;metrics.context_max_batch=Math.max(metrics.context_max_batch,events.length);
+  // Synchronous enqueue: a rejected group publishes none of its findings.
+  for(const event of events)push(event);
+ }
+ async function batch(events){
+  if(!Array.isArray(events)||events.length>64)throw Error('invalid_output');
+  if(!events.length)return;
+  if(mode==='per_event'){for(const event of events)await group([event]);}
+  else await group(events);
+ }
+ return {batch,metrics};
+}
+export {streamContextBatch};
+
 // Experiment adapter around the existing owner, receipt, context and atomic tracker gates.
 function streamContext(s){const cp=checkpoint(s),step=s.steps.find(v=>v.checkpoint_id===cp?.id);return {lab_session_id:s.lab_session_id,experiment_id:s.experiment_id,checkpoint_id:cp?.id||null,visit_id:step?.current_visit_id||null,lab_revision:s.revision,workspace_id:s.workspace.id,capture_epoch:s.workspace.capture_epoch,view_revision:s.workspace.view_revision,parameter_revision:s.workspace.parameter_revision,condition:s.workspace.condition};}
 function decisionSummary(value){const rows=[...value.criteria,...value.action_findings];for(const [status,prefix] of [['mismatch','Check this: '],['match','Visible: '],['unknown','Not established: ']]){const row=rows.find(row=>row.status===status&&row.evidence.trim());if(row)return prefix+row.evidence;}return 'The relevant settings or connections are not established in this view.';}
@@ -3255,17 +3280,19 @@ async function analyzeLabFrameStream(bytes,cp,state,env,emit){
   async reset(){attempt++;firstByte=firstFinding=criticalMs=null;if(attempt>1)await emit({type:'attempt_reset',attempt});},
   async consume(response){const parser=new FindingParserJS(cp,GUIDED_POLICY.procedures[cp.id],true),decoder=new SSEDecoderJS(),reader=response.body.getReader();let stopped=false,usage={},critical=false;
    try{while(true){const {value,done}=await reader.read();if(done)break;if(firstByte===null)firstByte=Date.now()-started;
+    const pending=[];emit.metrics.provider_chunks++;
     for(const data of decoder.feed(value)){
      if(data==='[DONE]')continue;let raw;try{raw=streamStrictJSON(data);}catch{throw Error('invalid_output');}
      const candidates=raw.candidates||[];if(!Array.isArray(candidates)||candidates.length>1)throw Error('invalid_output');
      if(candidates.length){const candidate=candidates[0],parts=candidate.content?.parts||[],text=parts.filter(p=>typeof p.text==='string'&&!p.thought).map(p=>p.text).join('');
       if(stopped&&(text||candidate.finishReason))throw Error('invalid_output');
-      for(const event of parser.feed(text)){if(firstFinding===null)firstFinding=Date.now()-started;await emit({...event,attempt});}
-      if(!critical&&['criteria','action_findings','uncertainties'].every(k=>parser.completed.has(k))){critical=true;criticalMs=Date.now()-started;await emit({type:'critical_fields_ready',attempt});}
+      for(const event of parser.feed(text)){if(firstFinding===null)firstFinding=Date.now()-started;pending.push({...event,attempt});}
+      if(!critical&&['criteria','action_findings','uncertainties'].every(k=>parser.completed.has(k))){critical=true;criticalMs=Date.now()-started;pending.push({type:'critical_fields_ready',attempt});}
       if(candidate.finishReason){if(candidate.finishReason!=='STOP')throw Error('incomplete_output');stopped=true;}
      }
      if(raw.usageMetadata)usage=raw.usageMetadata;
     }
+    await emit.batch(pending);
    }decoder.finish();if(!stopped)throw Error('incomplete_output');const value=parser.finish();return {value:validateLabResult({...value,summary:decisionSummary(value)},cp,true),usage};
    }finally{await reader.cancel().catch(()=>{});}
   }});
@@ -3282,13 +3309,15 @@ async function labStreamRoute(request,env,owner,executionContext){
  const requestId=crypto.randomUUID(),started=Date.now();let task;
  const stream=new ReadableStream({start(controller){
   const push=event=>{if(closed||abort.signal.aborted)return;controller.enqueue(new TextEncoder().encode('data: '+JSON.stringify({schema:'lab-analysis-stream/v2',request_id:requestId,event_sequence:++sequence,server_time:nowISO(),context:admitted,...event})+'\n\n'));};
-  const contextMetrics={context_db_reads:0,context_db_ms:0};
+  const delivery=streamContextBatch({mode:env.KIKI_STREAM_CONTEXT_MODE||'per_chunk',signal:abort.signal,
+   read:()=>labLoad(env,id,owner),
+   valid:current=>admitted&&current.runtime.capture_active&&current.status==='active'&&JSON.stringify(streamContext(current))===JSON.stringify(admitted),
+   push:event=>push({...event,provisional:true})});
   const emit=Object.assign(async event=>{
    if(abort.signal.aborted)throw Error('analysis_cancelled');
-   if(event.type==='admitted')admitted=event.context;
-   else if(admitted){const start=performance.now();let current;contextMetrics.context_db_reads++;try{current=await labLoad(env,id,owner);}finally{contextMetrics.context_db_ms=Math.round(contextMetrics.context_db_ms+performance.now()-start);}if(!current.runtime.capture_active||current.status!=='active'||JSON.stringify(streamContext(current))!==JSON.stringify(admitted))throw Error('stale_context');}
-   push({...event,provisional:event.type!=='admitted'});
-  },{signal:abort.signal,metrics:contextMetrics});
+   if(event.type==='admitted'){admitted=event.context;push({...event,provisional:false});}
+   else await delivery.batch([event]);
+  },{signal:abort.signal,metrics:delivery.metrics,batch:delivery.batch});
   task=(async()=>{try{
    const result=await labAnalyze(env,s,request,owner,meta,capture,emit),commitFinishedMs=Date.now()-started;
    if(abort.signal.aborted)return;
@@ -3500,7 +3529,7 @@ export default {
       if(request.method==='GET' && url.pathname==='/static/lab.js') return response(ASSETS.labjs,200,{'Content-Type':'application/javascript'});
       if (request.method === 'GET' && url.pathname === '/health') {
         let keys=[],configuration_valid=true;try{keys=providerKeys(env);}catch{configuration_valid=false;}
-        return json({latency_experiment:{id:'provider-db-io/v1',provider_io_mode:env.KIKI_PROVIDER_IO||'batched'},json_stream:{available:true,wire_format:'lab-analysis-stream/v2',priority:['criteria','action_findings','uncertainties'],commit_before_auxiliary:true},status:'ok',mode:'hosted_frame_receipt',sample_hz:.5,image_storage:'none',analysis:{provider:'gemini',configured:providerConfigured(env),configuration_valid,key_count:keys.length,rotation_enabled:keys.length>1,quota_pool_count:new Set(keys.map(v=>v.quota_pool)).size,model:env.GEMINI_SCREEN_MODEL||ANALYSIS_MODEL,lab_model:env.GEMINI_LAB_MODEL||env.GEMINI_SCREEN_MODEL||ANALYSIS_MODEL}});
+        return json({latency_experiment:{id:'stream-context-batch/v1',provider_io_mode:env.KIKI_PROVIDER_IO||'batched',context_validation_mode:env.KIKI_STREAM_CONTEXT_MODE||'per_chunk'},json_stream:{available:true,wire_format:'lab-analysis-stream/v2',priority:['criteria','action_findings','uncertainties'],commit_before_auxiliary:true},status:'ok',mode:'hosted_frame_receipt',sample_hz:.5,image_storage:'none',analysis:{provider:'gemini',configured:providerConfigured(env),configuration_valid,key_count:keys.length,rotation_enabled:keys.length>1,quota_pool_count:new Set(keys.map(v=>v.quota_pool)).size,model:env.GEMINI_SCREEN_MODEL||ANALYSIS_MODEL,lab_model:env.GEMINI_LAB_MODEL||env.GEMINI_SCREEN_MODEL||ANALYSIS_MODEL}});
       }
       const owner = request.headers.get('oai-authenticated-user-id');
       if(url.pathname==='/mcp' && request.method==='POST') return await labMCP(request,env,owner);

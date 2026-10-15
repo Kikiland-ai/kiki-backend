@@ -21,17 +21,19 @@ async function analyzeLabFrameStream(bytes,cp,state,env,emit){
   async reset(){attempt++;firstByte=firstFinding=criticalMs=null;if(attempt>1)await emit({type:'attempt_reset',attempt});},
   async consume(response){const parser=new FindingParserJS(cp,GUIDED_POLICY.procedures[cp.id],true),decoder=new SSEDecoderJS(),reader=response.body.getReader();let stopped=false,usage={},critical=false;
    try{while(true){const {value,done}=await reader.read();if(done)break;if(firstByte===null)firstByte=Date.now()-started;
+    const pending=[];emit.metrics.provider_chunks++;
     for(const data of decoder.feed(value)){
      if(data==='[DONE]')continue;let raw;try{raw=streamStrictJSON(data);}catch{throw Error('invalid_output');}
      const candidates=raw.candidates||[];if(!Array.isArray(candidates)||candidates.length>1)throw Error('invalid_output');
      if(candidates.length){const candidate=candidates[0],parts=candidate.content?.parts||[],text=parts.filter(p=>typeof p.text==='string'&&!p.thought).map(p=>p.text).join('');
       if(stopped&&(text||candidate.finishReason))throw Error('invalid_output');
-      for(const event of parser.feed(text)){if(firstFinding===null)firstFinding=Date.now()-started;await emit({...event,attempt});}
-      if(!critical&&['criteria','action_findings','uncertainties'].every(k=>parser.completed.has(k))){critical=true;criticalMs=Date.now()-started;await emit({type:'critical_fields_ready',attempt});}
+      for(const event of parser.feed(text)){if(firstFinding===null)firstFinding=Date.now()-started;pending.push({...event,attempt});}
+      if(!critical&&['criteria','action_findings','uncertainties'].every(k=>parser.completed.has(k))){critical=true;criticalMs=Date.now()-started;pending.push({type:'critical_fields_ready',attempt});}
       if(candidate.finishReason){if(candidate.finishReason!=='STOP')throw Error('incomplete_output');stopped=true;}
      }
      if(raw.usageMetadata)usage=raw.usageMetadata;
     }
+    await emit.batch(pending);
    }decoder.finish();if(!stopped)throw Error('incomplete_output');const value=parser.finish();return {value:validateLabResult({...value,summary:decisionSummary(value)},cp,true),usage};
    }finally{await reader.cancel().catch(()=>{});}
   }});
@@ -48,13 +50,15 @@ async function labStreamRoute(request,env,owner,executionContext){
  const requestId=crypto.randomUUID(),started=Date.now();let task;
  const stream=new ReadableStream({start(controller){
   const push=event=>{if(closed||abort.signal.aborted)return;controller.enqueue(new TextEncoder().encode('data: '+JSON.stringify({schema:'lab-analysis-stream/v2',request_id:requestId,event_sequence:++sequence,server_time:nowISO(),context:admitted,...event})+'\n\n'));};
-  const contextMetrics={context_db_reads:0,context_db_ms:0};
+  const delivery=streamContextBatch({mode:env.KIKI_STREAM_CONTEXT_MODE||'per_chunk',signal:abort.signal,
+   read:()=>labLoad(env,id,owner),
+   valid:current=>admitted&&current.runtime.capture_active&&current.status==='active'&&JSON.stringify(streamContext(current))===JSON.stringify(admitted),
+   push:event=>push({...event,provisional:true})});
   const emit=Object.assign(async event=>{
    if(abort.signal.aborted)throw Error('analysis_cancelled');
-   if(event.type==='admitted')admitted=event.context;
-   else if(admitted){const start=performance.now();let current;contextMetrics.context_db_reads++;try{current=await labLoad(env,id,owner);}finally{contextMetrics.context_db_ms=Math.round(contextMetrics.context_db_ms+performance.now()-start);}if(!current.runtime.capture_active||current.status!=='active'||JSON.stringify(streamContext(current))!==JSON.stringify(admitted))throw Error('stale_context');}
-   push({...event,provisional:event.type!=='admitted'});
-  },{signal:abort.signal,metrics:contextMetrics});
+   if(event.type==='admitted'){admitted=event.context;push({...event,provisional:false});}
+   else await delivery.batch([event]);
+  },{signal:abort.signal,metrics:delivery.metrics,batch:delivery.batch});
   task=(async()=>{try{
    const result=await labAnalyze(env,s,request,owner,meta,capture,emit),commitFinishedMs=Date.now()-started;
    if(abort.signal.aborted)return;

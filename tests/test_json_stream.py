@@ -97,8 +97,9 @@ class PipelineTests(unittest.IsolatedAsyncioTestCase):
    return response.body_iterator
   async def committed(iterator):
    while True:
-    event=json.loads((await anext(iterator))[6:])
-    if event['type']=='guidance_committed':return event
+    for packet in (await anext(iterator)).strip().split('\n\n'):
+     event=json.loads(packet[6:])
+     if event['type']=='guidance_committed':return event
   first=await open_stream();core=await committed(first)
   self.assertEqual(core['schema'],'lab-analysis-stream/v2');self.assertEqual(core['state']['projection'],'committed-decision/v1');self.assertNotIn('evidence',core['state'])
   self.assertIsNone(self.service.load(self.id,'owner')['runtime']['analysis_token'])
@@ -109,6 +110,44 @@ class PipelineTests(unittest.IsolatedAsyncioTestCase):
   release.set()
   async for event in first:pass
   self.assertEqual(self.service.load(self.id,'owner')['revision'],newer['revision'],'Late auxiliary delivery cannot save an older revision')
+ async def test_api_context_modes_share_chunks_and_keep_delivery_context_checks(self):
+  from prototypes.json_stream.api import stream_router
+  for index,mode in enumerate(('per_event','per_chunk')):
+   if index:
+    self.now+=3.1;self.capture['frame'].update(frame_id='capture:1:2',sequence=2,server_received_unix=self.now)
+   state=self.service.load(self.id,'owner')
+   body={'revision':state['revision'],'frame_id':self.capture['frame']['frame_id'],'view_revision':1}
+   class Request:
+    async def stream(request):yield json.dumps(body).encode()
+   endpoint=stream_router(self.service,lambda request:'owner',lambda request:None,context_mode=mode).routes[0].endpoint
+   response=await endpoint(self.id,Request());packets=[]
+   async for chunk in response.body_iterator:
+    packets.extend(json.loads(packet[6:]) for packet in chunk.strip().split('\n\n'))
+   result=next(e['state'] for e in packets if e['type']=='state_snapshot');timing=result['runtime']['last_analysis_timing']
+   self.assertEqual(timing['context_validation_mode'],mode);self.assertEqual(timing['context_db_reads'],5 if mode=='per_event' else 2)
+   tail=next(e['timing'] for e in packets if e['type']=='stream_complete')
+   self.assertGreater(tail['context_delivery_db_reads'],0);self.assertNotIn('context_delivery_db_reads',timing);self.assertEqual(result['queue']['done_checkpoint_ids'],[])
+ async def test_api_final_commit_rejects_view_change_after_last_finding(self):
+  from prototypes.json_stream.api import stream_router
+  self.release=asyncio.Event()
+  async def transport(request):
+   body=json.loads(request.content);cp=json.loads(body['contents'][0]['parts'][0]['text'])['checkpoint']
+   def event(text,finish=False):return ('data: '+json.dumps({'candidates':[{'content':{'parts':[{'text':text}]},**({'finishReason':'STOP'} if finish else {})}]})+'\n\n').encode()
+   return httpx.Response(200,stream=BytesStream(event(json.dumps(decision(cp))),event('',True),self.release))
+  self.analyzer.provider.transport=httpx.MockTransport(transport)
+  state=self.service.load(self.id,'owner');body={'revision':state['revision'],'frame_id':self.capture['frame']['frame_id'],'view_revision':1}
+  class Request:
+   async def stream(request):yield json.dumps(body).encode()
+  endpoint=stream_router(self.service,lambda request:'owner',lambda request:None,context_mode='per_chunk').routes[0].endpoint
+  response=await endpoint(self.id,Request());seen=asyncio.Event();packets=[]
+  async def collect():
+   async for chunk in response.body_iterator:
+    for packet in chunk.strip().split('\n\n'):
+     value=json.loads(packet[6:]);packets.append(value)
+     if value['type']=='critical_fields_ready':seen.set()
+  task=asyncio.create_task(collect());await asyncio.wait_for(seen.wait(),2)
+  current=self.service.load(self.id,'owner');self.service.change(self.id,'owner',ContextChange(revision=current['revision'],action='view_changed',view_revision=2));self.release.set();await task
+  self.assertTrue(any(e['type']=='discarded' for e in packets));self.assertFalse(any(e['type']=='guidance_committed' for e in packets));self.assertIsNone(self.service.load(self.id,'owner')['runtime']['candidate'])
  async def test_nonstop_has_no_candidate_and_preserves_progress(self):
   self.nonstop=True
   async def sink(event):pass

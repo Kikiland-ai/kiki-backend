@@ -106,3 +106,54 @@ test('the browser rejects foreign frame provenance and deduplicates old sequence
  await consumeAnalysisStream(response(),{expectedFrame:frame,expectedContext:context,onEvent:e=>seen.push(e.type)});assert.deepEqual(seen,['admitted','state_snapshot','stream_complete']);
  await assert.rejects(consumeAnalysisStream(response(),{expectedFrame:{...frame,sha256:'foreign'},expectedContext:context,onEvent(){}}));
 });
+
+for(const mode of ['per_event','per_chunk']){
+ test(`${mode}: a complete provider chunk shares validation without weakening the decision`,async t=>{
+  const p=await prepare(t);p.env.KIKI_STREAM_CONTEXT_MODE=mode;
+  p.env.LAB_STREAM_FETCH=async(url,options)=>{
+   const context=JSON.parse(JSON.parse(options.body).contents[0].parts[0].text),value=findings(context.checkpoint,context.procedure);delete value.summary;
+   return new Response('data: '+JSON.stringify({candidates:[{content:{parts:[{text:JSON.stringify(value)}]},finishReason:'STOP'}]})+'\n\n',{headers:{'Content-Type':'text/event-stream'}});
+  };
+  const all=events(await(await worker.fetch(streamRequest(p.state,p.cookie),p.env)).text()),state=all.find(e=>e.type==='state_snapshot').state,timing=state.runtime.last_analysis_timing;
+  assert.equal(timing.context_validation_mode,mode);assert.equal(timing.context_db_reads,mode==='per_chunk'?1:5);assert.equal(timing.context_events,5);assert.equal(timing.provider_chunks,1);assert.equal(state.queue.done_checkpoint_ids.length,0);assert.ok(all.some(e=>e.type==='guidance_committed'));
+ });
+ for(const mutation of [{action:'view_changed',view_revision:2},{action:'parameters_changed'},{action:'pause'},{action:'revisit',checkpoint_id:'CP-DSB-01'}]){
+  test(`${mode}: ${mutation.action} after the last finding is rejected by final commit validation`,async t=>{
+   const p=await prepare(t);p.env.KIKI_STREAM_CONTEXT_MODE=mode;let release;const gate=new Promise(r=>release=r);
+   p.env.LAB_STREAM_FETCH=async(url,options)=>{
+    const context=JSON.parse(JSON.parse(options.body).contents[0].parts[0].text),value=findings(context.checkpoint,context.procedure);delete value.summary;const encoder=new TextEncoder();
+    return new Response(new ReadableStream({async start(controller){
+     const send=(text,finish=false)=>controller.enqueue(encoder.encode('data: '+JSON.stringify({candidates:[{content:{parts:[{text}]},...(finish?{finishReason:'STOP'}:{})}]})+'\n\n'));
+     send(JSON.stringify(value));await gate;send('',true);controller.close();
+    }}),{headers:{'Content-Type':'text/event-stream'}});
+   };
+   const response=await worker.fetch(streamRequest(p.state,p.cookie),p.env),reader=response.body.getReader();let raw='';
+   while(!raw.includes('critical_fields_ready')){const next=await reader.read();assert.ok(!next.done);raw+=new TextDecoder().decode(next.value);}
+   let current=await(await worker.fetch(request(`/lab-sessions/${p.state.lab_session_id}`),p.env)).json();
+   const changed=await worker.fetch(request(`/lab-sessions/${p.state.lab_session_id}/action`,'POST',{revision:current.revision,...mutation}),p.env);assert.equal(changed.status,200);release();
+   while(true){const next=await reader.read();if(next.done)break;raw+=new TextDecoder().decode(next.value);}
+   const all=events(raw);assert.ok(all.some(e=>e.type==='discarded'));assert.ok(!all.some(e=>e.type==='guidance_committed'));
+   current=await(await worker.fetch(request(`/lab-sessions/${p.state.lab_session_id}`),p.env)).json();assert.equal(current.runtime.candidate,null);assert.equal(current.queue.done_checkpoint_ids.length,0);
+  });
+ }
+}
+
+for(const shape of ['coalesced_sse','separated_sse','byte_fragments'])test(`per_chunk preserves findings for ${shape}`,async t=>{
+ const p=await prepare(t);p.env.KIKI_STREAM_CONTEXT_MODE='per_chunk';let expected;
+ p.env.LAB_STREAM_FETCH=async(url,options)=>{
+  const context=JSON.parse(JSON.parse(options.body).contents[0].parts[0].text),value=findings(context.checkpoint,context.procedure);delete value.summary;expected=value;
+  const whole=JSON.stringify(value),encoder=new TextEncoder();
+  const messages=Array.from({length:7},(_,i)=>encoder.encode('data: '+JSON.stringify({candidates:[{content:{parts:[{text:whole.slice(Math.floor(i*whole.length/7),Math.floor((i+1)*whole.length/7))}]},...(i===6?{finishReason:'STOP'}:{})}]})+'\n\n'));
+  const joined=Buffer.concat(messages);
+  return new Response(new ReadableStream({start(controller){
+   if(shape==='coalesced_sse')controller.enqueue(joined);
+   else if(shape==='separated_sse')for(const message of messages)controller.enqueue(message);
+   else for(const byte of joined)controller.enqueue(new Uint8Array([byte]));
+   controller.close();
+  }}),{headers:{'Content-Type':'text/event-stream'}});
+ };
+ const all=events(await(await worker.fetch(streamRequest(p.state,p.cookie),p.env)).text()),state=all.find(e=>e.type==='state_snapshot').state;
+ assert.deepEqual(state.runtime.candidate.criteria,expected.criteria);assert.deepEqual(state.runtime.candidate.action_findings,expected.action_findings);
+ assert.equal(state.queue.done_checkpoint_ids.length,0);assert.equal(all.filter(e=>e.type==='provisional_findings').length,expected.criteria.length+expected.action_findings.length);
+ const timing=state.runtime.last_analysis_timing;assert.ok(timing.context_db_reads<=timing.context_events);if(shape==='coalesced_sse')assert.equal(timing.context_db_reads,1);
+});

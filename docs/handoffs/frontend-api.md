@@ -1,3 +1,9 @@
+# Stream context batching addition — 15 October 2026
+
+`experiment/stream-context-batch` retains the provider-I/O control and adds fresh per-chunk context validation, with `KIKI_STREAM_CONTEXT_MODE=per_event` as rollback. Endpoints and SSE v2 events remain unchanged. A network byte chunk may contain multiple SSE messages; consume SSE delimiters rather than network chunk boundaries. New timing counters record context batches/events and transport chunks; Python-only delivery counters appear in the completion tail. Canonical guidance still requires the full final tracker checks. See [implementation and automated gates](../experiments/stream-context-batch-implementation.md).
+
+---
+
 # Provider I/O experiment addition — 15 October 2026
 
 Branch `experiment/provider-db-io` adds private timing/usage diagnostics and `/health.latency_experiment` metadata. Existing endpoints, SSE `lab-analysis-stream/v2`, complete decision and committed guidance semantics stay unchanged. `KIKI_PROVIDER_IO=batched` is the default for the Python streaming pool and hosted provider adapter; `serial` selects the routing control. Python's inherited nonstream pool remains unchanged. See [implementation and automated acceptance](../experiments/provider-db-io-implementation.md). Other latency arms are prepared separately. The live Site remains Worker/D1; no Python origin has been deployed.

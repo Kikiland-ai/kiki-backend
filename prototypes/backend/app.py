@@ -62,7 +62,7 @@ def create_app(data_dir=Path('work/backend'), *, analyzer=None, text_factory=Non
         value=await original_health()
         value['mode']='screen_lab_and_mixed_language_jobs'
         value['api_schema']='kiki-prototype-api/v1'
-        value['latency_experiment']={'id':'provider-db-io/v1','provider_io_mode':getattr(getattr(app.state.lab.analyzer,'provider',None),'io_mode',None)}
+        value['latency_experiment']={'id':'stream-context-batch/v1','provider_io_mode':getattr(getattr(app.state.lab.analyzer,'provider',None),'io_mode',None),'context_validation_mode':os.environ.get('KIKI_STREAM_CONTEXT_MODE','per_chunk')}
         value['json_stream']={'available':bool(getattr(app.state.lab.analyzer,'supports_stream',False)),'wire_format':'lab-analysis-stream/v2','priority':['criteria','action_findings','uncertainties'],'commit_before_auxiliary':True}
         value['mixed_language']={'text_configured':jobs.text_configured,'speech_configured':jobs.speech_configured,
             'text_model':jobs.text_model,'speech_model':jobs.speech_model,'voice':jobs.voice,'workers':jobs.workers,

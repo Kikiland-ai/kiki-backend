@@ -49,6 +49,8 @@ class JsonStreamingAnalyzer(GeminiAnalyzer):
             parser=FindingParser(checkpoint,decision_only=short);sse=SSEDecoder();stopped=False;usage={};critical=False
             async for chunk in response.aiter_bytes():
                 if first_byte is None:first_byte=round((time.monotonic()-started)*1000)
+                pending=[]
+                if hasattr(sink,'metrics'):sink.metrics['provider_chunks']=sink.metrics.get('provider_chunks',0)+1
                 for data in sse.feed(chunk):
                     if data=='[DONE]':continue
                     try:raw=json.loads(data,object_pairs_hook=unique_object)
@@ -63,14 +65,17 @@ class JsonStreamingAnalyzer(GeminiAnalyzer):
                         for event in parser.feed(text.encode()):
                             if event['type']=='provisional_findings':
                                 if first_finding is None:first_finding=round((time.monotonic()-started)*1000)
-                                await sink({**event,'attempt':attempt})
+                                pending.append({**event,'attempt':attempt})
                         if not critical and {'criteria','action_findings','uncertainties'}<=parser.completed:
                             critical=True;critical_ms=round((time.monotonic()-started)*1000)
-                            await sink({'type':'critical_fields_ready','attempt':attempt})
+                            pending.append({'type':'critical_fields_ready','attempt':attempt})
                         if candidate.get('finishReason'):
                             if candidate['finishReason']!='STOP':raise AnalysisFailure('incomplete_output')
                             stopped=True
                     if isinstance(raw.get('usageMetadata'),dict):usage=raw['usageMetadata']
+                if hasattr(sink,'batch'):await sink.batch(pending)
+                else:
+                    for event in pending:await sink(event)
             sse.finish()
             if not stopped:raise AnalysisFailure('incomplete_output')
             return parser.finish(),usage
@@ -78,6 +83,6 @@ class JsonStreamingAnalyzer(GeminiAnalyzer):
             body=priority_request(pixels,checkpoint,state,self.model,decision_only=short)
             result,usage=await self.provider.stream(self.model,body,consume,reset,provider_metrics.update)
             counts={target:usage.get(source) if type(usage.get(source)) is int and usage[source]>=0 else None for target,source in {'input_tokens':'promptTokenCount','cached_tokens':'cachedContentTokenCount','thinking_tokens':'thoughtsTokenCount','output_tokens':'candidatesTokenCount','total_tokens':'totalTokenCount'}.items()}
-            return AnalysisFindings(result,{**provider_metrics,**getattr(sink,'metrics',{}),**counts,'image_bytes':len(pixels),'request_text_characters':len(body['systemInstruction']['parts'][0]['text'])+len(body['contents'][0]['parts'][0]['text'])+len(json.dumps(body['generationConfig']['responseJsonSchema'])),'provider_ms':round((time.monotonic()-started)*1000),'decision_validated_ms':round((time.monotonic()-started)*1000),'first_byte_ms':first_byte,'first_finding_ms':first_finding,'critical_fields_ms':critical_ms,'wire_format':'lab-observer-decision/v1' if short else 'lab-observer-json-stream/v1','observer_prompt_version':self.prompt_version})
+            return AnalysisFindings(result,{**provider_metrics,**{k:v for k,v in getattr(sink,'metrics',{}).items() if not k.startswith('context_delivery_')},**counts,'image_bytes':len(pixels),'request_text_characters':len(body['systemInstruction']['parts'][0]['text'])+len(body['contents'][0]['parts'][0]['text'])+len(json.dumps(body['generationConfig']['responseJsonSchema'])),'provider_ms':round((time.monotonic()-started)*1000),'decision_validated_ms':round((time.monotonic()-started)*1000),'first_byte_ms':first_byte,'first_finding_ms':first_finding,'critical_fields_ms':critical_ms,'wire_format':'lab-observer-decision/v1' if short else 'lab-observer-json-stream/v1','observer_prompt_version':self.prompt_version})
         except AnalysisFailure:raise
         except (ValueError,TypeError,KeyError,IndexError):raise AnalysisFailure('invalid_output') from None

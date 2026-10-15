@@ -1,3 +1,15 @@
+# Stream context batching — 15 October 2026
+
+Current arm: `stream-context-batch/v1`, based on the frozen provider-I/O source `c67fc3a5537ddcf98b8d8bfacbb606749687f693`. Provider routing stays batched for the paired context comparison. `KIKI_STREAM_CONTEXT_MODE=per_chunk` is the default; `per_event` is the control/rollback. No model input, prompt, output schema, progress policy, key pool or deadline changes.
+
+Already decoded findings from one incoming provider byte chunk share one fresh authoritative context read. Empty fragments need no read. No context is cached across chunks, no timer holds findings, and no partial response can commit. Pause/view/visit/parameter/workspace/capture fences and final durable-save context/freshness checks remain. SSE v2 event shapes/order are unchanged. Python can yield several SSE messages in one byte chunk; consumers must use normal SSE framing rather than assume one message per network read.
+
+New timing fields: `context_validation_mode`, `context_batches`, `context_events`, `context_max_batch`, `provider_chunks`, alongside `context_db_reads/ms`. These permit automatic measurement during ordinary use. Raw chunk count includes empty fragments and all attempts, so use context batches/events to assess effective batching. Python delivery checks have separate tail-only `context_delivery_db_reads/ms` counters.
+
+The backend's free `python scripts/run-screen-reader-evaluation.py` gates the arm with both complete lab replays, malformed/fragmented streams, changed views/visits/pause, last-finding-before-STOP races, disconnect, wrong settings and two-frame progress rules. `node scripts/benchmark-context-batch.mjs` compares one, three and seven event-bearing chunk groups under injected DB delay, retaining the no-gain case. These automated checks need no user screen-sharing run or paid API. Production gain remains unmeasured until the new code receives ordinary traffic.
+
+---
+
 # Provider database I/O arm — 15 October 2026
 
 Current source implements `provider-db-io/v1`. `KIKI_PROVIDER_IO=batched` is the default; `serial` selects the unchanged routing control. The model prompt, three-field decision schema, SSE v2, authored IDs, complete STOP and two-frame gates are unchanged. Healthy four-key routing uses four DB calls rather than seventeen, including three before HTTP rather than fifteen. This count reduction is not a production end-to-end latency claim.

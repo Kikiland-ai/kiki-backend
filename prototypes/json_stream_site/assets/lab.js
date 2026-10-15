@@ -1,13 +1,13 @@
-import {verificationCadence} from '/static/lab-cadence.js';
+import {verificationCadence,sameScreenContent} from '/static/lab-cadence.js';
 import {startAnalysisStream} from '/static/json-stream-client.js';
 /* Shared browser transport/display. Progress decisions come from the backend. */
 (() => {
  const $=id=>document.getElementById(id);
  let state=null,definition=null,policy=null,python=false,latest=null,captureId=null,attaching=null,busy=false,editing=false,viewChanging=false,generation=0;
- let streamEnabled=true,streamRows=[],activeStream=null;
+ let streamEnabled=true,streamRows=[],activeStream=null,acceptedObservation=null,lastFingerprint=null,lastSamplingContext=null,lastBound=false;
  const pendingStreams=new Set();
  const clearStream=()=>{streamRows=[];$('lab-stream-feedback').hidden=true;};
- function invalidateStream(){generation++;for(const item of pendingStreams)item.controller.abort();activeStream=null;clearStream();}
+ function invalidateStream(){generation++;void window.KikiWriting?.invalidate('Lab context or attachment changed');for(const item of pendingStreams)item.controller.abort();activeStream=null;clearStream();}
  async function streamedCheck(id,selected,version){
   clearStream();const item={controller:new AbortController(),committed:false,first:null,core:null,tail:null};activeStream=item;
   // Only auxiliary delivery is cancelled here; its durable decision is final.
@@ -15,9 +15,10 @@ import {startAnalysisStream} from '/static/json-stream-client.js';
   pendingStreams.add(item);const started=performance.now();
   const showTiming=()=>{if(activeStream===item&&version===generation)$('lab-stream-timing').textContent=`This check: first feedback ${item.first===null?'—':(item.first/1000).toFixed(2)+' s'}; committed guidance ${item.core===null?'—':(item.core/1000).toFixed(2)+' s'}; auxiliary ${item.tail===null?'pending':(item.tail/1000).toFixed(2)+' s'}. Verification resumes from the committed decision.`;};
   const context={lab_session_id:id,checkpoint_id:state.queue.current_checkpoint_id,visit_id:python?state.current_visit_id:step().current_visit_id,workspace_id:state.workspace.id,capture_epoch:state.workspace.capture_epoch,view_revision:state.workspace.view_revision,parameter_revision:state.workspace.parameter_revision,condition:state.workspace.condition};
-  const request=python?{headers:{'Content-Type':'application/json'},body:JSON.stringify({revision:state.revision,frame_id:selected.frame.frame_id,view_revision:selected.frame.view_revision})}:{headers:{'Content-Type':'image/jpeg','X-Capture-Frame':JSON.stringify(selected.meta)},body:selected.blob};
+  const drawingHeaders=window.KikiWriting?.requestHeaders(selected)||{};
+  const request=python?{headers:{'Content-Type':'application/json'},body:JSON.stringify({revision:state.revision,frame_id:selected.frame.frame_id,view_revision:selected.frame.view_revision})}:{headers:{'Content-Type':'image/jpeg','X-Capture-Frame':JSON.stringify(selected.meta),...drawingHeaders},body:selected.blob};
   let r;try{r=await fetch(`/lab-sessions/${id}/check-stream`,{method:'POST',credentials:'same-origin',...request,signal:AbortSignal.any([item.controller.signal,AbortSignal.timeout(25000)])});}catch(error){pendingStreams.delete(item);throw error;}
-  const pipe=startAnalysisStream(r,{expectedFrame:selected.frame,expectedContext:context,signal:item.controller.signal,onEvent:event=>{
+  const pipe=startAnalysisStream(r,{expectedFrame:selected.frame,expectedContext:context,streamContract:drawingHeaders['X-Guidance-Contract']?'lab-analysis-stream/v3':null,signal:item.controller.signal,onEvent:event=>{
    if(version!==generation||state?.lab_session_id!==id||activeStream!==item)return;
    if(event.type==='attempt_reset'){item.first=item.core=null;streamRows=[];$('lab-stream-findings').replaceChildren();$('lab-stream-progress').textContent='Trying another available connection…';}
    if(event.type==='admitted'){$('lab-stream-feedback').hidden=false;$('lab-stream-label').textContent='READING THIS FRAME';$('lab-stream-progress').textContent='Checking the visible settings and connections…';}
@@ -29,7 +30,7 @@ import {startAnalysisStream} from '/static/json-stream-client.js';
    // v2 snapshots are an auxiliary historical projection, never a state update.
   }});
   void pipe.completion.then(()=>{item.tail=performance.now()-started;showTiming();}).catch(()=>{if(item.committed&&activeStream===item&&version===generation)$('lab-stream-timing').textContent+=' Auxiliary delivery interrupted; the committed decision is retained.';}).finally(()=>pendingStreams.delete(item));
-  const result=await pipe.committed;item.committed=true;if(item.core===null)item.core=performance.now()-started;showTiming();return result;
+  const result=await pipe.committed;if(version!==generation||activeStream!==item||state?.lab_session_id!==id)throw new DOMException('Obsolete analysis completion','AbortError');item.committed=true;if(item.core===null)item.core=performance.now()-started;showTiming();return result;
  }
  let nextRetryAt=0,lastCheck=0,lastHash=null,lastCheckpoint=null,lastHeartbeat=0,lastCheckFrameId=null;
  const storage=()=>python?'kiki-python-lab-id':'kiki-last-lab-id';
@@ -47,7 +48,7 @@ import {startAnalysisStream} from '/static/json-stream-client.js';
   return primary.length?primary:(policy.fallback_confirmations[cp]||[]).filter(id=>pending.some(c=>c.criterion_id===id)&&state.runtime.candidate?.criteria.some(c=>c.criterion_id===id&&c.status==='unknown'));
  }
  function render(){
-  if(!state||!definition||!policy)return;
+  if(!state||!definition||!policy)return;window.KikiWriting?.context(state);
   $('lab-start').hidden=true;$('lab-run').hidden=false;
   const cp=current(),currentStep=step(),candidate=state.runtime.candidate,guide=state.guidance||{},action=guide.current_action;
   $('lab-model').textContent=python?state.workspace.model_name:state.workspace.external_project_ref;
@@ -70,8 +71,10 @@ import {startAnalysisStream} from '/static/json-stream-client.js';
   const nextText=state.guidance?.next_instruction||(next?policy.actions[next.id]:null);
   $('lab-next').textContent=nextText?`Coming next: ${nextText}`:'Coming next: save and review your experiment.';
   $('lab-budget').textContent=`${state.runtime.analysis_attempts} screen reads. Progress is screen-inferred or reported; understanding remains unassessed.`;
+  if(candidate&&state.runtime.analysis_status==='available'&&acceptedObservation?.observation_id!==candidate.observation_id)acceptedObservation={...candidate,lab_session_id:state.lab_session_id,context:[state.workspace.id,state.workspace.capture_epoch,state.workspace.view_revision,state.workspace.parameter_revision,state.workspace.condition]};
+  const accepted=acceptedObservation?.lab_session_id===state.lab_session_id?acceptedObservation:null,acceptedAge=accepted?Date.now()-(accepted.source_frame.server_received_unix_ms??accepted.source_frame.server_received_unix*1000):Infinity,historical=!accepted||acceptedAge>=20000||JSON.stringify(accepted.context)!==JSON.stringify([state.workspace.id,state.workspace.capture_epoch,state.workspace.view_revision,state.workspace.parameter_revision,state.workspace.condition])||!state.runtime.capture_active;
   const age=candidate?Date.now()-(candidate.source_frame.server_received_unix_ms??candidate.source_frame.server_received_unix*1000):Infinity;
-  $('lab-observation').textContent=candidate&&age<20000?candidate.summary:state.status==='completed'?'This experiment’s steps have been tracked.':!latest?'Share the matching model so I can follow along.':'I’m watching for the current action. Keep the relevant settings or scope visible.';
+  $('lab-observation').textContent=accepted?`${historical?'Earlier accepted view':'What I can see'}: ${accepted.summary}`:state.status==='completed'?'This experiment’s steps have been tracked.':!latest?'Share the matching model so I can follow along.':'Reading your shared screen. The accepted observation will appear here when verification completes.';
   $('lab-watch-state').textContent=busy?'READING YOUR SCREEN':state.status==='paused'?'GUIDANCE PAUSED':nextRetryAt>Date.now()?`ANALYSIS RETRY IN ${Math.ceil((nextRetryAt-Date.now())/1000)}s`:latest?'FOLLOWING ALONG':'WAITING FOR YOUR SCREEN';
   $('lab-checked').hidden=!candidate;
   if(candidate){const src=`/lab-sessions/${state.lab_session_id}/image?observation=${candidate.observation_id}`;if($('lab-checked').getAttribute('src')!==src)$('lab-checked').src=src;}else $('lab-checked').removeAttribute('src');
@@ -90,7 +93,7 @@ import {startAnalysisStream} from '/static/json-stream-client.js';
   $('lab-ledger').replaceChildren(...definition.checkpoints.map(c=>{const option=document.createElement('option');option.value=c.id;option.textContent=`${c.order}. ${c.instruction.en}`;option.selected=c.id===cp?.id;return option;}));
   $('lab-history-link').href=`/lab-sessions/${state.lab_session_id}/events`;
  }
- async function refresh(){if(!state)return;const id=state.lab_session_id,data=await api(`/lab-sessions/${id}`);if(state?.lab_session_id===id&&data.revision>=state.revision){state=data;render();}}
+ async function refresh(){if(!state)return;const id=state.lab_session_id,version=generation,data=await api(`/lab-sessions/${id}`);if(version===generation&&state?.lab_session_id===id&&data.revision>=state.revision){state=data;render();}}
  async function action(name,extra={}){
   invalidateStream();
   await refresh();const id=state.lab_session_id;
@@ -101,12 +104,12 @@ import {startAnalysisStream} from '/static/json-stream-client.js';
   if(!state)return;await refresh();
   if(!python||state.workspace.capture_session_id!==id)state=await api(`/lab-sessions/${state.lab_session_id}/attach`,'POST',{revision:state.revision,capture_session_id:id});
   const generic=$('enable-analysis');if(generic){generic.checked=false;generic.dispatchEvent(new Event('change'));}
-  render();message('I’m following your model. Keep working in Simulink; the next action will update as I can read it.');
+  window.KikiWriting?.attach(state,id);render();message('I’m following your model. Keep working in Simulink; the next action will update as I can read it.');
  }
  async function check(force=false){
   if(!state||!latest||busy||editing||viewChanging||state.status!=='active'||!current())return;
   if(Date.now()<nextRetryAt)return;
-  const cp=state.queue.current_checkpoint_id,same=latest.frame?.sha256===lastHash&&cp===lastCheckpoint;
+  const cp=state.queue.current_checkpoint_id,sampling=JSON.stringify([state.workspace.id,state.workspace.capture_epoch,state.workspace.view_revision,state.workspace.parameter_revision,state.workspace.condition,step().current_visit_id,state.guidance.current_action?.id]),same=cp===lastCheckpoint&&sampling===lastSamplingContext&&!!latest.writingBinding===lastBound&&sameScreenContent({hash:latest.frame?.sha256,fingerprint:latest.visualFingerprint},{hash:lastHash,fingerprint:lastFingerprint});
   const waitingForActionRead=state.runtime.candidate?.action_findings?.some(a=>a.status==='match'&&(state.procedure_tracking?.[a.action_id]?.count||0)<policy.minimum_matches);
   const waitingForSecondRead=state.runtime.candidate?.criteria.some(c=>c.status==='match'&&!policy.confirmations[cp]?.includes(c.criterion_id)&&!policy.responses[c.criterion_id]&&step().criteria.find(v=>v.criterion_id===c.criterion_id)?.state!=='satisfied');
   const evidenceExpiring=Object.values({...state.auto_tracking,...state.procedure_tracking}).some(v=>v.count>=policy.minimum_matches&&Date.now()-v.last_seen_ms>policy.support_age_ms/2);
@@ -116,28 +119,28 @@ import {startAnalysisStream} from '/static/json-stream-client.js';
   try{
    if(attaching)await attaching;
    if(python)await refresh();if(version!==generation||!latest)return;
-   const selected=latest;lastHash=selected.frame?.sha256;lastCheckpoint=state.queue.current_checkpoint_id;lastCheckFrameId=selected.frame?.frame_id;
+   const selected=latest;lastHash=selected.frame?.sha256;lastCheckpoint=state.queue.current_checkpoint_id;lastCheckFrameId=selected.frame?.frame_id;lastFingerprint=selected.visualFingerprint;lastSamplingContext=sampling;lastBound=!!selected.writingBinding;
    let data;const checkStarted=performance.now();
    if(streamEnabled)data=await streamedCheck(id,selected,version);
    else if(python)data=await api(`/lab-sessions/${id}/check`,'POST',{revision:state.revision,frame_id:selected.frame.frame_id,view_revision:selected.frame.view_revision});
-   else {const r=await fetch(`/lab-sessions/${id}/check`,{method:'POST',credentials:'same-origin',headers:{'Content-Type':'image/jpeg','X-Capture-Frame':JSON.stringify(selected.meta)},body:selected.blob,signal:AbortSignal.timeout(25000)});data=await r.json();if(!r.ok)throw Object.assign(Error(data.detail||'The guide could not read this frame.'),{status:r.status,retry_after_ms:data.retry_after_ms});}
+   else {const r=await fetch(`/lab-sessions/${id}/check`,{method:'POST',credentials:'same-origin',headers:{'Content-Type':'image/jpeg','X-Capture-Frame':JSON.stringify(selected.meta),...drawingHeaders},body:selected.blob,signal:AbortSignal.timeout(25000)});data=await r.json();if(!r.ok)throw Object.assign(Error(data.detail||'The guide could not read this frame.'),{status:r.status,retry_after_ms:data.retry_after_ms});}
    if(version!==generation||state?.lab_session_id!==id)return;
    if(!streamEnabled)$('lab-stream-timing').textContent=`Baseline JSON: full response ${((performance.now()-checkStarted)/1000).toFixed(2)} s; feedback arrives at completion.`;
-   state=data;retryDeadline(data);if(state.runtime.analysis_status==='waiting_for_provider')lastHash=null;
+   if(data.revision<state.revision)return;state=data;retryDeadline(data);render();await window.KikiWriting?.receive(state);if(version!==generation)return;if(state.runtime.analysis_status==='waiting_for_provider')lastHash=null;
    message(state.runtime.analysis_status==='waiting_for_provider'?'Analysis is waiting for the provider. Keep working; sharing and progress continue, and I’ll retry automatically.':state.runtime.analysis_status==='failed'?'I couldn’t read that frame. Keep sharing; I’ll try a later view.':state.queue.current_checkpoint_id!==lastCheckpoint?'That step is tracked. Here’s what to do next.':'I’m following along. Steps advance when there is enough visible evidence.');
   }catch(e){lastHash=null;nextRetryAt=Date.now()+(e.retry_after_ms|| (e.status===409?0:policy.fast_interval_ms||3000));if(version===generation){message(e.message);await refresh().catch(()=>{});}}
   finally{clearStream();busy=false;render();
    // A newer received frame can already be waiting. Do not wait for another
    // capture tick or reuse the same source frame as the second observation.
-   if(version===generation&&latest?.frame?.frame_id!==undefined&&latest.frame.frame_id!==lastCheckFrameId)setTimeout(()=>void check(),Math.max(0,(policy.fast_interval_ms||3000)-(Date.now()-lastCheck)));
+   if(version===generation&&latest?.frame?.frame_id!==undefined&&latest.frame.frame_id!==lastCheckFrameId)setTimeout(()=>{if(version===generation&&state?.lab_session_id===id)void check();},Math.max(0,(policy.fast_interval_ms||3000)-(Date.now()-lastCheck)));
   }
  }
  window.KikiLab={
   viewRevision(){return state?.workspace.view_revision||1;},
   async onViewChange(revision){if(!state||viewChanging)return;viewChanging=true;try{await refresh();if(revision>state.workspace.view_revision)await action('view_changed',{view_revision:revision});}finally{viewChanging=false;}},
   onCaptureStart(id){captureId=id;attaching=attach(id).catch(e=>message(e.message)).finally(()=>{attaching=null;});},
-  onFrame(blob,meta,frame){
-   latest=python?{frame:blob}:{blob,meta,frame};
+  onFrame(blob,meta,frame,writingBinding=null,visualFingerprint=null){
+   latest=python?{frame:blob}:{blob,meta,frame,writingBinding,visualFingerprint};
    if(state){render();if(!python&&Date.now()-lastHeartbeat>10000){lastHeartbeat=Date.now();void (async()=>{if(attaching)await attaching;await api(`/lab-sessions/${state.lab_session_id}/heartbeat`,'POST',{});})().catch(e=>message(e.message));}void check();}
   },
   onCapturePause(paused,id){if(paused)void this.onCaptureStop();else this.onCaptureStart(id);},

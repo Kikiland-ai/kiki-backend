@@ -1,0 +1,27 @@
+{
+  "sample_kind": "live_provider",
+  "same_exact_jpeg_sha256": "41e69b29daf4b70a2635a472fb20ac3f08f19013110d694fd62dc7527438c261",
+  "source_fingerprint": "3732e8f4e6d95fbf27e37772e11295df8777a931d472cd38a46110ca0a42cf79",
+  "model": "gemini-3.5-flash-lite",
+  "calls_requested": 2,
+  "real_recognition_tested": false,
+  "paint_tested": false,
+  "outcomes": [
+    {
+      "arm": "control",
+      "status": "committed",
+      "reason": null,
+      "analysis_status": "available",
+      "drawing_outcome": null,
+      "provider_attempts": 1
+    },
+    {
+      "arm": "drawing_v1",
+      "status": "stream_complete",
+      "reason": "provider_http_400",
+      "analysis_status": "waiting_for_provider",
+      "drawing_outcome": null,
+      "provider_attempts": 1
+    }
+  ]
+}

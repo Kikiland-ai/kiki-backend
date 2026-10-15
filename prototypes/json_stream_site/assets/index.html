@@ -3,9 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>JSON streaming · Kiki · Screen receiver</title>
+  <title>Kiki · Live guidance experiment</title>
   <link rel="stylesheet" href="/static/style.css">
   <script type="module" src="/static/lab.js"></script>
+  <script defer src="/static/writing-protocol.js"></script>
+  <script defer src="/static/frame-probe.js"></script>
+  <script defer src="/static/writing-frames.js"></script>
+  <script defer src="/static/guidance-protocol.js"></script>
+  <script defer src="/static/guidance-consumer.js"></script>
   <script defer src="/static/capture.js"></script>
 </head>
 <body>
@@ -13,7 +18,7 @@
     <header><a class="brand" href="/">Kiki<span class="dots">● ● ● ●</span></a><span class="tag">Guided Simulink prototype</span></header>
     <section class="intro">
       <div class="eyebrow">LEARN BY BUILDING</div>
-      <h1>Build your model.<br>I’ll follow along.</h1><p class="note">Short-decision experiment · your saved progress continues.</p>
+      <h1>Build your model.<br>I’ll follow along.</h1><p class="note">Private experiment · analysis decides the cue; your connected tab displays it.</p>
       <p>Start the lab below, then share your Simulink tab. Keep working in Simulink; the guide will read your screen and update what comes next.</p>
       <div class="controls">
         <button id="share">Share screen</button>
@@ -23,6 +28,7 @@
       <p id="status" role="status" aria-live="polite">Ready to share.</p>
       <details class="guide-details"><summary>Screen-sharing details</summary><label class="analysis-toggle"><input type="checkbox" id="enable-analysis" checked> Describe frames outside lab mode</label>
       <p class="note">Analysis sends selected images to Gemini, at most once every ten seconds, without a fixed read limit. Generic capture frames are not archived; a lab retains only its latest checked image as described below. Provider throttling pauses analysis with automatic retries; capture and saved progress continue.</p></details>
+      <div class="guide-action-details"><strong>Guidance on your live MATLAB tab</strong><p><a href="/downloads/kiki-guidance-adapter.zip">Download guidance adapter 0.4.0</a>. Load it unpacked in Chrome, share the MATLAB Chrome tab above, and choose <strong>Connect to tutor</strong> in its extension popup. Keep that tab visible. Shapes appear only after a current analysis has been validated; you perform every action.</p><button id="writing-check" class="secondary">Check guidance connection</button><p id="writing-status" role="status">Waiting for a connected shared tab.</p><dl><dt>Shared pixels</dt><dd id="writing-capture">Waiting for sharing</dd><dt>Analysis</dt><dd id="writing-analysis">Waiting for a lab</dd><dt>Drawing</dt><dd id="writing-delivery">No cue received</dd></dl><details><summary>Guidance delivery details</summary><pre id="writing-trace" style="max-height:240px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere">No guidance events yet.</pre></details></div>
     </section>
     <section class="panel lab-panel">
       <div class="panel-head"><h2>Your Simulink guide</h2><span id="lab-watch-state">READY</span></div>

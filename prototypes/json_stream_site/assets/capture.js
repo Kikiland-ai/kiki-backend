@@ -110,22 +110,29 @@
     if (!video.videoWidth || !video.videoHeight) return;
     const current = generation;
     busy = true;
+    let writingTicket=null;
     try {
+      writingTicket=await window.KikiWriting?.prepareFrame(video);
+      const freshSample=window.KikiWriting?.sample(writingTicket),source=freshSample?.image||video;
+      const sourceWidth=freshSample?.width||video.videoWidth,sourceHeight=freshSample?.height||video.videoHeight;
       captureViewRevision=Math.max(captureViewRevision,window.KikiLab?.viewRevision()||1);
-      if(lastSourceWidth && (lastSourceWidth!==video.videoWidth||lastSourceHeight!==video.videoHeight)){captureViewRevision++;window.KikiLab?.onViewChange(captureViewRevision);}
-      lastSourceWidth=video.videoWidth;lastSourceHeight=video.videoHeight;
-      const scale = Math.min(1, 1600 / Math.max(video.videoWidth, video.videoHeight));
-      canvas.width = Math.max(1, Math.round(video.videoWidth * scale));
-      canvas.height = Math.max(1, Math.round(video.videoHeight * scale));
-      canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+      if(lastSourceWidth && (lastSourceWidth!==sourceWidth||lastSourceHeight!==sourceHeight)){captureViewRevision++;window.KikiLab?.onViewChange(captureViewRevision);}
+      lastSourceWidth=sourceWidth;lastSourceHeight=sourceHeight;
+      const scale = Math.min(1, 1600 / Math.max(sourceWidth, sourceHeight));
+      canvas.width = Math.max(1, Math.round(sourceWidth * scale));
+      canvas.height = Math.max(1, Math.round(sourceHeight * scale));
+      canvas.getContext('2d').drawImage(source, 0, 0, canvas.width, canvas.height);
       let blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', .8));
       if (blob?.size > 1000000) blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', .55));
+      const visualFingerprint=writingTicket?window.KikiWriting.fingerprint(writingTicket,canvas):null;
+      const writingBinding=await window.KikiWriting?.finishFrame(writingTicket,canvas);
+      writingTicket=null;
       if (current !== generation || ending || paused) return;
       if (!blob || blob.size > 1000000) throw Object.assign(new Error('Frame exceeds 1 MB. Try a smaller shared window.'),{fatal:true});
       const meta = {type: 'frame', capture_epoch: 1, view_revision:captureViewRevision, sequence: ++sequence,
         captured_elapsed_ms: Math.round(performance.now() - started),
-        width: canvas.width, height: canvas.height, source_width: video.videoWidth,
-        source_height: video.videoHeight, byte_count: blob.size, mime_type: 'image/jpeg'};
+        width: canvas.width, height: canvas.height, source_width: sourceWidth,
+        source_height: sourceHeight, byte_count: blob.size, mime_type: 'image/jpeg'};
       upload = fetch(`/screen-sessions/${session}/frame`, {method: 'POST',
         headers: {'Content-Type': 'image/jpeg', 'X-Capture-Frame': JSON.stringify(meta)},
         body: blob, credentials: 'same-origin', signal: AbortSignal.timeout(12000)});
@@ -152,11 +159,13 @@
       $('remote-empty').hidden = true;
       status('Sharing active. Frames are arriving at the server.');
       // Analysis runs independently; provider latency never holds the capture timer.
-      window.KikiLab?.onFrame(returnedImage,meta,observation.observation?.latest_frame);
+      const admittedWriting=await window.KikiWriting?.admitFrame(writingBinding,observation.observation?.latest_frame,returnedImage);
+      window.KikiLab?.onFrame(returnedImage,meta,observation.observation?.latest_frame,admittedWriting,admittedWriting?visualFingerprint:null);
       void maybeAnalyze(returnedImage, meta, current);
     } catch (error) {
       if (current === generation && !ending) {if(error.fatal){status(error.message);await stop(true);}else{status('Connection interrupted. Sharing remains active; a fresh frame will be retried.');return 5000;}}
     } finally {
+      if(writingTicket)await window.KikiWriting?.finishFrame(writingTicket,canvas).catch(()=>{});
       upload = null; busy = false;
     }
     return 2000;
@@ -174,7 +183,7 @@
     analysisAbort?.abort(); analysisBusy = false; analysisAbort = null;
     clearTimeout(timer);
     if (stream) stream.getTracks().forEach(track => track.stop());
-    stream = null;
+    stream = null;window.KikiWriting?.setStream(null);
     $('preview').srcObject = null; $('local-empty').hidden = false;
     // Serialize cookie receipt updates before writing the ended receipt.
     if (upload) await upload.catch(() => {});
@@ -192,7 +201,7 @@
   $('share').addEventListener('click', async () => {
     $('share').disabled = true;
     try {
-      stream = await navigator.mediaDevices.getDisplayMedia({video: {frameRate: {ideal: 5, max: 10}}, audio: false});
+      stream = await navigator.mediaDevices.getDisplayMedia({video: {frameRate: {ideal: 10, max: 10}}, audio: false});
       const current = ++generation;
       sequence = 0; captureViewRevision=window.KikiLab?.viewRevision()||1;lastSourceWidth=0;lastSourceHeight=0; started = performance.now(); receipts.length = 0;
       currentSnapshot = null; lastReport = null; analysisMeta = null;
@@ -205,7 +214,7 @@
       $('count').textContent = '0'; $('dimensions').textContent = '—'; $('received').textContent = '—';
       $('preview').srcObject = stream;
       stream.getVideoTracks()[0].addEventListener('ended', () => stop());
-      await $('preview').play();
+      await $('preview').play();window.KikiWriting?.setStream(stream);
       if (current !== generation) return;
       $('local-empty').hidden = true;
       const created = await api('/screen-sessions', 'POST');
@@ -225,7 +234,7 @@
   $('pause').addEventListener('click', async () => {
     if (ending) return;
     $('pause').disabled = true;
-    const desiredPaused = !paused;
+    const desiredPaused = !paused;void window.KikiWriting?.invalidate('Sharing lifecycle changed.');
     // Keep sampling blocked throughout the lifecycle request, including resume.
     paused = true;
     if (upload) await upload.catch(() => {});

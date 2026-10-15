@@ -1,9 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
+import {existsSync} from 'node:fs';
 import vm from 'node:vm';
 import {DrawingRunJS,DrawingFindingParserJS,buildCommittedDrawing,validateDrawingModel} from '../worker/guidance.js';
-const base=new URL('../../../docs/architecture/examples/analysis-owned-guidance/v0.1/',import.meta.url);
+const repositoryExamples=new URL('../../../docs/architecture/examples/analysis-owned-guidance/v0.1/',import.meta.url);
+const base=existsSync(repositoryExamples)?repositoryExamples:new URL('../fixtures/analysis-owned-guidance/',import.meta.url);
 const load=async name=>JSON.parse(await readFile(new URL(name,base),'utf8'));
 const definition=JSON.parse(await readFile(new URL('../data/experiment.json',import.meta.url))),policy=JSON.parse(await readFile(new URL('../data/guided-policy.json',import.meta.url)));
 const input=await load('input.single.json'),model=await load('model.single.json'),cp=definition.checkpoints.find(c=>c.id==='CP-DSB-03'),actions=policy.procedures[cp.id];

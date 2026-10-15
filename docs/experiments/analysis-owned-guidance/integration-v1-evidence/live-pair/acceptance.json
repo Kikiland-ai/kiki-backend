@@ -1,0 +1,25 @@
+{
+  "sample_kind": "live_provider",
+  "same_exact_jpeg_sha256": "41e69b29daf4b70a2635a472fb20ac3f08f19013110d694fd62dc7527438c261",
+  "source_fingerprint": "fe64c3912d395b561f5cdb75f9d4144d61541e82da6b5c1fd2700178f4287e7f",
+  "model": "gemini-3.5-flash-lite",
+  "calls_requested": 2,
+  "real_recognition_tested": false,
+  "paint_tested": false,
+  "outcomes": [
+    {
+      "arm": "control",
+      "status": "stream_complete",
+      "reason": null,
+      "drawing_outcome": null,
+      "provider_attempts": null
+    },
+    {
+      "arm": "drawing_v1",
+      "status": "stream_complete",
+      "reason": null,
+      "drawing_outcome": null,
+      "provider_attempts": null
+    }
+  ]
+}

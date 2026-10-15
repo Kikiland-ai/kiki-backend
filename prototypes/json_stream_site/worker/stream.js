@@ -5,7 +5,7 @@ function committedProjection(state){
  const keys=['schema','lab_session_id','experiment_id','revision','status','progression_mode','current_visit_id','workspace','queue','guidance','observation','auto_tracking','procedure_tracking','procedure_history'];
  const value=Object.fromEntries(keys.filter(k=>k in state).map(k=>[k,structuredClone(state[k])]));
  value.steps=state.steps.map(item=>Object.fromEntries(['checkpoint_id','status','current_visit_id','criteria','timing','attempt_count'].filter(k=>k in item).map(k=>[k,structuredClone(item[k])])));
- value.runtime=Object.fromEntries(['analysis_attempts','analysis_status','analysis_error','retry_at_ms','retry_after_ms','last_analysis_timing','candidate'].filter(k=>k in state.runtime).map(k=>[k,structuredClone(state.runtime[k])]));
+ value.runtime=Object.fromEntries(['capture_active','analysis_attempts','analysis_status','analysis_error','retry_at_ms','retry_after_ms','last_analysis_timing','candidate'].filter(k=>k in state.runtime).map(k=>[k,structuredClone(state.runtime[k])]));
  value.projection='committed-decision/v1';return value;
 }
 async function analyzeLabFrameStream(bytes,cp,state,env,emit,drawingRun=null){
@@ -46,13 +46,15 @@ async function analyzeLabFrameStream(bytes,cp,state,env,emit,drawingRun=null){
 async function labStreamRoute(request,env,owner,executionContext){
  const url=new URL(request.url),match=/^\/lab-sessions\/([a-f0-9-]{36})\/check-stream$/.exec(url.pathname);
  if(!match)return null;if(request.method!=='POST')labError(405,'POST required.');
+ const drawing=request.headers.get('x-guidance-contract')===G_CONTRACT;
+ if(request.headers.has('x-guidance-contract')&&!drawing)labError(422,'Unsupported negotiated drawing contract.');
  const id=match[1],s=await labLoad(env,id,owner),capture=await readState(request,env,s.workspace.capture_session_id,owner);
  if(capture.status!=='sharing')labError(409,'Share the current model before checking.');
  if(!providerConfigured(env))labError(503,'Configure GEMINI_API_KEYS in this test Site’s server secrets.');
  const meta=metadata(request.headers.get('x-capture-frame')),abort=new AbortController();let sequence=0,closed=false,admitted=null;
  const requestId=crypto.randomUUID(),started=Date.now();let task;
  const stream=new ReadableStream({start(controller){
-  const push=event=>{if(closed||abort.signal.aborted)return;controller.enqueue(new TextEncoder().encode('data: '+JSON.stringify({schema:'lab-analysis-stream/v2',request_id:requestId,event_sequence:++sequence,server_time:nowISO(),context:admitted,...event})+'\n\n'));};
+  const push=event=>{if(closed||abort.signal.aborted)return;controller.enqueue(new TextEncoder().encode('data: '+JSON.stringify({schema:drawing?'lab-analysis-stream/v3':'lab-analysis-stream/v2',request_id:requestId,event_sequence:++sequence,server_time:nowISO(),context:admitted,...event})+'\n\n'));};
   const delivery=streamContextBatch({mode:env.KIKI_STREAM_CONTEXT_MODE||'per_chunk',signal:abort.signal,
    read:()=>labLoad(env,id,owner),
    valid:current=>admitted&&current.runtime.capture_active&&current.status==='active'&&JSON.stringify(streamContext(current))===JSON.stringify(admitted),
@@ -61,21 +63,24 @@ async function labStreamRoute(request,env,owner,executionContext){
    if(abort.signal.aborted)throw Error('analysis_cancelled');
    if(event.type==='admitted'){admitted=event.context;push({...event,provisional:false});}
    else await delivery.batch([event]);
-  },{signal:abort.signal,metrics:delivery.metrics,batch:delivery.batch});
+  },{signal:abort.signal,metrics:delivery.metrics,batch:delivery.batch,drawing,requestId,trace:new GuidanceTraceJS(record=>console.info(JSON.stringify(record)),{request_id:requestId,pair_id:request.headers.get('x-guidance-pair')||requestId,arm:drawing?'drawing_v1':'control',sample_kind:env.GUIDANCE_SAMPLE_KIND||'live_provider',model:env.GEMINI_LAB_MODEL||env.GEMINI_SCREEN_MODEL||ANALYSIS_MODEL,configuration_id:env.GUIDANCE_CONFIGURATION_ID||'integration-v1',source_revision:env.GUIDANCE_SOURCE_REVISION||'uncommitted',run_id:env.GUIDANCE_RUN_ID||'ordinary-use'})});
   task=(async()=>{try{
    const result=await labAnalyze(env,s,request,owner,meta,capture,emit),commitFinishedMs=Date.now()-started;
    if(abort.signal.aborted)return;
    if(admitted&&result.runtime.analysis_status==='available'){
-    push({type:'guidance_committed',provisional:false,revision:result.revision,current_context:streamContext(result),guidance:result.guidance,queue:result.queue,status:result.status,state:committedProjection(result),commit_finished_ms:commitFinishedMs});
+    emit.trace.emit('tracker_committed',{commit_finished_ms:commitFinishedMs,...result.runtime.last_analysis_timing});
+    if(drawing)result.screen_guidance=await gPublish(env,result,owner,emit.drawingRun,emit.verified,emit.trace);
+    const projection=committedProjection(result);if(drawing){projection.projection='committed-decision/v2';projection.screen_guidance=result.screen_guidance;}
+    push({type:'guidance_committed',provisional:false,revision:result.revision,current_context:streamContext(result),guidance:result.guidance,queue:result.queue,status:result.status,state:projection,commit_finished_ms:commitFinishedMs});
     await Promise.resolve();
     if(typeof env.LAB_STREAM_AUXILIARY==='function')await env.LAB_STREAM_AUXILIARY(result);
     push({type:'state_snapshot',provisional:false,state:result,current_context:streamContext(result)});
-   }else push({type:'analysis_waiting',provisional:false,state:result});
+   }else {emit.trace.emit('failed',result.runtime.last_analysis_timing||{},result.runtime.analysis_error||'provider_failure');push({type:'analysis_waiting',provisional:false,state:result});}
    const decisionCommitted=Boolean(admitted&&result.runtime.analysis_status==='available');
    const timing={...(admitted?result.runtime.last_analysis_timing:{}),decision_committed:decisionCommitted,timing_scope:admitted?'new_check':'retained_state',commit_finished_ms:decisionCommitted?commitFinishedMs:null,auxiliary_finished_ms:Date.now()-started};
    console.info(JSON.stringify({event:'analysis_stream_timing',request_id:requestId,checkpoint_id:admitted?.checkpoint_id||null,analysis_status:result.runtime.analysis_status,...timing}));
    push({type:'stream_complete',provisional:false,revision:result.revision,timing});
-  }catch(error){if(!abort.signal.aborted)push({type:error.status===409||error.message==='stale_context'?'discarded':'analysis_failed',provisional:false,status:error.status||502,reason:error.detail||'stream_failure',retry_after_ms:error.retry_after_ms||0});}
+  }catch(error){emit.trace.emit('failed',{},error.message||'stale_context');if(!abort.signal.aborted)push({type:error.status===409||error.message==='stale_context'?'discarded':'analysis_failed',provisional:false,status:error.status||502,reason:error.detail||'stream_failure',retry_after_ms:error.retry_after_ms||0});}
   finally{if(!closed){closed=true;controller.close();}}
   })();executionContext?.waitUntil(task);
  },cancel(){closed=true;abort.abort();}});

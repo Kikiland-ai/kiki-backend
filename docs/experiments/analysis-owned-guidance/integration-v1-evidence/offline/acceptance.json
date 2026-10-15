@@ -1,0 +1,48 @@
+{
+  "schema": "guidance-producer-acceptance/v1",
+  "completed_at": "2026-10-15T18:04:17.260438+00:00",
+  "passed": true,
+  "checks": [
+    {
+      "name": "schema-parity",
+      "returncode": 0,
+      "seconds": 0.03,
+      "log": "schema-parity.log"
+    },
+    {
+      "name": "reference",
+      "returncode": 0,
+      "seconds": 0.31,
+      "log": "reference.log"
+    },
+    {
+      "name": "python-producer",
+      "returncode": 0,
+      "seconds": 0.552,
+      "log": "python-producer.log"
+    },
+    {
+      "name": "worker-producer",
+      "returncode": 0,
+      "seconds": 0.189,
+      "log": "worker-producer.log"
+    },
+    {
+      "name": "paired-replay",
+      "returncode": 0,
+      "seconds": 0.611,
+      "log": "paired-replay.log"
+    },
+    {
+      "name": "reader-regression",
+      "returncode": 0,
+      "seconds": 10.992,
+      "log": "reader-regression.log"
+    }
+  ],
+  "paid_model_calls": 0,
+  "sample_kind": "offline_replay",
+  "site_deployed": false,
+  "renderer_interoperability_verified": false,
+  "paint_ack_verified": false
+}

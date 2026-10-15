@@ -8,6 +8,8 @@ export function localDB(path=':memory:'){
  if(!exists)sqlite.exec(readFileSync('drizzle/0000_dsb_lab.sql','utf8'));
  sqlite.exec(readFileSync('drizzle/0001_provider_cooldowns.sql','utf8'));
  sqlite.exec(readFileSync('drizzle/0002_provider_rotation.sql','utf8'));
+ sqlite.exec(readFileSync('drizzle/0003_writing_delivery.sql','utf8'));
+ sqlite.exec(readFileSync('drizzle/0004_guidance_outbox.sql','utf8'));
  const prepare=sql=>({sql,values:[],bind(...values){this.values=values.map(v=>v instanceof ArrayBuffer?new Uint8Array(v):v);return this;},
   async first(){return sqlite.prepare(sql).get(...this.values)||null;},
   async run(){const r=sqlite.prepare(sql).run(...this.values);return {meta:{changes:Number(r.changes)}};},

@@ -49,6 +49,7 @@ async function labSave(env,s,expected,eventType,payload={},eventId=crypto.random
  if(image)statements.push(db.prepare('INSERT OR REPLACE INTO lab_images(session_id,owner,frame_id,observation_id,received_at,jpeg) SELECT id,?,?,?,?,? FROM lab_sessions WHERE id=? AND owner=? AND mutation_id=?')
   .bind(s.owner_id,image.frame.frame_id,image.observation_id,image.frame.server_received_unix_ms,image.bytes.buffer,s.lab_session_id,s.owner_id,eventId));
  if(eventType==='capture_detached'||eventType==='session_paused'||payload.advanced||payload.action==='revisit'||s.status==='completed')statements.push(db.prepare('DELETE FROM lab_images WHERE session_id=? AND EXISTS (SELECT 1 FROM lab_sessions WHERE id=? AND mutation_id=?)').bind(s.lab_session_id,s.lab_session_id,eventId));
+ statements.push(...gCancelStatements(env,s,expected,eventType,eventId));
  const result=await db.batch(statements);
  if(!result[0].meta.changes)labError(409,'Lab changed while this request was running. Refresh its state.');
  return labProjection(s);
@@ -164,10 +165,13 @@ async function labAnalyze(env,s,request,owner,metadata,capture,emit=null){
  if(!capture.latest||capture.latest.sha256!==digest||Object.keys(metadata).some(k=>k!=='type'&&metadata[k]!==capture.latest[k]))labError(409,'A newer frame arrived. Check the next received image.');
  if(Date.now()-capture.latest.server_received_unix_ms>6000)labError(409,'The received frame is old. Wait for a new capture frame.');
  if(metadata.view_revision!==s.workspace.view_revision)labError(409,'View changed. Wait for its context update before checking.');
+ if(emit?.drawing)emit.verified=await gVerify(request,env,s,bytes,capture);
  const expected=s.revision;s.runtime.analysis_attempts++;s.runtime.last_analysis_started_ms=Date.now();s.runtime.analysis_status='checking';
  const working=await labSave(env,s,expected,'analysis_started',{frame_id:capture.latest.frame_id});
+ let drawingRun=null;if(emit?.drawing){const verified=emit.verified;drawingRun=new LiveDrawingRunJS(gAdmit(working,capture.latest,verified,emit.requestId));emit.drawingRun=drawingRun;emit.verified=verified;}
+ if(emit?.trace)emit.trace.emit('admitted',{image_bytes:bytes.byteLength});
  const cp=checkpoint(working),step=working.steps.find(v=>v.checkpoint_id===cp.id);let output;
- try{if(emit)await emit({type:'admitted',context:streamContext(working),frame:capture.latest,admitted_at:new Date(working.runtime.last_analysis_started_ms).toISOString()});output=emit?await analyzeLabFrameStream(bytes,cp,working,env,emit):await analyzeLabFrame(bytes,cp,working,env);}
+ try{if(emit)await emit({type:'admitted',context:streamContext(working),frame:capture.latest,admitted_at:new Date(working.runtime.last_analysis_started_ms).toISOString()});output=emit?await analyzeLabFrameStream(bytes,cp,working,env,emit,drawingRun):await analyzeLabFrame(bytes,cp,working,env);}
  catch(error){const current=await labLoad(env,s.lab_session_id,owner);
   if(current.revision!==working.revision){await labDiscardCheck(env,current,working,'stale_context');labError(409,'Lab changed during analysis; result ignored.');}
   if(emit?.signal.aborted){current.runtime.analysis_status='cancelled';delete current.runtime.retry_at_ms;return labSave(env,current,current.revision,'analysis_cancelled');}
@@ -175,17 +179,18 @@ async function labAnalyze(env,s,request,owner,metadata,capture,emit=null){
   current.runtime.last_analysis_timing={...error.provider_metrics,...emit?.metrics,frame_id:capture.latest.frame_id,total_ms:Date.now()-working.runtime.last_analysis_started_ms,received_to_result_ms:Date.now()-capture.latest.server_received_unix_ms,status:'failed'};
   current.steps.find(v=>v.checkpoint_id===cp.id).telemetry.analysis_failure_count++;
   return labSave(env,current,current.revision,'analysis_failed',{error:current.runtime.analysis_error});}
+ if(emit?.trace)emit.trace.emit('analysis_validated',output.timing);
  const current=await labLoad(env,s.lab_session_id,owner);
  if(current.revision!==working.revision){await labDiscardCheck(env,current,working,'stale_context');labError(409,'Lab changed during analysis; result ignored.');}
  if(emit?.signal.aborted||!current.runtime.capture_active||current.status!=='active'||Date.now()-capture.latest.server_received_unix_ms>20000){await labDiscardCheck(env,current,working,'capture_changed_or_expired');labError(409,'Capture changed or frame expired during analysis.');}
  current.runtime.last_analysis_timing={...output.timing,frame_id:capture.latest.frame_id,status:'available',total_ms:Date.now()-working.runtime.last_analysis_started_ms,received_to_result_ms:Date.now()-capture.latest.server_received_unix_ms};
- const observationId=crypto.randomUUID();current.runtime.analysis_status='available';delete current.runtime.analysis_error;delete current.runtime.retry_at_ms;
+ const observationId=drawingRun?.admission.frame.observation_id||crypto.randomUUID();current.runtime.analysis_status='available';delete current.runtime.analysis_error;delete current.runtime.retry_at_ms;
  current.runtime.candidate={...output.result,observation_id:observationId,source_frame:capture.latest,visit_id:step.current_visit_id,
-  capture_epoch:current.workspace.capture_epoch,view_revision:metadata.view_revision,admitted_context:{lab_session_id:working.lab_session_id,experiment_id:working.experiment_id,checkpoint_id:cp.id,visit_id:step.current_visit_id,lab_revision:working.revision,workspace_id:current.workspace.id,capture_epoch:current.workspace.capture_epoch,view_revision:metadata.view_revision,parameter_revision:current.workspace.parameter_revision,condition:current.workspace.condition},admitted_at:new Date(working.runtime.last_analysis_started_ms).toISOString(),completed_at:nowISO(),frame_handle:{handle_id:observationId,expires_at:new Date(Math.min(Date.now()+8000,capture.latest.server_received_unix_ms+20000)).toISOString(),media_type:'image/jpeg',access_policy:'same_owner_ephemeral'},parameter_revision:current.workspace.parameter_revision,model:output.model,prompt_version:emit?'dsb-step-observer/v4-short-decision1':GUIDED_POLICY.observer_prompt_version};
+  capture_epoch:current.workspace.capture_epoch,view_revision:metadata.view_revision,admitted_context:{lab_session_id:working.lab_session_id,experiment_id:working.experiment_id,checkpoint_id:cp.id,visit_id:step.current_visit_id,lab_revision:working.revision,workspace_id:current.workspace.id,capture_epoch:current.workspace.capture_epoch,view_revision:metadata.view_revision,parameter_revision:current.workspace.parameter_revision,condition:current.workspace.condition},admitted_at:new Date(working.runtime.last_analysis_started_ms).toISOString(),completed_at:nowISO(),frame_handle:drawingRun?.admission.frame_handle||{handle_id:observationId,expires_at:new Date(Math.min(Date.now()+8000,capture.latest.server_received_unix_ms+20000)).toISOString(),media_type:'image/jpeg',access_policy:'same_owner_ephemeral'},parameter_revision:current.workspace.parameter_revision,model:output.model,prompt_version:drawingRun?'dsb-step-observer/v5-drawing1':emit?'dsb-step-observer/v4-short-decision1':GUIDED_POLICY.observer_prompt_version};
  current.observation={observation_id:observationId,source_frame_id:capture.latest.frame_id,latest_frame_id:capture.latest.frame_id,
   capture_epoch:current.workspace.capture_epoch,view_revision:metadata.view_revision,source_received_at:capture.latest.server_received_at,age_ms:0,status:'available'};
  const candidate=current.runtime.candidate,advanced=guidedObserve(current,candidate);
- return labSave(env,current,current.revision,'analysis_completed',{candidate,advanced,origin_checkpoint_id:cp.id,origin_visit_id:step.current_visit_id},crypto.randomUUID(),advanced?null:{bytes,frame:capture.latest,observation_id:observationId});
+ return labSave(env,current,current.revision,'analysis_completed',{candidate,advanced,origin_checkpoint_id:cp.id,origin_visit_id:step.current_visit_id},crypto.randomUUID(),advanced&&!drawingRun?null:{bytes,frame:capture.latest,observation_id:observationId});
 }
 async function labRoute(request,env,owner){
  const url=new URL(request.url);

@@ -1,0 +1,27 @@
+{
+  "sample_kind": "live_provider",
+  "same_exact_jpeg_sha256": "41e69b29daf4b70a2635a472fb20ac3f08f19013110d694fd62dc7527438c261",
+  "source_fingerprint": "2753520161e4ca84b7c66f116027f13e95a8f1806a510963ca74e837e2d14ce0",
+  "model": "gemini-3.5-flash-lite",
+  "calls_requested": 2,
+  "real_recognition_tested": false,
+  "paint_tested": false,
+  "outcomes": [
+    {
+      "arm": "control",
+      "status": "committed",
+      "reason": null,
+      "analysis_status": "available",
+      "drawing_outcome": null,
+      "provider_attempts": 1
+    },
+    {
+      "arm": "drawing_v1",
+      "status": "stream_complete",
+      "reason": "provider_timeout_or_network_error",
+      "analysis_status": "waiting_for_provider",
+      "drawing_outcome": null,
+      "provider_attempts": 1
+    }
+  ]
+}

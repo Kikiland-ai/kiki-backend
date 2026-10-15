@@ -156,12 +156,15 @@ export default {
       if(request.method==='GET' && url.pathname==='/static/lab.js') return response(ASSETS.labjs,200,{'Content-Type':'application/javascript'});
       if (request.method === 'GET' && url.pathname === '/health') {
         let keys=[],configuration_valid=true;try{keys=providerKeys(env);}catch{configuration_valid=false;}
-        return json({latency_experiment:{id:'stream-context-batch/v1',provider_io_mode:env.KIKI_PROVIDER_IO||'batched',context_validation_mode:env.KIKI_STREAM_CONTEXT_MODE||'per_chunk'},json_stream:{available:true,wire_format:'lab-analysis-stream/v2',priority:['criteria','action_findings','uncertainties'],commit_before_auxiliary:true},status:'ok',mode:'hosted_frame_receipt',sample_hz:.5,image_storage:'none',analysis:{provider:'gemini',configured:providerConfigured(env),configuration_valid,key_count:keys.length,rotation_enabled:keys.length>1,quota_pool_count:new Set(keys.map(v=>v.quota_pool)).size,model:env.GEMINI_SCREEN_MODEL||ANALYSIS_MODEL,lab_model:env.GEMINI_LAB_MODEL||env.GEMINI_SCREEN_MODEL||ANALYSIS_MODEL}});
+        return json({guidance_integration:{contract:G_CONTRACT,adapter:'0.4.0',negotiated:true},latency_experiment:{id:'stream-context-batch/v1',provider_io_mode:env.KIKI_PROVIDER_IO||'batched',context_validation_mode:env.KIKI_STREAM_CONTEXT_MODE||'per_chunk'},json_stream:{available:true,wire_format:'lab-analysis-stream/v2',priority:['criteria','action_findings','uncertainties'],commit_before_auxiliary:true},status:'ok',mode:'hosted_frame_receipt',sample_hz:.5,image_storage:'none',analysis:{provider:'gemini',configured:providerConfigured(env),configuration_valid,key_count:keys.length,rotation_enabled:keys.length>1,quota_pool_count:new Set(keys.map(v=>v.quota_pool)).size,model:env.GEMINI_SCREEN_MODEL||ANALYSIS_MODEL,lab_model:env.GEMINI_LAB_MODEL||env.GEMINI_SCREEN_MODEL||ANALYSIS_MODEL}});
       }
+      if(request.method==='GET'&&url.pathname.startsWith('/static/')){const value=ASSETS[url.pathname.slice(8)];if(value!==undefined)return response(value,200,{'Content-Type':'application/javascript'});}
+      if(request.method==='GET'&&url.pathname==='/downloads/kiki-guidance-adapter.zip')return response(Uint8Array.from(atob(ASSETS.adapterzip),c=>c.charCodeAt(0)),200,{'Content-Type':'application/zip','Content-Disposition':'attachment; filename=kiki-guidance-adapter-0.4.0.zip'});
       const owner = request.headers.get('oai-authenticated-user-id');
       if(url.pathname==='/mcp' && request.method==='POST') return await labMCP(request,env,owner);
       if (!owner) fail(401, 'Open this private site while signed in to ChatGPT.');
       if (['POST','DELETE'].includes(request.method) && request.headers.get('origin') !== url.origin) fail(403, 'Same-origin request required.');
+      const guidanceResult=await guidanceRoute(request,env,owner);if(guidanceResult)return guidanceResult;
       const streamResult=await labStreamRoute(request,env,owner,executionContext);if(streamResult)return streamResult;
       const labResult=await labRoute(request,env,owner);
       if(labResult) return labResult;

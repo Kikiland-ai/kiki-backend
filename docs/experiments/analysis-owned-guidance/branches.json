@@ -1,6 +1,6 @@
 {
   "experiment": "analysis-owned-screen-guidance",
-  "status": "coordination_prepared_runtime_not_implemented",
+  "status": "integrated_controlled_pipeline_passed_deployment_pending",
   "base_reader_branch": "experiment/stream-context-batch",
   "base_reader_commit": "ae234dcdd78b91ef7d6e6b528b14f2e9196808bb",
   "branches": {
@@ -16,8 +16,12 @@
   "handoff": "docs/handoffs/analysis-owned-guidance-experiment.md",
   "design": "docs/decisions/0007-analysis-owned-screen-guidance.md",
   "reader_thread": "codex://threads/01a135c7-476f-70c3-bd7e-9c109051706e?hostId=durable",
-  "runtime_changed": false,
+  "runtime_changed": true,
   "site_deployed": false,
-  "contract_agreed": false,
-  "live_acceptance_passed": false
+  "contract_agreed": true,
+  "live_acceptance_passed": false,
+  "producer_commit": "1c658b63ef0a0ebce827168040bc057d92fa4c77",
+  "renderer_commit": "e916986",
+  "target_site": "https://kiki-screen-receiver.woodsycarp256.chatgpt.site",
+  "hosting_choice": "User explicitly chose reusing existing receiver; allocated new project remains unpublished."
 }

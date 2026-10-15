@@ -1,5 +1,5 @@
 // Browser receives trusted analysis events; it never turns partial rows into evidence.
-export async function consumeAnalysisStream(response,{expectedFrame,expectedContext,onEvent,signal}){
+export async function consumeAnalysisStream(response,{expectedFrame,expectedContext,onEvent,signal,streamContract=null}){
  if(!response.ok){const error=await response.json().catch(()=>({}));throw Object.assign(Error(error.detail||'The frame check could not start.'),{status:response.status,retry_after_ms:error.retry_after_ms});}
  if(!response.headers.get('content-type')?.includes('text/event-stream'))throw Error('The analyzer did not return a stream.');
  const reader=response.body.getReader(),decoder=new TextDecoder('utf-8',{fatal:true});let pending='',lines=[],requestId=null,protocol=null,last=0,terminal=false,admitted=false,total=0,finalState=null,coreSeen=false,admittedRevision=null;
@@ -7,17 +7,19 @@ export async function consumeAnalysisStream(response,{expectedFrame,expectedCont
   while(pending.includes('\n')){const index=pending.indexOf('\n'),line=pending.slice(0,index).replace(/\r$/,'');pending=pending.slice(index+1);
    if(line.startsWith('data:'))lines.push(line.slice(5).replace(/^ /,''));
    if(line||!lines.length)continue;const event=JSON.parse(lines.join('\n'));lines=[];
-   if(!['lab-analysis-stream/v1','lab-analysis-stream/v2'].includes(event.schema)||typeof event.request_id!=='string'||!Number.isSafeInteger(event.event_sequence))throw Error('Invalid analysis event.');
+   if(!['lab-analysis-stream/v1','lab-analysis-stream/v2','lab-analysis-stream/v3'].includes(event.schema)||typeof event.request_id!=='string'||!Number.isSafeInteger(event.event_sequence))throw Error('Invalid analysis event.');
+   if(streamContract&&event.schema!==streamContract)throw Error('Negotiated analysis stream changed.');
    if(requestId===null){requestId=event.request_id;protocol=event.schema;}if(requestId!==event.request_id||protocol!==event.schema)throw Error('Foreign analysis request.');
    if(event.event_sequence<=last)continue;last=event.event_sequence;
    if(event.type==='admitted'){
     if(admitted||!event.frame||['frame_id','sha256','width','height','byte_count','view_revision'].some(k=>event.frame[k]!==expectedFrame[k]))throw Error('Analysis frame provenance changed.');
     if(Object.entries(expectedContext).some(([k,v])=>event.context?.[k]!==v))throw Error('Analysis context changed.');admitted=true;admittedRevision=event.context?.lab_revision;
    }else if(['provisional_findings','critical_fields_ready','guidance_committed','state_snapshot','attempt_reset'].includes(event.type)&&!admitted)throw Error('Finding arrived before admission.');
-   if(event.type==='guidance_committed'&&event.schema==='lab-analysis-stream/v2'){
+   if(event.type==='guidance_committed'&&['lab-analysis-stream/v2','lab-analysis-stream/v3'].includes(event.schema)){
     const state=event.state,context=event.current_context;
-    if(coreSeen||event.provisional!==false||!state||state.projection!=='committed-decision/v1'||!Number.isSafeInteger(state.revision)||state.revision!==event.revision||(Number.isSafeInteger(admittedRevision)&&state.revision<=admittedRevision)||state.lab_session_id!==expectedContext.lab_session_id||context?.lab_session_id!==state.lab_session_id||context.lab_revision!==state.revision||state.runtime?.last_analysis_timing?.frame_id!==expectedFrame.frame_id||JSON.stringify(state.queue)!==JSON.stringify(event.queue)||JSON.stringify(state.guidance)!==JSON.stringify(event.guidance)||JSON.stringify(state).length>131072)throw Error('Invalid committed decision.');
-    if(state.queue.current_checkpoint_id!==context.checkpoint_id||['workspace_id','capture_epoch','view_revision'].some(key=>expectedContext[key]!==undefined&&context[key]!==expectedContext[key])||['id','capture_epoch','view_revision','parameter_revision','condition'].some(key=>state.workspace?.[key]!==context[key==='id'?'workspace_id':key]))throw Error('Committed context changed.');
+    if(coreSeen||event.provisional!==false||!state||state.projection!==(event.schema==='lab-analysis-stream/v3'?'committed-decision/v2':'committed-decision/v1')||!Number.isSafeInteger(state.revision)||state.revision!==event.revision||(Number.isSafeInteger(admittedRevision)&&state.revision<=admittedRevision)||state.lab_session_id!==expectedContext.lab_session_id||context?.lab_session_id!==state.lab_session_id||context.lab_revision!==state.revision||state.runtime?.last_analysis_timing?.frame_id!==expectedFrame.frame_id||JSON.stringify(state.queue)!==JSON.stringify(event.queue)||JSON.stringify(state.guidance)!==JSON.stringify(event.guidance)||JSON.stringify(state).length>131072)throw Error('Invalid committed decision.');
+    if(state.queue.current_checkpoint_id!==context.checkpoint_id||['workspace_id','capture_epoch','view_revision','parameter_revision','condition'].some(key=>expectedContext[key]!==undefined&&context[key]!==expectedContext[key])||['id','capture_epoch','view_revision','parameter_revision','condition'].some(key=>state.workspace?.[key]!==context[key==='id'?'workspace_id':key]))throw Error('Committed context changed.');
+    if(event.schema==='lab-analysis-stream/v3'&&state.screen_guidance){const e=state.screen_guidance;if(e.analysis_request_id!==requestId||e.frame.frame_id!==expectedFrame.frame_id||e.frame.sha256!==expectedFrame.sha256||e.context.lab_revision!==state.revision)throw Error('Foreign committed drawing.');}
     coreSeen=true;finalState=state;
    }
    if(event.type==='analysis_waiting'||(event.type==='state_snapshot'&&event.schema==='lab-analysis-stream/v1'))finalState=event.state;
@@ -36,7 +38,7 @@ export function startAnalysisStream(response,options){
  const committed=new Promise((resolve,reject)=>{settle=resolve;fail=reject;});
  const completion=consumeAnalysisStream(response,{...options,onEvent:async event=>{
   await options.onEvent(event);
-  if(!settled&&((event.schema==='lab-analysis-stream/v2'&&event.type==='guidance_committed')||event.type==='analysis_waiting')){settled=true;settle(event.state);}
+  if(!settled&&((['lab-analysis-stream/v2','lab-analysis-stream/v3'].includes(event.schema)&&event.type==='guidance_committed')||event.type==='analysis_waiting')){settled=true;settle(event.state);}
  }}).then(state=>{if(!settled){settled=true;settle(state);}return state;},error=>{if(!settled){settled=true;fail(error);}throw error;});
  // The owner may await committed first, attaching its tail handler afterward.
  completion.catch(()=>{});committed.catch(()=>{});

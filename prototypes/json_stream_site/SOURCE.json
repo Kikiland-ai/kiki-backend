@@ -1,11 +1,14 @@
 {
   "schema": "hosted-experiment-source/v1",
-  "project_id": "appgprj_6acfd4c6e6e48191b9110067ba86d556",
+  "project_id": "appgprj_6ace6ce34218819198dfd778a822aed5",
   "source_commit": "c83ec7e6664025b7ca01d06f208af009269f8ad2",
   "baseline_source_commit": "4e1d0c3d132ff2778216e5d7e4d987d3e04d7145",
-  "note": "Tracked source copied from the live experimental Site. BASELINE.md and old README sections are historical template records; current experiment operation is documented in docs/json-stream-experiment.md. This provenance marker is added in the backend repo only.",
+  "note": "Integrated on integration/analysis-owned-guidance. Historical source_commit and baseline_source_commit describe the inherited latency adapter. Current deployed code is identified by GUIDANCE_SOURCE_REVISION and the integration deployment receipt. Existing receiver chosen explicitly by the user; latency Site remains unchanged.",
   "previous_stream_source_commit": "cbaec32e47bbb53e49aa5d1a1f6f02d76ad81adc",
   "previous_short_decision_source_commit": "958fd7fb4ae94e0af5ffe592a2fcb09f406af5fb",
-  "experiment": "stream-context-batch/v1",
-  "previous_provider_io_source_commit": "c67fc3a5537ddcf98b8d8bfacbb606749687f693"
+  "experiment": "analysis-owned-guidance/v0.1",
+  "previous_provider_io_source_commit": "c67fc3a5537ddcf98b8d8bfacbb606749687f693",
+  "producer_commit": "1c658b63ef0a0ebce827168040bc057d92fa4c77",
+  "renderer_commit": "e916986",
+  "previous_receiver_source_commit": "6e2d81a64306347b13a53c0392a2c437c6d9117b"
 }

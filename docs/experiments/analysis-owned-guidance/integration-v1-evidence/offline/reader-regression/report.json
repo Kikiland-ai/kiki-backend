@@ -1,0 +1,169 @@
+{
+  "schema": "screen-reader-evaluation/v1",
+  "started_at": "2026-10-15T18:04:06.299995+00:00",
+  "source_commit": "c0d0a70f56e84e5fbde0f8d9792838f1c87a03ef",
+  "source_dirty": true,
+  "experiment": "stream-context-batch/v1",
+  "runtime": {
+    "python": "3.12.14",
+    "node": "v24.19.0"
+  },
+  "vision_mocked_in_offline_checks": true,
+  "real_simulink_accuracy_claim": false,
+  "paid_model_calls": 0,
+  "fixture_sha256": {
+    "local-settings": "db56a0faf3931efb193f41f4c9b8c46ad9cd1405e4ea82073a14a208208ffeae",
+    "wrong-local-phase-heldout": "aeb206dea885d5f330562cabcd06061b8589753128a237b907b4bd98682fc59d",
+    "carrier-at-receiver": "54dc1858e16e8b465a995ee37b4e9f77a198d4cde6862bb1c974669f99236cdb",
+    "hidden-wires-heldout": "9085ea48fb3f66f9b17157805db3c1aa7bc59867ee8b9190888b2237ff4929b8",
+    "clear-wires-heldout": "07745205c2a39104b28f40fb8e2c0291dc0c2c27eba84a5fd96db37a5a54c7ba"
+  },
+  "checks": [
+    {
+      "name": "site-build",
+      "command": [
+        "node",
+        "scripts/build.mjs"
+      ],
+      "returncode": 0,
+      "seconds": 0.075,
+      "log": "site-build.log"
+    },
+    {
+      "name": "python",
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-q"
+      ],
+      "returncode": 0,
+      "seconds": 3.216,
+      "log": "python.log"
+    },
+    {
+      "name": "node",
+      "command": [
+        "node",
+        "--test",
+        "scripts/test-analysis.mjs",
+        "scripts/test-context-batch.mjs",
+        "scripts/test-decision-ui.mjs",
+        "scripts/test-guidance-integration.mjs",
+        "scripts/test-guidance-producer.mjs",
+        "scripts/test-guidance-renderer.mjs",
+        "scripts/test-json-stream.mjs",
+        "scripts/test-lab-cadence.mjs",
+        "scripts/test-lab.mjs",
+        "scripts/test-provider-io.mjs",
+        "scripts/test-provider.mjs",
+        "scripts/test-python-proxy.mjs",
+        "scripts/test-receiver.mjs"
+      ],
+      "returncode": 0,
+      "seconds": 3.352,
+      "log": "node.log"
+    },
+    {
+      "name": "replay-serial",
+      "command": [
+        "node",
+        "scripts/replay-lab.mjs",
+        "--io-mode",
+        "serial",
+        "--output",
+        "/workspace/work/analysis-owned-guidance/work/evaluations/guidance-v1/reader-regression/replay-serial.json"
+      ],
+      "returncode": 0,
+      "seconds": 0.279,
+      "log": "replay-serial.log"
+    },
+    {
+      "name": "replay-batched",
+      "command": [
+        "node",
+        "scripts/replay-lab.mjs",
+        "--io-mode",
+        "batched",
+        "--output",
+        "/workspace/work/analysis-owned-guidance/work/evaluations/guidance-v1/reader-regression/replay-batched.json"
+      ],
+      "returncode": 0,
+      "seconds": 0.281,
+      "log": "replay-batched.log"
+    },
+    {
+      "name": "replay-context-control",
+      "command": [
+        "node",
+        "scripts/replay-lab.mjs",
+        "--io-mode",
+        "batched",
+        "--context-mode",
+        "per_event",
+        "--output",
+        "/workspace/work/analysis-owned-guidance/work/evaluations/guidance-v1/reader-regression/replay-context-control.json"
+      ],
+      "returncode": 0,
+      "seconds": 0.278,
+      "log": "replay-context-control.log"
+    },
+    {
+      "name": "context-benchmark",
+      "command": [
+        "node",
+        "scripts/benchmark-context-batch.mjs",
+        "--rtt-ms",
+        "20",
+        "--repeats",
+        "3",
+        "--output",
+        "/workspace/work/analysis-owned-guidance/work/evaluations/guidance-v1/reader-regression/context-benchmark.json"
+      ],
+      "returncode": 0,
+      "seconds": 1.987,
+      "log": "context-benchmark.log"
+    },
+    {
+      "name": "database-benchmark",
+      "command": [
+        "node",
+        "scripts/benchmark-provider-io.mjs",
+        "--rtt-ms",
+        "20",
+        "--repeats",
+        "3",
+        "--output",
+        "/workspace/work/analysis-owned-guidance/work/evaluations/guidance-v1/reader-regression/database-benchmark.json"
+      ],
+      "returncode": 0,
+      "seconds": 1.381,
+      "log": "database-benchmark.log"
+    },
+    {
+      "name": "pinned-context",
+      "command": [
+        "python",
+        "scripts/verify-context.py"
+      ],
+      "returncode": 0,
+      "seconds": 0.049,
+      "log": "pinned-context.log"
+    },
+    {
+      "name": "frozen-baseline",
+      "command": [
+        "python",
+        "scripts/check-screen-reader-baseline.py"
+      ],
+      "returncode": 0,
+      "seconds": 0.032,
+      "log": "frozen-baseline.log"
+    }
+  ],
+  "passed": true,
+  "completed_at": "2026-10-15T18:04:17.250982+00:00"
+}

@@ -1,6 +1,14 @@
-# JSON streaming test Site
+# Analysis-owned live guidance integration
 
-See [experiment operation and limits](docs/json-stream-experiment.md). This private Site is a separate Worker/D1 adapter; the Python implementation and frontend contract are in the experiment branch.
+This version targets the existing private receiver at https://kiki-screen-receiver.woodsycarp256.chatgpt.site. It combines producer `1c658b6` with the independent 0.4.0 renderer on `integration/analysis-owned-guidance`; the latency comparison Site and PR #1 are unchanged. The analysis call supplies drawing intent; the consumer validates current source/context and paints it on the connected live MATLAB tab. No second localization/model call runs in the extension.
+
+Use adapter 0.4.0, connect the MATLAB tab to this receiver, share that same browser tab, then start the guided lab. The connection button negotiates source identity and versions; it does not draw a fixed sample. Shapes appear only after a fully validated current model decision requests annotations. `none`, stale results and unresolved required targets produce no shapes; current `text_only` uses the canonical instruction. Capture, analysis and delivery status are separate, with bounded diagnostics in Annotation trace.
+
+Worker D1 batch persistence assigns ordered cancellation/cue sequences atomically with outbox insertion and guards lab revisions. Signed actual paint ACKs record exposure only. Existing tracker rules remain authoritative. Preserve all existing secrets and D1 rows; migration 0004 appends guidance tables after the existing 0003 migration.
+
+Build: `node scripts/build.mjs`. Offline checks: `node --test scripts/test-*.mjs`. The backend handoff is `docs/handoffs/analysis-owned-guidance-integration-v1.md`. Native capture/compositor checks use explicit model/Chrome API fixtures; installed-extension and real Simulink recognition acceptance remain pending. Live provider samples include successes and failures; no latency improvement is established.
+
+The sections below are historical receiver and latency adapter records. See [inherited experiment operation and limits](docs/json-stream-experiment.md).
 
 # Kiki private hosted screen receiver
 

@@ -1,3 +1,13 @@
+# Analysis-owned live guidance integration — 15 October 2026 (Asia/Kolkata)
+
+User authorized producer/renderer integration and deployment, then explicitly chose reusing the existing receiver Site and its secrets. Producer pinned at `1c658b63ef0a0ebce827168040bc057d92fa4c77`; independent renderer `e916986` is merged on `integration/analysis-owned-guidance`. Producer, baselines, latency Site/control and PR #1 remain unchanged.
+
+Implemented trusted source admission, one-call drawing analysis, negotiated v3/v2 projection, atomic D1 sequence/outbox and cancellation, fresh live transforms, actual signed paint receipts, callback fences and coherent accepted observations during streaming. Full details and limits: [integration handoff](../handoffs/analysis-owned-guidance-integration-v1.md). 114 Node cases and the full offline gate pass; native captured-tab controlled positive and stale-view negative tests pass. Real provider samples are mixed; nested generation schema 400 was fixed with a flat provider-facing shape while retaining the full published validator. No latency gain or real Simulink localization is established.
+
+Last completed: branch-separated implementation, controlled pipeline/negative checks and retained evidence. Next: publish this exact integration to the existing private receiver, preserve all secrets/D1 sessions, retain its deployment receipt, then obtain actual installed-extension/Simulink placement acceptance. The unused newly allocated Site remains unpublished. No message was sent into the other chat.
+
+---
+
 # Separate analysis-owned guidance experiment — 15 October 2026
 
 The user requested coordination with the reader chat and clear branch separation.

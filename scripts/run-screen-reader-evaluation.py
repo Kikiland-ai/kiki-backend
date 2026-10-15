@@ -25,6 +25,8 @@ def main():
   (output/(name+'.log')).write_text(log)
   report['checks'].append({'name':name,'command':command,'returncode':status,'seconds':round(time.monotonic()-started,3),'log':name+'.log'})
   print(f'{name}: {"PASS" if status==0 else "FAIL"}',flush=True)
+  if status and name!='live-vision':
+   print(f'Failed offline check diagnostics ({name}; full log in artifact):\n'+log[-18000:],flush=True)
   return status==0
  jobs=[('site-build',['node','scripts/build.mjs'],site),('python',['python','-m','unittest','discover','-s','tests','-q'],ROOT),('node',['node','--test',*sorted(str(Path(p).relative_to(site)) for p in glob.glob(str(site/'scripts/test-*.mjs')))],site),('replay-serial',['node','scripts/replay-lab.mjs','--io-mode','serial','--output',str(output/'replay-serial.json')],site),('replay-batched',['node','scripts/replay-lab.mjs','--io-mode','batched','--output',str(output/'replay-batched.json')],site),('replay-context-control',['node','scripts/replay-lab.mjs','--io-mode','batched','--context-mode','per_event','--output',str(output/'replay-context-control.json')],site),('context-benchmark',['node','scripts/benchmark-context-batch.mjs','--rtt-ms','20','--repeats','3','--output',str(output/'context-benchmark.json')],site),('database-benchmark',['node','scripts/benchmark-provider-io.mjs','--rtt-ms','20','--repeats','3','--output',str(output/'database-benchmark.json')],site),('pinned-context',['python','scripts/verify-context.py'],ROOT),('frozen-baseline',['python','scripts/check-screen-reader-baseline.py'],ROOT)]
  results=[run(*job) for job in jobs]

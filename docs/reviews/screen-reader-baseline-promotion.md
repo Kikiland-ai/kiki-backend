@@ -10,7 +10,7 @@ Draft PR: [Kikiland-ai/kiki-backend#1](https://github.com/Kikiland-ai/kiki-backe
 | --- | --- |
 | PR base | `baseline/screen-reader-v1`, currently `681ad52d37ac0bfced86ceadeaaed6ef8128caf5` |
 | PR head branch | `experiment/stream-context-batch` |
-| Last runtime implementation | `9af91d6d3019b602d506d4f3ef2a31662fe4c998`; subsequent review-record commits change documentation only |
+| Last runtime implementation | `9af91d6d3019b602d506d4f3ef2a31662fe4c998`; subsequent review commits change documentation and CI failure reporting only |
 | Manual test URL | https://kiki-json-stream.woodsycarp256.chatgpt.site |
 | Exact deployed Site source | `c83ec7e6664025b7ca01d06f208af009269f8ad2`, also pinned by [SOURCE.json](../../prototypes/json_stream_site/SOURCE.json) |
 | Successful deployment | `appgdep_6ad0a54cafe881919db038cc07bf6f61` |
@@ -18,7 +18,7 @@ Draft PR: [Kikiland-ai/kiki-backend#1](https://github.com/Kikiland-ai/kiki-backe
 | Runtime configuration | Existing owner-private Site; environment revision 8; existing keys, receipt signer and saved sessions |
 | Archived control | Baseline source/fixture [manifest](../baselines/screen-reader-v1.manifest.json) and original Git SHA remain immutable references even if the baseline branch later advances |
 
-This PR targets the baseline branch, not `main`. Opening it does not promote the baseline runtime or change the original baseline Site. The existing experimental Site already serves the proposed runtime. This review/documentation step does not redeploy it. A later Git merge and any baseline Site rollout are distinct actions; this session performs neither.
+This PR targets the baseline branch, not `main`. Opening it does not promote the baseline runtime or change the original baseline Site. The existing experimental Site already serves the proposed runtime. This review/documentation step does not redeploy it. A failed PR check also led to adding bounded offline failure output to CI console logs, without changing application behavior. A later Git merge and any baseline Site rollout are distinct actions; this session performs neither.
 
 ## Before and after
 
@@ -119,3 +119,7 @@ Manual acceptance is currently **pending**. No result is prefilled as passed. A 
 - Roll back only context delivery with `KIKI_STREAM_CONTEXT_MODE=per_event`, or provider DB routing with `KIKI_PROVIDER_IO=serial`, using the normal environment deployment. Full rollback is the recorded prior Site version/source. Do not silently reset learner data or force-rewrite the baseline branch.
 
 The merge gate is the user's manual result plus acceptable PR checks/review. Merging the Git branch does not automatically switch the original baseline Site. Record the approved result and exact merge SHA in this trace when merge is subsequently authorized; this session stops with an open draft PR.
+
+## PR check trace
+
+PR-triggered acceptance run [38718645204](https://github.com/Kikiland-ai/kiki-backend/actions/runs/38718645204) passed on documentation head `41b87fc`. The next run [38718685987](https://github.com/Kikiland-ai/kiki-backend/actions/runs/38718685987), at documentation head `986b719`, failed the Node suite while Python, all replays, both benchmarks and integrity checks passed. The failed report was retained as artifact `11963996721`; it is not discarded or represented as a pass. Artifact retrieval to this executor is unavailable, so the runner now also prints bounded failed offline logs to the CI console for investigation through the supported job-log API. Runtime and deployed Site source are unchanged by this diagnostic addition. Manual acceptance and merge remain pending.

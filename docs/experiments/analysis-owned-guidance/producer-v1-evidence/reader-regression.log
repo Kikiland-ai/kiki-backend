@@ -1,0 +1,11 @@
+site-build: PASS
+python: PASS
+node: PASS
+replay-serial: PASS
+replay-batched: PASS
+replay-context-control: PASS
+context-benchmark: PASS
+database-benchmark: PASS
+pinned-context: PASS
+frozen-baseline: PASS
+{"passed": true, "report": "/workspace/kiki-backend/work/analysis-owned-guidance-producer/work/evaluations/guidance-v1/reader-regression/report.json", "paid_model_calls": 0}

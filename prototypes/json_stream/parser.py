@@ -15,14 +15,22 @@ def unique_object(pairs):
     return result
 
 class FindingParser:
-    def __init__(self, checkpoint, decision_only=False):
+    def __init__(self, checkpoint, decision_only=False, drawing_input=None):
         self.checkpoint=checkpoint
         self.fields={'criteria','action_findings','uncertainties'} | (set() if decision_only else {'summary'})
         self.decision_only=decision_only
+        self.drawing_input=drawing_input
+        self.drawing_result=None
+        if drawing_input is not None:
+            if not decision_only:raise ValueError('drawing_requires_short_decision')
+            self.fields.add('screen_guidance')
         self.expected={'criteria':{c['id'] for c in checkpoint['completion_criteria']},
                        'action_findings':{a['id'] for a in PROCEDURES[checkpoint['id']]}}
         self.seen={key:set() for key in self.expected};self.keys=set();self.completed=set()
         self.decoder=json.JSONDecoder(object_pairs_hook=unique_object)
+        if drawing_input is not None:
+            from .guidance import strict_decoder
+            self.decoder=strict_decoder()
         self.utf8=codecs.getincrementaldecoder('utf-8')('strict')
         self.text='';self.pos=0;self.state='start';self.field=None;self.closed=False
     def feed(self, chunk):
@@ -95,6 +103,11 @@ class FindingParser:
             self.text+=self.utf8.decode(b'',final=True);self._parse();self._skip()
             if not self.closed or self.pos!=len(self.text) or self.keys!=self.fields:raise ValueError('incomplete')
             value=self.decoder.decode(self.text)
+            if self.drawing_input is not None:
+                from .guidance import validate_model
+                validate_model(value,self.drawing_input,self.checkpoint,self.expected['action_findings'])
+                self.drawing_result=value
+                value={key:data for key,data in value.items() if key!='screen_guidance'}
             if self.decision_only:value['summary']=decision_summary(value)
             if self.seen['action_findings']!=self.expected['action_findings']:raise ValueError('missing actions')
             return validate_result(value,self.checkpoint)

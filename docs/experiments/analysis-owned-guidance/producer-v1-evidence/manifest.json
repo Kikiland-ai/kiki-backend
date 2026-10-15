@@ -1,0 +1,19 @@
+{
+  "schema": "producer-v1-offline-evidence/v1",
+  "paid_model_calls": 0,
+  "live_latency_measured": false,
+  "renderer_verified": false,
+  "parent_commit": "08229428a712a5cd3c71847490d09502a7a8d5da",
+  "files_sha256": {
+    "acceptance.json": "62e6af42a15ab96869ee3a9a56dd807f1f6dff95606db43c49da493a5b1d6fdd",
+    "comparison.json": "8fb8dde18fd7bf2bf5fb87d63771124284f882838b52fa8682371c5071bc0954",
+    "final-paired-replay.log": "f22bde8530248a7a7fffd1acbd83cbc3c9fa0ca9ba188eb74778977fe293cb7f",
+    "final-python-producer.log": "050b4aae35b193466fdad15579749bb54767bd0510aeecabfa1d7ecf7d6d6d6d",
+    "final-worker-producer.log": "5e4c1b4ce03802f2e5e770daa5a09fc87ccc9105d0bae79c42cbc07cb4dedc23",
+    "python-producer.log": "6ab6e5afd8e6a988fdcabf306566b3ae0a9286f33c17773823e6b063b47bf483",
+    "reader-regression-report.json": "891b2aabf714b5922be57a78a88115dac8e064b72e4b6b4ba23b1c2917bd1016",
+    "reader-regression.log": "578389a2ea68256988a62e920f29e090fc1b5d04400f4cc2e5d2cb97a14434c7",
+    "timings.jsonl": "f0d2905d7d9a2e7f8de7811253669465788c9f0bc4cf697ce97652a1ce0153d4",
+    "worker-producer.log": "09058462da0fd1685300d9e3fa793fa70025b356ff97ac8cf9ff757083565aaa"
+  }
+}

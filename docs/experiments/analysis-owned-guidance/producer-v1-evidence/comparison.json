@@ -1,0 +1,290 @@
+{
+  "schema": "guidance-producer-comparison/v1",
+  "groups": [
+    {
+      "runtime": "python",
+      "configuration_id": "fixture-cp01-chunk64-batched-perchunk",
+      "sample_kind": "offline_replay",
+      "model": "gemini-3.5-flash-lite",
+      "arm": "control",
+      "requests": 10,
+      "outcomes": {
+        "tracker_committed": 10
+      },
+      "reasons": {
+        "none": 10
+      },
+      "source_revisions": [
+        "working-tree-sha256:f5d937a4044b1d92804f73d5064fe183ebc5e99ce94756cfd0cba9f01ab10a34"
+      ],
+      "metrics": {
+        "terminal_elapsed_ms": {
+          "n": 10,
+          "median": 5.301,
+          "p95": 28.711
+        },
+        "first_finding_ms": {
+          "n": 10,
+          "median": 2.0,
+          "p95": 23
+        },
+        "critical_fields_ms": {
+          "n": 10,
+          "median": 2.0,
+          "p95": 23
+        },
+        "drawing_fields_ms": {
+          "n": 0,
+          "median": null,
+          "p95": null
+        },
+        "provider_stop_ms": {
+          "n": 10,
+          "median": 2.0,
+          "p95": 23
+        },
+        "decision_validated_ms": {
+          "n": 10,
+          "median": 2.0,
+          "p95": 23
+        },
+        "commit_finished_ms": {
+          "n": 10,
+          "median": 4.0,
+          "p95": 25
+        },
+        "publication_ms": {
+          "n": 0,
+          "median": null,
+          "p95": null
+        },
+        "packet_prepared_ms": {
+          "n": 0,
+          "median": null,
+          "p95": null
+        },
+        "request_prepared_ms": {
+          "n": 0,
+          "median": null,
+          "p95": null
+        },
+        "validation_ms": {
+          "n": 0,
+          "median": null,
+          "p95": null
+        },
+        "drawing_tail_ms": {
+          "n": 0,
+          "median": null,
+          "p95": null
+        },
+        "frame_age_at_commit_ms": {
+          "n": 0,
+          "median": null,
+          "p95": null
+        },
+        "screen_guidance_bytes": {
+          "n": 0,
+          "median": null,
+          "p95": null
+        },
+        "provider_db_operations": {
+          "n": 10,
+          "median": 4.0,
+          "p95": 4
+        },
+        "provider_db_ms": {
+          "n": 10,
+          "median": 0.0,
+          "p95": 1
+        },
+        "provider_http_attempts": {
+          "n": 10,
+          "median": 1.0,
+          "p95": 1
+        },
+        "provider_http_ms": {
+          "n": 10,
+          "median": 1.0,
+          "p95": 21
+        },
+        "context_db_reads": {
+          "n": 0,
+          "median": null,
+          "p95": null
+        },
+        "context_db_ms": {
+          "n": 0,
+          "median": null,
+          "p95": null
+        },
+        "input_tokens": {
+          "n": 0,
+          "median": null,
+          "p95": null
+        },
+        "output_tokens": {
+          "n": 0,
+          "median": null,
+          "p95": null
+        },
+        "request_text_characters": {
+          "n": 10,
+          "median": 13335.0,
+          "p95": 13335
+        },
+        "image_bytes": {
+          "n": 10,
+          "median": 725.0,
+          "p95": 725
+        }
+      }
+    },
+    {
+      "runtime": "python",
+      "configuration_id": "fixture-cp01-chunk64-batched-perchunk",
+      "sample_kind": "offline_replay",
+      "model": "gemini-3.5-flash-lite",
+      "arm": "drawing_v1",
+      "requests": 10,
+      "outcomes": {
+        "published": 10
+      },
+      "reasons": {
+        "none": 10
+      },
+      "source_revisions": [
+        "working-tree-sha256:f5d937a4044b1d92804f73d5064fe183ebc5e99ce94756cfd0cba9f01ab10a34"
+      ],
+      "metrics": {
+        "terminal_elapsed_ms": {
+          "n": 10,
+          "median": 11.118500000000001,
+          "p95": 17.809
+        },
+        "first_finding_ms": {
+          "n": 10,
+          "median": 3.0,
+          "p95": 9
+        },
+        "critical_fields_ms": {
+          "n": 10,
+          "median": 3.0,
+          "p95": 9
+        },
+        "drawing_fields_ms": {
+          "n": 10,
+          "median": 3.0,
+          "p95": 9
+        },
+        "provider_stop_ms": {
+          "n": 10,
+          "median": 3.0,
+          "p95": 9
+        },
+        "decision_validated_ms": {
+          "n": 10,
+          "median": 4.0,
+          "p95": 10
+        },
+        "commit_finished_ms": {
+          "n": 10,
+          "median": 6.0,
+          "p95": 12
+        },
+        "publication_ms": {
+          "n": 10,
+          "median": 9.0,
+          "p95": 16
+        },
+        "packet_prepared_ms": {
+          "n": 10,
+          "median": 3.0,
+          "p95": 4
+        },
+        "request_prepared_ms": {
+          "n": 10,
+          "median": 2.0,
+          "p95": 8
+        },
+        "validation_ms": {
+          "n": 10,
+          "median": 1.0,
+          "p95": 1
+        },
+        "drawing_tail_ms": {
+          "n": 10,
+          "median": 1.0,
+          "p95": 1
+        },
+        "frame_age_at_commit_ms": {
+          "n": 10,
+          "median": 8.0,
+          "p95": 14
+        },
+        "screen_guidance_bytes": {
+          "n": 10,
+          "median": 4124.0,
+          "p95": 4124
+        },
+        "provider_db_operations": {
+          "n": 10,
+          "median": 4.0,
+          "p95": 4
+        },
+        "provider_db_ms": {
+          "n": 10,
+          "median": 0.0,
+          "p95": 0
+        },
+        "provider_http_attempts": {
+          "n": 10,
+          "median": 1.0,
+          "p95": 1
+        },
+        "provider_http_ms": {
+          "n": 10,
+          "median": 2.0,
+          "p95": 2
+        },
+        "context_db_reads": {
+          "n": 0,
+          "median": null,
+          "p95": null
+        },
+        "context_db_ms": {
+          "n": 0,
+          "median": null,
+          "p95": null
+        },
+        "input_tokens": {
+          "n": 0,
+          "median": null,
+          "p95": null
+        },
+        "output_tokens": {
+          "n": 0,
+          "median": null,
+          "p95": null
+        },
+        "request_text_characters": {
+          "n": 10,
+          "median": 16651.0,
+          "p95": 16651
+        },
+        "image_bytes": {
+          "n": 10,
+          "median": 725.0,
+          "p95": 725
+        }
+      }
+    }
+  ],
+  "paired_cases": 10,
+  "unpaired_cases": 0,
+  "limitations": [
+    "Offline replay measures parser/tracker/projection overhead only; provider generation, network, Site delivery and paint are not measured.",
+    "Each metric retains its own denominator; failed/discarded requests remain in outcome counts. Token counts are null unless reported by the provider.",
+    "Compare matching configuration/runtime/sample/model groups. Paired IDs identify cases, not randomized real-user trials. Rendering never supplies checkpoint evidence."
+  ]
+}

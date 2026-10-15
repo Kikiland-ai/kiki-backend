@@ -4,6 +4,8 @@
 
 This commit publishes schema, synthetic examples and contract reference checks first. It changes no active model prompt/parser, committed projection, browser client, build, Worker route, generated bundle, Site, secret or learner session. It does not implement a renderer or prove target localization/paint. The latency control, reader/writer baselines and PR #1's code/review state remain separate. PR #1 only received the requested latest latency observation in its description.
 
+> Implementation update: an opt-in producer v1 now exists on this branch. See the [v1 build/export/testing handoff](analysis-owned-guidance-producer-v1-build.md). The proposal-publication descriptions below refer to commit `08229428a712a5cd3c71847490d09502a7a8d5da`; they do not describe current implementation status. Renderer agreement and live integration remain pending.
+
 ## Version and compatibility proposal
 
 | Boundary | Proposed new contract | Existing control |
@@ -63,7 +65,7 @@ For a matching candidate, the producer deterministically wraps its marks in `scr
 
 The proposed v3 `guidance_committed.state` has `projection=committed-decision/v2` and one new `screen_guidance` field containing a `committed_guidance` or terminal `cancel` envelope from the bundle. Do not duplicate it in the event tail or make the consumer fetch a second semantic result. It is emitted only after durable tracker commitment; provisional findings/critical-ready events never draw. The existing independent committed/completion promises and blocked-tail protection are retained.
 
-The concrete schema export is the bundle above; there is **no new production callable export yet**. Next producer code is planned in `prototypes/json_stream/guidance.py` with a Python admission adapter and equivalent isolated Worker producer helper. Existing `analysis.py`, strict parsers and committed projection will select this version explicitly. Shared client/build/route/generated-bundle edits remain integration-owned.
+At the initial proposal commit there was **no new production callable export**. The [v1 build handoff](analysis-owned-guidance-producer-v1-build.md) now lists the opt-in implementations. Initial producer code was planned in `prototypes/json_stream/guidance.py` with a Python admission adapter and equivalent isolated Worker producer helper. Existing `analysis.py`, strict parsers and committed projection will select this version explicitly. Shared client/build/route/generated-bundle edits remain integration-owned.
 
 ## Replacement, ordering and cancellation
 
@@ -74,6 +76,20 @@ Consumers deduplicate packet/cancel IDs and maintain a high-water sequence even 
 Producer pause, disconnect, step/workspace/parameter/view change, expiry and stream retirement send the new version's ordered `cancel`, mechanically convertible to the unchanged v0.2 cancel shape. Renderer source/navigation/resize invalidation clears locally immediately and fences that binding/view without inventing a server sequence; later producer cancellations reconcile the server fence. Pending delivery and queued captures cannot restore a locally invalidated layer.
 
 Periodic frame arrival or a changed screenshot hash is **not itself a view revision or blanket cancellation of in-flight analysis**. Source identity/layout invalidation and final live-content freshness are separate. Delivery must still verify the current source pixels/geometry according to the agreed adapter proof; removing that final check is not a latency optimization.
+
+### Rapid observation changes during streaming
+
+User-reported integration risk, 15 October 2026: “when the streaming is going on the what can I see changes rapidly.” This is a required regression scenario, not a confirmed diagnosis or an implemented fix. It may mean changes in the shared source, repeated provisional panel updates, or overlapping/late responses; test each separately.
+
+- Pin every analysis to its immutable admitted frame, request ID and context. Stream fragments update only that request's private assembly buffer. Do not assemble findings or drawing geometry from different frames, retries or requests.
+- Keep the last accepted observation coherent in “What I can see,” labelled with its frame/capture age while a newer read runs. Do not rewrite that panel from each provisional finding or auxiliary snapshot. Publish the next accepted observation atomically with its committed now/next projection; an obsolete completion cannot overwrite it. Invalidation may immediately mark it historical/unavailable and clear guidance. Historical text must not masquerade as current observation or fallback instruction.
+- The browser needs a local attachment/request-generation fence as well as server context/sequence checks: abort is best effort, and an already queued callback can still run. Recheck identity and freshness immediately before tracker save, committed-event application, and visible paint. The server save must be conditional on the expected authoritative revision (or serialized against invalidation); a read followed by an unguarded save is not sufficient. A late auxiliary tail cannot replace the committed projection.
+- Source/layout/parameter/visit changes fence invalid work immediately. Capture-source changes, pan, zoom, resize, modal or scroll changes invalidate geometry as applicable; ordinary new frames or changed hashes alone do not. A same-layout content change can still make an instruction obsolete: final source/target freshness must reject or clear stale live cues even when `view_revision` is unchanged. Captured-frame preview remains explicitly historical, never proof of live freshness.
+- Coalesce waiting captures to the latest eligible frame under the existing bounded analysis scheduler, while retaining the admitted frame for the in-flight request. Do not restart on every frame or wait indefinitely for a motionless screen. If source motion prevents safe live placement, keep current tracker text available and omit anchored marks until a fresh validated result arrives; do not recycle stale packet fallback.
+
+Required deterministic integration tests use controlled stream barriers: newer frame arrival without layout change; source/view invalidation between chunks; invalidation between final validation and durable save; older request/tail completion after a newer commit; queued callbacks after abort; source-content movement with unchanged layout revision; invalidation between source verification and paint. Assert no observation regression, mixed-frame marks, stale progress save, resurrected layer or capture-starvation loop. Record frame age at commit/paint, invalidation/discard reasons and reschedule counts alongside latency. These tests are planned in addition to the existing 50 reference cases; they have not run in the live pipeline.
+
+Producer owns immutable admission, parsing, conditional tracker commit and ordered output. Integration owns panel updates/request-generation fencing and capture scheduling. Renderer owns final source freshness, local invalidation and pre-paint checks. Existing fields suffice for the documented proposal; any new wire generation or state-version field needs an explicitly agreed contract revision.
 
 ## Proposed transport, clocks and live connection gate
 

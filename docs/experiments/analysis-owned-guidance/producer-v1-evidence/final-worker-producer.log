@@ -1,0 +1,19 @@
+✔ Worker typed projection single (13.183758ms)
+✔ Worker typed projection comparison (7.018994ms)
+✔ Worker typed projection action-advance (3.784752ms)
+✔ Worker typed projection none (1.738904ms)
+✔ Worker typed projection declined (2.210817ms)
+✔ Worker typed projection text-only (2.798003ms)
+✔ Worker typed projection multi-unresolved (2.383567ms)
+✔ new parser accepts bytewise four fields and rejects dangerous malformed tails (17.807947ms)
+✔ input pins exact JPEG and versioned provider schema (3.477188ms)
+✔ stale view/condition/provenance and missing live proof reject entire packet (3.428985ms)
+✔ actual Worker stream uses one request and holds drawing behind full STOP (6.859933ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 128.14177

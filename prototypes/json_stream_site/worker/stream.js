@@ -8,18 +8,20 @@ function committedProjection(state){
  value.runtime=Object.fromEntries(['analysis_attempts','analysis_status','analysis_error','retry_at_ms','retry_after_ms','last_analysis_timing','candidate'].filter(k=>k in state.runtime).map(k=>[k,structuredClone(state.runtime[k])]));
  value.projection='committed-decision/v1';return value;
 }
-async function analyzeLabFrameStream(bytes,cp,state,env,emit){
+async function analyzeLabFrameStream(bytes,cp,state,env,emit,drawingRun=null){
+ const drawingStarted=drawingRun?Date.now():null;
  const {model,body}=buildLabRequest(bytes,cp,state,env),schema=body.generationConfig.responseJsonSchema;
  const order=['criteria','action_findings','uncertainties'];schema.properties=Object.fromEntries(order.map(k=>[k,schema.properties[k]]));schema.required=order;
  schema.properties.criteria.minItems=cp.completion_criteria.length;schema.properties.action_findings.minItems=GUIDED_POLICY.procedures[cp.id].length;
  body.systemInstruction.parts[0].text+="\nSerialize top-level JSON fields in this order: criteria, action_findings, uncertainties, summary. Put the complete authored checkpoint decision findings first, then complete action findings, then critical uncertainties, and the short visible summary last. Keep every ID, status and supporting evidence. Do not emit a completion claim or generate next-step instructions.\nOcclusion check is mandatory before any wire or receiver_structure match: inspect the ENTIRE path from the named source output to the named destination input. A foreground settings dialog, panel or other window covering ANY part of that path makes the connection UNKNOWN, even when both endpoints and line pieces on both sides are visible and appear aligned. Never mentally join separated line fragments through an opaque window. receiver_structure requires BOTH receiver input paths fully visible end-to-end. modulated-wire and local-wire must each be unknown when their own paths are partly covered. Expected circuit topology, aligned line pieces and block names are not visible connection evidence.";
  body.systemInstruction.parts[0].text+='\nSHORT DECISION CONTRACT overrides the earlier summary/serialization instruction: return exactly criteria, action_findings, uncertainties, in that order, then close the JSON object and finish. Include EVERY authored criterion and action exactly once. Keep all decisive evidence and critical uncertainties, with concise factual evidence clauses. Do not generate a summary, explanation, teaching instruction, history or auxiliary text. The server derives display prose after the complete decision. A match is not a checkpoint completion claim.';
- const started=Date.now();let attempt=0,firstByte=null,firstFinding=null,criticalMs=null,providerMetrics={};
+ if(drawingRun)await drawingRun.extendRequest(body,bytes,cp,GUIDED_POLICY.procedures[cp.id],streamContext(state));
+ const started=drawingStarted??Date.now(),requestPreparedMs=Date.now()-started;let attempt=0,firstByte=null,firstFinding=null,criticalMs=null,providerStopMs=null,drawingReadyMs=null,validationMs=null,providerMetrics={};
  const fetcher=typeof env.LAB_STREAM_FETCH==='function'?env.LAB_STREAM_FETCH:fetch;
  const consumed=await providerRequest(env,model,body,fetcher,{signal:emit.signal,
   onMetrics(value){providerMetrics=value;},
-  async reset(){attempt++;firstByte=firstFinding=criticalMs=null;if(attempt>1)await emit({type:'attempt_reset',attempt});},
-  async consume(response){const parser=new FindingParserJS(cp,GUIDED_POLICY.procedures[cp.id],true),decoder=new SSEDecoderJS(),reader=response.body.getReader();let stopped=false,usage={},critical=false;
+  async reset(){attempt++;firstByte=firstFinding=criticalMs=providerStopMs=drawingReadyMs=null;if(attempt>1)await emit({type:'attempt_reset',attempt});},
+  async consume(response){const parser=drawingRun?drawingRun.parser(cp,GUIDED_POLICY.procedures[cp.id]):new FindingParserJS(cp,GUIDED_POLICY.procedures[cp.id],true),decoder=new SSEDecoderJS(),reader=response.body.getReader();let stopped=false,usage={},critical=false;
    try{while(true){const {value,done}=await reader.read();if(done)break;if(firstByte===null)firstByte=Date.now()-started;
     const pending=[];emit.metrics.provider_chunks++;
     for(const data of decoder.feed(value)){
@@ -29,16 +31,17 @@ async function analyzeLabFrameStream(bytes,cp,state,env,emit){
       if(stopped&&(text||candidate.finishReason))throw Error('invalid_output');
       for(const event of parser.feed(text)){if(firstFinding===null)firstFinding=Date.now()-started;pending.push({...event,attempt});}
       if(!critical&&['criteria','action_findings','uncertainties'].every(k=>parser.completed.has(k))){critical=true;criticalMs=Date.now()-started;pending.push({type:'critical_fields_ready',attempt});}
-      if(candidate.finishReason){if(candidate.finishReason!=='STOP')throw Error('incomplete_output');stopped=true;}
+      if(candidate.finishReason){if(candidate.finishReason!=='STOP')throw Error('incomplete_output');stopped=true;providerStopMs=Date.now()-started;}
+      if(drawingReadyMs===null&&parser.completed.has('screen_guidance'))drawingReadyMs=Date.now()-started;
      }
      if(raw.usageMetadata)usage=raw.usageMetadata;
     }
     await emit.batch(pending);
-   }decoder.finish();if(!stopped)throw Error('incomplete_output');const value=parser.finish();return {value:validateLabResult({...value,summary:decisionSummary(value)},cp,true),usage};
+   }decoder.finish();if(!stopped)throw Error('incomplete_output');const validationStarted=Date.now(),parsed=parser.finish(),value=drawingRun?drawingRun.finish(parsed):parsed;validationMs=Date.now()-validationStarted;return {value:validateLabResult({...value,summary:decisionSummary(value)},cp,true),usage};
    }finally{await reader.cancel().catch(()=>{});}
   }});
  const usage=consumed.usage,count=name=>Number.isSafeInteger(usage[name])&&usage[name]>=0?usage[name]:null;
- return {result:consumed.value,model,timing:{...providerMetrics,...emit.metrics,provider_ms:Date.now()-started,decision_validated_ms:Date.now()-started,first_byte_ms:firstByte,first_finding_ms:firstFinding,critical_fields_ms:criticalMs,stream_attempts:attempt,input_tokens:count('promptTokenCount'),cached_tokens:count('cachedContentTokenCount'),thinking_tokens:count('thoughtsTokenCount'),output_tokens:count('candidatesTokenCount'),total_tokens:count('totalTokenCount'),input_token_modalities:Array.isArray(usage.promptTokensDetails)?usage.promptTokensDetails.filter(v=>['TEXT','IMAGE','AUDIO','VIDEO'].includes(v.modality)&&Number.isSafeInteger(v.tokenCount)&&v.tokenCount>=0).map(v=>({modality:v.modality,tokens:v.tokenCount})):null,image_bytes:bytes.byteLength,request_text_characters:body.systemInstruction.parts[0].text.length+body.contents[0].parts[0].text.length+JSON.stringify(schema).length,wire_format:'lab-observer-decision/v1'}};
+ return {result:consumed.value,model,...(drawingRun?{drawing:drawingRun.model}:{}),timing:{...providerMetrics,...emit.metrics,provider_ms:Date.now()-started,decision_validated_ms:Date.now()-started,first_byte_ms:firstByte,first_finding_ms:firstFinding,critical_fields_ms:criticalMs,provider_stop_ms:providerStopMs,drawing_fields_ms:drawingReadyMs,...(drawingRun?{validation_ms:validationMs,request_prepared_ms:requestPreparedMs,drawing_tail_ms:criticalMs===null?null:Date.now()-started-criticalMs}:{}),stream_attempts:attempt,input_tokens:count('promptTokenCount'),cached_tokens:count('cachedContentTokenCount'),thinking_tokens:count('thoughtsTokenCount'),output_tokens:count('candidatesTokenCount'),total_tokens:count('totalTokenCount'),input_token_modalities:Array.isArray(usage.promptTokensDetails)?usage.promptTokensDetails.filter(v=>['TEXT','IMAGE','AUDIO','VIDEO'].includes(v.modality)&&Number.isSafeInteger(v.tokenCount)&&v.tokenCount>=0).map(v=>({modality:v.modality,tokens:v.tokenCount})):null,image_bytes:bytes.byteLength,request_text_characters:body.systemInstruction.parts[0].text.length+body.contents[0].parts[0].text.length+JSON.stringify(body.generationConfig.responseJsonSchema).length,wire_format:drawingRun?'lab-observer-drawing/v1':'lab-observer-decision/v1',...(drawingRun?{observer_prompt_version:'dsb-step-observer/v5-drawing1'}:{})}};
 }
 async function labStreamRoute(request,env,owner,executionContext){
  const url=new URL(request.url),match=/^\/lab-sessions\/([a-f0-9-]{36})\/check-stream$/.exec(url.pathname);

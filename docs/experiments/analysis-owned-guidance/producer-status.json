@@ -2,9 +2,9 @@
   "experiment": "analysis-owned-screen-guidance",
   "branch": "experiment/analysis-owned-guidance-producer",
   "coordination_base": "c805d3799dbef5cfd734c9dd9844b9d9b075e677",
-  "status": "contract_proposal_published_for_renderer_review",
+  "status": "producer_v1_implemented_opt_in_not_integrated",
   "contract_agreed": false,
-  "runtime_implemented": false,
+  "runtime_implemented": true,
   "site_deployed": false,
   "renderer_interoperability_verified": false,
   "live_acceptance_passed": false,
@@ -19,5 +19,26 @@
   "handoff": "docs/handoffs/analysis-owned-guidance-producer-v0.1.md",
   "offline_check": "python scripts/check-analysis-owned-guidance-contract.py",
   "reference_acceptance_count": 50,
-  "next_action": "Renderer reviews fixtures; producer next implements explicitly versioned parsing/admission without shared integration wiring."
+  "next_action": "Renderer validates fixtures and producer output; integration supplies authored catalogue/current-source runtime, D1 atomic sequence/outbox, negotiated route/client wiring, stale callback fences and actual paint ACK before a new integration Site trial.",
+  "streaming_race_requirement": {
+    "status": "python_admission_and_outbox_races_offline_tested_consumer_and_paint_pending",
+    "handoff_section": "Rapid observation changes during streaming",
+    "scope": "Immutable frame assembly, atomic observation/progress presentation, conditional save, late-response fences and source freshness before paint.",
+    "acceptance": "Deterministic delayed analyzer/tracker and SQLite outbox revision/cancellation tests run offline; source-content detection, browser callback fencing and verify-to-paint remain integration gates."
+  },
+  "implementation_scope": "Explicit Python producer/check/outbox and isolated Worker analysis/parser/projection helpers; no route/client/build/Site or live renderer wiring.",
+  "producer_entrypoints": {
+    "python": "prototypes/json_stream/guidance_check.py:check_with_drawing",
+    "worker": "prototypes/json_stream_site/worker/guidance.js:runDrawingAnalysis / buildCommittedDrawing",
+    "evaluation": "python scripts/run-guidance-evaluation.py --full",
+    "logs": "work/evaluations/guidance-v1/timings.jsonl",
+    "comparison": "work/evaluations/guidance-v1/comparison.json"
+  },
+  "implementation_test_counts": {
+    "python": 11,
+    "worker": 11,
+    "contract_reference": 50,
+    "paired_replay_requests": 20
+  },
+  "implementation_handoff": "docs/handoffs/analysis-owned-guidance-producer-v1-build.md"
 }

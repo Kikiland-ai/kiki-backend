@@ -1,0 +1,27 @@
+name: Analysis-owned guidance producer v1
+on:
+  push:
+    branches: ['experiment/analysis-owned-guidance-producer']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  producer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24'
+      - run: pip install -r prototypes/screen_capture/requirements.txt -r contracts/analysis_owned_guidance.v0_1.requirements.txt
+      - run: python scripts/run-guidance-evaluation.py --full
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: guidance-producer-v1
+          path: work/evaluations/guidance-v1/
+          retention-days: 14

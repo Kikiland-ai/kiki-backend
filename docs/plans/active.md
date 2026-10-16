@@ -2,7 +2,7 @@
 
 User requested isolated API queries to diagnose suspected malformed requests. Eight bounded synthetic-image queries reproduced CP-06 drawing HTTP 400 twice while CP-06 control succeeded. Removing nested target-ID enums resolves rejection; removing string bounds does not. Exact internal provider rule remains undisclosed. The selected minimal generation-schema fix preserves the authored catalogue and unchanged full final validator. All 126 Node checks pass, including twelve checkpoint-wide construction and wrong-target rejection cases; source, baseline/policy and BB8 checks pass.
 
-Last completed: reproduce, isolate, fix and retain [evidence](../experiments/analysis-owned-guidance/query-schema-evidence/README.md). Next: publish this exact query fix to the existing receiver, retain deployment receipt, then examine the next live CP-06 outcome. Timeout/failover/cooldown controls and producer/renderer branches remain unchanged. See [handoff](../handoffs/analysis-owned-guidance-query-fix.md).
+Last completed: reproduce, isolate, fix and retain [evidence](../experiments/analysis-owned-guidance/query-schema-evidence/README.md); existing receiver version 17 published successfully at 11:05 Asia/Kolkata from Site source `e96ffa9`, backend code `c6a0a95`, environment revision 8. All secrets/access preserved; no active provider cooldown existed. Next: reload the receiver and examine the next live CP-06 outcome. Timeout/failover/cooldown controls and producer/renderer branches remain unchanged. See [handoff](../handoffs/analysis-owned-guidance-query-fix.md).
 
 ---
 

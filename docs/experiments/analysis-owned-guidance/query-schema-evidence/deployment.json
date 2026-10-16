@@ -1,0 +1,26 @@
+{
+  "schema": "query-fix-deployment/v1",
+  "project_id": "appgprj_6ace6ce34218819198dfd778a822aed5",
+  "version_number": 17,
+  "version_id": "appgprj_6ace6ce34218819198dfd778a822aed5~appgver_2751602f3b548191bdd5671ddc2cad71",
+  "deployment_id": "appgdep_6ad1b77ba4ac8191900996506ed59b6c",
+  "url": "https://kiki-screen-receiver.woodsycarp256.chatgpt.site",
+  "status": "succeeded",
+  "completed_at_utc": "2026-10-16T05:35:02.680968Z",
+  "completed_at_local": "2026-10-16 11:05 Asia/Kolkata",
+  "environment_revision": 8,
+  "backend_code_revision": "c6a0a958b671ae5efa4c131d021377495b2af4d3",
+  "pushed_source_revision": "e96ffa9a7c6f8b2308a47dac372225e2593cac93",
+  "worker_sha256": "2439b1700378432d35116cda2dc221ce18182156eab86984048c10b5fe7e0f51",
+  "standalone_node_tests": {
+    "passed": 126,
+    "failed": 0
+  },
+  "native_publication_verified": true,
+  "owner_private_preserved": true,
+  "all_existing_secrets_preserved": true,
+  "active_provider_cooldowns_before_deployment": 0,
+  "real_simulink_placement_tested": false,
+  "deployed_provider_request_tested": false,
+  "postdeploy_http_asset_check": "Not repeated: this managed environment denied CONNECT to the Site host during the preceding deployment. Native publication confirms deployment; local/source artifact equality and tests are verified."
+}

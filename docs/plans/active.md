@@ -1,3 +1,11 @@
+# Checkpoint-specific provider query rejection — 16 October 2026 (Asia/Kolkata)
+
+User requested isolated API queries to diagnose suspected malformed requests. Eight bounded synthetic-image queries reproduced CP-06 drawing HTTP 400 twice while CP-06 control succeeded. Removing nested target-ID enums resolves rejection; removing string bounds does not. Exact internal provider rule remains undisclosed. The selected minimal generation-schema fix preserves the authored catalogue and unchanged full final validator. All 126 Node checks pass, including twelve checkpoint-wide construction and wrong-target rejection cases; source, baseline/policy and BB8 checks pass.
+
+Last completed: reproduce, isolate, fix and retain [evidence](../experiments/analysis-owned-guidance/query-schema-evidence/README.md). Next: publish this exact query fix to the existing receiver, retain deployment receipt, then examine the next live CP-06 outcome. Timeout/failover/cooldown controls and producer/renderer branches remain unchanged. See [handoff](../handoffs/analysis-owned-guidance-query-fix.md).
+
+---
+
 # Analysis-owned live guidance integration — 15 October 2026 (Asia/Kolkata)
 
 User authorized producer/renderer integration and deployment, then explicitly chose reusing the existing receiver Site and its secrets. Producer pinned at `1c658b63ef0a0ebce827168040bc057d92fa4c77`; independent renderer `e916986` is merged on `integration/analysis-owned-guidance`. Producer, baselines, latency Site/control and PR #1 remain unchanged.

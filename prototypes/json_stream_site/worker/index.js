@@ -3394,6 +3394,11 @@ class LiveDrawingRunJS extends DrawingRunJS {
    marks.items={type:'object',additionalProperties:false,required:['kind','cue_id'],properties};
    body.systemInstruction.parts[0].text+=' For each mark emit only the fields for its kind: box/ellipse use target_id; text uses text_ref and anchor; arrow uses relationship_id, from and to. Omit unrelated optional fields. Runtime validation enforces the complete typed contract.';
   }
+  // Repeating the full target-ID enum at every nested anchor makes the CP-06
+  // query fail at the provider with INVALID_ARGUMENT. The authored catalogue
+  // and unchanged final validator enforce exact IDs; generation needs strings.
+  const simplifyTargets=node=>{if(Array.isArray(node))node.forEach(simplifyTargets);else if(node&&typeof node==='object'){if(node.properties?.target_id)node.properties.target_id={type:'string'};Object.values(node).forEach(simplifyTargets);}};
+  simplifyTargets(body.generationConfig.responseJsonSchema.properties.screen_guidance);
  }
 }
 const G_CONTRACT='analysis-owned-guidance/v0.1';

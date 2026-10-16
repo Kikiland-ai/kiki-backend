@@ -1,0 +1,14 @@
+{
+  "arm": "drawing",
+  "checkpoint": "CP-DSB-06",
+  "http_status": 400,
+  "content_type": "text/event-stream",
+  "headers_ms": 980,
+  "total_ms": 980,
+  "response_bytes": 127,
+  "error": {
+    "code": 400,
+    "status": "INVALID_ARGUMENT",
+    "message": "Request contains an invalid argument."
+  }
+}

@@ -1,9 +1,22 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {setupGuidance} from './guidance-fixture.mjs';
+import {setupGuidance,seedCheckpoint} from './guidance-fixture.mjs';
+import {readFile} from 'node:fs/promises';
+import {validateDrawingModel} from '../worker/guidance.js';
 import '../assets/guidance-protocol.js';
 import {startAnalysisStream} from '../assets/json-stream-client.js';
 const decode=text=>text.split('\n\n').filter(Boolean).map(v=>JSON.parse(v.slice(6)));
+const definition=JSON.parse(await readFile(new URL('../data/experiment.json',import.meta.url))),policy=JSON.parse(await readFile(new URL('../data/guided-policy.json',import.meta.url)));
+for(const cp of definition.checkpoints)test('live generation schema and strict target admission at '+cp.id,async t=>{
+ const h=await setupGuidance();t.after(()=>h.env.DB.close());await seedCheckpoint(h.env,h.state,cp.id);const original=h.env.LAB_STREAM_FETCH;let body;
+ h.env.LAB_STREAM_FETCH=async(url,options)=>{body=JSON.parse(options.body);return original(url,options);};
+ const events=decode(await(await h.check()).text());assert.ok(events.some(e=>e.type==='guidance_committed'),JSON.stringify(events));
+ const schema=body.generationConfig.responseJsonSchema;assert.equal(schema.properties.criteria.minItems,cp.completion_criteria.length);assert.equal(schema.properties.action_findings.maxItems,policy.procedures[cp.id].length);let targetFields=0;
+ function inspect(n){if(Array.isArray(n))n.forEach(inspect);else if(n&&typeof n==='object'){if(n.properties?.target_id){assert.deepEqual(n.properties.target_id,{type:'string'});targetFields++;}Object.values(n).forEach(inspect);}}inspect(schema.properties.screen_guidance);assert.equal(targetFields,5);
+ const eligible_actions=JSON.parse(body.contents[0].parts[0].text.split('\nAuthored drawing catalogue: ')[1]),action=eligible_actions[0];
+ const value={criteria:cp.completion_criteria.map(c=>({criterion_id:c.id,status:'unknown',evidence:'Controlled unknown finding.'})),action_findings:policy.procedures[cp.id].map(a=>({action_id:a.id,status:'unknown',evidence:'Controlled unknown finding.'})),uncertainties:[],screen_guidance:[{action_id:action.action_id,mode:'text_only',targets:action.required_target_ids.map(target_id=>({target_id,status:'unresolved',region:null})),marks:[]}]};
+ assert.doesNotThrow(()=>validateDrawingModel(value,{eligible_actions},cp,policy.procedures[cp.id]));value.screen_guidance[0].targets[0].target_id='foreign.target';assert.throws(()=>validateDrawingModel(value,{eligible_actions},cp,policy.procedures[cp.id]),/schema_enum/);value.screen_guidance[0].targets[0].target_id=action.required_target_ids.includes('message.block')?'carrier.block':'message.block';assert.throws(()=>validateDrawingModel(value,{eligible_actions},cp,policy.procedures[cp.id]),/foreign_or_missing_targets/);
+});
 async function complete(t,mode='annotate'){const h=await setupGuidance();t.after(()=>h.env.DB.close());h.env.fixtureMode=mode;const response=await h.check();assert.equal(response.status,200);const events=decode(await response.text());const core=events.find(e=>e.type==='guidance_committed');assert.ok(core,JSON.stringify(events));return {...h,events,core};}
 for(const mode of ['annotate','text_only','none'])test('negotiated real Worker commits '+mode+' with atomic outbox',async t=>{
  const h=await complete(t,mode),e=h.core.state.screen_guidance;assert.equal(h.core.schema,'lab-analysis-stream/v3');assert.equal(h.core.state.projection,'committed-decision/v2');assert.equal(e.outcome,mode);assert.equal(h.core.state.runtime.capture_active,true);globalThis.KikiGuidanceProtocol.validate(e,h.core.state);assert.equal(h.env.fixtureCalls,1);assert.equal(e.context.lab_revision,h.core.state.revision);

@@ -1,0 +1,10 @@
+{
+  "arm": "control",
+  "checkpoint": "CP-DSB-01",
+  "http_status": 200,
+  "content_type": "text/event-stream",
+  "headers_ms": 2517,
+  "total_ms": 3212,
+  "response_bytes": 6386,
+  "response_preview": "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"{\\n  \\\"criteria\\\":\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 3934,\"candidatesTokenCount\": 7,\"totalTokenCount\": 3941,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 2834},{\"modality\": \"IMAGE\",\"tokenCount\": 1100}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.5-flash-lite\",\"responseId\": \"HhvRaq32Kv3Qz7IPr5udKA\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" [\\n    {\\n      \\\"criterion_id\\\": \\\"CP-DSB-01:workspace\\\",\\n      \\\"status\\\": \\\"unknown\\\",\"}],\"role\": \"model\"},\"index\": 0}],\"usa"
+}

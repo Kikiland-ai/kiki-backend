@@ -1,0 +1,56 @@
+{
+  "arm": "drawing",
+  "status": "PASS",
+  "http_status": 200,
+  "complete_stop": true,
+  "actual_runtime_parser_valid": true,
+  "fields": [
+    "criteria",
+    "action_findings",
+    "uncertainties",
+    "screen_guidance"
+  ],
+  "chunks": 18,
+  "usage": {
+    "promptTokenCount": 4363,
+    "candidatesTokenCount": 435,
+    "totalTokenCount": 4798,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 3263
+      },
+      {
+        "modality": "IMAGE",
+        "tokenCount": 1100
+      }
+    ],
+    "serviceTier": "standard"
+  },
+  "screen_guidance": [
+    {
+      "action_id": "CP-DSB-01/create",
+      "mode": "text_only",
+      "targets": [
+        {
+          "target_id": "workspace.canvas",
+          "status": "ambiguous",
+          "region": null
+        }
+      ],
+      "marks": []
+    },
+    {
+      "action_id": "CP-DSB-01/save",
+      "mode": "text_only",
+      "targets": [
+        {
+          "target_id": "workspace.model_title",
+          "status": "ambiguous",
+          "region": null
+        }
+      ],
+      "marks": []
+    }
+  ]
+}

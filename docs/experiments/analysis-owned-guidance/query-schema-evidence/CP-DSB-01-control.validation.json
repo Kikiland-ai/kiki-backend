@@ -1,0 +1,29 @@
+{
+  "arm": "control",
+  "status": "PASS",
+  "http_status": 200,
+  "complete_stop": true,
+  "actual_runtime_parser_valid": true,
+  "fields": [
+    "criteria",
+    "action_findings",
+    "uncertainties"
+  ],
+  "chunks": 13,
+  "usage": {
+    "promptTokenCount": 3934,
+    "candidatesTokenCount": 271,
+    "totalTokenCount": 4205,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 2834
+      },
+      {
+        "modality": "IMAGE",
+        "tokenCount": 1100
+      }
+    ],
+    "serviceTier": "standard"
+  }
+}

@@ -1,0 +1,11 @@
+# Provider query fix — 16 October 2026, Asia/Kolkata
+
+The user's live receiver retry loop included Gemini timeouts and then HTTP 400 at CP-DSB-06. The original integration had tested provider schema acceptance at CP-03 and CP-01, which did not establish acceptance for larger checkpoint-specific schemas. Isolated CP-06 control succeeded, while drawing failed twice with generic `INVALID_ARGUMENT`. Removing string bounds did not help; removing repeated target-ID enums or removing array bounds each produced HTTP 200 and a response accepted by the unchanged full runtime validator.
+
+Selected fix: `LiveDrawingRunJS` replaces only the five repeated nested target-ID enums in the provider-facing response schema with string types. Stable IDs remain in the authored catalogue. Final schema and per-action semantic validation remain authoritative and reject unknown and unrelated target IDs. Criterion/action IDs, array bounds, geometry rules, source/transform/cancellation checks and all producer wire contracts remain unchanged.
+
+Verification: 126 Node tests passed, including twelve new checkpoint-wide real Worker/schema/target-rejection cases. Pinned source, frozen baseline/policy parity and BB8 package/discovery/reference-adapter checks pass. Eight isolated provider queries, exact before/after CP-06 queries, response bodies and parser checks are retained in [query-schema-evidence](../experiments/analysis-owned-guidance/query-schema-evidence/README.md). These use synthetic pixels and the cloud runtime key, not the Site's masked key pool or real learner screen. The provider's generic error does not disclose its internal grammar/constraint limit.
+
+No new model calls, retry loops or extension version are introduced into normal operation. Existing provider timeout/failover/cooldown settings are preserved. CP-06 control took 27.639 seconds in the isolated test, so the existing eight-second multi-key attempt can still time out. Do not promise a latency improvement or healthy real-Simulink recognition.
+
+Deployment: pending this exact query adapter publication to the existing private receiver. Preserve all secrets, sessions, access and previous version 16 for rollback. Next: reload the receiver after deployment and retain the next real CP-06 request outcome, without treating a text-only/none decision as a renderer failure.

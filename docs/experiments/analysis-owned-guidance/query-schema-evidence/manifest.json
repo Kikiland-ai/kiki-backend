@@ -1,0 +1,109 @@
+{
+  "schema": "isolated-provider-query-diagnostic/v1",
+  "recorded_date": "2026-10-16",
+  "timezone": "Asia/Kolkata",
+  "backend_before": "150ea24d514aaebab169a2910db33c55579675e1",
+  "site_version_before": 16,
+  "model": "gemini-3.5-flash-lite",
+  "endpoint": "streamGenerateContent?alt=sse",
+  "image": "725-byte constant-colour synthetic JPEG; not the learner screen",
+  "key_source": "Configured managed-cloud GEMINI_API_KEY, not the masked Site key pool",
+  "paid_requests": 8,
+  "changes": "Only provider responseJsonSchema.target_id fields changed from repeated enums to type:string; authored catalogue and full runtime validator remain unchanged.",
+  "results": [
+    {
+      "arm": "control",
+      "checkpoint": "CP-DSB-01",
+      "http_status": 200,
+      "content_type": "text/event-stream",
+      "headers_ms": 2517,
+      "total_ms": 3212,
+      "response_bytes": 6386,
+      "case": "CP-DSB-01-control"
+    },
+    {
+      "arm": "drawing",
+      "checkpoint": "CP-DSB-01",
+      "http_status": 200,
+      "content_type": "text/event-stream",
+      "headers_ms": 5311,
+      "total_ms": 6258,
+      "response_bytes": 8951,
+      "case": "CP-DSB-01-drawing"
+    },
+    {
+      "arm": "control",
+      "checkpoint": "CP-DSB-06",
+      "http_status": 200,
+      "content_type": "text/event-stream",
+      "headers_ms": 26698,
+      "total_ms": 27639,
+      "response_bytes": 9024,
+      "case": "CP-DSB-06-control"
+    },
+    {
+      "arm": "drawing",
+      "checkpoint": "CP-DSB-06",
+      "http_status": 400,
+      "content_type": "text/event-stream",
+      "headers_ms": 980,
+      "total_ms": 980,
+      "response_bytes": 127,
+      "error": {
+        "code": 400,
+        "status": "INVALID_ARGUMENT",
+        "message": "Request contains an invalid argument."
+      },
+      "case": "CP-DSB-06-drawing"
+    },
+    {
+      "name": "original",
+      "status": 400,
+      "headers_ms": 1268,
+      "total_ms": 1272,
+      "response_bytes": 127,
+      "error": {
+        "code": 400,
+        "status": "INVALID_ARGUMENT",
+        "message": "Request contains an invalid argument."
+      },
+      "case": "original"
+    },
+    {
+      "name": "without-string-bounds",
+      "status": 400,
+      "headers_ms": 810,
+      "total_ms": 811,
+      "response_bytes": 127,
+      "error": {
+        "code": 400,
+        "status": "INVALID_ARGUMENT",
+        "message": "Request contains an invalid argument."
+      },
+      "case": "without-string-bounds"
+    },
+    {
+      "name": "generic-target-ids",
+      "status": 200,
+      "headers_ms": 1775,
+      "total_ms": 3301,
+      "response_bytes": 13087,
+      "case": "generic-target-ids"
+    },
+    {
+      "name": "without-array-bounds",
+      "status": 200,
+      "headers_ms": 1221,
+      "total_ms": 2473,
+      "response_bytes": 12978,
+      "case": "without-array-bounds"
+    }
+  ],
+  "deployed_runtime_acceptance": false,
+  "limits": [
+    "Provider returned a generic INVALID_ARGUMENT body; no internal schema-compiler diagnostic or exact complexity threshold is exposed.",
+    "Successful isolated responses do not establish deployed key-pool/quota/network health or recognition accuracy.",
+    "CP-06 control took 27639 ms, beyond existing 8-second multi-key attempt limit. Timeout/failover controls are preserved.",
+    "The 12 new offline cases exercise actual request construction and full validation; they are not 12 live provider acceptance calls."
+  ]
+}

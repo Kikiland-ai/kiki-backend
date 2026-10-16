@@ -1,0 +1,38 @@
+{
+  "name": "without-array-bounds",
+  "status": "PASS",
+  "actual_runtime_parser_valid": true,
+  "criteria": 3,
+  "actions": 5,
+  "screen_guidance": [
+    {
+      "action_id": "CP-DSB-06/filter-create",
+      "mode": "text_only",
+      "targets": [
+        {
+          "target_id": "workspace.canvas",
+          "status": "ambiguous",
+          "region": null
+        }
+      ],
+      "marks": []
+    },
+    {
+      "action_id": "CP-DSB-06/filter-settings",
+      "mode": "text_only",
+      "targets": [
+        {
+          "target_id": "lowpass.numerator",
+          "status": "unresolved",
+          "region": null
+        },
+        {
+          "target_id": "lowpass.denominator",
+          "status": "unresolved",
+          "region": null
+        }
+      ],
+      "marks": []
+    }
+  ]
+}

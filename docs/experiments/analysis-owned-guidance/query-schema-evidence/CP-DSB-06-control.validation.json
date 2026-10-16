@@ -1,0 +1,7 @@
+{
+  "name": "CP-DSB-06-control",
+  "status": "PASS",
+  "actual_runtime_parser_valid": true,
+  "criteria": 3,
+  "actions": 5
+}

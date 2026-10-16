@@ -1,0 +1,12 @@
+{
+  "name": "without-string-bounds",
+  "status": 400,
+  "headers_ms": 810,
+  "total_ms": 811,
+  "response_bytes": 127,
+  "error": {
+    "code": 400,
+    "status": "INVALID_ARGUMENT",
+    "message": "Request contains an invalid argument."
+  }
+}

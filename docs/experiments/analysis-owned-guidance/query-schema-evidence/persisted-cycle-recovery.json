@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "stored_cycle_error": "provider_http_400",
+  "before_expiry_provider_http_attempts": 0,
+  "after_expiry_provider_http_attempts": 1,
+  "failed_keys_cleared": true,
+  "live_site_key_test": false
+}

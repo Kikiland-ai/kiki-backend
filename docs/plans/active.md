@@ -1,3 +1,11 @@
+# Version-17 retry follow-up — 16 October 2026 (Asia/Kolkata)
+
+Latest observed check (11:09:59) had zero provider HTTP attempts: a retained shared rotation-cycle deadline surfaced as `provider_http_400`. It expired at 11:10:54; capture detached at 11:10:44 and is inactive. Earlier predeployment checking missed `provider_rotation.retry_at` by looking only at provider_cooldowns. Controlled actual-router replay confirms dispatch resumes and failed keys clear after expiry. No new Google failure or post-expiry live recovery has been established, and no runtime change/redeployment was made.
+
+Last completed: inspect logs, owned session and both cooldown stores, then verify expiry/recovery locally. Next: user resumes screen sharing; inspect the next actual provider attempt and drawing negotiation. [Evidence and handoff](../handoffs/analysis-owned-guidance-query-fix.md). Progress/session/credentials remain preserved.
+
+---
+
 # Checkpoint-specific provider query rejection — 16 October 2026 (Asia/Kolkata)
 
 User requested isolated API queries to diagnose suspected malformed requests. Eight bounded synthetic-image queries reproduced CP-06 drawing HTTP 400 twice while CP-06 control succeeded. Removing nested target-ID enums resolves rejection; removing string bounds does not. Exact internal provider rule remains undisclosed. The selected minimal generation-schema fix preserves the authored catalogue and unchanged full final validator. All 126 Node checks pass, including twelve checkpoint-wide construction and wrong-target rejection cases; source, baseline/policy and BB8 checks pass.

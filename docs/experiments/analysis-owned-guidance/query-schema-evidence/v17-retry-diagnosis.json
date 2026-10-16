@@ -1,0 +1,22 @@
+{
+  "schema": "receiver-v17-retry-diagnosis/v1",
+  "date": "2026-10-16",
+  "timezone": "Asia/Kolkata",
+  "request_id": "757c4367-bac6-4d85-bc30-4fb3a78ea979",
+  "trace_source_revision": "c6a0a958b671ae5efa4c131d021377495b2af4d3",
+  "request_time_local": "11:09:59",
+  "checkpoint_id": "CP-DSB-06",
+  "arm": "control",
+  "provider_http_attempts": 0,
+  "provider_db_operations": 2,
+  "reported_error": "provider_http_400",
+  "reason": "Existing shared key-rotation cycle retry deadline, not a newly observed Google HTTP response.",
+  "rotation_failed_key_count": 4,
+  "rotation_retry_at_local": "2026-10-16 11:10:54",
+  "capture_detached_local": "2026-10-16 11:10:44",
+  "capture_active_when_inspected": false,
+  "fresh_api_error_after_v17_verified": false,
+  "earlier_check_limitation": "Only provider_cooldowns was checked before deployment; separate provider_rotation retry_at was missed.",
+  "controlled_recovery_check": "Stored failed cycle blocks dispatch before expiry and clears failed keys/last error on the first healthy request after expiry.",
+  "next_action": "User resumes sharing; inspect the next live request. No end-to-end success established."
+}

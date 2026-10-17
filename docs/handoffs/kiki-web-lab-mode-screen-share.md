@@ -28,6 +28,13 @@ The student starts, sees and controls sharing from **kiki-web Lab mode** (`/labs
 
 ## 3. Plan
 
+**Where each part is tracked.** The kiki-web tasks (apps/api pass-through, apps/web Lab mode controller, contracts, tests, blocker B1) live in [kiki-web draft PR #6](https://github.com/Kikiland-ai/kiki-web/pull/6), on branch `feature/lab-screen-share` with `apps/web/LAB_SCREEN_SHARE_PLAN.md`. This file keeps the full picture and the kiki-backend tasks:
+
+- Python parity spike;
+- hosting (B2);
+- a `fb:<uid>` owner test;
+- the extension `readers` allowlist.
+
 ### Blockers and high priority
 
 | ID | Item | Why it blocks | Owner | Until resolved |

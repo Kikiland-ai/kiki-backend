@@ -1,3 +1,19 @@
+# Branch reconciliation complete — 18 October 2026
+
+All backend work is now on `main`, and `main` is the only remote branch. Merged: PR #2 screen-reader v1 baseline (`fe7758e`, merge commit), PR #3 floating Kiki windows (`6b14b5e`, merge commit), PR #4 concept canvas library (`e1cfd9f`, squash with narration WAVs in Git LFS). CI on PR #4 pulled LFS on a cold cache and passed; later runs reuse the cache keyed by the recovery manifest.
+
+Work kept off `main` is preserved as annotated tags: `archive/annotation-v22` (stopped annotation/drawing line, includes the renderer), `archive/floating-design-notes`, `archive/guidance-producer`, `archive/toon-stream-plan`, `archive/screen-writing-v02` (includes v01), and `archive/concept-canvas-recovered` (`f8b761d`, the original recovery commit with plain-Git WAVs). Eighteen remote branches were deleted after a check that each head is reachable from `main` or one of these tags.
+
+Known identity note: GitHub server-side PR merges record the account's profile name and primary email (`ArpanAv3 <arpanvihan5@gmail.com>`); it rejects the noreply address for `--author-email`. Local commits use the noreply identity.
+
+Exact next actions, in order:
+1. User decisions for connecting concept content to kiki-web (Phase 0): keep kiki-web's C-AM-08 package or replace it; port the ten `models.js` scene kinds to trusted React renderers or approve sandboxed iframes; regenerate per-placard Odia and English narration for the six whole-concept clips or extend kiki-web for concept-scope clips.
+2. Run the six-item manual acceptance from `docs/reviews/screen-reader-baseline-promotion.md`, or record a waiver.
+3. Choose a host for the Python/FastAPI service (persistent volume for SQLite), then the Lab-mode backend follow-ups for kiki-web PR #6: Python parity for `capture_active` and accepted-observation retention, a `fb:<uid>` owner test, and `http://127.0.0.1:5174` in the extension readers list.
+4. Make the `until()` helper in `prototypes/json_stream_site/scripts/test-decision-ui.mjs` wait on time rather than a fixed 200 turns; it flaked twice in CI.
+
+---
+
 # Concept canvas library promotion to main — 18 October 2026
 
 Step 3 of the reconciliation order. Steps 1 and 2 merged as PR #2 (`fe7758e`) and PR #3 (`6b14b5e`). Branch `promote/concept-canvas` starts at `feature/concept-canvas-handoff` (`f8b761d`) and merges `main` with no conflicts. The canvas branch's own entry ("Concept canvas library", further down) still describes the content; its generator code (`prototypes/topic_canvas/`, `prototypes/concept_packets/`) was lost before commit and is not on any branch.
@@ -6,7 +22,7 @@ Changes for promotion, chosen by the user: the 24 narration WAVs under `artifact
 
 What ran on Windows 11 without `PYTHONUTF8`: `scripts/verify-cam-review.py` PASS (96 files, 10 concepts, 22 clips, 0 provider calls); `tests.test_concept_library` 5/5, including both kiki-web bridge tests against kiki-web `origin/main` `93cce9b`.
 
-Exact next action: open the PR from `promote/concept-canvas` to `main`, wait for CI, and squash-merge once the user confirms. Then tag the archived branches (`integration/analysis-owned-guidance`, `design/floating-guidance-bubbles`, `experiment/analysis-owned-guidance-producer`) and delete the branches now contained in `main`. Connecting this content to kiki-web waits on the user's Phase 0 decisions; the recommendations, not yet confirmed, are to keep kiki-web's C-AM-08 package, port the scene kinds to trusted React renderers, and regenerate per-placard Odia and English narration.
+Outcome: squash-merged as PR #4 (`e1cfd9f`) after the user confirmed; see the entry above for tags, branch cleanup and next actions.
 
 ---
 

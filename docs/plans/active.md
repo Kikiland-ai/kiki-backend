@@ -4,7 +4,7 @@ User still sees no shapes on receiver v18. New drawing streams fail before publi
 
 All 134 Node checks pass. A real Gemini/native-capture-to-compositor run paints independently checked pixels and records a signed paint receipt, with 1.5-second visibility. The six paid diagnostic requests include all failed variants and the malformed fixture-history attempt; no learner pixels/data were archived. [Evidence](../experiments/analysis-owned-guidance/generated-marks-v1-evidence/README.md), [handoff](../handoffs/screen-writing-generated-marks-fix.md).
 
-Last completed: reproduce actual model-generation failure, enforce mark structure/reference keys, verify real generated marks through paint, and run source/baseline/BB8 checks. Next: publish exact source to existing receiver and inspect fresh live outcomes. Real Simulink/installed-extension after-fix paint remains unverified; no new extension/client refresh is required for the server-only functional correction.
+Last completed: reproduce actual model-generation failure, enforce mark structure/reference keys, verify real generated marks through paint, run source/baseline/BB8 checks, and publish existing receiver version 19 successfully at 13:13:49 Asia/Kolkata (backend `dba89aa`, Site source `8a878e4`, environment revision 10). Secrets/access remain preserved. Postdeploy capture is inactive and no fresh drawing attempt is available. Next: user resumes the existing browser share; inspect actual drawing commit and paint/rejection receipts. Real Simulink/installed-extension after-fix paint remains unverified; no new extension/client refresh is required for the server-only functional correction.
 
 ---
 

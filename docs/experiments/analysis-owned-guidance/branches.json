@@ -30,5 +30,10 @@
   "query_fix_handoff": "docs/handoffs/analysis-owned-guidance-query-fix.md",
   "current_delivery_handoff": "docs/handoffs/screen-writing-live-receipts.md",
   "current_generation_handoff": "docs/handoffs/screen-writing-generated-marks-fix.md",
-  "current_prompt_handoff": "docs/handoffs/screen-writing-raster-fix.md"
+  "current_prompt_handoff": "docs/handoffs/screen-writing-raster-fix.md",
+  "annotation_work_status": "stopped_by_user_2026-10-17",
+  "current_direction": "floating_kiki_windows_design_handoff_only",
+  "floating_windows_handoff": "docs/handoffs/floating-guidance-windows.md",
+  "floating_windows_documentation_branch": "design/floating-guidance-bubbles",
+  "floating_windows_implemented": false
 }

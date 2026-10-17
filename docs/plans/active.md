@@ -1,3 +1,15 @@
+# Floating Kiki windows: design handoff only — 17 October 2026
+
+The user explicitly stopped all annotation work. They clarified that “bubbles” means little windows in Kiki's design language that show the useful reader-site information on the same shared screen, so Simulink, current/next steps and visible context can be seen together. This supersedes **all pending annotation next actions below**. Do not resume geometry, shapes, anchor matching, drawing-schema or pixel-gate debugging.
+
+Prepared the sizable [floating guidance window handoff](../handoffs/floating-guidance-windows.md) on `design/floating-guidance-bubbles`, from frozen integration parent `e93f99b`. It maps existing authoritative current/next/action details, accepted observation and status to a proposed deterministic reader-to-extension projection; covers Kiki/Breadboard mini-window UX, independent instruction/observation/window lifetimes, source/auth/order, MV3 restart, self-capture protection, branch migration, test gates and unresolved preferences. User decisions are separated from design proposals. No window implementation or deployment is claimed.
+
+Historical runtime remains receiver v22 (`bda51ad`, Site source `fc6b5f4`, environment 13), extension 0.4.0. Last subsequent inspection found four rejected v22 drawing deliveries (one clock, three pixel comparisons), then HTTP 400 entering CP-10 at 15:16:45 IST. Existing router imposed its own model-wide fifteen-minute cooldown, recorded until 15:31:45 IST; exact provider error body/field was unavailable. This historical deadline is not a live status claim for a future session. Current/next text already exists independently of those drawings and should remain usable during provider waits in the proposed UI.
+
+Last completed: targeted source/design inspection and documentation-only handoff; no runtime changes, provider requests, extension package, Site changes or learner mutations. Local fixture services were already stopped. An open reader browser page can still sample/analyze until the user pauses/stops it; the handoff did not remotely stop or reset it. Next: a new session reads the handoff, confirms design/base, and waits for the user's build instruction. Suggested future runtime branch is `experiment/floating-guidance-bubbles` from an agreed reader revision, not an automatic whole merge of the stopped drawing integration. Preserve existing baselines, Sites, secrets, learner state and other sessions' work.
+
+---
+
 # Live source-ticket lifecycle and visibility follow-up — 17 October 2026
 
 The user still sees no shapes despite `painted:2`. Current v21 receipts show 2 signed paints, 10 pixel-change rejections and 4 combined source-admission rejections among 16 deliveries. The uploaded trace confirms zero changed tiles at the second paint, but that cue could last at most about six more seconds. Original coordinates/removal time are absent, so actual user visibility remains unaccepted. No API 503 is established by these downstream failures.

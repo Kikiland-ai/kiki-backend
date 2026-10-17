@@ -2,6 +2,8 @@
 
 The user still cannot see shapes even when the browser reports `painted:2`. This follow-up uses BB8 engineering-debugging in reference mode and the Sites workflow. It does not declare the live experience accepted.
 
+**Superseded next actions:** the user stopped annotation work on 17 October. Continue only with the [floating Kiki window handoff](floating-guidance-windows.md) in design/context mode; do not resume this document's annotation repair next steps. Historical implementation/evidence below remains preserved.
+
 ## Observed production behavior
 
 Receiver v21, backend `c62edb33d49d0ea4c563acf0695639976a750398`. Sixteen non-cancellation delivery receipts from the current stream between 09:25:03 and 09:31:04 UTC: two signed `live_rendered` receipts, ten content-comparison rejections and four `Expired or foreign source admission.` rejections. Provider analysis and packet publication succeed for the inspected requests. These drawing failures are downstream of analysis, not evidence of HTTP 503.

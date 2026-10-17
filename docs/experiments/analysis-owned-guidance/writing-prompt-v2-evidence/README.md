@@ -3,7 +3,7 @@
 Controlled test images only; none are the two MATLAB screenshots attached in the current chat.
 
 - `results.json`: six actual Gemini requests, all HTTP 200 and contract valid. Both arms use identical source/schema hashes. `pass` includes the experiment's text-only preference for the hidden target; baseline omission is permitted by the public contract.
-- `*.model.json` and `*.response.txt`: complete actual controlled outputs and streaming responses. No model instructions are taken from these files at runtime.
+- `*.model.json` and `*.response.txt.gz`: complete actual controlled outputs and gzip-compressed streaming responses (preserving event framing). No model instructions are taken from these files at runtime.
 - `node-tests.txt`: 138 passing Node cases, including strict rejection of missing anchors, prose and foreign references, prompt-example validation, twelve checkpoint request checks prompt-version propagation and a stalled-encoder capture-mask regression.
 - `live-pipeline-*`: real-model native-capture/reader/Worker/consumer/compositor replay, actual pixel and signed delivery checks. Chrome APIs are explicitly dispatched by a fixture; `real_simulink_tested` and `installed_extension_tested` remain false. The live-gain case does not assert coherent observation-panel streaming; the separate existing controlled tests cover that behavior.
 - `first-pipeline-*`: earlier connected run before correcting its fixture-only delivery sample label. Model trace is `live_provider`, but ACK label was accidentally `offline_replay`; correlate by request ID. This is not a production transport defect.

@@ -3,6 +3,7 @@
 // scripts/evaluate-writing-prompt.mjs --live [--case CASE]
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
+import {gzipSync} from 'node:zlib';
 import {setupGuidance,seedCheckpoint} from './guidance-fixture.mjs';
 import {DrawingFindingParserJS} from '../worker/guidance.js';
 import {SSEDecoderJS} from '../worker/stream-core.js';
@@ -42,7 +43,7 @@ for(const [index,c] of cases.entries()){
    const decoder=new SSEDecoderJS(),parser=new DrawingFindingParserJS(cp,policy.procedures[cp.id],{eligible_actions:actions});let stopped=false,raw='';const reader=response.body.getReader();
    if(!response.ok){await reader.cancel();throw Error('provider_http_'+response.status);}
    while(true){const chunk=await reader.read();if(chunk.done)break;if(row.first_byte_ms===undefined)row.first_byte_ms=Math.round(performance.now()-started);raw+=new TextDecoder().decode(chunk.value);for(const data of decoder.feed(chunk.value)){if(data==='[DONE]')continue;const value=JSON.parse(data);if(value.usageMetadata)row.tokens=value.usageMetadata;for(const item of value.candidates||[]){parser.feed((item.content?.parts||[]).filter(p=>!p.thought).map(p=>p.text||'').join(''));if(item.finishReason){if(item.finishReason!=='STOP')throw Error('finish_'+item.finishReason);stopped=true;}}}}
-   await writeFile(new URL(`${c.id}.${arm}.response.txt`,out),raw);decoder.finish();if(!stopped)throw Error('missing_STOP');
+   await writeFile(new URL(`${c.id}.${arm}.response.txt.gz`,out),gzipSync(raw));decoder.finish();if(!stopped)throw Error('missing_STOP');
    await writeFile(new URL(`${c.id}.${arm}.model.json`,out),parser.text);const value=parser.finish();row.contract_valid=true;const candidate=value.screen_guidance.find(a=>a.action_id===current);row.outcome=candidate?.mode||'omitted';row.mark_kinds=candidate?.marks.map(m=>m.kind)||[];
    row.expected_mode=c.mode;row.mode_correct=row.outcome===c.mode;row.target_iou=Object.fromEntries(Object.entries(c.boxes||{}).map(([id,box])=>[id,candidate?.targets.find(t=>t.target_id===id)?.region?iou(candidate.targets.find(t=>t.target_id===id).region,box):0]));
    if(c.finding){row.expected_finding=c.finding;row.actual_finding=value.action_findings.find(a=>a.action_id===current)?.status;}

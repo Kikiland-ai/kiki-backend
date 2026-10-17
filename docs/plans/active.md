@@ -40,7 +40,9 @@ Exact next action: settle the handoff's open decisions with the kiki-web owners:
 - commit identity;
 - the production origin.
 
-Then port the controller role into `/labs/:sessionId`. Known test-harness flake: L2's raw image fetch can be reset on Windows. It needs a retry and a rerun once port 8870 is free.
+Then port the controller role into `/labs/:sessionId`.
+
+18 October follow-up: the L2 harness's raw image fetch now retries Windows socket resets and records each one in its report. L2 passed 30/30 in three consecutive runs (one recorded reset, retried), with zero network requests. L0 and L1 were rerun green. The live local server from the previous session is no longer running.
 
 ---
 

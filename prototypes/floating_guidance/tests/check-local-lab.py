@@ -50,9 +50,16 @@ def model_jpegs(count=3):
     """The last model-bound JPEGs, base64-encoded for the in-browser scan."""
     images = []
     for index in range(-count, 0):
-        try:
-            with urllib.request.urlopen(f'http://127.0.0.1:8870/__fixture/image?index={index}', timeout=30) as r: images.append(base64.b64encode(r.read()).decode())
-        except urllib.error.HTTPError: pass
+        # Same Windows socket reset as fixture(): retry, and keep the count in the report.
+        for attempt in range(3):
+            try:
+                with urllib.request.urlopen(f'http://127.0.0.1:8870/__fixture/image?index={index}', timeout=30) as r: images.append(base64.b64encode(r.read()).decode())
+                break
+            except urllib.error.HTTPError: break
+            except ConnectionResetError:
+                timeline.append({'fixture_connection_reset': f'image {index}', 'attempt': attempt + 1})
+                if attempt == 2: raise
+                time.sleep(0.2)
     return images
 
 async def model_image(pred, timeout=40):

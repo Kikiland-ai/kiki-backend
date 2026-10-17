@@ -1,0 +1,22 @@
+{
+  "project_id": "appgprj_6ace6ce34218819198dfd778a822aed5",
+  "version": 22,
+  "deployment_id": "appgdep_6ad342f2af988191809a2252a8018c8d",
+  "version_id": "appgprj_6ace6ce34218819198dfd778a822aed5~appgver_797a5c8bcf548191b5a53f741b6f1f56",
+  "status": "succeeded",
+  "url": "https://kiki-screen-receiver.woodsycarp256.chatgpt.site",
+  "updated_at": "2026-10-17T09:42:21.869522+00:00",
+  "environment_revision": 13,
+  "backend_code_revision": "bda51adabbbcdb344d94755c3dbba4c94aa8800c",
+  "site_source_revision": "fc6b5f4ae9531e78ff3d601777ae54a35bd8ab9e",
+  "worker_sha256": "9ac3f5103943337f684ef0638d2de2681b749106914887ff09a03473ad649a2f",
+  "owner_private_preserved": true,
+  "existing_secrets_preserved": true,
+  "node_checks_passed": 144,
+  "paid_model_calls": 0,
+  "installed_extension_tested": false,
+  "real_simulink_session_tested": false,
+  "requires_reader_refresh": true,
+  "extension_reinstall_required": false,
+  "live_visibility_accepted": false
+}

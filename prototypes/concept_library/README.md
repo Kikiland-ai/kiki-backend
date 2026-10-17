@@ -9,6 +9,7 @@ is needed to read or import the saved batch.
 Database: `artifacts/cam-review/concept-library.sqlite3`.
 Assets and original packets: `artifacts/cam-review/site/dist/concepts/`.
 SQLite holds content, scene data and references; WAV/SVG/JS bytes remain files.
+The WAVs are stored with Git LFS: run `git lfs pull` if they arrive as pointer files.
 The recovery manifest hashes the preserved Site source. The database builder
 verifies text/speech/audio hashes and atomically builds a repeatable snapshot.
 Reads are read-only and recheck packet/asset checksums.

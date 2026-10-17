@@ -1,3 +1,15 @@
+# Concept canvas library promotion to main — 18 October 2026
+
+Step 3 of the reconciliation order. Steps 1 and 2 merged as PR #2 (`fe7758e`) and PR #3 (`6b14b5e`). Branch `promote/concept-canvas` starts at `feature/concept-canvas-handoff` (`f8b761d`) and merges `main` with no conflicts. The canvas branch's own entry ("Concept canvas library", further down) still describes the content; its generator code (`prototypes/topic_canvas/`, `prototypes/concept_packets/`) was lost before commit and is not on any branch.
+
+Changes for promotion, chosen by the user: the 24 narration WAVs under `artifacts/cam-review/` move to Git LFS (scoped to that folder; the evidence audio already on `main` stays in plain Git), and the PR is squash-merged so `main`'s history holds pointers, not the 40 MB of audio. Code fixes: asset paths are stored with forward slashes so a Windows build matches; JSON reads and writes are UTF-8 with LF; the rebuild test compares database content instead of bytes (the SQLite header records the library version); the tamper test closes its connection. The recovered `site/build-review-library.py` is pinned by the recovery manifest and stays byte-exact.
+
+What ran on Windows 11 without `PYTHONUTF8`: `scripts/verify-cam-review.py` PASS (96 files, 10 concepts, 22 clips, 0 provider calls); `tests.test_concept_library` 5/5, including both kiki-web bridge tests against kiki-web `origin/main` `93cce9b`.
+
+Exact next action: open the PR from `promote/concept-canvas` to `main`, wait for CI, and squash-merge once the user confirms. Then tag the archived branches (`integration/analysis-owned-guidance`, `design/floating-guidance-bubbles`, `experiment/analysis-owned-guidance-producer`) and delete the branches now contained in `main`. Connecting this content to kiki-web waits on the user's Phase 0 decisions; the recommendations, not yet confirmed, are to keep kiki-web's C-AM-08 package, port the scene kinds to trusted React renderers, and regenerate per-placard Odia and English narration.
+
+---
+
 # Floating Kiki windows promotion to main — 18 October 2026
 
 Step 2 of the reconciliation order. Branch `promote/floating-guidance` starts at `experiment/floating-guidance-bubbles` (`73c6e96`) and merges `main` at `fe7758e`, which now holds the screen-reader baseline. The only conflict was this file: both sides had added a new top entry, and both are kept below. `design/floating-guidance-bubbles` is not merged; its handoff and test plan are older copies of the ones on this branch.

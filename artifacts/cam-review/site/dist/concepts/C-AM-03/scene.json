@@ -1,0 +1,80 @@
+{
+  "schema": "cam-interactive-scene/v1",
+  "modelVersion": "cam-packets/3",
+  "conceptId": "C-AM-03",
+  "kind": "am",
+  "title": "Conventional AM, envelope and modulation index",
+  "controls": [
+    {
+      "name": "mu",
+      "label": "Modulation index",
+      "min": 0,
+      "max": 1.5,
+      "step": 0.1,
+      "default": 0.5,
+      "unit": ""
+    }
+  ],
+  "visualBrief": {
+    "kind": "waveform",
+    "description": "Compare conventional AM envelopes for mu=0.5 and mu=1.5; show zero crossings and label envelope distortion rather than implying all demodulators fail.",
+    "alt": "Conventional AM, envelope and modulation index; Conventional AM includes carrier plus sidebands. For ordinary envelope recovery, keep mu at or below one.",
+    "from": {
+      "origin": "curated",
+      "label": "MathWorks: analog passband modulation; reference for the modulation families",
+      "url": "https://www.mathworks.com/help/comm/ug/analog-passband-modulation.html"
+    }
+  },
+  "walkthrough": [
+    {
+      "target": "Conventional AM",
+      "mark": "sweep",
+      "dim": "words",
+      "say": "For a single tone, conventional AM is s(t)=Ac[1+mu*cos(2*pi*fm*t)]cos(2*pi*fc*t)."
+    },
+    {
+      "target": "modulation index",
+      "mark": "marker",
+      "dim": "concept",
+      "say": "Use an envelope comparison to distinguish conventional AM from our suppressed-carrier lab waveform."
+    },
+    {
+      "target": "overmodulation",
+      "mark": "marker",
+      "dim": "concept",
+      "say": "Conventional AM includes carrier plus sidebands. For ordinary envelope recovery, keep mu at or below one."
+    }
+  ],
+  "sourceInteractive": {
+    "kind": "step_through",
+    "prompt": "Follow the explanation, then check the worked result.",
+    "steps": [
+      {
+        "label": "Define",
+        "detail": "For a single tone, conventional AM is s(t)=Ac[1+mu*cos(2*pi*fm*t)]cos(2*pi*fc*t)."
+      },
+      {
+        "label": "Apply",
+        "detail": "mu=(6-2)/(6+2)=0.5."
+      },
+      {
+        "label": "Check",
+        "detail": "This is 50% modulation and is not overmodulated."
+      }
+    ]
+  },
+  "assumptions": [
+    "Authored draft; scientific review pending",
+    "Trusted analytic teaching model, not live Simulink evidence",
+    "Any normalized examples are illustrative; no new measured device values",
+    "Manual placard states; no sentence alignment"
+  ],
+  "review": {
+    "scientific": "pending",
+    "sourceGrounding": "authored_concept"
+  },
+  "image": {
+    "status": "not_requested",
+    "reason": "Scientific plots/flow/comparisons are rendered as editable SVG; no generated-image claim"
+  }
+}

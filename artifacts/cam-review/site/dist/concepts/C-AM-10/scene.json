@@ -1,0 +1,89 @@
+{
+  "schema": "cam-interactive-scene/v1",
+  "modelVersion": "cam-packets/3",
+  "conceptId": "C-AM-10",
+  "kind": "pm",
+  "title": "Phase modulation and FM–PM distinction",
+  "controls": [
+    {
+      "name": "sensitivity",
+      "label": "Normalized sensitivity",
+      "min": 0,
+      "max": 2,
+      "step": 0.25,
+      "default": 1,
+      "unit": ""
+    },
+    {
+      "name": "constant",
+      "label": "0 sinusoidal message · 1 constant message",
+      "min": 0,
+      "max": 1,
+      "step": 1,
+      "default": 0,
+      "unit": ""
+    }
+  ],
+  "visualBrief": {
+    "kind": "table",
+    "description": "Two-column FM versus PM comparison: directly varied property, mathematical dependence, constant-message result, and ideal constant amplitude.",
+    "alt": "Phase modulation and FM–PM distinction; PM phase follows the message; FM frequency follows the message; frequency is phase’s rate of change.",
+    "from": {
+      "origin": "curated",
+      "label": "MathWorks: analog passband modulation; reference for the modulation families",
+      "url": "https://www.mathworks.com/help/comm/ug/analog-passband-modulation.html"
+    }
+  },
+  "walkthrough": [
+    {
+      "target": "Phase modulation",
+      "mark": "sweep",
+      "dim": "words",
+      "say": "PM varies carrier phase directly with the message: s(t)=Ac*cos(2*pi*fc*t+kp*m(t))."
+    },
+    {
+      "target": "phase sensitivity",
+      "mark": "marker",
+      "dim": "concept",
+      "say": "Use an FM/PM comparison card; retain the DSB-SC lab route without adding angle-modulation tasks."
+    },
+    {
+      "target": "derivative",
+      "mark": "marker",
+      "dim": "concept",
+      "say": "PM phase follows the message; FM frequency follows the message; frequency is phase’s rate of change."
+    }
+  ],
+  "sourceInteractive": {
+    "kind": "step_through",
+    "prompt": "Follow the explanation, then check the worked result.",
+    "steps": [
+      {
+        "label": "Define",
+        "detail": "PM varies carrier phase directly with the message: s(t)=Ac*cos(2*pi*fc*t+kp*m(t))."
+      },
+      {
+        "label": "Apply",
+        "detail": "The carrier has a fixed phase offset proportional to that message."
+      },
+      {
+        "label": "Check",
+        "detail": "Its steady instantaneous frequency returns to fc because the constant phase offset has zero derivative."
+      }
+    ]
+  },
+  "assumptions": [
+    "Authored draft; scientific review pending",
+    "Trusted analytic teaching model, not live Simulink evidence",
+    "Any normalized examples are illustrative; no new measured device values",
+    "Manual placard states; no sentence alignment"
+  ],
+  "review": {
+    "scientific": "pending",
+    "sourceGrounding": "authored_concept"
+  },
+  "image": {
+    "status": "not_requested",
+    "reason": "Scientific plots/flow/comparisons are rendered as editable SVG; no generated-image claim"
+  }
+}

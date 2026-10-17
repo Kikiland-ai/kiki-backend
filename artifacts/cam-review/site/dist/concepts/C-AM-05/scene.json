@@ -1,0 +1,80 @@
+{
+  "schema": "cam-interactive-scene/v1",
+  "modelVersion": "cam-packets/3",
+  "conceptId": "C-AM-05",
+  "kind": "spectrum",
+  "title": "SSB and VSB compared with DSB-SC",
+  "controls": [
+    {
+      "name": "family",
+      "label": "0 DSB-SC · 1 SSB · 2 VSB",
+      "min": 0,
+      "max": 2,
+      "step": 1,
+      "default": 0,
+      "unit": ""
+    }
+  ],
+  "visualBrief": {
+    "kind": "graph",
+    "description": "Three aligned spectra: DSB-SC with both sidebands, SSB with only upper sideband, VSB with upper sideband and labelled lower-sideband vestige.",
+    "alt": "SSB and VSB compared with DSB-SC; For message bandwidth B: DSB-SC uses 2B; ideal SSB uses B; VSB retains a vestige.",
+    "from": {
+      "origin": "curated",
+      "label": "MathWorks: analog passband modulation; reference for the modulation families",
+      "url": "https://www.mathworks.com/help/comm/ug/analog-passband-modulation.html"
+    }
+  },
+  "walkthrough": [
+    {
+      "target": "DSB-SC",
+      "mark": "sweep",
+      "dim": "words",
+      "say": "SSB sends one sideband; VSB sends one sideband plus a vestige of the other."
+    },
+    {
+      "target": "SSB",
+      "mark": "marker",
+      "dim": "concept",
+      "say": "Compare spectrum sketches rather than adding an SSB subsystem to the selected DSB-SC experiment."
+    },
+    {
+      "target": "VSB",
+      "mark": "marker",
+      "dim": "concept",
+      "say": "For message bandwidth B: DSB-SC uses 2B; ideal SSB uses B; VSB retains a vestige."
+    }
+  ],
+  "sourceInteractive": {
+    "kind": "step_through",
+    "prompt": "Follow the explanation, then check the worked result.",
+    "steps": [
+      {
+        "label": "Define",
+        "detail": "SSB sends one sideband; VSB sends one sideband plus a vestige of the other."
+      },
+      {
+        "label": "Apply",
+        "detail": "Ideal SSB bandwidth=4 kHz."
+      },
+      {
+        "label": "Check",
+        "detail": "DSB-SC bandwidth=2*4=8 kHz."
+      }
+    ]
+  },
+  "assumptions": [
+    "Authored draft; scientific review pending",
+    "Trusted analytic teaching model, not live Simulink evidence",
+    "Any normalized examples are illustrative; no new measured device values",
+    "Manual placard states; no sentence alignment"
+  ],
+  "review": {
+    "scientific": "pending",
+    "sourceGrounding": "authored_concept"
+  },
+  "image": {
+    "status": "not_requested",
+    "reason": "Scientific plots/flow/comparisons are rendered as editable SVG; no generated-image claim"
+  }
+}

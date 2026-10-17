@@ -1,0 +1,177 @@
+[
+  {
+    "conceptId": "C-AM-01",
+    "mediaRevision": "cm-103693fbb573473d8986ef5a",
+    "narration": 4,
+    "artifacts": 0,
+    "exclusions": [
+      {
+        "kind": "scene",
+        "reason": "App currently allowlists coherent-phase-recovery/v1 only; original scene retained in SQLite"
+      }
+    ],
+    "hasAppCompatibleMedia": true,
+    "fullPacketProjected": false,
+    "cloudStatus": "not_written"
+  },
+  {
+    "conceptId": "C-AM-02",
+    "mediaRevision": "cm-da664ef1a929441d4aa24bb7",
+    "narration": 4,
+    "artifacts": 0,
+    "exclusions": [
+      {
+        "kind": "scene",
+        "reason": "App currently allowlists coherent-phase-recovery/v1 only; original scene retained in SQLite"
+      }
+    ],
+    "hasAppCompatibleMedia": true,
+    "fullPacketProjected": false,
+    "cloudStatus": "not_written"
+  },
+  {
+    "conceptId": "C-AM-03",
+    "mediaRevision": "cm-8fd8d96e22a4eedb76b4e35d",
+    "narration": 4,
+    "artifacts": 0,
+    "exclusions": [
+      {
+        "kind": "scene",
+        "reason": "App currently allowlists coherent-phase-recovery/v1 only; original scene retained in SQLite"
+      }
+    ],
+    "hasAppCompatibleMedia": true,
+    "fullPacketProjected": false,
+    "cloudStatus": "not_written"
+  },
+  {
+    "conceptId": "C-AM-04",
+    "mediaRevision": "cm-8ddbfa91d411b06ab4f5e300",
+    "narration": 0,
+    "artifacts": 0,
+    "exclusions": [
+      {
+        "kind": "narration",
+        "assetId": "510482f37fce1a7031ede6f03378bcdaf9f1ea5647b690315174e0fd75a2c2ef",
+        "reason": "App contract requires per-placard recordings; original concept recording retained in SQLite"
+      },
+      {
+        "kind": "scene",
+        "reason": "App currently allowlists coherent-phase-recovery/v1 only; original scene retained in SQLite"
+      }
+    ],
+    "hasAppCompatibleMedia": false,
+    "fullPacketProjected": false,
+    "cloudStatus": "not_written"
+  },
+  {
+    "conceptId": "C-AM-05",
+    "mediaRevision": "cm-12f1118c1cf34d7dfc9ef84f",
+    "narration": 0,
+    "artifacts": 0,
+    "exclusions": [
+      {
+        "kind": "narration",
+        "assetId": "1546077d7d5c4cd0e2f6e16cf43cbfaaf62b32a7080806ea84965dd78cbcc928",
+        "reason": "App contract requires per-placard recordings; original concept recording retained in SQLite"
+      },
+      {
+        "kind": "scene",
+        "reason": "App currently allowlists coherent-phase-recovery/v1 only; original scene retained in SQLite"
+      }
+    ],
+    "hasAppCompatibleMedia": false,
+    "fullPacketProjected": false,
+    "cloudStatus": "not_written"
+  },
+  {
+    "conceptId": "C-AM-06",
+    "mediaRevision": "cm-a3baa099fd76e1d77f908c28",
+    "narration": 0,
+    "artifacts": 0,
+    "exclusions": [
+      {
+        "kind": "narration",
+        "assetId": "231312a668e5ab23161ba882d32059886eb8b5adf7fd5eccd91bb580231fc79f",
+        "reason": "App contract requires per-placard recordings; original concept recording retained in SQLite"
+      },
+      {
+        "kind": "scene",
+        "reason": "App currently allowlists coherent-phase-recovery/v1 only; original scene retained in SQLite"
+      }
+    ],
+    "hasAppCompatibleMedia": false,
+    "fullPacketProjected": false,
+    "cloudStatus": "not_written"
+  },
+  {
+    "conceptId": "C-AM-07",
+    "mediaRevision": "cm-25ce8b27af332dae259cd814",
+    "narration": 0,
+    "artifacts": 0,
+    "exclusions": [
+      {
+        "kind": "narration",
+        "assetId": "279d82e7d73489a27643e7263bcaeb16085236a84811573e659cd2285411d2ce",
+        "reason": "App contract requires per-placard recordings; original concept recording retained in SQLite"
+      },
+      {
+        "kind": "scene",
+        "reason": "App currently allowlists coherent-phase-recovery/v1 only; original scene retained in SQLite"
+      }
+    ],
+    "hasAppCompatibleMedia": false,
+    "fullPacketProjected": false,
+    "cloudStatus": "not_written"
+  },
+  {
+    "conceptId": "C-AM-08",
+    "mediaRevision": "cm-09967975820d6468c9272a38",
+    "narration": 4,
+    "artifacts": 1,
+    "exclusions": [],
+    "hasAppCompatibleMedia": true,
+    "fullPacketProjected": true,
+    "cloudStatus": "not_written"
+  },
+  {
+    "conceptId": "C-AM-09",
+    "mediaRevision": "cm-04a0998da963e4289df3dfa7",
+    "narration": 0,
+    "artifacts": 0,
+    "exclusions": [
+      {
+        "kind": "narration",
+        "assetId": "26b9221db1e80b4b772d54e66a9070341a4eef615a19d9a6ecafa86c21117559",
+        "reason": "App contract requires per-placard recordings; original concept recording retained in SQLite"
+      },
+      {
+        "kind": "scene",
+        "reason": "App currently allowlists coherent-phase-recovery/v1 only; original scene retained in SQLite"
+      }
+    ],
+    "hasAppCompatibleMedia": false,
+    "fullPacketProjected": false,
+    "cloudStatus": "not_written"
+  },
+  {
+    "conceptId": "C-AM-10",
+    "mediaRevision": "cm-2d5663833575b2fe9fdd7843",
+    "narration": 0,
+    "artifacts": 0,
+    "exclusions": [
+      {
+        "kind": "narration",
+        "assetId": "7a4e4f944d01629a1d1d1e5c57e31e9e17d367bdce45daac7f5e54f401c9259f",
+        "reason": "App contract requires per-placard recordings; original concept recording retained in SQLite"
+      },
+      {
+        "kind": "scene",
+        "reason": "App currently allowlists coherent-phase-recovery/v1 only; original scene retained in SQLite"
+      }
+    ],
+    "hasAppCompatibleMedia": false,
+    "fullPacketProjected": false,
+    "cloudStatus": "not_written"
+  }
+]

@@ -1,0 +1,643 @@
+{
+  "schema": "cam-concept-packet/v1",
+  "conceptId": "C-AM-03",
+  "planId": "LP-ANALOG-MODULATION",
+  "contentVersion": "am-51187527300cba2fa3cca868",
+  "sourceGitRevision": "ba40218d7bf07637debe530019bcf8faf6afb61a",
+  "sourceHash": "87c2264ca9f1bc41a7540ec0b3bfad79d9c7e6af289bd759e260064b3009650e",
+  "policy": {
+    "version": "cam-packets/3",
+    "textMode": "authored",
+    "textModel": null,
+    "speechModel": "gemini-3.8-flash-tts",
+    "mix": "authored_odia_english_placards",
+    "unit": "placard",
+    "audioUnit": "auto",
+    "speechLanguages": [
+      "or"
+    ]
+  },
+  "title": "Conventional AM, envelope and modulation index",
+  "status": "prepared_pending_review_and_delivery",
+  "createdAt": "2026-10-16T19:23:58.921576+00:00",
+  "placards": [
+    {
+      "id": "CARD-AM-03-definition",
+      "conceptId": "C-AM-03",
+      "kind": "definition",
+      "title": {
+        "en": "Definition",
+        "or": "ସଂଜ୍ଞା"
+      },
+      "body": {
+        "en": "For a single tone, conventional AM is s(t)=Ac[1+mu*cos(2*pi*fm*t)]cos(2*pi*fc*t).",
+        "or": "ଏକ single-tone message ପାଇଁ Conventional AM ହେଉଛି s(t)=Ac[1+mu*cos(2*pi*fm*t)]cos(2*pi*fc*t)।"
+      },
+      "termIds": [
+        "T-AM-03-1",
+        "T-AM-03-2",
+        "T-AM-03-3",
+        "T-AM-01-1",
+        "T-AM-01-2",
+        "T-AM-01-3",
+        "T-AM-02-1",
+        "T-AM-02-2",
+        "T-AM-02-3"
+      ],
+      "sources": [
+        {
+          "origin": "curated",
+          "label": "MathWorks: analog passband modulation; reference for the modulation families",
+          "url": "https://www.mathworks.com/help/comm/ug/analog-passband-modulation.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: DSB-SC coherent receiver and matching carrier parameters",
+          "url": "https://www.mathworks.com/help/comm/ref/dsbscamdemodulatorpassband.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: time-based Sine Wave parameters",
+          "url": "https://www.mathworks.com/help/simulink/slref/sinewave.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: continuous Transfer Fcn coefficients",
+          "url": "https://www.mathworks.com/help/simulink/slref/transferfcn.html"
+        }
+      ],
+      "generatedMixed": {
+        "displayText": "ଏକ single-tone message ପାଇଁ Conventional AM ହେଉଛି s(t)=Ac[1+mu*cos(2*pi*fm*t)]cos(2*pi*fc*t)।",
+        "spans": [
+          {
+            "language": "or",
+            "text": "ଏକ "
+          },
+          {
+            "language": "en",
+            "text": "single-tone message "
+          },
+          {
+            "language": "or",
+            "text": "ପାଇଁ "
+          },
+          {
+            "language": "en",
+            "text": "Conventional AM "
+          },
+          {
+            "language": "or",
+            "text": "ହେଉଛି "
+          },
+          {
+            "language": "en",
+            "text": "s(t)=Ac[1+mu*cos(2*pi*fm*t)]cos(2*pi*fc*t)।"
+          }
+        ],
+        "speechText": "ଏକ single-tone message ପାଇଁ Conventional A M ହେଉଛି s of t equals A c times one plus mu times cosine of two pi f m t, times cosine of two pi f c t।",
+        "provenance": "authored_case_reused"
+      }
+    },
+    {
+      "id": "CARD-AM-03-concept",
+      "conceptId": "C-AM-03",
+      "kind": "concept",
+      "title": {
+        "en": "Conventional AM, envelope and modulation index",
+        "or": "Conventional AM, Envelope ଓ Modulation index"
+      },
+      "body": {
+        "en": "Conventional AM retains a carrier component and varies the surrounding envelope with the message. For a normalised single-tone message, s(t)=Ac[1+mu*cos(2*pi*fm*t)]cos(2*pi*fc*t), where mu is the modulation index. An envelope detector can follow the message when the envelope stays non-negative and its time constant is suitable. With 0<=mu<=1, the envelope does not cross zero; mu>1 causes overmodulation and distorts simple envelope recovery. If the envelope extrema are Emax and Emin, mu=(Emax-Emin)/(Emax+Emin). This envelope rule applies to conventional AM; it must not be applied blindly to DSB-SC.",
+        "or": "Conventional AM ରେ Carrier component ରହେ ଏବଂ Envelope message ଅନୁସାରେ ବଦଳେ। Normalised single-tone message ପାଇଁ mu ହେଉଛି Modulation index। 0<=mu<=1 ହେଲେ Envelope ଶୂନ୍ୟକୁ ଅତିକ୍ରମ କରେ ନାହିଁ। mu>1 ହେଲେ Overmodulation ହୁଏ ଏବଂ ସରଳ Envelope detector ରେ message ବିକୃତ ହୋଇପାରେ। Envelope ର ସର୍ବାଧିକ ଓ ସର୍ବନିମ୍ନ ମୂଲ୍ୟରୁ mu=(Emax-Emin)/(Emax+Emin) ମିଳେ। ଏହି Envelope ନିୟମ Conventional AM ପାଇଁ; DSB-SC ରେ ସିଧାସଳଖ ଲାଗୁ କରିବା ଠିକ ନୁହେଁ।"
+      },
+      "termIds": [
+        "T-AM-03-1",
+        "T-AM-03-2",
+        "T-AM-03-3",
+        "T-AM-01-1",
+        "T-AM-01-2",
+        "T-AM-01-3",
+        "T-AM-02-1",
+        "T-AM-02-2",
+        "T-AM-02-3"
+      ],
+      "sources": [
+        {
+          "origin": "curated",
+          "label": "MathWorks: analog passband modulation; reference for the modulation families",
+          "url": "https://www.mathworks.com/help/comm/ug/analog-passband-modulation.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: DSB-SC coherent receiver and matching carrier parameters",
+          "url": "https://www.mathworks.com/help/comm/ref/dsbscamdemodulatorpassband.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: time-based Sine Wave parameters",
+          "url": "https://www.mathworks.com/help/simulink/slref/sinewave.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: continuous Transfer Fcn coefficients",
+          "url": "https://www.mathworks.com/help/simulink/slref/transferfcn.html"
+        }
+      ],
+      "visualRef": "explanation",
+      "generatedMixed": {
+        "displayText": "Conventional AM ରେ Carrier component ରହେ ଏବଂ Envelope message ଅନୁସାରେ ବଦଳେ। Normalised single-tone message ପାଇଁ mu ହେଉଛି Modulation index। 0<=mu<=1 ହେଲେ Envelope ଶୂନ୍ୟକୁ ଅତିକ୍ରମ କରେ ନାହିଁ। mu>1 ହେଲେ Overmodulation ହୁଏ ଏବଂ ସରଳ Envelope detector ରେ message ବିକୃତ ହୋଇପାରେ। Envelope ର ସର୍ବାଧିକ ଓ ସର୍ବନିମ୍ନ ମୂଲ୍ୟରୁ mu=(Emax-Emin)/(Emax+Emin) ମିଳେ। ଏହି Envelope ନିୟମ Conventional AM ପାଇଁ; DSB-SC ରେ ସିଧାସଳଖ ଲାଗୁ କରିବା ଠିକ ନୁହେଁ।",
+        "spans": [
+          {
+            "language": "en",
+            "text": "Conventional AM "
+          },
+          {
+            "language": "or",
+            "text": "ରେ "
+          },
+          {
+            "language": "en",
+            "text": "Carrier component "
+          },
+          {
+            "language": "or",
+            "text": "ରହେ ଏବଂ "
+          },
+          {
+            "language": "en",
+            "text": "Envelope message "
+          },
+          {
+            "language": "or",
+            "text": "ଅନୁସାରେ ବଦଳେ। "
+          },
+          {
+            "language": "en",
+            "text": "Normalised single-tone message "
+          },
+          {
+            "language": "or",
+            "text": "ପାଇଁ "
+          },
+          {
+            "language": "en",
+            "text": "mu "
+          },
+          {
+            "language": "or",
+            "text": "ହେଉଛି "
+          },
+          {
+            "language": "en",
+            "text": "Modulation index। 0<=mu<=1 "
+          },
+          {
+            "language": "or",
+            "text": "ହେଲେ "
+          },
+          {
+            "language": "en",
+            "text": "Envelope "
+          },
+          {
+            "language": "or",
+            "text": "ଶୂନ୍ୟକୁ ଅତିକ୍ରମ କରେ ନାହିଁ। "
+          },
+          {
+            "language": "en",
+            "text": "mu>1 "
+          },
+          {
+            "language": "or",
+            "text": "ହେଲେ "
+          },
+          {
+            "language": "en",
+            "text": "Overmodulation "
+          },
+          {
+            "language": "or",
+            "text": "ହୁଏ ଏବଂ ସରଳ "
+          },
+          {
+            "language": "en",
+            "text": "Envelope detector "
+          },
+          {
+            "language": "or",
+            "text": "ରେ "
+          },
+          {
+            "language": "en",
+            "text": "message "
+          },
+          {
+            "language": "or",
+            "text": "ବିକୃତ ହୋଇପାରେ। "
+          },
+          {
+            "language": "en",
+            "text": "Envelope "
+          },
+          {
+            "language": "or",
+            "text": "ର ସର୍ବାଧିକ ଓ ସର୍ବନିମ୍ନ ମୂଲ୍ୟରୁ "
+          },
+          {
+            "language": "en",
+            "text": "mu=(Emax-Emin)/(Emax+Emin) "
+          },
+          {
+            "language": "or",
+            "text": "ମିଳେ। ଏହି "
+          },
+          {
+            "language": "en",
+            "text": "Envelope "
+          },
+          {
+            "language": "or",
+            "text": "ନିୟମ "
+          },
+          {
+            "language": "en",
+            "text": "Conventional AM "
+          },
+          {
+            "language": "or",
+            "text": "ପାଇଁ; "
+          },
+          {
+            "language": "en",
+            "text": "DSB-SC "
+          },
+          {
+            "language": "or",
+            "text": "ରେ ସିଧାସଳଖ ଲାଗୁ କରିବା ଠିକ ନୁହେଁ।"
+          }
+        ],
+        "speechText": "Conventional A M ରେ Carrier component ରହେ ଏବଂ Envelope message ଅନୁସାରେ ବଦଳେ। Normalised single-tone message ପାଇଁ mu ହେଉଛି Modulation index। zero less than or equal to mu less than or equal to one ହେଲେ Envelope ଶୂନ୍ୟକୁ ଅତିକ୍ରମ କରେ ନାହିଁ। mu greater than one ହେଲେ Overmodulation ହୁଏ ଏବଂ ସରଳ Envelope detector ରେ message ବିକୃତ ହୋଇପାରେ। Envelope ର ସର୍ବାଧିକ ଓ ସର୍ବନିମ୍ନ ମୂଲ୍ୟରୁ mu equals E max minus E min divided by E max plus E min ମିଳେ। ଏହି Envelope ନିୟମ Conventional A M ପାଇଁ; D S B S C ରେ ସିଧାସଳଖ ଲାଗୁ କରିବା ଠିକ ନୁହେଁ।",
+        "provenance": "authored_case_reused"
+      }
+    },
+    {
+      "id": "CARD-AM-03-application",
+      "conceptId": "C-AM-03",
+      "kind": "application",
+      "title": {
+        "en": "Use it in a model",
+        "or": "Model ରେ ପ୍ରୟୋଗ"
+      },
+      "body": {
+        "en": "Use an envelope comparison to distinguish conventional AM from our suppressed-carrier lab waveform.",
+        "or": "Envelope ତୁଳନା କରି Conventional AM ଓ lab ର suppressed-carrier waveform ମଧ୍ୟରେ ତଫାତ ବୁଝନ୍ତୁ।"
+      },
+      "termIds": [
+        "T-AM-03-1",
+        "T-AM-03-2",
+        "T-AM-03-3",
+        "T-AM-01-1",
+        "T-AM-01-2",
+        "T-AM-01-3",
+        "T-AM-02-1",
+        "T-AM-02-2",
+        "T-AM-02-3"
+      ],
+      "sources": [
+        {
+          "origin": "curated",
+          "label": "MathWorks: analog passband modulation; reference for the modulation families",
+          "url": "https://www.mathworks.com/help/comm/ug/analog-passband-modulation.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: DSB-SC coherent receiver and matching carrier parameters",
+          "url": "https://www.mathworks.com/help/comm/ref/dsbscamdemodulatorpassband.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: time-based Sine Wave parameters",
+          "url": "https://www.mathworks.com/help/simulink/slref/sinewave.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: continuous Transfer Fcn coefficients",
+          "url": "https://www.mathworks.com/help/simulink/slref/transferfcn.html"
+        }
+      ],
+      "generatedMixed": {
+        "displayText": "Envelope ତୁଳନା କରି Conventional AM ଓ lab ର suppressed-carrier waveform ମଧ୍ୟରେ ତଫାତ ବୁଝନ୍ତୁ।",
+        "spans": [
+          {
+            "language": "en",
+            "text": "Envelope "
+          },
+          {
+            "language": "or",
+            "text": "ତୁଳନା କରି "
+          },
+          {
+            "language": "en",
+            "text": "Conventional AM "
+          },
+          {
+            "language": "or",
+            "text": "ଓ "
+          },
+          {
+            "language": "en",
+            "text": "lab "
+          },
+          {
+            "language": "or",
+            "text": "ର "
+          },
+          {
+            "language": "en",
+            "text": "suppressed-carrier waveform "
+          },
+          {
+            "language": "or",
+            "text": "ମଧ୍ୟରେ ତଫାତ ବୁଝନ୍ତୁ।"
+          }
+        ],
+        "speechText": "Envelope ତୁଳନା କରି Conventional A M ଓ lab ର suppressed-carrier waveform ମଧ୍ୟରେ ତଫାତ ବୁଝନ୍ତୁ।",
+        "provenance": "authored_case_reused"
+      }
+    },
+    {
+      "id": "CARD-AM-03-recap",
+      "conceptId": "C-AM-03",
+      "kind": "recap",
+      "title": {
+        "en": "Remember",
+        "or": "ମନେ ରଖନ୍ତୁ"
+      },
+      "body": {
+        "en": "Conventional AM includes carrier plus sidebands. For ordinary envelope recovery, keep mu at or below one.",
+        "or": "Conventional AM ରେ Carrier ଓ Sidebands ରହେ। ସରଳ Envelope recovery ପାଇଁ mu କୁ 1 କିମ୍ବା ତାଠାରୁ କମ ରଖନ୍ତୁ।"
+      },
+      "termIds": [
+        "T-AM-03-1",
+        "T-AM-03-2",
+        "T-AM-03-3",
+        "T-AM-01-1",
+        "T-AM-01-2",
+        "T-AM-01-3",
+        "T-AM-02-1",
+        "T-AM-02-2",
+        "T-AM-02-3"
+      ],
+      "sources": [
+        {
+          "origin": "curated",
+          "label": "MathWorks: analog passband modulation; reference for the modulation families",
+          "url": "https://www.mathworks.com/help/comm/ug/analog-passband-modulation.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: DSB-SC coherent receiver and matching carrier parameters",
+          "url": "https://www.mathworks.com/help/comm/ref/dsbscamdemodulatorpassband.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: time-based Sine Wave parameters",
+          "url": "https://www.mathworks.com/help/simulink/slref/sinewave.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: continuous Transfer Fcn coefficients",
+          "url": "https://www.mathworks.com/help/simulink/slref/transferfcn.html"
+        }
+      ],
+      "generatedMixed": {
+        "displayText": "Conventional AM ରେ Carrier ଓ Sidebands ରହେ। ସରଳ Envelope recovery ପାଇଁ mu କୁ 1 କିମ୍ବା ତାଠାରୁ କମ ରଖନ୍ତୁ।",
+        "spans": [
+          {
+            "language": "en",
+            "text": "Conventional AM "
+          },
+          {
+            "language": "or",
+            "text": "ରେ "
+          },
+          {
+            "language": "en",
+            "text": "Carrier "
+          },
+          {
+            "language": "or",
+            "text": "ଓ "
+          },
+          {
+            "language": "en",
+            "text": "Sidebands "
+          },
+          {
+            "language": "or",
+            "text": "ରହେ। ସରଳ "
+          },
+          {
+            "language": "en",
+            "text": "Envelope recovery "
+          },
+          {
+            "language": "or",
+            "text": "ପାଇଁ "
+          },
+          {
+            "language": "en",
+            "text": "mu "
+          },
+          {
+            "language": "or",
+            "text": "କୁ 1 କିମ୍ବା ତାଠାରୁ କମ ରଖନ୍ତୁ।"
+          }
+        ],
+        "speechText": "Conventional A M ରେ Carrier ଓ Sidebands ରହେ। ସରଳ Envelope recovery ପାଇଁ mu କୁ 1 କିମ୍ବା ତାଠାରୁ କମ ରଖନ୍ତୁ।",
+        "provenance": "authored_case_reused"
+      }
+    }
+  ],
+  "narration": [
+    {
+      "placardId": "CARD-AM-03-definition",
+      "placardIds": [
+        "CARD-AM-03-definition"
+      ],
+      "scope": "placard",
+      "language": "or",
+      "variantId": "authored-or-v1",
+      "assetId": "sha256-3d5eddba917790dc9558f1ebe140f0aaa3320160b0430e34d0bf467f8073f652",
+      "localFile": "CARD-AM-03-definition.or.wav",
+      "displayTextSha256": "e20a62dc31e093579da6df3d61b4056b02c6bed3ad4a2997e8b2707a119cca74",
+      "speechTextSha256": "796f85edcaae1d01e92511b548af36a9526332780d9f52d2b32f73152ac52167",
+      "audioSha256": "3d5eddba917790dc9558f1ebe140f0aaa3320160b0430e34d0bf467f8073f652",
+      "durationSeconds": 21.16,
+      "bytes": 1021794,
+      "contentType": "audio/wav",
+      "timing": "clip_duration_only",
+      "narrationKind": "generated",
+      "reviewed": false,
+      "deliveryStatus": "local_pending_upload",
+      "providerModel": "gemini-3.8-flash-lite-tts"
+    },
+    {
+      "placardId": "CARD-AM-03-concept",
+      "placardIds": [
+        "CARD-AM-03-concept"
+      ],
+      "scope": "placard",
+      "language": "or",
+      "variantId": "authored-or-v1",
+      "assetId": "sha256-d4e806484921fb4b205485c956f7c9ea6134cfc36167fa4b95b45efd43d785dc",
+      "localFile": "CARD-AM-03-concept.or.wav",
+      "displayTextSha256": "06c9bca07ce4f02fb82736699fcdab81ebfa6f10628f15aa708cc05ccae0cfe6",
+      "speechTextSha256": "e24ff02cf39fb6430a99a18d655ac0dbc14425b2414aadb2ec3081755cdade4a",
+      "audioSha256": "d4e806484921fb4b205485c956f7c9ea6134cfc36167fa4b95b45efd43d785dc",
+      "durationSeconds": 54.76,
+      "bytes": 2634594,
+      "contentType": "audio/wav",
+      "timing": "clip_duration_only",
+      "narrationKind": "generated",
+      "reviewed": false,
+      "deliveryStatus": "local_pending_upload",
+      "providerModel": "gemini-3.8-flash-lite-tts"
+    },
+    {
+      "placardId": "CARD-AM-03-application",
+      "placardIds": [
+        "CARD-AM-03-application"
+      ],
+      "scope": "placard",
+      "language": "or",
+      "variantId": "authored-or-v1",
+      "assetId": "sha256-fbecfe3c85aa7e85f5a9fc4ff71a7368774a104d862fa2156ac58470a99925dd",
+      "localFile": "CARD-AM-03-application.or.wav",
+      "displayTextSha256": "e8f91483cd984b69c61440158436b00765c21636ca52f9af932558bea2c8f3e0",
+      "speechTextSha256": "0b87e5c47b090688ac6f7ccac77a670a2509dfe2e245d8bf9f9d33cc707d5c81",
+      "audioSha256": "fbecfe3c85aa7e85f5a9fc4ff71a7368774a104d862fa2156ac58470a99925dd",
+      "durationSeconds": 7.72,
+      "bytes": 376674,
+      "contentType": "audio/wav",
+      "timing": "clip_duration_only",
+      "narrationKind": "generated",
+      "reviewed": false,
+      "deliveryStatus": "local_pending_upload",
+      "providerModel": "gemini-3.8-flash-tts"
+    },
+    {
+      "placardId": "CARD-AM-03-recap",
+      "placardIds": [
+        "CARD-AM-03-recap"
+      ],
+      "scope": "placard",
+      "language": "or",
+      "variantId": "authored-or-v1",
+      "assetId": "sha256-ac8f98989bd55bd38909353e5bbc7df0fdaed2a736db79095a9b7efb2bf31fca",
+      "localFile": "CARD-AM-03-recap.or.wav",
+      "displayTextSha256": "b415ae52a351a7a303fefa67e09b83721a1253a4bcfc5d3cd786134be3d1b82f",
+      "speechTextSha256": "ebf73d319199641d3974e6f8378951cde2247f6ef0df451dc0f427bb09e58bb1",
+      "audioSha256": "ac8f98989bd55bd38909353e5bbc7df0fdaed2a736db79095a9b7efb2bf31fca",
+      "durationSeconds": 10.76,
+      "bytes": 522594,
+      "contentType": "audio/wav",
+      "timing": "clip_duration_only",
+      "narrationKind": "generated",
+      "reviewed": false,
+      "deliveryStatus": "local_pending_upload",
+      "providerModel": "gemini-3.8-flash-tts"
+    }
+  ],
+  "scene": {
+    "schema": "cam-interactive-scene/v1",
+    "modelVersion": "cam-packets/3",
+    "conceptId": "C-AM-03",
+    "kind": "am",
+    "title": "Conventional AM, envelope and modulation index",
+    "controls": [
+      {
+        "name": "mu",
+        "label": "Modulation index",
+        "min": 0,
+        "max": 1.5,
+        "step": 0.1,
+        "default": 0.5,
+        "unit": ""
+      }
+    ],
+    "visualBrief": {
+      "kind": "waveform",
+      "description": "Compare conventional AM envelopes for mu=0.5 and mu=1.5; show zero crossings and label envelope distortion rather than implying all demodulators fail.",
+      "alt": "Conventional AM, envelope and modulation index; Conventional AM includes carrier plus sidebands. For ordinary envelope recovery, keep mu at or below one.",
+      "from": {
+        "origin": "curated",
+        "label": "MathWorks: analog passband modulation; reference for the modulation families",
+        "url": "https://www.mathworks.com/help/comm/ug/analog-passband-modulation.html"
+      }
+    },
+    "walkthrough": [
+      {
+        "target": "Conventional AM",
+        "mark": "sweep",
+        "dim": "words",
+        "say": "For a single tone, conventional AM is s(t)=Ac[1+mu*cos(2*pi*fm*t)]cos(2*pi*fc*t)."
+      },
+      {
+        "target": "modulation index",
+        "mark": "marker",
+        "dim": "concept",
+        "say": "Use an envelope comparison to distinguish conventional AM from our suppressed-carrier lab waveform."
+      },
+      {
+        "target": "overmodulation",
+        "mark": "marker",
+        "dim": "concept",
+        "say": "Conventional AM includes carrier plus sidebands. For ordinary envelope recovery, keep mu at or below one."
+      }
+    ],
+    "sourceInteractive": {
+      "kind": "step_through",
+      "prompt": "Follow the explanation, then check the worked result.",
+      "steps": [
+        {
+          "label": "Define",
+          "detail": "For a single tone, conventional AM is s(t)=Ac[1+mu*cos(2*pi*fm*t)]cos(2*pi*fc*t)."
+        },
+        {
+          "label": "Apply",
+          "detail": "mu=(6-2)/(6+2)=0.5."
+        },
+        {
+          "label": "Check",
+          "detail": "This is 50% modulation and is not overmodulated."
+        }
+      ]
+    },
+    "assumptions": [
+      "Authored draft; scientific review pending",
+      "Trusted analytic teaching model, not live Simulink evidence",
+      "Any normalized examples are illustrative; no new measured device values",
+      "Manual placard states; no sentence alignment"
+    ],
+    "review": {
+      "scientific": "pending",
+      "sourceGrounding": "authored_concept"
+    },
+    "image": {
+      "status": "not_requested",
+      "reason": "Scientific plots/flow/comparisons are rendered as editable SVG; no generated-image claim"
+    }
+  },
+  "review": {
+    "scientific": "pending",
+    "nativeOdia": "pending",
+    "pronunciation": "pending"
+  },
+  "alignment": "not_performed",
+  "publication": {
+    "status": "not_published",
+    "firestore": "not_written"
+  },
+  "experienceRevision": "cam-cb78ce1a7e2818afee4743fe"
+}

@@ -1,0 +1,80 @@
+{
+  "schema": "cam-interactive-scene/v1",
+  "modelVersion": "cam-packets/3",
+  "conceptId": "C-AM-06",
+  "kind": "receiver",
+  "title": "Coherent demodulation and recovery gain",
+  "controls": [
+    {
+      "name": "stage",
+      "label": "0 input · 1 multiply · 2 ideal lowpass · 3 gain",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "default": 0,
+      "unit": ""
+    }
+  ],
+  "visualBrief": {
+    "kind": "block",
+    "description": "Received DSB-SC plus local carrier feed Product, then lowpass filter and Gain 2; label desired m(t)/2 before gain and image near 2fc.",
+    "alt": "Coherent demodulation and recovery gain; Match frequency and phase; multiply; lowpass-filter; account for the half-amplitude factor.",
+    "from": {
+      "origin": "curated",
+      "label": "MathWorks: analog passband modulation; reference for the modulation families",
+      "url": "https://www.mathworks.com/help/comm/ug/analog-passband-modulation.html"
+    }
+  },
+  "walkthrough": [
+    {
+      "target": "coherent receiver",
+      "mark": "sweep",
+      "dim": "words",
+      "say": "Multiply DSB-SC by a matched local carrier, lowpass-filter it, and use gain 2 to undo the product factor for unit carrier amplitudes."
+    },
+    {
+      "target": "local oscillator",
+      "mark": "marker",
+      "dim": "concept",
+      "say": "Add a separate Local carrier and receiver Product block; follow it with the filter and recovery Gain."
+    },
+    {
+      "target": "recovery gain",
+      "mark": "marker",
+      "dim": "concept",
+      "say": "Match frequency and phase; multiply; lowpass-filter; account for the half-amplitude factor."
+    }
+  ],
+  "sourceInteractive": {
+    "kind": "step_through",
+    "prompt": "Follow the explanation, then check the worked result.",
+    "steps": [
+      {
+        "label": "Define",
+        "detail": "Multiply DSB-SC by a matched local carrier, lowpass-filter it, and use gain 2 to undo the product factor for unit carrier amplitudes."
+      },
+      {
+        "label": "Apply",
+        "detail": "Product detection leaves m(t)/2 in the message band."
+      },
+      {
+        "label": "Check",
+        "detail": "Use gain 2: 2*m(t)/2=m(t)."
+      }
+    ]
+  },
+  "assumptions": [
+    "Authored draft; scientific review pending",
+    "Trusted analytic teaching model, not live Simulink evidence",
+    "Any normalized examples are illustrative; no new measured device values",
+    "Manual placard states; no sentence alignment"
+  ],
+  "review": {
+    "scientific": "pending",
+    "sourceGrounding": "authored_concept"
+  },
+  "image": {
+    "status": "not_requested",
+    "reason": "Scientific plots/flow/comparisons are rendered as editable SVG; no generated-image claim"
+  }
+}

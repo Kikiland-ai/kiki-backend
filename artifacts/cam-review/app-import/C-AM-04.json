@@ -1,0 +1,14 @@
+{
+  "schema": "concept-media-revision/v1",
+  "manifest": {
+    "schema": "concept-media-manifest/v1",
+    "planId": "LP-ANALOG-MODULATION",
+    "conceptId": "C-AM-04",
+    "catalogVersion": "am-51187527300cba2fa3cca868",
+    "mediaRevision": "cm-8ddbfa91d411b06ab4f5e300",
+    "release": "sample_unreviewed",
+    "narration": [],
+    "artifacts": []
+  },
+  "assets": {}
+}

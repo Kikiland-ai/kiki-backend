@@ -1,0 +1,487 @@
+{
+  "schema": "cam-source-recovery/v1",
+  "sourceProjectId": "appgprj_6ad1b25ca21081918de0e3f23fc20d7a",
+  "sourceCommit": "b1c293c11400ea20156c39999a6e14b67c309feb",
+  "files": [
+    {
+      "path": ".openai/hosting.json",
+      "bytes": 106,
+      "sha256": "d0edd2b91c9db0c16331777644412c1841d203b2ded5a7a668ce23215c3dcf74"
+    },
+    {
+      "path": "README.md",
+      "bytes": 791,
+      "sha256": "1cf00b360ea535eb334d1145e4629748366778654e641ff089bae360f330d139"
+    },
+    {
+      "path": "build-review-library.py",
+      "bytes": 7179,
+      "sha256": "716803f2e01d58287a35158f20267776db8c0113e1f7cb1c4d0f183ae3e58a68"
+    },
+    {
+      "path": "dist/canvas.json",
+      "bytes": 13416,
+      "sha256": "528b306d8afbc1dd263b0f5783c6ca442b78b8fcf0f2972e80810199944fc47f"
+    },
+    {
+      "path": "dist/concepts/C-AM-01/CARD-AM-01-application.or.wav",
+      "bytes": 783714,
+      "sha256": "df5303354538f8d60d84f53a586b91fe32a43afd0049303bc54e0089616fb38b"
+    },
+    {
+      "path": "dist/concepts/C-AM-01/CARD-AM-01-concept.or.wav",
+      "bytes": 2361954,
+      "sha256": "271a8af8291f1a3e2e5cee5000facb8cc744339dab97212a22444d76d0563b93"
+    },
+    {
+      "path": "dist/concepts/C-AM-01/CARD-AM-01-definition.or.wav",
+      "bytes": 977634,
+      "sha256": "25c90241fd2429ccb539a2f086ca091ee10a5cf7191f19de12e99af45f0f2e3e"
+    },
+    {
+      "path": "dist/concepts/C-AM-01/CARD-AM-01-recap.or.wav",
+      "bytes": 829794,
+      "sha256": "fd4bd5c7a75d3cbcaf2b55d6dac1b0a06792f124265ad8f2d16b2c70236f9389"
+    },
+    {
+      "path": "dist/concepts/C-AM-01/index.html",
+      "bytes": 22360,
+      "sha256": "a7f66b2ec915e5fde7b9b8989bd77b72e855b45a66b783b16cc21a56752b0d78"
+    },
+    {
+      "path": "dist/concepts/C-AM-01/models.js",
+      "bytes": 9765,
+      "sha256": "41cb3e229a603040d7b1dea9e47e4f8563a347f15aaa1c731c64c02f9a3420a5"
+    },
+    {
+      "path": "dist/concepts/C-AM-01/packet.json",
+      "bytes": 25129,
+      "sha256": "11d685c68c11041449e1d691433272fcba358494d2a41744c62ec9f7cc82d79a"
+    },
+    {
+      "path": "dist/concepts/C-AM-01/player.js",
+      "bytes": 4239,
+      "sha256": "e9415bae105b95a03b10f6876aa12a2a809c5f37530a50396d964063047f11c7"
+    },
+    {
+      "path": "dist/concepts/C-AM-01/poster.svg",
+      "bytes": 12332,
+      "sha256": "16d03bc6523d689377447b23d8bbdd33ec29ae725d7dbd3529b51dd36b6a1ed5"
+    },
+    {
+      "path": "dist/concepts/C-AM-01/scene.json",
+      "bytes": 3007,
+      "sha256": "8a5c05f5ab4b20d32bbba41ff3c59e29779e7e9b9aeb533604be4b16ae69dc93"
+    },
+    {
+      "path": "dist/concepts/C-AM-02/CARD-AM-02-application.or.wav",
+      "bytes": 443874,
+      "sha256": "67d77f19f885000c7905aa825ad9f9de656c8bd7b68233dec108963aad0f761b"
+    },
+    {
+      "path": "dist/concepts/C-AM-02/CARD-AM-02-concept.or.wav",
+      "bytes": 1760994,
+      "sha256": "f84c81a6e9929ed2ef4761d7858fd168a259a2bfcaaf8ec4cdd53ae6bbd90aa1"
+    },
+    {
+      "path": "dist/concepts/C-AM-02/CARD-AM-02-definition.or.wav",
+      "bytes": 559074,
+      "sha256": "eaa1ef235581d45f0a0a9787e2c6ffdc55d23fa8d19a43af5d873c9d5d7cf7e0"
+    },
+    {
+      "path": "dist/concepts/C-AM-02/CARD-AM-02-recap.or.wav",
+      "bytes": 595554,
+      "sha256": "b7b245795bbf7642ac2ea26fe28cfb096f9a512f2aabdf00e048b17850850431"
+    },
+    {
+      "path": "dist/concepts/C-AM-02/index.html",
+      "bytes": 22828,
+      "sha256": "6b38e7d015709e17865a0db5d2b4a2f681851bed2070c9ec0b699f68ed741594"
+    },
+    {
+      "path": "dist/concepts/C-AM-02/models.js",
+      "bytes": 9765,
+      "sha256": "41cb3e229a603040d7b1dea9e47e4f8563a347f15aaa1c731c64c02f9a3420a5"
+    },
+    {
+      "path": "dist/concepts/C-AM-02/packet.json",
+      "bytes": 25023,
+      "sha256": "c8a5a1ce3f0858f4bdb026a58542302a39d311d33321de97fc562b07d8f4c4c8"
+    },
+    {
+      "path": "dist/concepts/C-AM-02/player.js",
+      "bytes": 4239,
+      "sha256": "e9415bae105b95a03b10f6876aa12a2a809c5f37530a50396d964063047f11c7"
+    },
+    {
+      "path": "dist/concepts/C-AM-02/poster.svg",
+      "bytes": 946,
+      "sha256": "fd2ed3e9a275dea886e0a29f99efa28d439690e74ce5ccfe79cedb3ad9b19b4e"
+    },
+    {
+      "path": "dist/concepts/C-AM-02/scene.json",
+      "bytes": 2749,
+      "sha256": "2d5f9c13f6fbb3dffc67316a6691667b0f9ef95c879f6194cc571b7c9d5711d4"
+    },
+    {
+      "path": "dist/concepts/C-AM-03/CARD-AM-03-application.or.wav",
+      "bytes": 376674,
+      "sha256": "fbecfe3c85aa7e85f5a9fc4ff71a7368774a104d862fa2156ac58470a99925dd"
+    },
+    {
+      "path": "dist/concepts/C-AM-03/CARD-AM-03-concept.or.wav",
+      "bytes": 2634594,
+      "sha256": "d4e806484921fb4b205485c956f7c9ea6134cfc36167fa4b95b45efd43d785dc"
+    },
+    {
+      "path": "dist/concepts/C-AM-03/CARD-AM-03-definition.or.wav",
+      "bytes": 1021794,
+      "sha256": "3d5eddba917790dc9558f1ebe140f0aaa3320160b0430e34d0bf467f8073f652"
+    },
+    {
+      "path": "dist/concepts/C-AM-03/CARD-AM-03-recap.or.wav",
+      "bytes": 522594,
+      "sha256": "ac8f98989bd55bd38909353e5bbc7df0fdaed2a736db79095a9b7efb2bf31fca"
+    },
+    {
+      "path": "dist/concepts/C-AM-03/index.html",
+      "bytes": 21909,
+      "sha256": "5919fa54b0761b54e0f2f56307e80774bbfc5032686d192385988f1de2a8d67a"
+    },
+    {
+      "path": "dist/concepts/C-AM-03/models.js",
+      "bytes": 9765,
+      "sha256": "41cb3e229a603040d7b1dea9e47e4f8563a347f15aaa1c731c64c02f9a3420a5"
+    },
+    {
+      "path": "dist/concepts/C-AM-03/packet.json",
+      "bytes": 23838,
+      "sha256": "f79db4c3b213a54a3aca6431f5e76fb865e5e7dfa80d20905bb38bb342e601d9"
+    },
+    {
+      "path": "dist/concepts/C-AM-03/player.js",
+      "bytes": 4239,
+      "sha256": "e9415bae105b95a03b10f6876aa12a2a809c5f37530a50396d964063047f11c7"
+    },
+    {
+      "path": "dist/concepts/C-AM-03/poster.svg",
+      "bytes": 12343,
+      "sha256": "c169c6b68e9d0f03450cecc6bd97cc29dcbbdadcd266947efc98179d1fbba1da"
+    },
+    {
+      "path": "dist/concepts/C-AM-03/scene.json",
+      "bytes": 2623,
+      "sha256": "3c0d7bd80ddfe47a5de342617f093710c38d79cb1a2db862aa51d071fe2de2f8"
+    },
+    {
+      "path": "dist/concepts/C-AM-04/C-AM-04.or.wav",
+      "bytes": 3986274,
+      "sha256": "510482f37fce1a7031ede6f03378bcdaf9f1ea5647b690315174e0fd75a2c2ef"
+    },
+    {
+      "path": "dist/concepts/C-AM-04/index.html",
+      "bytes": 20749,
+      "sha256": "5eb04b031d6760bb6bbe582b28cee59967180457f0cdecfd85960cf7c7f98e71"
+    },
+    {
+      "path": "dist/concepts/C-AM-04/models.js",
+      "bytes": 9765,
+      "sha256": "41cb3e229a603040d7b1dea9e47e4f8563a347f15aaa1c731c64c02f9a3420a5"
+    },
+    {
+      "path": "dist/concepts/C-AM-04/packet.json",
+      "bytes": 23287,
+      "sha256": "3210ed6139156041eb803e3e5558f668ca5927959cf0be72650f4656eb40c4ae"
+    },
+    {
+      "path": "dist/concepts/C-AM-04/player.js",
+      "bytes": 4239,
+      "sha256": "e9415bae105b95a03b10f6876aa12a2a809c5f37530a50396d964063047f11c7"
+    },
+    {
+      "path": "dist/concepts/C-AM-04/poster.svg",
+      "bytes": 656,
+      "sha256": "1a60fafbcfa8527fd0498443acdf95921ce60f8158577158145ed681d7ab7e88"
+    },
+    {
+      "path": "dist/concepts/C-AM-04/scene.json",
+      "bytes": 2956,
+      "sha256": "bc8818489d4559fa05d44f046f8d3b7734b6dd4382458bcd0095eec61bee25ca"
+    },
+    {
+      "path": "dist/concepts/C-AM-05/C-AM-05.or.wav",
+      "bytes": 3020514,
+      "sha256": "1546077d7d5c4cd0e2f6e16cf43cbfaaf62b32a7080806ea84965dd78cbcc928"
+    },
+    {
+      "path": "dist/concepts/C-AM-05/index.html",
+      "bytes": 20088,
+      "sha256": "2c37f48f5b5c9ac04e1780436fc3e2208c5fec7bf65747ae97f86d6caaf1e176"
+    },
+    {
+      "path": "dist/concepts/C-AM-05/models.js",
+      "bytes": 9765,
+      "sha256": "41cb3e229a603040d7b1dea9e47e4f8563a347f15aaa1c731c64c02f9a3420a5"
+    },
+    {
+      "path": "dist/concepts/C-AM-05/packet.json",
+      "bytes": 21885,
+      "sha256": "be31df9948f73f61d981839dcd0e8d776282d872d016c0591bb917c8382cabe7"
+    },
+    {
+      "path": "dist/concepts/C-AM-05/player.js",
+      "bytes": 4239,
+      "sha256": "e9415bae105b95a03b10f6876aa12a2a809c5f37530a50396d964063047f11c7"
+    },
+    {
+      "path": "dist/concepts/C-AM-05/poster.svg",
+      "bytes": 446,
+      "sha256": "5c6db920db5c2a6dc8995da66b2bd4c803f4c42b8b1a2e828b1077e9c280baa6"
+    },
+    {
+      "path": "dist/concepts/C-AM-05/scene.json",
+      "bytes": 2487,
+      "sha256": "0d4ec70797af81510ac497543d130b5889a574cea8288d947fd70f534165618e"
+    },
+    {
+      "path": "dist/concepts/C-AM-06/C-AM-06.or.wav",
+      "bytes": 3926754,
+      "sha256": "231312a668e5ab23161ba882d32059886eb8b5adf7fd5eccd91bb580231fc79f"
+    },
+    {
+      "path": "dist/concepts/C-AM-06/index.html",
+      "bytes": 21287,
+      "sha256": "15abfd4e3f3260623c1cb3ad6d09e02caca3439582c68baffa4972ef92defaf3"
+    },
+    {
+      "path": "dist/concepts/C-AM-06/models.js",
+      "bytes": 9765,
+      "sha256": "41cb3e229a603040d7b1dea9e47e4f8563a347f15aaa1c731c64c02f9a3420a5"
+    },
+    {
+      "path": "dist/concepts/C-AM-06/packet.json",
+      "bytes": 23583,
+      "sha256": "4d55552c6151d87b53cbb80abc325bf7e46d8baad23bf4be63d2da2e7385f863"
+    },
+    {
+      "path": "dist/concepts/C-AM-06/player.js",
+      "bytes": 4239,
+      "sha256": "e9415bae105b95a03b10f6876aa12a2a809c5f37530a50396d964063047f11c7"
+    },
+    {
+      "path": "dist/concepts/C-AM-06/poster.svg",
+      "bytes": 12366,
+      "sha256": "2a35b51fd80370a1a36be55ff4bfcc0608adf321f21056617cf59a5eecb47eee"
+    },
+    {
+      "path": "dist/concepts/C-AM-06/scene.json",
+      "bytes": 2716,
+      "sha256": "79a4f894ea170feb3656fde1b0782e35f85376336b5bf50c1af609fc6eb93e80"
+    },
+    {
+      "path": "dist/concepts/C-AM-07/C-AM-07.or.wav",
+      "bytes": 3429474,
+      "sha256": "279d82e7d73489a27643e7263bcaeb16085236a84811573e659cd2285411d2ce"
+    },
+    {
+      "path": "dist/concepts/C-AM-07/index.html",
+      "bytes": 20281,
+      "sha256": "decde3f0742dc4b25e70fc660a9f5cf2f1d1556168ac154b1142a03bf8a7eda9"
+    },
+    {
+      "path": "dist/concepts/C-AM-07/models.js",
+      "bytes": 9765,
+      "sha256": "41cb3e229a603040d7b1dea9e47e4f8563a347f15aaa1c731c64c02f9a3420a5"
+    },
+    {
+      "path": "dist/concepts/C-AM-07/packet.json",
+      "bytes": 22165,
+      "sha256": "fcbffd4ea462ece2e00b57e509f2b5e38f47216bb1d240ccf5827f9ac093e572"
+    },
+    {
+      "path": "dist/concepts/C-AM-07/player.js",
+      "bytes": 4239,
+      "sha256": "e9415bae105b95a03b10f6876aa12a2a809c5f37530a50396d964063047f11c7"
+    },
+    {
+      "path": "dist/concepts/C-AM-07/poster.svg",
+      "bytes": 12366,
+      "sha256": "2a35b51fd80370a1a36be55ff4bfcc0608adf321f21056617cf59a5eecb47eee"
+    },
+    {
+      "path": "dist/concepts/C-AM-07/scene.json",
+      "bytes": 2726,
+      "sha256": "a0eb51b21e4d19fc09898b87a9f956864b4312ef69df4525e63b4e540443afba"
+    },
+    {
+      "path": "dist/concepts/C-AM-08/CARD-AM-08-application.or.wav",
+      "bytes": 503394,
+      "sha256": "b53dd2227bbdd7dc728a400c35fb42ca7843c4133c5d428b14446f4ecd57972d"
+    },
+    {
+      "path": "dist/concepts/C-AM-08/CARD-AM-08-concept.or.wav",
+      "bytes": 1926114,
+      "sha256": "efb9ec714456093b505994753f0919504ba728067d0a5874ee665ad106620630"
+    },
+    {
+      "path": "dist/concepts/C-AM-08/CARD-AM-08-definition.or.wav",
+      "bytes": 674274,
+      "sha256": "05af66931e3c7cc3198016f579182d2e0fdb46d4572c6592e13ed98d5addf390"
+    },
+    {
+      "path": "dist/concepts/C-AM-08/CARD-AM-08-recap.or.wav",
+      "bytes": 537954,
+      "sha256": "4628ebc6a120880caa8297561f7a43708fefbc662fc53d87e5d86cb1edff8b12"
+    },
+    {
+      "path": "dist/concepts/C-AM-08/index.html",
+      "bytes": 23451,
+      "sha256": "8722f7d2ef97f1f77c70dd67c8027b0f468f6101ec35d57c160405e266608d3d"
+    },
+    {
+      "path": "dist/concepts/C-AM-08/models.js",
+      "bytes": 9765,
+      "sha256": "41cb3e229a603040d7b1dea9e47e4f8563a347f15aaa1c731c64c02f9a3420a5"
+    },
+    {
+      "path": "dist/concepts/C-AM-08/packet.json",
+      "bytes": 26234,
+      "sha256": "6c758b605ed54e5c7f661c4b004821802bebfcf050e6d69209e4d19c3ec53431"
+    },
+    {
+      "path": "dist/concepts/C-AM-08/player.js",
+      "bytes": 4239,
+      "sha256": "e9415bae105b95a03b10f6876aa12a2a809c5f37530a50396d964063047f11c7"
+    },
+    {
+      "path": "dist/concepts/C-AM-08/poster.svg",
+      "bytes": 12366,
+      "sha256": "2a35b51fd80370a1a36be55ff4bfcc0608adf321f21056617cf59a5eecb47eee"
+    },
+    {
+      "path": "dist/concepts/C-AM-08/scene.json",
+      "bytes": 2737,
+      "sha256": "5fcbd136c066906a2b233933770453d1560a52298551c2ba36592157407d3276"
+    },
+    {
+      "path": "dist/concepts/C-AM-09/C-AM-09.or.wav",
+      "bytes": 3389154,
+      "sha256": "26b9221db1e80b4b772d54e66a9070341a4eef615a19d9a6ecafa86c21117559"
+    },
+    {
+      "path": "dist/concepts/C-AM-09/index.html",
+      "bytes": 20199,
+      "sha256": "c439adc8c9cdd799d8d18c327f5f497d373364d6d2b47ec709acfd26c10b4f8b"
+    },
+    {
+      "path": "dist/concepts/C-AM-09/models.js",
+      "bytes": 9765,
+      "sha256": "41cb3e229a603040d7b1dea9e47e4f8563a347f15aaa1c731c64c02f9a3420a5"
+    },
+    {
+      "path": "dist/concepts/C-AM-09/packet.json",
+      "bytes": 22294,
+      "sha256": "d4fc1aa6693e9bdc59332f7d30c393f0ec0c2d8b69929fb41d3e12ed8a9df392"
+    },
+    {
+      "path": "dist/concepts/C-AM-09/player.js",
+      "bytes": 4239,
+      "sha256": "e9415bae105b95a03b10f6876aa12a2a809c5f37530a50396d964063047f11c7"
+    },
+    {
+      "path": "dist/concepts/C-AM-09/poster.svg",
+      "bytes": 12386,
+      "sha256": "b702942119bb43f9502e52ed2bfe5f53678adfca4acec465dbfe1cf403cb8f4b"
+    },
+    {
+      "path": "dist/concepts/C-AM-09/scene.json",
+      "bytes": 3112,
+      "sha256": "f143d1680889da80177af62c103e61f4b8cc8e2f4fce2b365fe2698428104123"
+    },
+    {
+      "path": "dist/concepts/C-AM-10/C-AM-10.or.wav",
+      "bytes": 3974754,
+      "sha256": "7a4e4f944d01629a1d1d1e5c57e31e9e17d367bdce45daac7f5e54f401c9259f"
+    },
+    {
+      "path": "dist/concepts/C-AM-10/index.html",
+      "bytes": 20698,
+      "sha256": "fdd4cd36ef551d198999e46f47ba3c42d071d36c34fd1ec94843b75857a96842"
+    },
+    {
+      "path": "dist/concepts/C-AM-10/models.js",
+      "bytes": 9765,
+      "sha256": "41cb3e229a603040d7b1dea9e47e4f8563a347f15aaa1c731c64c02f9a3420a5"
+    },
+    {
+      "path": "dist/concepts/C-AM-10/packet.json",
+      "bytes": 23238,
+      "sha256": "2fd94638fcec2ef7ab62f733ac2981fa52f129a31ca74576d2a314ccaf7a8c0d"
+    },
+    {
+      "path": "dist/concepts/C-AM-10/player.js",
+      "bytes": 4239,
+      "sha256": "e9415bae105b95a03b10f6876aa12a2a809c5f37530a50396d964063047f11c7"
+    },
+    {
+      "path": "dist/concepts/C-AM-10/poster.svg",
+      "bytes": 12371,
+      "sha256": "2865376053991f06db6d71b2b68cdca3252c509e8000b232dea2dd3d39ec4e16"
+    },
+    {
+      "path": "dist/concepts/C-AM-10/scene.json",
+      "bytes": 2890,
+      "sha256": "4a470ffd93b271b4fb7d4bee73154af90ac51daf2319e7c135a9934a1541ca6c"
+    },
+    {
+      "path": "dist/index.html",
+      "bytes": 7399,
+      "sha256": "b89c657146fac9956497ddf45aa2844ef17601ec136e239eef731d7fd5aa7504"
+    },
+    {
+      "path": "dist/narration.wav",
+      "bytes": 2486754,
+      "sha256": "614251a3855f2b6e488d9f3a69549ea46162aacecc406c051514a7964604e32f"
+    },
+    {
+      "path": "dist/review-manifest.json",
+      "bytes": 4431,
+      "sha256": "f8aff1885571244a6f9074d1c1c973e411cc68264ffd963e2b9b4aa929496a81"
+    },
+    {
+      "path": "dist/vco/canvas.json",
+      "bytes": 13416,
+      "sha256": "528b306d8afbc1dd263b0f5783c6ca442b78b8fcf0f2972e80810199944fc47f"
+    },
+    {
+      "path": "dist/vco/index.html",
+      "bytes": 121108,
+      "sha256": "7a6918d3c96847d9b6ff91ee762c28cb05b23973b5363fda80adcb23cc9e2c65"
+    },
+    {
+      "path": "dist/vco/narration.wav",
+      "bytes": 2486754,
+      "sha256": "614251a3855f2b6e488d9f3a69549ea46162aacecc406c051514a7964604e32f"
+    },
+    {
+      "path": "dist/vco/vco-path.animation.svg",
+      "bytes": 42353,
+      "sha256": "827981d76b77f72c715b55e4a884ed08673130f65a0a9b45898277e7358a507b"
+    },
+    {
+      "path": "dist/vco/vco-path.poster.svg",
+      "bytes": 41859,
+      "sha256": "cf33e2d1a24b129e93ad4a4fcf9440fdcb1faea4d7d1b950f9e110e54abe0e7e"
+    },
+    {
+      "path": "dist/vco-path.animation.svg",
+      "bytes": 42353,
+      "sha256": "827981d76b77f72c715b55e4a884ed08673130f65a0a9b45898277e7358a507b"
+    },
+    {
+      "path": "dist/vco-path.poster.svg",
+      "bytes": 41859,
+      "sha256": "cf33e2d1a24b129e93ad4a4fcf9440fdcb1faea4d7d1b950f9e110e54abe0e7e"
+    }
+  ]
+}

@@ -1,5 +1,12 @@
 # Kiki Backend
 
+**Stored concept content:** all ten C-AM concepts are now available in a
+[queryable SQLite library with versioned audio/artifact files](prototypes/concept_library/README.md).
+The included adapter exports/imports through the media publisher already merged
+in `kiki-web`. Start there to consume the saved batch; cloud publication remains
+deferred. See the [continuation record](docs/handoffs/concept-canvas-continuation.md)
+for the recovered source boundary and current contract compatibility.
+
 Kiki helps engineering students understand their course material in a familiar language while learning the English terminology they need for exams and practical work. This repository owns the content, media, learning-evidence and guidance capabilities behind that experience. The first language pair is **Odia–English**, with ECE as the initial subject context.
 
 **Current stage:** working translation and speech prototypes, with the backend architecture agreed. **FastAPI** and a **worker/actor hierarchy** are the chosen direction. There is no running FastAPI service yet; backend implementation is paused while the next feature boundaries and acceptance criteria are worked out.

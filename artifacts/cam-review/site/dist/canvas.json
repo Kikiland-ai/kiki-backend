@@ -1,0 +1,414 @@
+{
+  "schema": "topic-canvas/v1",
+  "id": "vco-fm-baseline",
+  "title": "A VCO in direct frequency modulation",
+  "source": {
+    "schema": "topic-canvas-input/v1",
+    "id": "vco-fm-baseline",
+    "title": "A VCO in direct frequency modulation",
+    "sentences": [
+      {
+        "id": "s1",
+        "english": "A voltage-controlled oscillator (VCO) changes its output frequency according to its control voltage."
+      },
+      {
+        "id": "s2",
+        "english": "In direct frequency modulation (FM), the message signal drives the VCO's control input."
+      },
+      {
+        "id": "s3",
+        "english": "In an ideal linear model, f_i(t) = f_c + K_v m(t), so the carrier's instantaneous frequency varies while its amplitude remains constant."
+      },
+      {
+        "id": "s4",
+        "english": "Here f_c is the carrier frequency, K_v is the VCO sensitivity in Hz/V, and m(t) is the message voltage."
+      }
+    ]
+  },
+  "source_sha256": "87b8375914752f113aedebf9a356f2c5f77bd7986523f8c30c6132645d880612",
+  "content": {
+    "mode": "mixed",
+    "sentences": [
+      {
+        "id": "s1",
+        "english": "A voltage-controlled oscillator (VCO) changes its output frequency according to its control voltage.",
+        "display_text": "ଗୋଟିଏ voltage-controlled oscillator କିମ୍ବା VCO ଏହାର control voltage ଅନୁସାରେ ଏହାର output frequency ବଦଳାଇଥାଏ।",
+        "speech_text": "ଗୋଟିଏ voltage-controlled oscillator କିମ୍ବା V C O ଏହାର control voltage ଅନୁସାରେ ଏହାର output frequency ବଦଳାଇଥାଏ।"
+      },
+      {
+        "id": "s2",
+        "english": "In direct frequency modulation (FM), the message signal drives the VCO's control input.",
+        "display_text": "ଏକ direct frequency modulation ବା FM ରେ, message signal VCO ର control input କୁ ଚାଳିତ କରିଥାଏ।",
+        "speech_text": "ଏକ direct frequency modulation ବା F M ରେ, message signal V C O ର control input କୁ ଚାଳିତ କରିଥାଏ।"
+      },
+      {
+        "id": "s3",
+        "english": "In an ideal linear model, f_i(t) = f_c + K_v m(t), so the carrier's instantaneous frequency varies while its amplitude remains constant.",
+        "display_text": "ଏକ ideal linear model ରେ, f_i(t) = f_c + K_v m(t), ତେଣୁ the carrier ର instantaneous frequency ପରିବର୍ତ୍ତନ ହୁଏ କିନ୍ତୁ ଏହାର amplitude ସ୍ଥିର ରହେ।",
+        "speech_text": "ଏକ ideal linear model ରେ, f i of t equals f c plus K v times m of t, ତେଣୁ the carrier ର instantaneous frequency ପରିବର୍ତ୍ତନ ହୁଏ କିନ୍ତୁ ଏହାର amplitude ସ୍ଥିର ରହେ।"
+      },
+      {
+        "id": "s4",
+        "english": "Here f_c is the carrier frequency, K_v is the VCO sensitivity in Hz/V, and m(t) is the message voltage.",
+        "display_text": "ଏଠାରେ f_c ହେଉଛି carrier frequency, K_v ହେଉଛି VCO sensitivity Hz/V ରେ, ଏବଂ m(t) ହେଉଛି message voltage।",
+        "speech_text": "ଏଠାରେ f c ହେଉଛି carrier frequency, K v ହେଉଛି V C O sensitivity hertz per volt ରେ, ଏବଂ m of t ହେଉଛି message voltage।"
+      }
+    ],
+    "review": {
+      "automated": "passed",
+      "checks": [
+        "sentence_ids",
+        "language_spans",
+        "Odia_script",
+        "English_terms",
+        "protected_literals",
+        "numeric_values",
+        "spoken_expansions"
+      ],
+      "meaning_review": "pending",
+      "native_Odia_review": "pending"
+    },
+    "mixed_script_sha256": "5520a3b80eb703a63d6e6b1cafd6f77dd3607e19e2a5d0f854850ac32b9233c1"
+  },
+  "content_sha256": "bfeb7b3eb0adfff017299e93d59c43fbfa70c7c718862b52e7a9c573ff29ebaa",
+  "audio": {
+    "schema": "topic-canvas-audio/v1",
+    "source_sha256": "87b8375914752f113aedebf9a356f2c5f77bd7986523f8c30c6132645d880612",
+    "content_sha256": "bfeb7b3eb0adfff017299e93d59c43fbfa70c7c718862b52e7a9c573ff29ebaa",
+    "timing_method": "unaligned_existing_clip",
+    "within_sentence_alignment": "not_available",
+    "segments": [],
+    "clip": {
+      "file": "narration.wav",
+      "duration_seconds": 51.68,
+      "audio_sha256": "614251a3855f2b6e488d9f3a69549ea46162aacecc406c051514a7964604e32f"
+    },
+    "provenance": {
+      "schema": "mixed-script-audio-trial/v1",
+      "status": "generated",
+      "provider": "Gemini Developer API",
+      "api": "Interactions REST v1beta",
+      "model": "gemini-3.8-flash-lite-tts",
+      "returned_model": "gemini-3.8-flash-lite-tts",
+      "voice": "Kore",
+      "request_sha256": "6de6a2eab6dd1417dd91df1af8101912e0ae8b363c5d1c1533c3e9cea0791149",
+      "speech_script_sha256": "e26fc46d2f99d766eaf81a654a673548f23cec7ad7ab7cfe0ffcb4571ff16a64",
+      "usage": {
+        "total_tokens": 1466,
+        "total_input_tokens": 174,
+        "total_cached_tokens": 0,
+        "total_output_tokens": 1292,
+        "total_tool_use_tokens": 0,
+        "total_thought_tokens": 0
+      },
+      "audio": {
+        "format": "WAV PCM",
+        "sample_rate_hz": 24000,
+        "channels": 1,
+        "sample_width_bytes": 2,
+        "frames": 1240320,
+        "duration_seconds": 51.68,
+        "peak_pcm": 29222,
+        "rms_pcm": 4621.228031818258,
+        "sha256": "614251a3855f2b6e488d9f3a69549ea46162aacecc406c051514a7964604e32f",
+        "bytes": 2486754
+      },
+      "timing_cues": null,
+      "alignment_status": "not_performed",
+      "review": {
+        "pronunciation": "pending",
+        "native_Odia": "pending",
+        "spoken_fidelity": "pending"
+      },
+      "script_result_file": "script.result.json",
+      "wav_file": "speech.wav",
+      "mp3_file": "speech.mp3",
+      "mp3_sha256": "9e48831dfe457647e4d62000b23f48883ba47f1206d0aa12cab40e961c6afc43",
+      "mp3_bytes": 414188
+    }
+  },
+  "canvases": [
+    {
+      "id": "vco-path",
+      "kind": "process",
+      "title": "Control voltage to frequency",
+      "objective": "Follow how the message controls an ideal VCO while amplitude stays constant.",
+      "source_sentence_ids": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+      ],
+      "mechanism": {
+        "kind": "vco_frequency",
+        "source_sentence_ids": [
+          "s1",
+          "s3"
+        ],
+        "changes": "control_voltage",
+        "responds": "instantaneous_frequency",
+        "stays_constant": "output_amplitude",
+        "assumptions": [
+          "ideal_linear",
+          "positive_sensitivity",
+          "normalized_example"
+        ]
+      },
+      "evidence": [
+        {
+          "sentence_id": "s1",
+          "quote": "changes its output frequency according to its control voltage"
+        },
+        {
+          "sentence_id": "s2",
+          "quote": "the message signal drives the VCO's control input"
+        },
+        {
+          "sentence_id": "s3",
+          "quote": "In an ideal linear model"
+        },
+        {
+          "sentence_id": "s4",
+          "quote": "m(t) is the message voltage"
+        }
+      ],
+      "image_brief": "A qualitative control input at left, oscillator block in the middle and output waveform at right. No text. This fixture uses an authored schematic base only.",
+      "targets": [
+        {
+          "id": "control",
+          "label": "Control input",
+          "description": "Input waveform on the left",
+          "status": "resolved",
+          "box": [
+            0.08,
+            0.3,
+            0.2,
+            0.3
+          ],
+          "path": [],
+          "reason": "Synthetic geometry, not actual localization"
+        },
+        {
+          "id": "oscillator",
+          "label": "VCO",
+          "description": "The middle oscillator block",
+          "status": "resolved",
+          "box": [
+            0.4,
+            0.3,
+            0.2,
+            0.3
+          ],
+          "path": [],
+          "reason": "Synthetic geometry, not actual localization"
+        },
+        {
+          "id": "output",
+          "label": "Output frequency",
+          "description": "Output waveform on the right",
+          "status": "resolved",
+          "box": [
+            0.72,
+            0.3,
+            0.2,
+            0.3
+          ],
+          "path": [
+            [
+              0.73,
+              0.45
+            ],
+            [
+              0.76,
+              0.35
+            ],
+            [
+              0.79,
+              0.45
+            ],
+            [
+              0.82,
+              0.55
+            ],
+            [
+              0.85,
+              0.45
+            ],
+            [
+              0.88,
+              0.35
+            ],
+            [
+              0.91,
+              0.45
+            ]
+          ],
+          "reason": "Synthetic path, not actual localization"
+        }
+      ],
+      "states": [
+        {
+          "id": "vco-s1",
+          "sentence_id": "s1",
+          "caption": "Control voltage changes output frequency.",
+          "operations": [
+            {
+              "kind": "focus",
+              "target_id": "oscillator",
+              "to_target_id": "",
+              "text": "",
+              "box": [
+                0.4,
+                0.3,
+                0.2,
+                0.3
+              ],
+              "path": [],
+              "destination_box": []
+            }
+          ],
+          "suppressed": [],
+          "render_mode": "annotated"
+        },
+        {
+          "id": "vco-s2",
+          "sentence_id": "s2",
+          "caption": "Follow the message to the control input.",
+          "operations": [
+            {
+              "kind": "arrow",
+              "target_id": "control",
+              "to_target_id": "oscillator",
+              "text": "",
+              "box": [
+                0.08,
+                0.3,
+                0.2,
+                0.3
+              ],
+              "path": [],
+              "destination_box": [
+                0.4,
+                0.3,
+                0.2,
+                0.3
+              ]
+            }
+          ],
+          "suppressed": [],
+          "render_mode": "annotated"
+        },
+        {
+          "id": "vco-s3",
+          "sentence_id": "s3",
+          "caption": "In the ideal model, frequency varies and amplitude stays constant.",
+          "operations": [
+            {
+              "kind": "trace",
+              "target_id": "output",
+              "to_target_id": "",
+              "text": "",
+              "box": [
+                0.72,
+                0.3,
+                0.2,
+                0.3
+              ],
+              "path": [
+                [
+                  0.73,
+                  0.45
+                ],
+                [
+                  0.76,
+                  0.35
+                ],
+                [
+                  0.79,
+                  0.45
+                ],
+                [
+                  0.82,
+                  0.55
+                ],
+                [
+                  0.85,
+                  0.45
+                ],
+                [
+                  0.88,
+                  0.35
+                ],
+                [
+                  0.91,
+                  0.45
+                ]
+              ],
+              "destination_box": []
+            }
+          ],
+          "suppressed": [],
+          "render_mode": "annotated"
+        },
+        {
+          "id": "vco-s4",
+          "sentence_id": "s4",
+          "caption": "Relate each symbol to the diagram.",
+          "operations": [
+            {
+              "kind": "label",
+              "target_id": "control",
+              "to_target_id": "",
+              "text": "m(t) · message voltage",
+              "box": [
+                0.08,
+                0.3,
+                0.2,
+                0.3
+              ],
+              "path": [],
+              "destination_box": []
+            }
+          ],
+          "suppressed": [],
+          "render_mode": "annotated"
+        }
+      ],
+      "image": {
+        "provider": "none",
+        "synthetic": true,
+        "request_sha256": "56754a8ad2c0c24997ce76f7afa067a0e4ffca2641bea6f737a52424bb4ed9fd",
+        "mime": "image/png",
+        "width": 640,
+        "height": 360,
+        "sha256": "c381962083d7225f02e01b31cfb7f66cfb089b0e4bf6c18928e79b8eb1caaa29",
+        "bytes": 11017,
+        "file": "base-vco-path.png"
+      },
+      "teaching_mode": "causal_mechanism",
+      "image_issues": [
+        "Synthetic schematic and authored coordinates; not Gemini output or reviewed scientific evidence."
+      ]
+    }
+  ],
+  "status": "needs_review",
+  "teaching_status": "causal_mechanisms_present",
+  "review": {
+    "scientific": "pending",
+    "image_grounding": "model_proposed",
+    "native_language": "pending"
+  },
+  "clock": "visual_preview",
+  "suppressed_operation_count": 0,
+  "provenance": {
+    "source_sha256": "87b8375914752f113aedebf9a356f2c5f77bd7986523f8c30c6132645d880612",
+    "content_sha256": "bfeb7b3eb0adfff017299e93d59c43fbfa70c7c718862b52e7a9c573ff29ebaa",
+    "mode": "fixture",
+    "text_model": "none",
+    "image_model": "none",
+    "prompt_version": "topic-canvas-prompts/2-causal-mechanisms",
+    "max_canvases": 2,
+    "audio_manifest_sha256": "3c1221d979f085d7c5f06b447fb8c15e49760ea4ded54e3560df3d892dfe9e01",
+    "supplied_plan_sha256": null
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "schema": "cam-interactive-scene/v1",
+  "modelVersion": "cam-packets/3",
+  "conceptId": "C-AM-08",
+  "kind": "phase_recovery",
+  "title": "Carrier mismatch and debugging",
+  "controls": [
+    {
+      "name": "phase",
+      "label": "Relative phase error",
+      "min": 0,
+      "max": 180,
+      "step": 15,
+      "default": 60,
+      "unit": "degree"
+    }
+  ],
+  "visualBrief": {
+    "kind": "waveform",
+    "description": "Compare gain-corrected message-band outputs for relative phase errors 0, 60 and 90 degrees; label ideal predictions and finite-filter residual separately.",
+    "alt": "Carrier mismatch and debugging; Relative phase matters. Frequency mismatch can create beating. Diagnose one parameter at a time.",
+    "from": {
+      "origin": "curated",
+      "label": "MathWorks: analog passband modulation; reference for the modulation families",
+      "url": "https://www.mathworks.com/help/comm/ug/analog-passband-modulation.html"
+    }
+  },
+  "walkthrough": [
+    {
+      "target": "Carrier mismatch",
+      "mark": "sweep",
+      "dim": "words",
+      "say": "With frequency matched and unit carrier amplitudes, ideal gain-corrected recovery is m(t)*cos(phi), where phi is relative phase error."
+    },
+    {
+      "target": "relative phase error",
+      "mark": "marker",
+      "dim": "concept",
+      "say": "Change only the receiver phase by 90 degrees, inspect recovery, then restore the baseline and rerun."
+    },
+    {
+      "target": "frequency mismatch",
+      "mark": "marker",
+      "dim": "concept",
+      "say": "Relative phase matters. Frequency mismatch can create beating. Diagnose one parameter at a time."
+    }
+  ],
+  "sourceInteractive": {
+    "kind": "parameter_sweep",
+    "prompt": "Change relative phase error; this is an ideal message-band prediction, not a simulator result.",
+    "inputs": [
+      {
+        "name": "phi",
+        "label": "Relative phase error",
+        "unit": "degree",
+        "min": 0,
+        "max": 180,
+        "step": 15,
+        "default": 60
+      }
+    ],
+    "outputs": [
+      {
+        "name": "fraction",
+        "label": "Signed recovery fraction",
+        "unit": "dimensionless",
+        "formula": "cos(phi*pi/180)"
+      }
+    ]
+  },
+  "assumptions": [
+    "Authored draft; scientific review pending",
+    "Trusted analytic teaching model, not live Simulink evidence",
+    "Any normalized examples are illustrative; no new measured device values",
+    "Manual placard states; no sentence alignment"
+  ],
+  "review": {
+    "scientific": "pending",
+    "sourceGrounding": "authored_concept"
+  },
+  "image": {
+    "status": "not_requested",
+    "reason": "Scientific plots/flow/comparisons are rendered as editable SVG; no generated-image claim"
+  }
+}

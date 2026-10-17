@@ -1,0 +1,100 @@
+{
+  "schema": "cam-interactive-scene/v1",
+  "modelVersion": "cam-packets/3",
+  "conceptId": "C-AM-04",
+  "kind": "dsb",
+  "title": "DSB-SC generation and sidebands",
+  "controls": [
+    {
+      "name": "fm",
+      "label": "Message frequency",
+      "min": 10,
+      "max": 200,
+      "step": 10,
+      "default": 100,
+      "unit": "Hz"
+    }
+  ],
+  "visualBrief": {
+    "kind": "graph",
+    "description": "Plot a single-tone DSB-SC magnitude spectrum at 1900 and 2100 Hz, no separate 2000 Hz line under zero-mean ideal assumptions; accompany with signed time waveform.",
+    "alt": "DSB-SC generation and sidebands; Product modulation; two sidebands; no intentional carrier offset; simple envelope detection is insufficient.",
+    "from": {
+      "origin": "curated",
+      "label": "MathWorks: analog passband modulation; reference for the modulation families",
+      "url": "https://www.mathworks.com/help/comm/ug/analog-passband-modulation.html"
+    }
+  },
+  "walkthrough": [
+    {
+      "target": "DSB-SC",
+      "mark": "sweep",
+      "dim": "words",
+      "say": "DSB-SC is s(t)=Ac*m(t)*cos(2*pi*fc*t); a zero-mean single-tone message produces sidebands at fc-fm and fc+fm."
+    },
+    {
+      "target": "zero-mean message",
+      "mark": "marker",
+      "dim": "concept",
+      "say": "Connect Message and Carrier to a Product block; predict 1900 Hz and 2100 Hz sidebands for the chosen sources."
+    },
+    {
+      "target": "sidebands",
+      "mark": "marker",
+      "dim": "concept",
+      "say": "Product modulation; two sidebands; no intentional carrier offset; simple envelope detection is insufficient."
+    }
+  ],
+  "sourceInteractive": {
+    "kind": "parameter_sweep",
+    "prompt": "Predict the single-tone sidebands without changing the live simulator.",
+    "inputs": [
+      {
+        "name": "fm",
+        "label": "Message frequency",
+        "unit": "Hz",
+        "min": 10,
+        "max": 200,
+        "step": 10,
+        "default": 100
+      },
+      {
+        "name": "fc",
+        "label": "Carrier frequency",
+        "unit": "Hz",
+        "min": 1000,
+        "max": 10000,
+        "step": 100,
+        "default": 2000
+      }
+    ],
+    "outputs": [
+      {
+        "name": "lsb",
+        "label": "Lower sideband",
+        "unit": "Hz",
+        "formula": "fc-fm"
+      },
+      {
+        "name": "usb",
+        "label": "Upper sideband",
+        "unit": "Hz",
+        "formula": "fc+fm"
+      }
+    ]
+  },
+  "assumptions": [
+    "Authored draft; scientific review pending",
+    "Trusted analytic teaching model, not live Simulink evidence",
+    "Any normalized examples are illustrative; no new measured device values",
+    "Manual placard states; no sentence alignment"
+  ],
+  "review": {
+    "scientific": "pending",
+    "sourceGrounding": "authored_concept"
+  },
+  "image": {
+    "status": "not_requested",
+    "reason": "Scientific plots/flow/comparisons are rendered as editable SVG; no generated-image claim"
+  }
+}

@@ -1,0 +1,665 @@
+{
+  "schema": "cam-concept-packet/v1",
+  "conceptId": "C-AM-10",
+  "planId": "LP-ANALOG-MODULATION",
+  "contentVersion": "am-51187527300cba2fa3cca868",
+  "sourceGitRevision": "ba40218d7bf07637debe530019bcf8faf6afb61a",
+  "sourceHash": "7285ca1392520c45c2ccd102a5e3d4f349291b190e92e0859f20f34ee155d191",
+  "policy": {
+    "version": "cam-packets/3",
+    "textMode": "authored",
+    "textModel": null,
+    "speechModel": "gemini-3.8-flash-tts",
+    "mix": "authored_odia_english_placards",
+    "unit": "placard",
+    "audioUnit": "auto",
+    "speechLanguages": [
+      "or"
+    ]
+  },
+  "title": "Phase modulation and FM–PM distinction",
+  "status": "prepared_pending_review_and_delivery",
+  "createdAt": "2026-10-16T19:26:16.659461+00:00",
+  "placards": [
+    {
+      "id": "CARD-AM-10-definition",
+      "conceptId": "C-AM-10",
+      "kind": "definition",
+      "title": {
+        "en": "Definition",
+        "or": "ସଂଜ୍ଞା"
+      },
+      "body": {
+        "en": "PM varies carrier phase directly with the message: s(t)=Ac*cos(2*pi*fc*t+kp*m(t)).",
+        "or": "PM ରେ Carrier phase Message ସହିତ ସିଧାସଳଖ ବଦଳେ: s(t)=Ac*cos(2*pi*fc*t+kp*m(t))।"
+      },
+      "termIds": [
+        "T-AM-10-1",
+        "T-AM-10-2",
+        "T-AM-10-3",
+        "T-AM-01-1",
+        "T-AM-01-2",
+        "T-AM-01-3",
+        "T-AM-02-1",
+        "T-AM-02-2",
+        "T-AM-02-3",
+        "T-AM-09-1",
+        "T-AM-09-2",
+        "T-AM-09-3"
+      ],
+      "sources": [
+        {
+          "origin": "curated",
+          "label": "MathWorks: analog passband modulation; reference for the modulation families",
+          "url": "https://www.mathworks.com/help/comm/ug/analog-passband-modulation.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: DSB-SC coherent receiver and matching carrier parameters",
+          "url": "https://www.mathworks.com/help/comm/ref/dsbscamdemodulatorpassband.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: time-based Sine Wave parameters",
+          "url": "https://www.mathworks.com/help/simulink/slref/sinewave.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: continuous Transfer Fcn coefficients",
+          "url": "https://www.mathworks.com/help/simulink/slref/transferfcn.html"
+        }
+      ],
+      "generatedMixed": {
+        "displayText": "PM ରେ Carrier phase Message ସହିତ ସିଧାସଳଖ ବଦଳେ: s(t)=Ac*cos(2*pi*fc*t+kp*m(t))।",
+        "spans": [
+          {
+            "language": "en",
+            "text": "PM "
+          },
+          {
+            "language": "or",
+            "text": "ରେ "
+          },
+          {
+            "language": "en",
+            "text": "Carrier phase Message "
+          },
+          {
+            "language": "or",
+            "text": "ସହିତ ସିଧାସଳଖ ବଦଳେ: "
+          },
+          {
+            "language": "en",
+            "text": "s(t)=Ac*cos(2*pi*fc*t+kp*m(t))।"
+          }
+        ],
+        "speechText": "P M ରେ Carrier phase Message ସହିତ ସିଧାସଳଖ ବଦଳେ: s of t equals A c times cosine of two pi f c t plus k p times m of t।",
+        "provenance": "authored_case_reused"
+      }
+    },
+    {
+      "id": "CARD-AM-10-concept",
+      "conceptId": "C-AM-10",
+      "kind": "concept",
+      "title": {
+        "en": "Phase modulation and FM–PM distinction",
+        "or": "Phase modulation ଓ FM–PM ତଫାତ"
+      },
+      "body": {
+        "en": "Phase modulation, or PM, changes the instantaneous phase of a constant-amplitude carrier directly according to the message. Its form is s(t)=Ac*cos(2*pi*fc*t+kp*m(t)), where kp is phase sensitivity. FM and PM are both angle modulation, but their direct message relationships differ: FM frequency deviation follows the message, while PM phase deviation follows the message. Because instantaneous frequency is the rate of change of phase divided by 2*pi, PM frequency deviation follows the derivative of the message. A constant message produces a fixed phase shift in PM rather than a sustained frequency offset. PM completes our chapter comparison and is not a prerequisite for the selected lab.",
+        "or": "Phase modulation କିମ୍ବା PM ରେ Message ଅନୁସାରେ constant-amplitude Carrier ର instantaneous Phase ସିଧାସଳଖ ବଦଳେ। s(t)=Ac*cos(2*pi*fc*t+kp*m(t)), ଯେଉଁଠି kp ହେଉଛି Phase sensitivity। FM ଓ PM ଦୁଇଟି Angle modulation। FM ର Frequency deviation Message ଅନୁସାରେ, PM ର Phase deviation Message ଅନୁସାରେ ବଦଳେ। Instantaneous Frequency ହେଉଛି Phase ର rate of change କୁ 2*pi ଦ୍ୱାରା ଭାଗ କଲେ ମିଳୁଥିବା ମୂଲ୍ୟ। ତେଣୁ PM ର Frequency deviation Message ର derivative ଅନୁସାରେ ବଦଳେ। Constant message PM ରେ fixed Phase shift ଦିଏ। PM ଏହି lab ର ପୂର୍ବଶର୍ତ୍ତ ନୁହେଁ।"
+      },
+      "termIds": [
+        "T-AM-10-1",
+        "T-AM-10-2",
+        "T-AM-10-3",
+        "T-AM-01-1",
+        "T-AM-01-2",
+        "T-AM-01-3",
+        "T-AM-02-1",
+        "T-AM-02-2",
+        "T-AM-02-3",
+        "T-AM-09-1",
+        "T-AM-09-2",
+        "T-AM-09-3"
+      ],
+      "sources": [
+        {
+          "origin": "curated",
+          "label": "MathWorks: analog passband modulation; reference for the modulation families",
+          "url": "https://www.mathworks.com/help/comm/ug/analog-passband-modulation.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: DSB-SC coherent receiver and matching carrier parameters",
+          "url": "https://www.mathworks.com/help/comm/ref/dsbscamdemodulatorpassband.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: time-based Sine Wave parameters",
+          "url": "https://www.mathworks.com/help/simulink/slref/sinewave.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: continuous Transfer Fcn coefficients",
+          "url": "https://www.mathworks.com/help/simulink/slref/transferfcn.html"
+        }
+      ],
+      "visualRef": "explanation",
+      "generatedMixed": {
+        "displayText": "Phase modulation କିମ୍ବା PM ରେ Message ଅନୁସାରେ constant-amplitude Carrier ର instantaneous Phase ସିଧାସଳଖ ବଦଳେ। s(t)=Ac*cos(2*pi*fc*t+kp*m(t)), ଯେଉଁଠି kp ହେଉଛି Phase sensitivity। FM ଓ PM ଦୁଇଟି Angle modulation। FM ର Frequency deviation Message ଅନୁସାରେ, PM ର Phase deviation Message ଅନୁସାରେ ବଦଳେ। Instantaneous Frequency ହେଉଛି Phase ର rate of change କୁ 2*pi ଦ୍ୱାରା ଭାଗ କଲେ ମିଳୁଥିବା ମୂଲ୍ୟ। ତେଣୁ PM ର Frequency deviation Message ର derivative ଅନୁସାରେ ବଦଳେ। Constant message PM ରେ fixed Phase shift ଦିଏ। PM ଏହି lab ର ପୂର୍ବଶର୍ତ୍ତ ନୁହେଁ।",
+        "spans": [
+          {
+            "language": "en",
+            "text": "Phase modulation "
+          },
+          {
+            "language": "or",
+            "text": "କିମ୍ବା "
+          },
+          {
+            "language": "en",
+            "text": "PM "
+          },
+          {
+            "language": "or",
+            "text": "ରେ "
+          },
+          {
+            "language": "en",
+            "text": "Message "
+          },
+          {
+            "language": "or",
+            "text": "ଅନୁସାରେ "
+          },
+          {
+            "language": "en",
+            "text": "constant-amplitude Carrier "
+          },
+          {
+            "language": "or",
+            "text": "ର "
+          },
+          {
+            "language": "en",
+            "text": "instantaneous Phase "
+          },
+          {
+            "language": "or",
+            "text": "ସିଧାସଳଖ ବଦଳେ। "
+          },
+          {
+            "language": "en",
+            "text": "s(t)=Ac*cos(2*pi*fc*t+kp*m(t)), "
+          },
+          {
+            "language": "or",
+            "text": "ଯେଉଁଠି "
+          },
+          {
+            "language": "en",
+            "text": "kp "
+          },
+          {
+            "language": "or",
+            "text": "ହେଉଛି "
+          },
+          {
+            "language": "en",
+            "text": "Phase sensitivity। FM "
+          },
+          {
+            "language": "or",
+            "text": "ଓ "
+          },
+          {
+            "language": "en",
+            "text": "PM "
+          },
+          {
+            "language": "or",
+            "text": "ଦୁଇଟି "
+          },
+          {
+            "language": "en",
+            "text": "Angle modulation। FM "
+          },
+          {
+            "language": "or",
+            "text": "ର "
+          },
+          {
+            "language": "en",
+            "text": "Frequency deviation Message "
+          },
+          {
+            "language": "or",
+            "text": "ଅନୁସାରେ, "
+          },
+          {
+            "language": "en",
+            "text": "PM "
+          },
+          {
+            "language": "or",
+            "text": "ର "
+          },
+          {
+            "language": "en",
+            "text": "Phase deviation Message "
+          },
+          {
+            "language": "or",
+            "text": "ଅନୁସାରେ ବଦଳେ। "
+          },
+          {
+            "language": "en",
+            "text": "Instantaneous Frequency "
+          },
+          {
+            "language": "or",
+            "text": "ହେଉଛି "
+          },
+          {
+            "language": "en",
+            "text": "Phase "
+          },
+          {
+            "language": "or",
+            "text": "ର "
+          },
+          {
+            "language": "en",
+            "text": "rate of change "
+          },
+          {
+            "language": "or",
+            "text": "କୁ 2*"
+          },
+          {
+            "language": "en",
+            "text": "pi "
+          },
+          {
+            "language": "or",
+            "text": "ଦ୍ୱାରା ଭାଗ କଲେ ମିଳୁଥିବା ମୂଲ୍ୟ। ତେଣୁ "
+          },
+          {
+            "language": "en",
+            "text": "PM "
+          },
+          {
+            "language": "or",
+            "text": "ର "
+          },
+          {
+            "language": "en",
+            "text": "Frequency deviation Message "
+          },
+          {
+            "language": "or",
+            "text": "ର "
+          },
+          {
+            "language": "en",
+            "text": "derivative "
+          },
+          {
+            "language": "or",
+            "text": "ଅନୁସାରେ ବଦଳେ। "
+          },
+          {
+            "language": "en",
+            "text": "Constant message PM "
+          },
+          {
+            "language": "or",
+            "text": "ରେ "
+          },
+          {
+            "language": "en",
+            "text": "fixed Phase shift "
+          },
+          {
+            "language": "or",
+            "text": "ଦିଏ। "
+          },
+          {
+            "language": "en",
+            "text": "PM "
+          },
+          {
+            "language": "or",
+            "text": "ଏହି "
+          },
+          {
+            "language": "en",
+            "text": "lab "
+          },
+          {
+            "language": "or",
+            "text": "ର ପୂର୍ବଶର୍ତ୍ତ ନୁହେଁ।"
+          }
+        ],
+        "speechText": "Phase modulation କିମ୍ବା P M ରେ Message ଅନୁସାରେ constant-amplitude Carrier ର instantaneous Phase ସିଧାସଳଖ ବଦଳେ। s of t equals A c times cosine of two pi f c t plus k p times m of t, ଯେଉଁଠି kp ହେଉଛି Phase sensitivity। F M ଓ P M ଦୁଇଟି Angle modulation। F M ର Frequency deviation Message ଅନୁସାରେ, P M ର Phase deviation Message ଅନୁସାରେ ବଦଳେ। Instantaneous Frequency ହେଉଛି Phase ର rate of change କୁ two pi ଦ୍ୱାରା ଭାଗ କଲେ ମିଳୁଥିବା ମୂଲ୍ୟ। ତେଣୁ P M ର Frequency deviation Message ର derivative ଅନୁସାରେ ବଦଳେ। Constant message P M ରେ fixed Phase shift ଦିଏ। P M ଏହି lab ର ପୂର୍ବଶର୍ତ୍ତ ନୁହେଁ।",
+        "provenance": "authored_case_reused"
+      }
+    },
+    {
+      "id": "CARD-AM-10-application",
+      "conceptId": "C-AM-10",
+      "kind": "application",
+      "title": {
+        "en": "Use it in a model",
+        "or": "Model ରେ ପ୍ରୟୋଗ"
+      },
+      "body": {
+        "en": "Use an FM/PM comparison card; retain the DSB-SC lab route without adding angle-modulation tasks.",
+        "or": "FM/PM comparison card ଦେଖନ୍ତୁ। DSB-SC lab route ରେ Angle modulation task ଯୋଡ଼ିବା ଦରକାର ନାହିଁ।"
+      },
+      "termIds": [
+        "T-AM-10-1",
+        "T-AM-10-2",
+        "T-AM-10-3",
+        "T-AM-01-1",
+        "T-AM-01-2",
+        "T-AM-01-3",
+        "T-AM-02-1",
+        "T-AM-02-2",
+        "T-AM-02-3",
+        "T-AM-09-1",
+        "T-AM-09-2",
+        "T-AM-09-3"
+      ],
+      "sources": [
+        {
+          "origin": "curated",
+          "label": "MathWorks: analog passband modulation; reference for the modulation families",
+          "url": "https://www.mathworks.com/help/comm/ug/analog-passband-modulation.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: DSB-SC coherent receiver and matching carrier parameters",
+          "url": "https://www.mathworks.com/help/comm/ref/dsbscamdemodulatorpassband.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: time-based Sine Wave parameters",
+          "url": "https://www.mathworks.com/help/simulink/slref/sinewave.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: continuous Transfer Fcn coefficients",
+          "url": "https://www.mathworks.com/help/simulink/slref/transferfcn.html"
+        }
+      ],
+      "generatedMixed": {
+        "displayText": "FM/PM comparison card ଦେଖନ୍ତୁ। DSB-SC lab route ରେ Angle modulation task ଯୋଡ଼ିବା ଦରକାର ନାହିଁ।",
+        "spans": [
+          {
+            "language": "en",
+            "text": "FM/PM comparison card "
+          },
+          {
+            "language": "or",
+            "text": "ଦେଖନ୍ତୁ। "
+          },
+          {
+            "language": "en",
+            "text": "DSB-SC lab route "
+          },
+          {
+            "language": "or",
+            "text": "ରେ "
+          },
+          {
+            "language": "en",
+            "text": "Angle modulation task "
+          },
+          {
+            "language": "or",
+            "text": "ଯୋଡ଼ିବା ଦରକାର ନାହିଁ।"
+          }
+        ],
+        "speechText": "F M/P M comparison card ଦେଖନ୍ତୁ। D S B S C lab route ରେ Angle modulation task ଯୋଡ଼ିବା ଦରକାର ନାହିଁ।",
+        "provenance": "authored_case_reused"
+      }
+    },
+    {
+      "id": "CARD-AM-10-recap",
+      "conceptId": "C-AM-10",
+      "kind": "recap",
+      "title": {
+        "en": "Remember",
+        "or": "ମନେ ରଖନ୍ତୁ"
+      },
+      "body": {
+        "en": "PM phase follows the message; FM frequency follows the message; frequency is phase’s rate of change.",
+        "or": "PM ର Phase Message କୁ ଅନୁସରେ; FM ର Frequency Message କୁ ଅନୁସରେ; Frequency ହେଉଛି Phase ର rate of change।"
+      },
+      "termIds": [
+        "T-AM-10-1",
+        "T-AM-10-2",
+        "T-AM-10-3",
+        "T-AM-01-1",
+        "T-AM-01-2",
+        "T-AM-01-3",
+        "T-AM-02-1",
+        "T-AM-02-2",
+        "T-AM-02-3",
+        "T-AM-09-1",
+        "T-AM-09-2",
+        "T-AM-09-3"
+      ],
+      "sources": [
+        {
+          "origin": "curated",
+          "label": "MathWorks: analog passband modulation; reference for the modulation families",
+          "url": "https://www.mathworks.com/help/comm/ug/analog-passband-modulation.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: DSB-SC coherent receiver and matching carrier parameters",
+          "url": "https://www.mathworks.com/help/comm/ref/dsbscamdemodulatorpassband.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: time-based Sine Wave parameters",
+          "url": "https://www.mathworks.com/help/simulink/slref/sinewave.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: continuous Transfer Fcn coefficients",
+          "url": "https://www.mathworks.com/help/simulink/slref/transferfcn.html"
+        }
+      ],
+      "generatedMixed": {
+        "displayText": "PM ର Phase Message କୁ ଅନୁସରେ; FM ର Frequency Message କୁ ଅନୁସରେ; Frequency ହେଉଛି Phase ର rate of change।",
+        "spans": [
+          {
+            "language": "en",
+            "text": "PM "
+          },
+          {
+            "language": "or",
+            "text": "ର "
+          },
+          {
+            "language": "en",
+            "text": "Phase Message "
+          },
+          {
+            "language": "or",
+            "text": "କୁ ଅନୁସରେ; "
+          },
+          {
+            "language": "en",
+            "text": "FM "
+          },
+          {
+            "language": "or",
+            "text": "ର "
+          },
+          {
+            "language": "en",
+            "text": "Frequency Message "
+          },
+          {
+            "language": "or",
+            "text": "କୁ ଅନୁସରେ; "
+          },
+          {
+            "language": "en",
+            "text": "Frequency "
+          },
+          {
+            "language": "or",
+            "text": "ହେଉଛି "
+          },
+          {
+            "language": "en",
+            "text": "Phase "
+          },
+          {
+            "language": "or",
+            "text": "ର "
+          },
+          {
+            "language": "en",
+            "text": "rate of change।"
+          }
+        ],
+        "speechText": "P M ର Phase Message କୁ ଅନୁସରେ; F M ର Frequency Message କୁ ଅନୁସରେ; Frequency ହେଉଛି Phase ର rate of change।",
+        "provenance": "authored_case_reused"
+      }
+    }
+  ],
+  "narration": [
+    {
+      "placardId": null,
+      "placardIds": [
+        "CARD-AM-10-definition",
+        "CARD-AM-10-concept",
+        "CARD-AM-10-application",
+        "CARD-AM-10-recap"
+      ],
+      "scope": "concept",
+      "language": "or",
+      "variantId": "authored-or-v1",
+      "assetId": "sha256-7a4e4f944d01629a1d1d1e5c57e31e9e17d367bdce45daac7f5e54f401c9259f",
+      "localFile": "C-AM-10.or.wav",
+      "displayTextSha256": "2a8381638e2217dd1611fb6df66c851bca3b55d3d3e003b9a502ecc699a37206",
+      "speechTextSha256": "c94be9675e5895269b6805efd7791684e2f71341ed5058611f369956f3292292",
+      "audioSha256": "7a4e4f944d01629a1d1d1e5c57e31e9e17d367bdce45daac7f5e54f401c9259f",
+      "durationSeconds": 82.68,
+      "bytes": 3974754,
+      "contentType": "audio/wav",
+      "timing": "clip_duration_only",
+      "narrationKind": "generated",
+      "reviewed": false,
+      "deliveryStatus": "local_pending_upload",
+      "providerModel": "gemini-3.8-flash-tts"
+    }
+  ],
+  "scene": {
+    "schema": "cam-interactive-scene/v1",
+    "modelVersion": "cam-packets/3",
+    "conceptId": "C-AM-10",
+    "kind": "pm",
+    "title": "Phase modulation and FM–PM distinction",
+    "controls": [
+      {
+        "name": "sensitivity",
+        "label": "Normalized sensitivity",
+        "min": 0,
+        "max": 2,
+        "step": 0.25,
+        "default": 1,
+        "unit": ""
+      },
+      {
+        "name": "constant",
+        "label": "0 sinusoidal message · 1 constant message",
+        "min": 0,
+        "max": 1,
+        "step": 1,
+        "default": 0,
+        "unit": ""
+      }
+    ],
+    "visualBrief": {
+      "kind": "table",
+      "description": "Two-column FM versus PM comparison: directly varied property, mathematical dependence, constant-message result, and ideal constant amplitude.",
+      "alt": "Phase modulation and FM–PM distinction; PM phase follows the message; FM frequency follows the message; frequency is phase’s rate of change.",
+      "from": {
+        "origin": "curated",
+        "label": "MathWorks: analog passband modulation; reference for the modulation families",
+        "url": "https://www.mathworks.com/help/comm/ug/analog-passband-modulation.html"
+      }
+    },
+    "walkthrough": [
+      {
+        "target": "Phase modulation",
+        "mark": "sweep",
+        "dim": "words",
+        "say": "PM varies carrier phase directly with the message: s(t)=Ac*cos(2*pi*fc*t+kp*m(t))."
+      },
+      {
+        "target": "phase sensitivity",
+        "mark": "marker",
+        "dim": "concept",
+        "say": "Use an FM/PM comparison card; retain the DSB-SC lab route without adding angle-modulation tasks."
+      },
+      {
+        "target": "derivative",
+        "mark": "marker",
+        "dim": "concept",
+        "say": "PM phase follows the message; FM frequency follows the message; frequency is phase’s rate of change."
+      }
+    ],
+    "sourceInteractive": {
+      "kind": "step_through",
+      "prompt": "Follow the explanation, then check the worked result.",
+      "steps": [
+        {
+          "label": "Define",
+          "detail": "PM varies carrier phase directly with the message: s(t)=Ac*cos(2*pi*fc*t+kp*m(t))."
+        },
+        {
+          "label": "Apply",
+          "detail": "The carrier has a fixed phase offset proportional to that message."
+        },
+        {
+          "label": "Check",
+          "detail": "Its steady instantaneous frequency returns to fc because the constant phase offset has zero derivative."
+        }
+      ]
+    },
+    "assumptions": [
+      "Authored draft; scientific review pending",
+      "Trusted analytic teaching model, not live Simulink evidence",
+      "Any normalized examples are illustrative; no new measured device values",
+      "Manual placard states; no sentence alignment"
+    ],
+    "review": {
+      "scientific": "pending",
+      "sourceGrounding": "authored_concept"
+    },
+    "image": {
+      "status": "not_requested",
+      "reason": "Scientific plots/flow/comparisons are rendered as editable SVG; no generated-image claim"
+    }
+  },
+  "review": {
+    "scientific": "pending",
+    "nativeOdia": "pending",
+    "pronunciation": "pending"
+  },
+  "alignment": "not_performed",
+  "publication": {
+    "status": "not_published",
+    "firestore": "not_written"
+  },
+  "experienceRevision": "cam-d3074253f11cac828f9ddeec"
+}

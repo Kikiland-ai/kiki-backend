@@ -1,0 +1,604 @@
+{
+  "schema": "cam-concept-packet/v1",
+  "conceptId": "C-AM-05",
+  "planId": "LP-ANALOG-MODULATION",
+  "contentVersion": "am-51187527300cba2fa3cca868",
+  "sourceGitRevision": "ba40218d7bf07637debe530019bcf8faf6afb61a",
+  "sourceHash": "e24d4b6fb50a1a86bdc5e60b9d6e16427241b37ec3bb136756ea8dfdfc04ec8f",
+  "policy": {
+    "version": "cam-packets/3",
+    "textMode": "authored",
+    "textModel": null,
+    "speechModel": "gemini-3.8-flash-tts",
+    "mix": "authored_odia_english_placards",
+    "unit": "placard",
+    "audioUnit": "auto",
+    "speechLanguages": [
+      "or"
+    ]
+  },
+  "title": "SSB and VSB compared with DSB-SC",
+  "status": "prepared_pending_review_and_delivery",
+  "createdAt": "2026-10-16T19:24:43.557767+00:00",
+  "placards": [
+    {
+      "id": "CARD-AM-05-definition",
+      "conceptId": "C-AM-05",
+      "kind": "definition",
+      "title": {
+        "en": "Definition",
+        "or": "ସଂଜ୍ଞା"
+      },
+      "body": {
+        "en": "SSB sends one sideband; VSB sends one sideband plus a vestige of the other.",
+        "or": "SSB ଗୋଟିଏ Sideband ପଠାଏ। VSB ଗୋଟିଏ Sideband ସହିତ ଅନ୍ୟଟିର ଏକ ଛୋଟ ଅଂଶ ପଠାଏ।"
+      },
+      "termIds": [
+        "T-AM-05-1",
+        "T-AM-05-2",
+        "T-AM-05-3",
+        "T-AM-01-1",
+        "T-AM-01-2",
+        "T-AM-01-3",
+        "T-AM-02-1",
+        "T-AM-02-2",
+        "T-AM-02-3",
+        "T-AM-03-1",
+        "T-AM-03-2",
+        "T-AM-03-3",
+        "T-AM-04-1",
+        "T-AM-04-2",
+        "T-AM-04-3"
+      ],
+      "sources": [
+        {
+          "origin": "curated",
+          "label": "MathWorks: analog passband modulation; reference for the modulation families",
+          "url": "https://www.mathworks.com/help/comm/ug/analog-passband-modulation.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: DSB-SC coherent receiver and matching carrier parameters",
+          "url": "https://www.mathworks.com/help/comm/ref/dsbscamdemodulatorpassband.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: time-based Sine Wave parameters",
+          "url": "https://www.mathworks.com/help/simulink/slref/sinewave.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: continuous Transfer Fcn coefficients",
+          "url": "https://www.mathworks.com/help/simulink/slref/transferfcn.html"
+        }
+      ],
+      "generatedMixed": {
+        "displayText": "SSB ଗୋଟିଏ Sideband ପଠାଏ। VSB ଗୋଟିଏ Sideband ସହିତ ଅନ୍ୟଟିର ଏକ ଛୋଟ ଅଂଶ ପଠାଏ।",
+        "spans": [
+          {
+            "language": "en",
+            "text": "SSB "
+          },
+          {
+            "language": "or",
+            "text": "ଗୋଟିଏ "
+          },
+          {
+            "language": "en",
+            "text": "Sideband "
+          },
+          {
+            "language": "or",
+            "text": "ପଠାଏ। "
+          },
+          {
+            "language": "en",
+            "text": "VSB "
+          },
+          {
+            "language": "or",
+            "text": "ଗୋଟିଏ "
+          },
+          {
+            "language": "en",
+            "text": "Sideband "
+          },
+          {
+            "language": "or",
+            "text": "ସହିତ ଅନ୍ୟଟିର ଏକ ଛୋଟ ଅଂଶ ପଠାଏ।"
+          }
+        ],
+        "speechText": "S S B ଗୋଟିଏ Sideband ପଠାଏ। V S B ଗୋଟିଏ Sideband ସହିତ ଅନ୍ୟଟିର ଏକ ଛୋଟ ଅଂଶ ପଠାଏ।",
+        "provenance": "authored_case_reused"
+      }
+    },
+    {
+      "id": "CARD-AM-05-concept",
+      "conceptId": "C-AM-05",
+      "kind": "concept",
+      "title": {
+        "en": "SSB and VSB compared with DSB-SC",
+        "or": "DSB-SC ସହିତ SSB ଓ VSB ତୁଳନା"
+      },
+      "body": {
+        "en": "Amplitude-modulation variants differ in which spectral components they transmit. DSB-SC sends both sidebands, requiring bandwidth 2B for a message whose highest frequency is B. SSB sends only one sideband and ideally requires bandwidth B, making better use of a restricted channel. VSB sends one sideband with a small vestige of the other; its bandwidth lies between ideal SSB and full DSB for a comparable message. The vestige eases practical filtering near the carrier. These are spectrum choices, not separate message types. Our lab uses DSB-SC, so SSB and VSB implementation is outside the lab route, although their comparison belongs in this chapter.",
+        "or": "Amplitude modulation ର ପ୍ରକାରଗୁଡ଼ିକ କେଉଁ Spectral component ପଠାଯାଏ ତାହାରେ ଭିନ୍ନ। Message ର ସର୍ବାଧିକ Frequency B ହେଲେ DSB-SC ପାଇଁ Bandwidth 2B। SSB କେବଳ ଗୋଟିଏ Sideband ପଠାଏ, ତେଣୁ ideal Bandwidth B। VSB ଗୋଟିଏ Sideband ସହିତ ଅନ୍ୟଟିର ଛୋଟ ଅଂଶ ପଠାଏ। ସମାନ Message ପାଇଁ ଏହାର Bandwidth SSB ଓ DSB ମଧ୍ୟରେ ରହେ। ଏହି ଛୋଟ ଅଂଶ Carrier ନିକଟରେ practical filtering କୁ ସହଜ କରେ। ଆମ lab DSB-SC ବ୍ୟବହାର କରେ; SSB/VSB ତୁଳନା chapter ରେ ଥିଲେ ମଧ୍ୟ lab ପୂର୍ବରୁ ଆବଶ୍ୟକ ନୁହେଁ।"
+      },
+      "termIds": [
+        "T-AM-05-1",
+        "T-AM-05-2",
+        "T-AM-05-3",
+        "T-AM-01-1",
+        "T-AM-01-2",
+        "T-AM-01-3",
+        "T-AM-02-1",
+        "T-AM-02-2",
+        "T-AM-02-3",
+        "T-AM-03-1",
+        "T-AM-03-2",
+        "T-AM-03-3",
+        "T-AM-04-1",
+        "T-AM-04-2",
+        "T-AM-04-3"
+      ],
+      "sources": [
+        {
+          "origin": "curated",
+          "label": "MathWorks: analog passband modulation; reference for the modulation families",
+          "url": "https://www.mathworks.com/help/comm/ug/analog-passband-modulation.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: DSB-SC coherent receiver and matching carrier parameters",
+          "url": "https://www.mathworks.com/help/comm/ref/dsbscamdemodulatorpassband.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: time-based Sine Wave parameters",
+          "url": "https://www.mathworks.com/help/simulink/slref/sinewave.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: continuous Transfer Fcn coefficients",
+          "url": "https://www.mathworks.com/help/simulink/slref/transferfcn.html"
+        }
+      ],
+      "visualRef": "explanation",
+      "generatedMixed": {
+        "displayText": "Amplitude modulation ର ପ୍ରକାରଗୁଡ଼ିକ କେଉଁ Spectral component ପଠାଯାଏ ତାହାରେ ଭିନ୍ନ। Message ର ସର୍ବାଧିକ Frequency B ହେଲେ DSB-SC ପାଇଁ Bandwidth 2B। SSB କେବଳ ଗୋଟିଏ Sideband ପଠାଏ, ତେଣୁ ideal Bandwidth B। VSB ଗୋଟିଏ Sideband ସହିତ ଅନ୍ୟଟିର ଛୋଟ ଅଂଶ ପଠାଏ। ସମାନ Message ପାଇଁ ଏହାର Bandwidth SSB ଓ DSB ମଧ୍ୟରେ ରହେ। ଏହି ଛୋଟ ଅଂଶ Carrier ନିକଟରେ practical filtering କୁ ସହଜ କରେ। ଆମ lab DSB-SC ବ୍ୟବହାର କରେ; SSB/VSB ତୁଳନା chapter ରେ ଥିଲେ ମଧ୍ୟ lab ପୂର୍ବରୁ ଆବଶ୍ୟକ ନୁହେଁ।",
+        "spans": [
+          {
+            "language": "en",
+            "text": "Amplitude modulation "
+          },
+          {
+            "language": "or",
+            "text": "ର ପ୍ରକାରଗୁଡ଼ିକ କେଉଁ "
+          },
+          {
+            "language": "en",
+            "text": "Spectral component "
+          },
+          {
+            "language": "or",
+            "text": "ପଠାଯାଏ ତାହାରେ ଭିନ୍ନ। "
+          },
+          {
+            "language": "en",
+            "text": "Message "
+          },
+          {
+            "language": "or",
+            "text": "ର ସର୍ବାଧିକ "
+          },
+          {
+            "language": "en",
+            "text": "Frequency B "
+          },
+          {
+            "language": "or",
+            "text": "ହେଲେ "
+          },
+          {
+            "language": "en",
+            "text": "DSB-SC "
+          },
+          {
+            "language": "or",
+            "text": "ପାଇଁ "
+          },
+          {
+            "language": "en",
+            "text": "Bandwidth 2B। SSB "
+          },
+          {
+            "language": "or",
+            "text": "କେବଳ ଗୋଟିଏ "
+          },
+          {
+            "language": "en",
+            "text": "Sideband "
+          },
+          {
+            "language": "or",
+            "text": "ପଠାଏ, ତେଣୁ "
+          },
+          {
+            "language": "en",
+            "text": "ideal Bandwidth B। VSB "
+          },
+          {
+            "language": "or",
+            "text": "ଗୋଟିଏ "
+          },
+          {
+            "language": "en",
+            "text": "Sideband "
+          },
+          {
+            "language": "or",
+            "text": "ସହିତ ଅନ୍ୟଟିର ଛୋଟ ଅଂଶ ପଠାଏ। ସମାନ "
+          },
+          {
+            "language": "en",
+            "text": "Message "
+          },
+          {
+            "language": "or",
+            "text": "ପାଇଁ ଏହାର "
+          },
+          {
+            "language": "en",
+            "text": "Bandwidth SSB "
+          },
+          {
+            "language": "or",
+            "text": "ଓ "
+          },
+          {
+            "language": "en",
+            "text": "DSB "
+          },
+          {
+            "language": "or",
+            "text": "ମଧ୍ୟରେ ରହେ। ଏହି ଛୋଟ ଅଂଶ "
+          },
+          {
+            "language": "en",
+            "text": "Carrier "
+          },
+          {
+            "language": "or",
+            "text": "ନିକଟରେ "
+          },
+          {
+            "language": "en",
+            "text": "practical filtering "
+          },
+          {
+            "language": "or",
+            "text": "କୁ ସହଜ କରେ। ଆମ "
+          },
+          {
+            "language": "en",
+            "text": "lab DSB-SC "
+          },
+          {
+            "language": "or",
+            "text": "ବ୍ୟବହାର କରେ; "
+          },
+          {
+            "language": "en",
+            "text": "SSB/VSB "
+          },
+          {
+            "language": "or",
+            "text": "ତୁଳନା "
+          },
+          {
+            "language": "en",
+            "text": "chapter "
+          },
+          {
+            "language": "or",
+            "text": "ରେ ଥିଲେ ମଧ୍ୟ "
+          },
+          {
+            "language": "en",
+            "text": "lab "
+          },
+          {
+            "language": "or",
+            "text": "ପୂର୍ବରୁ ଆବଶ୍ୟକ ନୁହେଁ।"
+          }
+        ],
+        "speechText": "Amplitude modulation ର ପ୍ରକାରଗୁଡ଼ିକ କେଉଁ Spectral component ପଠାଯାଏ ତାହାରେ ଭିନ୍ନ। Message ର ସର୍ବାଧିକ Frequency B ହେଲେ D S B S C ପାଇଁ Bandwidth 2B। S S B କେବଳ ଗୋଟିଏ Sideband ପଠାଏ, ତେଣୁ ideal Bandwidth B। V S B ଗୋଟିଏ Sideband ସହିତ ଅନ୍ୟଟିର ଛୋଟ ଅଂଶ ପଠାଏ। ସମାନ Message ପାଇଁ ଏହାର Bandwidth S S B ଓ DSB ମଧ୍ୟରେ ରହେ। ଏହି ଛୋଟ ଅଂଶ Carrier ନିକଟରେ practical filtering କୁ ସହଜ କରେ। ଆମ lab D S B S C ବ୍ୟବହାର କରେ; S S B/V S B ତୁଳନା chapter ରେ ଥିଲେ ମଧ୍ୟ lab ପୂର୍ବରୁ ଆବଶ୍ୟକ ନୁହେଁ।",
+        "provenance": "authored_case_reused"
+      }
+    },
+    {
+      "id": "CARD-AM-05-application",
+      "conceptId": "C-AM-05",
+      "kind": "application",
+      "title": {
+        "en": "Use it in a model",
+        "or": "Model ରେ ପ୍ରୟୋଗ"
+      },
+      "body": {
+        "en": "Compare spectrum sketches rather than adding an SSB subsystem to the selected DSB-SC experiment.",
+        "or": "Spectrum ଚିତ୍ର ତୁଳନା କରନ୍ତୁ। ବାଛିଥିବା DSB-SC experiment ରେ SSB subsystem ଯୋଡ଼ିବା ଦରକାର ନାହିଁ।"
+      },
+      "termIds": [
+        "T-AM-05-1",
+        "T-AM-05-2",
+        "T-AM-05-3",
+        "T-AM-01-1",
+        "T-AM-01-2",
+        "T-AM-01-3",
+        "T-AM-02-1",
+        "T-AM-02-2",
+        "T-AM-02-3",
+        "T-AM-03-1",
+        "T-AM-03-2",
+        "T-AM-03-3",
+        "T-AM-04-1",
+        "T-AM-04-2",
+        "T-AM-04-3"
+      ],
+      "sources": [
+        {
+          "origin": "curated",
+          "label": "MathWorks: analog passband modulation; reference for the modulation families",
+          "url": "https://www.mathworks.com/help/comm/ug/analog-passband-modulation.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: DSB-SC coherent receiver and matching carrier parameters",
+          "url": "https://www.mathworks.com/help/comm/ref/dsbscamdemodulatorpassband.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: time-based Sine Wave parameters",
+          "url": "https://www.mathworks.com/help/simulink/slref/sinewave.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: continuous Transfer Fcn coefficients",
+          "url": "https://www.mathworks.com/help/simulink/slref/transferfcn.html"
+        }
+      ],
+      "generatedMixed": {
+        "displayText": "Spectrum ଚିତ୍ର ତୁଳନା କରନ୍ତୁ। ବାଛିଥିବା DSB-SC experiment ରେ SSB subsystem ଯୋଡ଼ିବା ଦରକାର ନାହିଁ।",
+        "spans": [
+          {
+            "language": "en",
+            "text": "Spectrum "
+          },
+          {
+            "language": "or",
+            "text": "ଚିତ୍ର ତୁଳନା କରନ୍ତୁ। ବାଛିଥିବା "
+          },
+          {
+            "language": "en",
+            "text": "DSB-SC experiment "
+          },
+          {
+            "language": "or",
+            "text": "ରେ "
+          },
+          {
+            "language": "en",
+            "text": "SSB subsystem "
+          },
+          {
+            "language": "or",
+            "text": "ଯୋଡ଼ିବା ଦରକାର ନାହିଁ।"
+          }
+        ],
+        "speechText": "Spectrum ଚିତ୍ର ତୁଳନା କରନ୍ତୁ। ବାଛିଥିବା D S B S C experiment ରେ S S B subsystem ଯୋଡ଼ିବା ଦରକାର ନାହିଁ।",
+        "provenance": "authored_case_reused"
+      }
+    },
+    {
+      "id": "CARD-AM-05-recap",
+      "conceptId": "C-AM-05",
+      "kind": "recap",
+      "title": {
+        "en": "Remember",
+        "or": "ମନେ ରଖନ୍ତୁ"
+      },
+      "body": {
+        "en": "For message bandwidth B: DSB-SC uses 2B; ideal SSB uses B; VSB retains a vestige.",
+        "or": "Message bandwidth B ପାଇଁ DSB-SC: 2B; ideal SSB: B; VSB ରେ ଅନ୍ୟ Sideband ର ଛୋଟ ଅଂଶ ରହେ।"
+      },
+      "termIds": [
+        "T-AM-05-1",
+        "T-AM-05-2",
+        "T-AM-05-3",
+        "T-AM-01-1",
+        "T-AM-01-2",
+        "T-AM-01-3",
+        "T-AM-02-1",
+        "T-AM-02-2",
+        "T-AM-02-3",
+        "T-AM-03-1",
+        "T-AM-03-2",
+        "T-AM-03-3",
+        "T-AM-04-1",
+        "T-AM-04-2",
+        "T-AM-04-3"
+      ],
+      "sources": [
+        {
+          "origin": "curated",
+          "label": "MathWorks: analog passband modulation; reference for the modulation families",
+          "url": "https://www.mathworks.com/help/comm/ug/analog-passband-modulation.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: DSB-SC coherent receiver and matching carrier parameters",
+          "url": "https://www.mathworks.com/help/comm/ref/dsbscamdemodulatorpassband.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: time-based Sine Wave parameters",
+          "url": "https://www.mathworks.com/help/simulink/slref/sinewave.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: continuous Transfer Fcn coefficients",
+          "url": "https://www.mathworks.com/help/simulink/slref/transferfcn.html"
+        }
+      ],
+      "generatedMixed": {
+        "displayText": "Message bandwidth B ପାଇଁ DSB-SC: 2B; ideal SSB: B; VSB ରେ ଅନ୍ୟ Sideband ର ଛୋଟ ଅଂଶ ରହେ।",
+        "spans": [
+          {
+            "language": "en",
+            "text": "Message bandwidth B "
+          },
+          {
+            "language": "or",
+            "text": "ପାଇଁ "
+          },
+          {
+            "language": "en",
+            "text": "DSB-SC: 2B; ideal SSB: B; VSB "
+          },
+          {
+            "language": "or",
+            "text": "ରେ ଅନ୍ୟ "
+          },
+          {
+            "language": "en",
+            "text": "Sideband "
+          },
+          {
+            "language": "or",
+            "text": "ର ଛୋଟ ଅଂଶ ରହେ।"
+          }
+        ],
+        "speechText": "Message bandwidth B ପାଇଁ D S B S C: 2B; ideal S S B: B; V S B ରେ ଅନ୍ୟ Sideband ର ଛୋଟ ଅଂଶ ରହେ।",
+        "provenance": "authored_case_reused"
+      }
+    }
+  ],
+  "narration": [
+    {
+      "placardId": null,
+      "placardIds": [
+        "CARD-AM-05-definition",
+        "CARD-AM-05-concept",
+        "CARD-AM-05-application",
+        "CARD-AM-05-recap"
+      ],
+      "scope": "concept",
+      "language": "or",
+      "variantId": "authored-or-v1",
+      "assetId": "sha256-1546077d7d5c4cd0e2f6e16cf43cbfaaf62b32a7080806ea84965dd78cbcc928",
+      "localFile": "C-AM-05.or.wav",
+      "displayTextSha256": "f148f3913332d3c406bcdfb7972e76259a65781b8773d8c8f7d20ddb5fdb7af7",
+      "speechTextSha256": "e0bcdd45b118269d76f3b8a4be1c28f90f2e42a446b9d7f3cfd9939cafbb3443",
+      "audioSha256": "1546077d7d5c4cd0e2f6e16cf43cbfaaf62b32a7080806ea84965dd78cbcc928",
+      "durationSeconds": 62.8,
+      "bytes": 3020514,
+      "contentType": "audio/wav",
+      "timing": "clip_duration_only",
+      "narrationKind": "generated",
+      "reviewed": false,
+      "deliveryStatus": "local_pending_upload",
+      "providerModel": "gemini-3.8-flash-tts"
+    }
+  ],
+  "scene": {
+    "schema": "cam-interactive-scene/v1",
+    "modelVersion": "cam-packets/3",
+    "conceptId": "C-AM-05",
+    "kind": "spectrum",
+    "title": "SSB and VSB compared with DSB-SC",
+    "controls": [
+      {
+        "name": "family",
+        "label": "0 DSB-SC · 1 SSB · 2 VSB",
+        "min": 0,
+        "max": 2,
+        "step": 1,
+        "default": 0,
+        "unit": ""
+      }
+    ],
+    "visualBrief": {
+      "kind": "graph",
+      "description": "Three aligned spectra: DSB-SC with both sidebands, SSB with only upper sideband, VSB with upper sideband and labelled lower-sideband vestige.",
+      "alt": "SSB and VSB compared with DSB-SC; For message bandwidth B: DSB-SC uses 2B; ideal SSB uses B; VSB retains a vestige.",
+      "from": {
+        "origin": "curated",
+        "label": "MathWorks: analog passband modulation; reference for the modulation families",
+        "url": "https://www.mathworks.com/help/comm/ug/analog-passband-modulation.html"
+      }
+    },
+    "walkthrough": [
+      {
+        "target": "DSB-SC",
+        "mark": "sweep",
+        "dim": "words",
+        "say": "SSB sends one sideband; VSB sends one sideband plus a vestige of the other."
+      },
+      {
+        "target": "SSB",
+        "mark": "marker",
+        "dim": "concept",
+        "say": "Compare spectrum sketches rather than adding an SSB subsystem to the selected DSB-SC experiment."
+      },
+      {
+        "target": "VSB",
+        "mark": "marker",
+        "dim": "concept",
+        "say": "For message bandwidth B: DSB-SC uses 2B; ideal SSB uses B; VSB retains a vestige."
+      }
+    ],
+    "sourceInteractive": {
+      "kind": "step_through",
+      "prompt": "Follow the explanation, then check the worked result.",
+      "steps": [
+        {
+          "label": "Define",
+          "detail": "SSB sends one sideband; VSB sends one sideband plus a vestige of the other."
+        },
+        {
+          "label": "Apply",
+          "detail": "Ideal SSB bandwidth=4 kHz."
+        },
+        {
+          "label": "Check",
+          "detail": "DSB-SC bandwidth=2*4=8 kHz."
+        }
+      ]
+    },
+    "assumptions": [
+      "Authored draft; scientific review pending",
+      "Trusted analytic teaching model, not live Simulink evidence",
+      "Any normalized examples are illustrative; no new measured device values",
+      "Manual placard states; no sentence alignment"
+    ],
+    "review": {
+      "scientific": "pending",
+      "sourceGrounding": "authored_concept"
+    },
+    "image": {
+      "status": "not_requested",
+      "reason": "Scientific plots/flow/comparisons are rendered as editable SVG; no generated-image claim"
+    }
+  },
+  "review": {
+    "scientific": "pending",
+    "nativeOdia": "pending",
+    "pronunciation": "pending"
+  },
+  "alignment": "not_performed",
+  "publication": {
+    "status": "not_published",
+    "firestore": "not_written"
+  },
+  "experienceRevision": "cam-909a0af55872a19dbc939eeb"
+}

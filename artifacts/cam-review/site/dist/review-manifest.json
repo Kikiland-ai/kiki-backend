@@ -1,0 +1,127 @@
+{
+  "schema": "cam-sites-review/v1",
+  "concepts": [
+    {
+      "conceptId": "C-AM-01",
+      "title": "Amplitude, frequency and phase",
+      "experienceRevision": "cam-70174a2d5e49199490cfb3d9",
+      "sourceHash": "d7fa71a63a456c2126393a856a9302e82f3966a84fb28f033b9c4b51cbbc5b9a",
+      "placards": 4,
+      "audioClips": 4,
+      "audioScope": "placard",
+      "durationSeconds": 102.68,
+      "preview": "C-AM-01/index.html",
+      "firestoreTypedJsonBytes": 32990
+    },
+    {
+      "conceptId": "C-AM-02",
+      "title": "Message, carrier and the purpose of modulation",
+      "experienceRevision": "cam-2d391d1e9531ee0ec6f1531f",
+      "sourceHash": "8cc71ae50349dc3ad9975fd3fcb5decb40561f92de2cc44256707e2cb7c095f4",
+      "placards": 4,
+      "audioClips": 4,
+      "audioScope": "placard",
+      "durationSeconds": 69.48,
+      "preview": "C-AM-02/index.html",
+      "firestoreTypedJsonBytes": 33334
+    },
+    {
+      "conceptId": "C-AM-03",
+      "title": "Conventional AM, envelope and modulation index",
+      "experienceRevision": "cam-cb78ce1a7e2818afee4743fe",
+      "sourceHash": "87c2264ca9f1bc41a7540ec0b3bfad79d9c7e6af289bd759e260064b3009650e",
+      "placards": 4,
+      "audioClips": 4,
+      "audioScope": "placard",
+      "durationSeconds": 94.4,
+      "preview": "C-AM-03/index.html",
+      "firestoreTypedJsonBytes": 31091
+    },
+    {
+      "conceptId": "C-AM-04",
+      "title": "DSB-SC generation and sidebands",
+      "experienceRevision": "cam-e99f388714b78d1f655c7f8f",
+      "sourceHash": "ea886419c15f954457b34e8a4750ca3670e3af589414776a11a0e69243d45850",
+      "placards": 4,
+      "audioClips": 1,
+      "audioScope": "concept",
+      "durationSeconds": 82.92,
+      "preview": "C-AM-04/index.html",
+      "firestoreTypedJsonBytes": 30238
+    },
+    {
+      "conceptId": "C-AM-05",
+      "title": "SSB and VSB compared with DSB-SC",
+      "experienceRevision": "cam-909a0af55872a19dbc939eeb",
+      "sourceHash": "e24d4b6fb50a1a86bdc5e60b9d6e16427241b37ec3bb136756ea8dfdfc04ec8f",
+      "placards": 4,
+      "audioClips": 1,
+      "audioScope": "concept",
+      "durationSeconds": 62.8,
+      "preview": "C-AM-05/index.html",
+      "firestoreTypedJsonBytes": 29513
+    },
+    {
+      "conceptId": "C-AM-06",
+      "title": "Coherent demodulation and recovery gain",
+      "experienceRevision": "cam-107583dd20a8dac5be0287b0",
+      "sourceHash": "43a052f3fa78d2c8aa7de0702263c2539d1eb5c9875dc8f3a7084337e52c329c",
+      "placards": 4,
+      "audioClips": 1,
+      "audioScope": "concept",
+      "durationSeconds": 81.68,
+      "preview": "C-AM-06/index.html",
+      "firestoreTypedJsonBytes": 30958
+    },
+    {
+      "conceptId": "C-AM-07",
+      "title": "Lowpass filtering and waveform comparison",
+      "experienceRevision": "cam-cb5122737d1bc11d5e7658e5",
+      "sourceHash": "91aa62974737da791dfa2b16a354ed263374521da99b0845e693b2bc4de1eb5c",
+      "placards": 4,
+      "audioClips": 1,
+      "audioScope": "concept",
+      "durationSeconds": 71.32,
+      "preview": "C-AM-07/index.html",
+      "firestoreTypedJsonBytes": 28933
+    },
+    {
+      "conceptId": "C-AM-08",
+      "title": "Carrier mismatch and debugging",
+      "experienceRevision": "cam-a674571bb89083b015c68fa5",
+      "sourceHash": "0097dd5e3d0240ec81980e2c29ac376311bb85e8205f73646e270504ba7349ba",
+      "placards": 4,
+      "audioClips": 4,
+      "audioScope": "placard",
+      "durationSeconds": 75.36,
+      "preview": "C-AM-08/index.html",
+      "firestoreTypedJsonBytes": 34501
+    },
+    {
+      "conceptId": "C-AM-09",
+      "title": "Frequency modulation and deviation",
+      "experienceRevision": "cam-11cbf3df051551516d24206a",
+      "sourceHash": "98963d23e95c5a6237a3c956d9c5552905c90be947486a1e0f9420e4781f6f93",
+      "placards": 4,
+      "audioClips": 1,
+      "audioScope": "concept",
+      "durationSeconds": 70.48,
+      "preview": "C-AM-09/index.html",
+      "firestoreTypedJsonBytes": 29068
+    },
+    {
+      "conceptId": "C-AM-10",
+      "title": "Phase modulation and FM\u2013PM distinction",
+      "experienceRevision": "cam-d3074253f11cac828f9ddeec",
+      "sourceHash": "7285ca1392520c45c2ccd102a5e3d4f349291b190e92e0859f20f34ee155d191",
+      "placards": 4,
+      "audioClips": 1,
+      "audioScope": "concept",
+      "durationSeconds": 82.68,
+      "preview": "C-AM-10/index.html",
+      "firestoreTypedJsonBytes": 30135
+    }
+  ],
+  "reviewStatus": "pending",
+  "audioClipCount": 22
+}

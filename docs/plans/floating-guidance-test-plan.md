@@ -138,8 +138,7 @@ Built on `experiment/floating-guidance-bubbles` from `baseline/screen-reader-v1`
 | L1 | 43/43 pass, ~5 s | Real mouse/keyboard input over a controlled underlay. Covers: zero events reaching the page; drag, clamp and persistence; split/dock; Escape/Enter/arrow/Home keys; 900×600 viewport and 150% browser zoom; reduced motion; dark mode |
 | L2 | 30/30 pass, four consecutive runs, ~1 min each | Real reader Worker + dev extension + native tab capture. Covers: cold connect before analysis; reader/window agreement after every transition; advance; pause/resume from the window; zero page events and zero lab events from Kiki; target reload; worker stop; provider 429; stop sharing; tracker close; zero network requests |
 | Regression gate | Pass, 0 paid calls | `scripts/run-screen-reader-evaluation.py` offline mode: 95/95 Node, Python suite, three full replays, benchmarks, pinned context and frozen baseline (run with `PYTHONUTF8=1` on Windows) |
-| L3a | Not run | Needs the user at a real MATLAB Online tab |
-| L3b | Not run | Needs explicit authorization for a real model read |
+| L3a/L3b | User confirmed "it does work" on real MATLAB Online with live Gemini | 17 Oct, the user authorized real reads. `probe-gemini.mjs` passed (HTTP 200, STOP, 1.6 s). Live run: 79 reads; tracking advanced CP-DSB-01 → 06; 78 committed, 1 provider 503. Frame received → committed p50 4.7 s / p90 10.1 s / max 18.7 s. Gemini first byte p50 3.6 s (about 85% of each read); server overhead under ~60 ms per read. The itemised L3a checklist results were not reported individually |
 
 How the build differs from the plan above:
 

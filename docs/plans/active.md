@@ -26,7 +26,21 @@ Failed or environmental on Windows:
 
 Not done: L3a on real MATLAB Online, L3b with a real model, any Site deployment, a published JSON schema, CI wiring.
 
-Exact next action: the user runs L3a from [the slice README](../../prototypes/floating_guidance/README.md) and reports layout, interaction and masking on the real tool. L3b and hosting are separate authorizations.
+Live follow-up, same day:
+
+- The user authorized real Gemini reads. The key probe passed.
+- The local reader ran with `--live`, and the user confirmed the windows work on real MATLAB Online.
+- 79 live reads; CP-DSB-01 → 06; frame received → committed p50 4.7 s, p90 10.1 s; Gemini first byte about 85% of that.
+- The user then decided screen sharing must start from kiki-web Lab mode, not the demo reader. [Kiki-web Lab-mode handoff](../handoffs/kiki-web-lab-mode-screen-share.md) written; no kiki-web change made.
+
+Exact next action: settle the handoff's open decisions with the kiki-web owners:
+
+- the backend boundary (option A: kiki-web API fronts lab execution, recommended);
+- the kiki-web base branch;
+- commit identity;
+- the production origin.
+
+Then port the controller role into `/labs/:sessionId`. Known test-harness flake: L2's raw image fetch can be reset on Windows. It needs a retry and a rerun once port 8870 is free.
 
 ---
 

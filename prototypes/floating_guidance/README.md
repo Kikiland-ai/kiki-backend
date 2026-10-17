@@ -60,4 +60,20 @@ On Windows, set `PYTHONUTF8=1` for the repository's Python suites (the baseline 
    - after reloading MATLAB, Kiki comes back and reconnects.
 6. In the tracker tab, the returned frame should show a grey box where Kiki is. The magenta canary in the dev window must never appear in that image.
 
-The dev build shows a magenta canary and uses an open shadow root for tests. Use `work/floating-guidance/release` for anything other than local testing. L3b, a real model read, needs your go-ahead and a key or private Site.
+The dev build shows a magenta canary and uses an open shadow root for tests. Use `work/floating-guidance/release` for anything other than local testing.
+
+## L3b: real Gemini reads (paid)
+
+Check the key first. The probe makes one free model lookup and one small paid streamed vision call on the reader's model, and never prints the key:
+
+```sh
+node prototypes/floating_guidance/scripts/probe-gemini.mjs --env-file <path to .env file with GEMINI_API_KEY>
+```
+
+Then run the same server with live reads. The file database keeps your lab session across restarts, and in live mode the server allows outbound requests only to `generativelanguage.googleapis.com`:
+
+```sh
+cd prototypes/json_stream_site && node ../floating_guidance/scripts/serve-local-lab.mjs --live --env-file <path> --db work/l3a.sqlite
+```
+
+`http://localhost:8870/health` shows `analysis.configured: true` and the model in use. `/__fixture/state` counts the outbound Gemini requests made by this server process.

@@ -1,0 +1,112 @@
+[
+  {
+    "request_id": "5929fd4c-14b5-45cb-80c8-13c9f2115e1c",
+    "sequence": 2,
+    "status": "rejected",
+    "reason": "Live content differs from the analysed frame; geometry discarded.",
+    "server_received_at": "2026-10-17T08:03:58.425Z",
+    "late_context": false,
+    "paint_verified": false,
+    "source_revision": "b595babfaa6d5ad6531fa8f7c4d27d9904dfb3b5"
+  },
+  {
+    "request_id": null,
+    "sequence": 7,
+    "status": "cancelled",
+    "reason": "ordered_cancel",
+    "server_received_at": "2026-10-17T08:05:04.888Z",
+    "late_context": false,
+    "paint_verified": false,
+    "source_revision": "b595babfaa6d5ad6531fa8f7c4d27d9904dfb3b5"
+  },
+  {
+    "request_id": "e312dacf-19e7-4308-9ac1-307ea5dd6d8e",
+    "sequence": 8,
+    "status": "rejected",
+    "reason": "Live content differs from the analysed frame; geometry discarded.",
+    "server_received_at": "2026-10-17T08:05:15.216Z",
+    "late_context": false,
+    "paint_verified": false,
+    "source_revision": "b595babfaa6d5ad6531fa8f7c4d27d9904dfb3b5"
+  },
+  {
+    "request_id": null,
+    "sequence": 1,
+    "status": "cancelled",
+    "reason": "ordered_cancel",
+    "server_received_at": "2026-10-17T08:03:48.248Z",
+    "late_context": false,
+    "paint_verified": false,
+    "source_revision": "b595babfaa6d5ad6531fa8f7c4d27d9904dfb3b5"
+  },
+  {
+    "request_id": null,
+    "sequence": 9,
+    "status": "cancelled",
+    "reason": "ordered_cancel",
+    "server_received_at": "2026-10-17T08:05:17.380Z",
+    "late_context": false,
+    "paint_verified": false,
+    "source_revision": "b595babfaa6d5ad6531fa8f7c4d27d9904dfb3b5"
+  },
+  {
+    "request_id": "6e31e92a-e14e-4805-9eb8-11cb52adb355",
+    "sequence": 11,
+    "status": "rejected",
+    "reason": "Live content differs from the analysed frame; geometry discarded.",
+    "server_received_at": "2026-10-17T08:05:37.693Z",
+    "late_context": false,
+    "paint_verified": false,
+    "source_revision": "b595babfaa6d5ad6531fa8f7c4d27d9904dfb3b5"
+  },
+  {
+    "request_id": "cf058a32-428b-4aaa-bccf-562079f4cab8",
+    "sequence": 4,
+    "status": "rejected",
+    "reason": "Live content differs from the analysed frame; geometry discarded.",
+    "server_received_at": "2026-10-17T08:04:11.978Z",
+    "late_context": false,
+    "paint_verified": false,
+    "source_revision": "b595babfaa6d5ad6531fa8f7c4d27d9904dfb3b5"
+  },
+  {
+    "request_id": null,
+    "sequence": 5,
+    "status": "cancelled",
+    "reason": "ordered_cancel",
+    "server_received_at": "2026-10-17T08:04:51.946Z",
+    "late_context": false,
+    "paint_verified": false,
+    "source_revision": "b595babfaa6d5ad6531fa8f7c4d27d9904dfb3b5"
+  },
+  {
+    "request_id": "2e0da4b8-8333-40c7-8ab7-9eaa610a17d0",
+    "sequence": 6,
+    "status": "rejected",
+    "reason": "Live content differs from the analysed frame; geometry discarded.",
+    "server_received_at": "2026-10-17T08:05:02.976Z",
+    "late_context": false,
+    "paint_verified": false,
+    "source_revision": "b595babfaa6d5ad6531fa8f7c4d27d9904dfb3b5"
+  },
+  {
+    "request_id": null,
+    "sequence": 10,
+    "status": "cancelled",
+    "reason": "ordered_cancel",
+    "server_received_at": "2026-10-17T08:05:30.185Z",
+    "late_context": false,
+    "paint_verified": false,
+    "source_revision": "b595babfaa6d5ad6531fa8f7c4d27d9904dfb3b5"
+  },
+  {
+    "request_id": null,
+    "sequence": 3,
+    "status": "cancelled",
+    "reason": "ordered_cancel",
+    "server_received_at": "2026-10-17T08:04:00.713Z",
+    "late_context": false,
+    "paint_verified": false,
+    "source_revision": "b595babfaa6d5ad6531fa8f7c4d27d9904dfb3b5"
+  }
+]

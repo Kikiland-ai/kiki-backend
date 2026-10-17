@@ -1,3 +1,13 @@
+# Matched-raster freshness correction — 17 October 2026 (Asia/Kolkata)
+
+The user reports geometry repeatedly discarded on an unchanged view. Latest hosted receipts confirm five geometry rejections, six cancellations and no paint. The consumer compared raw native pixels with a resized/JPEG-decoded reference. Controlled native reproduction and both original PNGs from the user's ZIP confirm false positive changes. Fresh samples now resize to the analysed frame's exact dimensions before fingerprinting; threshold/context/source/cancellation guards remain unchanged. Both PNGs change from 31/16 changed tiles to zero; injected real pixel changes still reject.
+
+Actual model screenshot replays prove real box/text paint and removal on view switch, but strict localization remains failed (IoU 0.497 and 0.464 vs 0.5). Closed screenshot passes freshness and safely produces no current cue, missing the stricter expected text-only behavior. Two earlier model calls failed an optional successor mode; prompt clarification alone was insufficient, so compact mode branches now constrain generation for the reproduced single-target case. Full validation stays strict. Total five actual model calls, all failures retained; 140 Node cases and all source/baseline/BB8 gates pass. [Handoff](../handoffs/screen-writing-raster-fix.md), [evidence](../experiments/analysis-owned-guidance/raster-v1-evidence/README.md).
+
+Last completed: reproduce root cause, verify actual PNG pixels/native capture and regression rejection, add numeric diagnostics and typed candidate modes. Now: commit and publish the existing private receiver. Next: inspect updated-client delivery receipts, then improve analysis-side tight bounds and cue selection. Do not relax the failed placement threshold or claim running-Simulink/installed-extension acceptance. The supplied ZIP is downloaded and its originals are in ignored work; no further image upload is needed. Baselines/producer/independent renderer and latency controls remain preserved.
+
+---
+
 # Writing prompt contract and capture-mask correction — 17 October 2026 (Asia/Kolkata)
 
 The user requested BB8 prompt-engineering prevention of prose text references and missing anchors, while the actual MATLAB screenshot replay remains the overall acceptance goal. Applied the local skill in reference mode. The drawing2 prompt adds exact field semantics, action-local reference keys, anchor coordinates, valid/invalid examples, grounding and abstention. Public validator and v19 generation schemas stay unchanged; control/provider latency settings are preserved.

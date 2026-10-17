@@ -1,0 +1,94 @@
+[
+  {
+    "variant": "drawing2",
+    "event": "model_output_rejected",
+    "request_id": "b6313490-f428-4a05-9549-4963f2169883",
+    "phase": "complete_model",
+    "reason": "schema_contains",
+    "structure": [
+      {
+        "action_id": "CP-DSB-06/gain-settings",
+        "mode": "annotate",
+        "targets": [
+          {
+            "target_id": "recovery_gain.value",
+            "status": "resolved"
+          }
+        ],
+        "marks": [
+          {
+            "kind": "text",
+            "fields": [
+              "anchor",
+              "cue_id",
+              "kind",
+              "text_ref"
+            ],
+            "text_ref_allowed": true
+          }
+        ]
+      },
+      {
+        "action_id": "CP-DSB-06/chain",
+        "mode": "text_only",
+        "targets": [
+          {
+            "target_id": "workspace.canvas",
+            "status": "resolved"
+          }
+        ],
+        "marks": []
+      }
+    ]
+  },
+  {
+    "variant": "drawing3_prompt_only",
+    "event": "model_output_rejected",
+    "request_id": "17ef948d-496c-43a4-9879-9a2daa211807",
+    "phase": "complete_model",
+    "reason": "schema_contains",
+    "structure": [
+      {
+        "action_id": "CP-DSB-06/gain-settings",
+        "mode": "annotate",
+        "targets": [
+          {
+            "target_id": "recovery_gain.value",
+            "status": "resolved"
+          }
+        ],
+        "marks": [
+          {
+            "kind": "box",
+            "fields": [
+              "cue_id",
+              "kind",
+              "target_id"
+            ]
+          },
+          {
+            "kind": "text",
+            "fields": [
+              "anchor",
+              "cue_id",
+              "kind",
+              "text_ref"
+            ],
+            "text_ref_allowed": true
+          }
+        ]
+      },
+      {
+        "action_id": "CP-DSB-06/chain",
+        "mode": "text_only",
+        "targets": [
+          {
+            "target_id": "workspace.canvas",
+            "status": "resolved"
+          }
+        ],
+        "marks": []
+      }
+    ]
+  }
+]

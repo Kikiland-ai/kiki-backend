@@ -1,0 +1,23 @@
+{
+  "status": "EXPECTED_TEXT_ONLY_NOT_MET",
+  "model_contract_valid": true,
+  "observed_outcome": "none",
+  "reason": "no_matching_candidate",
+  "actual_model_calls": 1,
+  "raster_comparison": {
+    "at": "2026-10-17T08:22:49.504Z",
+    "stage": "live_pixels_compared",
+    "comparison_version": "encoded-frame-raster/v1",
+    "source_width": 1848,
+    "source_height": 1014,
+    "comparison_width": 1600,
+    "comparison_height": 878,
+    "changed": false,
+    "comparable_tiles": 574,
+    "changed_tiles": 0,
+    "max_delta": 0.937
+  },
+  "no_anchored_marks": true,
+  "canonical_text_paint_verified": false,
+  "notes": "No-cue is allowed by the public contract. The stricter harness expectation of a text-only painted panel did not pass."
+}

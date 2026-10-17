@@ -1,0 +1,17 @@
+{
+  "node": {
+    "passed": 140,
+    "failed": 0
+  },
+  "context_files_verified": 130,
+  "frozen_python_files_verified": 31,
+  "frozen_hosted_files_verified": 43,
+  "bb8_reference_tests_passed": 12,
+  "browser_pixel_regression_sources": 6,
+  "actual_model_requests": 5,
+  "installed_extension_tested": false,
+  "real_simulink_session_tested": false,
+  "user_matlab_screenshot_replay_tested": true,
+  "localization_accepted": false,
+  "learner_images_committed": false
+}

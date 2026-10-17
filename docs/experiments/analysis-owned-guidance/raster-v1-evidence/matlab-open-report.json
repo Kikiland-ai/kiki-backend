@@ -1,0 +1,165 @@
+{
+  "status": "FAIL_LOCALIZATION",
+  "native_screen_capture": true,
+  "real_browser_sse_stream": true,
+  "controller_origin_is_local_fixture_override": true,
+  "coherent_panel_during_stream": false,
+  "reader_visibility_at_paint": "visible",
+  "actual_reader_worker_broker_consumer_compositor": true,
+  "blue_pixels_at_authored_control": true,
+  "visible_after_1500ms": true,
+  "persisted_exposure_ack": true,
+  "periodic_frames_during_delayed_analysis": 3,
+  "installed_extension_tested": false,
+  "real_simulink_tested": false,
+  "real_model_localization_tested": true,
+  "live_model_requests": 1,
+  "explicit_control_setup_fixture": true,
+  "viewport": {
+    "width": 1848,
+    "height": 1020
+  },
+  "consumer": {
+    "schema": "guidance-consumer-trace/v1",
+    "health": {
+      "capture": "Verified pixels from the connected tab",
+      "analysis": "Waiting for provider",
+      "delivery": "Guidance cleared for the current context",
+      "captured": 3,
+      "painted": 1,
+      "last_failure": null
+    },
+    "events": [
+      {
+        "at": "2026-10-17T08:21:32.292Z",
+        "stage": "clock_calibrated",
+        "uncertainty_ms": 2.550048828125,
+        "server_processing_ms": 1
+      },
+      {
+        "at": "2026-10-17T08:21:32.293Z",
+        "stage": "negotiated",
+        "stream_id": "5f8b7996-4941-4386-b776-de7a0f8e2756"
+      },
+      {
+        "at": "2026-10-17T08:21:32.338Z",
+        "stage": "captured",
+        "ticket_id": "25b5c153-c22a-4dd0-9b1a-7ed488aa4ff6"
+      },
+      {
+        "at": "2026-10-17T08:21:33.000Z",
+        "stage": "frame_signed",
+        "frame_id": "9885a691-66de-49a5-9690-39903f248867:1:2"
+      },
+      {
+        "at": "2026-10-17T08:21:34.592Z",
+        "stage": "ack_recorded",
+        "sequence": 1,
+        "status": "cancelled"
+      },
+      {
+        "at": "2026-10-17T08:21:34.593Z",
+        "stage": "cancelled",
+        "sequence": 1
+      },
+      {
+        "at": "2026-10-17T08:21:35.058Z",
+        "stage": "captured",
+        "ticket_id": "27ed8853-c325-4e2d-a16d-5e33ed03e17c"
+      },
+      {
+        "at": "2026-10-17T08:21:36.106Z",
+        "stage": "frame_signed",
+        "frame_id": "9885a691-66de-49a5-9690-39903f248867:1:3"
+      },
+      {
+        "at": "2026-10-17T08:21:38.041Z",
+        "stage": "presentation_reserved"
+      },
+      {
+        "at": "2026-10-17T08:21:38.087Z",
+        "stage": "live_pixels_compared",
+        "comparison_version": "encoded-frame-raster/v1",
+        "source_width": 1848,
+        "source_height": 1020,
+        "comparison_width": 1600,
+        "comparison_height": 883,
+        "changed": false,
+        "comparable_tiles": 574,
+        "changed_tiles": 0,
+        "max_delta": 0.896
+      },
+      {
+        "at": "2026-10-17T08:21:38.087Z",
+        "stage": "live_pixels_verified",
+        "reservation_ms": 46.1000000089407
+      },
+      {
+        "at": "2026-10-17T08:21:38.101Z",
+        "stage": "paint_requested",
+        "reservation_ms": 59.6000000089407
+      },
+      {
+        "at": "2026-10-17T08:21:38.152Z",
+        "stage": "paint_acknowledged",
+        "request_id": "10ca6ea8-a276-4836-b618-243f936f9311",
+        "sequence": 2,
+        "commit_to_paint_ms": 117.80000001192093
+      },
+      {
+        "at": "2026-10-17T08:21:38.159Z",
+        "stage": "ack_recorded",
+        "sequence": 2,
+        "status": "live_rendered"
+      },
+      {
+        "at": "2026-10-17T08:21:38.343Z",
+        "stage": "captured",
+        "ticket_id": "fc3b435b-2633-45db-91ba-76ca1080068b"
+      },
+      {
+        "at": "2026-10-17T08:21:39.208Z",
+        "stage": "frame_signed",
+        "frame_id": "9885a691-66de-49a5-9690-39903f248867:1:4"
+      },
+      {
+        "at": "2026-10-17T08:21:41.053Z",
+        "stage": "invalidated",
+        "reason": "Shared view changed"
+      },
+      {
+        "at": "2026-10-17T08:21:41.063Z",
+        "stage": "invalidated",
+        "reason": "Lab context or attachment changed"
+      },
+      {
+        "at": "2026-10-17T08:21:41.127Z",
+        "stage": "ack_recorded",
+        "sequence": 3,
+        "status": "cancelled"
+      },
+      {
+        "at": "2026-10-17T08:21:41.128Z",
+        "stage": "cancelled",
+        "sequence": 3
+      },
+      {
+        "at": "2026-10-17T08:21:41.146Z",
+        "stage": "ack_recorded",
+        "sequence": 4,
+        "status": "cancelled"
+      },
+      {
+        "at": "2026-10-17T08:21:41.146Z",
+        "stage": "cancelled",
+        "sequence": 4
+      }
+    ]
+  },
+  "source_kind": "user_matlab_screenshot_replay",
+  "source_image_sha256": "814bfe3ec82914ddf9f0d6de500472d2277647ee41da7effe3b21239bcbd8294",
+  "current_outcome": "annotate",
+  "target_iou": 0.4643801002237608,
+  "localization_pass": false,
+  "view_switch_clears_old_ink": true
+}

@@ -1,0 +1,138 @@
+[
+  {
+    "source": [
+      1200,
+      800
+    ],
+    "encoded": [
+      1200,
+      800
+    ],
+    "raw_vs_jpeg": {
+      "changed": false,
+      "max_delta": 2.140625,
+      "tiles_over_3": 0
+    },
+    "same_size_raw_vs_jpeg": {
+      "changed": false,
+      "max_delta": 2.140625,
+      "tiles_over_3": 0
+    },
+    "raw_vs_itself": false
+  },
+  {
+    "source": [
+      1848,
+      1014
+    ],
+    "encoded": [
+      1600,
+      878
+    ],
+    "raw_vs_jpeg": {
+      "changed": true,
+      "max_delta": 9.375,
+      "tiles_over_3": 141
+    },
+    "same_size_raw_vs_jpeg": {
+      "changed": false,
+      "max_delta": 1.96875,
+      "tiles_over_3": 0
+    },
+    "raw_vs_itself": false
+  },
+  {
+    "source": [
+      1920,
+      1080
+    ],
+    "encoded": [
+      1600,
+      900
+    ],
+    "raw_vs_jpeg": {
+      "changed": true,
+      "max_delta": 8.640625,
+      "tiles_over_3": 142
+    },
+    "same_size_raw_vs_jpeg": {
+      "changed": false,
+      "max_delta": 2.296875,
+      "tiles_over_3": 0
+    },
+    "raw_vs_itself": false
+  },
+  {
+    "source": [
+      2560,
+      1440
+    ],
+    "encoded": [
+      1600,
+      900
+    ],
+    "raw_vs_jpeg": {
+      "changed": true,
+      "max_delta": 8.40625,
+      "tiles_over_3": 78
+    },
+    "same_size_raw_vs_jpeg": {
+      "changed": false,
+      "max_delta": 2.5625,
+      "tiles_over_3": 0
+    },
+    "raw_vs_itself": false
+  },
+  {
+    "source": [
+      1847,
+      1020
+    ],
+    "encoded": [
+      1600,
+      884
+    ],
+    "before": {
+      "changed": true,
+      "comparable_tiles": 576,
+      "changed_tiles": 31,
+      "max_delta": 5.344
+    },
+    "after": {
+      "changed": false,
+      "comparable_tiles": 576,
+      "changed_tiles": 0,
+      "max_delta": 1.188
+    },
+    "changed_source_rejected": true,
+    "source_kind": "supplied_image",
+    "source_name": "Screenshot 2026-10-17 131012.png",
+    "sha256": "814bfe3ec82914ddf9f0d6de500472d2277647ee41da7effe3b21239bcbd8294"
+  },
+  {
+    "source": [
+      1848,
+      1013
+    ],
+    "encoded": [
+      1600,
+      877
+    ],
+    "before": {
+      "changed": true,
+      "comparable_tiles": 576,
+      "changed_tiles": 16,
+      "max_delta": 5.844
+    },
+    "after": {
+      "changed": false,
+      "comparable_tiles": 576,
+      "changed_tiles": 0,
+      "max_delta": 1.245
+    },
+    "changed_source_rejected": true,
+    "source_kind": "supplied_image",
+    "source_name": "Screenshot 2026-10-17 131115.png",
+    "sha256": "78107ff25fc68ad7af153b11b98ff4a62b7f211d48b53bcafeb515127774aa71"
+  }
+]

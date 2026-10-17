@@ -10,7 +10,7 @@ const live=process.env.GUIDANCE_FIXTURE_LIVE_MODEL==='1',offlineFetch=env.LAB_ST
 if(live){if(!process.env.GEMINI_API_KEY)throw Error('Configured runtime Gemini key is required.');env.GEMINI_API_KEY=process.env.GEMINI_API_KEY;env.GUIDANCE_SAMPLE_KIND='live_provider';env.GUIDANCE_CONFIGURATION_ID='controlled-live-mark-generation-v1';env.LAB_STREAM_FETCH=async(...args)=>{if(liveRequests>=1)throw Error('live_probe_budget_exhausted');liveRequests++;return fetch(...args);};}
 const records=[];const prior=console.info;console.info=(value)=>{try{const r=JSON.parse(value);if(r.schema)records.push(r);}catch{}prior(value);};
 const handler=async(req,res)=>{try{
- if(req.url==='/__fixture/evidence'){res.setHeader('Content-Type','application/json');res.end(JSON.stringify({records,live_model_requests:liveRequests,acks:(await env.DB.prepare('SELECT timing_json FROM guidance_acks').all()).results.map(r=>JSON.parse(r.timing_json))}));return;}
+ if(req.url==='/__fixture/evidence'){res.setHeader('Content-Type','application/json');res.end(JSON.stringify({records,live_model_requests:liveRequests,acks:(await env.DB.prepare('SELECT timing_json FROM guidance_acks').all()).results.map(r=>JSON.parse(r.timing_json)),packets:(await env.DB.prepare('SELECT message_json FROM guidance_outbox ORDER BY sequence').all()).results.map(r=>JSON.parse(r.message_json))}));return;}
  const data=[];for await(const chunk of req)data.push(chunk);const bytes=Buffer.concat(data);
  const origin=req.headers.host==='localhost'?'https://localhost':fixtureOrigin;
  const request=new Request(origin+req.url,{method:req.method,headers:{...req.headers,'oai-authenticated-user-id':'guidance-offline-owner'},...(bytes.length?{body:bytes}:{})});

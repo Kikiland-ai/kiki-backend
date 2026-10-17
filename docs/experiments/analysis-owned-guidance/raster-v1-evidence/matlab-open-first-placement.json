@@ -1,0 +1,9 @@
+{
+  "paint_verified": true,
+  "visible_pixels_verified": true,
+  "target_iou": 0.4970617115538633,
+  "placement_threshold": 0.5,
+  "placement_pass": false,
+  "view_switch_tested": false,
+  "real_model_calls": 1
+}

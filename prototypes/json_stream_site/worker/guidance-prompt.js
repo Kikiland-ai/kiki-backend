@@ -1,6 +1,6 @@
 // Integration-owned prompt semantics. The producer's published schema/validator
 // and the three-field reader control remain unchanged.
-export const LIVE_DRAWING_PROMPT_VERSION='dsb-step-observer/v5-drawing2';
+export const LIVE_DRAWING_PROMPT_VERSION='dsb-step-observer/v5-drawing3';
 export function drawingWritingPrompt(actions){
  const a=actions[0],target=a.required_target_ids[0],ref=Object.keys(a.overlay_texts)[0];
  const example={kind:'text',cue_id:'note',anchor:{target_id:target,u:0,v:1},text_ref:ref};
@@ -17,6 +17,7 @@ Field rules:
 - text_ref is an exact KEY in this candidate action's overlay_texts, such as ${JSON.stringify(ref)}. It is never the mapped sentence, a visible value, or newly written prose. The server substitutes overlay_texts[text_ref] after validation; do not emit a text field.
 - An arrow is available only for an authored relationship. Include kind,cue_id,relationship_id,from,to; both endpoints have target_id,u,v and match that relationship's direction. No invented relationship or coordinate-only arrow.
 - cue_id is unique within a candidate. annotate requires ALL required targets resolved and 1-4 marks. If ANY required target is absent, unreadable or ambiguous, use text_only with every target and marks:[], preserving any targets actually resolved. Use none with targets:[],marks:[] only when guidance is inappropriate; do not guess coordinates to obtain an annotation.
+- text_only REQUIRES at least one target with status unresolved or ambiguous. All-resolved targets with mode text_only are INVALID. If a visible canvas is located but its wires are occluded, keep the wire findings unknown; propose annotate with a mark on the visible authored target if appropriate, or omit that optional action/use none. Finding uncertainty alone does not make a resolved target unresolved.
 Hard examples (field structure only; infer all actual geometry from this image):
 Valid text mark: ${JSON.stringify(example)}
 Invalid text mark: ${JSON.stringify({kind:'text',cue_id:'note',text_ref:'Gain is set to 2'})}

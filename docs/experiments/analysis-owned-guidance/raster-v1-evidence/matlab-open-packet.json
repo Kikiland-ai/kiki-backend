@@ -1,0 +1,172 @@
+{
+  "schema": "analysis-owned-guidance/v0.1",
+  "message_type": "committed_guidance",
+  "model_contract": "lab-observer-drawing/v1",
+  "stream_contract": "lab-analysis-stream/v3",
+  "projection_contract": "committed-decision/v2",
+  "analysis_request_id": "10ca6ea8-a276-4836-b618-243f936f9311",
+  "guidance_stream_id": "5f8b7996-4941-4386-b776-de7a0f8e2756",
+  "cue_sequence": 2,
+  "context": {
+    "lab_session_id": "1bcd8c41-6abf-496f-932c-9caa3a0eea90",
+    "experiment_id": "PR-AM-DSB",
+    "checkpoint_id": "CP-DSB-06",
+    "visit_id": "86b6fe46-bc7e-4bbf-94b7-7f3f665d18dd",
+    "lab_revision": 6,
+    "workspace_id": "e1461b16-64d6-431c-93a7-a2ecbcbc73e7",
+    "capture_epoch": 1,
+    "view_revision": 1,
+    "parameter_revision": 0,
+    "condition": "baseline"
+  },
+  "admitted_context": {
+    "lab_session_id": "1bcd8c41-6abf-496f-932c-9caa3a0eea90",
+    "experiment_id": "PR-AM-DSB",
+    "checkpoint_id": "CP-DSB-06",
+    "visit_id": "86b6fe46-bc7e-4bbf-94b7-7f3f665d18dd",
+    "lab_revision": 5,
+    "workspace_id": "e1461b16-64d6-431c-93a7-a2ecbcbc73e7",
+    "capture_epoch": 1,
+    "view_revision": 1,
+    "parameter_revision": 0,
+    "condition": "baseline"
+  },
+  "action_id": "CP-DSB-06/gain-settings",
+  "frame": {
+    "observation_id": "7a438967-0e3f-4057-8c0a-b7ff87b9d599",
+    "frame_id": "9885a691-66de-49a5-9690-39903f248867:1:2",
+    "sha256": "3ce7857ee598ba3917b9d1509044549a76dd4a58567368370d413b9949f5d327",
+    "byte_count": 102196,
+    "encoded_width": 1600,
+    "encoded_height": 883,
+    "capture_elapsed_ms": 2989,
+    "capture_time_authority": "capture_client_monotonic",
+    "received_at": "2026-10-17T08:21:32.945Z",
+    "admitted_at": "2026-10-17T08:21:34.499Z",
+    "receipt_time_authority": "observer_server_utc",
+    "view_revision": 1
+  },
+  "frame_handle": {
+    "handle_id": "c8b5d309-0570-429d-968b-7e6a2746f6c9",
+    "expires_at": "2026-10-17T08:21:52.945Z",
+    "media_type": "image/jpeg",
+    "access_policy": "same_owner_ephemeral"
+  },
+  "source_binding": {
+    "binding_id": "751e2cc3-436b-4869-9732-414a3d38ac26",
+    "binding_revision": 3,
+    "surface": "live_workspace",
+    "transform_revision": 3
+  },
+  "replacement": "replace_complete_guidance_layer",
+  "validity": {
+    "created_at": "2026-10-17T08:21:38.027Z",
+    "expires_at": "2026-10-17T08:21:46.027Z",
+    "max_frame_age_ms": 20000
+  },
+  "outcome": "annotate",
+  "reason": "none",
+  "teaching_intent": "highlight_parameter",
+  "target_criteria": [
+    {
+      "target_id": "recovery_gain.value",
+      "criterion_ids": [
+        "CP-DSB-06:gain_parameters"
+      ]
+    }
+  ],
+  "text_bindings": [
+    {
+      "cue_id": "t1",
+      "text_ref": "setting_0"
+    }
+  ],
+  "packet": {
+    "schema": "screen-writing/v0.2",
+    "message_type": "resolved_packet",
+    "packet_id": "ea3a8b9b-bf4c-4747-b995-b8afc588ac02",
+    "request_id": "10ca6ea8-a276-4836-b618-243f936f9311",
+    "guidance_stream_id": "5f8b7996-4941-4386-b776-de7a0f8e2756",
+    "cue_sequence": 2,
+    "context": {
+      "lab_session_id": "1bcd8c41-6abf-496f-932c-9caa3a0eea90",
+      "experiment_id": "PR-AM-DSB",
+      "checkpoint_id": "CP-DSB-06",
+      "visit_id": "86b6fe46-bc7e-4bbf-94b7-7f3f665d18dd",
+      "lab_revision": 6,
+      "workspace_id": "e1461b16-64d6-431c-93a7-a2ecbcbc73e7",
+      "capture_epoch": 1,
+      "view_revision": 1,
+      "parameter_revision": 0,
+      "condition": "baseline"
+    },
+    "frame": {
+      "observation_id": "7a438967-0e3f-4057-8c0a-b7ff87b9d599",
+      "frame_id": "9885a691-66de-49a5-9690-39903f248867:1:2",
+      "sha256": "3ce7857ee598ba3917b9d1509044549a76dd4a58567368370d413b9949f5d327",
+      "byte_count": 102196,
+      "encoded_width": 1600,
+      "encoded_height": 883,
+      "capture_elapsed_ms": 2989,
+      "capture_time_authority": "capture_client_monotonic",
+      "received_at": "2026-10-17T08:21:32.945Z",
+      "admitted_at": "2026-10-17T08:21:34.499Z",
+      "receipt_time_authority": "observer_server_utc",
+      "view_revision": 1
+    },
+    "resolved_targets": [
+      {
+        "target_id": "recovery_gain.value",
+        "status": "resolved",
+        "region": {
+          "x": 0.334,
+          "y": 0.467,
+          "width": 0.332,
+          "height": 0.043
+        },
+        "method": "model_vision",
+        "reason": "Located in the admitted analysis frame."
+      }
+    ],
+    "relationships": [],
+    "operations": [
+      {
+        "kind": "box",
+        "cue_id": "b1",
+        "target_id": "recovery_gain.value",
+        "meaning": "lab",
+        "accessible_label": "Recovery gain field"
+      },
+      {
+        "kind": "text",
+        "cue_id": "t1",
+        "anchor": {
+          "target_id": "recovery_gain.value",
+          "u": 0.5,
+          "v": 0.5
+        },
+        "meaning": "lab",
+        "accessible_label": "Recovery gain field",
+        "text": "Gain = 2"
+      }
+    ],
+    "replacement": "replace_complete_guidance_layer",
+    "delivery": {
+      "surface": "live_workspace",
+      "coordinate_space": "normalized_encoded_frame",
+      "adapter_binding_id": "751e2cc3-436b-4869-9732-414a3d38ac26",
+      "transform_revision": 3,
+      "pointer_events": "none",
+      "clip_to_frame": true
+    },
+    "validity": {
+      "created_at": "2026-10-17T08:21:38.027Z",
+      "expires_at": "2026-10-17T08:21:46.027Z",
+      "max_frame_age_ms": 20000
+    },
+    "fallback": {
+      "instruction": "Set Recovery gain to 2.",
+      "reason": "none"
+    }
+  }
+}

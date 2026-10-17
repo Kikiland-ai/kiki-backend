@@ -6,6 +6,12 @@ import '../assets/guidance-protocol.js';
 import '../assets/writing-protocol.js';
 const P=globalThis.KikiGuidanceProtocol;
 const load=()=>JSON.parse(readFileSync(new URL('./fixtures/guidance-renderer.json',import.meta.url))).state;
+test('visual diagnostics preserve the strict threshold and ignore only marker-excluded tiles',()=>{
+ const f=globalThis.KikiWritingProtocol;
+ assert.deepEqual(f.difference([10,20,null,40],[13,18,255,null]),{changed:false,comparable_tiles:2,changed_tiles:0,max_delta:3});
+ assert.deepEqual(f.difference([10,20,null],[13.01,25,0]),{changed:true,comparable_tiles:2,changed_tiles:2,max_delta:5});
+ assert.equal(f.changed([10],[13.01]),true);assert.equal(f.difference(null,[10]).changed,true);
+});
 test('drawing clock excludes slow server processing and conservatively bounds asymmetric transit',()=>{
  const s=globalThis.KikiWritingProtocol.clockSample(1000,1940,{clock_authority:'observer_server_utc',server_received_ms:501120,server_time_ms:501820});
  assert.equal(s.server_processing_ms,700);assert.equal(s.uncertainty,121);assert.ok(s.upper>=500000);assert.ok(s.upper-2*s.uncertainty<=500000);

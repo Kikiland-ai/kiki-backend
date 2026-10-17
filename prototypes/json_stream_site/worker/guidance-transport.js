@@ -21,6 +21,17 @@ class LiveDrawingRunJS extends DrawingRunJS {
    if(node.properties?.relationship_id)node.properties.relationship_id.enum=relationships;
    Object.values(node).forEach(constrain);
   }};constrain(body.generationConfig.responseJsonSchema.properties.screen_guidance);
+  // The provider subset drops the public schema's conditional mode checks.
+  // Express mode/mark cardinality as a compact typed union instead. For a
+  // one-target catalogue, text_only can only contain an unresolved target.
+  // Multi-target partial resolution still goes through the full contains gate.
+  const candidates=body.generationConfig.responseJsonSchema.properties.screen_guidance,base=candidates.items,props=base.properties;
+  const resolved=structuredClone(props.targets);resolved.minItems=1;resolved.items.properties.status.enum=['resolved'];resolved.items.properties.region=resolved.items.properties.region.anyOf.find(v=>v.type!=='null');
+  const textTargets=structuredClone(props.targets);textTargets.minItems=1;
+  if(this.admission.eligible_actions.every(a=>a.required_target_ids.length===1)){resolved.maxItems=textTargets.maxItems=1;textTargets.items.properties.status.enum=['unresolved','ambiguous'];textTargets.items.properties.region={type:'null'};}
+  const empty=()=>({type:'array',minItems:0,maxItems:0,items:{type:'string'}});
+  const variant=(mode,targets,marks)=>({type:'object',additionalProperties:false,required:base.required,properties:{action_id:props.action_id,mode:{type:'string',enum:[mode]},targets,marks}});
+  candidates.items={anyOf:[variant('annotate',resolved,{...props.marks,minItems:1}),variant('text_only',textTargets,empty()),variant('none',empty(),empty())]};
   body.systemInstruction.parts[0].text+=drawingWritingPrompt(this.admission.eligible_actions);
   this.promptVersion=LIVE_DRAWING_PROMPT_VERSION;
  }

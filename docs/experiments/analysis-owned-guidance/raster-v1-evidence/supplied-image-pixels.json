@@ -1,0 +1,50 @@
+[
+  {
+    "source": [
+      1847,
+      1020
+    ],
+    "encoded": [
+      1600,
+      884
+    ],
+    "before": {
+      "changed": true,
+      "comparable_tiles": 576,
+      "changed_tiles": 31,
+      "max_delta": 5.344
+    },
+    "after": {
+      "changed": false,
+      "comparable_tiles": 576,
+      "changed_tiles": 0,
+      "max_delta": 1.188
+    },
+    "name": "Screenshot 2026-10-17 131012.png",
+    "source_sha256": "814bfe3ec82914ddf9f0d6de500472d2277647ee41da7effe3b21239bcbd8294"
+  },
+  {
+    "source": [
+      1848,
+      1013
+    ],
+    "encoded": [
+      1600,
+      877
+    ],
+    "before": {
+      "changed": true,
+      "comparable_tiles": 576,
+      "changed_tiles": 16,
+      "max_delta": 5.844
+    },
+    "after": {
+      "changed": false,
+      "comparable_tiles": 576,
+      "changed_tiles": 0,
+      "max_delta": 1.245
+    },
+    "name": "Screenshot 2026-10-17 131115.png",
+    "source_sha256": "78107ff25fc68ad7af153b11b98ff4a62b7f211d48b53bcafeb515127774aa71"
+  }
+]

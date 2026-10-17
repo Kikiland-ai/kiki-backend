@@ -21,3 +21,8 @@ test('two-target abstention example preserves all required targets and contains 
  const action={...actions[0],required_target_ids:['lowpass.numerator','lowpass.denominator']},prompt=drawingWritingPrompt([action]),prefix='Valid candidate when all required controls are hidden: ',c=JSON.parse(prompt.split('\n').find(l=>l.startsWith(prefix)).slice(prefix.length));
  assert.deepEqual(c.targets,action.required_target_ids.map(target_id=>({target_id,status:'unresolved',region:null})));assert.deepEqual(c.marks,[]);assert.match(prompt,new RegExp(LIVE_DRAWING_PROMPT_VERSION.replaceAll('.','\\.')));
 });
+test('uncertain findings do not authorize text-only with all targets resolved',()=>{
+ const model=structuredClone(data.cases.find(c=>c.valid).model),candidate=model.screen_guidance.find(c=>c.action_id===actions[0].action_id);
+ candidate.mode='text_only';candidate.marks=[];assert.throws(()=>check(model),/schema_contains/);
+ candidate.targets[0].status='unresolved';candidate.targets[0].region=null;assert.doesNotThrow(()=>check(model));
+});

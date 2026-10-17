@@ -1,0 +1,109 @@
+{
+  "status": "PASS",
+  "expected_fault": "unchanged_high_resolution_source_rejected_by_mixed_raster_comparison",
+  "source_is_static": true,
+  "viewport": {
+    "width": 1848,
+    "height": 1014
+  },
+  "consumer": {
+    "schema": "guidance-consumer-trace/v1",
+    "health": {
+      "capture": "Source capture ticket expired or changed.",
+      "analysis": "available",
+      "delivery": "Guidance cleared for the current context",
+      "captured": 3,
+      "painted": 0,
+      "last_failure": {
+        "stage": "delivery",
+        "reason": "Live content differs from the analysed frame; geometry discarded."
+      }
+    },
+    "events": [
+      {
+        "at": "2026-10-17T08:09:40.640Z",
+        "stage": "clock_calibrated",
+        "uncertainty_ms": 4.9000244140625,
+        "server_processing_ms": 1
+      },
+      {
+        "at": "2026-10-17T08:09:40.641Z",
+        "stage": "negotiated",
+        "stream_id": "48b28d84-5e82-4024-8d49-d4fc04b83d76"
+      },
+      {
+        "at": "2026-10-17T08:09:40.676Z",
+        "stage": "captured",
+        "ticket_id": "45689b41-5c71-432b-a452-e01729a9cbf1"
+      },
+      {
+        "at": "2026-10-17T08:09:41.713Z",
+        "stage": "frame_signed",
+        "frame_id": "6542e6a7-53c3-4d6f-92e8-5f9897d60854:1:2"
+      },
+      {
+        "at": "2026-10-17T08:09:43.459Z",
+        "stage": "ack_recorded",
+        "sequence": 1,
+        "status": "cancelled"
+      },
+      {
+        "at": "2026-10-17T08:09:43.460Z",
+        "stage": "cancelled",
+        "sequence": 1
+      },
+      {
+        "at": "2026-10-17T08:09:43.754Z",
+        "stage": "captured",
+        "ticket_id": "46fa50c4-98d8-4495-9555-4db7af995c26"
+      },
+      {
+        "at": "2026-10-17T08:09:44.857Z",
+        "stage": "frame_signed",
+        "frame_id": "6542e6a7-53c3-4d6f-92e8-5f9897d60854:1:3"
+      },
+      {
+        "at": "2026-10-17T08:09:46.904Z",
+        "stage": "captured",
+        "ticket_id": "8e983803-efa9-4d85-b397-e3a4d138496a"
+      },
+      {
+        "at": "2026-10-17T08:09:47.089Z",
+        "stage": "presentation_reserved"
+      },
+      {
+        "at": "2026-10-17T08:09:47.135Z",
+        "stage": "delivery_rejected",
+        "request_id": "3c2b1422-21e8-4651-84e4-412a23fe329a",
+        "reason": "Live content differs from the analysed frame; geometry discarded."
+      },
+      {
+        "at": "2026-10-17T08:09:47.136Z",
+        "stage": "invalidated",
+        "reason": "Live content differs from the analysed frame; geometry discarded."
+      },
+      {
+        "at": "2026-10-17T08:09:47.144Z",
+        "stage": "ack_recorded",
+        "sequence": 2,
+        "status": "rejected"
+      },
+      {
+        "at": "2026-10-17T08:09:47.955Z",
+        "stage": "admission_rejected",
+        "reason": "Source capture ticket expired or changed."
+      },
+      {
+        "at": "2026-10-17T08:09:48.006Z",
+        "stage": "ack_recorded",
+        "sequence": 3,
+        "status": "cancelled"
+      },
+      {
+        "at": "2026-10-17T08:09:48.006Z",
+        "stage": "cancelled",
+        "sequence": 3
+      }
+    ]
+  }
+}

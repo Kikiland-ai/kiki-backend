@@ -72,9 +72,15 @@
    release=await reserve();const reserved=performance.now();log('presentation_reserved');
    const check=()=>{if(token!==epoch||track?.readyState!=='live'||upperNow()>=Date.parse(e.validity.expires_at)||performance.now()-reserved>=500)throw Error('Drawing expired, invalidated or exceeded its 500 ms presentation reservation.');};check();
    message('Checking live pixels before drawing');const b=await adapter('writer_prepare'),preparedAt=performance.now();let fresh;
-   try{fresh=await sampler.snapshot(video,b.descriptor.freshness_probe);const canvas=document.createElement('canvas');canvas.width=fresh.width;canvas.height=fresh.height;canvas.getContext('2d').drawImage(fresh.image,0,0);
+   try{fresh=await sampler.snapshot(video,b.descriptor.freshness_probe);const canvas=document.createElement('canvas');
+    // Use the same raster path as capture.js: source -> encoded frame -> grid.
+    // Native source -> grid differs from JPEG-decoded encoded frame -> grid
+    // on fine edges even when the underlying source pixels are unchanged.
+    canvas.width=selected.frame.width;canvas.height=selected.frame.height;canvas.getContext('2d').drawImage(fresh.image,0,0,canvas.width,canvas.height);
     const ignored=[b.descriptor.freshness_probe,selected.binding.descriptor.freshness_probe].map(p=>KikiFrameProbe.exclusion(p,canvas.width,canvas.height));
-    if(F.changed(F.fingerprint(canvas,ignored),selected.reference))throw Error('Live content differs from the analysed frame; geometry discarded.');
+    const comparison=F.difference(F.fingerprint(canvas,ignored),selected.reference),dimensions={source_width:fresh.width,source_height:fresh.height,comparison_width:canvas.width,comparison_height:canvas.height};
+    log('live_pixels_compared',{comparison_version:'encoded-frame-raster/v1',...dimensions,...comparison});
+    if(comparison.changed)throw Error(`Live content differs from the analysed frame; geometry discarded (${comparison.changed_tiles}/${comparison.comparable_tiles} tiles; max delta ${comparison.max_delta}; ${canvas.width}x${canvas.height}).`);
    log('live_pixels_verified',{reservation_ms:performance.now()-reserved});
    }finally{fresh?.close();await adapter('writer_finish',{ticket_id:b.ticket_id}).catch(()=>{});}check();
    const remaining=Math.min(7900,Date.parse(e.validity.expires_at)-upperNow()-50);if(remaining<=0)throw Error('Drawing expired before presentation.');check();

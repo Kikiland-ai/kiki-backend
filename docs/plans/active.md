@@ -1,3 +1,23 @@
+# Floating Kiki windows promotion to main — 18 October 2026
+
+Step 2 of the reconciliation order. Branch `promote/floating-guidance` starts at `experiment/floating-guidance-bubbles` (`73c6e96`) and merges `main` at `fe7758e`, which now holds the screen-reader baseline. The only conflict was this file: both sides had added a new top entry, and both are kept below. `design/floating-guidance-bubbles` is not merged; its handoff and test plan are older copies of the ones on this branch.
+
+What ran on the merged tree (Windows 11, no model calls): offline gate all ten checks PASS; floating L0 14/14, L1 43/43, L2 30/30 with zero live network requests.
+
+Exact next action: open the PR from `promote/floating-guidance` to `main`, wait for CI, and merge with a merge commit once the user confirms. Then step 3: clean up `feature/concept-canvas-handoff` (move its WAVs out of git, fix the Windows path and connection bugs) and open its PR.
+
+---
+
+# Screen-reader baseline promotion to main — 18 October 2026
+
+The user asked to merge the branches into `main` one at a time. This is step 1 of the reconciliation order: (1) `baseline/screen-reader-v1` → `main`; (2) `experiment/floating-guidance-bubbles` → `main`; (3) `feature/concept-canvas-handoff` → `main` after its binaries and Windows bugs are cleaned up. `integration/analysis-owned-guidance` and `design/floating-guidance-bubbles` stay off `main` as archived references, because the user stopped annotation work on 17 October. The experiment branches already contained in the baseline (`json-stream`, `targeted-vision`, `verifier-context`, `provider-db-io`, `stream-context-batch`) and the superseded `handoff/screen-writing-v01`/`v02` are to be deleted after tagging.
+
+PR #1 was merged into the baseline on 15 October (`7c986df`) without the manual acceptance checklist; that checklist remains outstanding. Branch `promote/screen-reader-v1` adds CI on `main` pushes and a Windows-safe evaluation runner. What ran: full offline gate on Windows without `PYTHONUTF8` — all ten checks PASS, 0 paid calls; BB8 validate PASS; BB8 adapter suite 11/12 with the known `WinError 1314` symlink error. Details are in the [promotion review record](../reviews/screen-reader-baseline-promotion.md#promotion-to-main).
+
+Outcome: merged to `main` as PR #2 (merge commit `fe7758e`) on 18 October after the user confirmed. CI attempt 1 failed one timing-sensitive Node test (`test-decision-ui.mjs` `until()` helper); attempt 2 passed on the same commit. The six-item manual acceptance run, Python/FastAPI hosting and edge-proxy deployment remain open.
+
+---
+
 # Floating Kiki windows: first slice built and locally verified — 17 October 2026
 
 The user stopped the annotation experiment, chose small Kiki windows on the shared MATLAB tab, and asked to iterate quickly, then commit and push. The [handoff](../handoffs/floating-guidance-windows.md), user choices ([ADR 0008](../decisions/0008-floating-guidance-windows-first-slice.md)) and [test plan](floating-guidance-test-plan.md) were copied from `design/floating-guidance-bubbles`. This branch starts from `baseline/screen-reader-v1` at `7c986df`; PR #1 had already merged, contrary to the entry below.

@@ -2,7 +2,9 @@
 
 Draft PR: [Kikiland-ai/kiki-backend#1](https://github.com/Kikiland-ai/kiki-backend/pull/1).
 
-15 October 2026, Asia/Calcutta. Status: **draft PR; manual acceptance pending; do not merge yet**. The user requested the accumulated improvements be proposed to baseline, with a traceable record, and will do one manual acceptance run before deciding to merge.
+15 October 2026, Asia/Calcutta. Status at the time: **draft PR; manual acceptance pending; do not merge yet**. The user requested the accumulated improvements be proposed to baseline, with a traceable record, and will do one manual acceptance run before deciding to merge.
+
+**Outcome (recorded 18 October 2026):** PR #1 was merged into `baseline/screen-reader-v1` on 15 October as merge commit `7c986dfb86daa2d8d939061db42ab576c7d4a183`, on the user's authorization. The six-item manual acceptance checklist below was not filled in before the merge and remains outstanding; it is not recorded as passed. On 18 October the user asked to bring the baseline to `main` through branch `promote/screen-reader-v1`. See "Promotion to main" at the end of this record.
 
 ## Exact review and test targets
 
@@ -123,3 +125,14 @@ The merge gate is the user's manual result plus acceptable PR checks/review. Mer
 ## PR check trace
 
 PR-triggered acceptance run [38718645204](https://github.com/Kikiland-ai/kiki-backend/actions/runs/38718645204) passed on documentation head `41b87fc`. The next run [38718685987](https://github.com/Kikiland-ai/kiki-backend/actions/runs/38718685987), at documentation head `986b719`, failed the Node suite while Python, all replays, both benchmarks and integrity checks passed. The failed report was retained as artifact `11963996721`; it is not discarded or represented as a pass. Artifact retrieval to this executor is unavailable, so the runner now also prints bounded failed offline logs to the CI console for investigation through the supported job-log API. Runtime and deployed Site source are unchanged by this diagnostic addition. Manual acceptance and merge remain pending.
+
+## Promotion to main
+
+18 October 2026, Asia/Calcutta. Branch `promote/screen-reader-v1` starts at baseline merge `7c986df` and targets `main` at `2f8eb62`. `main` is an ancestor of the baseline, so the change set is exactly the baseline plus these fix-ups:
+
+- CI: `.github/workflows/screen-reader-evaluation.yml` now runs on pushes to `main` instead of the two experiment branches it was set up for.
+- `scripts/run-screen-reader-evaluation.py` runs its child processes with `PYTHONUTF8=1` and reads and writes its own files as UTF-8, so the offline gate passes on Windows without extra shell setup. `scripts/check-screen-reader-baseline.py` reads its JSON as UTF-8. The hash-pinned runtime files (`prototypes/lab_tracking/definition.py`, `prototypes/screen_writing/reference.py`) are unchanged, so the frozen baseline manifest still holds; because `definition.py` reads without an explicit encoding, running the Python tests or check scripts directly on Windows still needs `PYTHONUTF8=1`. Fixing that means re-freezing the baseline manifest, which is left for a separate decision.
+
+Offline gate on Windows 11, Python 3.12, without `PYTHONUTF8` in the shell: site build, Python unittest, Node tests, three lab replays, two benchmarks, pinned context and frozen baseline all PASS; 0 paid model calls. BB8 `validate` PASS; the BB8 adapter suite has one known Windows error (symlink creation needs a privilege, `WinError 1314`).
+
+Still not done, and not claimed by this promotion: the six-item manual acceptance run, hosting of the Python/FastAPI service, deployment of the edge proxy, and a measured production latency gain. Merging to `main` does not change any deployed Site.

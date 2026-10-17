@@ -49,4 +49,10 @@ Automatic follow-up analyses after each live fixture's single-call budget are st
 
 The freshness/delivery bug is corrected. **Tight target localization and guaranteed useful cue selection remain unaccepted.** They require further analysis-side improvement rather than weakening freshness or fabricating instructions in the extension. Rendering/acknowledging guidance never completes a checkpoint.
 
-Next: publish the existing private receiver, then inspect ordinary updated-client delivery receipts. Reader refresh/re-share is needed; adapter 0.4.0 remains compatible. Do not request the PNGs again: they are now available through the ZIP and local ignored paths. Preserve baseline, producer, independent renderer and latency branches/Sites.
+Next: inspect ordinary updated-client delivery receipts on the successfully published receiver. Reader refresh/re-share is needed; adapter 0.4.0 remains compatible. Do not request the PNGs again: they are now available through the ZIP and local ignored paths. Preserve baseline, producer, independent renderer and latency branches/Sites.
+
+## Published receipt
+
+Existing private receiver version 21 succeeded at 13:59:33 Asia/Kolkata on 17 October 2026. [Site](https://kiki-screen-receiver.woodsycarp256.chatgpt.site), Site source `c948203b392db6ca4c8d94cc0b76adeac368cb2e`, backend `c62edb33d49d0ea4c563acf0695639976a750398`, environment revision 12. Source/Worker hashes match and both source checkouts pass 140 Node tests. Existing owner-private access, three secrets and learner records remain preserved. [Deployment receipt](../experiments/analysis-owned-guidance/raster-v1-evidence/deployment.json).
+
+Native publication is verified. Optional hosted HTTP asset QA was not retried under the existing managed proxy denial. Postdeploy real installed-extension Simulink paint and strict localization acceptance remain unverified/failed as described above; publication is a freshness bug correction, not a claim those quality gates pass.

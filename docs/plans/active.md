@@ -42,6 +42,19 @@ Exact next action: settle the handoff's open decisions with the kiki-web owners:
 
 Then port the controller role into `/labs/:sessionId`.
 
+18 October decisions ([ADR 0010](../decisions/0010-kiki-web-api-fronts-lab-execution.md)):
+
+- kiki-web's API verifies Firebase and passes lab execution through to kiki-backend, using the existing `SiteProxyGuard` contract.
+- kiki-web work starts from `main` (`93cce9b`, PR #5).
+- kiki-web commits are made as `arpanvihan5-sketch`.
+- kiki-web's production origin is high-priority blocker B1; kiki-backend Python hosting is B2.
+
+The [handoff](../handoffs/kiki-web-lab-mode-screen-share.md) now holds the Now/Next/Later plan. Next session: start at its "Now" list:
+
+1. Fast-forward kiki-web `main` and branch `feature/lab-screen-share`.
+2. Raise B1–B3 with their owners.
+3. Run the Python parity spike.
+
 18 October follow-up: the L2 harness's raw image fetch now retries Windows socket resets and records each one in its report. L2 passed 30/30 in three consecutive runs (one recorded reset, retried), with zero network requests. L0 and L1 were rerun green. The live local server from the previous session is no longer running.
 
 ---

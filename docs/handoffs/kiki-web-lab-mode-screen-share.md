@@ -1,168 +1,177 @@
 # Screen sharing from kiki-web Lab mode — handoff
 
-17 October 2026, Asia/Kolkata. Handoff for the kiki-web team. **No kiki-web change has been made.** Decisions still open are marked; nothing here is approved until they are settled.
+Written 17 October 2026; decisions added 18 October 2026, Asia/Kolkata. This handoff is for the next session that builds screen sharing into kiki-web Lab mode. **No kiki-web change has been made yet.** The user's decisions are in §2 and [ADR 0010](../decisions/0010-kiki-web-api-fronts-lab-execution.md). The plan is in §3.
 
-## 1. Decision and why now
+## 1. Outcome and evidence
 
-User instruction, after the live floating-window test:
+User instruction:
 
-> "the handoff for the screenshare here happens from a demo site, this should be instead done from the lab mode itself, this is a handoff for the kiki-web that should be taken care of."
+> "the handoff for the screenshare here happens from a demo site, this should be instead done from the lab mode itself"
 
-Today the student shares the MATLAB tab from kiki-backend's **demo reader page**: `http://localhost:8870` locally, or the private reader Site. Kiki's floating windows then appear on the MATLAB tab through the extension.
+The student starts, sees and controls sharing from **kiki-web Lab mode** (`/labs/:sessionId`). The Kiki windows appear on the shared MATLAB tab through the extension. kiki-backend's demo reader becomes a backend QA tool only.
 
-The goal is for the student to start, see and control sharing from **kiki-web Lab mode** (`/labs/:sessionId`), with the same windows on the MATLAB tab. The demo reader then becomes a backend QA tool, not part of the student journey.
+**What already works**, on `experiment/floating-guidance-bubbles`. The user confirmed on 17 October that it works on their real MATLAB Online tab with live Gemini reads (`gemini-3.5-flash-lite`). From the server log:
 
-**What already works**, on `experiment/floating-guidance-bubbles` (`e629108`) with real Gemini reads (`gemini-3.5-flash-lite`). The user confirmed it works on their real MATLAB Online tab. The local server log gave:
+- 79 reads; tracking advanced CP-DSB-01 → CP-DSB-06; 78 committed, 1 provider 503.
+- Frame received → committed: p50 4.7 s, p90 10.1 s, max 18.7 s.
+- Gemini time to first byte: p50 3.6 s, about 85% of each read.
+- Server work around each read: about 60 ms or less at p50.
 
-- 79 screen reads; tracking advanced CP-DSB-01 → CP-DSB-06; 78 committed, 1 provider 503.
-- Frame received → decision committed: p50 4.7 s, p90 10.1 s, max 18.7 s.
-- Gemini time to first byte: p50 3.6 s, p90 7.4 s; that is about 85% of each read.
-- Server work around the call (lab-state reads, provider bookkeeping, commit): under about 60 ms per read at p50.
-- Median per read: about 4.3k input tokens, 285 output tokens, 72 KB image.
+## 2. Decisions (user, 18 October)
 
-Commit → window display time was not logged server-side. It is visible in the reader page's `KikiFloating.diagnostics()`.
+| Question | Decision |
+| --- | --- |
+| Backend boundary | **kiki-web's own API (`apps/api`) checks Firebase sign-in and passes lab-execution requests through to kiki-backend.** The browser talks only to kiki-web's API |
+| kiki-web base | **`main`** (PR cleanup done; `origin/main` = `93cce9b`, PR #5) |
+| Commit identity in kiki-web | **`arpanvihan5-sketch`** <317357476+arpanvihan5-sketch@users.noreply.github.com>. This overrides kiki-web `AGENTS.md:7` (`akshitanitr`) for this work, by explicit user decision |
+| kiki-web production web address | **Unknown. Treated as a blocker (B1, §3)** |
 
-## 2. The role Lab mode takes over
+## 3. Plan
 
-The extension talks to **whichever page captures the screen**. That page is the "controller", and in this design it must be Lab mode. Its responsibilities, as the demo reader implements them today:
+### Blockers and high priority
 
-1. **Lab session lifecycle.**
-   - Create or resume the session (`screen_guided` progression) and attach the capture session.
-   - Send a heartbeat about every 10 s; it needs a capture receipt under 6 s old, and the server marks capture inactive after 20 s without one.
-   - Detach on stop, sign-out and `pagehide`.
-2. **Capture loop.**
-   - Call `getDisplayMedia` only on a user gesture; never reuse an old permission (CONTRACT §8).
-   - Sample about every 2 s; scale so the longest side is at most 1600 px.
-   - **Redact Kiki's window rectangles on the copied canvas before encoding** ([ADR 0009](../decisions/0009-floating-window-capture-redaction.md)).
-   - Encode JPEG at quality 0.8 (0.55 above 1 MB; frames over 1 MB are rejected) and upload.
-   - Increase the view revision when the source dimensions change.
-3. **Analysis.**
-   - Use the streamed check (`lab-analysis-stream/v2`) at the cadence in `lab-cadence.js`.
-   - Adopt state **only** from `guidance_committed`. Provisional findings are a labelled preview and never replace accepted facts.
-   - Honour `waiting_for_provider` / `retry_after_ms`. A non-auth 4xx starts a 15-minute model-wide cooldown, and saved instructions must stay usable throughout.
-4. **Authoritative actions:** pause/resume, student confirmations, responses and revisit, all revision-checked. A 409 means refresh, never overwrite.
-5. **Kiki windows publisher.**
-   - Build the `floating-guidance/v0.1` projection from every adopted state.
-   - Serve the bridge protocol (§4).
-   - Route window pause/resume to the same action as the Lab mode button.
-6. **Status UI.** Lifecycle per kiki-web CONTRACT §8: connecting, active, paused, disconnected, completed. Each non-active state shows a reason and a recovery action. Also show whether the extension was detected and why a frame was blocked (§6).
+| ID | Item | Why it blocks | Owner | Until resolved |
+| --- | --- | --- | --- | --- |
+| **B1 (high priority)** | **kiki-web production origin and hosting**: HTTPS URL, SPA fallback (`apps/web/README.md:59`), deploy target | Required in three places: the extension allowlist and capture-handle `permittedOrigins` (`build-extension.mjs` `readers`), apps/api `KIKI_CORS_ORIGINS`, and the WebSocket Origin check. No hosted Kiki address exists (`apps/web/active.md:159`) | User / Akshita | Build and test only on dev origins (`http://127.0.0.1:5174`) |
+| **B2 (high priority)** | **Host kiki-backend's Python service**: one persistent HTTPS instance with `KIKI_REQUIRE_PROXY=1`, `KIKI_PROXY_SECRET`, `GEMINI_API_KEY(S)` and persistent `KIKI_DATA_DIR` (`deploy/fastapi/runtime.env.example`) | apps/api needs a reachable upstream in production. The Python service is not hosted today (`docs/handoffs/frontend-api.md:136`) | User | Run it locally on `127.0.0.1:8100` |
+| B3 | Aditya's agreement: this path is the lab-execution integration for his screen-share/assessment scope | Docs assign screen-share monitoring and assessment to Aditya, deferred (`TEAM_HANDOFF.md:41,116`) | User / Aditya | Build behind the existing `monitoring: pending_integration` until agreed |
 
-## 3. Reference implementation to port (JS → kiki-web TypeScript)
+### Now — set up and unblock
 
-Paths are in kiki-backend on `experiment/floating-guidance-bubbles`. Port the behaviour, not the DOM code.
+1. **Sync kiki-web.** The user's checkout is on clean `main` (untracked `.claude/` only), 18 commits behind `origin/main`.
+   - Run `git pull --ff-only`.
+   - Branch `feature/lab-screen-share` from `93cce9b` or later.
+   - Set the repo's `user.name`/`user.email` to `arpanvihan5-sketch` and verify with `git var GIT_AUTHOR_IDENT`.
+2. **Raise B1, B2 and B3 with their owners.** Record the answers in kiki-web `apps/web/active.md` and in this file.
+3. **Python parity spike.** Run kiki-backend's unified API locally with the proxy guard (install `prototypes/screen_capture/requirements.txt`, then `KIKI_PROXY_SECRET=<32+ chars> KIKI_REQUIRE_PROXY=1 GEMINI_API_KEY=<server-side> python -B -m prototypes.backend --port 8100 --data-dir work/backend`; the default port is 8765; see `SETUP.md`), then:
+   - Check that its lab state has every field the window projector reads:
+     - from `guidance`: `current_action`, `next_action`, `next_instruction`, `action_position`, `procedure`, `already_tracked`;
+     - from `runtime`: `capture_active`, `analysis_status`, `retry_after_ms`, and `candidate` with `admitted_context` and `source_frame.server_received_unix_ms`;
+     - from `observation`: `age_ms` and `observation_id`.
 
-| Source | What it does | Port note |
-| --- | --- | --- |
-| `prototypes/json_stream_site/assets/floating-guidance.js` | Pure projector: tracker state → window snapshot; accepted-observation retention; freshness and scope rules | Port as a TS module with a Zod schema for the snapshot; keep `scripts/test-floating-guidance.mjs` cases as Vitest |
-| `prototypes/json_stream_site/assets/floating-bridge.js` | Publisher, bridge handshake, heartbeat, command routing, `sampleSafety` / `apply` redaction | Port as a hook or service in `features/labs`; the message names are the contract |
-| `prototypes/json_stream_site/assets/capture.js` (`frame()`) | Copy → redact → encode → upload order | Keep the order exactly: redact before `toBlob` |
-| `prototypes/json_stream_site/assets/json-stream-client.js` | SSE v2 parsing; committed vs auxiliary | Reuse the rules; Zod-validate events |
-| `prototypes/json_stream_site/assets/lab-cadence.js` | When to request the next read | Reuse |
-| `prototypes/json_stream_site/assets/lab.js` | State adoption, `render()` mapping, `action()`, pause wiring | Reference for which fields the UI reads |
-| `prototypes/floating_guidance/extension/` | MV3 extension | **No code change** needed except origins (§5) |
+     The Python service already computes the guidance fields (`prototypes/lab_tracking/guided.py:99-109`, `service.py:135-148`). The runtime and observation fields are unverified.
+   - Add a Python-state fixture to `scripts/test-floating-guidance.mjs`, and port the two Worker fixes if missing: committed `capture_active` and accepted-observation retention.
+
+### Next — build slice 1, local end to end
+
+**kiki-backend (small):**
+
+- Use the existing trusted-upstream contract unchanged. `SiteProxyGuard` (`prototypes/screen_capture/cloud_access.py`) requires `x-kiki-proxy-key` (constant-time compare) and a 1–256 character `x-kiki-owner` on HTTP and WebSocket. It is covered by `tests/test_cloud_access.py`.
+- Mutations also need `Origin` equal to the backend's own address, so the caller rewrites it, as `prototypes/json_stream_site/worker/python-proxy.js` does.
+- Optionally add an `owner` namespace test for `fb:<uid>`.
+
+**kiki-web `apps/api` — a new `lab_execution` module:**
+
+- **Auth and ownership:** reuse `Depends(identity)` (Firebase `verify_id_token(check_revoked=True)`, Google provider only) and the `CRS-AC-ECE` enrollment check. Load `learners/{uid}/labPreparations/{prepId}`; another user's preparation returns 404.
+- **Mapping:** add `learners/{uid}/labExecutions/{prepId}` = `{schema:"lab-execution-link/v1", backendLabId, backend:"kiki-backend-python", practicalId:"PR-AM-DSB", contentVersion, createdAt}`.
+  - Create it in a transaction on the first `POST /lab-preparations/{prepId}/execution`, which calls upstream `POST /lab-sessions {operator_trial:true, model_name:<projectRef or "dsb_sc">, progression_mode:"screen_guided"}`.
+  - The call is idempotent (`Idempotency-Key`); never create two upstream labs for one preparation.
+  - Checkpoint IDs already match (`CP-DSB-01…12`).
+- **Upstream client:**
+  - Fixed `KIKI_LAB_BACKEND_ORIGIN` (HTTPS in cloud; `http://127.0.0.1:8100` allowed only in local mode) and server-only `KIKI_LAB_PROXY_SECRET` (32+ characters).
+  - On every call, send `x-kiki-owner: fb:<uid>` and `x-kiki-proxy-key`, rewrite `Origin` to the upstream origin, and strip all client cookies and `x-kiki-*` headers.
+  - Follow no redirects; enforce timeouts and a frame body limit.
+  - Move `httpx` from dev to runtime dependencies; add a WebSocket client library.
+- **Routes:** a fixed allowlist with no generic path proxy. All under `/lab-preparations/{prepId}/execution`:
+
+  | kiki-web route | Upstream | Notes |
+  | --- | --- | --- |
+  | `POST` (create/attach link) / `GET` | `POST /lab-sessions` / `GET /lab-sessions/{lab}` | Lab state |
+  | `POST /screen-sessions` | `POST /screen-sessions` | Start a capture segment |
+  | `POST /stream-ticket` | — | One-time HMAC ticket, about 60 s, bound to uid + prep + screen session. Browsers cannot send `Authorization` on WebSockets |
+  | `WS /screen-sessions/{sid}/stream?ticket=` | `WS /screen-sessions/{sid}/stream` | Relay frames both ways. Check `Origin` against the CORS list by hand, since CORS does not apply to WebSockets |
+  | `POST /attach` | `POST /lab-sessions/{lab}/attach` | Revision-checked |
+  | `POST /check-stream` | `POST /lab-sessions/{lab}/check-stream` | **SSE passthrough** (`StreamingResponse` over an `httpx` stream), chunks in order, no buffering |
+  | `POST /context` | `POST /lab-sessions/{lab}/context` | Pause/resume, view and parameter changes, revisit |
+  | `POST /review`, `POST /responses` | same | Student confirmations and answers |
+  | `GET /events`, `GET /image` | same | Journal and the last checked frame |
+
+- **Error mapping:**
+  - Pass 409 through so the client refreshes.
+  - A 401 from upstream means a configuration fault; return 503 with "Lab tracking is unavailable; your progress is kept."
+  - Upstream down → 503, with the same message.
+- **Monitoring:** when an execution link exists, `monitoring.status` stops being pinned to `pending_integration`. Change the Pydantic `Literal`, the Zod literal (`contracts/lab-preparation.ts:15`) and `LAB_PREPARATION_CONTRACT.md` together. `pointerActive` stays false; the floating windows replace the pointer for this slice.
+- **Tests** (pytest with a fake upstream):
+  - forged `x-kiki-owner` is stripped;
+  - another user's prep returns 404;
+  - expired, reused or mismatched tickets are refused;
+  - SSE arrives in order and incrementally;
+  - WebSocket frames are relayed and closed on revoke;
+  - upstream down → 503;
+  - one upstream lab per preparation under concurrent creates.
+
+**kiki-web `apps/web` — the Lab mode controller** (in `features/labs`):
+
+- An execution service with Zod contracts for the kiki-backend fields actually used. Keep kiki-backend's field names; map them in one adapter.
+- A capture hook:
+  - `getDisplayMedia` on a user gesture only, with picker guidance (choose the Chrome tab);
+  - a frame about every 2 s, longest side at most 1600 px;
+  - **redact Kiki rectangles on the copied canvas, then JPEG-encode** ([ADR 0009](../decisions/0009-floating-window-capture-redaction.md));
+  - send frames over the ticketed WebSocket, then check with `{revision, frame_id, view_revision}`, the Python flow in `frontend-api.md` "Screen-guided UI binding";
+  - stop on sign-out through `withResourceCleanup` / `registerSignOutCleanup`.
+- A check-stream client: adopt state **only** from `guidance_committed`; provisional findings are a labelled preview only.
+- The Kiki window publisher: port `floating-guidance.js` (pure projector) and `floating-bridge.js` (protocol, `sampleSafety`/`apply`) to TypeScript. The protocol stays `floating-guidance/v0.1` (§4).
+- A connection panel replacing "Monitoring not connected" (`LabPreparation.tsx:13`):
+  1. Open MATLAB Online.
+  2. Show Kiki on MATLAB: detect the extension, or show install steps.
+  3. Share your MATLAB tab.
+  4. Then show the states: connecting, active, paused, disconnected, completed. Each non-active state gives a reason and a recovery action (CONTRACT §8). Reconnecting needs a fresh gesture.
+
+**Extension:**
+
+- Add `http://127.0.0.1:5174`, plus `:5173` if sample mode is used, to `readers` in `prototypes/floating_guidance/scripts/build-extension.mjs`, then rebuild.
+- The production origin is added when B1 resolves.
+
+**Acceptance for slice 1 (local):**
+
+- Ported L0 projector and bridge tests pass in Vitest.
+- A Playwright run with the dev extension (Playwright Chromium; flags as in `prototypes/floating_guidance/tests/check-local-lab.py`) proves start-from-Lab-mode, coherence, pause from both sides, clean model-bound frames, and lifecycle.
+- The backend is kiki-backend Python with a fake analyzer.
+- Then the user repeats L3 on real MATLAB Online from `/labs/:sessionId`, with no demo page open.
+
+### Later
+
+- Resolve B1 and B2: deploy both services and produce a release extension build with the production origin.
+- Hosted L3 and a latency comparison against §1.
+- Remove the demo reader from the student path.
+- Answer the remaining `LAB_PREPARATION_CONTRACT.md:47-57` questions: device control/lease across phone and laptop, the evidence/verdict schema, and how completion feeds practical progress.
+- Odia copy in windows; letting Lab mode bind the MATLAB tab without the popup; the pointer or other cues.
 
 ## 4. Bridge protocol (unchanged, `floating-guidance/v0.1`)
 
-`window.postMessage` on channel `kiki-floating-guidance`, same origin only, top frame only. Each request carries `bridge_id` and gets a `{type:'response', bridge_id, result}` reply.
+`window.postMessage` on channel `kiki-floating-guidance`, same origin and top frame only. Requests carry `bridge_id` and get `{type:'response', bridge_id, result}`.
 
 | Direction | Type | Meaning |
 | --- | --- | --- |
-| page → extension | `reader_hello {stream_id, lab_session_id}` | Become the controller. The extension returns a new `generation` and the bound tab's capture `handle`, if any |
-| page → extension | `reader_snapshot {message}` | `replace_snapshot` with `stream_id`, `generation` and an increasing `sequence`. The result is the window's display ACK |
-| page → extension | `reader_command_result {request_id, ok, error}` | Outcome of a window command |
-| page → extension | `reader_bye` | Page closing; windows go "not live" |
-| extension → page | `extension_present {version}` | Extension installed and bridge loaded |
-| extension → page | `fg_target_bound {handle, target_origin}` / `fg_target_closed` | MATLAB tab bound or gone |
-| extension → page | `fg_command {command, request_id}` | `pause` or `resume` pressed in a window |
+| page → extension | `reader_hello {stream_id, lab_session_id}` | Become the controller; the extension returns a new `generation` and the bound tab's capture `handle` |
+| page → extension | `reader_snapshot {message}` | `replace_snapshot` with `stream_id`, `generation` and an increasing `sequence`; the result is the display ACK |
+| page → extension | `reader_command_result` / `reader_bye` | Outcome of a window command / page closing |
+| extension → page | `extension_present`, `fg_target_bound {handle, target_origin}`, `fg_target_closed` | Install and binding state |
+| extension → page | `fg_command {command, request_id}` | Pause or resume pressed in a window |
 | extension → page | `fg_rects {rects, viewport, moving}` | Window rectangles in CSS px, for redaction |
-| extension → page | `fg_snapshot_request` / `fg_superseded` | Resend now / another controller tab took over |
+| extension → page | `fg_snapshot_request`, `fg_superseded` | Resend now / another controller took over |
 
-Publish rules:
+Send a snapshot on every content change and at least every 5 s. The windows mark the connection lost after 15 s of silence. Capture is analysed only when `displaySurface === 'browser'` and the capture handle matches the bound tab; any other frame is greyed and not analysed.
 
-- Send on every content change and as a heartbeat at least every 5 s. The windows mark the connection lost after 15 s of silence.
-- Never resend old pixels as fresh. The observation age is server-measured plus local monotonic time.
+## 5. Facts the plan relies on
 
-## 5. Extension changes
-
-- Add kiki-web origins to `readers` in `prototypes/floating_guidance/scripts/build-extension.mjs`. The same list feeds the content-script matches and the capture handle's `permittedOrigins`.
-  - Dev: `http://127.0.0.1:5174` (connected mode) and `http://127.0.0.1:5173` (sample mode).
-  - `localhost` and `127.0.0.1` are different origins; add whichever the team actually uses.
-  - Production: **open decision**; no kiki-web URL is documented yet.
-- Keep binding explicit, through the extension popup's "Show Kiki on this tab". Letting Lab mode bind the MATLAB tab directly is a later option; it needs a new, allowlisted command.
-
-## 6. Lab mode UX
-
-Lab mode today (`apps/web/src/features/labs/LabPreparation.tsx` on PR #2) is preparation only, with a "Monitoring not connected" notice. Add a connection panel that follows the journey's activation order: experiment, required concepts, software opened, connection confirmed.
-
-1. **Open MATLAB / Simulink Online.** This link already exists.
-2. **Show Kiki on MATLAB.**
-   - No `extension_present`: show install steps.
-   - Present but unbound: tell the student to click the Kiki icon on the MATLAB tab and choose "Show Kiki on this tab".
-   - Bound: "Kiki is on your MATLAB tab".
-3. **Share your MATLAB tab.** A user-gesture button.
-   - Picker guidance: choose the **Chrome tab** with MATLAB, not a window or the whole screen.
-   - Verify `displaySurface === 'browser'` and that the capture handle matches the bound tab.
-   - Otherwise show the block reason with a "Share again" action. Frames that can't be masked are greyed and never analysed.
-4. **Guidance active.**
-   - Lab mode shows progress, the current action and the observation.
-   - The windows on MATLAB show the same step from the same state revision; that is the coherence acceptance.
-   - Pause works from either place.
-5. **Lifecycle.**
-   - Stop sharing → disconnected, with Share again.
-   - Provider wait → instructions stay, with the retry time shown.
-   - Sign-out (`services.auth.registerSignOutCleanup`) → stop the tracks, detach, `reader_bye`.
-   - Reconnecting needs a fresh gesture.
-
-The floating windows replace the pointer for this slice. Keep `pointer.active` false; the windows don't use it.
-
-## 7. Backend boundary — the main open decision
-
-Facts:
-
-- **The demo reader Worker is same-origin only.** Its owner comes from the private Site's `oai-authenticated-user-id` header, and capture receipts are `HttpOnly; SameSite=Strict` cookies. kiki-web cannot call it from another origin.
-- **kiki-backend's unified Python FastAPI** ([frontend API handoff](frontend-api.md)) has the same capabilities:
-  - `/screen-sessions` with a WebSocket frame transport;
-  - `/lab-sessions/{id}/check-stream`, `/context`, `/review` and `/responses`;
-  - the identical tracker policy.
-
-  Its auth is an edge-supplied owner or a local cookie, not Firebase, and it is not hosted.
-- **kiki-web connected mode** calls its own `apps/api` with a Firebase Bearer token. CORS allows `127.0.0.1:5174`. CONTRACT §6: "all data goes through the API; the backend derives the UID from the token".
-  - kiki-web's provisional lab-execution types and endpoint constants (`apps/web/src/contracts/api.ts:301-412, 496-507`) differ from kiki-backend's routes and state shape.
-  - Every preparation response is pinned to `monitoring: pending_integration`.
-- **Ownership:** screen-share observation and assessment belong to Aditya and are deferred. The integration questions are listed in `apps/web/LAB_PREPARATION_CONTRACT.md:47-57`.
-
-Options:
-
-| Option | Shape | Trade-off |
+| Area | Fact | Source |
 | --- | --- | --- |
-| **A (recommended).** kiki-web's API fronts lab execution | `apps/api` verifies Firebase, then calls kiki-backend's lab/observation service server-to-server with the derived owner. Frames go to `apps/api` (HTTP or WS) and on to kiki-backend | Matches CONTRACT §6 and keeps one API and one auth for the client. Needs a service-to-service contract and hosting for kiki-backend's Python service |
-| B. kiki-web calls kiki-backend directly | Add Firebase token verification and CORS for kiki-web origins to kiki-backend's FastAPI | Fewer hops, but two APIs and two auth paths in the client; weakens the single-API rule |
-| C. Keep the demo reader, linked from Lab mode | — | Rejected by this instruction |
+| kiki-web auth | `firebase_admin.auth.verify_id_token(check_revoked=True)`; Google provider only; UID never taken from the body | `apps/api/.../backend.py:49-63`, `main.py:56-61` |
+| kiki-web lab data | Firestore `learners/{uid}/labPreparations/prep-{uuid}` (`lab-preparation/v1`, revisioned PATCH, 409 on stale); one active prep per UID and content version; `monitoring` pinned | `lab_preparation.py:73-91, 224-278, 292-310` |
+| kiki-web API today | No outbound HTTP client (`httpx` is dev-only), no SSE or WebSocket routes, exact-origin CORS for `127.0.0.1:5174`/`localhost:5174`, no DELETE | `pyproject.toml:17`, `main.py:28-47`, `config.py:19` |
+| kiki-web web | `/labs` and `/labs/:sessionId` in `LabPreparation.tsx`; provisional, unimplemented execution types in `contracts/api.ts:302-455`; sign-out cleanup with a 3 s deadline | `App.tsx:17-18`, `resource-cleanup.ts:6-28` |
+| IDs | Practical `PR-AM-DSB`; checkpoints `CP-DSB-01…12`, the same as kiki-backend; `projectRef` is free text | `data-model/cases/analog-modulation-odia.json` |
+| kiki-backend upstream | `SiteProxyGuard` and same-origin mutation rule; frames over WebSocket; `check-stream` v2 in Python | `cloud_access.py`, `backend/app.py:17-29`, `json_stream/api.py:16` |
+| Demo reader | Same-origin only: Site-injected owner header and `SameSite=Strict` cookies, so kiki-web cannot call it | `json_stream_site/worker/server.js:33-73,163` |
 
-Either A or B keeps redaction in the browser; the transport does not matter for it. Mapping kiki-backend's lab state to kiki-web's types is needed in both: keep kiki-backend's fields authoritative and map them in one adapter.
+kiki-web facts come from an export of `origin/main` at `93cce9b` (PR #5) on 18 October. The states of PRs #1–#3 were not rechecked.
 
-## 8. Acceptance
+## 6. Do not
 
-1. **Started from Lab mode.** With the real extension and MATLAB Online, a student starts sharing from `/labs/:sessionId` with no demo page open, and the Kiki windows appear.
-2. **Coherence.** Now/Next in Lab mode and in the windows match after every committed read, after a pause from either side, and after an advance.
-3. **Clean input.**
-   - The model-bound JPEG shows a grey box where Kiki is and never the dev canary.
-   - Sharing the wrong surface blocks analysis with a reason.
-4. **Lifecycle.** Stop sharing, MATLAB reload, Lab mode reload, sign-out and provider wait each end in the right state with a recovery action.
-5. **Latency.** Comparable to the numbers in §1. Measure frame received → committed, and committed → window display.
-6. **Automated coverage.** Port L0 and a kiki-web version of L2 (Playwright Chromium with the unpacked dev extension; tab-capture auto-select flags as in `prototypes/floating_guidance/tests/check-local-lab.py`). A fake Simulink page alone cannot pass item 1.
-
-## 9. Open decisions before building
-
-1. **Backend boundary:** option A or B (§7). Owners: the user, Akshita and Aditya.
-2. **kiki-web base branch.** PR #2 (`df2de21`, unmerged) is the handover's base. `redesign/engineering-sketchbook` (`2cfc241`) restyles `LabPreparation.tsx`, `Shell.tsx` and `ResumeLab.tsx` from an older base. Lab-mode work must reconcile with it.
-3. **Commit identity.** kiki-web's AGENTS.md says `akshitanitr`; the workspace CLAUDE.md says `arpanvihan5-sketch` for Arpan's work.
-4. **Production origin** for kiki-web (extension allowlist and capture-handle permission).
-5. **Binding.** Whether it stays popup-only or Lab mode may bind the MATLAB tab.
-
-## 10. Do not
-
-- Do not mock a Simulink connection or label screen-inferred progress as verified evidence.
+- Do not let the browser call kiki-backend directly, or put `KIKI_LAB_PROXY_SECRET` or a Gemini key anywhere client-side.
+- Do not build a generic path proxy; allowlist each route.
+- Do not mock a Simulink connection, or label screen-inferred progress as verified evidence.
 - Do not upload or analyse frames that could contain Kiki windows without redaction.
 - Do not ship the demo reader or the dev extension (canary, open shadow root, localhost) to students.
 - Do not depend on the stopped annotation/drawing code.

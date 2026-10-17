@@ -1,0 +1,6 @@
+{
+  "name": "kiki-screen-receiver",
+  "private": true,
+  "type": "module",
+  "scripts": {"build": "node scripts/build.mjs", "test": "node --test scripts/test-receiver.mjs"}
+}

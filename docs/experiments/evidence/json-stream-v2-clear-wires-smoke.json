@@ -1,0 +1,82 @@
+{
+  "schema": "json-stream-smoke/v1",
+  "synthetic_only": true,
+  "real_simulink_accuracy_claim": false,
+  "production_latency_claim": false,
+  "repeats_per_case_arm": 1,
+  "records": [
+    {
+      "prompt_sha256": "2c7095ee2dc86cc3a28594fd3a3ba364c01a77c4764f881d71c9a94931b12128",
+      "request_sha256": "994cc6b0ed89557112c2825295906010039a5f78d923ef0981de6c2734576864",
+      "case": "clear-wires-heldout",
+      "arm": "stream",
+      "image_sha256": "07745205c2a39104b28f40fb8e2c0291dc0c2c27eba84a5fd96db37a5a54c7ba",
+      "model": "gemini-3.5-flash-lite",
+      "expected": {
+        "receiver_structure": "match",
+        "local-create": "match",
+        "receiver-create": "match",
+        "modulated-wire": "match",
+        "local-wire": "match",
+        "local_parameters": "unknown",
+        "local-settings": "unknown"
+      },
+      "status": "success",
+      "passed": true,
+      "actual": {
+        "receiver_structure": "match",
+        "local-create": "match",
+        "receiver-create": "match",
+        "modulated-wire": "match",
+        "local-wire": "match",
+        "local_parameters": "unknown",
+        "local-settings": "unknown"
+      },
+      "total_seconds": 8.626,
+      "first_feedback_seconds": 7.871,
+      "metrics": {
+        "provider_ms": 8624,
+        "first_byte_ms": 7731,
+        "first_finding_ms": 7869,
+        "critical_fields_ms": 8549,
+        "output_tokens": 447,
+        "wire_format": "lab-observer-json-stream/v1",
+        "observer_prompt_version": "dsb-step-observer/v3-json-stream2"
+      }
+    },
+    {
+      "prompt_sha256": "2c7095ee2dc86cc3a28594fd3a3ba364c01a77c4764f881d71c9a94931b12128",
+      "request_sha256": "994cc6b0ed89557112c2825295906010039a5f78d923ef0981de6c2734576864",
+      "case": "clear-wires-heldout",
+      "arm": "priority-buffered",
+      "image_sha256": "07745205c2a39104b28f40fb8e2c0291dc0c2c27eba84a5fd96db37a5a54c7ba",
+      "model": "gemini-3.5-flash-lite",
+      "expected": {
+        "receiver_structure": "match",
+        "local-create": "match",
+        "receiver-create": "match",
+        "modulated-wire": "match",
+        "local-wire": "match",
+        "local_parameters": "unknown",
+        "local-settings": "unknown"
+      },
+      "status": "success",
+      "passed": true,
+      "actual": {
+        "receiver_structure": "match",
+        "local-create": "match",
+        "receiver-create": "match",
+        "modulated-wire": "match",
+        "local-wire": "match",
+        "local_parameters": "unknown",
+        "local-settings": "unknown"
+      },
+      "total_seconds": 2.086,
+      "first_feedback_seconds": 2.086,
+      "metrics": {
+        "wire_format": "priority-json-buffered-control",
+        "output_tokens": 471
+      }
+    }
+  ]
+}

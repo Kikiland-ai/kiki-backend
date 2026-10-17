@@ -1,0 +1,599 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:kiki:screen-writing:v0.1",
+  "title": "Provisional screen writing cue packet",
+  "description": "Coordinates describe the encoded analyzed frame. A separate runtime adapter must authorize/map live overlays; schema validity alone does not make a target correct.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "const": "screen-writing/v0.1"
+    },
+    "packet_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "intent": {
+      "enum": [
+        "show_action_target",
+        "explain_relationship",
+        "highlight_parameter",
+        "compare_waveforms"
+      ]
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "lab_session_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "experiment_id": {
+          "const": "PR-AM-DSB"
+        },
+        "checkpoint_id": {
+          "type": "string",
+          "pattern": "^CP-DSB-(0[1-9]|1[0-2])$"
+        },
+        "visit_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "lab_revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "workspace_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "capture_epoch": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "parameter_revision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "condition": {
+          "enum": [
+            "baseline",
+            "phase_fault",
+            "restored_baseline"
+          ]
+        }
+      },
+      "required": [
+        "lab_session_id",
+        "experiment_id",
+        "checkpoint_id",
+        "visit_id",
+        "lab_revision",
+        "workspace_id",
+        "capture_epoch",
+        "parameter_revision",
+        "condition"
+      ]
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "observation_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "frame_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "received_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "encoded_width": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1600
+        },
+        "encoded_height": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1600
+        }
+      },
+      "required": [
+        "observation_id",
+        "frame_id",
+        "sha256",
+        "received_at",
+        "encoded_width",
+        "encoded_height"
+      ]
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "semantic_label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "resolution": {
+          "enum": [
+            "resolved",
+            "unresolved"
+          ]
+        },
+        "region": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/region"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "semantic_label",
+        "resolution",
+        "region"
+      ]
+    },
+    "render": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "surface": {
+          "enum": [
+            "captured_frame",
+            "live_workspace"
+          ]
+        },
+        "coordinate_space": {
+          "const": "normalized_encoded_frame"
+        },
+        "pointer_events": {
+          "const": "none"
+        },
+        "colour_semantics": {
+          "const": "concept=green,words=red,english=yellow,lab=blue"
+        },
+        "clip_to_frame": {
+          "const": true
+        }
+      },
+      "required": [
+        "surface",
+        "coordinate_space",
+        "pointer_events",
+        "colour_semantics",
+        "clip_to_frame"
+      ]
+    },
+    "validity": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expires_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "max_frame_age_ms": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 20000
+        },
+        "invalidate_on": {
+          "const": [
+            "workspace_change",
+            "capture_epoch_change",
+            "step_visit_change",
+            "parameter_revision_change",
+            "scroll",
+            "zoom",
+            "resize",
+            "canvas_pan",
+            "modal_change",
+            "disconnect"
+          ]
+        }
+      },
+      "required": [
+        "created_at",
+        "expires_at",
+        "max_frame_age_ms",
+        "invalidate_on"
+      ]
+    },
+    "operations": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "kind": {
+                "const": "pointer"
+              },
+              "cue_id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "layer_id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "meaning": {
+                "enum": [
+                  "concept",
+                  "words",
+                  "english",
+                  "lab"
+                ]
+              },
+              "accessible_label": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 300
+              },
+              "at": {
+                "$ref": "#/$defs/point"
+              }
+            },
+            "required": [
+              "kind",
+              "cue_id",
+              "layer_id",
+              "meaning",
+              "accessible_label",
+              "at"
+            ]
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "kind": {
+                "const": "box"
+              },
+              "cue_id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "layer_id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "meaning": {
+                "enum": [
+                  "concept",
+                  "words",
+                  "english",
+                  "lab"
+                ]
+              },
+              "accessible_label": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 300
+              },
+              "region": {
+                "$ref": "#/$defs/region"
+              }
+            },
+            "required": [
+              "kind",
+              "cue_id",
+              "layer_id",
+              "meaning",
+              "accessible_label",
+              "region"
+            ]
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "kind": {
+                "const": "ellipse"
+              },
+              "cue_id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "layer_id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "meaning": {
+                "enum": [
+                  "concept",
+                  "words",
+                  "english",
+                  "lab"
+                ]
+              },
+              "accessible_label": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 300
+              },
+              "region": {
+                "$ref": "#/$defs/region"
+              }
+            },
+            "required": [
+              "kind",
+              "cue_id",
+              "layer_id",
+              "meaning",
+              "accessible_label",
+              "region"
+            ]
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "kind": {
+                "const": "arrow"
+              },
+              "cue_id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "layer_id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "meaning": {
+                "enum": [
+                  "concept",
+                  "words",
+                  "english",
+                  "lab"
+                ]
+              },
+              "accessible_label": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 300
+              },
+              "from": {
+                "$ref": "#/$defs/point"
+              },
+              "to": {
+                "$ref": "#/$defs/point"
+              }
+            },
+            "required": [
+              "kind",
+              "cue_id",
+              "layer_id",
+              "meaning",
+              "accessible_label",
+              "from",
+              "to"
+            ]
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "kind": {
+                "const": "polyline"
+              },
+              "cue_id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "layer_id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "meaning": {
+                "enum": [
+                  "concept",
+                  "words",
+                  "english",
+                  "lab"
+                ]
+              },
+              "accessible_label": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 300
+              },
+              "points": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 128,
+                "items": {
+                  "$ref": "#/$defs/point"
+                }
+              },
+              "reveal_ms": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 5000
+              }
+            },
+            "required": [
+              "kind",
+              "cue_id",
+              "layer_id",
+              "meaning",
+              "accessible_label",
+              "points",
+              "reveal_ms"
+            ]
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "kind": {
+                "const": "text"
+              },
+              "cue_id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "layer_id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "meaning": {
+                "enum": [
+                  "concept",
+                  "words",
+                  "english",
+                  "lab"
+                ]
+              },
+              "accessible_label": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 300
+              },
+              "at": {
+                "$ref": "#/$defs/point"
+              },
+              "text": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 160
+              }
+            },
+            "required": [
+              "kind",
+              "cue_id",
+              "layer_id",
+              "meaning",
+              "accessible_label",
+              "at",
+              "text"
+            ]
+          }
+        ]
+      }
+    },
+    "fallback": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "instruction": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "on_unresolved": {
+          "const": "text_only"
+        }
+      },
+      "required": [
+        "instruction",
+        "on_unresolved"
+      ]
+    }
+  },
+  "required": [
+    "schema",
+    "packet_id",
+    "intent",
+    "context",
+    "evidence",
+    "target",
+    "render",
+    "validity",
+    "operations",
+    "fallback"
+  ],
+  "$defs": {
+    "point": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "y": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ]
+    },
+    "region": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "y": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "width": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1
+        },
+        "height": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "width",
+        "height"
+      ]
+    }
+  }
+}

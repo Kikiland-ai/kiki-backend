@@ -1,3 +1,9 @@
+# Current prototype milestone
+
+The screen-reader and beginner checkpoint flow now work in the private hosted Worker prototype. The Python/FastAPI implementation is consolidated with mixed-language text/audio job routes and locally verified; its cloud origin is not yet connected.
+
+Start with [screen-reader baseline v1](docs/baselines/screen-reader-v1.md), [frontend API handoff](docs/handoffs/frontend-api.md), and [the active plan](docs/plans/active.md). Earlier implementation-status passages below are historical; these current documents take precedence. Latency experiment branches are prepared separately, with no new trial/deployment during this pause.
+
 # Kiki Backend
 
 Kiki helps engineering students understand their course material in a familiar language while learning the English terminology they need for exams and practical work. This repository owns the content, media, learning-evidence and guidance capabilities behind that experience. The first language pair is **Odia–English**, with ECE as the initial subject context.

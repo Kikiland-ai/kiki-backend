@@ -5,7 +5,7 @@ function committedProjection(state){
  const keys=['schema','lab_session_id','experiment_id','revision','status','progression_mode','current_visit_id','workspace','queue','guidance','observation','auto_tracking','procedure_tracking','procedure_history'];
  const value=Object.fromEntries(keys.filter(k=>k in state).map(k=>[k,structuredClone(state[k])]));
  value.steps=state.steps.map(item=>Object.fromEntries(['checkpoint_id','status','current_visit_id','criteria','timing','attempt_count'].filter(k=>k in item).map(k=>[k,structuredClone(item[k])])));
- value.runtime=Object.fromEntries(['analysis_attempts','analysis_status','analysis_error','retry_at_ms','retry_after_ms','last_analysis_timing','candidate'].filter(k=>k in state.runtime).map(k=>[k,structuredClone(state.runtime[k])]));
+ value.runtime=Object.fromEntries(['capture_active','analysis_attempts','analysis_status','analysis_error','retry_at_ms','retry_after_ms','last_analysis_timing','candidate'].filter(k=>k in state.runtime).map(k=>[k,structuredClone(state.runtime[k])]));
  value.projection='committed-decision/v1';return value;
 }
 async function analyzeLabFrameStream(bytes,cp,state,env,emit){

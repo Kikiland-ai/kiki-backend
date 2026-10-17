@@ -1,10 +1,81 @@
+# Floating Kiki windows promotion to main — 18 October 2026
+
+Step 2 of the reconciliation order. Branch `promote/floating-guidance` starts at `experiment/floating-guidance-bubbles` (`73c6e96`) and merges `main` at `fe7758e`, which now holds the screen-reader baseline. The only conflict was this file: both sides had added a new top entry, and both are kept below. `design/floating-guidance-bubbles` is not merged; its handoff and test plan are older copies of the ones on this branch.
+
+What ran on the merged tree (Windows 11, no model calls): offline gate all ten checks PASS; floating L0 14/14, L1 43/43, L2 30/30 with zero live network requests.
+
+Exact next action: open the PR from `promote/floating-guidance` to `main`, wait for CI, and merge with a merge commit once the user confirms. Then step 3: clean up `feature/concept-canvas-handoff` (move its WAVs out of git, fix the Windows path and connection bugs) and open its PR.
+
+---
+
 # Screen-reader baseline promotion to main — 18 October 2026
 
 The user asked to merge the branches into `main` one at a time. This is step 1 of the reconciliation order: (1) `baseline/screen-reader-v1` → `main`; (2) `experiment/floating-guidance-bubbles` → `main`; (3) `feature/concept-canvas-handoff` → `main` after its binaries and Windows bugs are cleaned up. `integration/analysis-owned-guidance` and `design/floating-guidance-bubbles` stay off `main` as archived references, because the user stopped annotation work on 17 October. The experiment branches already contained in the baseline (`json-stream`, `targeted-vision`, `verifier-context`, `provider-db-io`, `stream-context-batch`) and the superseded `handoff/screen-writing-v01`/`v02` are to be deleted after tagging.
 
 PR #1 was merged into the baseline on 15 October (`7c986df`) without the manual acceptance checklist; that checklist remains outstanding. Branch `promote/screen-reader-v1` adds CI on `main` pushes and a Windows-safe evaluation runner. What ran: full offline gate on Windows without `PYTHONUTF8` — all ten checks PASS, 0 paid calls; BB8 validate PASS; BB8 adapter suite 11/12 with the known `WinError 1314` symlink error. Details are in the [promotion review record](../reviews/screen-reader-baseline-promotion.md#promotion-to-main).
 
-Exact next action: open the PR from `promote/screen-reader-v1` to `main`, wait for the CI run, and merge with a merge commit (not squash or rebase, so the commit SHAs cited in the experiment records stay valid) once the user confirms. Then start step 2. The six-item manual acceptance run, Python/FastAPI hosting and edge-proxy deployment remain open.
+Outcome: merged to `main` as PR #2 (merge commit `fe7758e`) on 18 October after the user confirmed. CI attempt 1 failed one timing-sensitive Node test (`test-decision-ui.mjs` `until()` helper); attempt 2 passed on the same commit. The six-item manual acceptance run, Python/FastAPI hosting and edge-proxy deployment remain open.
+
+---
+
+# Floating Kiki windows: first slice built and locally verified — 17 October 2026
+
+The user stopped the annotation experiment, chose small Kiki windows on the shared MATLAB tab, and asked to iterate quickly, then commit and push. The [handoff](../handoffs/floating-guidance-windows.md), user choices ([ADR 0008](../decisions/0008-floating-guidance-windows-first-slice.md)) and [test plan](floating-guidance-test-plan.md) were copied from `design/floating-guidance-bubbles`. This branch starts from `baseline/screen-reader-v1` at `7c986df`; PR #1 had already merged, contrary to the entry below.
+
+Built:
+
+- **Projection and wiring:** a deterministic `floating-guidance/v0.1` projection, a reader-page publisher hooked into `render()`, and window pause/resume through the existing lab action.
+- **Ports:** `capture_active` in the committed projection; retention of the accepted observation, labelled "Earlier accepted view".
+- **Capture protection:** Kiki's rectangles are redacted on the copied frame before JPEG encoding ([ADR 0009](../decisions/0009-floating-window-capture-redaction.md)).
+- **Extension:** a new MV3 extension in `prototypes/floating_guidance/` with a `matlab.mathworks.com` host permission and a dev variant for localhost.
+
+Ran:
+
+- L0 14/14;
+- L1 43/43;
+- L2 30/30 in four consecutive runs;
+- the offline evaluation gate (95/95 Node, Python suite, three full replays, pinned context, frozen baseline);
+- BB8 validate and discovery checks.
+
+Real model calls: none.
+
+Failed or environmental on Windows:
+
+- The baseline Python suite needs `PYTHONUTF8=1`.
+- The BB8 symlink test cannot create symlinks without Developer Mode (`WinError 1314`); `bb8/` is unchanged.
+
+Not done: L3a on real MATLAB Online, L3b with a real model, any Site deployment, a published JSON schema, CI wiring.
+
+Live follow-up, same day:
+
+- The user authorized real Gemini reads. The key probe passed.
+- The local reader ran with `--live`, and the user confirmed the windows work on real MATLAB Online.
+- 79 live reads; CP-DSB-01 → 06; frame received → committed p50 4.7 s, p90 10.1 s; Gemini first byte about 85% of that.
+- The user then decided screen sharing must start from kiki-web Lab mode, not the demo reader. [Kiki-web Lab-mode handoff](../handoffs/kiki-web-lab-mode-screen-share.md) written; no kiki-web change made.
+
+Exact next action: settle the handoff's open decisions with the kiki-web owners:
+
+- the backend boundary (option A: kiki-web API fronts lab execution, recommended);
+- the kiki-web base branch;
+- commit identity;
+- the production origin.
+
+Then port the controller role into `/labs/:sessionId`.
+
+18 October decisions ([ADR 0010](../decisions/0010-kiki-web-api-fronts-lab-execution.md)):
+
+- kiki-web's API verifies Firebase and passes lab execution through to kiki-backend, using the existing `SiteProxyGuard` contract.
+- kiki-web work starts from `main` (`93cce9b`, PR #5).
+- kiki-web commits are made as `arpanvihan5-sketch`.
+- kiki-web's production origin is high-priority blocker B1; kiki-backend Python hosting is B2.
+
+The [handoff](../handoffs/kiki-web-lab-mode-screen-share.md) now holds the Now/Next/Later plan. Next session: start at its "Now" list:
+
+1. Fast-forward kiki-web `main` and branch `feature/lab-screen-share`.
+2. Raise B1–B3 with their owners.
+3. Run the Python parity spike.
+
+18 October follow-up: the L2 harness's raw image fetch now retries Windows socket resets and records each one in its report. L2 passed 30/30 in three consecutive runs (one recorded reset, retried), with zero network requests. L0 and L1 were rerun green. The live local server from the previous session is no longer running.
 
 ---
 

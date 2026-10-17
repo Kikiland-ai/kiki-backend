@@ -117,7 +117,12 @@
       const scale = Math.min(1, 1600 / Math.max(video.videoWidth, video.videoHeight));
       canvas.width = Math.max(1, Math.round(video.videoWidth * scale));
       canvas.height = Math.max(1, Math.round(video.videoHeight * scale));
-      canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+      const context2d = canvas.getContext('2d');
+      context2d.drawImage(video, 0, 0, canvas.width, canvas.height);
+      // Kiki's own windows are inside the shared tab: mask them on the copy
+      // before encoding so their text can never become screen evidence.
+      const safety = window.KikiFloating?.sampleSafety(stream.getVideoTracks()[0], canvas.width, canvas.height);
+      if (safety && safety.mode !== 'none') window.KikiFloating.apply(context2d, safety, canvas.width, canvas.height);
       let blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', .8));
       if (blob?.size > 1000000) blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', .55));
       if (current !== generation || ending || paused) return;

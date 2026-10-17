@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Kiki</title>
+<style>
+ body{width:280px;margin:0;padding:16px;font:14px/1.45 "Google Sans","Noto Sans",system-ui,sans-serif;color:#1f1f1f;background:#fbfaf7}
+ h1{font-size:16px;margin:0 0 4px}p{margin:0 0 12px;color:#5f6368}
+ button{font:inherit;font-weight:600;border-radius:999px;padding:8px 16px;cursor:pointer;border:0;background:#1967d2;color:#fff;box-shadow:0 3px 0 #0f4fa8;width:100%}
+ button.secondary{background:#fff;color:#1f1f1f;border:1px solid #d9d6cf;box-shadow:0 3px 0 #c9c5bc;margin-top:8px}
+ button:focus-visible{outline:2px solid #1967d2;outline-offset:2px}[hidden]{display:none}
+</style>
+</head>
+<body>
+<h1>Kiki windows</h1>
+<p id="state" role="status">Checking this tab…</p>
+<button id="bind" hidden>Show Kiki on this tab</button>
+<button id="unbind" class="secondary" hidden>Remove Kiki from this tab</button>
+<script src="popup.js"></script>
+</body>
+</html>

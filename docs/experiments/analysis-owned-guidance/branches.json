@@ -24,9 +24,9 @@
   "renderer_commit": "3f72dfb1208a8d49935fb5e4cf0e26a376d2f9ba",
   "target_site": "https://kiki-screen-receiver.woodsycarp256.chatgpt.site",
   "hosting_choice": "User explicitly chose reusing existing receiver; allocated new project remains unpublished.",
-  "deployed_backend_code_revision": "c6a0a958b671ae5efa4c131d021377495b2af4d3",
-  "deployed_site_source_revision": "e96ffa9a7c6f8b2308a47dac372225e2593cac93",
-  "deployed_version": 17,
+  "deployed_backend_code_revision": "67b84aba2cc037d60e7c71636a1824d8c8fa3fdb",
+  "deployed_site_source_revision": "70d6812b9e1acd46f8d1705b251c0e0c477024c8",
+  "deployed_version": 18,
   "query_fix_handoff": "docs/handoffs/analysis-owned-guidance-query-fix.md",
   "current_delivery_handoff": "docs/handoffs/screen-writing-hosted-delivery-fix.md"
 }

@@ -4,7 +4,7 @@ User reports advancing steps with no visible annotation. Current drawing-enabled
 
 Implemented on independent renderer commit `3f72dfb`, merged on integration: conservative clock interval excluding server processing, exact rejection reasons, and an expiry-bounded readable interval before automatic rechecking. Integration preserves owner checks and logs packet outcomes. All 129 Node/source/baseline/BB8 checks pass. No paid model calls, extension changes, tracker completion changes or API timeout changes.
 
-Last completed: reproduced and corrected the hosted timing path, tested readable paint and stale-view rejection, retained evidence. Next: publish exact source to existing private receiver, then inspect real installed-adapter paint/rejection after browser refresh/share. [Handoff](../handoffs/screen-writing-hosted-delivery-fix.md). Real Simulink after-fix placement is unverified.
+Last completed: reproduced and corrected the hosted timing path, tested readable paint and stale-view rejection, retained evidence, and published existing private receiver version 18 successfully at 12:18 Asia/Kolkata (Site source `70d6812`, backend code `67b84ab`, environment revision 9). Source checks passed and secrets/access remain preserved. Next: receiver refresh/native re-share is required to load the new consumer; inspect the next real installed-adapter signed paint receipt or precise rejection reason. [Handoff](../handoffs/screen-writing-hosted-delivery-fix.md). Real Simulink after-fix placement is unverified.
 
 ---
 

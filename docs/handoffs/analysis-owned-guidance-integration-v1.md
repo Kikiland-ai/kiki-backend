@@ -1,6 +1,6 @@
 # Analysis-owned guidance integration v1
 
-Updated 15 October 2026, Asia/Kolkata. Published deployment receipt is recorded below. The CP-06 query-schema correction is now deployed in version 17; see [the 16 October query-fix handoff](analysis-owned-guidance-query-fix.md).
+Updated 15 October 2026, Asia/Kolkata. Published deployment receipt is recorded below. The CP-06 query-schema correction is now deployed in version 17; see [the 16 October query-fix handoff](analysis-owned-guidance-query-fix.md). The latest receiver version 18 adds the [17 October hosted delivery correction](screen-writing-hosted-delivery-fix.md).
 
 The user authorized combining producer `1c658b63ef0a0ebce827168040bc057d92fa4c77` with the independent renderer on `integration/analysis-owned-guidance`. The renderer branch ends at `e916986`; the integration uses explicit merges, so its Worker/client/build changes do not enter the producer branch. Baselines, the latency-control branch/Site and PR #1 are unchanged. The user explicitly selected updating **https://kiki-screen-receiver.woodsycarp256.chatgpt.site** instead of provisioning another set of model secrets. Preserve its private audience, secrets and D1 sessions. The separately allocated `kiki-guidance-experiment` project is unpublished and unused.
 

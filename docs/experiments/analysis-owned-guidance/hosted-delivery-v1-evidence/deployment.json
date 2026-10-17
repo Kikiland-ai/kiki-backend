@@ -1,0 +1,31 @@
+{
+  "schema": "screen-writing-hosted-fix-deployment/v1",
+  "project_id": "appgprj_6ace6ce34218819198dfd778a822aed5",
+  "version_number": 18,
+  "version_id": "appgprj_6ace6ce34218819198dfd778a822aed5~appgver_a2bd8f4d4a0c819187860adab9531eca",
+  "deployment_id": "appgdep_6ad31a25fb7c8191ae0d10ec54b4db09",
+  "status": "succeeded",
+  "url": "https://kiki-screen-receiver.woodsycarp256.chatgpt.site",
+  "updated_at_utc": "2026-10-17T06:48:17.227619+00:00",
+  "timezone": "Asia/Kolkata",
+  "env_set_revision": 9,
+  "backend_code_revision": "67b84aba2cc037d60e7c71636a1824d8c8fa3fdb",
+  "source_commit": "70d6812b9e1acd46f8d1705b251c0e0c477024c8",
+  "renderer_commit": "3f72dfb1208a8d49935fb5e4cf0e26a376d2f9ba",
+  "worker_sha256": "60eb5256b218c2b65f3c55781fa39da6826130a6592045c9a094916e48740983",
+  "owner_private_preserved": true,
+  "existing_secrets_preserved": true,
+  "node_checks": {
+    "passed": 129,
+    "failed": 0
+  },
+  "controlled_clock_rejection_reproduced": true,
+  "controlled_visible_paint_verified": true,
+  "controlled_visible_after_1500ms": true,
+  "controlled_view_change_rejected": true,
+  "installed_extension_after_fix_verified": false,
+  "real_simulink_after_fix_verified": false,
+  "extension_upgrade_required": false,
+  "receiver_reload_and_native_reshare_required": true,
+  "postdeploy_http_asset_check": "Not repeated; the managed proxy denied CONNECT to this Site host in preceding verification. Exact artifact equality, standalone checks and native successful publication verified."
+}

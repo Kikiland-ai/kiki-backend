@@ -7,6 +7,12 @@ import '../assets/guidance-protocol.js';
 import {startAnalysisStream} from '../assets/json-stream-client.js';
 const decode=text=>text.split('\n\n').filter(Boolean).map(v=>JSON.parse(v.slice(6)));
 const definition=JSON.parse(await readFile(new URL('../data/experiment.json',import.meta.url))),policy=JSON.parse(await readFile(new URL('../data/guided-policy.json',import.meta.url)));
+test('owned clock brackets database work and rejects foreign lab access',async t=>{
+ const h=await setupGuidance();t.after(()=>h.env.DB.close());const db=h.env.DB,prepare=db.prepare.bind(db);let entered=false;
+ db.prepare=sql=>{const s=prepare(sql);return {...s,bind(...values){const b=s.bind(...values);return {...b,async first(){if(sql.startsWith('SELECT state_json,')){entered=true;await new Promise(r=>setTimeout(r,20));}return b.first();}};}};};
+ const r=await h.call(`/lab-sessions/${h.state.lab_session_id}/guidance/clock`),clock=await r.json();assert.equal(r.status,200);assert.ok(entered);assert.ok(clock.server_time_ms-clock.server_received_ms>=15);assert.equal(clock.max_uncertainty_ms,250);
+ const foreign=await h.call(`/lab-sessions/${h.state.lab_session_id}/guidance/clock`,'GET',null,null,{'oai-authenticated-user-id':'different-owner'});assert.equal(foreign.status,404);
+});
 for(const cp of definition.checkpoints)test('live generation schema and strict target admission at '+cp.id,async t=>{
  const h=await setupGuidance();t.after(()=>h.env.DB.close());await seedCheckpoint(h.env,h.state,cp.id);const original=h.env.LAB_STREAM_FETCH;let body;
  h.env.LAB_STREAM_FETCH=async(url,options)=>{body=JSON.parse(options.body);return original(url,options);};

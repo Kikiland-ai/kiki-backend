@@ -81,6 +81,14 @@ async def main():
     await reader.wait_for_function("Number(document.querySelector('#count').textContent)>=2",polling=50,timeout=10000)
     assert await reader.locator('#lab-observation').text_content()==panel
     streamed_panel=True
+   if '--expect-clock-rejection' in sys.argv:
+    await reader.wait_for_function("KikiWriting.diagnostics.events.some(e=>e.stage==='delivery_rejected'&&e.reason.includes('Clock uncertainty'))",timeout=45000)
+    diag=await reader.evaluate('KikiWriting.diagnostics');assert diag['health']['painted']==0,diag
+    await reader.wait_for_timeout(150)
+    evidence=await (await context.request.get('http://127.0.0.1:8872/__fixture/evidence')).json()
+    out=ROOT/'work/guidance-timing/clock-before';out.mkdir(parents=True,exist_ok=True)
+    report={'status':'PASS','expected_fault':'server_processing_counted_as_clock_uncertainty','no_paint_ack':True,'consumer':diag}
+    (out/'report.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps({k:v for k,v in report.items() if k!='consumer'},indent=2));return
    if fault['enabled']:
     await reader.wait_for_function("KikiWriting.diagnostics.events.some(e=>e.stage==='delivery_rejected')",timeout=45000)
     await reader.wait_for_timeout(150)
@@ -92,6 +100,8 @@ async def main():
     report={'status':'PASS','fault':'view_invalidated_between_verification_and_paint','no_paint_ack':True,'reject_ack_persisted':True,'consumer':diag}
     (out/'report.json').write_text(json.dumps(report,indent=2)+'\n');(out/'worker-evidence.json').write_text(json.dumps(evidence,indent=2)+'\n');print(json.dumps({k:v for k,v in report.items() if k!='consumer'},indent=2));return
    await reader.wait_for_function('KikiWriting.diagnostics.health.painted>0',timeout=45000)
+   readable='--check-readable' in sys.argv
+   if readable:await reader.wait_for_timeout(1500)
    diag=await reader.evaluate('KikiWriting.diagnostics')
    cdp=await context.new_cdp_session(target);png=base64.b64decode((await cdp.send('Page.captureScreenshot',{'format':'png'}))['data'])
    out=ROOT/'work/guidance-integration/native';out.mkdir(parents=True,exist_ok=True);(out/'pipeline-painted.png').write_bytes(png)
@@ -108,7 +118,7 @@ async def main():
    (out/'worker-evidence.json').write_text(json.dumps(evidence,indent=2)+'\n')
    assert any(a['status']=='live_rendered' for a in evidence['acks']),evidence
    assert await reader.evaluate('document.querySelector("#preview").srcObject.getVideoTracks()[0].getCaptureHandle()!==null')
-   report={'status':'PASS','native_screen_capture':True,'real_browser_sse_stream':tls,'controller_origin_is_local_fixture_override':tls,'coherent_panel_during_stream':streamed_panel,'reader_visibility_at_paint':await reader.evaluate('document.visibilityState'),'actual_reader_worker_broker_consumer_compositor':True,'blue_pixels_at_authored_control':True,'persisted_exposure_ack':True,'periodic_frames_during_delayed_analysis':diag['health']['captured'],'installed_extension_tested':False,'real_simulink_tested':False,'real_model_localization_tested':False,'consumer':diag}
+   report={'status':'PASS','native_screen_capture':True,'real_browser_sse_stream':tls,'controller_origin_is_local_fixture_override':tls,'coherent_panel_during_stream':streamed_panel,'reader_visibility_at_paint':await reader.evaluate('document.visibilityState'),'actual_reader_worker_broker_consumer_compositor':True,'blue_pixels_at_authored_control':True,'visible_after_1500ms':readable,'persisted_exposure_ack':True,'periodic_frames_during_delayed_analysis':diag['health']['captured'],'installed_extension_tested':False,'real_simulink_tested':False,'real_model_localization_tested':False,'consumer':diag}
    (out/'pipeline-report.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps({k:v for k,v in report.items() if k!='consumer'},indent=2))
   except:
    print('CONSUMER',await reader.evaluate('KikiWriting.diagnostics'),flush=True)

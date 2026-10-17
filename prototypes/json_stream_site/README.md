@@ -6,7 +6,7 @@ Use adapter 0.4.0, connect the MATLAB tab to this receiver, share that same brow
 
 Worker D1 batch persistence assigns ordered cancellation/cue sequences atomically with outbox insertion and guards lab revisions. Signed actual paint ACKs record exposure only. Existing tracker rules remain authoritative. Preserve all existing secrets and D1 rows; migration 0004 appends guidance tables after the existing 0003 migration.
 
-Build: `node scripts/build.mjs`. Offline checks: `node --test scripts/test-*.mjs`. The backend handoff is `docs/handoffs/analysis-owned-guidance-integration-v1.md`. Native capture/compositor checks use explicit model/Chrome API fixtures; installed-extension and real Simulink recognition acceptance remain pending. Live provider samples include successes and failures; no latency improvement is established.
+Build: `node scripts/build.mjs`. Offline checks: `node --test scripts/test-*.mjs`. The integration handoff is `docs/handoffs/analysis-owned-guidance-integration-v1.md`; the hosted timing correction is `docs/handoffs/screen-writing-hosted-delivery-fix.md`. Clock calibration excludes measured server work while preserving the 250 ms network-uncertainty limit. Automatic checks allow an expiry-bounded readable interval after paint. Delivery receipts retain their actual rejection reasons. Native capture/compositor checks use explicit model/Chrome API fixtures; installed-extension and real Simulink recognition acceptance remain pending. Live provider samples include successes and failures; no latency improvement is established.
 
 The sections below are historical receiver and latency adapter records. See [inherited experiment operation and limits](docs/json-stream-experiment.md).
 

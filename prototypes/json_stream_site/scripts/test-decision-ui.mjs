@@ -26,7 +26,9 @@ test('actual guide UI releases busy at commit and ignores an older auxiliary sna
  let release;const gate=new Promise(resolve=>release=resolve);let tails=0;env.LAB_STREAM_AUXILIARY=async()=>{if(++tails===1)await gate;};
  const nodes=new Map();const element=()=>({hidden:false,textContent:'',value:'',disabled:false,checked:false,attrs:{},addEventListener(){},replaceChildren(){},setAttribute(k,v){this.attrs[k]=v;},getAttribute(k){return this.attrs[k];},removeAttribute(k){delete this.attrs[k];},querySelector(){return element();}});
  const document={getElementById(id){if(!nodes.has(id))nodes.set(id,element());return nodes.get(id);},createElement:element};
- const context={document,window:{addEventListener(){}},localStorage:{getItem:()=>state.lab_session_id,setItem(){},removeItem(){}},fetch:fetcher,verificationCadence,sameScreenContent,startAnalysisStream,performance,AbortController,AbortSignal,Date,Event,console,Blob,URL,navigator:{},setTimeout(){}};
+ let holdDelay=0;const wakeups=[];
+ const writing={context(){},receive:async()=>{},requestHeaders:()=>({}),invalidate(){holdDelay=0;},get nextCheckDelay(){return holdDelay;}};
+ const context={document,window:{addEventListener(){},KikiWriting:writing},localStorage:{getItem:()=>state.lab_session_id,setItem(){},removeItem(){}},fetch:fetcher,verificationCadence,sameScreenContent,startAnalysisStream,performance,AbortController,AbortSignal,Date,Event,console,Blob,URL,navigator:{},setTimeout(fn,ms){wakeups.push({fn,ms});return wakeups.length;},clearTimeout(){}};
  vm.createContext(context);const source=(await readFile('assets/lab.js','utf8')).replace(/^import .*;\n/gm,'');vm.runInContext(source,context);
  const until=async predicate=>{const deadline=performance.now()+2000;while(performance.now()<deadline){if(predicate())return;await new Promise(resolve=>setTimeout(resolve,1));}assert.fail('Controlled UI condition did not settle: '+JSON.stringify({checks:checkCalls,tails,budget:document.getElementById('lab-budget').textContent,status:document.getElementById('lab-status').textContent}));};
  await until(()=>document.getElementById('lab-budget').textContent.includes('0 screen reads'));
@@ -38,4 +40,7 @@ test('actual guide UI releases busy at commit and ignores an older auxiliary sna
  await until(()=>document.getElementById('lab-budget').textContent.includes('2 screen reads'));
  assert.equal(checkCalls,2,'A blocked auxiliary tail must not keep the verification slot busy');
  release();await new Promise(resolve=>setImmediate(resolve));assert.ok(document.getElementById('lab-budget').textContent.includes('2 screen reads'),'Late old snapshot cannot restore the first state');
+ holdDelay=2500;t.mock.timers.tick(3100);const thirdMeta={...meta,sequence:3,captured_elapsed_ms:6220},thirdFrame=await frame(thirdMeta);
+ context.window.KikiLab.onFrame(new Blob([image]),thirdMeta,thirdFrame);await new Promise(resolve=>setImmediate(resolve));assert.equal(checkCalls,2,'A visible cue gets its bounded reading interval before automatic recheck');
+ const wake=wakeups.at(-1);assert.equal(wake.ms,2501);holdDelay=0;wake.fn();await until(()=>checkCalls===3);
 });

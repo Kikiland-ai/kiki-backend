@@ -4,10 +4,10 @@ import {startAnalysisStream} from '/static/json-stream-client.js';
 (() => {
  const $=id=>document.getElementById(id);
  let state=null,definition=null,policy=null,python=false,latest=null,captureId=null,attaching=null,busy=false,editing=false,viewChanging=false,generation=0;
- let streamEnabled=true,streamRows=[],activeStream=null,acceptedObservation=null,lastFingerprint=null,lastSamplingContext=null,lastBound=false;
+ let streamEnabled=true,streamRows=[],activeStream=null,acceptedObservation=null,lastFingerprint=null,lastSamplingContext=null,lastBound=false,presentationWake=null;
  const pendingStreams=new Set();
  const clearStream=()=>{streamRows=[];$('lab-stream-feedback').hidden=true;};
- function invalidateStream(){generation++;void window.KikiWriting?.invalidate('Lab context or attachment changed');for(const item of pendingStreams)item.controller.abort();activeStream=null;clearStream();}
+ function invalidateStream(){generation++;if(presentationWake!==null){clearTimeout(presentationWake);presentationWake=null;}void window.KikiWriting?.invalidate('Lab context or attachment changed');for(const item of pendingStreams)item.controller.abort();activeStream=null;clearStream();}
  async function streamedCheck(id,selected,version){
   clearStream();const item={controller:new AbortController(),committed:false,first:null,core:null,tail:null};activeStream=item;
   // Only auxiliary delivery is cancelled here; its durable decision is final.
@@ -109,6 +109,8 @@ import {startAnalysisStream} from '/static/json-stream-client.js';
  async function check(force=false){
   if(!state||!latest||busy||editing||viewChanging||state.status!=='active'||!current())return;
   if(Date.now()<nextRetryAt)return;
+  const visibleDelay=window.KikiWriting?.nextCheckDelay||0;
+  if(!force&&visibleDelay>0){if(presentationWake!==null)clearTimeout(presentationWake);const version=generation,id=state.lab_session_id;presentationWake=setTimeout(()=>{presentationWake=null;if(version===generation&&state?.lab_session_id===id)void check();},Math.ceil(visibleDelay)+1);return;}
   const cp=state.queue.current_checkpoint_id,sampling=JSON.stringify([state.workspace.id,state.workspace.capture_epoch,state.workspace.view_revision,state.workspace.parameter_revision,state.workspace.condition,step().current_visit_id,state.guidance.current_action?.id]),same=cp===lastCheckpoint&&sampling===lastSamplingContext&&!!latest.writingBinding===lastBound&&sameScreenContent({hash:latest.frame?.sha256,fingerprint:latest.visualFingerprint},{hash:lastHash,fingerprint:lastFingerprint});
   const waitingForActionRead=state.runtime.candidate?.action_findings?.some(a=>a.status==='match'&&(state.procedure_tracking?.[a.action_id]?.count||0)<policy.minimum_matches);
   const waitingForSecondRead=state.runtime.candidate?.criteria.some(c=>c.status==='match'&&!policy.confirmations[cp]?.includes(c.criterion_id)&&!policy.responses[c.criterion_id]&&step().criteria.find(v=>v.criterion_id===c.criterion_id)?.state!=='satisfied');

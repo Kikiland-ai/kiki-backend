@@ -1,0 +1,37 @@
+{
+  "schema": "hosted-guidance-delivery-check/v1",
+  "date": "2026-10-17",
+  "timezone": "Asia/Kolkata",
+  "renderer_branch_commit": "3f72dfb1208a8d49935fb5e4cf0e26a376d2f9ba",
+  "live_problem": {
+    "rejected": 5,
+    "cancelled": 11,
+    "verified_paint": 0,
+    "historical_exact_rejection_stage_known": false
+  },
+  "controlled_clock_db_delay_ms": 650,
+  "before": {
+    "painted": false,
+    "reason": "Clock uncertainty exceeds 250 ms; live drawing is paused."
+  },
+  "after": {
+    "visible_pixels": true,
+    "signed_paint_ack": true,
+    "visible_after_1500_ms": true,
+    "view_invalidation_rejected": true
+  },
+  "node_tests": {
+    "passed": 129,
+    "failed": 0
+  },
+  "paid_model_calls": 0,
+  "learner_pixels_archived": false,
+  "actual_installed_extension_tested": false,
+  "real_simulink_after_fix_tested": false,
+  "limitations": [
+    "The hosted defect is reproduced with controlled source pixels and explicit model/Chrome API fixtures. Generic historical rejection receipts prevent proving its exact stage for every prior real rejection.",
+    "The browser streaming check uses an explicit localhost controller-origin substitution and pinned ephemeral certificate. Native capture and compositor/signature/persistence code execute, but it is not an installed MV3 extension acceptance.",
+    "The retained source view is a controlled input, not learner MATLAB pixels. No provider latency/recognition improvement is claimed.",
+    "250 ms clock network uncertainty, 500 ms presentation reservation, packet expiry and source/context cancellation remain enforced."
+  ]
+}

@@ -12,7 +12,10 @@ const handler=async(req,res)=>{try{
  const data=[];for await(const chunk of req)data.push(chunk);const bytes=Buffer.concat(data);
  const origin=req.headers.host==='localhost'?'https://localhost':fixtureOrigin;
  const request=new Request(origin+req.url,{method:req.method,headers:{...req.headers,'oai-authenticated-user-id':'guidance-offline-owner'},...(bytes.length?{body:bytes}:{})});
- let response=await worker.fetch(request,env);
+ const delay=Number(process.env.GUIDANCE_FIXTURE_CLOCK_DB_DELAY_MS||0);let selectedEnv=env;
+ if(delay&&req.url.endsWith('/guidance/clock'))selectedEnv={...env,DB:{prepare(sql){const s=env.DB.prepare(sql);return {...s,bind(...values){const b=s.bind(...values);return {...b,async first(){await new Promise(r=>setTimeout(r,delay));return b.first();}};}};}}};
+ let response=await worker.fetch(request,selectedEnv);
+ if(process.env.GUIDANCE_FIXTURE_LEGACY_CLOCK==='1'&&req.url.endsWith('/guidance/clock')&&response.ok){const body=await response.json();delete body.server_received_ms;response=Response.json(body,{headers:response.headers});}
  if(req.url==='/lab-sessions'&&req.method==='POST'&&response.ok){const state=await seedCheckpoint(env,await response.json());response=Response.json(state,{headers:response.headers});}
  res.writeHead(response.status,Object.fromEntries(response.headers));const reader=response.body.getReader();res.on('close',()=>reader.cancel().catch(()=>{}));while(true){const {value,done}=await reader.read();if(done)break;res.write(Buffer.from(value));}res.end();
 }catch(err){console.error(err);if(!res.headersSent)res.writeHead(500);res.end('Controlled fixture failure');}};

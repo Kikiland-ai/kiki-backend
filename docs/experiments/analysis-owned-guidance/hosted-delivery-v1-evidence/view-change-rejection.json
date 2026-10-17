@@ -1,0 +1,116 @@
+{
+  "status": "PASS",
+  "fault": "view_invalidated_between_verification_and_paint",
+  "no_paint_ack": true,
+  "reject_ack_persisted": true,
+  "consumer": {
+    "schema": "guidance-consumer-trace/v1",
+    "health": {
+      "capture": "Verified pixels from the connected tab",
+      "analysis": "available",
+      "delivery": "Guidance cleared for the current context",
+      "captured": 3,
+      "painted": 0,
+      "last_failure": {
+        "stage": "delivery",
+        "reason": "Tab or view changed; discard entire cue"
+      }
+    },
+    "events": [
+      {
+        "at": "2026-10-17T06:45:29.068Z",
+        "stage": "clock_calibrated",
+        "uncertainty_ms": 3.4000244140625,
+        "server_processing_ms": 651
+      },
+      {
+        "at": "2026-10-17T06:45:29.068Z",
+        "stage": "negotiated",
+        "stream_id": "9251879d-4e31-4982-82cf-c07f8e2dddc7"
+      },
+      {
+        "at": "2026-10-17T06:45:29.102Z",
+        "stage": "captured",
+        "ticket_id": "d77927da-921a-485d-b923-7f8ea35550e2"
+      },
+      {
+        "at": "2026-10-17T06:45:30.156Z",
+        "stage": "frame_signed",
+        "frame_id": "f560e177-9861-4ef5-ab6f-6b60f7a720dc:1:2"
+      },
+      {
+        "at": "2026-10-17T06:45:30.694Z",
+        "stage": "ack_recorded",
+        "sequence": 1,
+        "status": "cancelled"
+      },
+      {
+        "at": "2026-10-17T06:45:30.694Z",
+        "stage": "cancelled",
+        "sequence": 1
+      },
+      {
+        "at": "2026-10-17T06:45:32.185Z",
+        "stage": "captured",
+        "ticket_id": "db39d078-9e34-4d41-9a08-ef72a17157ee"
+      },
+      {
+        "at": "2026-10-17T06:45:33.244Z",
+        "stage": "frame_signed",
+        "frame_id": "f560e177-9861-4ef5-ab6f-6b60f7a720dc:1:3"
+      },
+      {
+        "at": "2026-10-17T06:45:34.836Z",
+        "stage": "presentation_reserved"
+      },
+      {
+        "at": "2026-10-17T06:45:34.872Z",
+        "stage": "live_pixels_verified",
+        "reservation_ms": 36
+      },
+      {
+        "at": "2026-10-17T06:45:34.879Z",
+        "stage": "paint_requested",
+        "reservation_ms": 43.29999999701977
+      },
+      {
+        "at": "2026-10-17T06:45:34.915Z",
+        "stage": "invalidated",
+        "reason": "Shared view changed"
+      },
+      {
+        "at": "2026-10-17T06:45:34.922Z",
+        "stage": "invalidated",
+        "reason": "Lab context or attachment changed"
+      },
+      {
+        "at": "2026-10-17T06:45:34.951Z",
+        "stage": "delivery_rejected",
+        "request_id": "c6ae9885-5a13-4247-a01c-696b697be12c",
+        "reason": "Tab or view changed; discard entire cue"
+      },
+      {
+        "at": "2026-10-17T06:45:34.958Z",
+        "stage": "ack_recorded",
+        "sequence": 2,
+        "status": "rejected"
+      },
+      {
+        "at": "2026-10-17T06:45:35.236Z",
+        "stage": "ack_recorded",
+        "sequence": 3,
+        "status": "cancelled"
+      },
+      {
+        "at": "2026-10-17T06:45:35.236Z",
+        "stage": "cancelled",
+        "sequence": 3
+      },
+      {
+        "at": "2026-10-17T06:45:35.284Z",
+        "stage": "captured",
+        "ticket_id": "28950058-7d57-4ebb-984b-4bf690027270"
+      }
+    ]
+  }
+}

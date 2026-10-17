@@ -1,0 +1,74 @@
+{
+  "status": "PASS",
+  "expected_fault": "server_processing_counted_as_clock_uncertainty",
+  "no_paint_ack": true,
+  "consumer": {
+    "schema": "guidance-consumer-trace/v1",
+    "health": {
+      "capture": "Verified pixels from the connected tab",
+      "analysis": "available",
+      "delivery": "Clock uncertainty exceeds 250 ms; live drawing is paused.",
+      "captured": 2,
+      "painted": 0,
+      "last_failure": {
+        "stage": "delivery",
+        "reason": "Clock uncertainty exceeds 250 ms; live drawing is paused."
+      }
+    },
+    "events": [
+      {
+        "at": "2026-10-17T06:43:12.829Z",
+        "stage": "capture_blocked",
+        "reason": "Clock uncertainty exceeds 250 ms; live drawing is paused."
+      },
+      {
+        "at": "2026-10-17T06:43:15.241Z",
+        "stage": "captured",
+        "ticket_id": "3ed880b5-5224-479e-b5dd-6ccb48c5824a"
+      },
+      {
+        "at": "2026-10-17T06:43:16.315Z",
+        "stage": "frame_signed",
+        "frame_id": "7e372bfc-ec37-4477-baee-dd88302180dd:1:3"
+      },
+      {
+        "at": "2026-10-17T06:43:16.961Z",
+        "stage": "ack_recorded",
+        "sequence": 1,
+        "status": "cancelled"
+      },
+      {
+        "at": "2026-10-17T06:43:16.962Z",
+        "stage": "cancelled",
+        "sequence": 1
+      },
+      {
+        "at": "2026-10-17T06:43:18.355Z",
+        "stage": "captured",
+        "ticket_id": "b6325431-3fca-422e-9073-0b7a1f89d81f"
+      },
+      {
+        "at": "2026-10-17T06:43:19.407Z",
+        "stage": "frame_signed",
+        "frame_id": "7e372bfc-ec37-4477-baee-dd88302180dd:1:4"
+      },
+      {
+        "at": "2026-10-17T06:43:21.196Z",
+        "stage": "delivery_rejected",
+        "request_id": "cfabe408-ee35-4706-9299-d457f1f36199",
+        "reason": "Clock uncertainty exceeds 250 ms; live drawing is paused."
+      },
+      {
+        "at": "2026-10-17T06:43:21.197Z",
+        "stage": "invalidated",
+        "reason": "Clock uncertainty exceeds 250 ms; live drawing is paused."
+      },
+      {
+        "at": "2026-10-17T06:43:21.207Z",
+        "stage": "ack_recorded",
+        "sequence": 2,
+        "status": "rejected"
+      }
+    ]
+  }
+}

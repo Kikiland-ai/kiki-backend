@@ -1,3 +1,13 @@
+# Hosted annotation delivery correction — 17 October 2026 (Asia/Kolkata)
+
+User reports advancing steps with no visible annotation. Current drawing-enabled analyses commit, but inspected receipts are five rejected and eleven cancelled, with zero verified paints. Historical generic reasons prevent precise retrospective attribution. A native-browser controlled test reproduces clock rejection when 650 ms of server DB work is counted as network uncertainty; corrected receive/send timestamps paint real pixels and persist a signed ACK under identical delay. Pixels remain visible at 1.5 seconds, and an injected source move still rejects.
+
+Implemented on independent renderer commit `3f72dfb`, merged on integration: conservative clock interval excluding server processing, exact rejection reasons, and an expiry-bounded readable interval before automatic rechecking. Integration preserves owner checks and logs packet outcomes. All 129 Node/source/baseline/BB8 checks pass. No paid model calls, extension changes, tracker completion changes or API timeout changes.
+
+Last completed: reproduced and corrected the hosted timing path, tested readable paint and stale-view rejection, retained evidence. Next: publish exact source to existing private receiver, then inspect real installed-adapter paint/rejection after browser refresh/share. [Handoff](../handoffs/screen-writing-hosted-delivery-fix.md). Real Simulink after-fix placement is unverified.
+
+---
+
 # Version-17 retry follow-up — 16 October 2026 (Asia/Kolkata)
 
 Latest observed check (11:09:59) had zero provider HTTP attempts: a retained shared rotation-cycle deadline surfaced as `provider_http_400`. It expired at 11:10:54; capture detached at 11:10:44 and is inactive. Earlier predeployment checking missed `provider_rotation.retry_at` by looking only at provider_cooldowns. Controlled actual-router replay confirms dispatch resumes and failed keys clear after expiry. No new Google failure or post-expiry live recovery has been established, and no runtime change/redeployment was made.

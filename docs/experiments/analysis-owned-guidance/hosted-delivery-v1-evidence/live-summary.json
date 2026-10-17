@@ -1,0 +1,122 @@
+{
+  "schema": "live-screen-writing-diagnosis/v1",
+  "observed_on": "2026-10-17",
+  "timezone": "Asia/Kolkata",
+  "site_version": 17,
+  "latest_stream_receipt_counts": {
+    "rejected": 5,
+    "cancelled": 11
+  },
+  "inspected_receipts": [
+    {
+      "sequence": 13,
+      "status": "rejected",
+      "reason": "consumer_validation_failed"
+    },
+    {
+      "sequence": 2,
+      "status": "cancelled",
+      "reason": "ordered_cancel"
+    },
+    {
+      "sequence": 9,
+      "status": "cancelled",
+      "reason": "ordered_cancel"
+    },
+    {
+      "sequence": 6,
+      "status": "cancelled",
+      "reason": "ordered_cancel"
+    },
+    {
+      "sequence": 4,
+      "status": "cancelled",
+      "reason": "ordered_cancel"
+    },
+    {
+      "sequence": 5,
+      "status": "rejected",
+      "reason": "consumer_validation_failed"
+    },
+    {
+      "sequence": 14,
+      "status": "cancelled",
+      "reason": "ordered_cancel"
+    },
+    {
+      "sequence": 12,
+      "status": "cancelled",
+      "reason": "ordered_cancel"
+    },
+    {
+      "sequence": 10,
+      "status": "rejected",
+      "reason": "consumer_validation_failed"
+    },
+    {
+      "sequence": 1,
+      "status": "cancelled",
+      "reason": "ordered_cancel"
+    },
+    {
+      "sequence": 8,
+      "status": "rejected",
+      "reason": "consumer_validation_failed"
+    },
+    {
+      "sequence": 3,
+      "status": "rejected",
+      "reason": "consumer_validation_failed"
+    },
+    {
+      "sequence": 16,
+      "status": "cancelled",
+      "reason": "ordered_cancel"
+    },
+    {
+      "sequence": 15,
+      "status": "cancelled",
+      "reason": "ordered_cancel"
+    },
+    {
+      "sequence": 11,
+      "status": "cancelled",
+      "reason": "ordered_cancel"
+    },
+    {
+      "sequence": 7,
+      "status": "cancelled",
+      "reason": "ordered_cancel"
+    }
+  ],
+  "historical_exact_rejection_stage_known": false,
+  "historical_reason_limitation": "Client replaced actual reason with consumer_validation_failed.",
+  "live_drawing_analyses": [
+    {
+      "request_id": "c0d75bff-61a2-4f27-8179-bca6099a4f0a",
+      "wire_format": "lab-observer-drawing/v1",
+      "decision_committed": true,
+      "total_ms": 9305,
+      "received_to_result_ms": 10911
+    },
+    {
+      "request_id": "e54e42cf-212b-4452-93cb-98f4c377060d",
+      "wire_format": "lab-observer-drawing/v1",
+      "decision_committed": true,
+      "total_ms": 13272,
+      "received_to_result_ms": 14795
+    },
+    {
+      "request_id": "cc2bbc45-44fd-488c-acab-43023c72c112",
+      "wire_format": "lab-observer-drawing/v1",
+      "decision_committed": true,
+      "total_ms": 7328,
+      "received_to_result_ms": 8335
+    }
+  ],
+  "observed_clock_worker_ms": [
+    306
+  ],
+  "learner_pixels_archived": false,
+  "diagnosis": "Drawing-enabled analysis commits, but no inspected receipt proves paint. Hosted clock server-processing defect is reproduced separately with controlled pixels; generic historical receipts prevent claiming the exact same stage for every live rejection."
+}

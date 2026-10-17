@@ -72,14 +72,14 @@ async function gPublish(env,result,owner,run,verified,trace){
    env.DB.prepare('UPDATE guidance_streams SET sequence=?,publication_id=?,context_json=? WHERE id=? AND owner=? AND active=1 AND sequence=? AND fence_revision<? AND EXISTS(SELECT 1 FROM lab_sessions WHERE id=? AND owner=? AND revision=?) AND NOT EXISTS(SELECT 1 FROM guidance_outbox WHERE publication_id=?)').bind(packet.cue_sequence,publication,gJSON(packet.context),row.id,owner,row.sequence,admission.admitted_context.lab_revision,current.lab_session_id,owner,current.revision,publication),
    env.DB.prepare('INSERT OR IGNORE INTO guidance_outbox(stream_id,sequence,publication_id,message_json,created_at) SELECT id,sequence,?,?,? FROM guidance_streams WHERE id=? AND owner=? AND publication_id=? AND sequence=?').bind(publication,gJSON(packet),Date.now(),row.id,owner,publication,packet.cue_sequence)
   ]);
-  if(saved[0].meta.changes){trace.emit('published',{frame_age_at_commit_ms:Date.now()-Date.parse(packet.frame.received_at),screen_guidance_bytes:new TextEncoder().encode(gJSON(packet)).length});return packet;}
+  if(saved[0].meta.changes){trace.emit('published',{frame_age_at_commit_ms:Date.now()-Date.parse(packet.frame.received_at),screen_guidance_bytes:new TextEncoder().encode(gJSON(packet)).length});console.info(gJSON({event:'guidance_packet_published',request_id:packet.analysis_request_id,sequence:packet.cue_sequence,outcome:packet.outcome,reason:packet.reason,operation_count:packet.packet?.operations.length||0,action_id:packet.action_id,source_revision:env.GUIDANCE_SOURCE_REVISION||'uncommitted'}));return packet;}
  }
  labError(409,'Guidance publication conflicted with a newer context.');
 }
 async function guidanceRoute(request,env,owner){
  const url=new URL(request.url),m=/^\/lab-sessions\/([a-f0-9-]{36})\/guidance\/(connect|events|clock|ack)$/.exec(url.pathname);if(!m)return null;
- const s=await labLoad(env,m[1],owner),kind=m[2];
- if(kind==='clock'&&request.method==='GET')return json({server_time_ms:Date.now(),clock_authority:'observer_server_utc',max_uncertainty_ms:250});
+ const received=Date.now(),s=await labLoad(env,m[1],owner),kind=m[2];
+ if(kind==='clock'&&request.method==='GET')return json({server_received_ms:received,server_time_ms:Date.now(),clock_authority:'observer_server_utc',max_uncertainty_ms:250});
  if(kind==='connect'&&request.method==='POST'){
   const b=await labJSON(request),identity=b.identity;
   gNeed(s.runtime.capture_active&&s.status==='active'&&b.capture_session_id===s.workspace.capture_session_id,'Attach the shared tab first.');
@@ -105,7 +105,7 @@ async function guidanceRoute(request,env,owner){
   // A signed exposure may arrive after a later context; recording history does
   // not authorize stale presentation, extend its expiry or mutate progress.
 
-  const timing={schema:'guidance-delivery-timing/v1',request_id:ack.request_id,stream_id:id,sequence:ack.cue_sequence,sample_kind:env.GUIDANCE_SAMPLE_KIND||'live_provider',configuration_id:env.GUIDANCE_CONFIGURATION_ID||'drawing-integration-v1',source_revision:env.GUIDANCE_SOURCE_REVISION||'uncommitted',status:ack.status,commit_to_ack_ms:Date.now()-message.created_at,consumer_commit_to_paint_ms:Number.isFinite(b.commit_to_paint_ms)&&b.commit_to_paint_ms>=0?b.commit_to_paint_ms:null,consumer_delivered_at:ack.delivered_at,server_received_at:gNow(),late_context:s.revision!==value.context.lab_revision,paint_verified:['live_rendered','text_only'].includes(ack.status)};
+  const timing={schema:'guidance-delivery-timing/v1',request_id:ack.request_id,stream_id:id,sequence:ack.cue_sequence,sample_kind:env.GUIDANCE_SAMPLE_KIND||'live_provider',configuration_id:env.GUIDANCE_CONFIGURATION_ID||'drawing-integration-v1',source_revision:env.GUIDANCE_SOURCE_REVISION||'uncommitted',status:ack.status,reason:ack.reason,commit_to_ack_ms:Date.now()-message.created_at,consumer_commit_to_paint_ms:Number.isFinite(b.commit_to_paint_ms)&&b.commit_to_paint_ms>=0?b.commit_to_paint_ms:null,consumer_delivered_at:ack.delivered_at,server_received_at:gNow(),late_context:s.revision!==value.context.lab_revision,paint_verified:['live_rendered','text_only'].includes(ack.status)};
   await env.DB.prepare('INSERT OR IGNORE INTO guidance_acks(ack_id,owner,stream_id,sequence,packet_id,received_at,ack_json,timing_json) VALUES(?,?,?,?,?,?,?,?)').bind(ack.ack_id,owner,id,ack.cue_sequence,ack.packet_id,Date.now(),gJSON(ack),gJSON(timing)).run();console.info(gJSON(timing));return json({recorded:true,assessment_effect:'none'});
  }
  labError(405,'Unsupported guidance operation.');

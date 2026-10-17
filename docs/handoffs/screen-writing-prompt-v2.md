@@ -36,3 +36,9 @@ The second run exposed a separate deterministic reader issue: `capture.js` resto
 The user's two actual MATLAB screenshots are visible in chat but were not supplied as readable files in the execution workspace. `/workspace/attachments` contains only the older pasted text. No recreated or synthetic image is being represented as those exact screenshots. The exact-pixel MATLAB replay and open-dialog-to-closed-dialog cancellation test remain blocked on attachment-file access. Preserve that distinction when reporting acceptance.
 
 Next: load those two image files into a periodically captured source tab, run the unchanged reader/writer pipeline, correlate analysis/commit/paint times and test cancellation on the view switch. Actual installed-extension Simulink paint remains a separate live acceptance check.
+
+## Deployment receipt
+
+Existing private receiver version 20 published successfully at 13:30:37 Asia/Kolkata, 17 October 2026. [Site](https://kiki-screen-receiver.woodsycarp256.chatgpt.site), source `a24506ceadf05dcbba1da73ad9507b17fa1f0c74`, backend `b595babfaa6d5ad6531fa8f7c4d27d9904dfb3b5`, environment revision 11. Standalone source passes all 138 tests; generated Worker hashes match exactly. [Receipt](../experiments/analysis-owned-guidance/writing-prompt-v2-evidence/deployment.json). Existing owner-only audience and all three secrets are preserved. Baseline/producer/renderer branches and latency Site were not changed by this work.
+
+Reload the reader page and re-share to load the capture client correction. No extension reinstall is needed. Native publication is verified; optional postdeploy HTTP asset QA remains unavailable under the existing managed proxy denial and was not retried. No actual MATLAB screenshot or installed-extension acceptance is claimed.

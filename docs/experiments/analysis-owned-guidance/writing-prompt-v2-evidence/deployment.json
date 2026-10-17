@@ -1,0 +1,19 @@
+{
+  "project_id": "appgprj_6ace6ce34218819198dfd778a822aed5",
+  "version": 20,
+  "deployment_id": "appgdep_6ad32b1bed388191be11b9b1cad4b6e3",
+  "version_id": "appgprj_6ace6ce34218819198dfd778a822aed5~appgver_d2a2c11af5348191991cca98495aa66b",
+  "status": "succeeded",
+  "url": "https://kiki-screen-receiver.woodsycarp256.chatgpt.site",
+  "updated_at": "2026-10-17T08:00:37.375036+00:00",
+  "environment_revision": 11,
+  "backend_code_revision": "b595babfaa6d5ad6531fa8f7c4d27d9904dfb3b5",
+  "site_source_revision": "a24506ceadf05dcbba1da73ad9507b17fa1f0c74",
+  "worker_sha256": "01c720d86512b291a81e01c9f49327405349642040babc3c99c186a82b9430bd",
+  "prompt_version": "dsb-step-observer/v5-drawing2",
+  "owner_private_preserved": true,
+  "existing_secrets_preserved": true,
+  "installed_extension_tested": false,
+  "user_matlab_screenshots_tested": false,
+  "verification": "Native publication verified; managed policy still blocks optional deployed HTTP asset checks."
+}

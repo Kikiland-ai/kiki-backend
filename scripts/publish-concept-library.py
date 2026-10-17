@@ -33,7 +33,7 @@ def main():
         args.output.mkdir(parents=True, exist_ok=True)
         report = []
         for cid, p, exclusions in prepared:
-            (args.output / (cid + '.json')).write_text(json.dumps(p.record, ensure_ascii=False, indent=2) + '\n')
+            (args.output / (cid + '.json')).write_text(json.dumps(p.record, ensure_ascii=False, indent=2) + '\n', encoding='utf-8', newline='\n')
             report.append({'conceptId': cid, 'mediaRevision': p.manifest.mediaRevision, 'narration': len(p.manifest.narration),
                 'artifacts': len(p.manifest.artifacts), 'exclusions': exclusions,
                 'hasAppCompatibleMedia': bool(p.manifest.narration or p.manifest.artifacts),
@@ -51,7 +51,7 @@ def main():
             store = media.BucketMediaAssets(storage.bucket(args.bucket, app=app))
             for row, (_, p, _) in zip(report, prepared):
                 row['cloudStatus'] = media.publish(client, store, p, args.expected_current)
-        (args.output / 'compatibility.json').write_text(json.dumps(report, indent=2) + '\n')
+        (args.output / 'compatibility.json').write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8', newline='\n')
         print(json.dumps(report, indent=2))
         return 0
     finally:

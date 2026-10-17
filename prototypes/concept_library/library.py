@@ -20,7 +20,7 @@ def encoded(value):
 
 def validate(folder):
     folder = Path(folder)
-    p = json.loads((folder / 'packet.json').read_text())
+    p = json.loads((folder / 'packet.json').read_text(encoding='utf-8'))
     if p.get('schema') != 'cam-concept-packet/v1':
         raise ValueError('Unsupported packet schema')
     if [c['kind'] for c in p['placards']] != ['definition', 'concept', 'application', 'recap']:
@@ -45,7 +45,7 @@ def validate(folder):
         covered.extend(a['placardIds'])
     if sorted(covered) != sorted(c['id'] for c in p['placards']):
         raise ValueError('Narration does not cover the four placards exactly once')
-    if p['scene'] != json.loads((folder / 'scene.json').read_text()):
+    if p['scene'] != json.loads((folder / 'scene.json').read_text(encoding='utf-8')):
         raise ValueError('Scene differs from packet')
     return p
 
@@ -75,7 +75,7 @@ def build(database=DATABASE, root=ROOT):
             def asset(path, mime):
                 data = path.read_bytes()
                 identifier = sha(data)
-                conn.execute('INSERT OR IGNORE INTO assets VALUES(?,?,?,?)', (identifier, str(path.resolve().relative_to(root)), mime, len(data)))
+                conn.execute('INSERT OR IGNORE INTO assets VALUES(?,?,?,?)', (identifier, path.resolve().relative_to(root).as_posix(), mime, len(data)))
                 return identifier
             for folder, p in packets:
                 cid, version, revision = p['conceptId'], p['contentVersion'], p['experienceRevision']

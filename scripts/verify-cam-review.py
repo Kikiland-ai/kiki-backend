@@ -11,7 +11,7 @@ from prototypes.mixed_script.speech import inspect_wav
 
 def main():
     root = Path(__file__).resolve().parents[1] / 'artifacts/cam-review'
-    manifest = json.loads((root / 'recovery-manifest.json').read_text())
+    manifest = json.loads((root / 'recovery-manifest.json').read_text(encoding='utf-8'))
     site = root / 'site'
     for entry in manifest['files']:
         path = site / entry['path']
@@ -23,11 +23,11 @@ def main():
     for i in range(1, 11):
         cid = f'C-AM-{i:02}'
         folder = site / 'dist/concepts' / cid
-        packet = json.loads((folder / 'packet.json').read_text())
+        packet = json.loads((folder / 'packet.json').read_text(encoding='utf-8'))
         assert packet['conceptId'] == cid
         assert packet['contentVersion'] == 'am-51187527300cba2fa3cca868'
         assert packet['sourceGitRevision'] == 'ba40218d7bf07637debe530019bcf8faf6afb61a'
-        assert packet['scene'] == json.loads((folder / 'scene.json').read_text())
+        assert packet['scene'] == json.loads((folder / 'scene.json').read_text(encoding='utf-8'))
         assert [p['kind'] for p in packet['placards']] == ['definition', 'concept', 'application', 'recap']
         assert packet['alignment'] == 'not_performed'
         assert packet['publication']['firestore'] == 'not_written'

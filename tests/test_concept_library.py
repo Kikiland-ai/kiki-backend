@@ -1,3 +1,4 @@
+from contextlib import closing
 import importlib.util
 import json
 import os
@@ -8,6 +9,11 @@ import tempfile
 import unittest
 
 from prototypes.concept_library.library import DATABASE, ROOT, ConceptLibrary, build
+
+
+def dump(path):
+    with closing(sqlite3.connect(path)) as connection:
+        return list(connection.iterdump())
 
 
 class LibraryTests(unittest.TestCase):
@@ -30,7 +36,8 @@ class LibraryTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             db = Path(directory) / 'library.sqlite3'
             build(db)
-            self.assertEqual(db.read_bytes(), DATABASE.read_bytes())
+            # Compare content, not file bytes: the SQLite header records the writing library's version.
+            self.assertEqual(dump(db), dump(DATABASE))
             before = db.read_bytes()
             with self.assertRaisesRegex(ValueError, 'No concept packets'):
                 build(db, Path(directory))
@@ -41,7 +48,7 @@ class LibraryTests(unittest.TestCase):
             root = Path(directory)
             db = root / 'library.sqlite3'
             shutil.copyfile(DATABASE, db)
-            with sqlite3.connect(db) as connection:
+            with closing(sqlite3.connect(db)) as connection, connection:
                 row = connection.execute('SELECT asset_id,relative_path FROM assets WHERE mime_type=? LIMIT 1', ('audio/wav',)).fetchone()
                 connection.execute("UPDATE packets SET packet_json='{}' WHERE concept_id='C-AM-08'")
             dest = root / row[1]

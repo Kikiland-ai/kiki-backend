@@ -1,3 +1,13 @@
+# Live source-ticket lifecycle and visibility follow-up — 17 October 2026
+
+The user still sees no shapes despite `painted:2`. Current v21 receipts show 2 signed paints, 10 pixel-change rejections and 4 combined source-admission rejections among 16 deliveries. The uploaded trace confirms zero changed tiles at the second paint, but that cue could last at most about six more seconds. Original coordinates/removal time are absent, so actual user visibility remains unaccepted. No API 503 is established by these downstream failures.
+
+Three actual-controller regressions reproduce retained-proof reuse after clear, late admission after invalidation, and a delayed clear erasing a new capture ticket. All fail before and pass after the bounded repair. Source generations, retained-proof retirement and an awaited clear fence fix these races without weakening source/freshness/sequence checks. Diagnostics distinguish cumulative paints from a current cue and record requested geometry, expiry, source age and up to twelve changed regions. Extension 0.4.0 and all public contracts remain unchanged.
+
+Last completed: 144 Node checks, source/baseline/BB8 gates, controlled native positive paint visible at 1.5 seconds and stale-view rejection. No paid provider calls. Next: publish to the existing private receiver, record the receipt, then inspect refreshed installed-client coordinates/expiry/change-region diagnostics. Remaining live mismatch causes, tight localization and reliable user-visible delivery are not accepted. [Handoff](../handoffs/screen-writing-live-receipts.md), [evidence](../experiments/analysis-owned-guidance/live-receipts-v1-evidence/README.md).
+
+---
+
 # Matched-raster freshness correction — 17 October 2026 (Asia/Kolkata)
 
 The user reports geometry repeatedly discarded on an unchanged view. Latest hosted receipts confirm five geometry rejections, six cancellations and no paint. The consumer compared raw native pixels with a resized/JPEG-decoded reference. Controlled native reproduction and both original PNGs from the user's ZIP confirm false positive changes. Fresh samples now resize to the analysed frame's exact dimensions before fingerprinting; threshold/context/source/cancellation guards remain unchanged. Both PNGs change from 31/16 changed tiles to zero; injected real pixel changes still reject.

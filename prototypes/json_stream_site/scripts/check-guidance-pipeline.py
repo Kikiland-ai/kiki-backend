@@ -158,6 +158,11 @@ async def main():
    else:assert any(b>160 and b>r+80 for r,g,b in pixels),pixels
    await reader.wait_for_function("KikiWriting.diagnostics.events.some(e=>e.stage==='ack_recorded')",timeout=4000)
    diag=await reader.evaluate('KikiWriting.diagnostics');logs=await broker_call({'type':'diagnostics'},{'url':'chrome-extension://fixture/popup.html'})
+   assert diag['painted_is_cumulative'] is True
+   assert diag['current_cue'] and diag['current_cue']['operation_count']>0,diag
+   requested=next(e for e in reversed(diag['events']) if e['stage']=='paint_requested')
+   assert requested['marks'] and requested['ttl_ms']>0 and requested['source_ticket_age_ms']>=0,requested
+   assert any(e['stage']=='paint_acknowledged' and e.get('operation_count',0)>0 and e.get('remaining_ms',0)>0 for e in diag['events']),diag
    assert any(e['stage']=='guidance_painted' for e in logs['events']),logs
    assert diag['health']['captured']>=(1 if live_gain else 2),diag
    assert not errors,errors

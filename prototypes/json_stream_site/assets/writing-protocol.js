@@ -22,6 +22,10 @@
   return {changed:count>0,comparable_tiles:comparable,changed_tiles:count,max_delta:Math.round(max*1000)/1000};
  }
  const changed=(a,b)=>difference(a,b).changed;
+ function changedRegions(a,b){
+  if(!a||!b||a.length!==576||b.length!==576)return [];
+  return a.flatMap((v,i)=>v===null||b[i]===null||Math.abs(v-b[i])<=3?[]:[{column:i%32,row:Math.floor(i/32),x:(i%32)/32,y:Math.floor(i/32)/18,width:1/32,height:1/18,delta:Math.round(Math.abs(v-b[i])*1000)/1000}]).sort((a,b)=>b.delta-a.delta).slice(0,12);
+ }
  function clockSample(start,end,data){
   const sent=data.server_time_ms,received=data.server_received_ms??sent;
   if(data.clock_authority!=='observer_server_utc'||![start,end,sent,received].every(Number.isFinite)||end<start||sent<received)throw Error('Invalid drawing clock sample.');
@@ -32,5 +36,5 @@
   if(uncertainty<0||uncertainty>250)throw Error('Clock uncertainty exceeds 250 ms; live drawing is paused.');
   return {upper,uncertainty,sampled:end,server_processing_ms:sent-received};
  }
- globalThis.KikiWritingProtocol={sourceMatches,fingerprint,changed,difference,clockSample};
+ globalThis.KikiWritingProtocol={sourceMatches,fingerprint,changed,difference,changedRegions,clockSample};
 })();

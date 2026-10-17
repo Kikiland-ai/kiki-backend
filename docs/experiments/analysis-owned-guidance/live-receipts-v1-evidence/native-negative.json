@@ -1,0 +1,161 @@
+{
+  "status": "PASS",
+  "fault": "view_invalidated_between_verification_and_paint",
+  "no_paint_ack": true,
+  "reject_ack_persisted": true,
+  "consumer": {
+    "schema": "guidance-consumer-trace/v1",
+    "health": {
+      "capture": "Source invalidated before frame admission.",
+      "analysis": "available",
+      "delivery": "Guidance cleared for the current context",
+      "captured": 3,
+      "painted": 0,
+      "last_failure": {
+        "stage": "delivery",
+        "reason": "Tab or view changed; discard entire cue"
+      }
+    },
+    "painted_is_cumulative": true,
+    "current_cue": null,
+    "events": [
+      {
+        "at": "2026-10-17T09:39:42.888Z",
+        "stage": "clock_calibrated",
+        "uncertainty_ms": 2.75,
+        "server_processing_ms": 0
+      },
+      {
+        "at": "2026-10-17T09:39:42.888Z",
+        "stage": "negotiated",
+        "stream_id": "fc062b3d-35c9-4ea0-aee3-69f453345ab6"
+      },
+      {
+        "at": "2026-10-17T09:39:42.930Z",
+        "stage": "captured",
+        "ticket_id": "8cbe2141-3b03-4f5a-a7bc-d1b2fdb0f56e"
+      },
+      {
+        "at": "2026-10-17T09:39:43.650Z",
+        "stage": "frame_signed",
+        "frame_id": "e88d4d66-e22c-47de-9cc1-7d57c0e3b7f5:1:2"
+      },
+      {
+        "at": "2026-10-17T09:39:45.234Z",
+        "stage": "ack_recorded",
+        "sequence": 1,
+        "status": "cancelled"
+      },
+      {
+        "at": "2026-10-17T09:39:45.234Z",
+        "stage": "cancelled",
+        "sequence": 1
+      },
+      {
+        "at": "2026-10-17T09:39:45.687Z",
+        "stage": "captured",
+        "ticket_id": "1f809862-5602-498d-bcc7-199d33999762"
+      },
+      {
+        "at": "2026-10-17T09:39:46.776Z",
+        "stage": "frame_signed",
+        "frame_id": "e88d4d66-e22c-47de-9cc1-7d57c0e3b7f5:1:3"
+      },
+      {
+        "at": "2026-10-17T09:39:48.817Z",
+        "stage": "captured",
+        "ticket_id": "db17ce84-1616-48d0-9265-8a688f36cfab"
+      },
+      {
+        "at": "2026-10-17T09:39:49.328Z",
+        "stage": "presentation_reserved"
+      },
+      {
+        "at": "2026-10-17T09:39:49.373Z",
+        "stage": "live_pixels_compared",
+        "comparison_version": "encoded-frame-raster/v1",
+        "source_width": 1848,
+        "source_height": 1014,
+        "comparison_width": 1600,
+        "comparison_height": 878,
+        "changed": false,
+        "comparable_tiles": 574,
+        "changed_tiles": 0,
+        "max_delta": 2.016
+      },
+      {
+        "at": "2026-10-17T09:39:49.373Z",
+        "stage": "live_pixels_verified",
+        "reservation_ms": 44.900000005960464
+      },
+      {
+        "at": "2026-10-17T09:39:49.386Z",
+        "stage": "paint_requested",
+        "request_id": "4559a54f-6ebd-424b-b001-7ca046ac788c",
+        "sequence": 2,
+        "outcome": "annotate",
+        "marks": [
+          {
+            "kind": "box",
+            "region": {
+              "x": 0.25,
+              "y": 0.325,
+              "width": 0.18,
+              "height": 0.07
+            }
+          },
+          {
+            "kind": "text",
+            "anchor": {
+              "x": 0.25,
+              "y": 0.395
+            }
+          }
+        ],
+        "ttl_ms": 7876,
+        "expires_at": "2026-10-17T09:39:57.314Z",
+        "source_ticket_age_ms": 6468,
+        "source_admission_age_ms": 5736,
+        "reservation_ms": 57.599999994039536
+      },
+      {
+        "at": "2026-10-17T09:39:49.436Z",
+        "stage": "invalidated",
+        "reason": "Shared view changed"
+      },
+      {
+        "at": "2026-10-17T09:39:49.445Z",
+        "stage": "invalidated",
+        "reason": "Lab context or attachment changed"
+      },
+      {
+        "at": "2026-10-17T09:39:49.476Z",
+        "stage": "delivery_rejected",
+        "request_id": "4559a54f-6ebd-424b-b001-7ca046ac788c",
+        "reason": "Tab or view changed; discard entire cue"
+      },
+      {
+        "at": "2026-10-17T09:39:49.483Z",
+        "stage": "ack_recorded",
+        "sequence": 2,
+        "status": "rejected"
+      },
+      {
+        "at": "2026-10-17T09:39:49.782Z",
+        "stage": "ack_recorded",
+        "sequence": 3,
+        "status": "cancelled"
+      },
+      {
+        "at": "2026-10-17T09:39:49.782Z",
+        "stage": "cancelled",
+        "sequence": 3
+      },
+      {
+        "at": "2026-10-17T09:39:49.845Z",
+        "stage": "admission_rejected",
+        "reason": "Source invalidated before frame admission."
+      }
+    ]
+  }
+}

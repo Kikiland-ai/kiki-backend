@@ -2,6 +2,8 @@
 
 17 October 2026. Branch `integration/analysis-owned-guidance`. Uses BB8 engineering-debugging in reference mode and the existing Sites deployment workflow. This follows the user's request to inspect repeated geometry discards and test the supplied PNGs.
 
+Postdeployment follow-up: [live receipts and source lifecycle](screen-writing-live-receipts.md). The user still cannot see shapes; v21 has intermittent paints and additional rejections. The controlled raster repair does not establish reliable live delivery.
+
 ## Confirmed cause
 
 The current receiver's stored receipts show five rejected drawing packets between 13:33:58 and 13:35:37 Asia/Kolkata, all with `Live content differs from the analysed frame; geometry discarded.`, zero paint receipts, and `late_context:false`. The packets reached publication; these were browser freshness rejections after valid analysis. The first inspected packet's encoded frame is 1600×819. Live logs do not retain the two compared fingerprints, so historical per-tile attribution is unavailable.

@@ -3,14 +3,16 @@
 (() => {
  const P=KikiGuidanceProtocol,F=KikiWritingProtocol,$=id=>document.getElementById(id);
  let track=null,video=null,lab=null,captureId=null,connection=null,identityKey=null,epoch=0,mask=Promise.resolve(),active=null,high=0,queue=null,delivering=null,polling=false,offset=null,lastFP=null,inflightSequence=0,holdUntil=0;
- const pending=new Map(),samples=new Map(),retained=new Map(),events=[];
+ const pending=new Map(),samples=new Map(),retained=new Map(),events=[],ticketGenerations=new WeakMap(),ticketPrepared=new WeakMap();
+ let sourceGeneration=0,clearing=Promise.resolve();
  const health={capture:'Waiting for shared pixels',analysis:'Waiting for analysis',delivery:'No cue received',captured:0,painted:0,last_failure:null};
  const text=(key,value)=>{health[key]=value;const el=$('writing-'+key);if(el)el.textContent=value;};
- function log(stage,details={}){events.push({at:new Date().toISOString(),stage,...details});if(events.length>100)events.shift();const el=$('writing-trace');if(el)el.textContent=JSON.stringify({health,events},null,2);}
+ function log(stage,details={}){events.push({at:new Date().toISOString(),stage,...details});if(events.length>100)events.shift();const el=$('writing-trace');if(el)el.textContent=JSON.stringify(globalThis.KikiWriting?.diagnostics||{health,events},null,2);}
  function message(s){text('delivery',s);if($('writing-status'))$('writing-status').textContent=s;}
  function adapter(type,data={},timeout=1800){return new Promise((resolve,reject)=>{const requestId=crypto.randomUUID(),timer=setTimeout(()=>{pending.delete(requestId);reject(Error('Extension operation '+type+' exceeded '+Math.round(timeout)+' ms.'));},timeout);pending.set(requestId,{resolve,reject,timer});window.postMessage({channel:'kiki-tab-adapter',direction:'page',type,requestId,...data},location.origin);});}
  window.addEventListener('message',e=>{if(e.source!==window||e.origin!==location.origin||e.data?.channel!=='kiki-tab-adapter'||e.data.direction!=='extension')return;
   const r=pending.get(e.data.requestId);if(r){clearTimeout(r.timer);pending.delete(e.data.requestId);const error=e.data.result?.error||e.data.error;error?r.reject(Error(error)):r.resolve(e.data.result);}
+  if(e.data.type==='invalidated'&&e.data.reason==='expired'){const expired=active;active=null;holdUntil=0;if(expired){message('Previous cue expired; waiting for current guidance');log('cue_expired',{sequence:expired.cue_sequence,expires_at:expired.validity.expires_at});}}
   if(e.data.type==='invalidated'&&!['expired','producer_cancel','consumer_cancel'].includes(e.data.reason))void invalidate('Shared view changed',true);
   if(e.data.type==='stopped'){connection=null;identityKey=null;void invalidate('Extension disconnected');}
  });
@@ -23,38 +25,46 @@
  let connecting=null;
  async function ensureConnection(){if(connecting)return connecting;connecting=connect();try{return await connecting;}finally{connecting=null;}}
  async function connect(){
+  await clearing;
   if(!lab?.runtime.capture_active||!captureId)return false;
   const identity=await adapter('writer_identity');if(!F.sourceMatches(track,identity))throw Error('Share the same MATLAB Chrome tab that is connected to the extension.');
   const key=JSON.stringify([lab.lab_session_id,captureId,identity.sessionId,identity.public_key]);
   if(!connection||key!==identityKey){connection=await api(path('connect'),'POST',{contract:'analysis-owned-guidance/v0.1',capture_session_id:captureId,identity});
-   await adapter('writer_handshake',{negotiation:connection,lab_session_id:lab.lab_session_id});identityKey=key;high=0;epoch++;await calibrate();log('negotiated',{stream_id:connection.guidance_stream_id});}
+   await adapter('writer_handshake',{negotiation:connection,lab_session_id:lab.lab_session_id});identityKey=key;high=0;epoch++;sourceGeneration++;retained.clear();await calibrate();log('negotiated',{stream_id:connection.guidance_stream_id});}
   return true;
  }
- async function invalidate(reason,reportView=false){epoch++;active=null;queue=null;message(reason);log('invalidated',{reason});if(connection)void adapter('writer_clear',{},800).catch(()=>{});
+ async function invalidate(reason,reportView=false){epoch++;sourceGeneration++;active=null;holdUntil=0;queue=null;retained.clear();message(reason);log('invalidated',{reason});
+  // Clear and capture form a fence: an older asynchronous clear must never
+  // erase a ticket created for the next frame. Retained proofs retire with it.
+  if(connection)clearing=clearing.then(()=>adapter('writer_clear',{},800)).catch(e=>{connection=null;identityKey=null;log('source_clear_failed',{reason:e.message});});
   if(reportView&&lab)void window.KikiLab?.onViewChange(window.KikiLab.viewRevision()+1).catch(()=>{});
+  await clearing;
  }
- function setStream(stream){epoch++;track=stream?.getVideoTracks()[0]||null;sampler.setTrack(track);connection=null;identityKey=null;retained.clear();active=null;
+ function setStream(stream){epoch++;sourceGeneration++;lastFP=null;track=stream?.getVideoTracks()[0]||null;sampler.setTrack(track);connection=null;identityKey=null;retained.clear();active=null;
   if(track){track.addEventListener('ended',()=>void invalidate('Sharing stopped'));track.addEventListener('capturehandlechange',()=>{connection=null;identityKey=null;void invalidate('Shared source changed',true);});}
  }
  async function prepareFrame(preview){video=preview;const release=await reserve();let held=false;
-  try{if(!await ensureConnection())return null;const b=await adapter('writer_prepare');let sample;
+  try{await clearing;if(!await ensureConnection())return null;const generation=sourceGeneration,b=await adapter('writer_prepare');ticketGenerations.set(b,generation);ticketPrepared.set(b,performance.now());let sample;
    try{sample=await sampler.snapshot(preview,b.descriptor.freshness_probe);}catch(e){await adapter('writer_finish',{ticket_id:b.ticket_id}).catch(()=>{});throw e;}
+   if(generation!==sourceGeneration){sample.close();await adapter('writer_finish',{ticket_id:b.ticket_id}).catch(()=>{});throw Error('Source invalidated during capture.');}
    samples.set(b.ticket_id,{...sample,release});held=true;health.captured++;text('capture','Verified pixels from the connected tab');log('captured',{ticket_id:b.ticket_id});return b;
   }catch(e){text('capture',e.message);health.last_failure={stage:'capture',reason:e.message};log('capture_blocked',{reason:e.message});return null;}finally{if(!held)release();}
  }
  const fingerprint=(b,canvas)=>F.fingerprint(canvas,[KikiFrameProbe.exclusion(b.descriptor.freshness_probe,canvas.width,canvas.height)]);
- async function finishFrame(b,canvas){if(!b)return null;try{const r=await adapter('writer_finish',{ticket_id:b.ticket_id});if(!r.same_view)return null;
+ async function finishFrame(b,canvas){if(!b)return null;try{const r=await adapter('writer_finish',{ticket_id:b.ticket_id});if(!r.same_view||ticketGenerations.get(b)!==sourceGeneration)return null;
    const fp=fingerprint(b,canvas),changed=lastFP&&F.changed(fp,lastFP);lastFP=fp;if(changed&&active){await invalidate('Content changed; waiting for a fresh drawing');return null;}return b;
   }finally{const s=samples.get(b.ticket_id);s?.close();s?.release();samples.delete(b.ticket_id);}}
- async function admitFrame(b,frame,blob){if(!b)return null;try{
+ async function admitFrame(b,frame,blob){if(!b)return null;const generation=ticketGenerations.get(b),admissionConnection=connection;try{
+   await clearing;if(generation!==sourceGeneration||!admissionConnection||admissionConnection!==connection)throw Error('Source invalidated before frame admission.');
    const bytes=new Uint8Array(await blob.arrayBuffer());let raw='';for(let i=0;i<bytes.length;i+=8192)raw+=String.fromCharCode(...bytes.subarray(i,i+8192));
    const admitted=await adapter('writer_admit',{ticket_id:b.ticket_id,frame,jpeg:btoa(raw)},2200);
    const bitmap=await createImageBitmap(blob),reference=fingerprint(b,bitmap);bitmap.close();
+   if(generation!==sourceGeneration||admissionConnection!==connection)throw Error('Source invalidated during frame admission.');
    const selected={binding:b,attestation:admitted.attestation,connection_id:connection.connection_id,frame,blob,reference,received:performance.now()};retained.set(frame.frame_id,selected);
    for(const [id,v] of retained)if(retained.size>12||performance.now()-v.received>20000)retained.delete(id);
    log('frame_signed',{frame_id:frame.frame_id});return selected;
   }catch(e){text('capture',e.message);log('admission_rejected',{reason:e.message});return null;}}
- function requestHeaders(selected){const v=selected.writingBinding;if(!connection||!v||v.connection_id!==connection.connection_id)return {};
+ function requestHeaders(selected){const v=selected.writingBinding;if(!connection||!v||v.connection_id!==connection.connection_id||retained.get(selected.frame?.frame_id)!==v||performance.now()-v.received>=20000)return {};
   return {'X-Guidance-Contract':'analysis-owned-guidance/v0.1','X-Guidance-Connection':connection.connection_id,'X-Guidance-Attestation':JSON.stringify(v.attestation)};}
  async function recordAck(signed,started){const ack=signed?.ack||signed;if(!ack?.ack_id)return;await api(`/lab-sessions/${ack.context.lab_session_id}/guidance/ack?connection=${encodeURIComponent(ack.guidance_stream_id)}`,'POST',{ack,signature:signed.signature||null,commit_to_paint_ms:started===null?null:performance.now()-started});log('ack_recorded',{sequence:ack.cue_sequence,status:ack.status});}
  async function cancel(c){if(!connection||c.guidance_stream_id!==connection.guidance_stream_id||c.cue_sequence<=high)return;
@@ -78,22 +88,23 @@
     // on fine edges even when the underlying source pixels are unchanged.
     canvas.width=selected.frame.width;canvas.height=selected.frame.height;canvas.getContext('2d').drawImage(fresh.image,0,0,canvas.width,canvas.height);
     const ignored=[b.descriptor.freshness_probe,selected.binding.descriptor.freshness_probe].map(p=>KikiFrameProbe.exclusion(p,canvas.width,canvas.height));
-    const comparison=F.difference(F.fingerprint(canvas,ignored),selected.reference),dimensions={source_width:fresh.width,source_height:fresh.height,comparison_width:canvas.width,comparison_height:canvas.height};
-    log('live_pixels_compared',{comparison_version:'encoded-frame-raster/v1',...dimensions,...comparison});
+    const liveFingerprint=F.fingerprint(canvas,ignored),comparison=F.difference(liveFingerprint,selected.reference),dimensions={source_width:fresh.width,source_height:fresh.height,comparison_width:canvas.width,comparison_height:canvas.height};
+    log('live_pixels_compared',{comparison_version:'encoded-frame-raster/v1',...dimensions,...comparison,...(comparison.changed?{changed_regions:F.changedRegions(liveFingerprint,selected.reference)}:{})});
     if(comparison.changed)throw Error(`Live content differs from the analysed frame; geometry discarded (${comparison.changed_tiles}/${comparison.comparable_tiles} tiles; max delta ${comparison.max_delta}; ${canvas.width}x${canvas.height}).`);
    log('live_pixels_verified',{reservation_ms:performance.now()-reserved});
    }finally{fresh?.close();await adapter('writer_finish',{ticket_id:b.ticket_id}).catch(()=>{});}check();
    const remaining=Math.min(7900,Date.parse(e.validity.expires_at)-upperNow()-50);if(remaining<=0)throw Error('Drawing expired before presentation.');check();
-   log('paint_requested',{reservation_ms:performance.now()-reserved});
+   const marks=P.compile(e).map(op=>({kind:op.kind,...(op.region?{region:op.region}:{}),...(op.anchor?{anchor:op.anchor}:{}),...(op.anchors?{anchors:op.anchors}:{})}));
+   log('paint_requested',{request_id:e.analysis_request_id,sequence:e.cue_sequence,outcome:e.outcome,marks,ttl_ms:Math.round(remaining),expires_at:e.validity.expires_at,source_ticket_age_ms:Math.round(performance.now()-ticketPrepared.get(selected.binding)),source_admission_age_ms:Math.round(performance.now()-selected.received),reservation_ms:performance.now()-reserved});
    const signed=await adapter('guidance_commit',{envelope:e,ticket_id:selected.binding.ticket_id,ttlMs:remaining,deadline_renderer_ms:b.descriptor.clock_ms+(performance.now()-preparedAt)+remaining},Math.max(40,500-(performance.now()-reserved)));check();const ack=signed.ack;
    high=e.cue_sequence;active=e.outcome==='none'?null:e;holdUntil=active?performance.now()+Math.max(0,Math.min(2500,Date.parse(e.validity.expires_at)-upperNow())):0;
    if(e.outcome==='none'){message('Analysis supplied no current drawing');log('no_cue',{sequence:high});return;}
-   if(!['live_rendered','text_only'].includes(ack.status))throw Error('The connected tab did not acknowledge paint.');health.painted++;health.last_failure=null;message(ack.status==='text_only'?'Current instruction painted; target unresolved':'Shapes and notes painted on your shared tab');log('paint_acknowledged',{request_id:e.analysis_request_id,sequence:high,commit_to_paint_ms:performance.now()-started});
+   if(!['live_rendered','text_only'].includes(ack.status))throw Error('The connected tab did not acknowledge paint.');health.painted++;health.last_failure=null;message(ack.status==='text_only'?'Current instruction painted; target unresolved':'Shapes and notes painted on your shared tab');log('paint_acknowledged',{request_id:e.analysis_request_id,sequence:high,outcome:e.outcome,operation_count:marks.length,expires_at:e.validity.expires_at,remaining_ms:Math.max(0,Math.round(Date.parse(e.validity.expires_at)-upperNow())),commit_to_paint_ms:performance.now()-started});
    release();release=null;try{await recordAck(signed,started);}catch(err){log('ack_record_failed',{reason:err.message});}
   }catch(err){health.last_failure={stage:'delivery',reason:err.message};log('delivery_rejected',{request_id:e.analysis_request_id,reason:err.message});void recordAck(P.ack(e,'rejected',String(err.message||'consumer_validation_failed').slice(0,200)),started).catch(()=>{});if(token===epoch)await invalidate(err.message);}finally{release?.();inflightSequence=0;}}
  async function poll(){if(polling||!connection||!lab)return;polling=true;const observedConnection=connection;try{const result=await api(path('events')+'?connection='+encodeURIComponent(connection.connection_id)+'&after='+high);if(connection!==observedConnection)return;for(const m of result.messages)if(m.message_type==='cancel')await cancel(m);if(!result.active){connection=null;identityKey=null;}}catch(e){log('poll_failed',{reason:e.message});}finally{polling=false;}}
  setInterval(()=>void poll(),650);
  globalThis.KikiWriting={setStream,prepareFrame,finishFrame,admitFrame,fingerprint,requestHeaders,receive,invalidate,sample:b=>samples.get(b?.ticket_id),
-  attach(state,id){lab=state;captureId=id;},context(state){lab=state;},get nextCheckDelay(){try{return active?Math.max(0,Math.min(holdUntil-performance.now(),Date.parse(active.validity.expires_at)-upperNow())):0;}catch{return 0;}},get diagnostics(){return {schema:'guidance-consumer-trace/v1',health:structuredClone(health),events:structuredClone(events)};}};
+  attach(state,id){lab=state;captureId=id;},context(state){lab=state;},get nextCheckDelay(){try{return active?Math.max(0,Math.min(holdUntil-performance.now(),Date.parse(active.validity.expires_at)-upperNow())):0;}catch{return 0;}},get diagnostics(){let current_cue=null;try{if(active&&upperNow()<Date.parse(active.validity.expires_at))current_cue={sequence:active.cue_sequence,outcome:active.outcome,operation_count:active.packet?.operations.length||0,expires_at:active.validity.expires_at};}catch{}return {schema:'guidance-consumer-trace/v1',health:structuredClone(health),painted_is_cumulative:true,current_cue,events:structuredClone(events)};}};
  $('writing-check')?.addEventListener('click',async()=>{try{await ensureConnection();await calibrate();message('Source and contracts match. Waiting for a committed analysis drawing.');}catch(e){message(e.message);}});
 })();

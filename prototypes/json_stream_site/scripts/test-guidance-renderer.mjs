@@ -6,6 +6,13 @@ import '../assets/guidance-protocol.js';
 import '../assets/writing-protocol.js';
 const P=globalThis.KikiGuidanceProtocol;
 const load=()=>JSON.parse(readFileSync(new URL('./fixtures/guidance-renderer.json',import.meta.url))).state;
+test('changed-region diagnostics identify the strongest live pixels and preserve marker exclusions',()=>{
+ const a=Array(576).fill(100),b=[...a];a[34]=105;a[35]=120;a[575]=null;b[575]=255;
+ const regions=globalThis.KikiWritingProtocol.changedRegions(a,b);assert.equal(regions.length,2);
+ assert.deepEqual(regions[0],{column:3,row:1,x:3/32,y:1/18,width:1/32,height:1/18,delta:20});
+ assert.equal(regions[1].column,2);assert.equal(globalThis.KikiWritingProtocol.changedRegions(null,b).length,0);
+ assert.equal(globalThis.KikiWritingProtocol.changedRegions(Array(576).fill(110),b).length,12);
+});
 test('visual diagnostics preserve the strict threshold and ignore only marker-excluded tiles',()=>{
  const f=globalThis.KikiWritingProtocol;
  assert.deepEqual(f.difference([10,20,null,40],[13,18,255,null]),{changed:false,comparable_tiles:2,changed_tiles:0,max_delta:3});

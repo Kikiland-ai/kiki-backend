@@ -7,7 +7,7 @@ import {fileURLToPath} from 'node:url';
 import {randomBytes} from 'node:crypto';
 import worker from '../dist/server/index.js';
 import {localDB} from './local-db.mjs';
-export async function replayLab({ioMode='batched',contextMode='per_chunk'}={}){
+export async function replayLab({ioMode='batched',contextMode='per_chunk',onState=null}={}){
  const definition=JSON.parse(await readFile('data/experiment.json','utf8')),policy=JSON.parse(await readFile('data/guided-policy.json','utf8'));
  const image=Buffer.from(await readFile('scripts/fixtures/jpeg.txt','utf8'),'base64'),DB=localDB();
  const records=[],env={DB,KIKI_PROVIDER_IO:ioMode,KIKI_STREAM_CONTEXT_MODE:contextMode,CAPTURE_RECEIPT_KEY:randomBytes(32).toString('hex'),GEMINI_API_KEYS:'["fixture-a","fixture-b","fixture-c","fixture-d"]'};
@@ -27,6 +27,7 @@ export async function replayLab({ioMode='batched',contextMode='per_chunk'}={}){
   const events=(await(await call(`/lab-sessions/${state.lab_session_id}/check-stream`,'POST',image,{'Content-Type':'image/jpeg','X-Capture-Frame':JSON.stringify(meta)})).text()).split('\n\n').filter(Boolean).map(row=>JSON.parse(row.slice(6)));
   assert.ok(events.some(e=>e.type==='guidance_committed'),'Complete STOP must commit');
   state=events.find(e=>e.type==='state_snapshot').state;
+  if(onState)onState({state:structuredClone(state),committed:structuredClone(events.find(e=>e.type==='guidance_committed').state)});
   assert.equal(state.runtime.last_analysis_timing.provider_db_operations,ioMode==='batched'?4:17);
   assert.equal(state.runtime.last_analysis_timing.input_tokens,123);
   assert.equal(state.runtime.last_analysis_timing.context_validation_mode,contextMode);

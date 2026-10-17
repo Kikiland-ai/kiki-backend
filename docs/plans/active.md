@@ -1,3 +1,35 @@
+# Floating Kiki windows: first slice built and locally verified — 17 October 2026
+
+The user stopped the annotation experiment, chose small Kiki windows on the shared MATLAB tab, and asked to iterate quickly, then commit and push. The [handoff](../handoffs/floating-guidance-windows.md), user choices ([ADR 0008](../decisions/0008-floating-guidance-windows-first-slice.md)) and [test plan](floating-guidance-test-plan.md) were copied from `design/floating-guidance-bubbles`. This branch starts from `baseline/screen-reader-v1` at `7c986df`; PR #1 had already merged, contrary to the entry below.
+
+Built:
+
+- **Projection and wiring:** a deterministic `floating-guidance/v0.1` projection, a reader-page publisher hooked into `render()`, and window pause/resume through the existing lab action.
+- **Ports:** `capture_active` in the committed projection; retention of the accepted observation, labelled "Earlier accepted view".
+- **Capture protection:** Kiki's rectangles are redacted on the copied frame before JPEG encoding ([ADR 0009](../decisions/0009-floating-window-capture-redaction.md)).
+- **Extension:** a new MV3 extension in `prototypes/floating_guidance/` with a `matlab.mathworks.com` host permission and a dev variant for localhost.
+
+Ran:
+
+- L0 14/14;
+- L1 43/43;
+- L2 30/30 in four consecutive runs;
+- the offline evaluation gate (95/95 Node, Python suite, three full replays, pinned context, frozen baseline);
+- BB8 validate and discovery checks.
+
+Real model calls: none.
+
+Failed or environmental on Windows:
+
+- The baseline Python suite needs `PYTHONUTF8=1`.
+- The BB8 symlink test cannot create symlinks without Developer Mode (`WinError 1314`); `bb8/` is unchanged.
+
+Not done: L3a on real MATLAB Online, L3b with a real model, any Site deployment, a published JSON schema, CI wiring.
+
+Exact next action: the user runs L3a from [the slice README](../../prototypes/floating_guidance/README.md) and reports layout, interaction and masking on the real tool. L3b and hosting are separate authorizations.
+
+---
+
 # Baseline promotion PR requested; manual acceptance pending — 15 October 2026
 
 The user requested a PR with all cumulative improvements against `baseline/screen-reader-v1`, then one manual test before deciding to merge. Target verified at `681ad52d37ac0bfced86ceadeaaed6ef8128caf5`; head `experiment/stream-context-batch` contains nine implementation/evidence commits through `9af91d6d3019b602d506d4f3ef2a31662fe4c998`. Read the [promotion review record](../reviews/screen-reader-baseline-promotion.md) for the cumulative scope, reviewer map, source/deployment/evidence chain, compatibility, rollback and uncompleted manual checklist.

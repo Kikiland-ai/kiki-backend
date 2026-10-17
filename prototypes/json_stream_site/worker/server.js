@@ -154,6 +154,8 @@ export default {
       if(request.method==='GET' && url.pathname==='/static/lab-cadence.js') return response(ASSETS.labcadence,200,{'Content-Type':'application/javascript'});
       if(request.method==='GET' && url.pathname==='/static/json-stream-client.js')return response(ASSETS.streamclient,200,{'Content-Type':'application/javascript'});
       if(request.method==='GET' && url.pathname==='/static/lab.js') return response(ASSETS.labjs,200,{'Content-Type':'application/javascript'});
+      if(request.method==='GET' && url.pathname==='/static/floating-guidance.js') return response(ASSETS.floatingguidance,200,{'Content-Type':'application/javascript'});
+      if(request.method==='GET' && url.pathname==='/static/floating-bridge.js') return response(ASSETS.floatingbridge,200,{'Content-Type':'application/javascript'});
       if (request.method === 'GET' && url.pathname === '/health') {
         let keys=[],configuration_valid=true;try{keys=providerKeys(env);}catch{configuration_valid=false;}
         return json({latency_experiment:{id:'stream-context-batch/v1',provider_io_mode:env.KIKI_PROVIDER_IO||'batched',context_validation_mode:env.KIKI_STREAM_CONTEXT_MODE||'per_chunk'},json_stream:{available:true,wire_format:'lab-analysis-stream/v2',priority:['criteria','action_findings','uncertainties'],commit_before_auxiliary:true},status:'ok',mode:'hosted_frame_receipt',sample_hz:.5,image_storage:'none',analysis:{provider:'gemini',configured:providerConfigured(env),configuration_valid,key_count:keys.length,rotation_enabled:keys.length>1,quota_pool_count:new Set(keys.map(v=>v.quota_pool)).size,model:env.GEMINI_SCREEN_MODEL||ANALYSIS_MODEL,lab_model:env.GEMINI_LAB_MODEL||env.GEMINI_SCREEN_MODEL||ANALYSIS_MODEL}});

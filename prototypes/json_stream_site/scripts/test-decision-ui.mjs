@@ -8,6 +8,9 @@ import worker from '../dist/server/index.js';
 import {localDB} from './local-db.mjs';
 import {verificationCadence} from '../assets/lab-cadence.js';
 import {startAnalysisStream} from '../assets/json-stream-client.js';
+import {acceptedFrom,screenContext} from '../assets/floating-guidance.js';
+// Kiki window extension absent: the publisher stays idle and never masks frames.
+const createFloatingPublisher=()=>({source(){},changed(){},blockedReason:()=>null,status:()=>({present:false}),sampleSafety:()=>({mode:'none'}),apply(){}});
 
 test('actual guide UI releases busy at commit and ignores an older auxiliary snapshot',async t=>{
  t.mock.timers.enable({apis:['Date'],now:Date.UTC(2026,9,15)});
@@ -26,7 +29,7 @@ test('actual guide UI releases busy at commit and ignores an older auxiliary sna
  let release;const gate=new Promise(resolve=>release=resolve);let tails=0;env.LAB_STREAM_AUXILIARY=async()=>{if(++tails===1)await gate;};
  const nodes=new Map();const element=()=>({hidden:false,textContent:'',value:'',disabled:false,checked:false,attrs:{},addEventListener(){},replaceChildren(){},setAttribute(k,v){this.attrs[k]=v;},getAttribute(k){return this.attrs[k];},removeAttribute(k){delete this.attrs[k];},querySelector(){return element();}});
  const document={getElementById(id){if(!nodes.has(id))nodes.set(id,element());return nodes.get(id);},createElement:element};
- const context={document,window:{addEventListener(){}},localStorage:{getItem:()=>state.lab_session_id,setItem(){},removeItem(){}},fetch:fetcher,verificationCadence,startAnalysisStream,performance,AbortController,AbortSignal,Date,Event,console,Blob,URL,navigator:{},setTimeout(){}};
+ const context={document,window:{addEventListener(){}},localStorage:{getItem:()=>state.lab_session_id,setItem(){},removeItem(){}},fetch:fetcher,verificationCadence,startAnalysisStream,acceptedFrom,screenContext,createFloatingPublisher,performance,AbortController,AbortSignal,Date,Event,console,Blob,URL,navigator:{},setTimeout(){}};
  vm.createContext(context);const source=(await readFile('assets/lab.js','utf8')).replace(/^import .*;\n/gm,'');vm.runInContext(source,context);
  const until=async predicate=>{for(let i=0;i<200;i++){if(predicate())return;await new Promise(resolve=>setImmediate(resolve));}assert.fail('Controlled UI condition did not settle: '+JSON.stringify({checks:checkCalls,tails,budget:document.getElementById('lab-budget').textContent,status:document.getElementById('lab-status').textContent}));};
  await until(()=>document.getElementById('lab-budget').textContent.includes('0 screen reads'));

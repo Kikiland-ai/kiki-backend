@@ -1,6 +1,6 @@
 import {readFile,writeFile,mkdir,cp} from 'node:fs/promises';
 const assets = Object.fromEntries(await Promise.all([
-  ['html','assets/index.html'], ['css','assets/style.css'], ['js','assets/capture.js'], ['labjs','assets/lab.js'], ['labcadence','assets/lab-cadence.js'], ['streamclient','assets/json-stream-client.js'],
+  ['html','assets/index.html'], ['css','assets/style.css'], ['js','assets/capture.js'], ['labjs','assets/lab.js'], ['labcadence','assets/lab-cadence.js'], ['streamclient','assets/json-stream-client.js'], ['floatingguidance','assets/floating-guidance.js'], ['floatingbridge','assets/floating-bridge.js'],
 ].map(async ([key,path]) => [key,await readFile(path,'utf8')])));
 await mkdir('dist/server',{recursive:true});
 await mkdir('dist/.openai',{recursive:true});

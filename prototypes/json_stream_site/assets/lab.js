@@ -1,10 +1,27 @@
 import {verificationCadence} from '/static/lab-cadence.js';
 import {startAnalysisStream} from '/static/json-stream-client.js';
+import {acceptedFrom,screenContext} from '/static/floating-guidance.js';
+import {createFloatingPublisher} from '/static/floating-bridge.js';
 /* Shared browser transport/display. Progress decisions come from the backend. */
 (() => {
  const $=id=>document.getElementById(id);
  let state=null,definition=null,policy=null,python=false,latest=null,captureId=null,attaching=null,busy=false,editing=false,viewChanging=false,generation=0;
- let streamEnabled=true,streamRows=[],activeStream=null;
+ let streamEnabled=true,streamRows=[],activeStream=null,accepted=null;
+ // Kiki windows on the shared tab show this page's accepted state; pause/resume
+ // from a window uses the same revision-checked lab action as the button here.
+ const floating=createFloatingPublisher({onChange:()=>render(),onCommand:async command=>{
+  if(!state||python)throw Error('Open the lab in the tracker first.');
+  if((command==='pause'&&state.status!=='paused')||(command==='resume'&&state.status==='paused')){generation++;await action(command);}
+ }});
+ window.KikiFloating=floating;
+ // Server-measured age at adoption plus local monotonic ageing; never cross-clock.
+ const acceptedAge=()=>accepted&&Number.isFinite(accepted.base_age_ms)?accepted.base_age_ms+(performance.now()-accepted.base_at):null;
+ function adoptAccepted(){
+  const next=acceptedFrom(state,accepted);
+  if(next&&next!==accepted)Object.assign(next,{base_age_ms:state.observation?.observation_id===next.observation_id?state.observation.age_ms:null,base_at:performance.now()});
+  accepted=next;
+ }
+ floating.source(()=>state&&!python&&definition&&policy?{state,policy,definition,accepted,ageMs:acceptedAge(),reading:busy,retryAfterMs:nextRetryAt-Date.now()}:null);
  const pendingStreams=new Set();
  const clearStream=()=>{streamRows=[];$('lab-stream-feedback').hidden=true;};
  function invalidateStream(){generation++;for(const item of pendingStreams)item.controller.abort();activeStream=null;clearStream();}
@@ -70,8 +87,9 @@ import {startAnalysisStream} from '/static/json-stream-client.js';
   const nextText=state.guidance?.next_instruction||(next?policy.actions[next.id]:null);
   $('lab-next').textContent=nextText?`Coming next: ${nextText}`:'Coming next: save and review your experiment.';
   $('lab-budget').textContent=`${state.runtime.analysis_attempts} screen reads. Progress is screen-inferred or reported; understanding remains unassessed.`;
-  const age=candidate?Date.now()-(candidate.source_frame.server_received_unix_ms??candidate.source_frame.server_received_unix*1000):Infinity;
-  $('lab-observation').textContent=candidate&&age<20000?candidate.summary:state.status==='completed'?'This experiment’s steps have been tracked.':!latest?'Share the matching model so I can follow along.':'I’m watching for the current action. Keep the relevant settings or scope visible.';
+  adoptAccepted();const seen=python?null:screenContext(state,accepted,{ageMs:acceptedAge(),blockedReason:floating.blockedReason()});
+  $('lab-observation').textContent=seen?.summary?`${seen.status==='fresh'?'What I can see':'Earlier accepted view'}: ${seen.summary}`:seen?.status==='blocked'?seen.reason:state.status==='completed'?'This experiment’s steps have been tracked.':!latest?'Share the matching model so I can follow along.':'I’m watching for the current action. Keep the relevant settings or scope visible.';
+  const kiki=floating.status();$('lab-floating').textContent=!kiki.present?'Kiki windows: extension not detected.':kiki.superseded?'Kiki windows: another tracker tab is connected.':!kiki.bound?'Kiki windows: open your MATLAB tab and choose “Show Kiki on this tab” in the extension.':kiki.safety==='block'?`Kiki windows: shown on your MATLAB tab. ${floating.blockedReason()}`:'Kiki windows: shown on your MATLAB tab; they are masked out of every screen read.';
   $('lab-watch-state').textContent=busy?'READING YOUR SCREEN':state.status==='paused'?'GUIDANCE PAUSED':nextRetryAt>Date.now()?`ANALYSIS RETRY IN ${Math.ceil((nextRetryAt-Date.now())/1000)}s`:latest?'FOLLOWING ALONG':'WAITING FOR YOUR SCREEN';
   $('lab-checked').hidden=!candidate;
   if(candidate){const src=`/lab-sessions/${state.lab_session_id}/image?observation=${candidate.observation_id}`;if($('lab-checked').getAttribute('src')!==src)$('lab-checked').src=src;}else $('lab-checked').removeAttribute('src');
@@ -89,6 +107,7 @@ import {startAnalysisStream} from '/static/json-stream-client.js';
   $('lab-criteria').replaceChildren(...(cp?.completion_criteria||[]).map(c=>{const row=document.createElement('li'),stored=currentStep.criteria.find(v=>v.criterion_id===c.id);row.textContent=`${stored.state==='satisfied'?'Tracked':'Waiting'}: ${c.description}`;return row;}));
   $('lab-ledger').replaceChildren(...definition.checkpoints.map(c=>{const option=document.createElement('option');option.value=c.id;option.textContent=`${c.order}. ${c.instruction.en}`;option.selected=c.id===cp?.id;return option;}));
   $('lab-history-link').href=`/lab-sessions/${state.lab_session_id}/events`;
+  floating.changed();
  }
  async function refresh(){if(!state)return;const id=state.lab_session_id,data=await api(`/lab-sessions/${id}`);if(state?.lab_session_id===id&&data.revision>=state.revision){state=data;render();}}
  async function action(name,extra={}){
@@ -105,6 +124,8 @@ import {startAnalysisStream} from '/static/json-stream-client.js';
  }
  async function check(force=false){
   if(!state||!latest||busy||editing||viewChanging||state.status!=='active'||!current())return;
+  // A frame that could contain Kiki's own windows is never analysed.
+  if(floating.blockedReason())return;
   if(Date.now()<nextRetryAt)return;
   const cp=state.queue.current_checkpoint_id,same=latest.frame?.sha256===lastHash&&cp===lastCheckpoint;
   const waitingForActionRead=state.runtime.candidate?.action_findings?.some(a=>a.status==='match'&&(state.procedure_tracking?.[a.action_id]?.count||0)<policy.minimum_matches);

@@ -1,0 +1,164 @@
+{
+  "schema": "concept-media-revision/v1",
+  "manifest": {
+    "schema": "concept-media-manifest/v1",
+    "planId": "LP-ANALOG-MODULATION",
+    "conceptId": "C-AM-03",
+    "catalogVersion": "am-51187527300cba2fa3cca868",
+    "mediaRevision": "cm-8fd8d96e22a4eedb76b4e35d",
+    "release": "sample_unreviewed",
+    "narration": [
+      {
+        "renditionId": "CARD-AM-03-definition.or",
+        "placardId": "CARD-AM-03-definition",
+        "lang": "or",
+        "assetId": "3d5eddba917790dc9558f1ebe140f0aaa3320160b0430e34d0bf467f8073f652",
+        "mimeType": "audio/wav",
+        "bytes": 1021794,
+        "durationSeconds": 21.16,
+        "sourceTextSha256": "e20a62dc31e093579da6df3d61b4056b02c6bed3ad4a2997e8b2707a119cca74",
+        "speechScriptSha256": "796f85edcaae1d01e92511b548af36a9526332780d9f52d2b32f73152ac52167",
+        "audioSha256": "3d5eddba917790dc9558f1ebe140f0aaa3320160b0430e34d0bf467f8073f652",
+        "narrationKind": "generated",
+        "speech": {
+          "provider": "Gemini Developer API",
+          "model": "gemini-3.8-flash-lite-tts",
+          "voice": "Kore",
+          "style": "clear, patient Odia-English teaching narration",
+          "generator": "kiki-backend prototypes/mixed_script/speech.py; recovered packet import",
+          "generatedAt": "not_recorded_in_recovered_packet"
+        },
+        "timing": {
+          "kind": "clip_duration_only",
+          "alignment": "not_performed"
+        },
+        "review": {
+          "status": "unreviewed",
+          "pronunciation": "pending",
+          "nativeOdia": "pending",
+          "spokenFidelity": "pending",
+          "audioQuality": "pending"
+        }
+      },
+      {
+        "renditionId": "CARD-AM-03-concept.or",
+        "placardId": "CARD-AM-03-concept",
+        "lang": "or",
+        "assetId": "d4e806484921fb4b205485c956f7c9ea6134cfc36167fa4b95b45efd43d785dc",
+        "mimeType": "audio/wav",
+        "bytes": 2634594,
+        "durationSeconds": 54.76,
+        "sourceTextSha256": "06c9bca07ce4f02fb82736699fcdab81ebfa6f10628f15aa708cc05ccae0cfe6",
+        "speechScriptSha256": "e24ff02cf39fb6430a99a18d655ac0dbc14425b2414aadb2ec3081755cdade4a",
+        "audioSha256": "d4e806484921fb4b205485c956f7c9ea6134cfc36167fa4b95b45efd43d785dc",
+        "narrationKind": "generated",
+        "speech": {
+          "provider": "Gemini Developer API",
+          "model": "gemini-3.8-flash-lite-tts",
+          "voice": "Kore",
+          "style": "clear, patient Odia-English teaching narration",
+          "generator": "kiki-backend prototypes/mixed_script/speech.py; recovered packet import",
+          "generatedAt": "not_recorded_in_recovered_packet"
+        },
+        "timing": {
+          "kind": "clip_duration_only",
+          "alignment": "not_performed"
+        },
+        "review": {
+          "status": "unreviewed",
+          "pronunciation": "pending",
+          "nativeOdia": "pending",
+          "spokenFidelity": "pending",
+          "audioQuality": "pending"
+        }
+      },
+      {
+        "renditionId": "CARD-AM-03-application.or",
+        "placardId": "CARD-AM-03-application",
+        "lang": "or",
+        "assetId": "fbecfe3c85aa7e85f5a9fc4ff71a7368774a104d862fa2156ac58470a99925dd",
+        "mimeType": "audio/wav",
+        "bytes": 376674,
+        "durationSeconds": 7.72,
+        "sourceTextSha256": "e8f91483cd984b69c61440158436b00765c21636ca52f9af932558bea2c8f3e0",
+        "speechScriptSha256": "0b87e5c47b090688ac6f7ccac77a670a2509dfe2e245d8bf9f9d33cc707d5c81",
+        "audioSha256": "fbecfe3c85aa7e85f5a9fc4ff71a7368774a104d862fa2156ac58470a99925dd",
+        "narrationKind": "generated",
+        "speech": {
+          "provider": "Gemini Developer API",
+          "model": "gemini-3.8-flash-tts",
+          "voice": "Kore",
+          "style": "clear, patient Odia-English teaching narration",
+          "generator": "kiki-backend prototypes/mixed_script/speech.py; recovered packet import",
+          "generatedAt": "not_recorded_in_recovered_packet"
+        },
+        "timing": {
+          "kind": "clip_duration_only",
+          "alignment": "not_performed"
+        },
+        "review": {
+          "status": "unreviewed",
+          "pronunciation": "pending",
+          "nativeOdia": "pending",
+          "spokenFidelity": "pending",
+          "audioQuality": "pending"
+        }
+      },
+      {
+        "renditionId": "CARD-AM-03-recap.or",
+        "placardId": "CARD-AM-03-recap",
+        "lang": "or",
+        "assetId": "ac8f98989bd55bd38909353e5bbc7df0fdaed2a736db79095a9b7efb2bf31fca",
+        "mimeType": "audio/wav",
+        "bytes": 522594,
+        "durationSeconds": 10.76,
+        "sourceTextSha256": "b415ae52a351a7a303fefa67e09b83721a1253a4bcfc5d3cd786134be3d1b82f",
+        "speechScriptSha256": "ebf73d319199641d3974e6f8378951cde2247f6ef0df451dc0f427bb09e58bb1",
+        "audioSha256": "ac8f98989bd55bd38909353e5bbc7df0fdaed2a736db79095a9b7efb2bf31fca",
+        "narrationKind": "generated",
+        "speech": {
+          "provider": "Gemini Developer API",
+          "model": "gemini-3.8-flash-tts",
+          "voice": "Kore",
+          "style": "clear, patient Odia-English teaching narration",
+          "generator": "kiki-backend prototypes/mixed_script/speech.py; recovered packet import",
+          "generatedAt": "not_recorded_in_recovered_packet"
+        },
+        "timing": {
+          "kind": "clip_duration_only",
+          "alignment": "not_performed"
+        },
+        "review": {
+          "status": "unreviewed",
+          "pronunciation": "pending",
+          "nativeOdia": "pending",
+          "spokenFidelity": "pending",
+          "audioQuality": "pending"
+        }
+      }
+    ],
+    "artifacts": []
+  },
+  "assets": {
+    "3d5eddba917790dc9558f1ebe140f0aaa3320160b0430e34d0bf467f8073f652": {
+      "path": "concept-media/LP-ANALOG-MODULATION/assets/sha256/3d5eddba917790dc9558f1ebe140f0aaa3320160b0430e34d0bf467f8073f652",
+      "mimeType": "audio/wav",
+      "bytes": 1021794
+    },
+    "d4e806484921fb4b205485c956f7c9ea6134cfc36167fa4b95b45efd43d785dc": {
+      "path": "concept-media/LP-ANALOG-MODULATION/assets/sha256/d4e806484921fb4b205485c956f7c9ea6134cfc36167fa4b95b45efd43d785dc",
+      "mimeType": "audio/wav",
+      "bytes": 2634594
+    },
+    "fbecfe3c85aa7e85f5a9fc4ff71a7368774a104d862fa2156ac58470a99925dd": {
+      "path": "concept-media/LP-ANALOG-MODULATION/assets/sha256/fbecfe3c85aa7e85f5a9fc4ff71a7368774a104d862fa2156ac58470a99925dd",
+      "mimeType": "audio/wav",
+      "bytes": 376674
+    },
+    "ac8f98989bd55bd38909353e5bbc7df0fdaed2a736db79095a9b7efb2bf31fca": {
+      "path": "concept-media/LP-ANALOG-MODULATION/assets/sha256/ac8f98989bd55bd38909353e5bbc7df0fdaed2a736db79095a9b7efb2bf31fca",
+      "mimeType": "audio/wav",
+      "bytes": 522594
+    }
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "schema": "cam-interactive-scene/v1",
+  "modelVersion": "cam-packets/3",
+  "conceptId": "C-AM-02",
+  "kind": "flow",
+  "title": "Message, carrier and the purpose of modulation",
+  "controls": [
+    {
+      "name": "stage",
+      "label": "Teaching stage",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "default": 0,
+      "unit": ""
+    }
+  ],
+  "visualBrief": {
+    "kind": "block",
+    "description": "Message source and carrier source enter a modulator; output goes to a receiver/demodulator and recovered message. Label which input contains information.",
+    "alt": "Message, carrier and the purpose of modulation; Message is information; carrier is a reference; modulation prepares transmission; demodulation recovers information.",
+    "from": {
+      "origin": "curated",
+      "label": "MathWorks: analog passband modulation; reference for the modulation families",
+      "url": "https://www.mathworks.com/help/comm/ug/analog-passband-modulation.html"
+    }
+  },
+  "walkthrough": [
+    {
+      "target": "message signal",
+      "mark": "sweep",
+      "dim": "words",
+      "say": "Modulation changes a carrier property according to a message; demodulation recovers the message at the receiver."
+    },
+    {
+      "target": "carrier",
+      "mark": "marker",
+      "dim": "concept",
+      "say": "Label the two sources Message and Carrier before connecting them; identify which waveform carries information."
+    },
+    {
+      "target": "Modulation",
+      "mark": "marker",
+      "dim": "concept",
+      "say": "Message is information; carrier is a reference; modulation prepares transmission; demodulation recovers information."
+    }
+  ],
+  "sourceInteractive": {
+    "kind": "step_through",
+    "prompt": "Follow the explanation, then check the worked result.",
+    "steps": [
+      {
+        "label": "Define",
+        "detail": "Modulation changes a carrier property according to a message; demodulation recovers the message at the receiver."
+      },
+      {
+        "label": "Apply",
+        "detail": "The 100 Hz waveform is the message."
+      },
+      {
+        "label": "Check",
+        "detail": "The 2000 Hz oscillator is the carrier; a modulator combines it with the message."
+      }
+    ]
+  },
+  "assumptions": [
+    "Authored draft; scientific review pending",
+    "Trusted analytic teaching model, not live Simulink evidence",
+    "Any normalized examples are illustrative; no new measured device values",
+    "Manual placard states; no sentence alignment"
+  ],
+  "review": {
+    "scientific": "pending",
+    "sourceGrounding": "authored_concept"
+  },
+  "image": {
+    "status": "not_requested",
+    "reason": "Scientific plots/flow/comparisons are rendered as editable SVG; no generated-image claim"
+  }
+}

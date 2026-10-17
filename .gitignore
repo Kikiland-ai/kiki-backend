@@ -1,5 +1,6 @@
 node_modules/
 dist/
+!artifacts/cam-review/site/dist/
 coverage/
 .venv/
 __pycache__/

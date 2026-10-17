@@ -1,0 +1,629 @@
+{
+  "schema": "cam-concept-packet/v1",
+  "conceptId": "C-AM-09",
+  "planId": "LP-ANALOG-MODULATION",
+  "contentVersion": "am-51187527300cba2fa3cca868",
+  "sourceGitRevision": "ba40218d7bf07637debe530019bcf8faf6afb61a",
+  "sourceHash": "98963d23e95c5a6237a3c956d9c5552905c90be947486a1e0f9420e4781f6f93",
+  "policy": {
+    "version": "cam-packets/3",
+    "textMode": "authored",
+    "textModel": null,
+    "speechModel": "gemini-3.8-flash-tts",
+    "mix": "authored_odia_english_placards",
+    "unit": "placard",
+    "audioUnit": "auto",
+    "speechLanguages": [
+      "or"
+    ]
+  },
+  "title": "Frequency modulation and deviation",
+  "status": "prepared_pending_review_and_delivery",
+  "createdAt": "2026-10-16T19:25:50.880653+00:00",
+  "placards": [
+    {
+      "id": "CARD-AM-09-definition",
+      "conceptId": "C-AM-09",
+      "kind": "definition",
+      "title": {
+        "en": "Definition",
+        "or": "ସଂଜ୍ଞା"
+      },
+      "body": {
+        "en": "FM varies instantaneous carrier frequency with the message while ideal carrier amplitude remains constant.",
+        "or": "FM ରେ Message ଅନୁସାରେ instantaneous Carrier frequency ବଦଳେ; ideal Carrier amplitude ସ୍ଥିର ରହେ।"
+      },
+      "termIds": [
+        "T-AM-09-1",
+        "T-AM-09-2",
+        "T-AM-09-3",
+        "T-AM-01-1",
+        "T-AM-01-2",
+        "T-AM-01-3",
+        "T-AM-02-1",
+        "T-AM-02-2",
+        "T-AM-02-3"
+      ],
+      "sources": [
+        {
+          "origin": "curated",
+          "label": "MathWorks: analog passband modulation; reference for the modulation families",
+          "url": "https://www.mathworks.com/help/comm/ug/analog-passband-modulation.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: DSB-SC coherent receiver and matching carrier parameters",
+          "url": "https://www.mathworks.com/help/comm/ref/dsbscamdemodulatorpassband.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: time-based Sine Wave parameters",
+          "url": "https://www.mathworks.com/help/simulink/slref/sinewave.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: continuous Transfer Fcn coefficients",
+          "url": "https://www.mathworks.com/help/simulink/slref/transferfcn.html"
+        }
+      ],
+      "generatedMixed": {
+        "displayText": "FM ରେ Message ଅନୁସାରେ instantaneous Carrier frequency ବଦଳେ; ideal Carrier amplitude ସ୍ଥିର ରହେ।",
+        "spans": [
+          {
+            "language": "en",
+            "text": "FM "
+          },
+          {
+            "language": "or",
+            "text": "ରେ "
+          },
+          {
+            "language": "en",
+            "text": "Message "
+          },
+          {
+            "language": "or",
+            "text": "ଅନୁସାରେ "
+          },
+          {
+            "language": "en",
+            "text": "instantaneous Carrier frequency "
+          },
+          {
+            "language": "or",
+            "text": "ବଦଳେ; "
+          },
+          {
+            "language": "en",
+            "text": "ideal Carrier amplitude "
+          },
+          {
+            "language": "or",
+            "text": "ସ୍ଥିର ରହେ।"
+          }
+        ],
+        "speechText": "F M ରେ Message ଅନୁସାରେ instantaneous Carrier frequency ବଦଳେ; ideal Carrier amplitude ସ୍ଥିର ରହେ।",
+        "provenance": "authored_case_reused"
+      }
+    },
+    {
+      "id": "CARD-AM-09-concept",
+      "conceptId": "C-AM-09",
+      "kind": "concept",
+      "title": {
+        "en": "Frequency modulation and deviation",
+        "or": "Frequency modulation ଓ Deviation"
+      },
+      "body": {
+        "en": "Frequency modulation, or FM, represents the message through changes in instantaneous carrier frequency rather than through carrier amplitude. An ideal FM signal has constant amplitude. Frequency deviation Delta f is the maximum departure from the carrier frequency. For a sinusoidal message of frequency fm, the modulation index is beta=Delta f/fm. FM generally has multiple sidebands, so its bandwidth is not simply the DSB-SC value 2B. Carson’s rule estimates a useful occupied bandwidth as approximately 2*(Delta f+B), where B is the highest message frequency. This is an engineering approximation, not an exact finite spectral boundary. FM is part of the chapter but not required to execute our selected DSB-SC lab.",
+        "or": "Frequency modulation କିମ୍ବା FM ରେ Message ଅନୁସାରେ instantaneous Carrier frequency ବଦଳେ। Ideal FM ର Amplitude ସ୍ଥିର। Carrier frequency ଠାରୁ ସର୍ବାଧିକ ପରିବର୍ତ୍ତନ ହେଉଛି Frequency deviation Delta f। Single-tone message frequency fm ପାଇଁ Modulation index beta=Delta f/fm। FM ରେ ଅନେକ Sideband ଥାଇପାରେ। Carson’s rule ଅନୁସାରେ useful bandwidth ପ୍ରାୟ 2*(Delta f+B), ଯେଉଁଠି B ସର୍ବାଧିକ Message frequency। ଏହା ଏକ approximation, ସମସ୍ତ spectral component ର ନିଖୁତ ସୀମା ନୁହେଁ। FM chapter ରେ ଅଛି, କିନ୍ତୁ DSB-SC lab ପାଇଁ ପୂର୍ବଶର୍ତ୍ତ ନୁହେଁ।"
+      },
+      "termIds": [
+        "T-AM-09-1",
+        "T-AM-09-2",
+        "T-AM-09-3",
+        "T-AM-01-1",
+        "T-AM-01-2",
+        "T-AM-01-3",
+        "T-AM-02-1",
+        "T-AM-02-2",
+        "T-AM-02-3"
+      ],
+      "sources": [
+        {
+          "origin": "curated",
+          "label": "MathWorks: analog passband modulation; reference for the modulation families",
+          "url": "https://www.mathworks.com/help/comm/ug/analog-passband-modulation.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: DSB-SC coherent receiver and matching carrier parameters",
+          "url": "https://www.mathworks.com/help/comm/ref/dsbscamdemodulatorpassband.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: time-based Sine Wave parameters",
+          "url": "https://www.mathworks.com/help/simulink/slref/sinewave.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: continuous Transfer Fcn coefficients",
+          "url": "https://www.mathworks.com/help/simulink/slref/transferfcn.html"
+        }
+      ],
+      "visualRef": "explanation",
+      "generatedMixed": {
+        "displayText": "Frequency modulation କିମ୍ବା FM ରେ Message ଅନୁସାରେ instantaneous Carrier frequency ବଦଳେ। Ideal FM ର Amplitude ସ୍ଥିର। Carrier frequency ଠାରୁ ସର୍ବାଧିକ ପରିବର୍ତ୍ତନ ହେଉଛି Frequency deviation Delta f। Single-tone message frequency fm ପାଇଁ Modulation index beta=Delta f/fm। FM ରେ ଅନେକ Sideband ଥାଇପାରେ। Carson’s rule ଅନୁସାରେ useful bandwidth ପ୍ରାୟ 2*(Delta f+B), ଯେଉଁଠି B ସର୍ବାଧିକ Message frequency। ଏହା ଏକ approximation, ସମସ୍ତ spectral component ର ନିଖୁତ ସୀମା ନୁହେଁ। FM chapter ରେ ଅଛି, କିନ୍ତୁ DSB-SC lab ପାଇଁ ପୂର୍ବଶର୍ତ୍ତ ନୁହେଁ।",
+        "spans": [
+          {
+            "language": "en",
+            "text": "Frequency modulation "
+          },
+          {
+            "language": "or",
+            "text": "କିମ୍ବା "
+          },
+          {
+            "language": "en",
+            "text": "FM "
+          },
+          {
+            "language": "or",
+            "text": "ରେ "
+          },
+          {
+            "language": "en",
+            "text": "Message "
+          },
+          {
+            "language": "or",
+            "text": "ଅନୁସାରେ "
+          },
+          {
+            "language": "en",
+            "text": "instantaneous Carrier frequency "
+          },
+          {
+            "language": "or",
+            "text": "ବଦଳେ। "
+          },
+          {
+            "language": "en",
+            "text": "Ideal FM "
+          },
+          {
+            "language": "or",
+            "text": "ର "
+          },
+          {
+            "language": "en",
+            "text": "Amplitude "
+          },
+          {
+            "language": "or",
+            "text": "ସ୍ଥିର। "
+          },
+          {
+            "language": "en",
+            "text": "Carrier frequency "
+          },
+          {
+            "language": "or",
+            "text": "ଠାରୁ ସର୍ବାଧିକ ପରିବର୍ତ୍ତନ ହେଉଛି "
+          },
+          {
+            "language": "en",
+            "text": "Frequency deviation Delta f। Single-tone message frequency fm "
+          },
+          {
+            "language": "or",
+            "text": "ପାଇଁ "
+          },
+          {
+            "language": "en",
+            "text": "Modulation index beta=Delta f/fm। FM "
+          },
+          {
+            "language": "or",
+            "text": "ରେ ଅନେକ "
+          },
+          {
+            "language": "en",
+            "text": "Sideband "
+          },
+          {
+            "language": "or",
+            "text": "ଥାଇପାରେ। "
+          },
+          {
+            "language": "en",
+            "text": "Carson’s rule "
+          },
+          {
+            "language": "or",
+            "text": "ଅନୁସାରେ "
+          },
+          {
+            "language": "en",
+            "text": "useful bandwidth "
+          },
+          {
+            "language": "or",
+            "text": "ପ୍ରାୟ 2*("
+          },
+          {
+            "language": "en",
+            "text": "Delta f+B), "
+          },
+          {
+            "language": "or",
+            "text": "ଯେଉଁଠି "
+          },
+          {
+            "language": "en",
+            "text": "B "
+          },
+          {
+            "language": "or",
+            "text": "ସର୍ବାଧିକ "
+          },
+          {
+            "language": "en",
+            "text": "Message frequency। "
+          },
+          {
+            "language": "or",
+            "text": "ଏହା ଏକ "
+          },
+          {
+            "language": "en",
+            "text": "approximation, "
+          },
+          {
+            "language": "or",
+            "text": "ସମସ୍ତ "
+          },
+          {
+            "language": "en",
+            "text": "spectral component "
+          },
+          {
+            "language": "or",
+            "text": "ର ନିଖୁତ ସୀମା ନୁହେଁ। "
+          },
+          {
+            "language": "en",
+            "text": "FM chapter "
+          },
+          {
+            "language": "or",
+            "text": "ରେ ଅଛି, କିନ୍ତୁ "
+          },
+          {
+            "language": "en",
+            "text": "DSB-SC lab "
+          },
+          {
+            "language": "or",
+            "text": "ପାଇଁ ପୂର୍ବଶର୍ତ୍ତ ନୁହେଁ।"
+          }
+        ],
+        "speechText": "Frequency modulation କିମ୍ବା F M ରେ Message ଅନୁସାରେ instantaneous Carrier frequency ବଦଳେ। Ideal F M ର Amplitude ସ୍ଥିର। Carrier frequency ଠାରୁ ସର୍ବାଧିକ ପରିବର୍ତ୍ତନ ହେଉଛି Frequency deviation Delta f। Single-tone message frequency fm ପାଇଁ Modulation index beta equals delta f divided by f m। F M ରେ ଅନେକ Sideband ଥାଇପାରେ। Carson’s rule ଅନୁସାରେ useful bandwidth ପ୍ରାୟ two times delta f plus B, ଯେଉଁଠି B ସର୍ବାଧିକ Message frequency। ଏହା ଏକ approximation, ସମସ୍ତ spectral component ର ନିଖୁତ ସୀମା ନୁହେଁ। F M chapter ରେ ଅଛି, କିନ୍ତୁ D S B S C lab ପାଇଁ ପୂର୍ବଶର୍ତ୍ତ ନୁହେଁ।",
+        "provenance": "authored_case_reused"
+      }
+    },
+    {
+      "id": "CARD-AM-09-application",
+      "conceptId": "C-AM-09",
+      "kind": "application",
+      "title": {
+        "en": "Use it in a model",
+        "or": "Model ରେ ପ୍ରୟୋଗ"
+      },
+      "body": {
+        "en": "Compare FM cycle spacing against DSB-SC amplitude changes in a waveform placard.",
+        "or": "Waveform placard ରେ FM ର cycle spacing ଓ DSB-SC ର Amplitude ପରିବର୍ତ୍ତନ ତୁଳନା କରନ୍ତୁ।"
+      },
+      "termIds": [
+        "T-AM-09-1",
+        "T-AM-09-2",
+        "T-AM-09-3",
+        "T-AM-01-1",
+        "T-AM-01-2",
+        "T-AM-01-3",
+        "T-AM-02-1",
+        "T-AM-02-2",
+        "T-AM-02-3"
+      ],
+      "sources": [
+        {
+          "origin": "curated",
+          "label": "MathWorks: analog passband modulation; reference for the modulation families",
+          "url": "https://www.mathworks.com/help/comm/ug/analog-passband-modulation.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: DSB-SC coherent receiver and matching carrier parameters",
+          "url": "https://www.mathworks.com/help/comm/ref/dsbscamdemodulatorpassband.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: time-based Sine Wave parameters",
+          "url": "https://www.mathworks.com/help/simulink/slref/sinewave.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: continuous Transfer Fcn coefficients",
+          "url": "https://www.mathworks.com/help/simulink/slref/transferfcn.html"
+        }
+      ],
+      "generatedMixed": {
+        "displayText": "Waveform placard ରେ FM ର cycle spacing ଓ DSB-SC ର Amplitude ପରିବର୍ତ୍ତନ ତୁଳନା କରନ୍ତୁ।",
+        "spans": [
+          {
+            "language": "en",
+            "text": "Waveform placard "
+          },
+          {
+            "language": "or",
+            "text": "ରେ "
+          },
+          {
+            "language": "en",
+            "text": "FM "
+          },
+          {
+            "language": "or",
+            "text": "ର "
+          },
+          {
+            "language": "en",
+            "text": "cycle spacing "
+          },
+          {
+            "language": "or",
+            "text": "ଓ "
+          },
+          {
+            "language": "en",
+            "text": "DSB-SC "
+          },
+          {
+            "language": "or",
+            "text": "ର "
+          },
+          {
+            "language": "en",
+            "text": "Amplitude "
+          },
+          {
+            "language": "or",
+            "text": "ପରିବର୍ତ୍ତନ ତୁଳନା କରନ୍ତୁ।"
+          }
+        ],
+        "speechText": "Waveform placard ରେ F M ର cycle spacing ଓ D S B S C ର Amplitude ପରିବର୍ତ୍ତନ ତୁଳନା କରନ୍ତୁ।",
+        "provenance": "authored_case_reused"
+      }
+    },
+    {
+      "id": "CARD-AM-09-recap",
+      "conceptId": "C-AM-09",
+      "kind": "recap",
+      "title": {
+        "en": "Remember",
+        "or": "ମନେ ରଖନ୍ତୁ"
+      },
+      "body": {
+        "en": "FM changes instantaneous frequency. beta=Delta f/fm. Carson bandwidth is an approximation.",
+        "or": "FM instantaneous Frequency ବଦଳାଏ। beta=Delta f/fm। Carson bandwidth ଏକ approximation।"
+      },
+      "termIds": [
+        "T-AM-09-1",
+        "T-AM-09-2",
+        "T-AM-09-3",
+        "T-AM-01-1",
+        "T-AM-01-2",
+        "T-AM-01-3",
+        "T-AM-02-1",
+        "T-AM-02-2",
+        "T-AM-02-3"
+      ],
+      "sources": [
+        {
+          "origin": "curated",
+          "label": "MathWorks: analog passband modulation; reference for the modulation families",
+          "url": "https://www.mathworks.com/help/comm/ug/analog-passband-modulation.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: DSB-SC coherent receiver and matching carrier parameters",
+          "url": "https://www.mathworks.com/help/comm/ref/dsbscamdemodulatorpassband.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: time-based Sine Wave parameters",
+          "url": "https://www.mathworks.com/help/simulink/slref/sinewave.html"
+        },
+        {
+          "origin": "curated",
+          "label": "MathWorks: continuous Transfer Fcn coefficients",
+          "url": "https://www.mathworks.com/help/simulink/slref/transferfcn.html"
+        }
+      ],
+      "generatedMixed": {
+        "displayText": "FM instantaneous Frequency ବଦଳାଏ। beta=Delta f/fm। Carson bandwidth ଏକ approximation।",
+        "spans": [
+          {
+            "language": "en",
+            "text": "FM instantaneous Frequency "
+          },
+          {
+            "language": "or",
+            "text": "ବଦଳାଏ। "
+          },
+          {
+            "language": "en",
+            "text": "beta=Delta f/fm। Carson bandwidth "
+          },
+          {
+            "language": "or",
+            "text": "ଏକ "
+          },
+          {
+            "language": "en",
+            "text": "approximation।"
+          }
+        ],
+        "speechText": "F M instantaneous Frequency ବଦଳାଏ। beta equals delta f divided by f m। Carson bandwidth ଏକ approximation।",
+        "provenance": "authored_case_reused"
+      }
+    }
+  ],
+  "narration": [
+    {
+      "placardId": null,
+      "placardIds": [
+        "CARD-AM-09-definition",
+        "CARD-AM-09-concept",
+        "CARD-AM-09-application",
+        "CARD-AM-09-recap"
+      ],
+      "scope": "concept",
+      "language": "or",
+      "variantId": "authored-or-v1",
+      "assetId": "sha256-26b9221db1e80b4b772d54e66a9070341a4eef615a19d9a6ecafa86c21117559",
+      "localFile": "C-AM-09.or.wav",
+      "displayTextSha256": "9e4a9a837d8eda9bb62f2de0b514ea5c5682558c91968c543847ab6edeb4dc1e",
+      "speechTextSha256": "c14722a7ae00884773c44375b1ff3a7362cef84ce5a4520006ff01dfdb7e7303",
+      "audioSha256": "26b9221db1e80b4b772d54e66a9070341a4eef615a19d9a6ecafa86c21117559",
+      "durationSeconds": 70.48,
+      "bytes": 3389154,
+      "contentType": "audio/wav",
+      "timing": "clip_duration_only",
+      "narrationKind": "generated",
+      "reviewed": false,
+      "deliveryStatus": "local_pending_upload",
+      "providerModel": "gemini-3.8-flash-tts"
+    }
+  ],
+  "scene": {
+    "schema": "cam-interactive-scene/v1",
+    "modelVersion": "cam-packets/3",
+    "conceptId": "C-AM-09",
+    "kind": "fm",
+    "title": "Frequency modulation and deviation",
+    "controls": [
+      {
+        "name": "df",
+        "label": "Frequency deviation",
+        "min": 1000,
+        "max": 10000,
+        "step": 500,
+        "default": 5000,
+        "unit": "Hz"
+      },
+      {
+        "name": "B",
+        "label": "Single-tone message frequency / B",
+        "min": 500,
+        "max": 3000,
+        "step": 100,
+        "default": 1000,
+        "unit": "Hz"
+      }
+    ],
+    "visualBrief": {
+      "kind": "waveform",
+      "description": "Constant-amplitude FM trace with dense and sparse cycles according to a low-frequency message; compare to amplitude modulation.",
+      "alt": "Frequency modulation and deviation; FM changes instantaneous frequency. beta=Delta f/fm. Carson bandwidth is an approximation.",
+      "from": {
+        "origin": "curated",
+        "label": "MathWorks: analog passband modulation; reference for the modulation families",
+        "url": "https://www.mathworks.com/help/comm/ug/analog-passband-modulation.html"
+      }
+    },
+    "walkthrough": [
+      {
+        "target": "Frequency modulation",
+        "mark": "sweep",
+        "dim": "words",
+        "say": "FM varies instantaneous carrier frequency with the message while ideal carrier amplitude remains constant."
+      },
+      {
+        "target": "Frequency deviation",
+        "mark": "marker",
+        "dim": "concept",
+        "say": "Compare FM cycle spacing against DSB-SC amplitude changes in a waveform placard."
+      },
+      {
+        "target": "Carson",
+        "mark": "marker",
+        "dim": "concept",
+        "say": "FM changes instantaneous frequency. beta=Delta f/fm. Carson bandwidth is an approximation."
+      }
+    ],
+    "sourceInteractive": {
+      "kind": "parameter_sweep",
+      "prompt": "Estimate FM occupied bandwidth using Carson’s approximation.",
+      "inputs": [
+        {
+          "name": "df",
+          "label": "Frequency deviation",
+          "unit": "Hz",
+          "min": 1000,
+          "max": 10000,
+          "step": 500,
+          "default": 5000
+        },
+        {
+          "name": "B",
+          "label": "Highest message frequency",
+          "unit": "Hz",
+          "min": 500,
+          "max": 3000,
+          "step": 100,
+          "default": 1000
+        }
+      ],
+      "outputs": [
+        {
+          "name": "bw",
+          "label": "Approximate occupied bandwidth",
+          "unit": "Hz",
+          "formula": "2*(df+B)"
+        },
+        {
+          "name": "beta",
+          "label": "Single-tone modulation index",
+          "unit": "dimensionless",
+          "formula": "df/B"
+        }
+      ]
+    },
+    "assumptions": [
+      "Authored draft; scientific review pending",
+      "Trusted analytic teaching model, not live Simulink evidence",
+      "Any normalized examples are illustrative; no new measured device values",
+      "Manual placard states; no sentence alignment"
+    ],
+    "review": {
+      "scientific": "pending",
+      "sourceGrounding": "authored_concept"
+    },
+    "image": {
+      "status": "not_requested",
+      "reason": "Scientific plots/flow/comparisons are rendered as editable SVG; no generated-image claim"
+    }
+  },
+  "review": {
+    "scientific": "pending",
+    "nativeOdia": "pending",
+    "pronunciation": "pending"
+  },
+  "alignment": "not_performed",
+  "publication": {
+    "status": "not_published",
+    "firestore": "not_written"
+  },
+  "experienceRevision": "cam-11cbf3df051551516d24206a"
+}

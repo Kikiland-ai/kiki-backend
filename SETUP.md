@@ -13,6 +13,7 @@ Select the private `Kikiland-ai/kiki-backend` repo and current `main` branch in 
 Runtime baseline:
 
 - Git and Python 3.12 for the existing standard-library prototypes and offline checks; no application dependencies need installing to run them.
+- Git LFS for the concept-canvas narration WAVs under `artifacts/cam-review/`. Run `git lfs install` once before cloning, or `git lfs pull` in an existing clone; without it those files are small pointer texts and `scripts/verify-cam-review.py` fails.
 - FastAPI with durable job coordination and bounded stage workers is the selected future backend direction. Database, queue/actor framework, object storage and package-management/lockfile choices remain open; do not scaffold them during context loading.
 - Node.js 22 is needed only for the imported JavaScript ledger validator. npm and Java 21 are conditional tooling if the optional Firebase emulator reference below is selected later.
 - FFmpeg is used for WAV-to-MP3 conversion and may be used for future GIF/video derivatives. Browser rendering and alignment need separately chosen/installed dependencies; they are not established by this checkout.

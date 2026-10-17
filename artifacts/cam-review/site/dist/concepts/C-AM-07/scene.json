@@ -1,0 +1,80 @@
+{
+  "schema": "cam-interactive-scene/v1",
+  "modelVersion": "cam-packets/3",
+  "conceptId": "C-AM-07",
+  "kind": "filter",
+  "title": "Lowpass filtering and waveform comparison",
+  "controls": [
+    {
+      "name": "cutoff",
+      "label": "Butterworth cutoff",
+      "min": 200,
+      "max": 1000,
+      "step": 100,
+      "default": 500,
+      "unit": "Hz"
+    }
+  ],
+  "visualBrief": {
+    "kind": "graph",
+    "description": "Lowpass magnitude response with 100 Hz message inside passband, 500 Hz cutoff, unwanted 3900/4100 Hz products attenuated; show shifted recovered waveform.",
+    "alt": "Lowpass filtering and waveform comparison; Retain message frequencies; suppress the doubled-carrier image; expect finite attenuation and phase lag.",
+    "from": {
+      "origin": "curated",
+      "label": "MathWorks: analog passband modulation; reference for the modulation families",
+      "url": "https://www.mathworks.com/help/comm/ug/analog-passband-modulation.html"
+    }
+  },
+  "walkthrough": [
+    {
+      "target": "lowpass filter",
+      "mark": "sweep",
+      "dim": "words",
+      "say": "A lowpass filter retains lower-frequency components and attenuates higher-frequency components."
+    },
+    {
+      "target": "500 Hz cutoff",
+      "mark": "marker",
+      "dim": "concept",
+      "say": "Enter the lowpass coefficients, run the model, and compare steady-state recovered amplitude and frequency."
+    },
+    {
+      "target": "phase lag",
+      "mark": "marker",
+      "dim": "concept",
+      "say": "Retain message frequencies; suppress the doubled-carrier image; expect finite attenuation and phase lag."
+    }
+  ],
+  "sourceInteractive": {
+    "kind": "step_through",
+    "prompt": "Follow the explanation, then check the worked result.",
+    "steps": [
+      {
+        "label": "Define",
+        "detail": "A lowpass filter retains lower-frequency components and attenuates higher-frequency components."
+      },
+      {
+        "label": "Apply",
+        "detail": "100 Hz lies below the cutoff and is largely retained."
+      },
+      {
+        "label": "Check",
+        "detail": "Unwanted receiver components near 3900 and 4100 Hz lie far above it and are attenuated."
+      }
+    ]
+  },
+  "assumptions": [
+    "Authored draft; scientific review pending",
+    "Trusted analytic teaching model, not live Simulink evidence",
+    "Any normalized examples are illustrative; no new measured device values",
+    "Manual placard states; no sentence alignment"
+  ],
+  "review": {
+    "scientific": "pending",
+    "sourceGrounding": "authored_concept"
+  },
+  "image": {
+    "status": "not_requested",
+    "reason": "Scientific plots/flow/comparisons are rendered as editable SVG; no generated-image claim"
+  }
+}

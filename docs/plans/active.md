@@ -1,3 +1,15 @@
+# Concept canvas library promotion to main — 18 October 2026
+
+Step 3 of the reconciliation order. Steps 1 and 2 merged as PR #2 (`fe7758e`) and PR #3 (`6b14b5e`). Branch `promote/concept-canvas` starts at `feature/concept-canvas-handoff` (`f8b761d`) and merges `main` with no conflicts. The canvas branch's own entry ("Concept canvas library", further down) still describes the content; its generator code (`prototypes/topic_canvas/`, `prototypes/concept_packets/`) was lost before commit and is not on any branch.
+
+Changes for promotion, chosen by the user: the 24 narration WAVs under `artifacts/cam-review/` move to Git LFS (scoped to that folder; the evidence audio already on `main` stays in plain Git), and the PR is squash-merged so `main`'s history holds pointers, not the 40 MB of audio. Code fixes: asset paths are stored with forward slashes so a Windows build matches; JSON reads and writes are UTF-8 with LF; the rebuild test compares database content instead of bytes (the SQLite header records the library version); the tamper test closes its connection. The recovered `site/build-review-library.py` is pinned by the recovery manifest and stays byte-exact.
+
+What ran on Windows 11 without `PYTHONUTF8`: `scripts/verify-cam-review.py` PASS (96 files, 10 concepts, 22 clips, 0 provider calls); `tests.test_concept_library` 5/5, including both kiki-web bridge tests against kiki-web `origin/main` `93cce9b`.
+
+Exact next action: open the PR from `promote/concept-canvas` to `main`, wait for CI, and squash-merge once the user confirms. Then tag the archived branches (`integration/analysis-owned-guidance`, `design/floating-guidance-bubbles`, `experiment/analysis-owned-guidance-producer`) and delete the branches now contained in `main`. Connecting this content to kiki-web waits on the user's Phase 0 decisions; the recommendations, not yet confirmed, are to keep kiki-web's C-AM-08 package, port the scene kinds to trusted React renderers, and regenerate per-placard Odia and English narration.
+
+---
+
 # Floating Kiki windows promotion to main — 18 October 2026
 
 Step 2 of the reconciliation order. Branch `promote/floating-guidance` starts at `experiment/floating-guidance-bubbles` (`73c6e96`) and merges `main` at `fe7758e`, which now holds the screen-reader baseline. The only conflict was this file: both sides had added a new top entry, and both are kept below. `design/floating-guidance-bubbles` is not merged; its handoff and test plan are older copies of the ones on this branch.
@@ -201,6 +213,74 @@ Last completed action: baseline and API source/docs verified locally. Exact next
 The previous plan below is historical context and has not been used to restart paused work automatically.
 
 # Backend implementation continuation
+
+## Versioned concept content library and merged-app adapter — 18 October 2026
+
+The user requested committing/pushing the session work on a branch, then clarified
+that the web handoff is already implemented and merged: the deliverable is stored
+content and a usable pipeline. Branch: `feature/concept-canvas-handoff`.
+
+**Available after cloning:** `artifacts/cam-review/concept-library.sqlite3` stores
+all ten C-AM packets, 40 authored English/mixed Odia–English placards, scene
+definitions, metadata and file references. All 22 WAVs (793.8 seconds), ten SVG
+posters, trusted JavaScript models/players and review pages are tracked alongside
+it under `artifacts/cam-review/site/dist`. Audio is stored as files, not SQLite
+blobs or Firestore fields. The complete library is roughly 45 MB, with no large
+individual Git objects. No runtime credentials or ignored failed generations
+are included.
+
+**Use it:** read `prototypes/concept_library/README.md`; run
+`python -B scripts/concept-library.py list` or `get C-AM-08`.
+`ConceptLibrary.packet()` and `.asset()` provide checksum-verified reads.
+`build` atomically/repeatably imports the saved packet JSON into SQLite without
+generation. This is a Git-versioned portable snapshot, not a production service.
+
+**Merged integration checked:** cloned current `kiki-web` main at `93cce9b`
+(PR #5 merged), read actual API/web media schemas and publisher. The adapter
+`scripts/publish-concept-library.py` reuses that app's catalog builder, media
+validation, source binding, object store and Firestore publication. It exports
+ten schema-valid app-native records and explicit compatibility exclusions;
+committed outputs are in `artifacts/cam-review/app-import/`, with the full checked
+web commit in `context.json`. The existing namespace is `conceptMedia/.../revisions/`.
+No competing `learningMedia` publisher was introduced.
+
+**Current contract boundary:** app v1 accepts per-placard audio and only the
+phase-recovery renderer. Six whole-concept recordings and nine other scene types
+remain fully stored in SQLite but cannot be mislabelled as app-v1 media. Four
+concepts contribute 16 compatible clips; C-AM-08 also has the native scene.
+Default all-concept application refuses empty/unsupported projections before
+cloud writes. An existing media head requires an explicit expected revision;
+consider the existing C-AM-08 English clips before replacing it with this batch's
+Odia-only audio. Scientific/Odia/pronunciation reviews and alignment remain pending.
+
+**Recovery boundary:** this execution checkout had reset to baseline `2f8eb62`;
+earlier uncommitted backend files and ignored `work/` outputs were absent. The
+published Site source at `b1c293c11400ea20156c39999a6e14b67c309feb` was recovered
+through the Sites repository connector, with all 96 files independently hashed.
+The original Python topic-canvas/packet generators, tests/contracts and newer
+handoff documents were not in the saved Site source and are not claimed recovered.
+Existing committed mixed-script/TTS adapters remain intact. New storage/import
+code is explicitly distinguished from original recovered outputs. See
+`docs/handoffs/concept-canvas-continuation.md`.
+
+**Actual verification:** 30 backend tests discovered: 28 passed, two optional
+merged-app tests skipped in the base environment; those two passed separately
+using the actual merged API dependencies and checkout. SQLite rebuild bytes match
+the committed snapshot; corrupted metadata/audio and invalid lookup IDs are
+rejected. All 96 source hashes, 22 WAV measurements/speech hashes and exact
+four-placard coverage passed. App-native export validated every concept against
+the merged catalog and Pydantic contract. Source integrity passed for all 130
+pinned files; BB8 validation/discovery and all 36 BB8 tests passed. Credential
+pattern and whitespace checks passed. No provider generation or production
+Firestore/Storage writes were made. Earlier browser/Sites results are historical
+evidence; no new authenticated hosted-browser claim is made here.
+
+**Next:** consume the stored library or export app-native records using the
+README commands. Production publication remains deferred until existing Google
+Cloud access and the private bucket are connected. Extend the app's allowlisted
+scene/audio-scope contract to expose the remaining full packets, without
+rebuilding the already merged basic integration or changing the source catalog
+and learner progress.
 
 Status: session work published to origin/main with verified Arpan identity; pipeline/BB8/evidence/docs preserved; FastAPI/worker design accepted; graphics handoff ready; backend implementation paused by user
 

@@ -1,0 +1,6 @@
+{
+  "webRepository": "https://github.com/Kikiland-ai/kiki-web",
+  "webCommit": "93cce9beed4e059f9e0fbad844ec0f1a792bdb7f",
+  "cloudStatus": "not_written",
+  "notes": "Complete originals are in SQLite; compatibility.json describes explicit v1 projection exclusions."
+}

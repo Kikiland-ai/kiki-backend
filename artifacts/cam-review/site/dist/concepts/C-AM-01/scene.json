@@ -1,0 +1,109 @@
+{
+  "schema": "cam-interactive-scene/v1",
+  "modelVersion": "cam-packets/3",
+  "conceptId": "C-AM-01",
+  "kind": "signal",
+  "title": "Amplitude, frequency and phase",
+  "controls": [
+    {
+      "name": "amplitude",
+      "label": "Amplitude",
+      "min": 0.25,
+      "max": 2,
+      "step": 0.25,
+      "default": 1,
+      "unit": "normalized"
+    },
+    {
+      "name": "frequency",
+      "label": "Frequency",
+      "min": 10,
+      "max": 1000,
+      "step": 10,
+      "default": 100,
+      "unit": "Hz"
+    },
+    {
+      "name": "phase",
+      "label": "Phase",
+      "min": 0,
+      "max": 180,
+      "step": 15,
+      "default": 0,
+      "unit": "degree"
+    }
+  ],
+  "visualBrief": {
+    "kind": "waveform",
+    "description": "Draw two labelled time traces with equal frequency and different amplitudes; a third trace has a phase shift. Show 10 ms period for 100 Hz.",
+    "alt": "Amplitude, frequency and phase; Peak size: amplitude. Cycles per second: frequency. Relative timing: phase. Convert Hz using 2*pi*f.",
+    "from": {
+      "origin": "curated",
+      "label": "MathWorks: analog passband modulation; reference for the modulation families",
+      "url": "https://www.mathworks.com/help/comm/ug/analog-passband-modulation.html"
+    }
+  },
+  "walkthrough": [
+    {
+      "target": "Amplitude",
+      "mark": "sweep",
+      "dim": "words",
+      "say": "A sinusoid is x(t)=A sin(2*pi*f*t+phi): A is amplitude, f is frequency in Hz and phi is phase in radians."
+    },
+    {
+      "target": "frequency",
+      "mark": "marker",
+      "dim": "concept",
+      "say": "Set a 100 Hz message source using Frequency = 2*pi*100 rad/s; inspect one cycle lasting 10 ms."
+    },
+    {
+      "target": "phase",
+      "mark": "marker",
+      "dim": "concept",
+      "say": "Peak size: amplitude. Cycles per second: frequency. Relative timing: phase. Convert Hz using 2*pi*f."
+    }
+  ],
+  "sourceInteractive": {
+    "kind": "parameter_sweep",
+    "prompt": "Change frequency and observe period and angular frequency.",
+    "inputs": [
+      {
+        "name": "f",
+        "label": "Frequency",
+        "unit": "Hz",
+        "min": 10,
+        "max": 1000,
+        "step": 10,
+        "default": 100
+      }
+    ],
+    "outputs": [
+      {
+        "name": "T",
+        "label": "Period",
+        "unit": "s",
+        "formula": "1/f"
+      },
+      {
+        "name": "omega",
+        "label": "Angular frequency",
+        "unit": "rad/s",
+        "formula": "2*pi*f"
+      }
+    ]
+  },
+  "assumptions": [
+    "Authored draft; scientific review pending",
+    "Trusted analytic teaching model, not live Simulink evidence",
+    "Any normalized examples are illustrative; no new measured device values",
+    "Manual placard states; no sentence alignment"
+  ],
+  "review": {
+    "scientific": "pending",
+    "sourceGrounding": "authored_concept"
+  },
+  "image": {
+    "status": "not_requested",
+    "reason": "Scientific plots/flow/comparisons are rendered as editable SVG; no generated-image claim"
+  }
+}

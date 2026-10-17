@@ -1,0 +1,109 @@
+{
+  "schema": "cam-interactive-scene/v1",
+  "modelVersion": "cam-packets/3",
+  "conceptId": "C-AM-09",
+  "kind": "fm",
+  "title": "Frequency modulation and deviation",
+  "controls": [
+    {
+      "name": "df",
+      "label": "Frequency deviation",
+      "min": 1000,
+      "max": 10000,
+      "step": 500,
+      "default": 5000,
+      "unit": "Hz"
+    },
+    {
+      "name": "B",
+      "label": "Single-tone message frequency / B",
+      "min": 500,
+      "max": 3000,
+      "step": 100,
+      "default": 1000,
+      "unit": "Hz"
+    }
+  ],
+  "visualBrief": {
+    "kind": "waveform",
+    "description": "Constant-amplitude FM trace with dense and sparse cycles according to a low-frequency message; compare to amplitude modulation.",
+    "alt": "Frequency modulation and deviation; FM changes instantaneous frequency. beta=Delta f/fm. Carson bandwidth is an approximation.",
+    "from": {
+      "origin": "curated",
+      "label": "MathWorks: analog passband modulation; reference for the modulation families",
+      "url": "https://www.mathworks.com/help/comm/ug/analog-passband-modulation.html"
+    }
+  },
+  "walkthrough": [
+    {
+      "target": "Frequency modulation",
+      "mark": "sweep",
+      "dim": "words",
+      "say": "FM varies instantaneous carrier frequency with the message while ideal carrier amplitude remains constant."
+    },
+    {
+      "target": "Frequency deviation",
+      "mark": "marker",
+      "dim": "concept",
+      "say": "Compare FM cycle spacing against DSB-SC amplitude changes in a waveform placard."
+    },
+    {
+      "target": "Carson",
+      "mark": "marker",
+      "dim": "concept",
+      "say": "FM changes instantaneous frequency. beta=Delta f/fm. Carson bandwidth is an approximation."
+    }
+  ],
+  "sourceInteractive": {
+    "kind": "parameter_sweep",
+    "prompt": "Estimate FM occupied bandwidth using Carson’s approximation.",
+    "inputs": [
+      {
+        "name": "df",
+        "label": "Frequency deviation",
+        "unit": "Hz",
+        "min": 1000,
+        "max": 10000,
+        "step": 500,
+        "default": 5000
+      },
+      {
+        "name": "B",
+        "label": "Highest message frequency",
+        "unit": "Hz",
+        "min": 500,
+        "max": 3000,
+        "step": 100,
+        "default": 1000
+      }
+    ],
+    "outputs": [
+      {
+        "name": "bw",
+        "label": "Approximate occupied bandwidth",
+        "unit": "Hz",
+        "formula": "2*(df+B)"
+      },
+      {
+        "name": "beta",
+        "label": "Single-tone modulation index",
+        "unit": "dimensionless",
+        "formula": "df/B"
+      }
+    ]
+  },
+  "assumptions": [
+    "Authored draft; scientific review pending",
+    "Trusted analytic teaching model, not live Simulink evidence",
+    "Any normalized examples are illustrative; no new measured device values",
+    "Manual placard states; no sentence alignment"
+  ],
+  "review": {
+    "scientific": "pending",
+    "sourceGrounding": "authored_concept"
+  },
+  "image": {
+    "status": "not_requested",
+    "reason": "Scientific plots/flow/comparisons are rendered as editable SVG; no generated-image claim"
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "criteria": [
+    {
+      "criterion_id": "CP-DSB-06:filter_parameters",
+      "status": "unknown",
+      "evidence": "Lowpass block is not visible in the current view to inspect its coefficient arrays."
+    },
+    {
+      "criterion_id": "CP-DSB-06:gain_parameters",
+      "status": "unknown",
+      "evidence": "Recovery gain block is not visible in the current view to inspect its gain parameter."
+    },
+    {
+      "criterion_id": "CP-DSB-06:receiver_chain",
+      "status": "unknown",
+      "evidence": "The receiver chain from Receiver product to Lowpass and Recovery gain is not visible."
+    }
+  ],
+  "action_findings": [
+    {
+      "action_id": "CP-DSB-06/filter-create",
+      "status": "unknown",
+      "evidence": "Lowpass Transfer Fcn block is not visible on the canvas."
+    },
+    {
+      "action_id": "CP-DSB-06/filter-settings",
+      "status": "unknown",
+      "evidence": "Lowpass block settings dialog is not visible."
+    },
+    {
+      "action_id": "CP-DSB-06/gain-create",
+      "status": "unknown",
+      "evidence": "Recovery gain block is not visible on the canvas."
+    },
+    {
+      "action_id": "CP-DSB-06/gain-settings",
+      "status": "unknown",
+      "evidence": "Recovery gain settings dialog is not visible."
+    },
+    {
+      "action_id": "CP-DSB-06/chain",
+      "status": "unknown",
+      "evidence": "Lowpass and Recovery gain blocks are off-screen, so the complete chain cannot be verified."
+    }
+  ],
+  "uncertainties": [
+    "Lowpass and Recovery gain blocks are not present in the current screenshot view."
+  ],
+  "screen_guidance": [
+    {
+      "action_id": "CP-DSB-06/gain-settings",
+      "mode": "text_only",
+      "targets": [
+        {
+          "target_id": "recovery_gain.value",
+          "status": "unresolved",
+          "region": null
+        }
+      ],
+      "marks": []
+    },
+    {
+      "action_id": "CP-DSB-06/chain",
+      "mode": "text_only",
+      "targets": [
+        {
+          "target_id": "workspace.canvas",
+          "status": "unresolved",
+          "region": null
+        }
+      ],
+      "marks": []
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "criteria": [
+    {
+      "criterion_id": "CP-DSB-05:local_parameters",
+      "status": "mismatch",
+      "evidence": "The Local carrier dialog shows phase 0 instead of pi/2 while frequency is 2*pi*2000."
+    },
+    {
+      "criterion_id": "CP-DSB-05:receiver_structure",
+      "status": "unknown",
+      "evidence": "The workspace diagram with receiver Product and wiring is hidden behind the Block Parameters dialog."
+    }
+  ],
+  "action_findings": [
+    {
+      "action_id": "CP-DSB-05/local-create",
+      "status": "match",
+      "evidence": "The Block Parameters dialog for Local carrier is visible."
+    },
+    {
+      "action_id": "CP-DSB-05/local-settings",
+      "status": "mismatch",
+      "evidence": "The Local carrier dialog shows frequency 2*pi*2000 and phase 0 instead of pi/2."
+    },
+    {
+      "action_id": "CP-DSB-05/receiver-create",
+      "status": "unknown",
+      "evidence": "The workspace canvas and Receiver product block are obscured by the settings dialog."
+    },
+    {
+      "action_id": "CP-DSB-05/modulated-wire",
+      "status": "unknown",
+      "evidence": "The connection path from Modulator to Receiver product is completely hidden by the settings dialog."
+    },
+    {
+      "action_id": "CP-DSB-05/local-wire",
+      "status": "unknown",
+      "evidence": "The connection path from Local carrier to Receiver product is completely hidden by the settings dialog."
+    }
+  ],
+  "uncertainties": [
+    "The main workspace diagram and wiring are occluded by the Local carrier properties window."
+  ],
+  "screen_guidance": [
+    {
+      "action_id": "CP-DSB-05/local-settings",
+      "mode": "annotate",
+      "targets": [
+        {
+          "target_id": "local_carrier.frequency",
+          "status": "resolved",
+          "region": {
+            "x": 0.043,
+            "y": 6.438e-01,
+            "width": 0.395,
+            "height": 0.043
+          }
+        },
+        {
+          "target_id": "local_carrier.phase",
+          "status": "resolved",
+          "region": {
+            "x": 0.043,
+            "y": 7.351e-01,
+            "width": 0.395,
+            "height": 0.043
+          }
+        }
+      ],
+      "marks": [
+        {
+          "kind": "text",
+          "cue_id": "freq_note",
+          "anchor": {
+            "target_id": "local_carrier.frequency",
+            "u": 0.5,
+            "v": 0.5
+          },
+          "text_ref": "setting_0"
+        },
+        {
+          "kind": "text",
+          "cue_id": "phase_note",
+          "anchor": {
+            "target_id": "local_carrier.phase",
+            "u": 0.5,
+            "v": 0.5
+          },
+          "text_ref": "setting_1"
+        }
+      ]
+    }
+  ]
+}

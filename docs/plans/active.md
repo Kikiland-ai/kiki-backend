@@ -1,3 +1,13 @@
+# Writing prompt contract and capture-mask correction — 17 October 2026 (Asia/Kolkata)
+
+The user requested BB8 prompt-engineering prevention of prose text references and missing anchors, while the actual MATLAB screenshot replay remains the overall acceptance goal. Applied the local skill in reference mode. The drawing2 prompt adds exact field semantics, action-local reference keys, anchor coordinates, valid/invalid examples, grounding and abstention. Public validator and v19 generation schemas stay unchanged; control/provider latency settings are preserved.
+
+Six bounded paired Gemini calls: both arms contract-valid 3/3; candidate meets the three-case rubric, baseline omits hidden-target candidate (permitted by contract). About 800 added input tokens; no reliability/latency improvement is statistically established. Separate connected runs found a signed paint could be followed by a hidden layer during asynchronous JPEG encoding. Restore ink after synchronous clean-canvas copy/fingerprint and before encoding; stalled-encoder regression passes. Full final replay and publication receipts follow in the linked handoff.
+
+Last completed: 138 Node cases; context/baseline/BB8/reference design gates; real-model connected paint, correct receipt provenance and visible pixels at 1.5 seconds; native stale-view rejection; coherent observation panel under periodic frames. Real-model final sample: 3,629 ms analysis-to-tracker-commit and 122.5 ms consumer-receipt-to-paint. All failed runs retained. Now: publish the verified changes on the existing private receiver using Sites. Next: replay the two exact MATLAB images and open/closed-dialog cancellation once original image files are available. Later: actual installed-extension Simulink acceptance. The images are visible in chat but absent from execution attachment paths; do not substitute controlled fixtures and claim the exact screenshots were tested. [Handoff](../handoffs/screen-writing-prompt-v2.md).
+
+---
+
 # Generated mark contract correction — 17 October 2026 (Asia/Kolkata)
 
 User still sees no shapes on receiver v18. New drawing streams fail before publication. Real-model controlled probes reproduce prose in text_ref and missing text anchors under the flat generation schema. A compact typed mark union plus offered reference-key enums passes unchanged validation. Explicit validation guards stop schema errors being mislabelled as network failures and retried across four keys. Existing reader/extension remains compatible.

@@ -1,0 +1,6 @@
+{
+  "status": "PASS",
+  "fault": "view_invalidated_between_verification_and_paint",
+  "no_paint_ack": true,
+  "reject_ack_persisted": true
+}

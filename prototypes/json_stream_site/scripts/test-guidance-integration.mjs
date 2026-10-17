@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {setupGuidance,seedCheckpoint} from './guidance-fixture.mjs';
 import {readFile} from 'node:fs/promises';
 import {validateDrawingModel} from '../worker/guidance.js';
+import {drawingWritingPrompt,LIVE_DRAWING_PROMPT_VERSION} from '../worker/guidance-prompt.js';
 import '../assets/guidance-protocol.js';
 import {startAnalysisStream} from '../assets/json-stream-client.js';
 const decode=text=>text.split('\n\n').filter(Boolean).map(v=>JSON.parse(v.slice(6)));
@@ -25,6 +26,7 @@ for(const cp of definition.checkpoints)test('live generation schema and strict t
  const events=decode(await(await h.check()).text());assert.ok(events.some(e=>e.type==='guidance_committed'),JSON.stringify(events));
  const schema=body.generationConfig.responseJsonSchema;assert.equal(schema.properties.criteria.minItems,cp.completion_criteria.length);assert.equal(schema.properties.action_findings.maxItems,policy.procedures[cp.id].length);
  const eligible_actions=JSON.parse(body.contents[0].parts[0].text.split('\nAuthored drawing catalogue: ')[1]),action=eligible_actions[0],hasRelations=eligible_actions.some(a=>a.relationships.length);let targetFields=0,textFields=0;
+ assert.ok(body.systemInstruction.parts[0].text.endsWith(drawingWritingPrompt(eligible_actions)));assert.equal(events.find(e=>e.type==='guidance_committed').state.runtime.candidate.prompt_version,LIVE_DRAWING_PROMPT_VERSION);assert.equal(events.find(e=>e.type==='guidance_committed').state.runtime.last_analysis_timing.observer_prompt_version,LIVE_DRAWING_PROMPT_VERSION);
  function inspect(n){if(Array.isArray(n))n.forEach(inspect);else if(n&&typeof n==='object'){if(n.properties?.target_id){assert.deepEqual(n.properties.target_id,{type:'string'});targetFields++;}if(n.properties?.text_ref){assert.deepEqual(n.properties.text_ref.enum,[...new Set(eligible_actions.flatMap(a=>Object.keys(a.overlay_texts)))].sort());textFields++;}Object.values(n).forEach(inspect);}}inspect(schema.properties.screen_guidance);assert.equal(targetFields,hasRelations?5:3);assert.equal(textFields,1);
  const variants=schema.properties.screen_guidance.items.properties.marks.items.anyOf;assert.deepEqual(variants.flatMap(v=>v.properties.kind.enum).sort(),['box','ellipse','text',...(hasRelations?['arrow']:[])].sort());for(const v of variants)assert.deepEqual(v.required.slice().sort(),Object.keys(v.properties).sort(),'Every kind-specific field is required during generation');
  const value={criteria:cp.completion_criteria.map(c=>({criterion_id:c.id,status:'unknown',evidence:'Controlled unknown finding.'})),action_findings:policy.procedures[cp.id].map(a=>({action_id:a.id,status:'unknown',evidence:'Controlled unknown finding.'})),uncertainties:[],screen_guidance:[{action_id:action.action_id,mode:'text_only',targets:action.required_target_ids.map(target_id=>({target_id,status:'unresolved',region:null})),marks:[]}]};

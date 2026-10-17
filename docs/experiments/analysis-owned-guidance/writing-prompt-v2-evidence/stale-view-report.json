@@ -1,0 +1,121 @@
+{
+  "status": "PASS",
+  "fault": "view_invalidated_between_verification_and_paint",
+  "no_paint_ack": true,
+  "reject_ack_persisted": true,
+  "consumer": {
+    "schema": "guidance-consumer-trace/v1",
+    "health": {
+      "capture": "Verified pixels from the connected tab",
+      "analysis": "available",
+      "delivery": "Guidance cleared for the current context",
+      "captured": 3,
+      "painted": 0,
+      "last_failure": {
+        "stage": "delivery",
+        "reason": "Tab or view changed; discard entire cue"
+      }
+    },
+    "events": [
+      {
+        "at": "2026-10-17T07:58:01.186Z",
+        "stage": "clock_calibrated",
+        "uncertainty_ms": 3.5999755859375,
+        "server_processing_ms": 651
+      },
+      {
+        "at": "2026-10-17T07:58:01.186Z",
+        "stage": "negotiated",
+        "stream_id": "9a7e9b0f-00f2-4f95-b9a6-740c5c2943b7"
+      },
+      {
+        "at": "2026-10-17T07:58:01.215Z",
+        "stage": "captured",
+        "ticket_id": "27ae68fc-3f2c-4871-b44b-43a874bccb14"
+      },
+      {
+        "at": "2026-10-17T07:58:01.278Z",
+        "stage": "frame_signed",
+        "frame_id": "a18dc077-29ec-40ce-a80b-a4f9186ab0de:1:2"
+      },
+      {
+        "at": "2026-10-17T07:58:02.880Z",
+        "stage": "ack_recorded",
+        "sequence": 1,
+        "status": "cancelled"
+      },
+      {
+        "at": "2026-10-17T07:58:02.880Z",
+        "stage": "cancelled",
+        "sequence": 1
+      },
+      {
+        "at": "2026-10-17T07:58:03.313Z",
+        "stage": "captured",
+        "ticket_id": "bd12bc5e-e44b-48ad-9b56-be997f1c8c70"
+      },
+      {
+        "at": "2026-10-17T07:58:03.569Z",
+        "stage": "frame_signed",
+        "frame_id": "a18dc077-29ec-40ce-a80b-a4f9186ab0de:1:3"
+      },
+      {
+        "at": "2026-10-17T07:58:05.610Z",
+        "stage": "captured",
+        "ticket_id": "ceb4abd0-89e4-4f5b-829a-8c9d0115e791"
+      },
+      {
+        "at": "2026-10-17T07:58:06.653Z",
+        "stage": "frame_signed",
+        "frame_id": "a18dc077-29ec-40ce-a80b-a4f9186ab0de:1:4"
+      },
+      {
+        "at": "2026-10-17T07:58:06.961Z",
+        "stage": "presentation_reserved"
+      },
+      {
+        "at": "2026-10-17T07:58:06.998Z",
+        "stage": "live_pixels_verified",
+        "reservation_ms": 37.20000000298023
+      },
+      {
+        "at": "2026-10-17T07:58:07.006Z",
+        "stage": "paint_requested",
+        "reservation_ms": 44.79999999701977
+      },
+      {
+        "at": "2026-10-17T07:58:07.040Z",
+        "stage": "invalidated",
+        "reason": "Shared view changed"
+      },
+      {
+        "at": "2026-10-17T07:58:07.048Z",
+        "stage": "invalidated",
+        "reason": "Lab context or attachment changed"
+      },
+      {
+        "at": "2026-10-17T07:58:07.076Z",
+        "stage": "delivery_rejected",
+        "request_id": "d993df93-1302-4a3c-9c90-e4fa2b99b73d",
+        "reason": "Tab or view changed; discard entire cue"
+      },
+      {
+        "at": "2026-10-17T07:58:07.082Z",
+        "stage": "ack_recorded",
+        "sequence": 2,
+        "status": "rejected"
+      },
+      {
+        "at": "2026-10-17T07:58:07.448Z",
+        "stage": "ack_recorded",
+        "sequence": 3,
+        "status": "cancelled"
+      },
+      {
+        "at": "2026-10-17T07:58:07.449Z",
+        "stage": "cancelled",
+        "sequence": 3
+      }
+    ]
+  }
+}

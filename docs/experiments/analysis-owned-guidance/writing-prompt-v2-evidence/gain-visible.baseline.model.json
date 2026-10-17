@@ -1,0 +1,85 @@
+{
+  "criteria": [
+    {
+      "criterion_id": "CP-DSB-06:filter_parameters",
+      "status": "unknown",
+      "evidence": "The Lowpass block dialog is not visible in this view."
+    },
+    {
+      "criterion_id": "CP-DSB-06:gain_parameters",
+      "status": "match",
+      "evidence": "The Block Parameters: Recovery dialog shows Gain set to 2."
+    },
+    {
+      "criterion_id": "CP-DSB-06:receiver_chain",
+      "status": "unknown",
+      "evidence": "The receiver chain connections are occluded by the open dialog window."
+    }
+  ],
+  "action_findings": [
+    {
+      "action_id": "CP-DSB-06/filter-create",
+      "status": "unknown",
+      "evidence": "The Lowpass block is not visible in the cropped view."
+    },
+    {
+      "action_id": "CP-DSB-06/filter-settings",
+      "status": "unknown",
+      "evidence": "The Lowpass parameters dialog is not visible."
+    },
+    {
+      "action_id": "CP-DSB-06/gain-create",
+      "status": "match",
+      "evidence": "The Recovery gain dialog title proves the Recovery gain block exists."
+    },
+    {
+      "action_id": "CP-DSB-06/gain-settings",
+      "status": "match",
+      "evidence": "The Gain field in the Recovery dialog displays 2."
+    },
+    {
+      "action_id": "CP-DSB-06/chain",
+      "status": "unknown",
+      "evidence": "Connection paths are entirely occluded by the foreground parameters dialog."
+    }
+  ],
+  "uncertainties": [
+    "The Lowpass filter block parameters are hidden behind the active Recovery dialog.",
+    "The receiver chain wire connections are occluded by the parameter dialog window."
+  ],
+  "screen_guidance": [
+    {
+      "action_id": "CP-DSB-06/gain-settings",
+      "mode": "annotate",
+      "targets": [
+        {
+          "target_id": "recovery_gain.value",
+          "status": "resolved",
+          "region": {
+            "x": 0.155,
+            "y": 0.474,
+            "width": 0.412,
+            "height": 0.063
+          }
+        }
+      ],
+      "marks": [
+        {
+          "kind": "box",
+          "cue_id": "c1",
+          "target_id": "recovery_gain.value"
+        },
+        {
+          "kind": "text",
+          "cue_id": "t1",
+          "anchor": {
+            "target_id": "recovery_gain.value",
+            "u": 0.5,
+            "v": 0
+          },
+          "text_ref": "setting_0"
+        }
+      ]
+    }
+  ]
+}

@@ -122,11 +122,15 @@
       canvas.width = Math.max(1, Math.round(sourceWidth * scale));
       canvas.height = Math.max(1, Math.round(sourceHeight * scale));
       canvas.getContext('2d').drawImage(source, 0, 0, canvas.width, canvas.height);
-      let blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', .8));
-      if (blob?.size > 1000000) blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', .55));
       const visualFingerprint=writingTicket?window.KikiWriting.fingerprint(writingTicket,canvas):null;
+      // The immutable canvas already contains clean pixels. Restore the user's
+      // guidance before asynchronous JPEG encoding, which can take a full frame
+      // interval in a throttled reader tab. Encoding must not mask live ink.
       const writingBinding=await window.KikiWriting?.finishFrame(writingTicket,canvas);
       writingTicket=null;
+      if (current !== generation || ending || paused) return;
+      let blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', .8));
+      if (blob?.size > 1000000) blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', .55));
       if (current !== generation || ending || paused) return;
       if (!blob || blob.size > 1000000) throw Object.assign(new Error('Frame exceeds 1 MB. Try a smaller shared window.'),{fatal:true});
       const meta = {type: 'frame', capture_epoch: 1, view_revision:captureViewRevision, sequence: ++sequence,

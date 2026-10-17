@@ -1,0 +1,110 @@
+{
+  "status": "PASS",
+  "native_screen_capture": true,
+  "real_browser_sse_stream": true,
+  "controller_origin_is_local_fixture_override": true,
+  "coherent_panel_during_stream": false,
+  "reader_visibility_at_paint": "visible",
+  "actual_reader_worker_broker_consumer_compositor": true,
+  "blue_pixels_at_authored_control": true,
+  "visible_after_1500ms": true,
+  "persisted_exposure_ack": true,
+  "periodic_frames_during_delayed_analysis": 3,
+  "installed_extension_tested": false,
+  "real_simulink_tested": false,
+  "real_model_localization_tested": true,
+  "live_model_requests": 1,
+  "explicit_control_setup_fixture": true,
+  "consumer": {
+    "schema": "guidance-consumer-trace/v1",
+    "health": {
+      "capture": "Verified pixels from the connected tab",
+      "analysis": "Waiting for provider",
+      "delivery": "Shapes and notes painted on your shared tab",
+      "captured": 3,
+      "painted": 1,
+      "last_failure": null
+    },
+    "events": [
+      {
+        "at": "2026-10-17T07:57:18.402Z",
+        "stage": "clock_calibrated",
+        "uncertainty_ms": 3,
+        "server_processing_ms": 651
+      },
+      {
+        "at": "2026-10-17T07:57:18.402Z",
+        "stage": "negotiated",
+        "stream_id": "c350cd8f-f9a5-4c20-8e2a-215e00d7c3a4"
+      },
+      {
+        "at": "2026-10-17T07:57:18.431Z",
+        "stage": "captured",
+        "ticket_id": "06583863-256d-4ade-ae5d-38841d452a76"
+      },
+      {
+        "at": "2026-10-17T07:57:18.804Z",
+        "stage": "frame_signed",
+        "frame_id": "da0ae198-671b-47b7-b889-5050eb80e6c0:1:2"
+      },
+      {
+        "at": "2026-10-17T07:57:20.275Z",
+        "stage": "ack_recorded",
+        "sequence": 1,
+        "status": "cancelled"
+      },
+      {
+        "at": "2026-10-17T07:57:20.276Z",
+        "stage": "cancelled",
+        "sequence": 1
+      },
+      {
+        "at": "2026-10-17T07:57:20.849Z",
+        "stage": "captured",
+        "ticket_id": "f2562d74-fbd3-4b6e-afbd-363bf18c9e7a"
+      },
+      {
+        "at": "2026-10-17T07:57:21.894Z",
+        "stage": "frame_signed",
+        "frame_id": "da0ae198-671b-47b7-b889-5050eb80e6c0:1:3"
+      },
+      {
+        "at": "2026-10-17T07:57:23.614Z",
+        "stage": "presentation_reserved"
+      },
+      {
+        "at": "2026-10-17T07:57:23.655Z",
+        "stage": "live_pixels_verified",
+        "reservation_ms": 41.1000000089407
+      },
+      {
+        "at": "2026-10-17T07:57:23.673Z",
+        "stage": "paint_requested",
+        "reservation_ms": 58.5
+      },
+      {
+        "at": "2026-10-17T07:57:23.727Z",
+        "stage": "paint_acknowledged",
+        "request_id": "8ec86469-d997-46f0-829c-651b048faa3e",
+        "sequence": 2,
+        "commit_to_paint_ms": 122.40000000596046
+      },
+      {
+        "at": "2026-10-17T07:57:23.733Z",
+        "stage": "ack_recorded",
+        "sequence": 2,
+        "status": "live_rendered"
+      },
+      {
+        "at": "2026-10-17T07:57:23.927Z",
+        "stage": "captured",
+        "ticket_id": "bdec927a-46ea-49b5-92ec-e0b0ac4110d0"
+      },
+      {
+        "at": "2026-10-17T07:57:24.736Z",
+        "stage": "frame_signed",
+        "frame_id": "da0ae198-671b-47b7-b889-5050eb80e6c0:1:4"
+      }
+    ]
+  }
+}

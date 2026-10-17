@@ -1,0 +1,322 @@
+[
+  {
+    "case": "gain-visible",
+    "split": "development",
+    "arm": "baseline",
+    "prompt_version": "dsb-step-observer/v5-drawing1",
+    "sample_kind": "live_provider",
+    "source_kind": "controlled_screenshot_fixture",
+    "image": "docs/experiments/analysis-owned-guidance/generated-marks-v1-evidence/controlled-query-image.jpeg",
+    "image_sha256": "981cc356ed893c151579c4f4cb64182e950e09116cce2eb256d30c604ce9fe3a",
+    "schema_sha256": "46f12bc682d85a9b675c635ec62998f92e69bc588d95f5eac727a0fe6b7c7b46",
+    "input_sha256": "f61645eaf1a904caf92ff5db7e51364047124e83a959d4eeaf7ef2cfa661e9d9",
+    "model": "gemini-3.5-flash-lite",
+    "timeout_ms": 20000,
+    "retries": 0,
+    "paint_tested": false,
+    "real_simulink_tested": false,
+    "request_characters": 19627,
+    "http_status": 200,
+    "headers_ms": 1954,
+    "first_byte_ms": 1955,
+    "tokens": {
+      "promptTokenCount": 5017,
+      "candidatesTokenCount": 743,
+      "totalTokenCount": 5760,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 3937
+        },
+        {
+          "modality": "IMAGE",
+          "tokenCount": 1080
+        }
+      ],
+      "serviceTier": "standard"
+    },
+    "contract_valid": true,
+    "outcome": "annotate",
+    "mark_kinds": [
+      "box",
+      "text"
+    ],
+    "expected_mode": "annotate",
+    "mode_correct": true,
+    "target_iou": {
+      "recovery_gain.value": 0.9638369989041499
+    },
+    "pass": true,
+    "elapsed_ms": 3419
+  },
+  {
+    "case": "gain-visible",
+    "split": "development",
+    "arm": "candidate",
+    "prompt_version": "dsb-step-observer/v5-drawing2",
+    "sample_kind": "live_provider",
+    "source_kind": "controlled_screenshot_fixture",
+    "image": "docs/experiments/analysis-owned-guidance/generated-marks-v1-evidence/controlled-query-image.jpeg",
+    "image_sha256": "981cc356ed893c151579c4f4cb64182e950e09116cce2eb256d30c604ce9fe3a",
+    "schema_sha256": "46f12bc682d85a9b675c635ec62998f92e69bc588d95f5eac727a0fe6b7c7b46",
+    "input_sha256": "f61645eaf1a904caf92ff5db7e51364047124e83a959d4eeaf7ef2cfa661e9d9",
+    "model": "gemini-3.5-flash-lite",
+    "timeout_ms": 20000,
+    "retries": 0,
+    "paint_tested": false,
+    "real_simulink_tested": false,
+    "request_characters": 23168,
+    "http_status": 200,
+    "headers_ms": 1512,
+    "first_byte_ms": 1512,
+    "tokens": {
+      "promptTokenCount": 5819,
+      "candidatesTokenCount": 827,
+      "totalTokenCount": 6646,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 4739
+        },
+        {
+          "modality": "IMAGE",
+          "tokenCount": 1080
+        }
+      ],
+      "serviceTier": "standard"
+    },
+    "contract_valid": true,
+    "outcome": "annotate",
+    "mark_kinds": [
+      "box",
+      "text"
+    ],
+    "expected_mode": "annotate",
+    "mode_correct": true,
+    "target_iou": {
+      "recovery_gain.value": 0.9716394117042048
+    },
+    "pass": true,
+    "elapsed_ms": 3102
+  },
+  {
+    "case": "gain-hidden",
+    "split": "development",
+    "arm": "candidate",
+    "prompt_version": "dsb-step-observer/v5-drawing2",
+    "sample_kind": "live_provider",
+    "source_kind": "controlled_screenshot_fixture",
+    "image": "fixtures/json-stream/clear-wires-heldout.jpg",
+    "image_sha256": "07745205c2a39104b28f40fb8e2c0291dc0c2c27eba84a5fd96db37a5a54c7ba",
+    "schema_sha256": "46f12bc682d85a9b675c635ec62998f92e69bc588d95f5eac727a0fe6b7c7b46",
+    "input_sha256": "a70a8dce709eca8e4b004be001090dfc90b45aefa0f400e825b21335d94aa70f",
+    "model": "gemini-3.5-flash-lite",
+    "timeout_ms": 20000,
+    "retries": 0,
+    "paint_tested": false,
+    "real_simulink_tested": false,
+    "request_characters": 23168,
+    "http_status": 200,
+    "headers_ms": 1760,
+    "first_byte_ms": 1760,
+    "tokens": {
+      "promptTokenCount": 5819,
+      "candidatesTokenCount": 656,
+      "totalTokenCount": 6475,
+      "cachedContentTokenCount": 3136,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 4739
+        },
+        {
+          "modality": "IMAGE",
+          "tokenCount": 1080
+        }
+      ],
+      "cacheTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 2554
+        },
+        {
+          "modality": "IMAGE",
+          "tokenCount": 582
+        }
+      ],
+      "serviceTier": "standard"
+    },
+    "contract_valid": true,
+    "outcome": "text_only",
+    "mark_kinds": [],
+    "expected_mode": "text_only",
+    "mode_correct": true,
+    "target_iou": {},
+    "pass": true,
+    "elapsed_ms": 2988
+  },
+  {
+    "case": "gain-hidden",
+    "split": "development",
+    "arm": "baseline",
+    "prompt_version": "dsb-step-observer/v5-drawing1",
+    "sample_kind": "live_provider",
+    "source_kind": "controlled_screenshot_fixture",
+    "image": "fixtures/json-stream/clear-wires-heldout.jpg",
+    "image_sha256": "07745205c2a39104b28f40fb8e2c0291dc0c2c27eba84a5fd96db37a5a54c7ba",
+    "schema_sha256": "46f12bc682d85a9b675c635ec62998f92e69bc588d95f5eac727a0fe6b7c7b46",
+    "input_sha256": "a70a8dce709eca8e4b004be001090dfc90b45aefa0f400e825b21335d94aa70f",
+    "model": "gemini-3.5-flash-lite",
+    "timeout_ms": 20000,
+    "retries": 0,
+    "paint_tested": false,
+    "real_simulink_tested": false,
+    "request_characters": 19627,
+    "http_status": 200,
+    "headers_ms": 1278,
+    "first_byte_ms": 1278,
+    "tokens": {
+      "promptTokenCount": 5017,
+      "candidatesTokenCount": 469,
+      "totalTokenCount": 5486,
+      "cachedContentTokenCount": 3022,
+      "promptTokensDetails": [
+        {
+          "modality": "IMAGE",
+          "tokenCount": 1080
+        },
+        {
+          "modality": "TEXT",
+          "tokenCount": 3937
+        }
+      ],
+      "cacheTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 2372
+        },
+        {
+          "modality": "IMAGE",
+          "tokenCount": 650
+        }
+      ],
+      "serviceTier": "standard"
+    },
+    "contract_valid": true,
+    "outcome": "omitted",
+    "mark_kinds": [],
+    "expected_mode": "text_only",
+    "mode_correct": false,
+    "target_iou": {},
+    "pass": false,
+    "elapsed_ms": 2086
+  },
+  {
+    "case": "two-fields-wrong-phase",
+    "split": "held_out_for_this_prompt_change",
+    "arm": "baseline",
+    "prompt_version": "dsb-step-observer/v5-drawing1",
+    "sample_kind": "live_provider",
+    "source_kind": "controlled_screenshot_fixture",
+    "image": "fixtures/screen-reader-baseline/wrong-local-phase-heldout.jpg",
+    "image_sha256": "aeb206dea885d5f330562cabcd06061b8589753128a237b907b4bd98682fc59d",
+    "schema_sha256": "e6134cb76f8a85e8199ac717be5ca16f9a8628a92ac391beb439e132ca9e671d",
+    "input_sha256": "6ed6d885ded2d434586e90654552db57024f1dea285fe717b9909f23383a0e82",
+    "model": "gemini-3.5-flash-lite",
+    "timeout_ms": 20000,
+    "retries": 0,
+    "paint_tested": false,
+    "real_simulink_tested": false,
+    "request_characters": 20659,
+    "http_status": 200,
+    "headers_ms": 1908,
+    "first_byte_ms": 1908,
+    "tokens": {
+      "promptTokenCount": 5152,
+      "candidatesTokenCount": 956,
+      "totalTokenCount": 6108,
+      "promptTokensDetails": [
+        {
+          "modality": "IMAGE",
+          "tokenCount": 1080
+        },
+        {
+          "modality": "TEXT",
+          "tokenCount": 4072
+        }
+      ],
+      "serviceTier": "standard"
+    },
+    "contract_valid": true,
+    "outcome": "annotate",
+    "mark_kinds": [
+      "box",
+      "box",
+      "text",
+      "text"
+    ],
+    "expected_mode": "annotate",
+    "mode_correct": true,
+    "target_iou": {
+      "local_carrier.frequency": 0.9052986711012826,
+      "local_carrier.phase": 0.9677604857142853
+    },
+    "expected_finding": "mismatch",
+    "actual_finding": "mismatch",
+    "pass": true,
+    "elapsed_ms": 3668
+  },
+  {
+    "case": "two-fields-wrong-phase",
+    "split": "held_out_for_this_prompt_change",
+    "arm": "candidate",
+    "prompt_version": "dsb-step-observer/v5-drawing2",
+    "sample_kind": "live_provider",
+    "source_kind": "controlled_screenshot_fixture",
+    "image": "fixtures/screen-reader-baseline/wrong-local-phase-heldout.jpg",
+    "image_sha256": "aeb206dea885d5f330562cabcd06061b8589753128a237b907b4bd98682fc59d",
+    "schema_sha256": "e6134cb76f8a85e8199ac717be5ca16f9a8628a92ac391beb439e132ca9e671d",
+    "input_sha256": "6ed6d885ded2d434586e90654552db57024f1dea285fe717b9909f23383a0e82",
+    "model": "gemini-3.5-flash-lite",
+    "timeout_ms": 20000,
+    "retries": 0,
+    "paint_tested": false,
+    "real_simulink_tested": false,
+    "request_characters": 24291,
+    "http_status": 200,
+    "headers_ms": 1316,
+    "first_byte_ms": 1316,
+    "tokens": {
+      "promptTokenCount": 5973,
+      "candidatesTokenCount": 859,
+      "totalTokenCount": 6832,
+      "promptTokensDetails": [
+        {
+          "modality": "IMAGE",
+          "tokenCount": 1080
+        },
+        {
+          "modality": "TEXT",
+          "tokenCount": 4893
+        }
+      ],
+      "serviceTier": "standard"
+    },
+    "contract_valid": true,
+    "outcome": "annotate",
+    "mark_kinds": [
+      "text",
+      "text"
+    ],
+    "expected_mode": "annotate",
+    "mode_correct": true,
+    "target_iou": {
+      "local_carrier.frequency": 0.9803087352067351,
+      "local_carrier.phase": 0.9378638998195222
+    },
+    "expected_finding": "mismatch",
+    "actual_finding": "mismatch",
+    "pass": true,
+    "elapsed_ms": 2914
+  }
+]

@@ -1,0 +1,50 @@
+{
+  "criteria": [
+    {
+      "criterion_id": "CP-DSB-06:filter_parameters",
+      "status": "unknown",
+      "evidence": "Lowpass filter parameters are not visible in the screenshot."
+    },
+    {
+      "criterion_id": "CP-DSB-06:gain_parameters",
+      "status": "unknown",
+      "evidence": "Recovery gain parameters are not visible in the screenshot."
+    },
+    {
+      "criterion_id": "CP-DSB-06:receiver_chain",
+      "status": "unknown",
+      "evidence": "The receiver chain from Receiver product to Lowpass and Recovery gain is not visible."
+    }
+  ],
+  "action_findings": [
+    {
+      "action_id": "CP-DSB-06/filter-create",
+      "status": "unknown",
+      "evidence": "The Lowpass block is not visible in the screenshot."
+    },
+    {
+      "action_id": "CP-DSB-06/filter-settings",
+      "status": "unknown",
+      "evidence": "The Lowpass block settings dialog is not visible."
+    },
+    {
+      "action_id": "CP-DSB-06/gain-create",
+      "status": "unknown",
+      "evidence": "The Recovery gain block is not visible in the screenshot."
+    },
+    {
+      "action_id": "CP-DSB-06/gain-settings",
+      "status": "unknown",
+      "evidence": "The Recovery gain block settings dialog is not visible."
+    },
+    {
+      "action_id": "CP-DSB-06/chain",
+      "status": "unknown",
+      "evidence": "The receiver chain connections beyond Receiver product are not visible."
+    }
+  ],
+  "uncertainties": [
+    "The Lowpass and Recovery gain blocks and their connections are outside the cropped view."
+  ],
+  "screen_guidance": []
+}

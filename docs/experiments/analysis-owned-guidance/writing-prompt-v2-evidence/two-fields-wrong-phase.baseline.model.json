@@ -1,0 +1,104 @@
+{
+  "criteria": [
+    {
+      "criterion_id": "CP-DSB-05:local_parameters",
+      "status": "mismatch",
+      "evidence": "The Local carrier dialog shows Phase (rad) as 0 instead of pi/2."
+    },
+    {
+      "criterion_id": "CP-DSB-05:receiver_structure",
+      "status": "unknown",
+      "evidence": "The receiver structure wiring is not visible because the Local carrier parameters dialog is open."
+    }
+  ],
+  "action_findings": [
+    {
+      "action_id": "CP-DSB-05/local-create",
+      "status": "match",
+      "evidence": "The Block Parameters: Local carrier dialog is visible."
+    },
+    {
+      "action_id": "CP-DSB-05/local-settings",
+      "status": "mismatch",
+      "evidence": "The Local carrier dialog shows Frequency (rad/sec) as 2*pi*2000 and Phase (rad) as 0 instead of pi/2."
+    },
+    {
+      "action_id": "CP-DSB-05/receiver-create",
+      "status": "unknown",
+      "evidence": "The canvas and Receiver product are occluded by the Local carrier settings dialog."
+    },
+    {
+      "action_id": "CP-DSB-05/modulated-wire",
+      "status": "unknown",
+      "evidence": "The modulated signal connection is occluded by the Local carrier settings dialog."
+    },
+    {
+      "action_id": "CP-DSB-05/local-wire",
+      "status": "unknown",
+      "evidence": "The local carrier connection is occluded by the Local carrier settings dialog."
+    }
+  ],
+  "uncertainties": [
+    "The main model canvas and receiver wiring are fully occluded by the Local carrier parameters dialog."
+  ],
+  "screen_guidance": [
+    {
+      "action_id": "CP-DSB-05/local-settings",
+      "mode": "annotate",
+      "targets": [
+        {
+          "target_id": "local_carrier.frequency",
+          "status": "resolved",
+          "region": {
+            "x": 0.043,
+            "y": 6.425e-1,
+            "width": 3.991e-1,
+            "height": 4.14e-2
+          }
+        },
+        {
+          "target_id": "local_carrier.phase",
+          "status": "resolved",
+          "region": {
+            "x": 0.043,
+            "y": 7.346e-1,
+            "width": 3.991e-1,
+            "height": 4.14e-2
+          }
+        }
+      ],
+      "marks": [
+        {
+          "kind": "box",
+          "cue_id": "freq_box",
+          "target_id": "local_carrier.frequency"
+        },
+        {
+          "kind": "box",
+          "cue_id": "phase_box",
+          "target_id": "local_carrier.phase"
+        },
+        {
+          "kind": "text",
+          "cue_id": "freq_text",
+          "anchor": {
+            "target_id": "local_carrier.frequency",
+            "u": 0.5,
+            "v": 1.250e-1
+          },
+          "text_ref": "setting_0"
+        },
+        {
+          "kind": "text",
+          "cue_id": "phase_text",
+          "anchor": {
+            "target_id": "local_carrier.phase",
+            "u": 0.5,
+            "v": 1.250e-1
+          },
+          "text_ref": "setting_1"
+        }
+      ]
+    }
+  ]
+}

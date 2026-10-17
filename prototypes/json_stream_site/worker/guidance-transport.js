@@ -21,6 +21,8 @@ class LiveDrawingRunJS extends DrawingRunJS {
    if(node.properties?.relationship_id)node.properties.relationship_id.enum=relationships;
    Object.values(node).forEach(constrain);
   }};constrain(body.generationConfig.responseJsonSchema.properties.screen_guidance);
+  body.systemInstruction.parts[0].text+=drawingWritingPrompt(this.admission.eligible_actions);
+  this.promptVersion=LIVE_DRAWING_PROMPT_VERSION;
  }
 }
 const G_CONTRACT='analysis-owned-guidance/v0.1';

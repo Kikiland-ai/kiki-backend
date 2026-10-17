@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "native_screen_capture": true,
+  "real_browser_sse_stream": true,
+  "controller_origin_is_local_fixture_override": true,
+  "coherent_panel_during_stream": true,
+  "reader_visibility_at_paint": "visible",
+  "actual_reader_worker_broker_consumer_compositor": true,
+  "blue_pixels_at_authored_control": true,
+  "visible_after_1500ms": true,
+  "persisted_exposure_ack": true,
+  "periodic_frames_during_delayed_analysis": 4,
+  "installed_extension_tested": false,
+  "real_simulink_tested": false,
+  "real_model_localization_tested": false,
+  "live_model_requests": 0,
+  "explicit_control_setup_fixture": false
+}

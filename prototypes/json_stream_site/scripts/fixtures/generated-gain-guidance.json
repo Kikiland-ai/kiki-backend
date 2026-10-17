@@ -1,0 +1,441 @@
+{
+  "description": "Actual Gemini outputs on a controlled gain-dialog screenshot; no learner data.",
+  "checkpoint_id": "CP-DSB-06",
+  "eligible_actions": [
+    {
+      "action_id": "CP-DSB-06/gain-settings",
+      "checkpoint_id": "CP-DSB-06",
+      "teaching_intent": "highlight_parameter",
+      "canonical_instruction": "Set Recovery gain to 2.",
+      "canonical_reason": "Restore the product scale.",
+      "required_target_ids": [
+        "recovery_gain.value"
+      ],
+      "target_labels": {
+        "recovery_gain.value": "Recovery Gain value"
+      },
+      "subcriteria": {
+        "recovery_gain.value": [
+          "CP-DSB-06:gain_parameters"
+        ]
+      },
+      "overlay_texts": {
+        "canonical_instruction": "Set Recovery gain to 2.",
+        "action_title": "Set Recovery gain to 2."
+      },
+      "relationships": []
+    },
+    {
+      "action_id": "CP-DSB-06/chain",
+      "checkpoint_id": "CP-DSB-06",
+      "teaching_intent": "show_action_target",
+      "canonical_instruction": "Inspect the receiver chain.",
+      "canonical_reason": "Check the visible circuit.",
+      "required_target_ids": [
+        "workspace.canvas"
+      ],
+      "target_labels": {
+        "workspace.canvas": "Selected Simulink model canvas"
+      },
+      "subcriteria": {
+        "workspace.canvas": []
+      },
+      "overlay_texts": {
+        "canonical_instruction": "Inspect the receiver chain."
+      },
+      "relationships": []
+    }
+  ],
+  "cases": [
+    {
+      "variant": "flat",
+      "valid": false,
+      "validation_reason": "schema_oneOf",
+      "model": {
+        "criteria": [
+          {
+            "criterion_id": "CP-DSB-06:filter_parameters",
+            "status": "unknown",
+            "evidence": "The Lowpass block settings dialog is not visible in this view."
+          },
+          {
+            "criterion_id": "CP-DSB-06:gain_parameters",
+            "status": "match",
+            "evidence": "The Block Parameters: Recovery dialog shows Gain set to 2."
+          },
+          {
+            "criterion_id": "CP-DSB-06:receiver_chain",
+            "status": "unknown",
+            "evidence": "The circuit connections are completely covered by the open dialog window."
+          }
+        ],
+        "action_findings": [
+          {
+            "action_id": "CP-DSB-06/filter-create",
+            "status": "unknown",
+            "evidence": "The Lowpass block is not visible due to the overlying dialog."
+          },
+          {
+            "action_id": "CP-DSB-06/filter-settings",
+            "status": "unknown",
+            "evidence": "The Lowpass dialog is not open or visible."
+          },
+          {
+            "action_id": "CP-DSB-06/gain-create",
+            "status": "match",
+            "evidence": "The Recovery dialog title confirms the Recovery gain block exists."
+          },
+          {
+            "action_id": "CP-DSB-06/gain-settings",
+            "status": "match",
+            "evidence": "The Block Parameters: Recovery dialog shows the Gain field entered as 2."
+          },
+          {
+            "action_id": "CP-DSB-06/chain",
+            "status": "unknown",
+            "evidence": "The receiver chain connections are hidden beneath the dialog."
+          }
+        ],
+        "uncertainties": [
+          "The Lowpass block parameters cannot be verified because its dialog is not open.",
+          "The receiver chain wiring is completely occluded by the Recovery block parameters window."
+        ],
+        "screen_guidance": [
+          {
+            "action_id": "CP-DSB-06/gain-settings",
+            "mode": "annotate",
+            "targets": [
+              {
+                "target_id": "recovery_gain.value",
+                "status": "resolved",
+                "region": {
+                  "x": 0.155,
+                  "y": 0.474,
+                  "width": 0.407,
+                  "height": 0.063
+                }
+              }
+            ],
+            "marks": [
+              {
+                "kind": "box",
+                "cue_id": "gain-val",
+                "target_id": "recovery_gain.value"
+              },
+              {
+                "kind": "text",
+                "cue_id": "gain-txt",
+                "anchor": {
+                  "target_id": "recovery_gain.value",
+                  "u": 0.5,
+                  "v": 0.12500000000000003
+                },
+                "text_ref": "Gain is set to 2"
+              }
+            ]
+          },
+          {
+            "action_id": "CP-DSB-06/chain",
+            "mode": "text_only",
+            "targets": [
+              {
+                "target_id": "workspace.canvas",
+                "status": "ambiguous",
+                "region": null
+              }
+            ],
+            "marks": []
+          }
+        ]
+      }
+    },
+    {
+      "variant": "typed",
+      "valid": false,
+      "validation_reason": "schema_oneOf",
+      "model": {
+        "criteria": [
+          {
+            "criterion_id": "CP-DSB-06:filter_parameters",
+            "status": "unknown",
+            "evidence": "The Lowpass filter parameters dialog is not visible in this view."
+          },
+          {
+            "criterion_id": "CP-DSB-06:gain_parameters",
+            "status": "match",
+            "evidence": "The Block Parameters: Recovery dialog shows Gain set to 2."
+          },
+          {
+            "criterion_id": "CP-DSB-06:receiver_chain",
+            "status": "unknown",
+            "evidence": "The receiver chain connections are occluded by the Block Parameters dialog."
+          }
+        ],
+        "action_findings": [
+          {
+            "action_id": "CP-DSB-06/filter-create",
+            "status": "unknown",
+            "evidence": "The Lowpass block is not visible behind the open dialog."
+          },
+          {
+            "action_id": "CP-DSB-06/filter-settings",
+            "status": "unknown",
+            "evidence": "The Lowpass settings dialog is not currently open."
+          },
+          {
+            "action_id": "CP-DSB-06/gain-create",
+            "status": "match",
+            "evidence": "The Block Parameters: Recovery dialog title proves the Recovery gain block exists."
+          },
+          {
+            "action_id": "CP-DSB-06/gain-settings",
+            "status": "match",
+            "evidence": "The Block Parameters: Recovery dialog shows Gain set to 2."
+          },
+          {
+            "action_id": "CP-DSB-06/chain",
+            "status": "unknown",
+            "evidence": "The receiver chain connections are occluded by the Block Parameters dialog."
+          }
+        ],
+        "uncertainties": [
+          "Lowpass filter coefficient arrays cannot be verified while the Recovery gain dialog is open.",
+          "Receiver chain connections are occluded by the dialog window."
+        ],
+        "screen_guidance": [
+          {
+            "action_id": "CP-DSB-06/gain-settings",
+            "mode": "annotate",
+            "targets": [
+              {
+                "target_id": "recovery_gain.value",
+                "status": "resolved",
+                "region": {
+                  "x": 0.154,
+                  "y": 0.473,
+                  "width": 0.407,
+                  "height": 0.063
+                }
+              }
+            ],
+            "marks": [
+              {
+                "kind": "box",
+                "cue_id": "gain-val-box",
+                "target_id": "recovery_gain.value"
+              },
+              {
+                "kind": "text",
+                "cue_id": "gain-val-text",
+                "anchor": {
+                  "target_id": "recovery_gain.value",
+                  "u": 0.5,
+                  "v": 0.5
+                },
+                "text_ref": "Gain is set to 2"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": "text-enum",
+      "valid": false,
+      "validation_reason": "schema_oneOf",
+      "model": {
+        "criteria": [
+          {
+            "criterion_id": "CP-DSB-06:filter_parameters",
+            "status": "unknown",
+            "evidence": "The Lowpass block dialog is not visible in this view, so filter parameters cannot be verified."
+          },
+          {
+            "criterion_id": "CP-DSB-06:gain_parameters",
+            "status": "match",
+            "evidence": "The Block Parameters: Recovery dialog shows Gain set to 2."
+          },
+          {
+            "criterion_id": "CP-DSB-06:receiver_chain",
+            "status": "unknown",
+            "evidence": "The workspace diagram with receiver connections is covered by the dialog."
+          }
+        ],
+        "action_findings": [
+          {
+            "action_id": "CP-DSB-06/filter-create",
+            "status": "unknown",
+            "evidence": "The model canvas is hidden behind the Recovery block parameters dialog."
+          },
+          {
+            "action_id": "CP-DSB-06/filter-settings",
+            "status": "unknown",
+            "evidence": "The Lowpass transfer function dialog is not currently open."
+          },
+          {
+            "action_id": "CP-DSB-06/gain-create",
+            "status": "unknown",
+            "evidence": "The model canvas is obscured by the open Recovery block parameters dialog."
+          },
+          {
+            "action_id": "CP-DSB-06/gain-settings",
+            "status": "match",
+            "evidence": "The Block Parameters: Recovery dialog displays the Gain field with value 2."
+          },
+          {
+            "action_id": "CP-DSB-06/chain",
+            "status": "unknown",
+            "evidence": "The complete receiver path connections are occluded by the foreground Block Parameters dialog."
+          }
+        ],
+        "uncertainties": [
+          "Lowpass block parameters are not visible in the cropped view.",
+          "Circuit wiring between Receiver product, Lowpass, and Recovery gain is occluded by the open dialog."
+        ],
+        "screen_guidance": [
+          {
+            "action_id": "CP-DSB-06/gain-settings",
+            "mode": "annotate",
+            "targets": [
+              {
+                "target_id": "recovery_gain.value",
+                "status": "resolved",
+                "region": {
+                  "x": 0.155,
+                  "y": 0.475,
+                  "width": 0.41,
+                  "height": 0.065
+                }
+              }
+            ],
+            "marks": [
+              {
+                "kind": "box",
+                "cue_id": "gain_val_box",
+                "target_id": "recovery_gain.value"
+              },
+              {
+                "kind": "text",
+                "cue_id": "gain_val_text",
+                "text_ref": "action_title"
+              }
+            ]
+          },
+          {
+            "action_id": "CP-DSB-06/chain",
+            "mode": "text_only",
+            "targets": [
+              {
+                "target_id": "workspace.canvas",
+                "status": "unresolved",
+                "region": null
+              }
+            ],
+            "marks": []
+          }
+        ]
+      }
+    },
+    {
+      "variant": "typed-text-enum",
+      "valid": true,
+      "validation_reason": null,
+      "model": {
+        "criteria": [
+          {
+            "criterion_id": "CP-DSB-06:filter_parameters",
+            "status": "unknown",
+            "evidence": "The Lowpass filter block is not shown in this view."
+          },
+          {
+            "criterion_id": "CP-DSB-06:gain_parameters",
+            "status": "match",
+            "evidence": "The Block Parameters: Recovery dialog shows Gain set to 2."
+          },
+          {
+            "criterion_id": "CP-DSB-06:receiver_chain",
+            "status": "unknown",
+            "evidence": "The receiver chain connections are occluded by the foreground settings dialog."
+          }
+        ],
+        "action_findings": [
+          {
+            "action_id": "CP-DSB-06/filter-create",
+            "status": "unknown",
+            "evidence": "The Lowpass block is not visible in the cropped view."
+          },
+          {
+            "action_id": "CP-DSB-06/filter-settings",
+            "status": "unknown",
+            "evidence": "The Lowpass settings dialog is not visible."
+          },
+          {
+            "action_id": "CP-DSB-06/gain-create",
+            "status": "unknown",
+            "evidence": "The Recovery gain block is covered by its open settings dialog."
+          },
+          {
+            "action_id": "CP-DSB-06/gain-settings",
+            "status": "match",
+            "evidence": "The Block Parameters: Recovery dialog displays Gain field with value 2."
+          },
+          {
+            "action_id": "CP-DSB-06/chain",
+            "status": "unknown",
+            "evidence": "The receiver chain wiring path is occluded by the Block Parameters dialog."
+          }
+        ],
+        "uncertainties": [
+          "Lowpass filter block parameters are hidden behind the open Recovery gain dialog."
+        ],
+        "screen_guidance": [
+          {
+            "action_id": "CP-DSB-06/gain-settings",
+            "mode": "annotate",
+            "targets": [
+              {
+                "target_id": "recovery_gain.value",
+                "status": "resolved",
+                "region": {
+                  "x": 0.155,
+                  "y": 0.475,
+                  "width": 0.41,
+                  "height": 0.063
+                }
+              }
+            ],
+            "marks": [
+              {
+                "kind": "box",
+                "cue_id": "c1",
+                "target_id": "recovery_gain.value"
+              },
+              {
+                "kind": "text",
+                "cue_id": "t1",
+                "anchor": {
+                  "target_id": "recovery_gain.value",
+                  "u": 0.5,
+                  "v": 0
+                },
+                "text_ref": "action_title"
+              }
+            ]
+          },
+          {
+            "action_id": "CP-DSB-06/chain",
+            "mode": "text_only",
+            "targets": [
+              {
+                "target_id": "workspace.canvas",
+                "status": "ambiguous",
+                "region": null
+              }
+            ],
+            "marks": []
+          }
+        ]
+      }
+    }
+  ]
+}

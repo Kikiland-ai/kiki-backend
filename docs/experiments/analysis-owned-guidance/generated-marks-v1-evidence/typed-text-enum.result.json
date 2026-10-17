@@ -1,0 +1,53 @@
+{
+  "variant": "typed-text-enum",
+  "status": 200,
+  "elapsed_ms": 2997,
+  "valid": true,
+  "guidance": [
+    {
+      "action_id": "CP-DSB-06/gain-settings",
+      "mode": "annotate",
+      "targets": [
+        {
+          "target_id": "recovery_gain.value",
+          "status": "resolved",
+          "region": {
+            "x": 0.155,
+            "y": 0.475,
+            "width": 0.41,
+            "height": 0.063
+          }
+        }
+      ],
+      "marks": [
+        {
+          "kind": "box",
+          "cue_id": "c1",
+          "target_id": "recovery_gain.value"
+        },
+        {
+          "kind": "text",
+          "cue_id": "t1",
+          "anchor": {
+            "target_id": "recovery_gain.value",
+            "u": 0.5,
+            "v": 0
+          },
+          "text_ref": "action_title"
+        }
+      ]
+    },
+    {
+      "action_id": "CP-DSB-06/chain",
+      "mode": "text_only",
+      "targets": [
+        {
+          "target_id": "workspace.canvas",
+          "status": "ambiguous",
+          "region": null
+        }
+      ],
+      "marks": []
+    }
+  ]
+}

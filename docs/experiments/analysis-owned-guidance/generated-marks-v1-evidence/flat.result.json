@@ -1,0 +1,54 @@
+{
+  "variant": "flat",
+  "status": 200,
+  "elapsed_ms": 4163,
+  "valid": false,
+  "validation_reason": "schema_oneOf",
+  "model": [
+    {
+      "action_id": "CP-DSB-06/gain-settings",
+      "mode": "annotate",
+      "targets": [
+        {
+          "target_id": "recovery_gain.value",
+          "status": "resolved",
+          "region": {
+            "x": 0.155,
+            "y": 0.474,
+            "width": 0.407,
+            "height": 0.063
+          }
+        }
+      ],
+      "marks": [
+        {
+          "kind": "box",
+          "cue_id": "gain-val",
+          "target_id": "recovery_gain.value"
+        },
+        {
+          "kind": "text",
+          "cue_id": "gain-txt",
+          "anchor": {
+            "target_id": "recovery_gain.value",
+            "u": 0.5,
+            "v": 0.12500000000000003
+          },
+          "text_ref": "Gain is set to 2"
+        }
+      ]
+    },
+    {
+      "action_id": "CP-DSB-06/chain",
+      "mode": "text_only",
+      "targets": [
+        {
+          "target_id": "workspace.canvas",
+          "status": "ambiguous",
+          "region": null
+        }
+      ],
+      "marks": []
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "variant": "typed",
+  "status": 200,
+  "elapsed_ms": 2858,
+  "valid": false,
+  "validation_reason": "schema_oneOf",
+  "model": [
+    {
+      "action_id": "CP-DSB-06/gain-settings",
+      "mode": "annotate",
+      "targets": [
+        {
+          "target_id": "recovery_gain.value",
+          "status": "resolved",
+          "region": {
+            "x": 0.154,
+            "y": 0.473,
+            "width": 0.407,
+            "height": 0.063
+          }
+        }
+      ],
+      "marks": [
+        {
+          "kind": "box",
+          "cue_id": "gain-val-box",
+          "target_id": "recovery_gain.value"
+        },
+        {
+          "kind": "text",
+          "cue_id": "gain-val-text",
+          "anchor": {
+            "target_id": "recovery_gain.value",
+            "u": 0.5,
+            "v": 0.5
+          },
+          "text_ref": "Gain is set to 2"
+        }
+      ]
+    }
+  ]
+}

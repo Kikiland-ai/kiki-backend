@@ -1,0 +1,156 @@
+{
+  "schema": "screen-writing-precommit-failure/v1",
+  "site_version": 18,
+  "observed_on": "2026-10-17",
+  "timezone": "Asia/Kolkata",
+  "events": [
+    {
+      "time": "2026-10-17T07:27:16.684Z",
+      "request_id": "26243f7b-2301-447b-abd2-4676d89139c0",
+      "stage": "analysis_stream_timing",
+      "committed": false,
+      "provider_http_attempts": 1,
+      "provider_http_ms": 6086,
+      "provider_chunks": 67
+    },
+    {
+      "time": "2026-10-17T07:27:16.684Z",
+      "request_id": "26243f7b-2301-447b-abd2-4676d89139c0",
+      "stage": "failed",
+      "arm": "drawing_v1",
+      "reason": "provider_timeout_or_network_error",
+      "provider_http_attempts": 1,
+      "provider_http_ms": 6086,
+      "provider_chunks": 67,
+      "source_revision": "67b84aba2cc037d60e7c71636a1824d8c8fa3fdb"
+    },
+    {
+      "time": "2026-10-17T07:27:00.596Z",
+      "request_id": "39800fde-9bd6-4ea4-806c-2dc51ceac9ed",
+      "stage": "analysis_stream_timing",
+      "committed": false,
+      "provider_http_attempts": 3,
+      "provider_http_ms": 17969,
+      "provider_chunks": 356
+    },
+    {
+      "time": "2026-10-17T07:27:00.596Z",
+      "request_id": "39800fde-9bd6-4ea4-806c-2dc51ceac9ed",
+      "stage": "failed",
+      "arm": "drawing_v1",
+      "reason": "provider_timeout_or_network_error",
+      "provider_http_attempts": 3,
+      "provider_http_ms": 17969,
+      "provider_chunks": 356,
+      "source_revision": "67b84aba2cc037d60e7c71636a1824d8c8fa3fdb"
+    },
+    {
+      "time": "2026-10-17T07:26:37.244Z",
+      "request_id": "39800fde-9bd6-4ea4-806c-2dc51ceac9ed",
+      "stage": "admitted",
+      "arm": "drawing_v1",
+      "reason": "none",
+      "source_revision": "67b84aba2cc037d60e7c71636a1824d8c8fa3fdb"
+    },
+    {
+      "time": "2026-10-17T07:26:32.053Z",
+      "request_id": "1d4c57d3-f106-4964-8ad5-21b884b2076e",
+      "stage": "failed",
+      "arm": "drawing_v1",
+      "reason": "stale_context",
+      "source_revision": "67b84aba2cc037d60e7c71636a1824d8c8fa3fdb"
+    },
+    {
+      "time": "2026-10-17T07:26:28.595Z",
+      "request_id": "330c434d-3f62-45a4-8b30-40064b7b524a",
+      "stage": "failed",
+      "arm": "drawing_v1",
+      "reason": "stale_context",
+      "source_revision": "67b84aba2cc037d60e7c71636a1824d8c8fa3fdb"
+    },
+    {
+      "time": "2026-10-17T07:26:24.195Z",
+      "request_id": "8fa46097-cd32-4c4b-8130-278c0448f34f",
+      "stage": "failed",
+      "arm": "drawing_v1",
+      "reason": "stale_context",
+      "source_revision": "67b84aba2cc037d60e7c71636a1824d8c8fa3fdb"
+    },
+    {
+      "time": "2026-10-17T07:26:18.955Z",
+      "request_id": "939cb5ed-77c4-4e2b-8143-b809c668698e",
+      "stage": "failed",
+      "arm": "control",
+      "reason": "stale_context",
+      "source_revision": "67b84aba2cc037d60e7c71636a1824d8c8fa3fdb"
+    },
+    {
+      "time": "2026-10-17T07:26:11.127Z",
+      "request_id": "939cb5ed-77c4-4e2b-8143-b809c668698e",
+      "stage": "admitted",
+      "arm": "control",
+      "reason": "none",
+      "source_revision": "67b84aba2cc037d60e7c71636a1824d8c8fa3fdb"
+    },
+    {
+      "time": "2026-10-17T07:26:10.199Z",
+      "request_id": "d83b9feb-f6c7-4344-83f9-ef1ffb50c525",
+      "stage": "analysis_stream_timing",
+      "wire_format": "lab-observer-decision/v1",
+      "committed": true,
+      "provider_http_attempts": 1,
+      "provider_http_ms": 5800,
+      "provider_chunks": 51
+    },
+    {
+      "time": "2026-10-17T07:26:10.199Z",
+      "request_id": "d83b9feb-f6c7-4344-83f9-ef1ffb50c525",
+      "stage": "tracker_committed",
+      "arm": "control",
+      "reason": "none",
+      "provider_http_attempts": 1,
+      "provider_http_ms": 5800,
+      "provider_chunks": 51,
+      "source_revision": "67b84aba2cc037d60e7c71636a1824d8c8fa3fdb"
+    },
+    {
+      "time": "2026-10-17T07:26:01.377Z",
+      "request_id": "d83b9feb-f6c7-4344-83f9-ef1ffb50c525",
+      "stage": "admitted",
+      "arm": "control",
+      "reason": "none",
+      "source_revision": "67b84aba2cc037d60e7c71636a1824d8c8fa3fdb"
+    },
+    {
+      "time": "2026-10-17T07:26:00.516Z",
+      "request_id": "7fca3269-6469-4126-a231-b43776cd3145",
+      "stage": "analysis_stream_timing",
+      "wire_format": "lab-observer-decision/v1",
+      "committed": true,
+      "provider_http_attempts": 1,
+      "provider_http_ms": 5645,
+      "provider_chunks": 13
+    },
+    {
+      "time": "2026-10-17T07:26:00.516Z",
+      "request_id": "7fca3269-6469-4126-a231-b43776cd3145",
+      "stage": "tracker_committed",
+      "arm": "control",
+      "reason": "none",
+      "provider_http_attempts": 1,
+      "provider_http_ms": 5645,
+      "provider_chunks": 13,
+      "source_revision": "67b84aba2cc037d60e7c71636a1824d8c8fa3fdb"
+    },
+    {
+      "time": "2026-10-17T07:25:52.529Z",
+      "request_id": "7fca3269-6469-4126-a231-b43776cd3145",
+      "stage": "admitted",
+      "arm": "control",
+      "reason": "none",
+      "source_revision": "67b84aba2cc037d60e7c71636a1824d8c8fa3fdb"
+    }
+  ],
+  "diagnosis": "Inspected drawing-enabled requests fail before a cue is committed. A controlled real-model probe reproduces invalid text_ref and missing anchor; a separate actual-router replay shows strict validator exceptions mislabelled as network failures and retried through four keys. Exact historical live model fields were not retained.",
+  "learner_pixels_archived": false
+}

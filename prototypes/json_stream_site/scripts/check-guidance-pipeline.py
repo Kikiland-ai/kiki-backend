@@ -15,6 +15,7 @@ SOURCE='https://matlab.mathworks.com/controlled-writer-fixture'
 async def main():
  async with async_playwright() as p:
   tls='--tls' in sys.argv
+  live_gain='--live-gain' in sys.argv
   origin='https://localhost' if tls else ORIGIN
   args=['--no-sandbox','--enable-usermedia-screen-capturing','--auto-select-tab-capture-source-by-title=Kiki complete writer fixture']
   if tls:
@@ -31,7 +32,8 @@ async def main():
    response=await context.request.fetch('http://127.0.0.1:8872'+req.url[len(ORIGIN):],method=req.method,headers=req.headers,data=req.post_data_buffer,timeout=30000)
    await route.fulfill(response=response)
   if not tls:await context.route(ORIGIN+'/**',worker_route)
-  await target.route(SOURCE,lambda r:r.fulfill(content_type='text/html',body='''<!doctype html><title>Kiki complete writer fixture</title><style>body{margin:0;background:#fafafa;font:18px system-ui}input{position:fixed;box-sizing:border-box;left:25vw;top:32.5vh;width:18vw;height:7vh}</style><h1>Controlled Message settings</h1><input id=frequency value="2*pi*100">'''))
+  html=(ASSETS.parent/'scripts/fixtures/gain-dialog.html').read_text() if live_gain else '''<!doctype html><title>Kiki complete writer fixture</title><style>body{margin:0;background:#fafafa;font:18px system-ui}input{position:fixed;box-sizing:border-box;left:25vw;top:32.5vh;width:18vw;height:7vh}</style><h1>Controlled Message settings</h1><input id=frequency value="2*pi*100">'''
+  await target.route(SOURCE,lambda r:r.fulfill(content_type='text/html',body=html))
   await broker.route('https://broker.fixture/**',lambda r:r.fulfill(body='<title>Explicit Chrome API fixture</title>'))
   await target.goto(SOURCE);await broker.goto('https://broker.fixture/')
   async def broker_call(m,sender):
@@ -74,7 +76,7 @@ async def main():
   await reader.locator('#share').click()
   try:
    streamed_panel=False
-   if tls:
+   if tls and not live_gain:
     await reader.wait_for_function("document.querySelector('#lab-stream-findings').children.length>0",polling=50,timeout=20000)
     panel=await reader.locator('#lab-observation').text_content()
     assert await reader.evaluate('KikiWriting.diagnostics.health.painted')==0
@@ -107,18 +109,22 @@ async def main():
    out=ROOT/'work/guidance-integration/native';out.mkdir(parents=True,exist_ok=True);(out/'pipeline-painted.png').write_bytes(png)
    from PIL import Image
    import io
-   image=Image.open(io.BytesIO(png));pixels=[image.getpixel((300+dx,288))[:3] for dx in range(-3,4)]
+   image=Image.open(io.BytesIO(png))
+   if live_gain:
+    box=await target.locator('#gain').bounding_box();x=round(box['x']+box['width']/2);y=round(box['y']);pixels=[image.getpixel((x+dx,y+dy))[:3] for dx in range(-4,5) for dy in range(-8,9)]
+   else:pixels=[image.getpixel((300+dx,288))[:3] for dx in range(-3,4)]
    assert any(b>160 and b>r+80 for r,g,b in pixels),pixels
    await reader.wait_for_function("KikiWriting.diagnostics.events.some(e=>e.stage==='ack_recorded')",timeout=4000)
    diag=await reader.evaluate('KikiWriting.diagnostics');logs=await broker_call({'type':'diagnostics'},{'url':'chrome-extension://fixture/popup.html'})
    assert any(e['stage']=='guidance_painted' for e in logs['events']),logs
-   assert diag['health']['captured']>=2,diag
+   assert diag['health']['captured']>=(1 if live_gain else 2),diag
    assert not errors,errors
    evidence=await (await context.request.get('http://127.0.0.1:8872/__fixture/evidence')).json()
    (out/'worker-evidence.json').write_text(json.dumps(evidence,indent=2)+'\n')
    assert any(a['status']=='live_rendered' for a in evidence['acks']),evidence
+   if live_gain:assert evidence['live_model_requests']==1,evidence
    assert await reader.evaluate('document.querySelector("#preview").srcObject.getVideoTracks()[0].getCaptureHandle()!==null')
-   report={'status':'PASS','native_screen_capture':True,'real_browser_sse_stream':tls,'controller_origin_is_local_fixture_override':tls,'coherent_panel_during_stream':streamed_panel,'reader_visibility_at_paint':await reader.evaluate('document.visibilityState'),'actual_reader_worker_broker_consumer_compositor':True,'blue_pixels_at_authored_control':True,'visible_after_1500ms':readable,'persisted_exposure_ack':True,'periodic_frames_during_delayed_analysis':diag['health']['captured'],'installed_extension_tested':False,'real_simulink_tested':False,'real_model_localization_tested':False,'consumer':diag}
+   report={'status':'PASS','native_screen_capture':True,'real_browser_sse_stream':tls,'controller_origin_is_local_fixture_override':tls,'coherent_panel_during_stream':streamed_panel,'reader_visibility_at_paint':await reader.evaluate('document.visibilityState'),'actual_reader_worker_broker_consumer_compositor':True,'blue_pixels_at_authored_control':True,'visible_after_1500ms':readable,'persisted_exposure_ack':True,'periodic_frames_during_delayed_analysis':diag['health']['captured'],'installed_extension_tested':False,'real_simulink_tested':False,'real_model_localization_tested':live_gain,'live_model_requests':evidence['live_model_requests'],'explicit_control_setup_fixture':live_gain,'consumer':diag}
    (out/'pipeline-report.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps({k:v for k,v in report.items() if k!='consumer'},indent=2))
   except:
    print('CONSUMER',await reader.evaluate('KikiWriting.diagnostics'),flush=True)

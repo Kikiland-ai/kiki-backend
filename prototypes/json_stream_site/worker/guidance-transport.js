@@ -2,19 +2,25 @@
  * atomically in D1. Native source claims are signed by the connected extension;
  * this is an owner-authorized extension, not remote hardware attestation. */
 const gSame=(a,b)=>JSON.stringify(a,Object.keys(a).sort())===JSON.stringify(b,Object.keys(b).sort());
-// Provider generation uses one structural mark object instead of a four-way
-// union. The unchanged full producer schema validates every returned kind.
+// Keep a compact typed union: required anchors and authored text references
+// must be enforced during generation as well as by the final public validator.
 class LiveDrawingRunJS extends DrawingRunJS {
- async extendRequest(...args){await super.extendRequest(...args);const body=args[0],marks=body.generationConfig.responseJsonSchema.properties.screen_guidance.items.properties.marks;
-  const variants=marks.items.anyOf;if(variants){const properties={};for(const v of variants)for(const [key,value] of Object.entries(v.properties)){if(key==='kind'){properties.kind||={enum:[]};properties.kind.enum.push(...value.enum);}else properties[key]=value;}
-   marks.items={type:'object',additionalProperties:false,required:['kind','cue_id'],properties};
-   body.systemInstruction.parts[0].text+=' For each mark emit only the fields for its kind: box/ellipse use target_id; text uses text_ref and anchor; arrow uses relationship_id, from and to. Omit unrelated optional fields. Runtime validation enforces the complete typed contract.';
+ async extendRequest(...args){
+  await super.extendRequest(...args);const body=args[0],marks=body.generationConfig.responseJsonSchema.properties.screen_guidance.items.properties.marks,variants=marks.items.anyOf;
+  if(variants){
+   const byKind=kind=>structuredClone(variants.find(v=>v.properties.kind.enum.includes(kind))),box=byKind('box');box.properties.kind.enum=['box','ellipse'];
+   const allowed=[box,byKind('text')];if(this.admission.eligible_actions.some(a=>a.relationships.length))allowed.push(byKind('arrow'));
+   marks.items={anyOf:allowed};
   }
-  // Repeating the full target-ID enum at every nested anchor makes the CP-06
-  // query fail at the provider with INVALID_ARGUMENT. The authored catalogue
-  // and unchanged final validator enforce exact IDs; generation needs strings.
-  const simplifyTargets=node=>{if(Array.isArray(node))node.forEach(simplifyTargets);else if(node&&typeof node==='object'){if(node.properties?.target_id)node.properties.target_id={type:'string'};Object.values(node).forEach(simplifyTargets);}};
-  simplifyTargets(body.generationConfig.responseJsonSchema.properties.screen_guidance);
+  const textRefs=[...new Set(this.admission.eligible_actions.flatMap(a=>Object.keys(a.overlay_texts)))].sort(),relationships=[...new Set(this.admission.eligible_actions.flatMap(a=>a.relationships.map(r=>r.relationship_id)))].sort();
+  const constrain=node=>{if(Array.isArray(node))node.forEach(constrain);else if(node&&typeof node==='object'){
+   // Repeated long target-ID enums caused CP-06 provider INVALID_ARGUMENT;
+   // the catalogue and unchanged final validator still enforce exact IDs.
+   if(node.properties?.target_id)node.properties.target_id={type:'string'};
+   if(node.properties?.text_ref)node.properties.text_ref.enum=textRefs;
+   if(node.properties?.relationship_id)node.properties.relationship_id.enum=relationships;
+   Object.values(node).forEach(constrain);
+  }};constrain(body.generationConfig.responseJsonSchema.properties.screen_guidance);
  }
 }
 const G_CONTRACT='analysis-owned-guidance/v0.1';

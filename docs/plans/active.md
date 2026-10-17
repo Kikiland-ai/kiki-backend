@@ -1,3 +1,13 @@
+# Generated mark contract correction — 17 October 2026 (Asia/Kolkata)
+
+User still sees no shapes on receiver v18. New drawing streams fail before publication. Real-model controlled probes reproduce prose in text_ref and missing text anchors under the flat generation schema. A compact typed mark union plus offered reference-key enums passes unchanged validation. Explicit validation guards stop schema errors being mislabelled as network failures and retried across four keys. Existing reader/extension remains compatible.
+
+All 134 Node checks pass. A real Gemini/native-capture-to-compositor run paints independently checked pixels and records a signed paint receipt, with 1.5-second visibility. The six paid diagnostic requests include all failed variants and the malformed fixture-history attempt; no learner pixels/data were archived. [Evidence](../experiments/analysis-owned-guidance/generated-marks-v1-evidence/README.md), [handoff](../handoffs/screen-writing-generated-marks-fix.md).
+
+Last completed: reproduce actual model-generation failure, enforce mark structure/reference keys, verify real generated marks through paint, and run source/baseline/BB8 checks. Next: publish exact source to existing receiver and inspect fresh live outcomes. Real Simulink/installed-extension after-fix paint remains unverified; no new extension/client refresh is required for the server-only functional correction.
+
+---
+
 # Hosted annotation delivery correction — 17 October 2026 (Asia/Kolkata)
 
 User reports advancing steps with no visible annotation. Current drawing-enabled analyses commit, but inspected receipts are five rejected and eleven cancelled, with zero verified paints. Historical generic reasons prevent precise retrospective attribution. A native-browser controlled test reproduces clock rejection when 650 ms of server DB work is counted as network uncertainty; corrected receive/send timestamps paint real pixels and persist a signed ACK under identical delay. Pixels remain visible at 1.5 seconds, and an injected source move still rejects.

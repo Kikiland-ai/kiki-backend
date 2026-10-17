@@ -1,6 +1,11 @@
 // Experiment adapter around the existing owner, receipt, context and atomic tracker gates.
 function streamContext(s){const cp=checkpoint(s),step=s.steps.find(v=>v.checkpoint_id===cp?.id);return {lab_session_id:s.lab_session_id,experiment_id:s.experiment_id,checkpoint_id:cp?.id||null,visit_id:step?.current_visit_id||null,lab_revision:s.revision,workspace_id:s.workspace.id,capture_epoch:s.workspace.capture_epoch,view_revision:s.workspace.view_revision,parameter_revision:s.workspace.parameter_revision,condition:s.workspace.condition};}
 function decisionSummary(value){const rows=[...value.criteria,...value.action_findings];for(const [status,prefix] of [['mismatch','Check this: '],['match','Visible: '],['unknown','Not established: ']]){const row=rows.find(row=>row.status===status&&row.evidence.trim());if(row)return prefix+row.evidence;}return 'The relevant settings or connections are not established in this view.';}
+function modelShapeDiagnostic(parser,drawingRun){
+ if(!drawingRun)return null;let value;try{value=streamStrictJSON(parser.text);}catch{return null;}
+ const actions=drawingRun.admission.eligible_actions,ids=new Set(actions.flatMap(a=>a.required_target_ids)),fields=new Set(['kind','cue_id','target_id','anchor','text_ref','relationship_id','from','to']);
+ return Array.isArray(value?.screen_guidance)?value.screen_guidance.slice(0,3).map(c=>({action_id:actions.some(a=>a.action_id===c?.action_id)?c.action_id:'foreign',mode:['annotate','text_only','none'].includes(c?.mode)?c.mode:'invalid',targets:Array.isArray(c?.targets)?c.targets.slice(0,3).map(t=>({target_id:ids.has(t?.target_id)?t.target_id:'foreign',status:['resolved','unresolved','ambiguous'].includes(t?.status)?t.status:'invalid'})):null,marks:Array.isArray(c?.marks)?c.marks.slice(0,5).map(m=>({kind:['box','ellipse','text','arrow'].includes(m?.kind)?m.kind:'invalid',fields:Object.keys(m||{}).map(k=>fields.has(k)?k:'unknown').sort(),...(m?.kind==='text'?{text_ref_allowed:Object.hasOwn(actions.find(a=>a.action_id===c.action_id)?.overlay_texts||{},m.text_ref)}:{})})):null})):null;
+}
 function committedProjection(state){
  const keys=['schema','lab_session_id','experiment_id','revision','status','progression_mode','current_visit_id','workspace','queue','guidance','observation','auto_tracking','procedure_tracking','procedure_history'];
  const value=Object.fromEntries(keys.filter(k=>k in state).map(k=>[k,structuredClone(state[k])]));
@@ -22,6 +27,7 @@ async function analyzeLabFrameStream(bytes,cp,state,env,emit,drawingRun=null){
   onMetrics(value){providerMetrics=value;},
   async reset(){attempt++;firstByte=firstFinding=criticalMs=providerStopMs=drawingReadyMs=null;if(attempt>1)await emit({type:'attempt_reset',attempt});},
   async consume(response){const parser=drawingRun?drawingRun.parser(cp,GUIDED_POLICY.procedures[cp.id]):new FindingParserJS(cp,GUIDED_POLICY.procedures[cp.id],true),decoder=new SSEDecoderJS(),reader=response.body.getReader();let stopped=false,usage={},critical=false;
+   const checked=(phase,fn)=>{try{return fn();}catch(error){const reason=/^[a-z][a-zA-Z0-9_]{1,80}$/.test(error.message||'')?error.message:'validator_exception';console.info(JSON.stringify({event:'model_output_rejected',request_id:emit.requestId,phase,reason,structure:modelShapeDiagnostic(parser,drawingRun)}));throw Object.assign(Error('invalid_output'),{validation_reason:reason});}};
    try{while(true){const {value,done}=await reader.read();if(done)break;if(firstByte===null)firstByte=Date.now()-started;
     const pending=[];emit.metrics.provider_chunks++;
     for(const data of decoder.feed(value)){
@@ -29,7 +35,7 @@ async function analyzeLabFrameStream(bytes,cp,state,env,emit,drawingRun=null){
      const candidates=raw.candidates||[];if(!Array.isArray(candidates)||candidates.length>1)throw Error('invalid_output');
      if(candidates.length){const candidate=candidates[0],parts=candidate.content?.parts||[],text=parts.filter(p=>typeof p.text==='string'&&!p.thought).map(p=>p.text).join('');
       if(stopped&&(text||candidate.finishReason))throw Error('invalid_output');
-      for(const event of parser.feed(text)){if(firstFinding===null)firstFinding=Date.now()-started;pending.push({...event,attempt});}
+      for(const event of checked('incremental_json',()=>parser.feed(text))){if(firstFinding===null)firstFinding=Date.now()-started;pending.push({...event,attempt});}
       if(!critical&&['criteria','action_findings','uncertainties'].every(k=>parser.completed.has(k))){critical=true;criticalMs=Date.now()-started;pending.push({type:'critical_fields_ready',attempt});}
       if(candidate.finishReason){if(candidate.finishReason!=='STOP')throw Error('incomplete_output');stopped=true;providerStopMs=Date.now()-started;}
       if(drawingReadyMs===null&&parser.completed.has('screen_guidance'))drawingReadyMs=Date.now()-started;
@@ -37,7 +43,7 @@ async function analyzeLabFrameStream(bytes,cp,state,env,emit,drawingRun=null){
      if(raw.usageMetadata)usage=raw.usageMetadata;
     }
     await emit.batch(pending);
-   }decoder.finish();if(!stopped)throw Error('incomplete_output');const validationStarted=Date.now(),parsed=parser.finish(),value=drawingRun?drawingRun.finish(parsed):parsed;validationMs=Date.now()-validationStarted;return {value:validateLabResult({...value,summary:decisionSummary(value)},cp,true),usage};
+   }decoder.finish();if(!stopped)throw Error('incomplete_output');const validationStarted=Date.now(),parsed=checked('complete_model',()=>parser.finish()),value=drawingRun?drawingRun.finish(parsed):parsed;validationMs=Date.now()-validationStarted;return {value:checked('tracker_findings',()=>validateLabResult({...value,summary:decisionSummary(value)},cp,true)),usage};
    }finally{await reader.cancel().catch(()=>{});}
   }});
  const usage=consumed.usage,count=name=>Number.isSafeInteger(usage[name])&&usage[name]>=0?usage[name]:null;

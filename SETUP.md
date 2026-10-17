@@ -1,3 +1,7 @@
+# Current unified prototype setup
+
+This branch adds a runnable single-process FastAPI backend. Install `prototypes/screen_capture/requirements.txt`, then run `python -B -m prototypes.backend --port 8765 --data-dir work/backend`. Remote access still requires actual authenticated HTTPS Python hosting; the live Site remains Worker/D1 until the bridge is deliberately activated. See [frontend handoff](docs/handoffs/frontend-api.md) and [deployment setup](deploy/fastapi/README.md). The historical context-only setup below does not describe current endpoint availability.
+
 # Start backend work without losing product context
 
 This repository contains working mixed-language text/speech prototypes and a chosen FastAPI/worker architecture, but no running API. The [README](README.md) is the current entry point; [the pipeline decision](docs/decisions/0001-mixed-language-audio-pipeline.md) and [architecture assessment](docs/architecture/mixed-language-fastapi.md) supersede older stack suggestions. New sessions load context through `CONTEXT-BOOT.md` and wait for direction. Backend building remains paused; future service instructions below are references, not startup actions.

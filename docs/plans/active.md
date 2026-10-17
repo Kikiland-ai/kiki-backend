@@ -1,3 +1,205 @@
+# Floating Kiki windows promotion to main — 18 October 2026
+
+Step 2 of the reconciliation order. Branch `promote/floating-guidance` starts at `experiment/floating-guidance-bubbles` (`73c6e96`) and merges `main` at `fe7758e`, which now holds the screen-reader baseline. The only conflict was this file: both sides had added a new top entry, and both are kept below. `design/floating-guidance-bubbles` is not merged; its handoff and test plan are older copies of the ones on this branch.
+
+What ran on the merged tree (Windows 11, no model calls): offline gate all ten checks PASS; floating L0 14/14, L1 43/43, L2 30/30 with zero live network requests.
+
+Exact next action: open the PR from `promote/floating-guidance` to `main`, wait for CI, and merge with a merge commit once the user confirms. Then step 3: clean up `feature/concept-canvas-handoff` (move its WAVs out of git, fix the Windows path and connection bugs) and open its PR.
+
+---
+
+# Screen-reader baseline promotion to main — 18 October 2026
+
+The user asked to merge the branches into `main` one at a time. This is step 1 of the reconciliation order: (1) `baseline/screen-reader-v1` → `main`; (2) `experiment/floating-guidance-bubbles` → `main`; (3) `feature/concept-canvas-handoff` → `main` after its binaries and Windows bugs are cleaned up. `integration/analysis-owned-guidance` and `design/floating-guidance-bubbles` stay off `main` as archived references, because the user stopped annotation work on 17 October. The experiment branches already contained in the baseline (`json-stream`, `targeted-vision`, `verifier-context`, `provider-db-io`, `stream-context-batch`) and the superseded `handoff/screen-writing-v01`/`v02` are to be deleted after tagging.
+
+PR #1 was merged into the baseline on 15 October (`7c986df`) without the manual acceptance checklist; that checklist remains outstanding. Branch `promote/screen-reader-v1` adds CI on `main` pushes and a Windows-safe evaluation runner. What ran: full offline gate on Windows without `PYTHONUTF8` — all ten checks PASS, 0 paid calls; BB8 validate PASS; BB8 adapter suite 11/12 with the known `WinError 1314` symlink error. Details are in the [promotion review record](../reviews/screen-reader-baseline-promotion.md#promotion-to-main).
+
+Outcome: merged to `main` as PR #2 (merge commit `fe7758e`) on 18 October after the user confirmed. CI attempt 1 failed one timing-sensitive Node test (`test-decision-ui.mjs` `until()` helper); attempt 2 passed on the same commit. The six-item manual acceptance run, Python/FastAPI hosting and edge-proxy deployment remain open.
+
+---
+
+# Floating Kiki windows: first slice built and locally verified — 17 October 2026
+
+The user stopped the annotation experiment, chose small Kiki windows on the shared MATLAB tab, and asked to iterate quickly, then commit and push. The [handoff](../handoffs/floating-guidance-windows.md), user choices ([ADR 0008](../decisions/0008-floating-guidance-windows-first-slice.md)) and [test plan](floating-guidance-test-plan.md) were copied from `design/floating-guidance-bubbles`. This branch starts from `baseline/screen-reader-v1` at `7c986df`; PR #1 had already merged, contrary to the entry below.
+
+Built:
+
+- **Projection and wiring:** a deterministic `floating-guidance/v0.1` projection, a reader-page publisher hooked into `render()`, and window pause/resume through the existing lab action.
+- **Ports:** `capture_active` in the committed projection; retention of the accepted observation, labelled "Earlier accepted view".
+- **Capture protection:** Kiki's rectangles are redacted on the copied frame before JPEG encoding ([ADR 0009](../decisions/0009-floating-window-capture-redaction.md)).
+- **Extension:** a new MV3 extension in `prototypes/floating_guidance/` with a `matlab.mathworks.com` host permission and a dev variant for localhost.
+
+Ran:
+
+- L0 14/14;
+- L1 43/43;
+- L2 30/30 in four consecutive runs;
+- the offline evaluation gate (95/95 Node, Python suite, three full replays, pinned context, frozen baseline);
+- BB8 validate and discovery checks.
+
+Real model calls: none.
+
+Failed or environmental on Windows:
+
+- The baseline Python suite needs `PYTHONUTF8=1`.
+- The BB8 symlink test cannot create symlinks without Developer Mode (`WinError 1314`); `bb8/` is unchanged.
+
+Not done: L3a on real MATLAB Online, L3b with a real model, any Site deployment, a published JSON schema, CI wiring.
+
+Live follow-up, same day:
+
+- The user authorized real Gemini reads. The key probe passed.
+- The local reader ran with `--live`, and the user confirmed the windows work on real MATLAB Online.
+- 79 live reads; CP-DSB-01 → 06; frame received → committed p50 4.7 s, p90 10.1 s; Gemini first byte about 85% of that.
+- The user then decided screen sharing must start from kiki-web Lab mode, not the demo reader. [Kiki-web Lab-mode handoff](../handoffs/kiki-web-lab-mode-screen-share.md) written; no kiki-web change made.
+
+Exact next action: settle the handoff's open decisions with the kiki-web owners:
+
+- the backend boundary (option A: kiki-web API fronts lab execution, recommended);
+- the kiki-web base branch;
+- commit identity;
+- the production origin.
+
+Then port the controller role into `/labs/:sessionId`.
+
+18 October decisions ([ADR 0010](../decisions/0010-kiki-web-api-fronts-lab-execution.md)):
+
+- kiki-web's API verifies Firebase and passes lab execution through to kiki-backend, using the existing `SiteProxyGuard` contract.
+- kiki-web work starts from `main` (`93cce9b`, PR #5).
+- kiki-web commits are made as `arpanvihan5-sketch`.
+- kiki-web's production origin is high-priority blocker B1; kiki-backend Python hosting is B2.
+
+The [handoff](../handoffs/kiki-web-lab-mode-screen-share.md) now holds the Now/Next/Later plan. Next session: start at its "Now" list:
+
+1. Fast-forward kiki-web `main` and branch `feature/lab-screen-share`.
+2. Raise B1–B3 with their owners.
+3. Run the Python parity spike.
+
+18 October follow-up: the L2 harness's raw image fetch now retries Windows socket resets and records each one in its report. L2 passed 30/30 in three consecutive runs (one recorded reset, retried), with zero network requests. L0 and L1 were rerun green. The live local server from the previous session is no longer running.
+
+---
+
+# Baseline promotion PR requested; manual acceptance pending — 15 October 2026
+
+The user requested a PR with all cumulative improvements against `baseline/screen-reader-v1`, then one manual test before deciding to merge. Target verified at `681ad52d37ac0bfced86ceadeaaed6ef8128caf5`; head `experiment/stream-context-batch` contains nine implementation/evidence commits through `9af91d6d3019b602d506d4f3ef2a31662fe4c998`. Read the [promotion review record](../reviews/screen-reader-baseline-promotion.md) for the cumulative scope, reviewer map, source/deployment/evidence chain, compatibility, rollback and uncompleted manual checklist.
+
+The runtime under test remains the successful private Site source `c83ec7e6664025b7ca01d06f208af009269f8ad2` at https://kiki-json-stream.woodsycarp256.chatgpt.site . This PR preparation changes documentation and CI failure reporting only; no redeploy, baseline merge, audience/secret change, reset or auto-merge is authorized/performed. Recorded local runtime gate is 117 Python/87 Node plus full automated lab replays and retained benchmarks. The user will test the live guide once; manual acceptance is pending and must be recorded honestly, with actual checkpoint range and unexercised items.
+
+Draft PR opened: https://github.com/Kikiland-ai/kiki-backend/pull/1 . Verified open/draft/unmerged, base `baseline/screen-reader-v1` at `681ad52`, head `experiment/stream-context-batch`. Last completed action: pushed review documentation and opened the requested PR. Exact next action: observe available PR checks and await the user's recorded manual test result; do not merge or enable auto-merge until subsequently authorized. PR-check trace: first PR acceptance run passed; next documentation-only head failed the Node suite. All other stages passed. Retained the failed artifact and added bounded offline failure output to the CI console to investigate without a manual lab rerun; application/Site source is unchanged. Older entries below are historical.
+
+---
+
+# Context batching live; automated testing requires no manual lab rerun — 15 October 2026
+
+The user authorized continued implementation but cannot guarantee manual testing. The automated runner is the gate for this orchestration change. Branch `experiment/stream-context-batch` builds from frozen provider-I/O control `4c3dd6f57b3da435b8b74ab534a926e4255f6850`; provider routing is held batched for both new context arms. No original branch history was rewritten. Read [implementation, latency mapping and rollback](../experiments/stream-context-batch-implementation.md) and [registry](../experiments/latency-experiment-registry.json).
+
+Same private Site: https://kiki-json-stream.woodsycarp256.chatgpt.site . Exact source `c83ec7e6664025b7ca01d06f208af009269f8ad2`, successful deployment `appgdep_6ad0a54cafe881919db038cc07bf6f61`, saved version `appgprj_6acfd4c6e6e48191b9110067ba86d556~appgver_60818f2b70d0819199581aad03e2c222`, environment 8, MCP true. Existing private audience, secrets and saved learner sessions remain. No new key/reset/manual run is pending. Provider-I/O Site source `c67fc3a5537ddcf98b8d8bfacbb606749687f693` is the control/rollback.
+
+Python/FastAPI and hosted Worker validate findings already decoded from one transport chunk using one fresh authoritative context read. `KIKI_STREAM_CONTEXT_MODE=per_chunk` is default; `per_event` restores per-finding validation. No TTL context caching or timing delay was introduced; empty fragments do no read and new event-bearing chunks revalidate. Final authoritative current-context/freshness/durable-save checks, full JSON/STOP, two supporting frames and student confirmations remain. SSE v2 framing is unchanged; Python may yield several messages per byte chunk. Prompt hash is unchanged. Site remains Worker/D1; Python hosting and native browser acceptance remain separate.
+
+Automated gate passes 117 Python/87 Node tests, complete twelve-checkpoint replays in both context modes, provider controls, contradictory settings, late mutations after the final finding, pause/revisit/view/parameter fences, cancellation and coalesced/separate/byte-fragmented SSE. Default CI command also verifies pinned/frozen source integrity and simulated chunk-shape A/B; no model keys or paid calls. CI runs on the new branch and keeps reports; its hosted status remains unverified due available run-list limitations. Also passed lab design, writer v0.2 39 cases and BB8 checks; OpenAPI remains 29 unchanged paths.
+
+With seven events and artificial 300 ms/read, 1/3/7 groups measured context time of 0.301/0.902/2.104 s versus per-event 2.105/2.104/2.103 s. This retains the no-gain fragmented case and is not a production end-to-end speedup claim. New context batch/event/chunk metrics collect during ordinary future usage; no dedicated user experiment is required. Python delivery counters are tail-only diagnostics. See [retained offline report](../experiments/evidence/2026-10-15-context-batch-offline.json).
+
+Last completed action: implemented, automatically verified and privately published context batching. Exact next action: observe ordinary production phase metrics when traffic appears, without asking for a manual full-lab rerun. Verifier-context and targeted-vision branches remain prepared, not implemented; changing model inputs requires broader labelled recognition acceptance. Original baseline, JSON/TOON and provider-I/O control refs are preserved.
+
+---
+
+# Provider DB experiment live; automated acceptance ready — 15 October 2026
+
+The user asked for separate latency experiments, maximum-leverage implementation and a regression mechanism that does not require repeated manual lab runs. Implemented `provider-db-io/v1` on isolated branch `experiment/provider-db-io`; see [registry](../experiments/latency-experiment-registry.json) and [implementation/testing](../experiments/provider-db-io-implementation.md). Prepared three separate refs at `42afb87f48905734557411167bcad7c7e4506502`: `experiment/stream-context-batch`, `experiment/verifier-context`, `experiment/targeted-vision`. Those arms are not implemented/live. Original JSON, frozen baseline and TOON branches stay unchanged.
+
+Same private live URL: https://kiki-json-stream.woodsycarp256.chatgpt.site . Exact Site source `c67fc3a5537ddcf98b8d8bfacbb606749687f693`, successful deployment `appgdep_6ad019222c308191b14bd7e3b41d19a9`, saved version `appgprj_6acfd4c6e6e48191b9110067ba86d556~appgver_3e3f9ce91a9c819198e7b36a25b7a7b6`; environment revision 8, MCP true, same private audience/keys/sessions/schema. No learner reset or new key is needed. Previous source `958fd7fb4ae94e0af5ffe592a2fcb09f406af5fb` is the rollback baseline.
+
+Python streamed routing and hosted D1 routing now use atomic acquisition, bulk deduplicated health reads refreshed on retry and combined success/release. Healthy four-key provider DB count is 17 -> 4, before HTTP 15 -> 3. Same model/prompt/decision/SSE/two-frame/current-context gates. Timings now distinguish routing and context DB work and record actual prompt/cache/thinking/output/total usage. Artificial 20 ms DB delay confirms removed serial operations; no production end-to-end speedup is asserted. Input prompt remains unchanged. Python FastAPI mirror is tested, not cloud-hosted; Site remains Worker/D1.
+
+`python scripts/run-screen-reader-evaluation.py` passes 112 Python and 69 Node tests, complete twelve-checkpoint synthetic replays in serial and batched modes, injected wrong-setting/support-reset scenario, A/B database-delay reports and source integrity. It writes machine-readable results and fails on regressions. CI is configured to run this free command and retain artifacts without provider secrets. `--live` opts into five paid synthetic recognition analyses and requires all outcomes to pass. No new paid calls this turn. Native Simulink/browser capture and broader vision recognition remain sampled release acceptance; mocked findings and DOM stubs do not establish those capabilities.
+
+Also passed pinned 130 sources/frozen baseline parity, lab design, writer v0.2 39 cases, BB8 validation/discovery/twelve tests. OpenAPI export unchanged at 29 paths. Rendering still cannot complete checkpoints.
+
+CI observation limit: GitHub CLI run-list access returned Forbidden; the connected workflow-list tool only lists pull-request runs and returned none. The pushed workflow is configured, not verified as executed.
+
+Last completed action: implemented, locally verified and privately published DB arm. Exact next action: observe first GitHub Actions evaluation, then collect new production phase timings before advancing the separate streamed-context-read arm. Verifier-only inputs need a broader labelled recognition gate; targeted vision additionally needs explicit crop/target provenance. Current evaluation artifacts and [offline evidence](../experiments/evidence/2026-10-15-provider-db-io-offline.json) distinguish synthetic mechanism results from production performance.
+
+---
+
+# Short-decision experiment published — 15 October 2026
+
+User selected the short complete decision / independent auxiliary-tail approach and asked to document existing latency evidence first. That evidence was committed/pushed first at `47ae4669efac7ea281aa862891723167727e0d08`; the pre-change [latency checkpoint](../experiments/json-stream-latency-checkpoint.md) remains the comparison reference. The implementation is now complete; see [short-decision record](../experiments/short-decision-implementation.md).
+
+Same live private URL: https://kiki-json-stream.woodsycarp256.chatgpt.site . Exact Site source `958fd7fb4ae94e0af5ffe592a2fcb09f406af5fb`, deployment `appgdep_6ad006becae081919d16fa678134c2f6`, saved version `appgprj_6acfd4c6e6e48191b9110067ba86d556~appgver_1ddf6e67d61c8191ac9d10abf8e058da`; terminal succeeded, environment revision 8, MCP true, audience unchanged. The previous experimental source `cbaec32e47bbb53e49aa5d1a1f6f02d76ad81adc` remains the pre-change reference. User sessions/keys/schema were preserved; refresh the tab and resume the saved lab/share, without reset.
+
+Python and Worker now validate a complete three-field decision (`criteria`, `action_findings`, `uncertainties`) with full IDs/evidence/STOP, retain all original context/freshness/two-frame gates, save progress, then emit `guidance_committed.state`. The bounded committed projection releases the client verification slot independently of full history/timings. A newer frame can start immediately subject to the existing 3 s start floor. Stale/failed tails cannot roll back state; no second summary model call is made. SSE v2 and model decision v1 are explicit compatibility changes. The original buffered `/check`, frozen baseline branch/Site, TOON branch and writer contract remain unchanged. Python serves the new client with its original capture transport; actual Site remains Worker/D1, not Python hosting.
+
+Checks: 107 Python, 65 Node (including actual UI code under DOM stubs), frozen source/fixture/policy integrity, 130 pinned sources, lab design, 39 synthetic writer acceptances, BB8 package/discovery/twelve checks; OpenAPI 29 paths. Ten new bounded paid synthetic calls passed 5/5 focused cases in both old-stream and short-decision arms. Median complete model result 6.725 -> 5.574 s; first finding 5.933 -> 4.664 s; median output tokens 466 -> 428. One case was slower and is retained. These tiny coding-cloud trials do not establish a 20% verified-next-action win or deployed Simulink performance. Original timeout/cooldown limits remain; no quota reliability claim. Browser-control tooling unavailable, so no native sharing/SSE/Simulink acceptance was performed.
+
+Last completed action: implemented, verified and privately published the selected variant after publishing pre-change evidence. Exact next action: user refreshes the live experiment, resumes the same model/share and compares recognition-to-next-instruction delay, including the second matching read; inspect post-save commit and auxiliary timing logs on request. No further keys/redeploy/reset is pending. Broader paired stage-duration evidence, timeout coordination, Python cloud origin and real live overlay remain separate work.
+
+---
+
+# Pre-short-decision evidence checkpoint — 15 October 2026
+
+The user reports that the streamed guide feels considerably faster, with a remaining wait before next-step guidance, and selected the short complete decision / independent auxiliary-tail approach. They explicitly asked to document the existing improvement/comparison first. Read [the latency checkpoint](../experiments/json-stream-latency-checkpoint.md) and its sanitized JSON report before making runtime changes. Current runtime remains GitHub `b0a00033038ed8d2558ab6bf55c3ea7d229d9312`, exact Site source `cbaec32e47bbb53e49aa5d1a1f6f02d76ad81adc`.
+
+Measured early-delivery lead in four successful recent live checks: 2.905–3.144 s from parser-ready first finding to provider return, median 3.025 s. Historical baseline Worker wall median 9.599 s (13 successes) versus latest stream 10.920 s (four successes) is unpaired, so it establishes no causal full-response speedup/regression. The latest bounded tail also includes two timed-out checks/four failed key attempts and a sixty-second cycle cooldown, with continued capture. Full checkpoint/browser-display timing is not captured. Internal total_ms is assigned before final guidedObserve/labSave; do not call it a durable-commit timestamp.
+
+Read-only checks: thirteen stream/cadence tests plus the distinct-frame advancement test passed; published source is unchanged. The next implementation must preserve complete core JSON/provider STOP, authored IDs, current context, two distinct matches and canonical server-owned now/next. Release the UI slot from trusted committed bounded state; auxiliary work and late snapshots must not mutate a newer run. Provider reservation ends after the short decision, not after optional work. No extra summary model call is required by this design. Exact next action: commit/push the evidence record first, then build and test the selected variant before a new private Site publication.
+
+---
+
+# JSON streaming experiment — live private test, 15 October 2026
+
+The user resumed JSON implementation/live trials/publication, after giving the frozen baseline to the parallel writer. The JSON branch is implemented; TOON, frozen baseline branch and original Site are unchanged.
+
+Live private test: https://kiki-json-stream.woodsycarp256.chatgpt.site . Project `appgprj_6acfd4c6e6e48191b9110067ba86d556`; source `cbaec32e47bbb53e49aa5d1a1f6f02d76ad81adc`; saved version `appgprj_6acfd4c6e6e48191b9110067ba86d556~appgver_3120e7798fe48191bb0f4d4c6119a877`; successful deployment `appgdep_6acfddb9682081918e30cf9f9c558939`, environment revision 8, MCP true, owner-private. The user configured GEMINI_API_KEYS on this new Site; a separate receipt signer was set. Secret values never enter source/artifacts/output. Initial archive layout was rejected; repackaging the exact pushed build with dist/server/index.js succeeded.
+
+Implemented Python stream parser/provider/analyzer and owned POST /lab-sessions/{lab_id}/check-stream around existing LabService. Immediate trusted frame/context, tentative full-ID findings, then committed canonical guidance before the state tail. Full output/provider STOP/current context/freshness/two-frame gates remain. Hosted Worker adapter and UI are copied in prototypes/json_stream_site; original frozen files still hash-match. The actual Site remains Worker/D1; Python cloud hosting is not claimed. No broad branch merge or infrastructure host was provisioned.
+
+Evidence: [implementation/trials](../experiments/json-stream-implementation.md). First eight-call trial caught occluded-wire false matches in both baseline/v1; retained/rejected. The first v2 trial had one invalid response; retained. Exact array counts and mandatory entire-path occlusion wording now pass five synthetic cases in both stream/same-prompt buffered control. Across all final five cases median first feedback 2.178 vs 2.307 s, completion 2.861 vs 2.307 s, with an 8.626 s stream outlier. Every stream exposed its first complete finding 0.683–0.897 s before final output. This is early-delivery evidence, not a reliable latency win or actual Simulink acceptance. All 22 paid smoke calls/results, including negative/slow cases, are recorded.
+
+Checks: 105 Python tests (nine new stream/parser/tracker/API), 61 Node tests (ten new stream/client/provider cases), 31 frozen Python and 43 hosted source hashes, four original fixture hashes/definition/policy parity, 130 pinned sources; OpenAPI now 29 HTTP paths. Screen-writing/v0.2 and source datasets are unchanged. Browser-control tooling absent; no improvised browser launched. Native deploy success verifies publication; real browser capture/SSE and Simulink progression are the user's next test.
+
+Ownership: observation/progress/canonical now-next remain here; resolution/rendering/transforms/cancellation/delivery ACKs remain in parallel writing session. Analysis SSE is not a cue stream; provisional rows cannot become cue evidence or finish checkpoints. Use committed observation + exact frame handle for writer integration.
+
+Last completed action: published the private experimental Site and verified native status. Exact next action: user starts a separate test session, shares Simulink and checks early field feedback/canonical progression; inspect the new Site's safe timing logs on request. A larger balanced benchmark, actual Simulink overlay acceptance, shared text/TTS/screen quotas and Python cloud origin remain separate work.
+
+---
+
+# Prepared JSON streaming branch — paused
+
+Baseline commit: `681ad52d37ac0bfced86ceadeaaed6ef8128caf5`. This branch changes only experiment preparation documents/configuration. The original observer/acceptance/hosted baseline is unchanged. Read [IMPLEMENTATION.md](../experiments/IMPLEMENTATION.md) for the next scoped build, and [the shared protocol](../experiments/screen-reader-streaming-comparison.md) for identical controls/gates. The config is descriptive, not a runtime flag. No stream implementation, paid trial, experimental deployment or baseline Site change has happened.
+
+Last completed action: prepared an isolated experiment from the same frozen baseline as the other arm. Exact next action when work resumes: implement the selected streaming adapter/router behind an explicit experiment path, pass offline replay/semantic gates, then run a separately resumed controlled trial. Python cloud hosting and frontend production connection remain pending.
+
+---
+
+# Current pause: baseline recorded, API consolidated, streaming experiments prepared
+
+14 October 2026. The user reported completing at least eight Simulink steps with intuitive, understandable guidance. Recognition/tracking works; verification latency remains the next optimization. This report is usability evidence, not a certified eight-step transcript or mastery assessment.
+
+## Current deliverables
+
+- [End-to-end screen-reader baseline](../baselines/screen-reader-v1.md) and exact source/deployment/hash manifest. Hosted source is 4e1d0c3d132ff2778216e5d7e4d987d3e04d7145; deployed environment revision 6. Working private Site is still Worker/D1.
+- Preserved Python capture/lab code and unchanged screen-writing/v0.2 contracts, with a portable hosted source snapshot and four controlled synthetic screenshots.
+- [Frontend API handoff](../handoffs/frontend-api.md), unified Python entry point `prototypes.backend`, prepared-source text/audio job routes, typed request/response contracts, exported OpenAPI and controlled examples. Blocking adapters use a bounded executor; durable stage checkpoints, owner-scoped idempotency, separate readiness, explicit retry and cancellation are implemented locally.
+- [Shared streaming comparison protocol](../experiments/screen-reader-streaming-comparison.md). JSON and TOON branches will be prepared from the same baseline commit. No stream implementation, paid experiment or production deployment during this pause.
+
+## Verification performed
+
+96 Python tests passed, including nine unified API/job acceptances. The unchanged hosted copy passed 51 Worker tests and deterministic build. Lab-design checks and 39 synthetic v0.2 writer acceptances passed. 130 pinned source files unchanged; BB8 package/discovery and twelve reference checks passed. Frozen 31 Python screen files and 43 hosted source files match the manifest, with definition/policy parity and four matching fixture hashes. The prepared proxy passes idempotency/identity/Origin checks. OpenAPI exports 28 HTTP paths. `git diff --check` passed. Providers were fixtures; zero live provider calls and zero Site deployments. Actual Python container/cloud/browser/Simulink acceptance was not rerun.
+
+## Remaining responsibilities and exact pickup
+
+The current chat owns observation, checkpoint evidence/progress and canonical now/next instructions. The writer session owns anchor resolution, rendering, transforms, cancellation and ACK delivery; rendering never completes a checkpoint. No actual live Simulink overlay is proved. Keep the screen-writing v0.2 handoff unchanged while building the observation stream.
+
+Python hosting remains unconnected. Before giving the frontend a real API base, host one persistent instance, apply the prepared idempotency-preserving edge helper and verify signed-in HTTP/WebSocket/job/WAV isolation. Text/TTS still use GEMINI_API_KEY; screen uses the rotating list. Shared quota/key coordination, production auth/retention, generic language-policy live quality and audio alignment remain open. The new local API must not be called live merely because the earlier Worker Site works.
+
+Last completed action: baseline and API source/docs verified locally. Exact next action: publish this baseline and two preparation-only branches, record their exact SHAs, then pause. When resumed, implement/test each stream branch independently against the same protocol and untouched baseline; measure provisional feedback and verified advancement separately.
+
+---
+
+The previous plan below is historical context and has not been used to restart paused work automatically.
+
 # Backend implementation continuation
 
 ## Versioned concept content library and merged-app adapter — 18 October 2026

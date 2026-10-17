@@ -1,0 +1,31 @@
+{
+  "schema": "prototype-verification-record/v1",
+  "date": "2026-10-14",
+  "provider_calls": 0,
+  "production_deployments": 0,
+  "checks": {
+    "python_unittest_count": 96,
+    "python_unittest_pass": true,
+    "unified_backend_acceptance_count": 9,
+    "hosted_worker_test_count": 51,
+    "hosted_worker_pass": true,
+    "screen_writing_synthetic_acceptance_count": 39,
+    "lab_tracking_design_pass": true,
+    "pinned_source_count": 130,
+    "pinned_source_unchanged": true,
+    "bb8_reference_checks": 12,
+    "bb8_package_and_discovery_pass": true,
+    "frozen_screen_source_integrity_pass": true,
+    "python_hosted_definition_and_policy_equal": true,
+    "frontend_openapi_http_path_count": 28,
+    "unified_edge_idempotency_auth_contract_pass": true
+  },
+  "unverified": [
+    "Actual Python container build and persistent host deployment",
+    "Authenticated cloud HTTP/WebSocket/job/media end-to-end integration",
+    "New browser or actual Simulink acceptance",
+    "Live generic proficiency-policy language quality",
+    "JSON streaming or TOON streaming implementation/performance",
+    "Actual live Simulink overlay acceptance"
+  ]
+}

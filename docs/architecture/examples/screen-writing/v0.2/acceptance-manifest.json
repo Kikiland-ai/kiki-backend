@@ -1,0 +1,162 @@
+{
+  "schema": "screen-writing-acceptance/v0.2",
+  "synthetic": true,
+  "cases": [
+    {
+      "name": "valid_single_target",
+      "expected": "preview_rendered"
+    },
+    {
+      "name": "multi_target_comparison",
+      "expected": "preview_rendered"
+    },
+    {
+      "name": "one_required_multi_target_unresolved",
+      "expected": "text_only"
+    },
+    {
+      "name": "unresolved_valid_context",
+      "expected": "text_only"
+    },
+    {
+      "name": "stale_unresolved_fallback",
+      "expected": "discarded_completely"
+    },
+    {
+      "name": "stale_visit",
+      "expected": "rejected:stale_context"
+    },
+    {
+      "name": "stale_view",
+      "expected": "rejected:stale_context"
+    },
+    {
+      "name": "stale_condition",
+      "expected": "rejected:stale_context"
+    },
+    {
+      "name": "stale_workspace",
+      "expected": "rejected:stale_context"
+    },
+    {
+      "name": "stale_parameter_revision",
+      "expected": "rejected:stale_context"
+    },
+    {
+      "name": "foreign_frame_id",
+      "expected": "rejected:foreign_frame"
+    },
+    {
+      "name": "foreign_frame_hash",
+      "expected": "rejected:foreign_frame"
+    },
+    {
+      "name": "foreign_frame_dimensions",
+      "expected": "rejected:foreign_frame"
+    },
+    {
+      "name": "duplicate_cue_ids",
+      "expected": "rejected:duplicate_cue_id"
+    },
+    {
+      "name": "duplicate_resolved_target",
+      "expected": "rejected:duplicate_resolved_target_id"
+    },
+    {
+      "name": "out_of_frame_region",
+      "expected": "rejected:invalid_resolved_region"
+    },
+    {
+      "name": "unrelated_operation_target",
+      "expected": "rejected:operation_target_not_resolved"
+    },
+    {
+      "name": "foreign_fallback_instruction",
+      "expected": "rejected:foreign_instruction"
+    },
+    {
+      "name": "extended_expiry",
+      "expected": "rejected:extended_or_changed_validity"
+    },
+    {
+      "name": "unresolved_with_operations",
+      "expected": "rejected:unresolved_required_target_operations"
+    },
+    {
+      "name": "foreign_handle_owner",
+      "expected": "rejected"
+    },
+    {
+      "name": "different_mounted_preview",
+      "expected": "rejected"
+    },
+    {
+      "name": "stale_observation",
+      "expected": "rejected"
+    },
+    {
+      "name": "out_of_order_delivery",
+      "expected": "rejected_without_clearing_current_layer"
+    },
+    {
+      "name": "duplicate_packet_id",
+      "expected": "deduplicated"
+    },
+    {
+      "name": "view_cancellation",
+      "expected": "cancelled_then_old_packet_rejected"
+    },
+    {
+      "name": "new_context_after_cancellation",
+      "expected": "preview_rendered"
+    },
+    {
+      "name": "paused_clears_layer",
+      "expected": "cleared_no_fallback"
+    },
+    {
+      "name": "disconnected_clears_layer",
+      "expected": "cleared_no_fallback"
+    },
+    {
+      "name": "missing_live_adapter",
+      "expected": "rejected"
+    },
+    {
+      "name": "boolean_adapter_placeholder",
+      "expected": "rejected"
+    },
+    {
+      "name": "missing_trusted_integration_proof",
+      "expected": "rejected"
+    },
+    {
+      "name": "complete_synthetic_live_capability",
+      "expected": "simulated_live_rendered_only"
+    },
+    {
+      "name": "expired_live_integration_proof",
+      "expected": "rejected"
+    },
+    {
+      "name": "out_of_bounds_live_transform",
+      "expected": "rejected"
+    },
+    {
+      "name": "stale_live_transform",
+      "expected": "rejected"
+    },
+    {
+      "name": "expiry_during_delivery",
+      "expected": "cleared_rejected"
+    },
+    {
+      "name": "unrelated_comparison_endpoint",
+      "expected": "rejected"
+    },
+    {
+      "name": "v0.1_incompatible",
+      "expected": "transport_rejection"
+    }
+  ]
+}

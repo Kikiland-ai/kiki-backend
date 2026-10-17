@@ -1,0 +1,371 @@
+{
+  "controlled_fixture_only": true,
+  "format_only_comparison": true,
+  "no_live_lab_mutation": true,
+  "records": [
+    {
+      "case": "local-settings",
+      "format": "verbose",
+      "model": "gemini-3.5-flash-lite",
+      "started_at": "2026-10-14T16:54:40Z",
+      "image_sha256": "db56a0faf3931efb193f41f4c9b8c46ad9cd1405e4ea82073a14a208208ffeae",
+      "prompt_sha256": "67521820163eebccb697446338f73850660292df999f6c0aa5ca96c949bfa319",
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "usage": {
+        "promptTokenCount": 4994,
+        "candidatesTokenCount": 452,
+        "totalTokenCount": 5446,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 3914
+          },
+          {
+            "modality": "IMAGE",
+            "tokenCount": 1080
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "output_bytes": 1456,
+      "schema_valid": true,
+      "passed": true,
+      "expected": {
+        "local_parameters": "match",
+        "local-create": "match",
+        "local-settings": "match"
+      },
+      "actual": {
+        "local_parameters": "match",
+        "local-create": "match",
+        "local-settings": "match"
+      },
+      "elapsed_seconds": 9.66
+    },
+    {
+      "case": "local-settings",
+      "format": "compact",
+      "model": "gemini-3.5-flash-lite",
+      "started_at": "2026-10-14T16:54:50Z",
+      "image_sha256": "db56a0faf3931efb193f41f4c9b8c46ad9cd1405e4ea82073a14a208208ffeae",
+      "prompt_sha256": "1ac040729d50e615a2edd0e7706e8a9b8ae275365af28dcf36cc8116ee41526e",
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "usage": {
+        "promptTokenCount": 5130,
+        "candidatesTokenCount": 326,
+        "totalTokenCount": 5456,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 4050
+          },
+          {
+            "modality": "IMAGE",
+            "tokenCount": 1080
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "output_bytes": 930,
+      "schema_valid": true,
+      "passed": true,
+      "expected": {
+        "local_parameters": "match",
+        "local-create": "match",
+        "local-settings": "match"
+      },
+      "actual": {
+        "local_parameters": "match",
+        "local-create": "match",
+        "local-settings": "match"
+      },
+      "elapsed_seconds": 2.43
+    },
+    {
+      "case": "wrong-local-phase-heldout",
+      "format": "compact",
+      "model": "gemini-3.5-flash-lite",
+      "started_at": "2026-10-14T16:54:52Z",
+      "image_sha256": "aeb206dea885d5f330562cabcd06061b8589753128a237b907b4bd98682fc59d",
+      "prompt_sha256": "1ac040729d50e615a2edd0e7706e8a9b8ae275365af28dcf36cc8116ee41526e",
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "usage": {
+        "promptTokenCount": 5130,
+        "candidatesTokenCount": 285,
+        "totalTokenCount": 5415,
+        "cachedContentTokenCount": 1854,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 4050
+          },
+          {
+            "modality": "IMAGE",
+            "tokenCount": 1080
+          }
+        ],
+        "cacheTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 1464
+          },
+          {
+            "modality": "IMAGE",
+            "tokenCount": 390
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "output_bytes": 799,
+      "schema_valid": true,
+      "passed": false,
+      "expected": {
+        "local_parameters": "mismatch",
+        "local-create": "match",
+        "local-settings": "mismatch"
+      },
+      "actual": {
+        "local_parameters": "mismatch",
+        "local-create": "match",
+        "local-settings": "match"
+      },
+      "elapsed_seconds": 2.31
+    },
+    {
+      "case": "wrong-local-phase-heldout",
+      "format": "verbose",
+      "model": "gemini-3.5-flash-lite",
+      "started_at": "2026-10-14T16:54:54Z",
+      "image_sha256": "aeb206dea885d5f330562cabcd06061b8589753128a237b907b4bd98682fc59d",
+      "prompt_sha256": "67521820163eebccb697446338f73850660292df999f6c0aa5ca96c949bfa319",
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "usage": {
+        "promptTokenCount": 4994,
+        "candidatesTokenCount": 451,
+        "totalTokenCount": 5445,
+        "cachedContentTokenCount": 1786,
+        "promptTokensDetails": [
+          {
+            "modality": "IMAGE",
+            "tokenCount": 1080
+          },
+          {
+            "modality": "TEXT",
+            "tokenCount": 3914
+          }
+        ],
+        "cacheTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 1400
+          },
+          {
+            "modality": "IMAGE",
+            "tokenCount": 386
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "output_bytes": 1448,
+      "schema_valid": true,
+      "passed": true,
+      "expected": {
+        "local_parameters": "mismatch",
+        "local-create": "match",
+        "local-settings": "mismatch"
+      },
+      "actual": {
+        "local_parameters": "mismatch",
+        "local-create": "match",
+        "local-settings": "mismatch"
+      },
+      "elapsed_seconds": 2.54
+    },
+    {
+      "case": "carrier-at-receiver",
+      "format": "verbose",
+      "model": "gemini-3.5-flash-lite",
+      "started_at": "2026-10-14T16:54:57Z",
+      "image_sha256": "54dc1858e16e8b465a995ee37b4e9f77a198d4cde6862bb1c974669f99236cdb",
+      "prompt_sha256": "67521820163eebccb697446338f73850660292df999f6c0aa5ca96c949bfa319",
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "usage": {
+        "promptTokenCount": 4994,
+        "candidatesTokenCount": 464,
+        "totalTokenCount": 5458,
+        "cachedContentTokenCount": 1786,
+        "promptTokensDetails": [
+          {
+            "modality": "IMAGE",
+            "tokenCount": 1080
+          },
+          {
+            "modality": "TEXT",
+            "tokenCount": 3914
+          }
+        ],
+        "cacheTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 1400
+          },
+          {
+            "modality": "IMAGE",
+            "tokenCount": 386
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "output_bytes": 1576,
+      "schema_valid": true,
+      "passed": true,
+      "expected": {
+        "local_parameters": "unknown",
+        "local-create": "unknown",
+        "local-settings": "unknown"
+      },
+      "actual": {
+        "local_parameters": "unknown",
+        "local-create": "unknown",
+        "local-settings": "unknown"
+      },
+      "elapsed_seconds": 4.07
+    },
+    {
+      "case": "carrier-at-receiver",
+      "format": "compact",
+      "model": "gemini-3.5-flash-lite",
+      "started_at": "2026-10-14T16:55:01Z",
+      "image_sha256": "54dc1858e16e8b465a995ee37b4e9f77a198d4cde6862bb1c974669f99236cdb",
+      "prompt_sha256": "1ac040729d50e615a2edd0e7706e8a9b8ae275365af28dcf36cc8116ee41526e",
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "usage": {
+        "promptTokenCount": 5130,
+        "candidatesTokenCount": 252,
+        "totalTokenCount": 5382,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 4050
+          },
+          {
+            "modality": "IMAGE",
+            "tokenCount": 1080
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "output_bytes": 653,
+      "schema_valid": true,
+      "passed": false,
+      "expected": {
+        "local_parameters": "unknown",
+        "local-create": "unknown",
+        "local-settings": "unknown"
+      },
+      "actual": {
+        "local_parameters": "unknown",
+        "local-create": "unknown",
+        "local-settings": "match"
+      },
+      "elapsed_seconds": 5.37
+    },
+    {
+      "case": "hidden-wires-heldout",
+      "format": "compact",
+      "model": "gemini-3.5-flash-lite",
+      "started_at": "2026-10-14T16:55:06Z",
+      "image_sha256": "9085ea48fb3f66f9b17157805db3c1aa7bc59867ee8b9190888b2237ff4929b8",
+      "prompt_sha256": "1ac040729d50e615a2edd0e7706e8a9b8ae275365af28dcf36cc8116ee41526e",
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "usage": {
+        "promptTokenCount": 5130,
+        "candidatesTokenCount": 250,
+        "totalTokenCount": 5380,
+        "cachedContentTokenCount": 1854,
+        "promptTokensDetails": [
+          {
+            "modality": "IMAGE",
+            "tokenCount": 1080
+          },
+          {
+            "modality": "TEXT",
+            "tokenCount": 4050
+          }
+        ],
+        "cacheTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 1464
+          },
+          {
+            "modality": "IMAGE",
+            "tokenCount": 390
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "output_bytes": 776,
+      "schema_valid": true,
+      "passed": false,
+      "expected": {
+        "receiver_structure": "unknown",
+        "modulated-wire": "unknown",
+        "local-wire": "unknown"
+      },
+      "actual": {
+        "receiver_structure": "match",
+        "modulated-wire": "match",
+        "local-wire": "match"
+      },
+      "elapsed_seconds": 8.78
+    },
+    {
+      "case": "hidden-wires-heldout",
+      "format": "verbose",
+      "model": "gemini-3.5-flash-lite",
+      "started_at": "2026-10-14T16:55:15Z",
+      "image_sha256": "9085ea48fb3f66f9b17157805db3c1aa7bc59867ee8b9190888b2237ff4929b8",
+      "prompt_sha256": "67521820163eebccb697446338f73850660292df999f6c0aa5ca96c949bfa319",
+      "http_status": 200,
+      "finish_reason": "STOP",
+      "usage": {
+        "promptTokenCount": 4994,
+        "candidatesTokenCount": 461,
+        "totalTokenCount": 5455,
+        "promptTokensDetails": [
+          {
+            "modality": "IMAGE",
+            "tokenCount": 1080
+          },
+          {
+            "modality": "TEXT",
+            "tokenCount": 3914
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "output_bytes": 1630,
+      "schema_valid": true,
+      "passed": true,
+      "expected": {
+        "receiver_structure": "unknown",
+        "modulated-wire": "unknown",
+        "local-wire": "unknown"
+      },
+      "actual": {
+        "receiver_structure": "unknown",
+        "modulated-wire": "unknown",
+        "local-wire": "unknown"
+      },
+      "elapsed_seconds": 4.15
+    }
+  ]
+}

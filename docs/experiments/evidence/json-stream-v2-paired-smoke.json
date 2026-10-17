@@ -1,0 +1,237 @@
+{
+  "schema": "json-stream-smoke/v1",
+  "synthetic_only": true,
+  "real_simulink_accuracy_claim": false,
+  "production_latency_claim": false,
+  "repeats_per_case_arm": 1,
+  "records": [
+    {
+      "prompt_sha256": "2c7095ee2dc86cc3a28594fd3a3ba364c01a77c4764f881d71c9a94931b12128",
+      "request_sha256": "e9c1f48f94edcc7c23441c34ed7d9d89bf25751033bf88f1cb16c3d79d2ba488",
+      "case": "local-settings",
+      "arm": "stream",
+      "image_sha256": "db56a0faf3931efb193f41f4c9b8c46ad9cd1405e4ea82073a14a208208ffeae",
+      "model": "gemini-3.5-flash-lite",
+      "expected": {
+        "local_parameters": "match",
+        "local-create": "match",
+        "local-settings": "match"
+      },
+      "status": "success",
+      "passed": true,
+      "actual": {
+        "local_parameters": "match",
+        "local-create": "match",
+        "local-settings": "match"
+      },
+      "total_seconds": 3.108,
+      "first_feedback_seconds": 2.211,
+      "metrics": {
+        "provider_ms": 3106,
+        "first_byte_ms": 2080,
+        "first_finding_ms": 2209,
+        "critical_fields_ms": 2986,
+        "output_tokens": 513,
+        "wire_format": "lab-observer-json-stream/v1",
+        "observer_prompt_version": "dsb-step-observer/v3-json-stream2"
+      }
+    },
+    {
+      "prompt_sha256": "2c7095ee2dc86cc3a28594fd3a3ba364c01a77c4764f881d71c9a94931b12128",
+      "request_sha256": "e9c1f48f94edcc7c23441c34ed7d9d89bf25751033bf88f1cb16c3d79d2ba488",
+      "case": "local-settings",
+      "arm": "priority-buffered",
+      "image_sha256": "db56a0faf3931efb193f41f4c9b8c46ad9cd1405e4ea82073a14a208208ffeae",
+      "model": "gemini-3.5-flash-lite",
+      "expected": {
+        "local_parameters": "match",
+        "local-create": "match",
+        "local-settings": "match"
+      },
+      "status": "success",
+      "passed": true,
+      "actual": {
+        "local_parameters": "match",
+        "local-create": "match",
+        "local-settings": "match"
+      },
+      "total_seconds": 2.424,
+      "first_feedback_seconds": 2.424,
+      "metrics": {
+        "wire_format": "priority-json-buffered-control",
+        "output_tokens": 549
+      }
+    },
+    {
+      "prompt_sha256": "2c7095ee2dc86cc3a28594fd3a3ba364c01a77c4764f881d71c9a94931b12128",
+      "request_sha256": "cf53def4b92ff87777bb7459a0a0b4537ad588540ba1739c6fb36366c45576d2",
+      "case": "wrong-local-phase-heldout",
+      "arm": "priority-buffered",
+      "image_sha256": "aeb206dea885d5f330562cabcd06061b8589753128a237b907b4bd98682fc59d",
+      "model": "gemini-3.5-flash-lite",
+      "expected": {
+        "local_parameters": "mismatch",
+        "local-create": "match",
+        "local-settings": "mismatch"
+      },
+      "status": "success",
+      "passed": true,
+      "actual": {
+        "local_parameters": "mismatch",
+        "local-create": "match",
+        "local-settings": "mismatch"
+      },
+      "total_seconds": 2.469,
+      "first_feedback_seconds": 2.469,
+      "metrics": {
+        "wire_format": "priority-json-buffered-control",
+        "output_tokens": 469
+      }
+    },
+    {
+      "prompt_sha256": "2c7095ee2dc86cc3a28594fd3a3ba364c01a77c4764f881d71c9a94931b12128",
+      "request_sha256": "cf53def4b92ff87777bb7459a0a0b4537ad588540ba1739c6fb36366c45576d2",
+      "case": "wrong-local-phase-heldout",
+      "arm": "stream",
+      "image_sha256": "aeb206dea885d5f330562cabcd06061b8589753128a237b907b4bd98682fc59d",
+      "model": "gemini-3.5-flash-lite",
+      "expected": {
+        "local_parameters": "mismatch",
+        "local-create": "match",
+        "local-settings": "mismatch"
+      },
+      "status": "success",
+      "passed": true,
+      "actual": {
+        "local_parameters": "mismatch",
+        "local-create": "match",
+        "local-settings": "mismatch"
+      },
+      "total_seconds": 1.995,
+      "first_feedback_seconds": 1.179,
+      "metrics": {
+        "provider_ms": 1992,
+        "first_byte_ms": 1016,
+        "first_finding_ms": 1177,
+        "critical_fields_ms": 1881,
+        "output_tokens": 501,
+        "wire_format": "lab-observer-json-stream/v1",
+        "observer_prompt_version": "dsb-step-observer/v3-json-stream2"
+      }
+    },
+    {
+      "prompt_sha256": "2c7095ee2dc86cc3a28594fd3a3ba364c01a77c4764f881d71c9a94931b12128",
+      "request_sha256": "c26cfb7c36fb07ddc95aaf4690328e8c2833437f3378e34abfdcffeb981b1a04",
+      "case": "carrier-at-receiver",
+      "arm": "stream",
+      "image_sha256": "54dc1858e16e8b465a995ee37b4e9f77a198d4cde6862bb1c974669f99236cdb",
+      "model": "gemini-3.5-flash-lite",
+      "expected": {
+        "local_parameters": "unknown",
+        "local-create": "unknown",
+        "local-settings": "unknown"
+      },
+      "status": "success",
+      "passed": true,
+      "actual": {
+        "local_parameters": "unknown",
+        "local-create": "unknown",
+        "local-settings": "unknown"
+      },
+      "total_seconds": 2.861,
+      "first_feedback_seconds": 2.178,
+      "metrics": {
+        "provider_ms": 2860,
+        "first_byte_ms": 2030,
+        "first_finding_ms": 2177,
+        "critical_fields_ms": 2824,
+        "output_tokens": 447,
+        "wire_format": "lab-observer-json-stream/v1",
+        "observer_prompt_version": "dsb-step-observer/v3-json-stream2"
+      }
+    },
+    {
+      "prompt_sha256": "2c7095ee2dc86cc3a28594fd3a3ba364c01a77c4764f881d71c9a94931b12128",
+      "request_sha256": "c26cfb7c36fb07ddc95aaf4690328e8c2833437f3378e34abfdcffeb981b1a04",
+      "case": "carrier-at-receiver",
+      "arm": "priority-buffered",
+      "image_sha256": "54dc1858e16e8b465a995ee37b4e9f77a198d4cde6862bb1c974669f99236cdb",
+      "model": "gemini-3.5-flash-lite",
+      "expected": {
+        "local_parameters": "unknown",
+        "local-create": "unknown",
+        "local-settings": "unknown"
+      },
+      "status": "success",
+      "passed": true,
+      "actual": {
+        "local_parameters": "unknown",
+        "local-create": "unknown",
+        "local-settings": "unknown"
+      },
+      "total_seconds": 2.307,
+      "first_feedback_seconds": 2.307,
+      "metrics": {
+        "wire_format": "priority-json-buffered-control",
+        "output_tokens": 445
+      }
+    },
+    {
+      "prompt_sha256": "2c7095ee2dc86cc3a28594fd3a3ba364c01a77c4764f881d71c9a94931b12128",
+      "request_sha256": "c2002674ef7288119ce6afe0eb3ab43baf0920eca62d79985ea95a73f4371563",
+      "case": "hidden-wires-heldout",
+      "arm": "priority-buffered",
+      "image_sha256": "9085ea48fb3f66f9b17157805db3c1aa7bc59867ee8b9190888b2237ff4929b8",
+      "model": "gemini-3.5-flash-lite",
+      "expected": {
+        "receiver_structure": "unknown",
+        "modulated-wire": "unknown",
+        "local-wire": "unknown"
+      },
+      "status": "success",
+      "passed": true,
+      "actual": {
+        "receiver_structure": "unknown",
+        "modulated-wire": "unknown",
+        "local-wire": "unknown"
+      },
+      "total_seconds": 2.019,
+      "first_feedback_seconds": 2.019,
+      "metrics": {
+        "wire_format": "priority-json-buffered-control",
+        "output_tokens": 490
+      }
+    },
+    {
+      "prompt_sha256": "2c7095ee2dc86cc3a28594fd3a3ba364c01a77c4764f881d71c9a94931b12128",
+      "request_sha256": "c2002674ef7288119ce6afe0eb3ab43baf0920eca62d79985ea95a73f4371563",
+      "case": "hidden-wires-heldout",
+      "arm": "stream",
+      "image_sha256": "9085ea48fb3f66f9b17157805db3c1aa7bc59867ee8b9190888b2237ff4929b8",
+      "model": "gemini-3.5-flash-lite",
+      "expected": {
+        "receiver_structure": "unknown",
+        "modulated-wire": "unknown",
+        "local-wire": "unknown"
+      },
+      "status": "success",
+      "passed": true,
+      "actual": {
+        "receiver_structure": "unknown",
+        "modulated-wire": "unknown",
+        "local-wire": "unknown"
+      },
+      "total_seconds": 1.915,
+      "first_feedback_seconds": 1.147,
+      "metrics": {
+        "provider_ms": 1914,
+        "first_byte_ms": 993,
+        "first_finding_ms": 1146,
+        "critical_fields_ms": 1822,
+        "output_tokens": 460,
+        "wire_format": "lab-observer-json-stream/v1",
+        "observer_prompt_version": "dsb-step-observer/v3-json-stream2"
+      }
+    }
+  ]
+}

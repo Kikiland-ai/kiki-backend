@@ -1,0 +1,7 @@
+work/
+dist/
+.sites-runtime/
+node_modules/
+*.log
+
+.openai/hosting.json

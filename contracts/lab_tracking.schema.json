@@ -1,0 +1,1109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:kiki:lab-tracking:v1",
+  "title": "Proposed prototype lab tracking projection",
+  "description": "Structural contract only. Queue, ownership, references, timing and transition invariants need runtime validation.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "const": "lab-tracking/v1"
+    },
+    "mode": {
+      "enum": [
+        "operator_trial",
+        "learner"
+      ]
+    },
+    "synthetic": {
+      "type": "boolean"
+    },
+    "lab_session_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "owner_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "definition": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "definition_id": {
+          "enum": [
+            "DEMO-PR-AM-DSB-v1"
+          ]
+        },
+        "repository": {
+          "enum": [
+            "Kikiland-ai/Design-Thinking"
+          ]
+        },
+        "commit": {
+          "const": "2a6c843448d81062f89596b941516f8b7817ec79"
+        },
+        "definition_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "required": [
+        "definition_id",
+        "repository",
+        "commit",
+        "definition_sha256"
+      ]
+    },
+    "experiment_id": {
+      "const": "PR-AM-DSB"
+    },
+    "status": {
+      "enum": [
+        "preparing",
+        "ready",
+        "active",
+        "paused",
+        "disconnected",
+        "completed"
+      ]
+    },
+    "readiness": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "required_concept_gate": {
+          "enum": [
+            "unknown",
+            "passed",
+            "not_passed"
+          ]
+        },
+        "operator_trial_override": {
+          "type": "boolean"
+        },
+        "override_reason": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 500
+        },
+        "chapter_test_required": {
+          "const": false
+        }
+      },
+      "required": [
+        "required_concept_gate",
+        "operator_trial_override",
+        "override_reason",
+        "chapter_test_required"
+      ]
+    },
+    "workspace": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 200
+        },
+        "software": {
+          "enum": [
+            "simulink_online"
+          ]
+        },
+        "confirmed": {
+          "type": "boolean"
+        },
+        "external_project_ref": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 200
+        },
+        "capture_session_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 200
+        },
+        "capture_epoch": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "parameter_revision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "condition": {
+          "enum": [
+            "baseline",
+            "phase_fault",
+            "restored_baseline"
+          ]
+        },
+        "view_revision": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "id",
+        "software",
+        "confirmed",
+        "external_project_ref",
+        "capture_session_id",
+        "capture_epoch",
+        "parameter_revision",
+        "condition",
+        "view_revision"
+      ]
+    },
+    "observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "observation_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 200
+        },
+        "source_frame_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 200
+        },
+        "latest_frame_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 200
+        },
+        "capture_epoch": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "source_received_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "age_ms": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "status": {
+          "enum": [
+            "awaiting_frame",
+            "available",
+            "stale",
+            "failed",
+            "disconnected"
+          ]
+        },
+        "view_revision": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "observation_id",
+        "source_frame_id",
+        "latest_frame_id",
+        "capture_epoch",
+        "source_received_at",
+        "age_ms",
+        "status",
+        "view_revision"
+      ]
+    },
+    "queue": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "current_checkpoint_id": {
+          "enum": [
+            null,
+            "CP-DSB-01",
+            "CP-DSB-02",
+            "CP-DSB-03",
+            "CP-DSB-04",
+            "CP-DSB-05",
+            "CP-DSB-06",
+            "CP-DSB-07",
+            "CP-DSB-08",
+            "CP-DSB-09",
+            "CP-DSB-10",
+            "CP-DSB-11",
+            "CP-DSB-12"
+          ]
+        },
+        "upcoming_checkpoint_ids": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "CP-DSB-01",
+              "CP-DSB-02",
+              "CP-DSB-03",
+              "CP-DSB-04",
+              "CP-DSB-05",
+              "CP-DSB-06",
+              "CP-DSB-07",
+              "CP-DSB-08",
+              "CP-DSB-09",
+              "CP-DSB-10",
+              "CP-DSB-11",
+              "CP-DSB-12"
+            ]
+          },
+          "uniqueItems": true,
+          "maxItems": 12
+        },
+        "done_checkpoint_ids": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "CP-DSB-01",
+              "CP-DSB-02",
+              "CP-DSB-03",
+              "CP-DSB-04",
+              "CP-DSB-05",
+              "CP-DSB-06",
+              "CP-DSB-07",
+              "CP-DSB-08",
+              "CP-DSB-09",
+              "CP-DSB-10",
+              "CP-DSB-11",
+              "CP-DSB-12"
+            ]
+          },
+          "uniqueItems": true,
+          "maxItems": 12
+        },
+        "support_items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "checkpoint_id": {
+                "enum": [
+                  "CP-DSB-01",
+                  "CP-DSB-02",
+                  "CP-DSB-03",
+                  "CP-DSB-04",
+                  "CP-DSB-05",
+                  "CP-DSB-06",
+                  "CP-DSB-07",
+                  "CP-DSB-08",
+                  "CP-DSB-09",
+                  "CP-DSB-10",
+                  "CP-DSB-11",
+                  "CP-DSB-12"
+                ]
+              },
+              "kind": {
+                "enum": [
+                  "concept_explanation",
+                  "parameter_help",
+                  "question",
+                  "connection_help"
+                ]
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 500
+              },
+              "state": {
+                "enum": [
+                  "queued",
+                  "in_progress",
+                  "done"
+                ]
+              },
+              "evidence_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200
+                },
+                "uniqueItems": true,
+                "maxItems": 20
+              }
+            },
+            "required": [
+              "id",
+              "checkpoint_id",
+              "kind",
+              "reason",
+              "state",
+              "evidence_ids"
+            ]
+          },
+          "maxItems": 50
+        }
+      },
+      "required": [
+        "current_checkpoint_id",
+        "upcoming_checkpoint_ids",
+        "done_checkpoint_ids",
+        "support_items"
+      ]
+    },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "checkpoint_id": {
+            "enum": [
+              "CP-DSB-01",
+              "CP-DSB-02",
+              "CP-DSB-03",
+              "CP-DSB-04",
+              "CP-DSB-05",
+              "CP-DSB-06",
+              "CP-DSB-07",
+              "CP-DSB-08",
+              "CP-DSB-09",
+              "CP-DSB-10",
+              "CP-DSB-11",
+              "CP-DSB-12"
+            ]
+          },
+          "status": {
+            "enum": [
+              "upcoming",
+              "in_progress",
+              "blocked",
+              "awaiting_review",
+              "done",
+              "needs_recheck"
+            ]
+          },
+          "current_visit_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 200
+          },
+          "visits": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "uniqueItems": true,
+            "maxItems": 100
+          },
+          "attempt_count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "criteria": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "criterion_id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200
+                },
+                "state": {
+                  "enum": [
+                    "unknown",
+                    "model_suggested",
+                    "satisfied",
+                    "failed",
+                    "needs_recheck"
+                  ]
+                },
+                "evidence_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200
+                  },
+                  "uniqueItems": true,
+                  "maxItems": 30
+                },
+                "review_basis": {
+                  "enum": [
+                    null,
+                    "self_report",
+                    "model_inference",
+                    "reviewed_visual",
+                    "adapter_verified"
+                  ]
+                },
+                "parameter_revision": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "minimum": 0
+                }
+              },
+              "required": [
+                "criterion_id",
+                "state",
+                "evidence_ids",
+                "review_basis",
+                "parameter_revision"
+              ]
+            },
+            "minItems": 1,
+            "maxItems": 10
+          },
+          "timing": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "entered_at": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time"
+              },
+              "wall_ms": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "tracking_active_ms": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "paused_ms": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "disconnected_ms": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "valid_observation_ms": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "required": [
+              "entered_at",
+              "wall_ms",
+              "tracking_active_ms",
+              "paused_ms",
+              "disconnected_ms",
+              "valid_observation_ms"
+            ]
+          },
+          "telemetry": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "help_request_count": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "hint_shown_count": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "answer_count": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "correction_count": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "run_attempt_count": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "run_error_count": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "analysis_failure_count": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "required": [
+              "help_request_count",
+              "hint_shown_count",
+              "answer_count",
+              "correction_count",
+              "run_attempt_count",
+              "run_error_count",
+              "analysis_failure_count"
+            ]
+          }
+        },
+        "required": [
+          "checkpoint_id",
+          "status",
+          "current_visit_id",
+          "visits",
+          "attempt_count",
+          "criteria",
+          "timing",
+          "telemetry"
+        ]
+      },
+      "minItems": 12,
+      "maxItems": 12
+    },
+    "learner_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "language_preference": {
+          "enum": [
+            null,
+            "or",
+            "en"
+          ]
+        },
+        "dimensions": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "concept": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 1
+            },
+            "words": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 1
+            },
+            "english": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 1
+            },
+            "lab": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 1
+            }
+          },
+          "required": [
+            "concept",
+            "words",
+            "english",
+            "lab"
+          ]
+        },
+        "concepts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "concept_id": {
+                "enum": [
+                  "C-AM-01",
+                  "C-AM-02",
+                  "C-AM-03",
+                  "C-AM-04",
+                  "C-AM-06",
+                  "C-AM-07",
+                  "C-AM-08"
+                ]
+              },
+              "theory_check": {
+                "enum": [
+                  "unknown",
+                  "passed",
+                  "not_passed"
+                ]
+              },
+              "assessment_run_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200
+                },
+                "uniqueItems": true,
+                "maxItems": 100
+              },
+              "understanding": {
+                "enum": [
+                  "unknown",
+                  "supported_for_this_task",
+                  "needs_review"
+                ]
+              },
+              "evidence_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200
+                },
+                "uniqueItems": true,
+                "maxItems": 100
+              },
+              "self_confidence": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1,
+                "maximum": 10
+              }
+            },
+            "required": [
+              "concept_id",
+              "theory_check",
+              "assessment_run_ids",
+              "understanding",
+              "evidence_ids",
+              "self_confidence"
+            ]
+          },
+          "minItems": 7,
+          "maxItems": 7
+        },
+        "inference_candidates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "checkpoint_id": {
+                "enum": [
+                  "CP-DSB-01",
+                  "CP-DSB-02",
+                  "CP-DSB-03",
+                  "CP-DSB-04",
+                  "CP-DSB-05",
+                  "CP-DSB-06",
+                  "CP-DSB-07",
+                  "CP-DSB-08",
+                  "CP-DSB-09",
+                  "CP-DSB-10",
+                  "CP-DSB-11",
+                  "CP-DSB-12"
+                ]
+              },
+              "concept_ids": {
+                "type": "array",
+                "items": {
+                  "enum": [
+                    "C-AM-01",
+                    "C-AM-02",
+                    "C-AM-03",
+                    "C-AM-04",
+                    "C-AM-06",
+                    "C-AM-07",
+                    "C-AM-08"
+                  ]
+                },
+                "uniqueItems": true
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 300
+              },
+              "status": {
+                "enum": [
+                  "candidate",
+                  "confirmed",
+                  "rejected"
+                ]
+              },
+              "evidence_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200
+                },
+                "uniqueItems": true
+              },
+              "alternative_explanations": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 300
+                },
+                "maxItems": 10
+              }
+            },
+            "required": [
+              "id",
+              "checkpoint_id",
+              "concept_ids",
+              "label",
+              "status",
+              "evidence_ids",
+              "alternative_explanations"
+            ]
+          },
+          "maxItems": 50
+        }
+      },
+      "required": [
+        "language_preference",
+        "dimensions",
+        "concepts",
+        "inference_candidates"
+      ]
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "kind": {
+            "enum": [
+              "workspace",
+              "model_structure",
+              "parameters",
+              "run_result",
+              "waveform",
+              "prediction",
+              "answer",
+              "explanation",
+              "save_confirmation"
+            ]
+          },
+          "origin": {
+            "enum": [
+              "screen_analysis",
+              "student_report",
+              "reviewer",
+              "simulink_adapter"
+            ]
+          },
+          "captured_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "capture_epoch": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "workspace_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 200
+          },
+          "parameter_revision": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "checkpoint_id": {
+            "enum": [
+              "CP-DSB-01",
+              "CP-DSB-02",
+              "CP-DSB-03",
+              "CP-DSB-04",
+              "CP-DSB-05",
+              "CP-DSB-06",
+              "CP-DSB-07",
+              "CP-DSB-08",
+              "CP-DSB-09",
+              "CP-DSB-10",
+              "CP-DSB-11",
+              "CP-DSB-12"
+            ]
+          },
+          "visit_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 200
+          },
+          "observation_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 200
+          },
+          "frame_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "uniqueItems": true,
+            "maxItems": 20
+          },
+          "review_status": {
+            "enum": [
+              "unreviewed",
+              "accepted",
+              "rejected"
+            ]
+          },
+          "reviewed_by": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 200
+          },
+          "synthetic": {
+            "type": "boolean"
+          },
+          "summary": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1500
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "origin",
+          "captured_at",
+          "capture_epoch",
+          "workspace_id",
+          "parameter_revision",
+          "checkpoint_id",
+          "visit_id",
+          "observation_id",
+          "frame_ids",
+          "review_status",
+          "reviewed_by",
+          "synthetic",
+          "summary"
+        ]
+      },
+      "maxItems": 1000
+    },
+    "history": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "last_event_sequence": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "event_log_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "event_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "coverage": {
+          "enum": [
+            "sampled_frames"
+          ]
+        },
+        "capture_gap_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "truncated": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "last_event_sequence",
+        "event_log_ref",
+        "event_count",
+        "coverage",
+        "capture_gap_count",
+        "truncated"
+      ]
+    },
+    "guidance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "enum": [
+            "inactive",
+            "waiting_for_observation",
+            "current_step",
+            "awaiting_review",
+            "paused",
+            "disconnected",
+            "ended"
+          ]
+        },
+        "now_checkpoint_id": {
+          "enum": [
+            null,
+            "CP-DSB-01",
+            "CP-DSB-02",
+            "CP-DSB-03",
+            "CP-DSB-04",
+            "CP-DSB-05",
+            "CP-DSB-06",
+            "CP-DSB-07",
+            "CP-DSB-08",
+            "CP-DSB-09",
+            "CP-DSB-10",
+            "CP-DSB-11",
+            "CP-DSB-12"
+          ]
+        },
+        "next_checkpoint_id": {
+          "enum": [
+            null,
+            "CP-DSB-01",
+            "CP-DSB-02",
+            "CP-DSB-03",
+            "CP-DSB-04",
+            "CP-DSB-05",
+            "CP-DSB-06",
+            "CP-DSB-07",
+            "CP-DSB-08",
+            "CP-DSB-09",
+            "CP-DSB-10",
+            "CP-DSB-11",
+            "CP-DSB-12"
+          ]
+        },
+        "instruction": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 1000
+        },
+        "reason": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 1000
+        },
+        "based_on_observation_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 200
+        },
+        "based_on_visit_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 200
+        },
+        "valid_until": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "pointer_active": {
+          "const": false
+        }
+      },
+      "required": [
+        "state",
+        "now_checkpoint_id",
+        "next_checkpoint_id",
+        "instruction",
+        "reason",
+        "based_on_observation_id",
+        "based_on_visit_id",
+        "valid_until",
+        "pointer_active"
+      ]
+    }
+  },
+  "required": [
+    "schema",
+    "mode",
+    "synthetic",
+    "lab_session_id",
+    "owner_id",
+    "revision",
+    "definition",
+    "experiment_id",
+    "status",
+    "readiness",
+    "workspace",
+    "observation",
+    "queue",
+    "steps",
+    "learner_state",
+    "evidence",
+    "history",
+    "guidance"
+  ]
+}

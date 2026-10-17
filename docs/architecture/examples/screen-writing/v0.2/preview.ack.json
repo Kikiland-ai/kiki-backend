@@ -1,0 +1,41 @@
+{
+  "schema": "screen-writing/v0.2",
+  "message_type": "delivery_ack",
+  "ack_id": "synthetic-ack-1",
+  "request_id": "synthetic-request-1",
+  "packet_id": "synthetic-packet-1",
+  "cancel_id": null,
+  "guidance_stream_id": "synthetic-stream",
+  "cue_sequence": 1,
+  "context": {
+    "lab_session_id": "synthetic-lab",
+    "experiment_id": "PR-AM-DSB",
+    "checkpoint_id": "CP-DSB-03",
+    "visit_id": "synthetic-visit-3",
+    "lab_revision": 7,
+    "workspace_id": "synthetic-model",
+    "capture_epoch": 1,
+    "parameter_revision": 2,
+    "view_revision": 4,
+    "condition": "baseline"
+  },
+  "actual_surface": "captured_frame",
+  "delivered_at": "2026-10-14T00:30:02+05:30",
+  "timestamp_authority": "consumer_clock",
+  "status": "preview_rendered",
+  "reason": "rendered",
+  "adapter_binding_id": null,
+  "transform_revision": null,
+  "packet_context": {
+    "lab_session_id": "synthetic-lab",
+    "experiment_id": "PR-AM-DSB",
+    "checkpoint_id": "CP-DSB-03",
+    "visit_id": "synthetic-visit-3",
+    "lab_revision": 7,
+    "workspace_id": "synthetic-model",
+    "capture_epoch": 1,
+    "parameter_revision": 2,
+    "view_revision": 4,
+    "condition": "baseline"
+  }
+}

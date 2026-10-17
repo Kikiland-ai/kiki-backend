@@ -64,3 +64,11 @@ installed-extension or real-Simulink recognition acceptance claim. Initial
 incognito source-binding and exhausted-reservation failures are retained in the
 integration evidence, not relabelled as successes. The original viewport smoke
 is not used as a tutor acceptance gate.
+
+## Hosted timing correction — 17 October 2026
+
+The controlled local browser proof did not reproduce hosted DB/clock latency. Live drawing analyses committed on 17 October, but inspected exposure rows contained only rejection/cancellation receipts; no paint was established. Old rejection receipts used the generic `consumer_validation_failed`, preventing exact historical stage attribution.
+
+Renderer now computes a conservative clock-offset interval from the clock endpoint's request-received and response-sent UTC timestamps. Server processing is excluded from network uncertainty; the 250 ms limit and integer timestamp margin remain. Legacy endpoints without receive timestamps retain the previous conservative whole-round-trip treatment. Excess actual network uncertainty still rejects drawing. Integration must add the receive timestamp while preserving owner checks.
+
+Actual paint establishes a minimum readable interval of up to 2.5 seconds, bounded by the packet's original expiry; `nextCheckDelay` lets integration defer automatic rechecking during this interval. Source/context invalidation still clears immediately. Rendering/ACK never advances a checkpoint. Client rejections now retain their bounded actual reason in the existing v0.2 ACK field, instead of discarding it behind a generic label. These changes affect reader assets; the installed extension protocol/version is unchanged.

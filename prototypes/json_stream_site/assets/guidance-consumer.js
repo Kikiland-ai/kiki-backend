@@ -2,7 +2,7 @@
  * The model chooses marks; this consumer validates, transforms and delivers. */
 (() => {
  const P=KikiGuidanceProtocol,F=KikiWritingProtocol,$=id=>document.getElementById(id);
- let track=null,video=null,lab=null,captureId=null,connection=null,identityKey=null,epoch=0,mask=Promise.resolve(),active=null,high=0,queue=null,delivering=null,polling=false,offset=null,lastFP=null,inflightSequence=0;
+ let track=null,video=null,lab=null,captureId=null,connection=null,identityKey=null,epoch=0,mask=Promise.resolve(),active=null,high=0,queue=null,delivering=null,polling=false,offset=null,lastFP=null,inflightSequence=0,holdUntil=0;
  const pending=new Map(),samples=new Map(),retained=new Map(),events=[];
  const health={capture:'Waiting for shared pixels',analysis:'Waiting for analysis',delivery:'No cue received',captured:0,painted:0,last_failure:null};
  const text=(key,value)=>{health[key]=value;const el=$('writing-'+key);if(el)el.textContent=value;};
@@ -18,7 +18,7 @@
  const sampler=new KikiWritingFrames();
  async function api(path,method='GET',body=null){const r=await fetch(path,{method,credentials:'same-origin',signal:AbortSignal.timeout(4000),...(body?{headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}:{})});const data=await r.json();if(!r.ok)throw Error(data.detail||'Guidance transport is unavailable');return data;}
  const path=kind=>`/lab-sessions/${lab.lab_session_id}/guidance/${kind}`;
- async function calibrate(){const start=performance.now(),r=await api(path('clock')),end=performance.now();if((end-start)/2>250)throw Error('Clock uncertainty exceeds 250 ms; live drawing is paused.');offset={upper:r.server_time_ms-start,uncertainty:(end-start)/2,sampled:end};}
+ async function calibrate(){const start=performance.now(),r=await api(path('clock')),end=performance.now();offset=F.clockSample(start,end,r);log('clock_calibrated',{uncertainty_ms:offset.uncertainty,server_processing_ms:offset.server_processing_ms});}
  function upperNow(){if(!offset||performance.now()-offset.sampled>30000)throw Error('Drawing clock needs calibration.');return performance.now()+offset.upper;}
  let connecting=null;
  async function ensureConnection(){if(connecting)return connecting;connecting=connect();try{return await connecting;}finally{connecting=null;}}
@@ -80,14 +80,14 @@
    const remaining=Math.min(7900,Date.parse(e.validity.expires_at)-upperNow()-50);if(remaining<=0)throw Error('Drawing expired before presentation.');check();
    log('paint_requested',{reservation_ms:performance.now()-reserved});
    const signed=await adapter('guidance_commit',{envelope:e,ticket_id:selected.binding.ticket_id,ttlMs:remaining,deadline_renderer_ms:b.descriptor.clock_ms+(performance.now()-preparedAt)+remaining},Math.max(40,500-(performance.now()-reserved)));check();const ack=signed.ack;
-   high=e.cue_sequence;active=e.outcome==='none'?null:e;
+   high=e.cue_sequence;active=e.outcome==='none'?null:e;holdUntil=active?performance.now()+Math.max(0,Math.min(2500,Date.parse(e.validity.expires_at)-upperNow())):0;
    if(e.outcome==='none'){message('Analysis supplied no current drawing');log('no_cue',{sequence:high});return;}
    if(!['live_rendered','text_only'].includes(ack.status))throw Error('The connected tab did not acknowledge paint.');health.painted++;health.last_failure=null;message(ack.status==='text_only'?'Current instruction painted; target unresolved':'Shapes and notes painted on your shared tab');log('paint_acknowledged',{request_id:e.analysis_request_id,sequence:high,commit_to_paint_ms:performance.now()-started});
    release();release=null;try{await recordAck(signed,started);}catch(err){log('ack_record_failed',{reason:err.message});}
-  }catch(err){health.last_failure={stage:'delivery',reason:err.message};log('delivery_rejected',{request_id:e.analysis_request_id,reason:err.message});void recordAck(P.ack(e,'rejected','consumer_validation_failed'),started).catch(()=>{});if(token===epoch)await invalidate(err.message);}finally{release?.();inflightSequence=0;}}
+  }catch(err){health.last_failure={stage:'delivery',reason:err.message};log('delivery_rejected',{request_id:e.analysis_request_id,reason:err.message});void recordAck(P.ack(e,'rejected',String(err.message||'consumer_validation_failed').slice(0,200)),started).catch(()=>{});if(token===epoch)await invalidate(err.message);}finally{release?.();inflightSequence=0;}}
  async function poll(){if(polling||!connection||!lab)return;polling=true;const observedConnection=connection;try{const result=await api(path('events')+'?connection='+encodeURIComponent(connection.connection_id)+'&after='+high);if(connection!==observedConnection)return;for(const m of result.messages)if(m.message_type==='cancel')await cancel(m);if(!result.active){connection=null;identityKey=null;}}catch(e){log('poll_failed',{reason:e.message});}finally{polling=false;}}
  setInterval(()=>void poll(),650);
  globalThis.KikiWriting={setStream,prepareFrame,finishFrame,admitFrame,fingerprint,requestHeaders,receive,invalidate,sample:b=>samples.get(b?.ticket_id),
-  attach(state,id){lab=state;captureId=id;},context(state){lab=state;},get diagnostics(){return {schema:'guidance-consumer-trace/v1',health:structuredClone(health),events:structuredClone(events)};}};
+  attach(state,id){lab=state;captureId=id;},context(state){lab=state;},get nextCheckDelay(){try{return active?Math.max(0,Math.min(holdUntil-performance.now(),Date.parse(active.validity.expires_at)-upperNow())):0;}catch{return 0;}},get diagnostics(){return {schema:'guidance-consumer-trace/v1',health:structuredClone(health),events:structuredClone(events)};}};
  $('writing-check')?.addEventListener('click',async()=>{try{await ensureConnection();await calibrate();message('Source and contracts match. Waiting for a committed analysis drawing.');}catch(e){message(e.message);}});
 })();

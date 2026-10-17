@@ -1,3 +1,13 @@
+# Screen-reader baseline promotion to main — 18 October 2026
+
+The user asked to merge the branches into `main` one at a time. This is step 1 of the reconciliation order: (1) `baseline/screen-reader-v1` → `main`; (2) `experiment/floating-guidance-bubbles` → `main`; (3) `feature/concept-canvas-handoff` → `main` after its binaries and Windows bugs are cleaned up. `integration/analysis-owned-guidance` and `design/floating-guidance-bubbles` stay off `main` as archived references, because the user stopped annotation work on 17 October. The experiment branches already contained in the baseline (`json-stream`, `targeted-vision`, `verifier-context`, `provider-db-io`, `stream-context-batch`) and the superseded `handoff/screen-writing-v01`/`v02` are to be deleted after tagging.
+
+PR #1 was merged into the baseline on 15 October (`7c986df`) without the manual acceptance checklist; that checklist remains outstanding. Branch `promote/screen-reader-v1` adds CI on `main` pushes and a Windows-safe evaluation runner. What ran: full offline gate on Windows without `PYTHONUTF8` — all ten checks PASS, 0 paid calls; BB8 validate PASS; BB8 adapter suite 11/12 with the known `WinError 1314` symlink error. Details are in the [promotion review record](../reviews/screen-reader-baseline-promotion.md#promotion-to-main).
+
+Exact next action: open the PR from `promote/screen-reader-v1` to `main`, wait for the CI run, and merge with a merge commit (not squash or rebase, so the commit SHAs cited in the experiment records stay valid) once the user confirms. Then start step 2. The six-item manual acceptance run, Python/FastAPI hosting and edge-proxy deployment remain open.
+
+---
+
 # Baseline promotion PR requested; manual acceptance pending — 15 October 2026
 
 The user requested a PR with all cumulative improvements against `baseline/screen-reader-v1`, then one manual test before deciding to merge. Target verified at `681ad52d37ac0bfced86ceadeaaed6ef8128caf5`; head `experiment/stream-context-batch` contains nine implementation/evidence commits through `9af91d6d3019b602d506d4f3ef2a31662fe4c998`. Read the [promotion review record](../reviews/screen-reader-baseline-promotion.md) for the cumulative scope, reviewer map, source/deployment/evidence chain, compatibility, rollback and uncompleted manual checklist.

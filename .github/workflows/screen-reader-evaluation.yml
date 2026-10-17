@@ -3,7 +3,7 @@ on:
   pull_request:
     paths: ['prototypes/**', 'contracts/**', 'tests/**', 'scripts/**', 'fixtures/**', '.github/workflows/screen-reader-evaluation.yml']
   push:
-    branches: ['experiment/provider-db-io', 'experiment/stream-context-batch']
+    branches: ['main']
   workflow_dispatch:
 permissions:
   contents: read

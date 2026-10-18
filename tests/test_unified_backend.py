@@ -47,7 +47,7 @@ class UnifiedBackendTests(unittest.TestCase):
     def tearDown(self):
         if self.speech.gate:self.speech.gate.set()
         self.client.__exit__(None,None,None)
-        self.app.state.store.db.close(); self.app.state.lab.store.db.close(); self.temp.cleanup()
+        self.app.state.store.db.close(); self.app.state.lab.store.db.close(); self.app.state.lab_keys.db.close(); self.temp.cleanup()
     def submit(self, body=None, idem='test-1'):
         response=self.client.post('/v1/mixed-language-jobs',json=body or self.body,headers={**self.headers,'Idempotency-Key':idem})
         self.assertEqual(response.status_code,202,response.text); return response.json()
@@ -136,6 +136,34 @@ class UnifiedBackendTests(unittest.TestCase):
         self.assertEqual([c['stage'] for c in g2.calls],['mixed'])
         self.assertEqual(restart.get(job['job_id'],'owner')['status'],'ready')
         restart.executor.shutdown(wait=False);restart.db.close()
+    def test_lab_creation_replays_an_idempotency_key_for_the_same_owner_and_body(self):
+        secret='controlled-proxy-secret-at-least-32-characters'
+        directory=self.directory/'idempotent'
+        alice={'x-kiki-proxy-key':secret,'x-kiki-owner':'fb:alice-uid','origin':'http://testserver'}
+        body={'operator_trial':True,'model_name':'dsb_sc','progression_mode':'screen_guided'}
+        app=create_app(directory,text_factory=self.factory,proxy_secret=secret)
+        with TestClient(app) as client:
+            first=client.post('/lab-sessions',json=body,headers={**alice,'Idempotency-Key':'op-1'})
+            self.assertEqual(first.status_code,201); lab_id=first.json()['lab_session_id']
+            self.assertNotIn('idempotency-replayed',first.headers)
+            again=client.post('/lab-sessions',json=body,headers={**alice,'Idempotency-Key':'op-1'})
+            self.assertEqual((again.status_code,again.json()['lab_session_id'],again.headers['idempotency-replayed']),(201,lab_id,'true'))
+            self.assertEqual(client.post('/lab-sessions',json={**body,'model_name':'other'},headers={**alice,'Idempotency-Key':'op-1'}).status_code,409)
+            bob=client.post('/lab-sessions',json=body,headers={**alice,'x-kiki-owner':'fb:bob-uid','Idempotency-Key':'op-1'})
+            self.assertEqual(bob.status_code,201); self.assertNotEqual(bob.json()['lab_session_id'],lab_id)
+            unkeyed=[client.post('/lab-sessions',json=body,headers=alice).json()['lab_session_id'] for _ in range(2)]
+            self.assertEqual(len({lab_id,*unkeyed}),3)
+            self.assertEqual(client.post('/lab-sessions',json=body,headers={**alice,'Idempotency-Key':'bad key!'}).status_code,422)
+            self.assertEqual(client.post('/lab-sessions',json=body,headers={**alice,'Idempotency-Key':'op-2','origin':'https://foreign'}).status_code,403)
+            self.assertEqual(len(client.get('/lab-sessions',headers=alice).json()),3)
+        app.state.store.db.close();app.state.lab.store.db.close();app.state.lab_keys.db.close()
+        # The record survives a restart, so a retry after a crash still finds the first lab.
+        restarted=create_app(directory,text_factory=self.factory,proxy_secret=secret)
+        with TestClient(restarted) as client:
+            replay=client.post('/lab-sessions',json=body,headers={**alice,'Idempotency-Key':'op-1'})
+            self.assertEqual((replay.status_code,replay.json()['lab_session_id']),(201,lab_id))
+        restarted.state.store.db.close();restarted.state.lab.store.db.close();restarted.state.lab_keys.db.close()
+
     def test_cloud_proxy_boundary_protects_jobs_and_assets(self):
         secret='controlled-proxy-secret-at-least-32-characters'
         app=create_app(self.directory/'cloud',text_factory=self.factory,proxy_secret=secret)
@@ -146,6 +174,6 @@ class UnifiedBackendTests(unittest.TestCase):
             job=client.post('/v1/mixed-language-jobs',json=self.body,headers=headers).json()
             self.assertEqual(client.get(job['links']['status'],headers={**headers,'x-kiki-owner':'other'}).status_code,404)
             self.assertEqual(client.get(job['links']['status'],headers=headers).status_code,200)
-        app.state.store.db.close();app.state.lab.store.db.close()
+        app.state.store.db.close();app.state.lab.store.db.close();app.state.lab_keys.db.close()
 
 if __name__=='__main__':unittest.main()

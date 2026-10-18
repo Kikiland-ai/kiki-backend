@@ -91,7 +91,19 @@
               }
             }
           }
-        }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "description": "Optional. The same owner, key and body return the lab created first; the same key with a different body is 409.",
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:-]{1,100}$"
+            }
+          }
+        ]
       }
     },
     "/lab-sessions/{lab_id}": {

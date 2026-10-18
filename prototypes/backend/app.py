@@ -12,6 +12,7 @@ from prototypes.mixed_language.service import MixedLanguageService
 from prototypes.mixed_language.api import mixed_language_router, MixedBodyLimit
 from prototypes.json_stream.analysis import JsonStreamingAnalyzer
 from prototypes.json_stream.api import stream_router
+from prototypes.backend.lab_idempotency import LabCreateKeys, start_lab_route
 
 def create_app(data_dir=Path('work/backend'), *, analyzer=None, text_factory=None, speech_factory=None, proxy_secret=None):
     secret=os.environ.get('KIKI_PROXY_SECRET','') if proxy_secret is None else proxy_secret
@@ -32,6 +33,13 @@ def create_app(data_dir=Path('work/backend'), *, analyzer=None, text_factory=Non
     app.include_router(mixed_language_router(jobs,owner_of,mutation_origin))
     app.include_router(stream_router(app.state.lab,owner_of,mutation_origin))
     app.add_middleware(MixedBodyLimit)
+
+    # Shadow the frozen create route (it sits inside an included router) so a trusted upstream
+    # can safely retry it with Idempotency-Key. It must match first; the schema keeps the frozen operation.
+    app.state.lab_keys=LabCreateKeys(Path(data_dir))
+    app.add_api_route('/lab-sessions',start_lab_route(app.state.lab,app.state.lab_keys,owner_of,mutation_origin),
+        methods=['POST'],status_code=201,include_in_schema=False)
+    app.router.routes.insert(0,app.router.routes.pop())
 
     if getattr(app.state.lab.analyzer,'supports_stream',False):
         assets=Path(__file__).resolve().parents[1]/'json_stream_site'/'assets'
@@ -82,6 +90,9 @@ def create_app(data_dir=Path('work/backend'), *, analyzer=None, text_factory=Non
             shape=model.model_json_schema(ref_template='#/components/schemas/{model}')
             components.update(shape.pop('$defs',{})); components[model.__name__]=shape
             schema['paths'][path]['post']['requestBody']={'required':True,'content':{'application/json':{'schema':{'$ref':'#/components/schemas/'+model.__name__}}}}
+        schema['paths']['/lab-sessions']['post']['parameters']=[{'name':'Idempotency-Key','in':'header','required':False,
+            'description':'Optional. The same owner, key and body return the lab created first; the same key with a different body is 409.',
+            'schema':{'type':'string','pattern':'^[A-Za-z0-9_.:-]{1,100}$'}}]
         components['SafeValidationError']={'type':'object','properties':{'detail':{'type':'string'}},'required':['detail']}
         for path in schema['paths'].values():
             for operation in path.values():

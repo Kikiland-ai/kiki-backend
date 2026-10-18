@@ -2,6 +2,8 @@
 
 17 October 2026, Asia/Kolkata. **Design and handoff only. No bubble implementation, extension release, model trial or Site deployment is authorized by this document.**
 
+**Status, 18 October 2026:** the first slice was built on `experiment/floating-guidance-bubbles` and merged to `main` (PR #3, `6b14b5e`). kiki-web Lab mode now drives the windows ([kiki-web lab handoff](kiki-web-lab-mode-screen-share.md) §0). The branches named below were deleted after the merge. The documentation branch is kept as tag `archive/floating-design-notes` and the stopped annotation line as tag `archive/annotation-v22`; read references to those branches below as references to the tags.
+
 ## 1. User decision and outcome
 
 The user stopped the annotation experiment:
@@ -35,7 +37,7 @@ Last published annotation state, preserved as historical information:
 | Standalone Site source revision | `fc6b5f4ae9531e78ff3d601777ae54a35bd8ab9e` |
 | Environment revision | 13; existing three secrets preserved |
 | Current extension source version | 0.4.0 |
-| Last annotation receipt handoff | [screen-writing-live-receipts.md](https://github.com/Kikiland-ai/kiki-backend/blob/design/floating-guidance-bubbles/docs/handoffs/screen-writing-live-receipts.md) (on the design branch; not carried into the runtime branch) |
+| Last annotation receipt handoff | [screen-writing-live-receipts.md](https://github.com/Kikiland-ai/kiki-backend/blob/archive/floating-design-notes/docs/handoffs/screen-writing-live-receipts.md) (on tag `archive/floating-design-notes`; not carried into `main`) |
 
 There is no floating-window Site or extension build. Do not tell the user to refresh/install anything to obtain this design. No Site was changed for this handoff, no provider requests were made, and the owned local fixture services were already stopped. An already-open reader page may still run its own sampling/analysis loop; stopping development does not remotely close that page or mutate its lab. Pause/Stop sharing in the browser controls that lifecycle. Do not silently pause, reset or delete the learner's saved session from another session.
 

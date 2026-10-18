@@ -1,6 +1,39 @@
 # Screen sharing from kiki-web Lab mode — handoff
 
-Written 17 October 2026; decisions added 18 October 2026, Asia/Kolkata. This handoff is for the next session that builds screen sharing into kiki-web Lab mode. **No kiki-web change has been made yet.** The user's decisions are in §2 and [ADR 0010](../decisions/0010-kiki-web-api-fronts-lab-execution.md). The plan is in §3.
+Written 17 October 2026; decisions added 18 October 2026, Asia/Kolkata. The user's decisions are in §2 and [ADR 0010](../decisions/0010-kiki-web-api-fronts-lab-execution.md). The plan in §3 is kept as written; §0 says what has since been built.
+
+## 0. Status — 18 October 2026, after kiki-web PR #7
+
+**kiki-web side built and merged.** kiki-web PR #7 (`0ee6646`, merged as `0ed7c06`) implements every apps/api and apps/web task in `apps/web/LAB_SCREEN_SHARE_PLAN.md`:
+
+- the Firebase → enrollment → preparation-ownership checks;
+- the allowlisted pass-through under `/lab-preparations/{prepId}/execution` with `x-kiki-owner: fb:<uid>`, `x-kiki-proxy-key`, `Origin` rewrite and an `Idempotency-Key`;
+- single-use WebSocket tickets, SSE passthrough, and the `labExecutions/{prepId}` link document;
+- tab capture with redaction before JPEG encoding;
+- the in-page Now/Next view and the `floating-guidance/v0.1` bridge to this repo's extension.
+
+The kiki-backend work it relies on is on `main` (PR #3; kiki-web pinned `73c6e96`, and nothing it calls has changed since). Offline checks of kiki-web `origin/main`: API pytest 118 passed (one unrelated Windows encoding failure in a concept-media test), Vitest 180 passed, `tsc -b` clean, and a regenerated Python execution receipt matches the committed fixture. The Playwright lab test was not run; its config uses a POSIX venv path and it uses a fake analyzer.
+
+**Contract check against kiki-backend `main`:** every upstream path, request body and SSE event matches. `SiteProxyGuard` accepts `fb:<uid>` owners when `KIKI_PROXY_SECRET` is set. Python reports `runtime.capture_status` (not `capture_active`) and `source_frame.server_received_unix` in seconds (not `_ms`); kiki-web normalizes both (`apps/web/src/contracts/lab-execution.ts:53-67`), so the §3 "Python parity spike" is no longer needed.
+
+**Still open:**
+
+| Owner | Item |
+| --- | --- |
+| kiki-backend | Add `http://127.0.0.1:5174` to the dev and release `readers` in `prototypes/floating_guidance/scripts/build-extension.mjs` (kiki-web's own test builder works around it today) |
+| kiki-backend | A `fb:<uid>` owner test; `tests/test_cloud_access.py` uses `site-owner` only |
+| kiki-backend | Honour `Idempotency-Key` on `POST /lab-sessions`. Today a lost first response leaves kiki-web's link in `creating` and later calls return 503 |
+| kiki-web | Handle the `{"type":"skipped"}` WebSocket reply (`prototypes/screen_capture/server.py`); today a skipped frame waits 10 s and disconnects |
+| kiki-web | Make `playwright.lab.config.ts` find the API venv on Windows |
+| kiki-web | Shared ticket storage before running more than one API worker |
+| User | The student-controlled trial on real MATLAB Online from `/labs/:id` (next action in kiki-web `apps/web/active.md`) |
+| User / Akshita | B1: kiki-web HTTPS origin and hosting, which then goes into `KIKI_CORS_ORIGINS` and the release extension `readers` |
+| User | B2: one persistent HTTPS Python instance with the proxy secret, Gemini keys and a persistent `KIKI_DATA_DIR` |
+| User | Confirm the readiness change: kiki-web now lets a student start screen guidance before passing the seven concept checks (`operator_trial`) |
+
+B3 is recorded as resolved in kiki-web's docs.
+
+**Local run settings** (one machine): start this service with `KIKI_PROXY_SECRET=<32+ chars> KIKI_REQUIRE_PROXY=1 GEMINI_API_KEY=<server-side> python -B -m prototypes.backend --port 8100 --data-dir work/backend`. kiki-web's local mode accepts only `http://127.0.0.1:8100` as the backend origin; this service defaults to 8765. In kiki-web, set `KIKI_LAB_EXECUTION_MODE=local`, `KIKI_LAB_BACKEND_ORIGIN=http://127.0.0.1:8100` and the same secret as `KIKI_LAB_PROXY_SECRET`, run the API with one worker, and start the web app on port 5174. Connected testing across machines is covered in [connected integration testing](../plans/connected-integration-testing.md).
 
 ## 1. Outcome and evidence
 

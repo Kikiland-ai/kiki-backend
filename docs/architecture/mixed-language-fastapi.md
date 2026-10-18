@@ -2,6 +2,8 @@
 
 Date: 13 October 2026 · Status: design only; implementation not authorized
 
+> **18 October 2026:** the job API is a content-generation path driven from the database side; kiki-web reads stored content and does not call it. See [ADR 0011](../decisions/0011-generated-content-reaches-kiki-web-through-the-database.md).
+
 The user chose FastAPI and the [translation/audio pipeline](../decisions/0001-mixed-language-audio-pipeline.md), then endorsed a worker/actor hierarchy for job management. The logical hierarchy below is the chosen direction; its concrete runtime, database, queue, storage and performance targets remain proposals.
 
 ## Quality attributes and current constraints

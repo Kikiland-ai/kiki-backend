@@ -1,3 +1,20 @@
+# Frontend integration state after kiki-web Lab mode — 18 October 2026
+
+kiki-web merged Lab mode screen sharing (kiki-web PR #7, `0ed7c06`) on top of its plan (#6). It calls this repo's Python service through its API, as decided in ADR 0010. A read-only check against `main` found every path, body and SSE event matching; the two field-name differences are normalized in kiki-web. Status, open items and local run settings are in the [kiki-web lab handoff](../handoffs/kiki-web-lab-mode-screen-share.md) §0.
+
+User decision recorded as [ADR 0011](../decisions/0011-generated-content-reaches-kiki-web-through-the-database.md): the mixed-language job API is a content-generation path driven from the database side, and kiki-web reads the stored content. No kiki-web connection to `/v1/mixed-language-jobs` is planned. Media hosting for generated assets is tracked separately.
+
+What ran (read-only, from exports; no provider calls): kiki-web API pytest 118 passed (one unrelated Windows encoding failure), Vitest 180 passed, `tsc -b` clean, Python execution receipt regenerated against this repo's `main` and matching the fixture. The kiki-web Playwright lab test was not run.
+
+Exact next actions, in order:
+1. kiki-backend, small: add `http://127.0.0.1:5174` to the extension `readers`; add a `fb:<uid>` owner test; honour `Idempotency-Key` on `POST /lab-sessions`.
+2. User: the local MATLAB Online trial from kiki-web `/labs/:id`, with this service on port 8100 behind the proxy secret. For testing across machines, follow [connected integration testing](connected-integration-testing.md).
+3. kiki-web: handle the WebSocket `skipped` reply; make the Playwright lab config work on Windows; add CI (kiki-web has no workflows).
+4. Decisions: B1 kiki-web hosting origin; B2 Python hosting; the owner model (one shared proxy secret, `fb:` owners from kiki-web and Site owners from `deploy/sites/python-proxy.js`); whether students may start guidance before the concept checks (`operator_trial`); the concept-canvas Phase 0 choices.
+5. Housekeeping: refresh the Design-Thinking pin (`context/design-thinking/SOURCE.json` is 8 commits behind); align emulator project IDs and ports with kiki-web; fix the `until()` flake.
+
+---
+
 # Branch reconciliation complete — 18 October 2026
 
 All backend work is now on `main`, and `main` is the only remote branch. Merged: PR #2 screen-reader v1 baseline (`fe7758e`, merge commit), PR #3 floating Kiki windows (`6b14b5e`, merge commit), PR #4 concept canvas library (`e1cfd9f`, squash with narration WAVs in Git LFS). CI on PR #4 pulled LFS on a cold cache and passed; later runs reuse the cache keyed by the recovery manifest.

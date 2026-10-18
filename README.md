@@ -1,21 +1,22 @@
-# Current prototype milestone
-
-The screen-reader and beginner checkpoint flow now work in the private hosted Worker prototype. The Python/FastAPI implementation is consolidated with mixed-language text/audio job routes and locally verified; its cloud origin is not yet connected.
-
-Start with [screen-reader baseline v1](docs/baselines/screen-reader-v1.md), [frontend API handoff](docs/handoffs/frontend-api.md), and [the active plan](docs/plans/active.md). Earlier implementation-status passages below are historical; these current documents take precedence. Latency experiment branches are prepared separately, with no new trial/deployment during this pause.
-
 # Kiki Backend
 
-**Stored concept content:** all ten C-AM concepts are now available in a
-[queryable SQLite library with versioned audio/artifact files](prototypes/concept_library/README.md).
-The included adapter exports/imports through the media publisher already merged
-in `kiki-web`. Start there to consume the saved batch; cloud publication remains
-deferred. See the [continuation record](docs/handoffs/concept-canvas-continuation.md)
-for the recovered source boundary and current contract compatibility.
+## What is on `main` (18 October 2026)
+
+All backend work was reconciled into `main` on 18 October; it is the only branch. Stopped or superseded work is kept as `archive/*` tags.
+
+| Capability | Where | State |
+| --- | --- | --- |
+| Screen reader v1: Gemini reads the shared lab tab; a tracker advances the 12 DSB-SC checkpoints; streamed results (`check-stream`, `lab-analysis-stream/v2`) | `prototypes/lab_tracking/`, `prototypes/json_stream/`, `prototypes/screen_capture/`, [baseline record](docs/baselines/screen-reader-v1.md) | Offline gate passes; live only on a private Worker Site. The six-item manual acceptance run is outstanding |
+| Unified FastAPI app: capture WebSocket, lab sessions, mixed-language jobs | `prototypes/backend/app.py`, `contracts/frontend.openapi.json`, `deploy/fastapi/Dockerfile` | Runs locally; not hosted |
+| Floating Kiki windows over the shared MATLAB tab (MV3 extension) | `prototypes/floating_guidance/` | Live-tested 17 October; driven from kiki-web Lab mode ([lab handoff](docs/handoffs/kiki-web-lab-mode-screen-share.md)) |
+| Mixed-language text and speech generation | `prototypes/mixed_script/`, `prototypes/mixed_language/` | Real Gemini runs recorded. Used for content generation from the database side, not called by kiki-web ([ADR 0011](docs/decisions/0011-generated-content-reaches-kiki-web-through-the-database.md)) |
+| Concept canvas library: ten C-AM packets, 22 Odia clips (Git LFS), SQLite library, kiki-web publisher adapter | `prototypes/concept_library/`, `artifacts/cam-review/` | Recovered outputs; the generator code was lost before commit ([continuation record](docs/handoffs/concept-canvas-continuation.md)) |
+
+Start with [the active plan](docs/plans/active.md) for the current next actions, then the [frontend API handoff](docs/handoffs/frontend-api.md). Status passages further down this README that predate 18 October are historical; the table above and the active plan take precedence.
 
 Kiki helps engineering students understand their course material in a familiar language while learning the English terminology they need for exams and practical work. This repository owns the content, media, learning-evidence and guidance capabilities behind that experience. The first language pair is **Odia–English**, with ECE as the initial subject context.
 
-**Current stage:** working translation and speech prototypes, with the backend architecture agreed. **FastAPI** and a **worker/actor hierarchy** are the chosen direction. There is no running FastAPI service yet; backend implementation is paused while the next feature boundaries and acceptance criteria are worked out.
+**Current stage:** working prototypes for screen reading, lab checkpoint tracking, floating guidance windows, and mixed-language text and speech, served by one locally verified FastAPI app (see the table above). **FastAPI** and a **worker/actor hierarchy** remain the chosen direction for durable content jobs. No service is hosted yet.
 
 ## Start here
 
@@ -111,7 +112,7 @@ This is a logical actor hierarchy, not a requirement to allocate a process per j
 
 ## Setup and offline checks
 
-Use **Python 3.12** and Git for the current prototypes and checks. Their runtime uses the Python standard library; no FastAPI dependency installation or service start command exists yet. FFmpeg is needed when converting recordings or exporting future frame-based media. Node.js 22 is optional for validating the imported JavaScript ledgers; Firebase emulators and Java are conditional future tooling, not prerequisites for the current pipeline.
+Use **Python 3.12** and Git for the current prototypes and checks, plus **Git LFS** for the concept narration WAVs. The FastAPI app and its tests need `python -m pip install -r prototypes/screen_capture/requirements.txt`; the floating-window and browser checks also need `playwright` with Chromium, and the offline gate needs Node.js 22 or later. Start the app locally with `python -B -m prototypes.backend --port 8100` (default port 8765). FFmpeg is needed when converting recordings or exporting future frame-based media. Node.js 22 is optional for validating the imported JavaScript ledgers; Firebase emulators and Java are conditional future tooling, not prerequisites for the current pipeline.
 
 Clone the private repository with an account that has access:
 
@@ -138,7 +139,7 @@ python -B bb8/adapters/reference/bb8.py validate
 python -B bb8/adapters/discovery/sync.py --check
 ```
 
-The latest published local verification passed **25 pipeline tests**, **36 BB8 tests** and all **130 pinned source files**. Tests cover structural preservation, adapters and media integrity; they do not certify translation quality or learning impact. CI workflows currently cover BB8 and product-context/ledger validation, not a deployed API.
+The full offline gate is `python scripts/run-screen-reader-evaluation.py`: site build, Python unittest, Node tests, three lab replays, two benchmarks, pinned context and the frozen baseline, with no paid model calls. Tests cover structure, contracts, adapters and media integrity; they do not certify translation quality, recognition accuracy on real tools, or learning impact. CI runs that gate on pull requests and on pushes to `main` (fetching LFS files), alongside the BB8 and product-context/ledger workflows. On Windows, set `PYTHONUTF8=1` when running Python tests directly; the gate sets it for you.
 
 ### Live provider access
 
@@ -157,6 +158,12 @@ The text CLI makes two dependent requests, stops on failed validation and has no
 | Location | What belongs here |
 | --- | --- |
 | `prototypes/mixed_script/` | Existing text/speech implementation, prompt copies and measured evidence |
+| `prototypes/backend/`, `prototypes/mixed_language/` | Unified FastAPI app and the mixed-language job routes |
+| `prototypes/lab_tracking/`, `prototypes/json_stream/`, `prototypes/screen_capture/` | Screen reader, checkpoint tracker, streamed decisions, capture receiver and proxy guard |
+| `prototypes/json_stream_site/`, `prototypes/hosted_screen_reader/` | Worker reader Site source (experiment) and its frozen baseline snapshot |
+| `prototypes/floating_guidance/` | Floating Kiki windows extension, harness and local lab checks |
+| `prototypes/concept_library/`, `artifacts/cam-review/` | Recovered concept canvas library and its kiki-web publisher adapter |
+| `contracts/` | Runtime schemas and the frontend OpenAPI document |
 | `fixtures/mixed-script/` | Bounded source and explicitly synthetic generated fixtures |
 | `tests/` | Offline pipeline and adapter boundary tests |
 | `docs/decisions/`, `docs/architecture/` | Agreed choices and design proposals, distinct from implemented contracts |
@@ -165,7 +172,7 @@ The text CLI makes two dependent requests, stops on failed validation and has no
 | `bb8/`, `.agents/skills/`, `.claude/skills/` | Bundled BB8 reference guidance and host discovery wrappers |
 | `scripts/` | Existing CLI and source-integrity check |
 
-Future reconciled runtime schemas belong in `contracts/` when implemented; that directory is not present yet. The [source manifest](context/design-thinking/SOURCE.json) pins `73d16c0d967a5d81dd74f1f28ef0defc48c8a778`. Integrity checks establish unchanged bytes, not that every source file was read. `STARTER-MANIFEST.json` describes the original handoff baseline rather than freezing subsequent work.
+Reconciled runtime schemas live in `contracts/`. The [source manifest](context/design-thinking/SOURCE.json) pins `73d16c0d967a5d81dd74f1f28ef0defc48c8a778`. Integrity checks establish unchanged bytes, not that every source file was read. `STARTER-MANIFEST.json` describes the original handoff baseline rather than freezing subsequent work.
 
 New agent sessions follow [AGENTS.md](AGENTS.md) and [CONTEXT-BOOT.md](CONTEXT-BOOT.md): load relevant context, report readiness, then wait for the user's direction. BB8 0.2.2 includes 22 skills, including prompt-design-engineering. Local wrappers and reference mode do not imply native ChatGPT plugin activation; see [BB8 usage](BB8.md).
 

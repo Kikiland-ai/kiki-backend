@@ -7,7 +7,7 @@
   $('bind').hidden=!s.bindable||s.bound;$('unbind').hidden=!s.bound;
   $('state').textContent=!s.bindable?'Open MATLAB Online in this tab, then show Kiki here.':s.bound?(s.tracker_open?'Kiki is shown on this tab and connected to the tracker.':'Kiki is shown on this tab. Open the Kiki tracker to connect it.'):'Show Kiki’s current step and screen context on this tab.';
  }
- $('bind').onclick=async()=>{const r=await chrome.runtime.sendMessage({type:'bind_tab',tabId:tab.id});if(!r.ok)$('state').textContent=r.error;await refresh();};
+ $('bind').onclick=async()=>{const r=await chrome.runtime.sendMessage({type:'bind_tab',tabId:tab.id});await refresh();if(!r.ok)$('state').textContent=r.error||'Kiki could not open its windows. Reload the MATLAB tab, then show Kiki again.';};
  $('unbind').onclick=async()=>{await chrome.runtime.sendMessage({type:'unbind'});await refresh();};
  await refresh();
 })();

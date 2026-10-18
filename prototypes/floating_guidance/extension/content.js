@@ -4,7 +4,11 @@
 (() => {
  const CFG=globalThis.KIKI_FG_CONFIG;
  if(window.top!==window||!CFG?.targets.includes(location.origin))return;
+ if(globalThis.__KIKI_FG_CONTENT__)return;
+ globalThis.__KIKI_FG_CONTENT__=true;
  const core=globalThis.KikiFloatingCore,UI=globalThis.KikiFloatingUI;
+ // A reloaded extension context may leave its old, now inactive DOM behind.
+ document.querySelectorAll('kiki-floating-guidance').forEach(node=>node.remove());
  const host=document.createElement('kiki-floating-guidance');
  host.style.cssText='all:initial;position:fixed;inset:0;z-index:2147483647;pointer-events:none;display:none';
  // Dev builds use an open root so the automated loop can read what is shown.
@@ -51,6 +55,7 @@
  }
  chrome.runtime.onMessage.addListener((m,sender,reply)=>{
   if(sender.id!==chrome.runtime.id||sender.tab||m?.to!=='target')return false;
+  if(m.type==='fg_probe'){ready.then(()=>reply({ok:true,ready:Boolean(ui)&&host.isConnected}),()=>reply({ok:false,ready:false}));return true;}
   if(m.type==='fg_snapshot'){reply(ui?apply(m.message):{result:'rejected',reason:'not_ready'});return false;}
   if(m.type==='fg_bound'){connection=m.connected?'reconnecting':'disconnected';show(true);}
   else if(m.type==='fg_unbound'){message=null;highWater=null;pending=null;show(false);}
@@ -61,9 +66,9 @@
  });
  setInterval(()=>{if(bound){draw();}},1000);
  setInterval(()=>{if(bound)sendRects();},3000);
- chrome.storage.local.get('kiki_fg_layout').then(saved=>{
+ const ready=chrome.storage.local.get('kiki_fg_layout').then(saved=>{
   ui=UI.create({host,shadow,canary:CFG.dev,onCommand,onLayout,
    store:{get:()=>saved?.kiki_fg_layout||null,set:value=>void chrome.storage.local.set({kiki_fg_layout:value})}});
-  return send({type:'target_hello'});
- }).then(r=>{if(r?.bound){connection=r.connected?'reconnecting':'disconnected';show(true);}});
+ });
+ ready.then(()=>send({type:'target_hello'})).then(r=>{if(r?.bound){connection=r.connected?'reconnecting':'disconnected';show(true);}}).catch(()=>{});
 })();

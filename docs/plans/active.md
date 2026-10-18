@@ -1,3 +1,28 @@
+# Floating windows startup repair — 18 October 2026
+
+Actual native hosted trial exposed a startup defect: extension 0.1.2 reported bound
+when its content UI was absent from an already-open MATLAB tab. The reader correctly
+held screen reads for missing mask/window positions. A read-only cloud usage receipt
+at 17:42 UTC confirms zero admitted checks and zero provider-attempt records; the
+approved five-check allowance remains unused. No student confirmation was fabricated.
+
+Extension 0.1.3 probes UI readiness, injects existing isolated top-frame scripts when
+missing, waits for UI/storage initialization and requires a Show acknowledgement.
+Missing/timed-out/vanished targets fail binding; popup errors remain visible.
+Idempotent content startup avoids duplicate panels and cleans inactive prior hosts.
+Permissions, origins and fail-closed mask freshness checks are unchanged.
+
+Independent source review is clean. All 26 focused core/lifecycle/confirmation tests
+passed with the actual web publisher included (KIKI_WEB_CHECKOUT), from the documented
+prototypes/json_stream_site working directory. The first root invocation from the
+repository root could not find the core replay fixture; the corrected command passed.
+Native verification of the updated package remains pending. Application Cloud Run
+images and Hosting source remain as recorded below; this is an extension-only repair.
+Next: reviewed main publication, package/reload 0.1.3, verify visible floating panels
+and fresh positions before a new explicit human Share; do not reset the trial counter.
+
+---
+
 # Hosted cloud release — 18 October 2026
 
 This current record supersedes the historical local-only deployment statements below.

@@ -6,7 +6,7 @@
 // Never give the dev build to a learner. Run: node prototypes/floating_guidance/scripts/build-extension.mjs
 import {mkdir,readFile,writeFile,copyFile,rm} from 'node:fs/promises';
 const source=new URL('../extension/',import.meta.url),out=new URL('../../../work/floating-guidance/',import.meta.url);
-const VERSION='0.1.2';
+const VERSION='0.1.3';
 const HOSTED_READERS=['https://kiki-512012.web.app','https://kiki-json-stream.woodsycarp256.chatgpt.site','https://kiki-screen-receiver.woodsycarp256.chatgpt.site'];
 const variants={
  release:{readers:HOSTED_READERS,targets:['https://matlab.mathworks.com'],dev:false},

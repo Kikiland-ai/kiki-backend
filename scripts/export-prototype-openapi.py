@@ -11,7 +11,7 @@ with tempfile.TemporaryDirectory() as directory:
     schema=app.openapi()
     schema['info']['description']='Locally implemented unified prototype. Hosted deployment and Site activation are pending. WebSocket envelopes and runtime lab projections are documented separately in docs/handoffs/frontend-api.md.'
     output=Path(__file__).resolve().parents[1]/'contracts/frontend.openapi.json'
-    output.write_text(json.dumps(schema,ensure_ascii=False,indent=2)+'\n')
+    output.write_text(json.dumps(schema,ensure_ascii=False,indent=2)+'\n',encoding='utf-8',newline='\n')
     app.state.mixed_language.executor.shutdown(wait=False)
-    app.state.mixed_language.db.close();app.state.store.db.close();app.state.lab.store.db.close()
+    app.state.mixed_language.db.close();app.state.store.db.close();app.state.lab.store.db.close();app.state.lab_keys.db.close()
     print('Exported',len(schema['paths']),'HTTP paths to contracts/frontend.openapi.json')

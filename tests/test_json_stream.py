@@ -202,4 +202,4 @@ class StreamApiTests(unittest.TestCase):
     self.assertEqual(types[0],'admitted');self.assertLess(types.index('guidance_committed'),types.index('state_snapshot'));self.assertEqual(types[-1],'stream_complete')
     stranger=TestClient(app);stranger.get('/')
     self.assertEqual(stranger.post(f'/lab-sessions/{lab_id}/check-stream',headers=headers,json=body).status_code,404);stranger.close()
-   app.state.store.db.close();app.state.lab.store.db.close()
+   app.state.store.db.close();app.state.lab.store.db.close();app.state.lab_keys.db.close()

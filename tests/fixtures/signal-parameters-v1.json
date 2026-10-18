@@ -1,0 +1,227 @@
+{
+  "artifactId": "SCENE-AM-01-signal-parameters",
+  "renderer": "signal-parameters/v1",
+  "placardIds": [
+    "CARD-AM-01-concept",
+    "CARD-AM-01-application"
+  ],
+  "prompt": "Change frequency and observe period and angular frequency.",
+  "altText": "Amplitude, frequency and phase; Peak size: amplitude. Cycles per second: frequency. Relative timing: phase. Convert Hz using 2*pi*f.",
+  "controls": [
+    {
+      "name": "amplitude",
+      "label": "Amplitude",
+      "unit": "normalized",
+      "min": 0.25,
+      "max": 2.0,
+      "step": 0.25,
+      "default": 1.0
+    },
+    {
+      "name": "frequency",
+      "label": "Frequency",
+      "unit": "Hz",
+      "min": 10.0,
+      "max": 1000.0,
+      "step": 10.0,
+      "default": 100.0
+    },
+    {
+      "name": "phase",
+      "label": "Phase",
+      "unit": "degree",
+      "min": 0.0,
+      "max": 180.0,
+      "step": 15.0,
+      "default": 0.0
+    }
+  ],
+  "outputs": [
+    {
+      "name": "periodSeconds",
+      "label": "Period",
+      "unit": "s"
+    },
+    {
+      "name": "angularFrequency",
+      "label": "Angular frequency",
+      "unit": "rad/s"
+    }
+  ],
+  "timeWindowSeconds": 0.02,
+  "sampleIntervals": 900,
+  "reference": "unit_amplitude_zero_phase_same_frequency",
+  "amplitudeUnit": "normalized",
+  "claim": "ideal_teaching_model",
+  "sources": [
+    {
+      "origin": "curated",
+      "label": "MathWorks: analog passband modulation; reference for the modulation families",
+      "url": "https://www.mathworks.com/help/comm/ug/analog-passband-modulation.html"
+    }
+  ],
+  "bindings": [
+    {
+      "path": "sourceConcepts/C-AM-01#explanation.modalities.interactive",
+      "sha256": "5c510219a772a4c9e50a017a0ba2ca701d8a54471a3622c3f9d1166aa7cab5db"
+    },
+    {
+      "path": "sourceConcepts/C-AM-01#explanation.modalities.textImage.visual",
+      "sha256": "7aeafb6e7e7b684c944803788a8a02c0167fac1dd70b61b78d0262fc319d96d6"
+    }
+  ],
+  "modelBindings": [
+    {
+      "path": "concept-library/C-AM-01/cam-70174a2d5e49199490cfb3d9/models.js",
+      "sha256": "41cb3e229a603040d7b1dea9e47e4f8563a347f15aaa1c731c64c02f9a3420a5"
+    },
+    {
+      "path": "concept-library/C-AM-01/cam-70174a2d5e49199490cfb3d9/scene.json",
+      "sha256": "8a5c05f5ab4b20d32bbba41ff3c59e29779e7e9b9aeb533604be4b16ae69dc93"
+    }
+  ],
+  "behaviorTests": [
+    {
+      "inputs": {
+        "amplitude": 1.0,
+        "frequency": 100.0,
+        "phase": 0.0
+      },
+      "output": "periodSeconds",
+      "expected": 0.01,
+      "tolerance": 1e-08
+    },
+    {
+      "inputs": {
+        "amplitude": 1.0,
+        "frequency": 100.0,
+        "phase": 0.0
+      },
+      "output": "angularFrequency",
+      "expected": 628.318530717959,
+      "tolerance": 1e-08
+    },
+    {
+      "inputs": {
+        "amplitude": 1.0,
+        "frequency": 10.0,
+        "phase": 0.0
+      },
+      "output": "periodSeconds",
+      "expected": 0.1,
+      "tolerance": 1e-08
+    },
+    {
+      "inputs": {
+        "amplitude": 1.0,
+        "frequency": 1000.0,
+        "phase": 0.0
+      },
+      "output": "periodSeconds",
+      "expected": 0.001,
+      "tolerance": 1e-08
+    },
+    {
+      "inputs": {
+        "amplitude": 1.0,
+        "frequency": 100.0,
+        "phase": 0.0,
+        "timeSeconds": 0.0
+      },
+      "output": "signal",
+      "expected": 0.0,
+      "tolerance": 1e-08
+    },
+    {
+      "inputs": {
+        "amplitude": 1.0,
+        "frequency": 100.0,
+        "phase": 0.0,
+        "timeSeconds": 0.0025
+      },
+      "output": "signal",
+      "expected": 1.0,
+      "tolerance": 1e-08
+    },
+    {
+      "inputs": {
+        "amplitude": 0.25,
+        "frequency": 100.0,
+        "phase": 0.0,
+        "timeSeconds": 0.0025
+      },
+      "output": "signal",
+      "expected": 0.25,
+      "tolerance": 1e-08
+    },
+    {
+      "inputs": {
+        "amplitude": 2.0,
+        "frequency": 100.0,
+        "phase": 0.0,
+        "timeSeconds": 0.0025
+      },
+      "output": "signal",
+      "expected": 2.0,
+      "tolerance": 1e-08
+    },
+    {
+      "inputs": {
+        "amplitude": 1.0,
+        "frequency": 100.0,
+        "phase": 90.0,
+        "timeSeconds": 0.0
+      },
+      "output": "signal",
+      "expected": 1.0,
+      "tolerance": 1e-08
+    },
+    {
+      "inputs": {
+        "amplitude": 1.0,
+        "frequency": 100.0,
+        "phase": 180.0,
+        "timeSeconds": 0.0025
+      },
+      "output": "signal",
+      "expected": -1.0,
+      "tolerance": 1e-08
+    },
+    {
+      "inputs": {
+        "amplitude": 2.0,
+        "frequency": 100.0,
+        "phase": 90.0,
+        "timeSeconds": 0.0
+      },
+      "output": "reference",
+      "expected": 0.0,
+      "tolerance": 1e-08
+    },
+    {
+      "inputs": {
+        "amplitude": 0.25,
+        "frequency": 100.0,
+        "phase": 180.0,
+        "timeSeconds": 0.0025
+      },
+      "output": "reference",
+      "expected": 1.0,
+      "tolerance": 1e-08
+    },
+    {
+      "inputs": {
+        "amplitude": 1.0,
+        "frequency": 1000.0,
+        "phase": 0.0,
+        "timeSeconds": 0.00025
+      },
+      "output": "signal",
+      "expected": 1.0,
+      "tolerance": 1e-08
+    }
+  ],
+  "review": {
+    "scientific": "pending"
+  }
+}

@@ -1,3 +1,161 @@
+# Backend continuation — 18 October 2026
+
+**GCP setup handed to a new user-requested session:**
+`01a14f77-f2ce-70e3-9177-f3e49a649394` (“Set up KiKi GCP and Firebase resources”).
+User explicitly requests browser-controlled setup in KiKi / kiki-512012. Full context:
+workspace outputs/GCP-RESOURCE-SETUP-HANDOFF.md. That session owns resource inventory,
+provisioning and non-secret readback/remaining gates; it must preserve the running
+backend/Mac integration, and distinguish infrastructure from durable code/deployment.
+
+**Latest cloud target correction:** the user identifies KiKi / `kiki-512012` as the
+correct project, supplied console URL with `project=kiki-512012` (authuser=1). This
+supersedes builder-cup-a8479 in historical plans/handoffs. Local candidate source/runtime
+is unchanged. No live Firebase authentication, learner/catalog data or media was moved.
+Inspect KiKi's actual Firestore/GCS/Firebase/Cloud Run state before cloud implementation.
+
+Chrome inspection now verifies KiKi/project number 957277170773: no linked billing
+account; bucket creation disabled/no rows. Firestore shows an API error and an empty
+list, plus Console automatic API enablement notification, so database/location needs
+rechecking. See workspace outputs/KIKI-STORAGE-READINESS.md. No database/bucket or
+deployment was created; the running integration source/config remains unchanged.
+
+**Web ownership offloaded by the user:** full kiki-web implementation/test handoff sent
+to chat `01a14f24-0243-7c30-b0f2-4a47e567cd5e` ("Locate BB8 plugin task"), whose own checkout
+is `C:/Users/ASUS/Documents/Codex/2026-10-18/i/outputs/kiki-web`. It reports newly fetched
+main `1562866` / PR #12, so it must inspect current code before treating older web gaps
+as still missing. Scope includes shared all-CAM consumer/API/player integration, artifact
+metadata gating, review/respond controls, reload-create recovery, proposed command queue
+and local/connected acceptance preparation. This chat retains backend ownership and
+the running candidate; deployment-readiness planning remains in its separate chat.
+
+**Current integration candidate is adopted on Windows port 8100.** Actual launcher
+receipt selects this worktree with PR #7 ancestry, dirty source hash
+`cba63acd35bdb222070b7fb63c84c00a5a628769e125543d865c64866e480cb0`, proxy required and
+startup smoke 9/9 / zero model calls. Listener PID 24572 is the child of receipt PID
+18000. Both lab databases were backed up before migration. Mac loopback health 200
+was verified through its existing sshd-session 38186 forward. No code commit/push/merge,
+cloud publication, deployment or new paid call was made.
+
+Completed here: all-ten CAM v1 export/common model/audio-scope preparation; user-confirmed
+quality gate; crash-safe lab creation and legacy-key migration; extension 0.1.1 handshake/
+response fencing; source-pinned adoption/backup/runtime receipts and publication inventory.
+151 backend tests pass; model cases 38 + ten independent examples + twenty invalid cases;
+L0 22/22, browser harness 43/43, native capture 31/31, React/API/canonical-extension browser
+case 31.7 seconds pass. Full offline evaluation 11/11 passed before the two additional
+provenance tests; those tests are included in the separate 151-test root run. Source and
+frozen baseline are intact. BB8 reference validation passes; its known stale discovery
+index and Windows symlink-helper privilege issues remain housekeeping, not claimed fixes.
+
+An intermittent React/window Resume failure was isolated deterministically to the web
+controller's commandBusy overlap. A proposed serialized, generation-fenced web command
+queue was tested only in the scratch PR #9 export: delayed-response browser regression
+passes (11.2 seconds) and ten capture unit tests pass, including Stop cancelling queued
+Resume. Primary web checkout remains clean. Mac must review/adopt that patch and its own
+review/respond and creation-recovery controls. See decision 0015 and the exported
+MAC-WEB-COMMAND-QUEUE.patch; this is not an applied web release.
+
+Exact next: Mac verifies the bundle and actual runtime receipt, reloads extension 0.1.1
+and both browser tabs, integrates the common CAM consumer, fixes the web control/recovery
+gaps and runs the per-journey checklist in MAC-NEXT-INTEGRATION.md. Canonical Mac smoke
+against the newly adopted candidate and full signed-in all-ten/twelve-checkpoint acceptance
+remain joint tests. The existing tunnel is working; do not create a competing forward.
+Private bucket/delivery configuration, publication/head activation and durable Cloud Run
+state/auth remain explicit cloud/joint gates; local integration does not close them.
+
+Earlier continuation below is historical.
+
+The user marked scientific accuracy, narration fidelity, Odia/technical pronunciation and
+audio quality verified. Record this as user-confirmed in
+[the review ledger](../reviews/cam-content-review-status.md), without claiming a new
+independent review or rewriting immutable package metadata. Missing English recordings,
+sentence alignment and saved-model limitations remain explicit coverage constraints.
+
+Lab creation/idempotency is now crash-safe locally: lab, initial event and replay receipt
+commit in one labs.sqlite transaction; legacy receipts import read-only and conflicts
+fail closed. Ten new tests prove injected failures, real abrupt process termination,
+restart/replay, competing connections and migration. All 149 root tests pass with the web
+bridge enabled; source/frozen integrity, targeted Ruff and diff checks pass. BB8 reference
+validation passes; the known discovery-index freshness issue remains. See
+[decision 0014](../decisions/0014-atomic-lab-creation.md). The live backend/data are unchanged.
+Canonical HTTP/WebSocket smoke also passes 9/9 with zero model calls against an isolated
+candidate server on a temporary port; no synthetic labs remain and that server stopped.
+This does not establish adoption/provenance of the running port-8100 service.
+
+Previously next: reproduce the stale extension-controller sequence using sanitized lifecycle data,
+then fix it jointly with the web reader. Media publication remains gated by the common
+web consumer and approved private delivery configuration. A separate user-requested chat assesses
+deployment readiness and the complete builder-cup-a8479 / Cloud Run / Firebase setup;
+this session retains backend implementation ownership.
+
+# Learning-content compatibility first slice — 18 October 2026
+
+**Current continuation:** user requires all CAM modules checked together and a plug-in
+interface. The all-CAM candidate now exports ten artifacts/26 recordings with no exclusions,
+using one shared canvas family, concept-scoped audio and unchanged native bilingual C-AM-08.
+The v2-envelope proposal is superseded; v1 is retained. 139 backend tests pass; 38 model
+render cases, ten independent examples and twenty invalid-input checks pass. Source stays
+local/uncommitted. [Current handoff](../handoffs/all-cam-compatibility.md),
+[decision 0013](../decisions/0013-all-cam-plug-in-contract.md). Earlier first-slice text below
+is historical. Next: the Mac implements the common consumer update and verifies all ten
+modules as a parameterized suite. Audio storage must not hide artifact metadata.
+
+User prioritized the complete learning journey after reviewing the Mac's limited live
+guidance report. Local branch `work/learning-content-compat` is based on PR #7 f2dca8b;
+the running integration worktree/main are unchanged. No commit/push/cloud/provider trial.
+
+Implemented a source-bound C-AM-01 signal contract, checked scene/model hashes, fixed
+numerical semantics and candidate-signal export through the existing adapter. Default v1
+records are unchanged; candidate cloud publication is blocked before writes and the
+current web consumer is explicitly reported unsupported. Four original recordings are
+reused. C-AM-08 phase data and its v1 revision are unchanged; existing web English clips
+must be preserved. The six concept recordings remain excluded; their explicit scope
+proposal is documented rather than mislabelled as implemented playback.
+
+Actual checks: 132 root tests pass (including web bridge), 13 vectors match the preserved
+browser model, source/frozen/media integrity pass, new Python Ruff/diff checks pass and
+all-ten legacy export matches its prior records. BB8 reference validation passes; its
+pre-existing discovery index freshness failure remains. No scientific/native-Odia/audio
+quality approval or connected browser acceptance is claimed.
+
+BB8 helper suite: 34/36 pass; two symlink-creation tests are blocked by Windows privilege
+WinError 1314 before their assertions. No environment privilege or packaged BB8 change.
+
+[Handoff and Mac checklist](../handoffs/learning-content-compatibility.md),
+[decision/audio-scope proposal](../decisions/0012-learning-media-candidate-contract.md).
+
+Exact next: coordinate the Mac v1/v2 decoder + trusted signal renderer, run C-AM-01's
+signed-in text/audio/artifact/assessment/continuation checklist, then implement the agreed
+concept-scope audio variant with C-AM-04. Lab atomicity and stale-controller findings remain
+separate open reliability work. Deployment waits for these acceptance gates.
+
+---
+
+# Lab integration small fixes; SSH forward chosen — 18 October 2026
+
+**Continuing on another machine:** start with the [integration testing and deployment handoff](../handoffs/integration-and-deployment.md).
+
+The user chose the SSH forward for connected testing ([plan](connected-integration-testing.md), setup 1) and asked for the small fixes in both repos.
+
+kiki-backend (branch `fix/lab-integration-small`):
+
+- `POST /lab-sessions` honours `Idempotency-Key`: the same owner, key and body return the first lab (201, `Idempotency-Replayed: true`), a different body is 409, and records survive restarts. It lives in `prototypes/backend/lab_idempotency.py` and shadows the frozen route from the composition layer, so the frozen baseline files are unchanged. The key format and 409 match the mixed-language job API. `contracts/frontend.openapi.json` documents the optional header.
+- `tests/test_cloud_access.py` checks `fb:<uid>` owners over HTTP and WebSocket.
+- The dev extension build serves kiki-web's `:5174` origins.
+- `test-decision-ui.mjs` waits on elapsed time instead of 200 event-loop turns (it flaked twice in CI).
+- `scripts/smoke-lab-upstream.py` checks a backend as kiki-web reaches it, with no model calls.
+
+kiki-web (branch `fix/lab-integration-small`): the `skipped` WebSocket reply, a per-platform Playwright venv path, UTF-8 writes, CI for the web app and API, and a create retry that re-sends the saved key and body. The Lab home notice when execution is disabled was not changed; it needs a contract decision.
+
+What ran (Windows 11, no model calls): offline gate all ten checks PASS, including the frozen baseline; floating L0 14/14, L1 43/43, L2 30/30; `test-decision-ui.mjs` 10/10 sequential and 8/8 concurrent; the smoke script 9/9 against a real backend on `127.0.0.1:8100` with `KIKI_REQUIRE_PROXY=1`, and a wrong secret refused with 401. kiki-web (reported by the implementing session): API pytest 119 passed without `PYTHONUTF8`, Vitest 182 passed in a clean export, lint, `tsc -b` and build pass. Not run: kiki-web Playwright suites and anything across two machines.
+
+Exact next actions, in order:
+1. Merge this repo's PR before kiki-web's: kiki-web's create retry assumes idempotent creation.
+2. User: the first connected trial, following the runbook in [connected integration testing](connected-integration-testing.md) (enable OpenSSH Server on the backend machine, forward port 8100, run the smoke script, then the MATLAB Online trial from `/labs/:id`).
+3. Decide the Lab home notice signal (an API capability field is recommended) and the remaining decisions listed in the entry below.
+4. Consider re-freezing the screen-reader baseline to add explicit UTF-8 reads in `prototypes/lab_tracking/definition.py`; until then Python runs on Windows, including kiki-web's lab Playwright server, need `PYTHONUTF8=1`.
+
+---
+
 # Frontend integration state after kiki-web Lab mode — 18 October 2026
 
 kiki-web merged Lab mode screen sharing (kiki-web PR #7, `0ed7c06`) on top of its plan (#6). It calls this repo's Python service through its API, as decided in ADR 0010. A read-only check against `main` found every path, body and SSE event matching; the two field-name differences are normalized in kiki-web. Status, open items and local run settings are in the [kiki-web lab handoff](../handoffs/kiki-web-lab-mode-screen-share.md) §0.
@@ -536,3 +694,6 @@ The connected GitHub account is verified as `arpanvihan5-sketch` (id `317357476`
 SOURCE.json now points to the corrected source baseline `73d16c0d967a5d81dd74f1f28ef0defc48c8a778`, whose product file tree is identical to the previously pinned baseline. All 130 source files are unchanged; hashes remain authoritative. BB8/starter provenance was reconciled. See docs/commit-identity-correction.md for recovery and verification details. The user's context-only startup boundary remains in force.
 
 Identity-correction completion: both main histories were replaced successfully using explicit expected-head leases. GitHub commit metadata was checked for all nine corrected commits and the identity/provenance follow-ups; author and committer are `arpanvihan5-sketch` throughout. Both local branches matched origin/main, and all 130 source hashes still passed verification. No application implementation was started. For the next session, use a fresh/current checkout of the rewritten main history, follow CONTEXT-BOOT.md, and wait for the user's direction; preserve any local work rather than merging old history back into main.
+
+## Full cloud build — 18 October 2026
+Isolated source integrates new prototypes/cloud_lab store/domain/capture/frame/provider runtime, no frozen source changes or local trial restart. Real named DB contracts A4/B5 passed; provider IO mocked. Frozen31/43/4 baseline and existing capture16 tests pass. Container/retention/build configuration added. Images/source main release, actual private transport, replacement and student acceptance pending. See deploy/cloud/README.md. Next: source review/main commit, immutable build, private engine deployment and hosted acceptance.

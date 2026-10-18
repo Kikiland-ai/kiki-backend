@@ -1,0 +1,17 @@
+.git
+.env*
+**/.env*
+work
+artifacts
+context
+bb8
+tests
+fixtures
+**/node_modules
+**/.venv
+**/__pycache__
+**/*.pyc
+**/*.sqlite*
+**/*.db
+**/*.wav
+**/*.log

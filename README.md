@@ -12,7 +12,7 @@ All backend work was reconciled into `main` on 18 October; it is the only branch
 | Mixed-language text and speech generation | `prototypes/mixed_script/`, `prototypes/mixed_language/` | Real Gemini runs recorded. Used for content generation from the database side, not called by kiki-web ([ADR 0011](docs/decisions/0011-generated-content-reaches-kiki-web-through-the-database.md)) |
 | Concept canvas library: ten C-AM packets, 22 Odia clips (Git LFS), SQLite library, kiki-web publisher adapter | `prototypes/concept_library/`, `artifacts/cam-review/` | Recovered outputs; the generator code was lost before commit ([continuation record](docs/handoffs/concept-canvas-continuation.md)) |
 
-Start with [the active plan](docs/plans/active.md) for the current next actions, then the [frontend API handoff](docs/handoffs/frontend-api.md). Status passages further down this README that predate 18 October are historical; the table above and the active plan take precedence.
+Start with [the active plan](docs/plans/active.md) for the current next actions and the [integration testing and deployment handoff](docs/handoffs/integration-and-deployment.md), then the [frontend API handoff](docs/handoffs/frontend-api.md). Status passages further down this README that predate 18 October are historical; the table above and the active plan take precedence.
 
 Kiki helps engineering students understand their course material in a familiar language while learning the English terminology they need for exams and practical work. This repository owns the content, media, learning-evidence and guidance capabilities behind that experience. The first language pair is **Odia–English**, with ECE as the initial subject context.
 

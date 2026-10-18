@@ -1,6 +1,6 @@
 # Connected integration testing: kiki-web and kiki-backend across machines
 
-18 October 2026. This is a plan for testing kiki-web Lab mode against this repo's Python service when the two run on different machines, for example one teammate runs kiki-web and another runs kiki-backend. Nothing here has been run yet. kiki-web facts are from `origin/main` at `0ed7c06`; kiki-backend facts are from `main`.
+18 October 2026. This is a plan for testing kiki-web Lab mode against this repo's Python service when the two run on different machines, for example one teammate runs kiki-web and another runs kiki-backend. **Chosen setup (user, 18 October): the SSH forward (setup 1).** The backend side of it has been checked with `scripts/smoke-lab-upstream.py` against a local backend on port 8100; no cross-machine trial has run yet. kiki-web facts are from `origin/main` at `0ed7c06`; kiki-backend facts are from `main`.
 
 ## Why a plain LAN address does not work
 
@@ -22,7 +22,7 @@ The browser has its own rule: screen capture (`getDisplayMedia`) needs a secure 
 | No redirects | `lab_upstream.py:36` | Use the exact HTTPS origin; ngrok does not redirect it |
 | Streaming | `json_stream/api.py:90` sends `X-Accel-Buffering: no` | Check that `check-stream` chunks arrive incrementally through the tunnel |
 | WebSocket | `lab_upstream.py:75-78` turns the origin into `wss://` | ngrok and Tailscale both carry WebSockets |
-| Extension origins | kiki-backend `prototypes/floating_guidance/scripts/build-extension.mjs:9-12` has no kiki-web origin; kiki-web `apps/web/scripts/build-lab-test-extension.mjs:9` has `http://127.0.0.1:5174` | For a trial today, use kiki-web's test extension build, or add `http://127.0.0.1:5174` to this repo's dev `readers` (an open next action) |
+| Extension origins | kiki-backend `prototypes/floating_guidance/scripts/build-extension.mjs` dev build includes `http://127.0.0.1:5174` and `http://localhost:5174`; the release build has hosted origins only | Load this repo's dev build (`work/floating-guidance/dev/`) for local trials. kiki-web's `apps/web/scripts/build-lab-test-extension.mjs` is for its Playwright test |
 | MATLAB binding | kiki-web `floating-bridge.ts:9` | Binds only to `https://matlab.mathworks.com` |
 | kiki-web web port | `apps/web/vite.config.ts` (5173, strict), `package.json:11` (`--host 127.0.0.1`) | Start with `npm run dev:connected -- --port 5174`, because the API's CORS default is `127.0.0.1:5174`/`localhost:5174` (`config.py:22`) |
 | Single API worker | kiki-web WebSocket tickets are in memory | Run kiki-web's API with one worker |
@@ -30,7 +30,7 @@ The browser has its own rule: screen capture (`getDisplayMedia`) needs a secure 
 
 ## Setups, in order of preference
 
-### 1. SSH forward: kiki-web stays in local mode, no config change
+### 1. SSH forward: kiki-web stays in local mode, no config change (chosen)
 
 Backend machine (M2):
 
@@ -39,12 +39,26 @@ KIKI_PROXY_SECRET=<secret> KIKI_REQUIRE_PROXY=1 GEMINI_API_KEY=<key> \
   python -B -m prototypes.backend --port 8100 --data-dir work/backend
 ```
 
-It binds to `127.0.0.1` by default (`prototypes/backend/__main__.py:9`). M2 needs an SSH server (Windows: the OpenSSH Server optional feature).
+It binds to `127.0.0.1` by default (`prototypes/backend/__main__.py:9`), so nothing else on the network can reach it. M2 needs an SSH server. On Windows, in an administrator PowerShell:
+
+```powershell
+Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
+Start-Service sshd
+Set-Service -Name sshd -StartupType Manual
+```
+
+The M1 user needs an account (or an authorized key) on M2. Port 8100 must be free on M1.
 
 kiki-web machine (M1):
 
 ```sh
-ssh -N -L 127.0.0.1:8100:127.0.0.1:8100 <user>@<M2>
+ssh -N -o ExitOnForwardFailure=yes -o ServerAliveInterval=30 -L 127.0.0.1:8100:127.0.0.1:8100 <user>@<M2>
+```
+
+`ExitOnForwardFailure` stops at once if port 8100 is taken on M1; `ServerAliveInterval` keeps an idle forward from being dropped during a long trial. Then, on M1, check the backend exactly as kiki-web will reach it:
+
+```sh
+KIKI_PROXY_SECRET=<secret> python -B scripts/smoke-lab-upstream.py --origin http://127.0.0.1:8100
 ```
 
 Then kiki-web uses `KIKI_LAB_EXECUTION_MODE=local`, `KIKI_LAB_BACKEND_ORIGIN=http://127.0.0.1:8100` and `KIKI_LAB_PROXY_SECRET=<secret>`. Host and Origin are both `127.0.0.1:8100`, and nothing is exposed publicly.
@@ -93,11 +107,11 @@ Tailscale puts both machines on one private network (a tailnet) without public e
 2. M2: create a secret with `python -c "import secrets; print(secrets.token_urlsafe(32))"` and share it privately.
 3. M2: start the backend on port 8100 with `KIKI_REQUIRE_PROXY=1`, the secret and the Gemini key.
 4. M2: `curl http://127.0.0.1:8100/health` succeeds; a `POST /screen-sessions` without the key returns 401.
-5. Connect: the SSH forward (setup 1), or start ngrok / `tailscale serve` (setups 2 and 3).
-6. M1: `curl <backend origin>/health` succeeds through the forward or tunnel.
+5. Connect: on M1, start the SSH forward (setup 1). For setups 2 and 3, start ngrok or `tailscale serve` on M2 instead.
+6. M1: with a kiki-backend checkout, run `scripts/smoke-lab-upstream.py` against the backend origin; all nine checks pass.
 7. M1: pull kiki-web `main` and set the lab mode, origin and secret for the chosen setup.
 8. M1: start kiki-web's API on port 8000 with one worker, then `npm run dev:connected -- --port 5174` in `apps/web`.
-9. M1: build and load the extension: kiki-web's `apps/web/scripts/build-lab-test-extension.mjs`, or this repo's dev build once `127.0.0.1:5174` is in its `readers`.
+9. M1: build this repo's extension with `node prototypes/floating_guidance/scripts/build-extension.mjs` and load `work/floating-guidance/dev/` unpacked in Chrome.
 10. M1: sign in at `http://127.0.0.1:5174`.
 11. Open MATLAB Online in another tab and bind it from the extension popup.
 12. From `/labs/:sessionId`, start screen guidance and share the MATLAB tab (choose a Chrome tab).
@@ -105,7 +119,7 @@ Tailscale puts both machines on one private network (a tailnet) without public e
 14. Pause and resume from the page and from the windows, then stop; the backend lab should end in `ended`.
 15. Rotate the secret, close the tunnel, and record results, latency and any errors in `docs/plans/active.md`.
 
-## Automated checks to add
+## Automated checks
 
-- **Backend smoke script (this repo):** with the proxy headers and `Origin` set to the tunnel origin, run `GET /health`, `POST /screen-sessions`, a WebSocket `capture_started` plus one fixture JPEG frame, `POST /lab-sessions`, `/attach`, and `/check-stream`, asserting that SSE chunks arrive incrementally. Model it on `tests/test_unified_backend.py`. It tests a tunnel without kiki-web.
+- **Backend smoke script (added):** `scripts/smoke-lab-upstream.py` uses kiki-web's headers to check health, refusal without the proxy key, `fb:` owner lab creation and isolation, `Idempotency-Key` replay, a screen session and its WebSocket, then deletes its lab. It makes no model calls. Not yet covered: sending a frame and `check-stream`, which would need a fixture analyzer or a paid model call.
 - **kiki-web lab Playwright test against a real backend:** `playwright.lab.config.ts` starts a fake analyzer server with `../api/.venv/bin/python` (POSIX only; Windows needs `.venv\Scripts\python.exe`). It needs a switch to skip that server and use `KIKI_LAB_BACKEND_ORIGIN`, and a Firebase ID token from the auth emulator (`demo-kiki-local`).

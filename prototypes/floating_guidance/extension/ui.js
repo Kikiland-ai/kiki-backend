@@ -84,11 +84,12 @@ dl{margin:4px 0 0}dt{font-size:12px;color:var(--pencil);margin-top:8px}dd{margin
   const screen=h('div',{class:'screen'},h('h2',{},screenHeading,age),summary,check,uncertain);
   const status=h('div',{class:'status'}),notice=h('p',{class:'notice',hidden:true,role:'alert'});
   const pause=h('button',{class:'btn primary',type:'button','data-action':'pause'},'Pause guidance');
+  const confirm=h('button',{class:'btn',type:'button','data-action':'focus_confirmation'},'Confirm saved model in tracker');
   const tracker=h('button',{class:'btn',type:'button','data-action':'open_tracker'},'Open tracker');
   const hdr=h('span',{class:'hdr'}),splitButton=icon('split','Split into two windows');
   const barA=h('div',{class:'bar','data-drag':'a',tabindex:'0','aria-label':'Kiki guide. Use arrow keys to move this window.'},dots(),h('span',{class:'title'},h('strong',{},'Kiki'),hdr),splitButton,icon('reset','Reset window position'),icon('minimize','Minimize Kiki'));
   const bodyA=h('div',{class:'body'},guide,screen);
-  const foot=h('div',{class:'foot'},status,notice,pause,tracker,canary?h('span',{class:'canary'},h('i'),'KIKI CANARY 7319'):null);
+  const foot=h('div',{class:'foot'},status,notice,pause,confirm,tracker,canary?h('span',{class:'canary'},h('i'),'KIKI CANARY 7319'):null);
   const winA=h('section',{class:'win','data-id':'a',role:'region','aria-label':'Kiki guide',tabindex:'-1'},barA,bodyA,foot);
   const barB=h('div',{class:'bar','data-drag':'b',tabindex:'0','aria-label':'Screen context. Use arrow keys to move this window.'},dots(),h('span',{class:'title'},h('strong',{},'Screen context')),icon('dock','Dock windows together'),icon('minimize','Minimize Kiki'));
   const bodyB=h('div',{class:'body'});
@@ -158,6 +159,7 @@ dl{margin:4px 0 0}dt{font-size:12px;color:var(--pencil);margin-top:8px}dd{margin
    else if(action==='restore'){layout.minimized=false;}
    else if(action==='details'){layout.details=!layout.details;if(vm)render(vm);}
    else if(action==='pause'){if(!pause.disabled)onCommand(pause.dataset.command);return;}
+   else if(action==='focus_confirmation'){onCommand('focus_confirmation');return;}
    else if(action==='open_tracker'){onCommand('open_tracker');return;}
    else return;
    save();place();

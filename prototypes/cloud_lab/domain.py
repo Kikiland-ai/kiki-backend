@@ -9,13 +9,14 @@ from prototypes.lab_tracking.service import LabService
 
 
 class CloudLabService(LabService):
-    def __init__(self, store, capture, analyzer, images=None, clock=time.time, *, capture_status=None):
+    def __init__(self, store, capture, analyzer, images=None, clock=time.time, *, capture_status=None, capture_snapshot=None):
         # Deliberately do not call LabService.__init__: it creates SQLite, binds an
         # SQL provider and invalidates *all* noncompleted labs on each worker start.
         # The cloud analyzer must arrive with its shared provider configured.
         self.store = store
         self.capture = capture
         self.capture_status = capture_status if capture_status is not None else capture
+        self.capture_snapshot = capture_snapshot
         self.analyzer = analyzer
         self.clock = clock
         self.images = images if images is not None else {}
@@ -43,7 +44,16 @@ class CloudLabService(LabService):
 
     def save(self, state, kind, payload=None, actor="system", origin=None):
         invalidated_image = state.pop("_cloud_image_invalidation_id", None)
-        result = super().save(state, kind, payload, actor, origin)
+        capture_guard = state.pop("_cloud_capture_guard", None)
+        self.account_time(state)
+        expected = state["revision"]
+        state["revision"] += 1
+        event = self.event(state, kind, payload, actor, origin)
+        if capture_guard is None:
+            self.store.save(state, expected, event)
+        else:
+            self.store.save(state, expected, event, capture_guard=capture_guard)
+        result = self.project(state)
         if invalidated_image:
             if hasattr(self.images, "discard_if"):
                 self.images.discard_if(state["lab_session_id"], invalidated_image)
@@ -66,8 +76,9 @@ class CloudLabService(LabService):
             capture_id = state["workspace"].get("capture_session_id")
             reason = None
             if capture_id and self.capture_status is not None:
+                current = {}
                 try:
-                    current = self.capture_status(capture_id, owner)
+                    current = (self.capture_snapshot or self.capture_status)(capture_id, owner)
                     status = current["status"]
                 except HTTPException as exc:
                     if exc.status_code != 404:
@@ -84,6 +95,8 @@ class CloudLabService(LabService):
                         self.account_time(state)
                         state["runtime"]["capture_status"] = status
                     reason = f"capture_{status}"
+                    if current.get("guard") is not None:
+                        state["_cloud_capture_guard"] = current["guard"]
             runtime = state["runtime"]
             if not reason and runtime.get("analysis_token") and self.clock() - (runtime.get("last_analysis_started") or 0) > 30:
                 reason = "analysis_worker_expired"
@@ -104,17 +117,22 @@ class CloudLabService(LabService):
             if snapshot["status"] == "completed":
                 continue
             for attempt in range(3):
-                state = self.load(snapshot["lab_session_id"], snapshot["owner_id"])
+                state = self.store.load(snapshot["lab_session_id"], snapshot["owner_id"])
                 if state["workspace"]["capture_session_id"] != capture_id or state["status"] == "completed":
                     break
-                changed_view = view_revision is not None and view_revision > state["workspace"]["view_revision"]
-                if state["runtime"]["capture_status"] == status and not changed_view:
+                current = self.capture_snapshot(capture_id, state["owner_id"]) if self.capture_snapshot is not None else None
+                authoritative_status = current["status"] if current is not None else status
+                authoritative_view = current.get("view_revision") if current is not None else view_revision
+                changed_view = authoritative_view is not None and authoritative_view > state["workspace"]["view_revision"]
+                if state["runtime"]["capture_status"] == authoritative_status and not changed_view:
                     break
                 self.account_time(state)
-                state["runtime"]["capture_status"] = status
+                state["runtime"]["capture_status"] = authoritative_status
                 if changed_view:
-                    state["workspace"]["view_revision"] = view_revision
-                reason = "view_changed" if changed_view else f"capture_{status}"
+                    state["workspace"]["view_revision"] = authoritative_view
+                reason = "view_changed" if changed_view else f"capture_{authoritative_status}"
+                if current is not None:
+                    state["_cloud_capture_guard"] = current["guard"]
                 self.invalidate(state, reason)
                 try:
                     self.save(state, reason)
@@ -124,5 +142,5 @@ class CloudLabService(LabService):
                         raise
 
 
-def create_domain(store, capture, analyzer, *, images=None, clock=time.time, capture_status=None):
-    return CloudLabService(store, capture, analyzer, images=images, clock=clock, capture_status=capture_status)
+def create_domain(store, capture, analyzer, *, images=None, clock=time.time, capture_status=None, capture_snapshot=None):
+    return CloudLabService(store, capture, analyzer, images=images, clock=clock, capture_status=capture_status, capture_snapshot=capture_snapshot)

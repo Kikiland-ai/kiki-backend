@@ -17,7 +17,7 @@ from fastapi import HTTPException
 
 from contracts.lab_tracking import StartLab, ContextChange
 from prototypes.cloud_lab.domain import CloudLabService
-from prototypes.cloud_lab.store import CloudLabCreateKeys, FirestoreLabStore
+from prototypes.cloud_lab.store import CloudLabCreateKeys, FirestoreLabStore, run_atomic
 
 
 BODY = StartLab(model_name="cloud_contract_fixture", operator_trial=True)
@@ -112,6 +112,14 @@ class MemoryClient:
 
 
 class Contract:
+    def capture_row(self, client, status="sharing", fence=2):
+        ref = client.collection(self.prefix + "_captures").document("capture-fixture")
+        row = {"owner": "fb:fixture", "status": status, "fence": fence,
+               "producer": "replacement" if status == "sharing" else None,
+               "lease_until": 4_000_000_000 if status == "sharing" else 0,
+               "latest": {"view_revision": 1}}
+        run_atomic(client, lambda transaction: transaction.set(ref, row))
+
     def service(self, client=None):
         store = FirestoreLabStore(client or self.client, self.prefix)
         analyzer = SimpleNamespace(configured=False)
@@ -185,6 +193,42 @@ class Contract:
         self.assertEqual(second.load(state["lab_session_id"], "fb:fixture")["revision"], 2)
         second.capture_changed("active-capture", "disconnected")
         self.assertEqual(second.load(state["lab_session_id"], "fb:fixture")["revision"], 3)
+
+    def test_delayed_disconnect_hint_preserves_authoritative_replacement_candidate(self):
+        lab, keys = self.service()
+        created, _ = self.create(lab, keys)
+        state = lab.load(created["lab_session_id"], "fb:fixture")
+        state["workspace"]["capture_session_id"] = "capture-fixture"
+        state["runtime"]["capture_status"] = "sharing"
+        state["runtime"]["candidate"] = {"observation_id": "replacement-observation",
+                                          "source_frame": {"server_received_unix": lab.clock()}}
+        lab.save(state, "fixture_replacement_checked")
+        self.capture_row(self.clients[1])
+        observer = CloudLabService(lab.store, None, SimpleNamespace(configured=False),
+                                   capture_snapshot=lab.store.capture_snapshot)
+        observer.capture_changed("capture-fixture", "disconnected", view_revision=99)
+        actual = lab.store.load(state["lab_session_id"], "fb:fixture")
+        self.assertEqual(actual["revision"], state["revision"])
+        self.assertEqual(actual["runtime"]["candidate"]["observation_id"], "replacement-observation")
+        self.assertEqual(actual["workspace"]["view_revision"], 1)
+
+    def test_capture_replacement_after_snapshot_is_rejected_in_lab_transaction(self):
+        lab, keys = self.service()
+        created, _ = self.create(lab, keys)
+        state = lab.load(created["lab_session_id"], "fb:fixture")
+        state["workspace"]["capture_session_id"] = "capture-fixture"
+        lab.save(state, "fixture_capture_attached")
+        self.capture_row(self.clients[0], status="disconnected", fence=1)
+        guard = lab.store.capture_snapshot("capture-fixture", "fb:fixture")["guard"]
+        # Another real client replaces the producer after the callback reads its
+        # snapshot but before its lab projection/event transaction begins.
+        self.capture_row(self.clients[1], status="sharing", fence=2)
+        state["revision"] += 1
+        event = lab.event(state, "obsolete_disconnect")
+        self.assert_http(409, lambda: lab.store.save(state, state["revision"] - 1, event, capture_guard=guard))
+        actual = lab.store.load(state["lab_session_id"], "fb:fixture")
+        self.assertEqual(actual["revision"], state["revision"] - 1)
+        self.assertEqual(len(lab.store.events(state["lab_session_id"], "fb:fixture")), 2)
 
 
 class OfflineCloudLabTests(Contract, unittest.TestCase):
@@ -318,6 +362,8 @@ def cleanup_contract(client, prefix):
         lab.reference.delete()
     for receipt in client.collection(prefix + "_lab_create_receipts").stream():
         receipt.reference.delete()
+    for capture in client.collection(prefix + "_captures").stream():
+        capture.reference.delete()
 
 
 @unittest.skipUnless(os.getenv("KIKI_CLOUD_CONTRACT") == "1", "requires authorized real named-DB contract")

@@ -46,14 +46,15 @@ def create_app(*, client=None, analyzer=None, proxy_secret=None, clock=time.time
         from google.cloud import firestore
         client = firestore.Client(project=project, database=database)
     captures = FirestoreCaptureStore(client, collection_prefix, clock=clock)
-    store = FirestoreLabStore(client, collection_prefix)
+    store = FirestoreLabStore(client, collection_prefix, clock=clock)
     images = FirestoreImages(client, collection_prefix=collection_prefix+'_checked', clock=clock,
                              write_guard=CheckedFrameWriteGuard(client, collection_prefix, clock=clock))
     if analyzer is None:
         analyzer = CloudAnalyzer()
         analyzer.provider = FirestoreStreamingProviderPool(client, collection_prefix=collection_prefix, clock=clock)
     lab = CloudLabService(store, captures.capture_access, analyzer, images=images, clock=clock,
-                          capture_status=lambda sid, owner: {"status": captures.session(sid, owner)["status"]})
+                          capture_status=lambda sid, owner: {"status": captures.session(sid, owner)["status"]},
+                          capture_snapshot=store.capture_snapshot)
     app = FastAPI(title='Kiki cloud lab engine', version='1.0.0')
     app.state.store, app.state.lab, app.state.captures = store, lab, captures
     app.state.lab_keys = CloudLabCreateKeys(store)

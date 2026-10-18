@@ -79,17 +79,18 @@ dl{margin:4px 0 0}dt{font-size:12px;color:var(--pencil);margin-top:8px}dd{margin
   const details=h('dl',{id:'kiki-details',hidden:true},h('dt',{},'Where'),where,h('dt',{},'How'),h('dd',{},how),h('dt',{},'Expected result'),result,
    h('dt',{'data-for':'why'},'Why this step'),why,h('dt',{'data-for':'already'},'If it is already done'),already);
   const nextTag=h('span',{class:'tag',hidden:true},'· next stage'),next=h('p',{class:'next'});
-  const guide=h('div',{class:'guide'},label,h('h2',{},'Now'),now,settings,toggle,details,h('h2',{},'Next',nextTag),next);
+  const confirm=h('button',{class:'btn',type:'button','data-action':'focus_confirmation',hidden:true},'Confirm saved model in tracker');
+  const saveHelp=h('p',{hidden:true},'Save the model in MATLAB first. This opens your confirmation form; it does not save the model.');
+  const guide=h('div',{class:'guide'},label,h('h2',{},'Now'),now,settings,toggle,details,confirm,saveHelp,h('h2',{},'Next',nextTag),next);
   const screenHeading=h('span'),age=h('span',{class:'age'}),summary=h('p',{class:'summary'}),check=h('ul',{class:'check',hidden:true}),uncertain=h('p',{class:'uncertain',hidden:true});
   const screen=h('div',{class:'screen'},h('h2',{},screenHeading,age),summary,check,uncertain);
   const status=h('div',{class:'status'}),notice=h('p',{class:'notice',hidden:true,role:'alert'});
   const pause=h('button',{class:'btn primary',type:'button','data-action':'pause'},'Pause guidance');
-  const confirm=h('button',{class:'btn',type:'button','data-action':'focus_confirmation'},'Confirm saved model in tracker');
   const tracker=h('button',{class:'btn',type:'button','data-action':'open_tracker'},'Open tracker');
   const hdr=h('span',{class:'hdr'}),splitButton=icon('split','Split into two windows');
   const barA=h('div',{class:'bar','data-drag':'a',tabindex:'0','aria-label':'Kiki guide. Use arrow keys to move this window.'},dots(),h('span',{class:'title'},h('strong',{},'Kiki'),hdr),splitButton,icon('reset','Reset window position'),icon('minimize','Minimize Kiki'));
   const bodyA=h('div',{class:'body'},guide,screen);
-  const foot=h('div',{class:'foot'},status,notice,pause,confirm,tracker,canary?h('span',{class:'canary'},h('i'),'KIKI CANARY 7319'):null);
+  const foot=h('div',{class:'foot'},status,notice,pause,tracker,canary?h('span',{class:'canary'},h('i'),'KIKI CANARY 7319'):null);
   const winA=h('section',{class:'win','data-id':'a',role:'region','aria-label':'Kiki guide',tabindex:'-1'},barA,bodyA,foot);
   const barB=h('div',{class:'bar','data-drag':'b',tabindex:'0','aria-label':'Screen context. Use arrow keys to move this window.'},dots(),h('span',{class:'title'},h('strong',{},'Screen context')),icon('dock','Dock windows together'),icon('minimize','Minimize Kiki'));
   const bodyB=h('div',{class:'body'});
@@ -125,11 +126,13 @@ dl{margin:4px 0 0}dt{font-size:12px;color:var(--pencil);margin-top:8px}dd{margin
   function setText(node,value){const text=value??'';if(node.textContent!==text)node.textContent=text;}
   function render(model){
    vm=model;
-   if(vm.empty){setText(label,'Kiki');label.dataset.tone='muted';setText(now,vm.status.text);settings.hidden=true;toggle.hidden=true;details.hidden=true;setText(next,'');
+   if(vm.empty){confirm.hidden=saveHelp.hidden=true;confirm.disabled=true;setText(label,'Kiki');label.dataset.tone='muted';setText(now,vm.status.text);settings.hidden=true;toggle.hidden=true;details.hidden=true;setText(next,'');
     setText(screenHeading,'Screen context');setText(age,'');setText(summary,'Waiting for the Kiki tracker.');check.hidden=uncertain.hidden=true;
     setText(status,vm.status.text);status.dataset.live='false';pause.disabled=true;setText(hdr,'');setText(launcherState,'· not connected');place();return;}
    setText(hdr,vm.header);setText(label,vm.guide.label);label.dataset.tone=vm.guide.label==='Current step'?'':'muted';
    const a=vm.guide.now;setText(now,a?.title||(vm.guide.label==='Experiment complete'?'Experiment complete. Review and export your journal in the tracker.':'Keep the experiment visible; Kiki is waiting for the tracker.'));
+   confirm.hidden=saveHelp.hidden=!['CP-DSB-01','CP-DSB-12'].includes(a?.checkpoint_id);
+   confirm.disabled=!vm.live||vm.pause.disabled||!a;
    const rows=a?.settings||[];settings.hidden=!rows.length;
    settings.tBodies[0].replaceChildren(...rows.map(s=>h('tr',{},h('td',{},s.field),h('td',{},h('code',{},s.value)))));
    const hasDetails=Boolean(a&&(a.where||a.how?.length||a.expected_result||vm.guide.why||a.already_done_help));
@@ -159,7 +162,7 @@ dl{margin:4px 0 0}dt{font-size:12px;color:var(--pencil);margin-top:8px}dd{margin
    else if(action==='restore'){layout.minimized=false;}
    else if(action==='details'){layout.details=!layout.details;if(vm)render(vm);}
    else if(action==='pause'){if(!pause.disabled)onCommand(pause.dataset.command);return;}
-   else if(action==='focus_confirmation'){onCommand('focus_confirmation');return;}
+   else if(action==='focus_confirmation'){if(!confirm.hidden&&!confirm.disabled)onCommand('focus_confirmation');return;}
    else if(action==='open_tracker'){onCommand('open_tracker');return;}
    else return;
    save();place();

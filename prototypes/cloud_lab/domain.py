@@ -9,7 +9,7 @@ from prototypes.lab_tracking.service import LabService
 
 
 class CloudLabService(LabService):
-    def __init__(self, store, capture, analyzer, images=None, clock=time.time, *, capture_status=None, capture_snapshot=None):
+    def __init__(self, store, capture, analyzer, images=None, clock=time.time, *, capture_status=None, capture_snapshot=None, trial_check_limit=None):
         # Deliberately do not call LabService.__init__: it creates SQLite, binds an
         # SQL provider and invalidates *all* noncompleted labs on each worker start.
         # The cloud analyzer must arrive with its shared provider configured.
@@ -17,6 +17,9 @@ class CloudLabService(LabService):
         self.capture = capture
         self.capture_status = capture_status if capture_status is not None else capture
         self.capture_snapshot = capture_snapshot
+        if trial_check_limit is not None and (type(trial_check_limit) is not int or not 1 <= trial_check_limit <= 1000):
+            raise ValueError("Trial check limit must be an integer from 1 to 1000")
+        self.trial_check_limit = trial_check_limit
         self.analyzer = analyzer
         self.clock = clock
         self.images = images if images is not None else {}
@@ -43,6 +46,12 @@ class CloudLabService(LabService):
                     criterion.update(state="unknown", evidence_ids=[], completion_basis=None)
 
     def save(self, state, kind, payload=None, actor="system", origin=None):
+        # Admission is persisted before the analyzer runs. Revision CAS serializes
+        # concurrent workers at the final permitted check; rejected retries cannot
+        # create a sixth event or dispatch another provider request.
+        if (kind == "analysis_started" and self.trial_check_limit is not None
+                and state["runtime"]["analysis_attempts"] > self.trial_check_limit):
+            raise HTTPException(429, "The approved screen-check trial budget is exhausted")
         invalidated_image = state.pop("_cloud_image_invalidation_id", None)
         capture_guard = state.pop("_cloud_capture_guard", None)
         self.account_time(state)
@@ -142,5 +151,5 @@ class CloudLabService(LabService):
                         raise
 
 
-def create_domain(store, capture, analyzer, *, images=None, clock=time.time, capture_status=None, capture_snapshot=None):
-    return CloudLabService(store, capture, analyzer, images=images, clock=clock, capture_status=capture_status, capture_snapshot=capture_snapshot)
+def create_domain(store, capture, analyzer, *, images=None, clock=time.time, capture_status=None, capture_snapshot=None, trial_check_limit=None):
+    return CloudLabService(store, capture, analyzer, images=images, clock=clock, capture_status=capture_status, capture_snapshot=capture_snapshot, trial_check_limit=trial_check_limit)

@@ -24,6 +24,10 @@
  }
  function settle(text){pending=null;clearTimeout(commandTimer);if(text!==undefined)ui.showNotice(text);draw();}
  function onCommand(command){
+  if(command==='focus_confirmation'){
+   if(!message)return;
+   void send({type:'fg_command',command,command_version:1,stream_id:message.stream_id,generation:message.generation,context:message.body.context,lab_revision:message.body.lab_revision}).then(r=>ui.showNotice(r?.ok?'Continue in the tracker: select only evidence you reviewed and write your own note.':'The step changed. Open the tracker to review the current form.'));return;
+  }
   if(command==='open_tracker'){void send({type:'fg_command',command}).then(r=>{if(!r?.ok)ui.showNotice('Open the Kiki tracker tab first.');});return;}
   if(command!=='pause'&&command!=='resume')return;
   pending=command;ui.showNotice(null);draw();

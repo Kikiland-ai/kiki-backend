@@ -1,0 +1,339 @@
+{
+  "$defs": {
+    "SceneReview": {
+      "additionalProperties": false,
+      "properties": {
+        "scientific": {
+          "enum": [
+            "pending",
+            "accepted",
+            "rejected"
+          ],
+          "title": "Scientific",
+          "type": "string"
+        }
+      },
+      "required": [
+        "scientific"
+      ],
+      "title": "SceneReview",
+      "type": "object"
+    },
+    "SceneSource": {
+      "additionalProperties": false,
+      "properties": {
+        "origin": {
+          "title": "Origin",
+          "type": "string"
+        },
+        "label": {
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Url"
+        }
+      },
+      "required": [
+        "origin",
+        "label"
+      ],
+      "title": "SceneSource",
+      "type": "object"
+    },
+    "SignalBehaviorTest": {
+      "additionalProperties": false,
+      "properties": {
+        "inputs": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Inputs",
+          "type": "object"
+        },
+        "output": {
+          "enum": [
+            "periodSeconds",
+            "angularFrequency",
+            "signal",
+            "reference"
+          ],
+          "title": "Output",
+          "type": "string"
+        },
+        "expected": {
+          "title": "Expected",
+          "type": "number"
+        },
+        "tolerance": {
+          "exclusiveMinimum": 0,
+          "maximum": 1e-06,
+          "title": "Tolerance",
+          "type": "number"
+        }
+      },
+      "required": [
+        "inputs",
+        "output",
+        "expected",
+        "tolerance"
+      ],
+      "title": "SignalBehaviorTest",
+      "type": "object"
+    },
+    "SignalControl": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "enum": [
+            "amplitude",
+            "frequency",
+            "phase"
+          ],
+          "title": "Name",
+          "type": "string"
+        },
+        "label": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "unit": {
+          "enum": [
+            "normalized",
+            "Hz",
+            "degree"
+          ],
+          "title": "Unit",
+          "type": "string"
+        },
+        "min": {
+          "title": "Min",
+          "type": "number"
+        },
+        "max": {
+          "title": "Max",
+          "type": "number"
+        },
+        "step": {
+          "title": "Step",
+          "type": "number"
+        },
+        "default": {
+          "type": "number",
+          "title": "Default"
+        }
+      },
+      "required": [
+        "name",
+        "label",
+        "unit",
+        "min",
+        "max",
+        "step",
+        "default"
+      ],
+      "title": "SignalControl",
+      "type": "object"
+    },
+    "SignalOutput": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "enum": [
+            "periodSeconds",
+            "angularFrequency"
+          ],
+          "title": "Name",
+          "type": "string"
+        },
+        "label": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "unit": {
+          "enum": [
+            "s",
+            "rad/s"
+          ],
+          "title": "Unit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "label",
+        "unit"
+      ],
+      "title": "SignalOutput",
+      "type": "object"
+    },
+    "SourceBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "title": "SourceBinding",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "artifactId": {
+      "const": "SCENE-AM-01-signal-parameters",
+      "title": "Artifactid",
+      "type": "string"
+    },
+    "renderer": {
+      "const": "signal-parameters/v1",
+      "title": "Renderer",
+      "type": "string"
+    },
+    "placardIds": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 4,
+      "minItems": 1,
+      "title": "Placardids",
+      "type": "array"
+    },
+    "prompt": {
+      "minLength": 1,
+      "title": "Prompt",
+      "type": "string"
+    },
+    "altText": {
+      "minLength": 1,
+      "title": "Alttext",
+      "type": "string"
+    },
+    "controls": {
+      "items": {
+        "$ref": "#/$defs/SignalControl"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "title": "Controls",
+      "type": "array"
+    },
+    "outputs": {
+      "items": {
+        "$ref": "#/$defs/SignalOutput"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Outputs",
+      "type": "array"
+    },
+    "timeWindowSeconds": {
+      "const": 0.02,
+      "title": "Timewindowseconds",
+      "type": "number"
+    },
+    "sampleIntervals": {
+      "const": 900,
+      "title": "Sampleintervals",
+      "type": "integer"
+    },
+    "reference": {
+      "const": "unit_amplitude_zero_phase_same_frequency",
+      "title": "Reference",
+      "type": "string"
+    },
+    "amplitudeUnit": {
+      "const": "normalized",
+      "title": "Amplitudeunit",
+      "type": "string"
+    },
+    "claim": {
+      "const": "ideal_teaching_model",
+      "title": "Claim",
+      "type": "string"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/SceneSource"
+      },
+      "minItems": 1,
+      "title": "Sources",
+      "type": "array"
+    },
+    "bindings": {
+      "items": {
+        "$ref": "#/$defs/SourceBinding"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Bindings",
+      "type": "array"
+    },
+    "modelBindings": {
+      "items": {
+        "$ref": "#/$defs/SourceBinding"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Modelbindings",
+      "type": "array"
+    },
+    "behaviorTests": {
+      "items": {
+        "$ref": "#/$defs/SignalBehaviorTest"
+      },
+      "minItems": 4,
+      "title": "Behaviortests",
+      "type": "array"
+    },
+    "review": {
+      "$ref": "#/$defs/SceneReview"
+    }
+  },
+  "required": [
+    "artifactId",
+    "renderer",
+    "placardIds",
+    "prompt",
+    "altText",
+    "controls",
+    "outputs",
+    "timeWindowSeconds",
+    "sampleIntervals",
+    "reference",
+    "amplitudeUnit",
+    "claim",
+    "sources",
+    "bindings",
+    "modelBindings",
+    "behaviorTests",
+    "review"
+  ],
+  "title": "SignalParametersScene",
+  "type": "object"
+}

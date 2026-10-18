@@ -36,7 +36,8 @@ def create_app(data_dir=Path('work/backend'), *, analyzer=None, text_factory=Non
 
     # Shadow the frozen create route (it sits inside an included router) so a trusted upstream
     # can safely retry it with Idempotency-Key. It must match first; the schema keeps the frozen operation.
-    app.state.lab_keys=LabCreateKeys(Path(data_dir))
+    app.state.lab_keys=LabCreateKeys(Path(data_dir),app.state.lab.store)
+    app.state.lab.store=app.state.lab_keys.store
     app.add_api_route('/lab-sessions',start_lab_route(app.state.lab,app.state.lab_keys,owner_of,mutation_origin),
         methods=['POST'],status_code=201,include_in_schema=False)
     app.router.routes.insert(0,app.router.routes.pop())

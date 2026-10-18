@@ -1,0 +1,3 @@
+-r ../../prototypes/screen_capture/requirements.txt
+google-cloud-firestore>=2.21,<3
+google-auth>=2.40,<3

@@ -1,7 +1,7 @@
 // MV3 worker: binds one MATLAB tab, accepts one reader tab as controller and
 // routes floating-guidance/v0.1 messages between them. All routing state lives
 // in storage.session, so a suspended worker resumes without resurrecting stale
-// content: every reader hello starts a new generation.
+// content: each new reader stream/document starts a generation; retries reuse it.
 importScripts('config.js');
 const CFG=globalThis.KIKI_FG_CONFIG,KEY='kiki_fg';
 const READER=new Set(['reader_hello','reader_snapshot','reader_command_result','reader_bye']);
@@ -48,14 +48,26 @@ async function handle(k,m,sender){
  if(k==='reader'){
   if(m.type==='reader_hello'){
    if(typeof m.stream_id!=='string'||!/^[A-Za-z0-9-]{8,64}$/.test(m.stream_id))return {ok:false,error:'bad_stream'};
-   const old=s.controller;s.generation++;
-   s.controller={tabId,origin:originOf(sender.url),stream_id:m.stream_id,generation:s.generation};
+   const old=s.controller,document_id=sender.documentId||null;
+   // Mount/load/recheck may overlap. A second hello for the same publisher is
+   // a retry, not a takeover: invalidating its in-flight snapshots strands it.
+   if(old?.tabId===tabId&&old.stream_id===m.stream_id&&(old.document_id||null)===document_id)
+    return {ok:true,generation:old.generation,binding:s.binding?{handle:s.binding.handle,target_origin:s.binding.origin}:null};
+   s.generation++;
+   s.controller={tabId,origin:originOf(sender.url),document_id,stream_id:m.stream_id,generation:s.generation};
    if(old&&old.tabId!==tabId)await sendTab(old.tabId,{to:'reader',type:'fg_superseded'});
    log(s,'reader_hello',{generation:s.generation});await save(s);
    if(s.binding)await toTarget(s,{type:'fg_controller',generation:s.generation});
    return {ok:true,generation:s.generation,binding:s.binding?{handle:s.binding.handle,target_origin:s.binding.origin}:null};
   }
-  if(!s.controller||s.controller.tabId!==tabId)return {ok:false,error:'not_current_controller'};
+  if(!s.controller||s.controller.tabId!==tabId||(s.controller.document_id||null)!==(sender.documentId||null))
+   return {ok:false,error:'not_current_controller'};
+  // Additive identity fencing for control messages; the content bridge supplies
+  // it for existing page clients too. A late same-tab publisher cannot close or
+  // acknowledge commands on behalf of its replacement.
+  if((m.stream_id!==undefined||m.generation!==undefined)&&
+    (m.stream_id!==s.controller.stream_id||m.generation!==s.controller.generation))
+   return {ok:false,error:'stale_stream_or_generation'};
   if(m.type==='reader_snapshot'){
    const message=m.message;
    if(message?.stream_id!==s.controller.stream_id||message?.generation!==s.controller.generation)return {ok:false,error:'stale_stream_or_generation'};
@@ -79,6 +91,11 @@ async function handle(k,m,sender){
   if(m.type==='fg_rects'){if(s.controller)void toReader(s,{type:'fg_rects',rects:m.rects,viewport:m.viewport,moving:Boolean(m.moving)});return {ok:true};}
   if(m.type==='fg_command'){
    if(!s.controller)return {ok:false,error:'tracker_not_open'};
+   if(m.command==='focus_confirmation'){
+    if(m.command_version!==1||m.stream_id!==s.controller.stream_id||m.generation!==s.controller.generation)return {ok:false,error:'stale_stream_or_generation'};
+    await toReader(s,{type:'fg_command',command:m.command,command_version:1,stream_id:m.stream_id,generation:m.generation,context:m.context,lab_revision:m.lab_revision});
+    const tab=await chrome.tabs.update(s.controller.tabId,{active:true});await chrome.windows.update(tab.windowId,{focused:true}).catch(()=>{});return {ok:true};
+   }
    if(m.command==='open_tracker'){const tab=await chrome.tabs.update(s.controller.tabId,{active:true});await chrome.windows.update(tab.windowId,{focused:true}).catch(()=>{});return {ok:true};}
    if(!['pause','resume'].includes(m.command)||typeof m.request_id!=='string')return {ok:false,error:'unknown_command'};
    log(s,'command',{command:m.command});await save(s);

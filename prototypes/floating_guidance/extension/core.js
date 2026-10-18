@@ -37,7 +37,7 @@
   return {ok:true};
  }
  // High-water per attachment generation. The background increments the
- // generation on every reader hello, so a reloaded reader is a new generation.
+ // generation on each new reader stream/document; hello retries reuse it.
  function order(highWater,message){
   if(!highWater)return 'accept';
   if(message.generation<highWater.generation)return 'stale_generation';

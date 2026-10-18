@@ -1,0 +1,1110 @@
+{
+  "$defs": {
+    "BehaviorTest": {
+      "additionalProperties": false,
+      "description": "A renderer must reproduce these values before it may draw the scene.",
+      "properties": {
+        "inputs": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Inputs",
+          "type": "object"
+        },
+        "output": {
+          "title": "Output",
+          "type": "string"
+        },
+        "expected": {
+          "title": "Expected",
+          "type": "number"
+        },
+        "tolerance": {
+          "exclusiveMinimum": 0,
+          "maximum": 0.01,
+          "title": "Tolerance",
+          "type": "number"
+        }
+      },
+      "required": [
+        "inputs",
+        "output",
+        "expected",
+        "tolerance"
+      ],
+      "title": "BehaviorTest",
+      "type": "object"
+    },
+    "CanvasBehaviorCase": {
+      "additionalProperties": false,
+      "properties": {
+        "inputs": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Inputs",
+          "type": "object"
+        },
+        "cursor": {
+          "const": 0.25,
+          "title": "Cursor",
+          "type": "number"
+        },
+        "readouts": {
+          "items": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "title": "Readouts",
+          "type": "array"
+        },
+        "samples": {
+          "items": {
+            "$ref": "#/$defs/TraceSamples"
+          },
+          "title": "Samples",
+          "type": "array"
+        },
+        "hasExtraSvg": {
+          "title": "Hasextrasvg",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "inputs",
+        "cursor",
+        "readouts",
+        "samples",
+        "hasExtraSvg"
+      ],
+      "title": "CanvasBehaviorCase",
+      "type": "object"
+    },
+    "CanvasControl": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "pattern": "^[a-zA-Z][a-zA-Z0-9]*$",
+          "title": "Name",
+          "type": "string"
+        },
+        "label": {
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "min": {
+          "title": "Min",
+          "type": "number"
+        },
+        "max": {
+          "title": "Max",
+          "type": "number"
+        },
+        "step": {
+          "exclusiveMinimum": 0,
+          "title": "Step",
+          "type": "number"
+        },
+        "default": {
+          "type": "number",
+          "title": "Default"
+        },
+        "unit": {
+          "enum": [
+            "",
+            "normalized",
+            "Hz",
+            "degree"
+          ],
+          "title": "Unit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "label",
+        "min",
+        "max",
+        "step",
+        "default",
+        "unit"
+      ],
+      "title": "CanvasControl",
+      "type": "object"
+    },
+    "CanvasScene": {
+      "additionalProperties": false,
+      "properties": {
+        "schema": {
+          "const": "cam-interactive-scene/v1",
+          "title": "Schema",
+          "type": "string"
+        },
+        "modelVersion": {
+          "const": "cam-packets/3",
+          "title": "Modelversion",
+          "type": "string"
+        },
+        "conceptId": {
+          "pattern": "^C-AM-(0[1-9]|10)$",
+          "title": "Conceptid",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "signal",
+            "flow",
+            "am",
+            "dsb",
+            "spectrum",
+            "receiver",
+            "filter",
+            "phase_recovery",
+            "fm",
+            "pm"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "controls": {
+          "items": {
+            "$ref": "#/$defs/CanvasControl"
+          },
+          "maxItems": 3,
+          "minItems": 1,
+          "title": "Controls",
+          "type": "array"
+        },
+        "visualBrief": {
+          "$ref": "#/$defs/VisualBrief"
+        },
+        "walkthrough": {
+          "items": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "title": "Walkthrough",
+          "type": "array"
+        },
+        "sourceInteractive": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Sourceinteractive",
+          "type": "object"
+        },
+        "assumptions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Assumptions",
+          "type": "array"
+        },
+        "review": {
+          "$ref": "#/$defs/SavedSceneReview"
+        },
+        "image": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Image",
+          "type": "object"
+        }
+      },
+      "required": [
+        "schema",
+        "modelVersion",
+        "conceptId",
+        "kind",
+        "title",
+        "controls",
+        "visualBrief",
+        "walkthrough",
+        "sourceInteractive",
+        "assumptions",
+        "review",
+        "image"
+      ],
+      "title": "CanvasScene",
+      "type": "object"
+    },
+    "ClipTiming": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "clip_duration_only",
+          "title": "Kind",
+          "type": "string"
+        },
+        "alignment": {
+          "const": "not_performed",
+          "title": "Alignment",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "alignment"
+      ],
+      "title": "ClipTiming",
+      "type": "object"
+    },
+    "ConceptCanvasArtifact": {
+      "additionalProperties": false,
+      "properties": {
+        "artifactId": {
+          "pattern": "^SCENE-AM-(0[1-9]|10)-canvas$",
+          "title": "Artifactid",
+          "type": "string"
+        },
+        "renderer": {
+          "const": "cam-concept-canvas/v1",
+          "title": "Renderer",
+          "type": "string"
+        },
+        "placardIds": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 4,
+          "minItems": 1,
+          "title": "Placardids",
+          "type": "array"
+        },
+        "scene": {
+          "$ref": "#/$defs/CanvasScene"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/$defs/SceneSource"
+          },
+          "title": "Sources",
+          "type": "array"
+        },
+        "bindings": {
+          "items": {
+            "$ref": "#/$defs/SourceBinding"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "title": "Bindings",
+          "type": "array"
+        },
+        "modelBindings": {
+          "items": {
+            "$ref": "#/$defs/SourceBinding"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "title": "Modelbindings",
+          "type": "array"
+        },
+        "behaviorTests": {
+          "items": {
+            "$ref": "#/$defs/CanvasBehaviorCase"
+          },
+          "maxItems": 7,
+          "minItems": 3,
+          "title": "Behaviortests",
+          "type": "array"
+        },
+        "claim": {
+          "const": "ideal_teaching_model",
+          "title": "Claim",
+          "type": "string"
+        },
+        "review": {
+          "$ref": "#/$defs/SceneReview"
+        }
+      },
+      "required": [
+        "artifactId",
+        "renderer",
+        "placardIds",
+        "scene",
+        "sources",
+        "bindings",
+        "modelBindings",
+        "behaviorTests",
+        "claim",
+        "review"
+      ],
+      "title": "ConceptCanvasArtifact",
+      "type": "object"
+    },
+    "ConceptNarrationRendition": {
+      "additionalProperties": false,
+      "properties": {
+        "lang": {
+          "enum": [
+            "en",
+            "or"
+          ],
+          "title": "Lang",
+          "type": "string"
+        },
+        "assetId": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Assetid",
+          "type": "string"
+        },
+        "mimeType": {
+          "const": "audio/wav",
+          "title": "Mimetype",
+          "type": "string"
+        },
+        "bytes": {
+          "exclusiveMinimum": 44,
+          "maximum": 20000000,
+          "title": "Bytes",
+          "type": "integer"
+        },
+        "durationSeconds": {
+          "exclusiveMinimum": 0,
+          "maximum": 600,
+          "title": "Durationseconds",
+          "type": "number"
+        },
+        "sourceTextSha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sourcetextsha256",
+          "type": "string"
+        },
+        "speechScriptSha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Speechscriptsha256",
+          "type": "string"
+        },
+        "audioSha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Audiosha256",
+          "type": "string"
+        },
+        "narrationKind": {
+          "enum": [
+            "generated",
+            "recorded"
+          ],
+          "title": "Narrationkind",
+          "type": "string"
+        },
+        "speech": {
+          "$ref": "#/$defs/SpeechModel"
+        },
+        "timing": {
+          "$ref": "#/$defs/ClipTiming"
+        },
+        "review": {
+          "$ref": "#/$defs/NarrationReview"
+        },
+        "scope": {
+          "const": "concept",
+          "title": "Scope",
+          "type": "string"
+        },
+        "conceptId": {
+          "pattern": "^C-AM-(0[1-9]|10)$",
+          "title": "Conceptid",
+          "type": "string"
+        },
+        "renditionId": {
+          "pattern": "^C-AM-(0[1-9]|10)\\.concept\\.(en|or)$",
+          "title": "Renditionid",
+          "type": "string"
+        },
+        "placardIds": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 4,
+          "minItems": 1,
+          "title": "Placardids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "lang",
+        "assetId",
+        "mimeType",
+        "bytes",
+        "durationSeconds",
+        "sourceTextSha256",
+        "speechScriptSha256",
+        "audioSha256",
+        "narrationKind",
+        "speech",
+        "timing",
+        "review",
+        "scope",
+        "conceptId",
+        "renditionId",
+        "placardIds"
+      ],
+      "title": "ConceptNarrationRendition",
+      "type": "object"
+    },
+    "JsonValue": {},
+    "MediaSource": {
+      "additionalProperties": false,
+      "properties": {
+        "origin": {
+          "title": "Origin",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Url"
+        }
+      },
+      "required": [
+        "origin",
+        "label"
+      ],
+      "title": "MediaSource",
+      "type": "object"
+    },
+    "NarrationRendition": {
+      "additionalProperties": false,
+      "properties": {
+        "renditionId": {
+          "pattern": "^[A-Za-z0-9-]{1,96}\\.(en|or)$",
+          "title": "Renditionid",
+          "type": "string"
+        },
+        "placardId": {
+          "maxLength": 96,
+          "minLength": 1,
+          "title": "Placardid",
+          "type": "string"
+        },
+        "lang": {
+          "enum": [
+            "en",
+            "or"
+          ],
+          "title": "Lang",
+          "type": "string"
+        },
+        "assetId": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Assetid",
+          "type": "string"
+        },
+        "mimeType": {
+          "const": "audio/wav",
+          "title": "Mimetype",
+          "type": "string"
+        },
+        "bytes": {
+          "exclusiveMinimum": 44,
+          "maximum": 20000000,
+          "title": "Bytes",
+          "type": "integer"
+        },
+        "durationSeconds": {
+          "exclusiveMinimum": 0,
+          "maximum": 600,
+          "title": "Durationseconds",
+          "type": "number"
+        },
+        "sourceTextSha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sourcetextsha256",
+          "type": "string"
+        },
+        "speechScriptSha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Speechscriptsha256",
+          "type": "string"
+        },
+        "audioSha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Audiosha256",
+          "type": "string"
+        },
+        "narrationKind": {
+          "enum": [
+            "generated",
+            "recorded"
+          ],
+          "title": "Narrationkind",
+          "type": "string"
+        },
+        "speech": {
+          "$ref": "#/$defs/SpeechModel"
+        },
+        "timing": {
+          "$ref": "#/$defs/ClipTiming"
+        },
+        "review": {
+          "$ref": "#/$defs/NarrationReview"
+        }
+      },
+      "required": [
+        "renditionId",
+        "placardId",
+        "lang",
+        "assetId",
+        "mimeType",
+        "bytes",
+        "durationSeconds",
+        "sourceTextSha256",
+        "speechScriptSha256",
+        "audioSha256",
+        "narrationKind",
+        "speech",
+        "timing",
+        "review"
+      ],
+      "title": "NarrationRendition",
+      "type": "object"
+    },
+    "NarrationReview": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": [
+            "unreviewed",
+            "reviewed"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "pronunciation": {
+          "enum": [
+            "pending",
+            "accepted",
+            "rejected"
+          ],
+          "title": "Pronunciation",
+          "type": "string"
+        },
+        "nativeOdia": {
+          "enum": [
+            "pending",
+            "accepted",
+            "rejected"
+          ],
+          "title": "Nativeodia",
+          "type": "string"
+        },
+        "spokenFidelity": {
+          "enum": [
+            "pending",
+            "accepted",
+            "rejected"
+          ],
+          "title": "Spokenfidelity",
+          "type": "string"
+        },
+        "audioQuality": {
+          "enum": [
+            "pending",
+            "accepted",
+            "rejected"
+          ],
+          "title": "Audioquality",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "pronunciation",
+        "nativeOdia",
+        "spokenFidelity",
+        "audioQuality"
+      ],
+      "title": "NarrationReview",
+      "type": "object"
+    },
+    "PhaseRecoveryScene": {
+      "additionalProperties": false,
+      "properties": {
+        "artifactId": {
+          "pattern": "^[A-Za-z0-9-]{1,96}$",
+          "title": "Artifactid",
+          "type": "string"
+        },
+        "renderer": {
+          "const": "coherent-phase-recovery/v1",
+          "title": "Renderer",
+          "type": "string"
+        },
+        "placardIds": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 4,
+          "minItems": 1,
+          "title": "Placardids",
+          "type": "array"
+        },
+        "prompt": {
+          "minLength": 1,
+          "title": "Prompt",
+          "type": "string"
+        },
+        "controls": {
+          "items": {
+            "$ref": "#/$defs/SceneControl"
+          },
+          "maxItems": 1,
+          "minItems": 1,
+          "title": "Controls",
+          "type": "array"
+        },
+        "outputs": {
+          "items": {
+            "$ref": "#/$defs/SceneOutput"
+          },
+          "maxItems": 1,
+          "minItems": 1,
+          "title": "Outputs",
+          "type": "array"
+        },
+        "comparisonDegrees": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 6,
+          "minItems": 1,
+          "title": "Comparisondegrees",
+          "type": "array"
+        },
+        "residual": {
+          "const": "not_modelled",
+          "title": "Residual",
+          "type": "string"
+        },
+        "claim": {
+          "const": "ideal_teaching_model",
+          "title": "Claim",
+          "type": "string"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/$defs/MediaSource"
+          },
+          "title": "Sources",
+          "type": "array"
+        },
+        "bindings": {
+          "items": {
+            "$ref": "#/$defs/SourceBinding"
+          },
+          "minItems": 1,
+          "title": "Bindings",
+          "type": "array"
+        },
+        "behaviorTests": {
+          "items": {
+            "$ref": "#/$defs/BehaviorTest"
+          },
+          "minItems": 1,
+          "title": "Behaviortests",
+          "type": "array"
+        },
+        "review": {
+          "$ref": "#/$defs/SceneReview"
+        }
+      },
+      "required": [
+        "artifactId",
+        "renderer",
+        "placardIds",
+        "prompt",
+        "controls",
+        "outputs",
+        "comparisonDegrees",
+        "residual",
+        "claim",
+        "sources",
+        "bindings",
+        "behaviorTests",
+        "review"
+      ],
+      "title": "PhaseRecoveryScene",
+      "type": "object"
+    },
+    "SavedSceneReview": {
+      "additionalProperties": false,
+      "properties": {
+        "scientific": {
+          "enum": [
+            "pending",
+            "accepted",
+            "rejected"
+          ],
+          "title": "Scientific",
+          "type": "string"
+        },
+        "sourceGrounding": {
+          "const": "authored_concept",
+          "title": "Sourcegrounding",
+          "type": "string"
+        }
+      },
+      "required": [
+        "scientific",
+        "sourceGrounding"
+      ],
+      "title": "SavedSceneReview",
+      "type": "object"
+    },
+    "SceneControl": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "pattern": "^[a-z][a-zA-Z0-9]{0,31}$",
+          "title": "Name",
+          "type": "string"
+        },
+        "label": {
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "unit": {
+          "const": "degree",
+          "title": "Unit",
+          "type": "string"
+        },
+        "min": {
+          "title": "Min",
+          "type": "number"
+        },
+        "max": {
+          "title": "Max",
+          "type": "number"
+        },
+        "step": {
+          "exclusiveMinimum": 0,
+          "title": "Step",
+          "type": "number"
+        },
+        "default": {
+          "type": "number",
+          "title": "Default"
+        }
+      },
+      "required": [
+        "name",
+        "label",
+        "unit",
+        "min",
+        "max",
+        "step",
+        "default"
+      ],
+      "title": "SceneControl",
+      "type": "object"
+    },
+    "SceneOutput": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "pattern": "^[a-z][a-zA-Z0-9]{0,31}$",
+          "title": "Name",
+          "type": "string"
+        },
+        "label": {
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "unit": {
+          "const": "dimensionless",
+          "title": "Unit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "label",
+        "unit"
+      ],
+      "title": "SceneOutput",
+      "type": "object"
+    },
+    "SceneReview": {
+      "additionalProperties": false,
+      "properties": {
+        "scientific": {
+          "enum": [
+            "pending",
+            "accepted",
+            "rejected"
+          ],
+          "title": "Scientific",
+          "type": "string"
+        }
+      },
+      "required": [
+        "scientific"
+      ],
+      "title": "SceneReview",
+      "type": "object"
+    },
+    "SceneSource": {
+      "additionalProperties": false,
+      "properties": {
+        "origin": {
+          "title": "Origin",
+          "type": "string"
+        },
+        "label": {
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Url"
+        }
+      },
+      "required": [
+        "origin",
+        "label"
+      ],
+      "title": "SceneSource",
+      "type": "object"
+    },
+    "SourceBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "title": "SourceBinding",
+      "type": "object"
+    },
+    "SpeechModel": {
+      "additionalProperties": false,
+      "description": "Model revision of a clip: what produced the speech, never a secret or request body.",
+      "properties": {
+        "provider": {
+          "minLength": 1,
+          "title": "Provider",
+          "type": "string"
+        },
+        "model": {
+          "minLength": 1,
+          "title": "Model",
+          "type": "string"
+        },
+        "voice": {
+          "minLength": 1,
+          "title": "Voice",
+          "type": "string"
+        },
+        "style": {
+          "minLength": 1,
+          "title": "Style",
+          "type": "string"
+        },
+        "generator": {
+          "minLength": 1,
+          "title": "Generator",
+          "type": "string"
+        },
+        "generatedAt": {
+          "minLength": 1,
+          "title": "Generatedat",
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider",
+        "model",
+        "voice",
+        "style",
+        "generator",
+        "generatedAt"
+      ],
+      "title": "SpeechModel",
+      "type": "object"
+    },
+    "TraceSamples": {
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "values": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 6,
+          "minItems": 6,
+          "title": "Values",
+          "type": "array"
+        }
+      },
+      "required": [
+        "label",
+        "values"
+      ],
+      "title": "TraceSamples",
+      "type": "object"
+    },
+    "VisualBrief": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "waveform",
+            "block",
+            "graph",
+            "table"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "alt": {
+          "title": "Alt",
+          "type": "string"
+        },
+        "from": {
+          "$ref": "#/$defs/SceneSource"
+        }
+      },
+      "required": [
+        "kind",
+        "description",
+        "alt",
+        "from"
+      ],
+      "title": "VisualBrief",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "const": "concept-media-manifest/v1",
+      "title": "Schema",
+      "type": "string"
+    },
+    "planId": {
+      "const": "LP-ANALOG-MODULATION",
+      "title": "Planid",
+      "type": "string"
+    },
+    "conceptId": {
+      "pattern": "^C-AM-(0[1-9]|10)$",
+      "title": "Conceptid",
+      "type": "string"
+    },
+    "catalogVersion": {
+      "pattern": "^am-[a-f0-9]{24}$",
+      "title": "Catalogversion",
+      "type": "string"
+    },
+    "mediaRevision": {
+      "pattern": "^cm-[a-f0-9]{24}$",
+      "title": "Mediarevision",
+      "type": "string"
+    },
+    "release": {
+      "enum": [
+        "sample_unreviewed",
+        "reviewed"
+      ],
+      "title": "Release",
+      "type": "string"
+    },
+    "narration": {
+      "items": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/NarrationRendition"
+          },
+          {
+            "$ref": "#/$defs/ConceptNarrationRendition"
+          }
+        ]
+      },
+      "title": "Narration",
+      "type": "array"
+    },
+    "artifacts": {
+      "items": {
+        "discriminator": {
+          "mapping": {
+            "cam-concept-canvas/v1": "#/$defs/ConceptCanvasArtifact",
+            "coherent-phase-recovery/v1": "#/$defs/PhaseRecoveryScene"
+          },
+          "propertyName": "renderer"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/$defs/ConceptCanvasArtifact"
+          },
+          {
+            "$ref": "#/$defs/PhaseRecoveryScene"
+          }
+        ]
+      },
+      "title": "Artifacts",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema",
+    "planId",
+    "conceptId",
+    "catalogVersion",
+    "mediaRevision",
+    "release",
+    "narration",
+    "artifacts"
+  ],
+  "title": "CandidateMediaManifest",
+  "type": "object"
+}

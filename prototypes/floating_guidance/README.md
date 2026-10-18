@@ -1,5 +1,12 @@
 # Floating Kiki windows — first slice
 
+Current integration build: **0.1.1**, with idempotent reader handshakes and fenced bridge
+responses. See [controller recovery](../../docs/decisions/0015-floating-controller-recovery.md).
+Run `node --test prototypes/floating_guidance/tests/test-controller-lifecycle.mjs` from
+the repo root; set `KIKI_WEB_CHECKOUT` to include the actual web publisher regression.
+The offline evaluation now includes receiver/controller checks. New stream/document
+generations still reject old snapshots; the fix does not disable capture safety.
+
 Kiki mini windows inside the shared MATLAB/Simulink Online tab. They show the reader's current and next step, the accepted screen observation and the connection state, so the student does not need to switch tabs. Design: [handoff](../../docs/handoffs/floating-guidance-windows.md), [ADR 0008](../../docs/decisions/0008-floating-guidance-windows-first-slice.md), [ADR 0009](../../docs/decisions/0009-floating-window-capture-redaction.md), [test plan](../../docs/plans/floating-guidance-test-plan.md).
 
 The tracker stays authoritative. The windows copy its text, never choose a step, and never count as a lab action. Pause/resume from a window calls the reader's existing revision-checked lab action.

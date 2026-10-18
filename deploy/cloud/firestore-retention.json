@@ -1,0 +1,11 @@
+{
+  "indexes": [],
+  "fieldOverrides": [
+    {"collectionGroup":"kiki_cloud_frame_chunks","fieldPath":"expires_at","ttl":true,"indexes":[]},
+    {"collectionGroup":"kiki_cloud_frame_manifests","fieldPath":"expires_at","ttl":true,"indexes":[]},
+    {"collectionGroup":"kiki_cloud_checked_frame_chunks","fieldPath":"expires_at","ttl":true,"indexes":[]},
+    {"collectionGroup":"kiki_cloud_checked_frame_manifests","fieldPath":"expires_at","ttl":true,"indexes":[]},
+    {"collectionGroup":"kiki_cloud_frame_chunks","fieldPath":"bytes","indexes":[]},
+    {"collectionGroup":"kiki_cloud_checked_frame_chunks","fieldPath":"bytes","indexes":[]}
+  ]
+}

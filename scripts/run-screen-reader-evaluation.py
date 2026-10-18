@@ -14,6 +14,9 @@ def main():
   report['fixture_sha256'][case['id']]=actual
  def run(name,command,cwd=ROOT):
   started=time.monotonic()
+  # Keep child checks in the interpreter/venv that invoked this runner. Windows
+  # executable lookup can otherwise select base Python despite a Scripts PATH.
+  if command[0]=='python':command=[sys.executable,*command[1:]]
   # Offline checks receive no provider secrets, even when the shell has them.
   env={k:v for k,v in os.environ.items() if not k.startswith(('GEMINI_','GOOGLE_API_KEY'))}
   if name=='live-vision':env=os.environ.copy()
@@ -31,6 +34,7 @@ def main():
    print(f'Failed offline check diagnostics ({name}; full log in artifact):\n'+log[-18000:],flush=True)
   return status==0
  jobs=[('site-build',['node','scripts/build.mjs'],site),('python',['python','-m','unittest','discover','-s','tests','-q'],ROOT),('node',['node','--test',*sorted(str(Path(p).relative_to(site)) for p in glob.glob(str(site/'scripts/test-*.mjs')))],site),('replay-serial',['node','scripts/replay-lab.mjs','--io-mode','serial','--output',str(output/'replay-serial.json')],site),('replay-batched',['node','scripts/replay-lab.mjs','--io-mode','batched','--output',str(output/'replay-batched.json')],site),('replay-context-control',['node','scripts/replay-lab.mjs','--io-mode','batched','--context-mode','per_event','--output',str(output/'replay-context-control.json')],site),('context-benchmark',['node','scripts/benchmark-context-batch.mjs','--rtt-ms','20','--repeats','3','--output',str(output/'context-benchmark.json')],site),('database-benchmark',['node','scripts/benchmark-provider-io.mjs','--rtt-ms','20','--repeats','3','--output',str(output/'database-benchmark.json')],site),('pinned-context',['python','scripts/verify-context.py'],ROOT),('frozen-baseline',['python','scripts/check-screen-reader-baseline.py'],ROOT)]
+ jobs.insert(3,('floating-controller',['node','--test','../floating_guidance/tests/test-core.mjs','../floating_guidance/tests/test-controller-lifecycle.mjs'],site))
  results=[run(*job) for job in jobs]
  if args.live:
   live=output/'live-vision.json';ok=run('live-vision',['python','scripts/compare-json-stream.py','--live','--arms','stream','--manifest','fixtures/json-stream/manifest.json','--repeats','1','--output',str(live)])

@@ -128,6 +128,19 @@ async def run():
             label = await kiki(target, '.label')
             check('cold connect labels the step as saved, sharing off', label and label['text'] == 'Saved step · share this tab to continue', label)
             check('no model call before sharing', fixture()['model_calls'] == 0)
+            # Duplicate hello used to bump the generation underneath this publisher.
+            # Reproduce it through the real page/content-script/worker boundary.
+            previous = await reader.evaluate('KikiFloating.status()')
+            await reader.evaluate("""()=>{const s=KikiFloating.status();for(let i=0;i<2;i++)
+              window.postMessage({channel:'kiki-floating-guidance',direction:'page',type:'reader_hello',
+                stream_id:s.stream_id,bridge_id:9000+i},location.origin);} """)
+            continued = await until(lambda: reader.evaluate('KikiFloating.status()'),
+                                    lambda s: s['sequence'] > previous['sequence'] and
+                                    (s['display'] or {}).get('result') in ('displayed', 'duplicate'), 10)
+            routed = await sw.evaluate('kikiTest.state()')
+            check('duplicate hello retains generation and snapshots recover without manual recheck',
+                  continued and routed['controller']['generation'] == previous['generation'],
+                  {'page_generation': previous['generation'], 'worker_generation': routed['controller']['generation']})
             await shot(target, '01-cold-connect')
 
             # 2. Share the target tab; frames are masked, analysis runs on the fixture.

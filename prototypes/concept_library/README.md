@@ -1,5 +1,30 @@
 # Stored concept content and publication pipeline
 
+## Current: all ten modules, one plug-in contract
+
+Use [the all-CAM handoff](../../docs/handoffs/all-cam-compatibility.md). `candidate-cam`
+exports all ten scenes and 26 recordings, preserving the web C-AM-08 bilingual package.
+It retains the existing v1 envelope, adds one common canvas renderer family and an honest
+concept-audio variant. This supersedes the C-AM-01-only/v2 proposal. Current web consumer
+unions/renderer/player integration still need the shared update; candidate apply is blocked.
+
+```sh
+python -X utf8 -B scripts/publish-concept-library.py --web-root /path/to/kiki-web --contract candidate-cam --output work/all-cam
+```
+
+## Learning compatibility continuation — 18 October
+
+The default v1 export is unchanged. An export-only `--contract candidate-signal` now adds
+C-AM-01's typed `signal-parameters/v1` scene alongside its four existing clips. The
+current web consumer still requires its coordinated decoder/renderer update; candidate
+publication is blocked. Whole-concept narration is still excluded pending its separate
+audio-scope contract. See [the implementation handoff](../../docs/handoffs/learning-content-compatibility.md)
+for schemas, conformance examples, checks and exact Mac acceptance steps.
+
+```sh
+python -X utf8 -B scripts/publish-concept-library.py --web-root /path/to/kiki-web --concepts C-AM-01 --contract candidate-signal --output work/cam01-candidate
+```
+
 The complete ten-concept batch is available as a versioned **SQLite metadata
 database plus immutable asset files**, ready to query after cloning. It contains
 40 authored English/mixed Odia–English placards, 22 recordings (793.8 seconds),

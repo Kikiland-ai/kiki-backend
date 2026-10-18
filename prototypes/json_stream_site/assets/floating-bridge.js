@@ -11,7 +11,7 @@ export function createFloatingPublisher({onCommand=async()=>{},onChange=()=>{}}=
  const waiting=new Map(),log=[];
  const record=(event,detail={})=>{log.push({at:new Date().toISOString(),event,...detail});if(log.length>200)log.shift();};
  function post(message){return new Promise(resolve=>{const bridge_id=++bridgeSeq;waiting.set(bridge_id,resolve);
-  window.postMessage({channel:CHANNEL,direction:'page',bridge_id,...message},location.origin);
+  window.postMessage({channel:CHANNEL,direction:'page',bridge_id,stream_id:streamId,generation,...message},location.origin);
   setTimeout(()=>{if(waiting.delete(bridge_id))resolve({ok:false,error:'bridge_timeout'});},5000);});}
  async function hello(){
   const r=await post({type:'reader_hello',stream_id:streamId,lab_session_id:source()?.state?.lab_session_id||null});
@@ -21,7 +21,7 @@ export function createFloatingPublisher({onCommand=async()=>{},onChange=()=>{}}=
  addEventListener('message',e=>{
   if(e.source!==window||e.origin!==location.origin||e.data?.channel!==CHANNEL||e.data.direction!=='extension')return;
   const m=e.data;
-  if(m.type==='response'){const resolve=waiting.get(m.bridge_id);if(resolve){waiting.delete(m.bridge_id);resolve(m.result);}return;}
+  if(m.type==='response'){if(m.stream_id&&m.stream_id!==streamId)return;const resolve=waiting.get(m.bridge_id);if(resolve){waiting.delete(m.bridge_id);resolve(m.result);}return;}
   if(m.type==='extension_present'){if(!present){present=true;record('extension_present',{version:m.version});void hello();}return;}
   if(m.type==='fg_target_bound'){binding={handle:m.handle,target_origin:m.target_origin};rectReports=[];viewport=null;record('target_bound');onChange();void flush(true);}
   else if(m.type==='fg_target_closed'){binding=null;rectReports=[];viewport=null;record('target_closed');onChange();}
@@ -33,6 +33,7 @@ export function createFloatingPublisher({onCommand=async()=>{},onChange=()=>{}}=
   }else if(m.type==='fg_command')void command(m);
  });
  async function command(m){
+  if(superseded||generation===null)return;
   let ok=true,error=null;record('command',{command:m.command});
   try{await onCommand(m.command);}catch(err){ok=false;error=String(err?.message||err).slice(0,200);}
   await post({type:'reader_command_result',request_id:m.request_id,ok,error});void flush(true);
@@ -50,7 +51,7 @@ export function createFloatingPublisher({onCommand=async()=>{},onChange=()=>{}}=
    action_id:body.instructions.now?.action_id||null,observation_id:body.screen_context.observation_id,screen:body.screen_context.status,display:r?.result?.result||r?.error||null});
  }
  setInterval(()=>void flush(false),1000);
- addEventListener('pagehide',()=>{if(present&&generation)window.postMessage({channel:CHANNEL,direction:'page',bridge_id:0,type:'reader_bye'},location.origin);});
+ addEventListener('pagehide',()=>{if(present&&generation)window.postMessage({channel:CHANNEL,direction:'page',bridge_id:0,type:'reader_bye',stream_id:streamId,generation},location.origin);});
  // Decide how a sampled frame may be used before any JPEG is encoded.
  function sampleSafety(track,width,height){const safety=decideSafety(track,width,height);frames[safety.mode]++;return safety;}
  function decideSafety(track,width,height){

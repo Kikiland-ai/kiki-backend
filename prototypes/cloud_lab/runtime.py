@@ -2,6 +2,7 @@
 import asyncio
 import json
 import os
+import re
 import time
 import uuid
 
@@ -35,6 +36,12 @@ class CloudAnalyzer(JsonStreamingAnalyzer):
 
 
 def create_app(*, client=None, analyzer=None, proxy_secret=None, clock=time.time, collection_prefix='kiki_cloud'):
+    trial_value = os.environ.get('KIKI_TRIAL_MAX_CHECKS')
+    trial_limit = None
+    if trial_value is not None:
+        if not re.fullmatch(r'[1-9][0-9]{0,3}', trial_value) or int(trial_value) > 1000:
+            raise RuntimeError('KIKI_TRIAL_MAX_CHECKS must be an integer from 1 to 1000')
+        trial_limit = int(trial_value)
     secret = os.environ.get('KIKI_PROXY_SECRET', '') if proxy_secret is None else proxy_secret
     if len(secret) < 32:
         raise RuntimeError('Cloud lab requires the managed proxy secret')
@@ -46,15 +53,17 @@ def create_app(*, client=None, analyzer=None, proxy_secret=None, clock=time.time
         from google.cloud import firestore
         client = firestore.Client(project=project, database=database)
     captures = FirestoreCaptureStore(client, collection_prefix, clock=clock)
-    store = FirestoreLabStore(client, collection_prefix, clock=clock)
+    store = FirestoreLabStore(client, collection_prefix, clock=clock, trial_check_limit=trial_limit)
     images = FirestoreImages(client, collection_prefix=collection_prefix+'_checked', clock=clock,
                              write_guard=CheckedFrameWriteGuard(client, collection_prefix, clock=clock))
     if analyzer is None:
         analyzer = CloudAnalyzer()
         analyzer.provider = FirestoreStreamingProviderPool(client, collection_prefix=collection_prefix, clock=clock)
+    if trial_limit is not None and len(getattr(getattr(analyzer, 'provider', None), 'keys', ())) > 3:
+        raise RuntimeError('The approved trial permits at most three configured provider keys')
     lab = CloudLabService(store, captures.capture_access, analyzer, images=images, clock=clock,
                           capture_status=lambda sid, owner: {"status": captures.session(sid, owner)["status"]},
-                          capture_snapshot=store.capture_snapshot)
+                          capture_snapshot=store.capture_snapshot, trial_check_limit=trial_limit)
     app = FastAPI(title='Kiki cloud lab engine', version='1.0.0')
     app.state.store, app.state.lab, app.state.captures = store, lab, captures
     app.state.lab_keys = CloudLabCreateKeys(store)
@@ -82,6 +91,7 @@ def create_app(*, client=None, analyzer=None, proxy_secret=None, clock=time.time
     @app.get('/health')
     async def health():
         return {'status': 'ok', 'mode': 'cloud_screen_lab', 'api_schema': 'kiki-prototype-api/v1',
+                'trial_check_limit': lab.trial_check_limit,
                 'lab_storage': 'named_firestore', 'image_storage': 'private_latest_firestore_chunks_30s_access_ttl',
                 'analysis': {'provider': 'gemini', 'configured': analyzer.configured, 'model': getattr(analyzer, 'model', None)},
                 'json_stream': {'available': bool(getattr(analyzer, 'supports_stream', False)), 'wire_format': 'lab-analysis-stream/v2'},

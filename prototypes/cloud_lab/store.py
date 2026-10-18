@@ -33,13 +33,17 @@ def encode(value):
 
 
 class FirestoreLabStore:
-    def __init__(self, client, collection_prefix="kiki_cloud", clock=time.time):
+    def __init__(self, client, collection_prefix="kiki_cloud", clock=time.time, *, trial_check_limit=None):
         if getattr(client, "_database", None) == "(default)":
             raise ValueError("Cloud labs require an explicit named Firestore database")
         self.client = client
+        if trial_check_limit is not None and (type(trial_check_limit) is not int or not 1 <= trial_check_limit <= 1000):
+            raise ValueError("Trial check limit must be an integer from 1 to 1000")
+        self.trial_check_limit = trial_check_limit
         self.clock = clock
         self.labs = client.collection(collection_prefix + "_labs")
         self.captures = client.collection(collection_prefix + "_captures")
+        self.trial_budget = client.collection(collection_prefix + "_trial_budgets").document("approved-live-trial")
         self.receipts = client.collection(collection_prefix + "_lab_create_receipts")
         self._staged = ContextVar("cloud_lab_staged_create", default=None)
 
@@ -168,6 +172,22 @@ class FirestoreLabStore:
                 if state.get("workspace", {}).get("capture_session_id") != capture_guard["capture_id"]:
                     raise HTTPException(409, "Attached capture changed")
                 self._verify_capture_guard(transaction, capture_guard, state["owner_id"])
+            budget = None
+            if self.trial_check_limit is not None and event.get("event_type") == "analysis_started":
+                snapshot = self.trial_budget.get(transaction=transaction)
+                budget = snapshot.to_dict() if snapshot.exists else {
+                    "schema": "cloud-trial-budget/v1", "limit": self.trial_check_limit, "count": 0}
+                if (budget.get("schema") != "cloud-trial-budget/v1"
+                        or budget.get("limit") != self.trial_check_limit
+                        or type(budget.get("count")) is not int or budget["count"] < 0):
+                    raise HTTPException(429, "Approved trial budget configuration changed; operator review required")
+                if budget["count"] >= self.trial_check_limit:
+                    raise HTTPException(429, "The approved screen-check trial budget is exhausted")
+                budget = {**budget, "count": budget["count"] + 1}
+            # All reads precede writes. Admission, lab projection and journal are
+            # one commit; a conflict/crash cannot lose or duplicate a budget slot.
+            if budget is not None:
+                transaction.set(self.trial_budget, budget)
             transaction.set(ref, self._body(state))
             transaction.create(self._event_ref(ref, event), {"sequence": event["event_sequence"],
                                                            "event_id": event["event_id"], "body_json": encode(event)})

@@ -1,5 +1,7 @@
 # Lab integration small fixes; SSH forward chosen — 18 October 2026
 
+**Continuing on another machine:** start with the [integration testing and deployment handoff](../handoffs/integration-and-deployment.md).
+
 The user chose the SSH forward for connected testing ([plan](connected-integration-testing.md), setup 1) and asked for the small fixes in both repos.
 
 kiki-backend (branch `fix/lab-integration-small`):

@@ -1,6 +1,7 @@
 // Builds the unpacked extension in two variants under work/floating-guidance/:
 //   release/  hosted reader Sites + matlab.mathworks.com only
 //   dev/      adds http://localhost:8870 (reader) and :8871 (controlled target),
+//             kiki-web Lab mode's local origins (:5174, matching its API CORS defaults),
 //             the visible capture canary and an open shadow root for tests.
 // Never give the dev build to a learner. Run: node prototypes/floating_guidance/scripts/build-extension.mjs
 import {mkdir,readFile,writeFile,copyFile,rm} from 'node:fs/promises';
@@ -9,7 +10,7 @@ const VERSION='0.1.0';
 const HOSTED_READERS=['https://kiki-json-stream.woodsycarp256.chatgpt.site','https://kiki-screen-receiver.woodsycarp256.chatgpt.site'];
 const variants={
  release:{readers:HOSTED_READERS,targets:['https://matlab.mathworks.com'],dev:false},
- dev:{readers:[...HOSTED_READERS,'http://localhost:8870'],targets:['https://matlab.mathworks.com','http://localhost:8871'],dev:true},
+ dev:{readers:[...HOSTED_READERS,'http://localhost:8870','http://127.0.0.1:5174','http://localhost:5174'],targets:['https://matlab.mathworks.com','http://localhost:8871'],dev:true},
 };
 const files=['core.js','ui.js','content.js','bridge.js','background.js','popup.html','popup.js'];
 for(const [name,v] of Object.entries(variants)){

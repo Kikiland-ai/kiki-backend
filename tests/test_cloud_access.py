@@ -47,6 +47,23 @@ class CloudAccessTests(unittest.TestCase):
         finally:
             fresh_browser.close()
 
+    def test_kiki_web_firebase_owners_are_accepted_and_isolated(self):
+        # kiki-web's API forwards `x-kiki-owner: fb:<uid>` (ADR 0010).
+        alice = {**self.headers, 'x-kiki-owner': 'fb:alice-uid'}
+        bob = {**self.headers, 'x-kiki-owner': 'fb:bob-uid'}
+        lab_id = self.client.post('/lab-sessions', headers=alice, json={'operator_trial': True, 'model_name': 'dsb_sc'}).json()['lab_session_id']
+        self.assertEqual(self.client.get(f'/lab-sessions/{lab_id}', headers=alice).status_code, 200)
+        self.assertEqual(self.client.get(f'/lab-sessions/{lab_id}', headers=bob).status_code, 404)
+        self.assertEqual(self.client.get(f'/lab-sessions/{lab_id}', headers={**alice, 'x-kiki-owner': 'alice-uid'}).status_code, 404)
+        self.assertEqual([s['lab_session_id'] for s in self.client.get('/lab-sessions', headers=alice).json()], [lab_id])
+        self.assertEqual(self.client.get('/lab-sessions', headers=bob).json(), [])
+        sid = self.client.post('/screen-sessions', headers=alice).json()['session_id']
+        with self.assertRaises(WebSocketDisconnect):
+            with self.client.websocket_connect(f'/screen-sessions/{sid}/stream', headers=bob):
+                pass
+        with self.client.websocket_connect(f'/screen-sessions/{sid}/stream', headers=alice) as ws:
+            self.assertEqual(ws.receive_json()['type'], 'connected')
+
     def test_http_secret_does_not_open_unauthenticated_websockets(self):
         sid = self.client.post('/screen-sessions', headers=self.headers).json()['session_id']
         with self.assertRaises(WebSocketDisconnect):

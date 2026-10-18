@@ -31,7 +31,8 @@ test('actual guide UI releases busy at commit and ignores an older auxiliary sna
  const document={getElementById(id){if(!nodes.has(id))nodes.set(id,element());return nodes.get(id);},createElement:element};
  const context={document,window:{addEventListener(){}},localStorage:{getItem:()=>state.lab_session_id,setItem(){},removeItem(){}},fetch:fetcher,verificationCadence,startAnalysisStream,acceptedFrom,screenContext,createFloatingPublisher,performance,AbortController,AbortSignal,Date,Event,console,Blob,URL,navigator:{},setTimeout(){}};
  vm.createContext(context);const source=(await readFile('assets/lab.js','utf8')).replace(/^import .*;\n/gm,'');vm.runInContext(source,context);
- const until=async predicate=>{for(let i=0;i<200;i++){if(predicate())return;await new Promise(resolve=>setImmediate(resolve));}assert.fail('Controlled UI condition did not settle: '+JSON.stringify({checks:checkCalls,tails,budget:document.getElementById('lab-budget').textContent,status:document.getElementById('lab-status').textContent}));};
+ // Wait on real elapsed time, not a fixed number of turns: CI runners can need more turns. Date is mocked; performance is not.
+ const until=async predicate=>{const deadline=performance.now()+2000;while(performance.now()<deadline){if(predicate())return;await new Promise(resolve=>setImmediate(resolve));}if(predicate())return;assert.fail('Controlled UI condition did not settle: '+JSON.stringify({checks:checkCalls,tails,budget:document.getElementById('lab-budget').textContent,status:document.getElementById('lab-status').textContent}));};
  await until(()=>document.getElementById('lab-budget').textContent.includes('0 screen reads'));
  context.window.KikiLab.onFrame(new Blob([image]),meta,firstFrame);
  await until(()=>document.getElementById('lab-budget').textContent.includes('1 screen reads'));

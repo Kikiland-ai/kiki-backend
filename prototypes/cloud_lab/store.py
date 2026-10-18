@@ -39,6 +39,7 @@ class FirestoreLabStore:
         self.client = client
         self.clock = clock
         self.labs = client.collection(collection_prefix + "_labs")
+        self.captures = client.collection(collection_prefix + "_captures")
         self.receipts = client.collection(collection_prefix + "_lab_create_receipts")
         self._staged = ContextVar("cloud_lab_staged_create", default=None)
 
@@ -124,13 +125,49 @@ class FirestoreLabStore:
             self._write_create(transaction, ref, state, event)
         run_atomic(self.client, commit)
 
-    def save(self, state, expected, event):
+    def capture_snapshot(self, capture_id, owner):
+        """Metadata-only producer snapshot suitable for a guarded lab mutation."""
+        snap = self.captures.document(capture_id).get()
+        row = snap.to_dict() if snap.exists else None
+        if row and row.get("owner") != owner:
+            raise HTTPException(404, "Session not found")
+        guard = {"capture_id": capture_id, "owner": owner, "exists": bool(row)}
+        if not row:
+            return {"status": "disconnected", "view_revision": None, "guard": guard}
+        guard["fields"] = {key: row.get(key) for key in ("fence", "producer", "status", "lease_until")}
+        view = (row.get("latest") or {}).get("view_revision")
+        guard["view_revision"] = view
+        status = row["status"]
+        if status in ("sharing", "paused") and row.get("lease_until", 0) <= self.clock():
+            status = "disconnected"
+        guard["effective_status"] = status
+        return {"status": status, "view_revision": view, "guard": guard}
+
+    def _verify_capture_guard(self, transaction, guard, owner):
+        snap = self.captures.document(guard["capture_id"]).get(transaction=transaction)
+        row = snap.to_dict() if snap.exists else None
+        valid = guard["owner"] == owner and bool(row) == guard["exists"]
+        if valid and row:
+            valid = row.get("owner") == owner and all(row.get(k) == v for k, v in guard["fields"].items())
+            valid = valid and (row.get("latest") or {}).get("view_revision") == guard["view_revision"]
+            status = row["status"]
+            if status in ("sharing", "paused") and row.get("lease_until", 0) <= self.clock():
+                status = "disconnected"
+            valid = valid and status == guard["effective_status"]
+        if not valid:
+            raise HTTPException(409, "Capture producer changed; refresh before editing")
+
+    def save(self, state, expected, event, *, capture_guard=None):
         self._validate(state, event, expected)
         ref = self._document(state["lab_session_id"])
         def commit(transaction):
             current = self._owned(ref.get(transaction=transaction), state["owner_id"])
             if current["revision"] != expected:
                 raise HTTPException(409, "Lab revision changed; refresh before editing")
+            if capture_guard is not None:
+                if state.get("workspace", {}).get("capture_session_id") != capture_guard["capture_id"]:
+                    raise HTTPException(409, "Attached capture changed")
+                self._verify_capture_guard(transaction, capture_guard, state["owner_id"])
             transaction.set(ref, self._body(state))
             transaction.create(self._event_ref(ref, event), {"sequence": event["event_sequence"],
                                                            "event_id": event["event_id"], "body_json": encode(event)})

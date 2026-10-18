@@ -1,3 +1,27 @@
+# Lab integration small fixes; SSH forward chosen — 18 October 2026
+
+The user chose the SSH forward for connected testing ([plan](connected-integration-testing.md), setup 1) and asked for the small fixes in both repos.
+
+kiki-backend (branch `fix/lab-integration-small`):
+
+- `POST /lab-sessions` honours `Idempotency-Key`: the same owner, key and body return the first lab (201, `Idempotency-Replayed: true`), a different body is 409, and records survive restarts. It lives in `prototypes/backend/lab_idempotency.py` and shadows the frozen route from the composition layer, so the frozen baseline files are unchanged. The key format and 409 match the mixed-language job API. `contracts/frontend.openapi.json` documents the optional header.
+- `tests/test_cloud_access.py` checks `fb:<uid>` owners over HTTP and WebSocket.
+- The dev extension build serves kiki-web's `:5174` origins.
+- `test-decision-ui.mjs` waits on elapsed time instead of 200 event-loop turns (it flaked twice in CI).
+- `scripts/smoke-lab-upstream.py` checks a backend as kiki-web reaches it, with no model calls.
+
+kiki-web (branch `fix/lab-integration-small`): the `skipped` WebSocket reply, a per-platform Playwright venv path, UTF-8 writes, CI for the web app and API, and a create retry that re-sends the saved key and body. The Lab home notice when execution is disabled was not changed; it needs a contract decision.
+
+What ran (Windows 11, no model calls): offline gate all ten checks PASS, including the frozen baseline; floating L0 14/14, L1 43/43, L2 30/30; `test-decision-ui.mjs` 10/10 sequential and 8/8 concurrent; the smoke script 9/9 against a real backend on `127.0.0.1:8100` with `KIKI_REQUIRE_PROXY=1`, and a wrong secret refused with 401. kiki-web (reported by the implementing session): API pytest 119 passed without `PYTHONUTF8`, Vitest 182 passed in a clean export, lint, `tsc -b` and build pass. Not run: kiki-web Playwright suites and anything across two machines.
+
+Exact next actions, in order:
+1. Merge this repo's PR before kiki-web's: kiki-web's create retry assumes idempotent creation.
+2. User: the first connected trial, following the runbook in [connected integration testing](connected-integration-testing.md) (enable OpenSSH Server on the backend machine, forward port 8100, run the smoke script, then the MATLAB Online trial from `/labs/:id`).
+3. Decide the Lab home notice signal (an API capability field is recommended) and the remaining decisions listed in the entry below.
+4. Consider re-freezing the screen-reader baseline to add explicit UTF-8 reads in `prototypes/lab_tracking/definition.py`; until then Python runs on Windows, including kiki-web's lab Playwright server, need `PYTHONUTF8=1`.
+
+---
+
 # Frontend integration state after kiki-web Lab mode — 18 October 2026
 
 kiki-web merged Lab mode screen sharing (kiki-web PR #7, `0ed7c06`) on top of its plan (#6). It calls this repo's Python service through its API, as decided in ADR 0010. A read-only check against `main` found every path, body and SSE event matching; the two field-name differences are normalized in kiki-web. Status, open items and local run settings are in the [kiki-web lab handoff](../handoffs/kiki-web-lab-mode-screen-share.md) §0.

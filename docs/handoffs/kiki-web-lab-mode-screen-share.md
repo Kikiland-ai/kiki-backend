@@ -20,12 +20,14 @@ The kiki-backend work it relies on is on `main` (PR #3; kiki-web pinned `73c6e96
 
 | Owner | Item |
 | --- | --- |
-| kiki-backend | Add `http://127.0.0.1:5174` to the dev and release `readers` in `prototypes/floating_guidance/scripts/build-extension.mjs` (kiki-web's own test builder works around it today) |
-| kiki-backend | A `fb:<uid>` owner test; `tests/test_cloud_access.py` uses `site-owner` only |
-| kiki-backend | Honour `Idempotency-Key` on `POST /lab-sessions`. Today a lost first response leaves kiki-web's link in `creating` and later calls return 503 |
-| kiki-web | Handle the `{"type":"skipped"}` WebSocket reply (`prototypes/screen_capture/server.py`); today a skipped frame waits 10 s and disconnects |
-| kiki-web | Make `playwright.lab.config.ts` find the API venv on Windows |
+| kiki-backend | **Done (18 Oct):** the dev build's `readers` include `http://127.0.0.1:5174` and `http://localhost:5174`; the release build waits for B1 |
+| kiki-backend | **Done (18 Oct):** `tests/test_cloud_access.py` checks that `fb:<uid>` owners are accepted and isolated over HTTP and WebSocket |
+| kiki-backend | **Done (18 Oct):** `POST /lab-sessions` replays the first lab for the same owner, key and body (201, `Idempotency-Replayed: true`) and returns 409 for a different body; records survive restarts (`prototypes/backend/lab_idempotency.py`). kiki-web must re-send the same key and body to use it |
+| kiki-web | **Done on kiki-web branch `fix/lab-integration-small` (18 Oct):** a `skipped` reply resolves the frame without an error and without check-stream; the next capture tick runs normally |
+| kiki-web | **Done on the same branch:** the lab Playwright config picks the venv interpreter per platform. Its fake-analyzer server still needs `PYTHONUTF8=1` on Windows because the frozen `prototypes/lab_tracking/definition.py` reads JSON without an encoding |
 | kiki-web | Shared ticket storage before running more than one API worker |
+| kiki-web | **Done on the same branch:** after a lost create response, a later start re-sends `POST /lab-sessions` with the reservation's saved key and body and links the replayed lab. Needs this repo's idempotent create deployed first |
+| kiki-web | Lab home shows "Practise with screen guidance" even when execution is disabled. No current signal distinguishes "disabled" from "not started"; options are an API capability field (recommended), a web build flag, or a `disabled` monitoring status. Needs a contract decision |
 | User | The student-controlled trial on real MATLAB Online from `/labs/:id` (next action in kiki-web `apps/web/active.md`) |
 | User / Akshita | B1: kiki-web HTTPS origin and hosting, which then goes into `KIKI_CORS_ORIGINS` and the release extension `readers` |
 | User | B2: one persistent HTTPS Python instance with the proxy secret, Gemini keys and a persistent `KIKI_DATA_DIR` |

@@ -1,3 +1,67 @@
+# Hosted cloud release — 18 October 2026
+
+This current record supersedes the historical local-only deployment statements below.
+The user authorized the full cloud build, reviewed main publication and deployment.
+The original Windows8100/Mac trial checkout and frozen screen-reader baseline were preserved.
+
+Backend application source is main cb3e562b3f7140442e716b4f170100b3a2212955
+(PR8/9/10). Engine kiki-lab-00003-hc4 serves100% from
+sha256:7833cef1f74a200ced9bddfd5967efba46dc62b2d3469d309506fafa1c83828a.
+URL: https://kiki-lab-2j2ne7xpiq-el.a.run.app. Cloud Run IAM permits only the
+kiki-api runtime identity; proxy/owner authorization also remains enforced.
+Project kiki-512012, named database kiki-firedb, region asia-south1.
+Managed Gemini pool/proxy versions are numeric1; no secret payload was read or printed.
+
+The cloud composition uses transactional Firestore labs/events/create receipts,
+producer fences, private latest redacted frames with30s access TTL, guarded checked
+images and independent provider-attempt telemetry. Four frame cleanup TTL policies
+are ACTIVE. Stop/replacement physically deletes current pixels; expiry denies access
+even before asynchronous TTL cleanup. No capture archive enters the CAM bucket.
+
+Verified: clean keyless Cloud Builds and actual runtime startup; API-identity private
+HTTP200, WebSocket upload/cross-HTTP frame retrieval, SSE missing-lab404 route and
+Stop revocation. A real revision replacement preserved exact synthetic state/journal,
+concurrent create replay and deleted-lab tombstones, with no automatic capture resume.
+Real named-database concurrency/late-callback/checked-frame guards passed. Frozen
+31Python/43hosted/4fixture baseline and130 source-file integrity checks passed.
+New cloud suite36offline passes;21 opt-in tests skipped in that run, separately
+recorded actual database proofs are not represented as those skips having run.
+
+The first live trial is explicitly approved for five total screen checks and at most
+fifteen provider HTTP attempts. KIKI_TRIAL_MAX_CHECKS=5 is deployed. A stable global
+budget document commits admission atomically with analysis_started, across all labs,
+owners and replacements. Startup refuses more than three configured keys. Six budget
+tests plus independent source review and actual two-client/different-lab final-slot
+proof passed. Do not reset the counter/remove the cap without new human authorization.
+The actual deployed private health reports limit5; this probe made zero provider calls.
+
+Web/API source main7c2e68fff9211fb2b8bc93c728231f17d51d53ed is deployed at
+https://kiki-512012.web.app and API kiki-api-00002-qp9. All-ten authored catalog68docs
+and10immutable media records/26original WAVs were published and independently read
+back, including42,934,644 original bytes and unchanged native C08 revision.
+The API runtime identity also verified all10/26 through actual lesson/media adapters.
+Production uses concept-media-storage/v1 canonical JSON/checksum envelopes for nested
+arrays, preserving logical records; no learner/Auth migration occurred.
+
+Human reports hosted audio works and is performing own sign-in/learning. Extension
+0.1.2 is packaged for the exact hosted origin. Student-owned native Share, actual
+bounded model analysis, CP5–12 explanations/completion, all-ten fresh quiz feedback,
+individual all26 audibility and adversarial native identity/lifecycle checks remain
+separate pending acceptance. No synthetic test is a student answer or checkpoint pass.
+Full cloud acceptance is NOT claimed. Missing English for nine concepts, sentence
+alignment and saved-model visual limitations remain explicit known content limits.
+
+Evidence is preserved in the full-cloud-build chat outputs: RELEASE-READY.json,
+IMPLEMENTATION-LEDGER.csv, REPLACEMENT-CLOUD-LOGS.json, FINAL-CLOUD-CONTRACT-LOGS.json,
+TRIAL-CLOUD-CONTRACT-LOGS.json, GLOBAL-TRIAL-BUDGET-REAL-DB.json and publication receipts.
+Last completed: deployed shared trial cap and zero-provider private transport proof.
+Exact next: observe the human's explicit Share trial within the approved allowance,
+Stop, reconcile sanitized actual attempt counts and student-visible outcomes. Do not
+fabricate preferences, explanations, grading or progress; obtain additional budget
+before any further provider trial. Billing alert403/admin threshold remains unresolved.
+
+---
+
 # Backend continuation — 18 October 2026
 
 **GCP setup handed to a new user-requested session:**

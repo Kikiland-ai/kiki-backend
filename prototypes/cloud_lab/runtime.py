@@ -19,7 +19,7 @@ from prototypes.screen_capture.cloud_access import SiteProxyGuard
 from prototypes.screen_capture.server import same_origin, validate_image
 from .capture import FirestoreCaptureStore
 from .domain import CloudLabService
-from .frames import FirestoreImages
+from .frames import FirestoreImages, CheckedFrameWriteGuard
 from .provider_state import FirestoreStreamingProviderPool
 from .store import FirestoreLabStore, CloudLabCreateKeys
 from .telemetry import ATTEMPT_CONTEXT
@@ -47,7 +47,8 @@ def create_app(*, client=None, analyzer=None, proxy_secret=None, clock=time.time
         client = firestore.Client(project=project, database=database)
     captures = FirestoreCaptureStore(client, collection_prefix, clock=clock)
     store = FirestoreLabStore(client, collection_prefix)
-    images = FirestoreImages(client, collection_prefix=collection_prefix+'_checked', clock=clock)
+    images = FirestoreImages(client, collection_prefix=collection_prefix+'_checked', clock=clock,
+                             write_guard=CheckedFrameWriteGuard(client, collection_prefix, clock=clock))
     if analyzer is None:
         analyzer = CloudAnalyzer()
         analyzer.provider = FirestoreStreamingProviderPool(client, collection_prefix=collection_prefix, clock=clock)

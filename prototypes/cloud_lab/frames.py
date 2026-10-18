@@ -5,6 +5,7 @@ configure Firestore TTL on expires_at for physical cleanup after instance death.
 Firestore TTL is asynchronous, so it is cleanup, never the authorization boundary.
 """
 import hashlib
+import json
 import time
 import uuid
 from collections.abc import MutableMapping
@@ -24,12 +25,49 @@ def record(ref, transaction):
     return snap.to_dict() if snap.exists else None
 
 
+class CheckedFrameWriteGuard:
+    """Fence delayed analysis pixels against Stop and newer lab/capture context.
+
+    Read inside the SAME transaction that writes the pixels. A concurrent Stop,
+    replacement, frame admission or student mutation causes Firestore to retry;
+    the retried guard then refuses the obsolete observation before any writes.
+    """
+    def __init__(self, client, collection_prefix='kiki_cloud', *, clock=time.time):
+        self.labs = client.collection(collection_prefix + '_labs')
+        self.captures = client.collection(collection_prefix + '_captures')
+        self.clock = clock
+
+    def __call__(self, transaction, lab_id, observation_id, payload):
+        lab = record(self.labs.document(lab_id), transaction)
+        if not lab or lab.get('deleted'):
+            return False
+        state = json.loads(lab['state_json'])
+        candidate = state['runtime'].get('candidate')
+        if (state['status'] != 'active' or state['runtime']['capture_status'] != 'sharing'
+                or not candidate or candidate['observation_id'] != observation_id):
+            return False
+        capture_id = state['workspace'].get('capture_session_id')
+        if not capture_id:
+            return False
+        capture = record(self.captures.document(capture_id), transaction)
+        if (not capture or capture['owner'] != lab['owner'] or capture['status'] != 'sharing'
+                or not capture.get('producer') or capture.get('fence', 0) < 1
+                or capture['lease_until'] <= self.clock()):
+            return False
+        source, latest = candidate['source_frame'], capture.get('latest')
+        return bool(latest and source['frame_id'] == latest['frame_id']
+                    and source['sha256'] == latest['sha256'] == hashlib.sha256(payload).hexdigest()
+                    and source['view_revision'] == latest['view_revision'] == state['workspace']['view_revision']
+                    and 0 <= self.clock()-source['server_received_unix'] <= 20)
+
+
 class FirestoreImages(MutableMapping):
     """Latest checked frame mapping accepted by the existing domain service."""
-    def __init__(self, client, collection_prefix='kiki_cloud', *, clock=time.time, ttl=30):
+    def __init__(self, client, collection_prefix='kiki_cloud', *, clock=time.time, ttl=30, write_guard=None):
         if not 1 <= ttl <= 60:
             raise ValueError('Frame TTL must be between one and sixty seconds')
         self.client, self.clock, self.ttl = client, clock, ttl
+        self.write_guard = write_guard
         self.manifests = client.collection(collection_prefix + '_frame_manifests')
         self.chunks = client.collection(collection_prefix + '_frame_chunks')
 
@@ -39,6 +77,8 @@ class FirestoreImages(MutableMapping):
     def put(self, key, observation_id, payload, *, transaction):
         if not isinstance(payload, bytes) or not 1 <= len(payload) <= 1_000_000:
             raise ValueError('Invalid frame bytes')
+        if self.write_guard is not None and not self.write_guard(transaction, key, observation_id, payload):
+            return False
         ref = self.ref(key)
         old = record(ref, transaction)
         generation = uuid.uuid4().hex
@@ -51,6 +91,7 @@ class FirestoreImages(MutableMapping):
                               'expires_unix': expires, 'expires_at': datetime.fromtimestamp(expires, timezone.utc)})
         for chunk_id in (old or {}).get('chunks', []):
             transaction.delete(self.chunks.document(chunk_id))
+        return True
 
     def read(self, key, *, transaction):
         manifest = record(self.ref(key), transaction)

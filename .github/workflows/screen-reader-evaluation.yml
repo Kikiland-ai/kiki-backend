@@ -13,6 +13,9 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          # Provenance checks verify the candidate's ancestor, not only its files.
+          fetch-depth: 0
       # Concept narration WAVs are in Git LFS; cache them so each run does not re-download them.
       - uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684
         with:

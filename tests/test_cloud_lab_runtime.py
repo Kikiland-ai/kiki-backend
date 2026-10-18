@@ -2,6 +2,7 @@
 import asyncio
 import copy
 import io
+import json
 import os
 import subprocess
 import threading
@@ -15,7 +16,7 @@ from fastapi import HTTPException
 from fastapi.testclient import TestClient
 
 from prototypes.cloud_lab.capture import FirestoreCaptureStore
-from prototypes.cloud_lab.frames import FirestoreImages
+from prototypes.cloud_lab.frames import FirestoreImages, CheckedFrameWriteGuard
 from prototypes.cloud_lab.provider_state import FirestoreProviderPool
 from prototypes.cloud_lab.runtime import create_app
 from prototypes.lab_tracking.provider import AnalysisFailure
@@ -142,6 +143,47 @@ class OfflineCaptureTests(CaptureContract, unittest.TestCase):
         self.a.set_status(self.sid, 'owner', 'ended', 'stop')
         self.assertEqual(sum('_frame_chunks/' in k for k in self.client.values), 0)
 
+    def test_stop_between_analysis_commit_and_checked_image_write(self):
+        self.setup_capture()
+        self.a.frame(self.sid, 'owner', 'producer', self.fence, META, b'one')
+        source = self.a.session(self.sid, 'owner')['latest']
+        candidate = {'observation_id':'checked-before-stop', 'source_frame':source}
+        state = {'status':'active', 'runtime':{'capture_status':'sharing', 'candidate':candidate},
+                 'workspace':{'capture_session_id':self.sid, 'view_revision':1}}
+        lab_ref = self.client.collection(self.prefix+'_labs').document('lab')
+        lab_ref.set({'owner':'owner', 'deleted':False, 'state_json':json.dumps(state)})
+        images = FirestoreImages(self.client, self.prefix+'_checked', clock=lambda:self.now,
+                                  write_guard=CheckedFrameWriteGuard(self.client, self.prefix, clock=lambda:self.now))
+        # The active candidate is allowed; then invalidate before the delayed put.
+        images['lab'] = ('checked-before-stop', b'one')
+        self.assertEqual(images['lab'], ('checked-before-stop', b'one'))
+        images.pop('lab')
+        self.b.set_status(self.sid, 'owner', 'ended', 'capture_stopped')
+        # Capture row alone must fence the write, even before lab invalidation lands.
+        images['lab'] = ('checked-before-stop', b'one')
+        self.assertNotIn('lab', images)
+        self.assertFalse(any(self.prefix+'_checked_frame_chunks/' in key for key in self.client.values))
+        state['runtime'].update(candidate=None, capture_status='ended')
+        lab_ref.set({'owner':'owner', 'deleted':False, 'state_json':json.dumps(state)})
+        images['lab'] = ('checked-before-stop', b'one')
+        self.assertNotIn('lab', images)
+
+    def test_checked_write_rejects_newer_source_frame_and_observation(self):
+        self.setup_capture()
+        self.a.frame(self.sid, 'owner', 'producer', self.fence, META, b'one')
+        source = self.a.session(self.sid, 'owner')['latest']
+        state = {'status':'active', 'runtime':{'capture_status':'sharing', 'candidate':{'observation_id':'current', 'source_frame':source}},
+                 'workspace':{'capture_session_id':self.sid, 'view_revision':1}}
+        self.client.collection(self.prefix+'_labs').document('lab').set({'owner':'owner','deleted':False,'state_json':json.dumps(state)})
+        images = FirestoreImages(self.client, self.prefix+'_checked', clock=lambda:self.now,
+                                  write_guard=CheckedFrameWriteGuard(self.client,self.prefix,clock=lambda:self.now))
+        images['lab'] = ('stale-observation', b'one')
+        self.assertNotIn('lab', images)
+        self.now += 2
+        self.a.frame(self.sid, 'owner', 'producer', self.fence, {**META,'sequence':2}, b'two')
+        images['lab'] = ('current', b'one')
+        self.assertNotIn('lab', images)
+
     def test_cloud_composition_health_disables_jobs_and_private_boundary(self):
         analyzer = SimpleNamespace(configured=False)
         app = create_app(client=self.client, analyzer=analyzer, proxy_secret='x'*32)
@@ -258,6 +300,23 @@ class LiveCaptureTests(CaptureContract, unittest.TestCase):
             self.assertIsNotNone(lease)
             two.persist(lease, 'replacement-worker', release=True)
         asyncio.run(verify())
+
+    def test_real_checked_frame_guard_refuses_delayed_write_after_stop(self):
+        self.setup_capture()
+        self.a.frame(self.sid, 'owner', 'producer', self.fence, META, b'one')
+        source = self.a.session(self.sid, 'owner')['latest']
+        state = {'status':'active', 'runtime':{'capture_status':'sharing', 'candidate':{'observation_id':'checked', 'source_frame':source}},
+                 'workspace':{'capture_session_id':self.sid, 'view_revision':1}}
+        self.clients[0].collection(self.prefix+'_labs').document('lab').set({'owner':'owner','deleted':False,'state_json':json.dumps(state)})
+        images = FirestoreImages(self.clients[0],self.prefix+'_checked',clock=lambda:self.now,
+                                  write_guard=CheckedFrameWriteGuard(self.clients[0],self.prefix,clock=lambda:self.now))
+        images['lab'] = ('checked',b'one')
+        self.assertIn('lab',images)
+        images.pop('lab')
+        self.b.set_status(self.sid,'owner','ended','capture_stopped')
+        images['lab'] = ('checked',b'one')
+        self.assertNotIn('lab',images)
+        self.assertEqual(list(self.clients[1].collection(self.prefix+'_checked_frame_chunks').stream()),[])
 
     def test_two_app_http_ws_private_capture_and_lab_transport(self):
         apps = [create_app(client=client, analyzer=SimpleNamespace(configured=False), proxy_secret='x'*32,

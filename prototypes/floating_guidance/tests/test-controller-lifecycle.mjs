@@ -8,25 +8,26 @@ import {createRequire} from 'node:module';
 import {resolve} from 'node:path';
 
 const background=await readFile(new URL('../extension/background.js',import.meta.url),'utf8');
+const content=await readFile(new URL('../extension/content.js',import.meta.url),'utf8');
 const bridge=await readFile(new URL('../extension/bridge.js',import.meta.url),'utf8');
 const CFG={readers:['http://127.0.0.1:5174'],targets:['https://matlab.mathworks.com'],dev:true,version:'test'};
 const copy=v=>structuredClone(v),tick=()=>new Promise(resolve=>setImmediate(resolve));
 const sender=(tabId=1,documentId='document-a')=>({id:'extension-fixture',frameId:0,documentId,tab:{id:tabId},url:CFG.readers[0]+'/labs/test'});
 
-function worker(storage={}){
- const messages=[],calls=[],listeners={};
+function worker(storage={},options={}){
+ const messages=[],calls=[],listeners={},injections=[];let installed=!options.targetAbsent;
  const chrome={runtime:{id:'extension-fixture',getURL:path=>'chrome-extension://extension-fixture/'+path,
    onMessage:{addListener:fn=>listeners.message=fn}},
   storage:{session:{get:async key=>copy({[key]:storage[key]}),set:async value=>Object.assign(storage,copy(value))}},
   tabs:{get:async id=>({id,url:CFG.targets[0]+'/'}),update:async(id,props)=>({id,windowId:1,...props}),
-   sendMessage:async(tabId,message)=>{messages.push({tabId,message:copy(message)});return {ok:true,result:'displayed'};},
+   sendMessage:async(tabId,message)=>{messages.push({tabId,message:copy(message)});if(message.type==='fg_bound'&&options.boundDeliveryFails)throw new Error('Target unloaded');if(message.type==='fg_probe'&&options.neverReady)return new Promise(()=>{});if(message.to==='target'&&!installed)throw new Error('Receiving end does not exist');return {ok:true,ready:installed,result:'displayed'};},
    onRemoved:{addListener:fn=>listeners.removed=fn},onUpdated:{addListener:fn=>listeners.updated=fn}},
   windows:{update:async()=>({})},
-  scripting:{executeScript:async()=>[{result:true}]}};
- const context=vm.createContext({chrome,KIKI_FG_CONFIG:CFG,URL,crypto:webcrypto,importScripts:()=>{},console:{info:()=>{}}});
+  scripting:{executeScript:async spec=>{injections.push(copy(spec));if(spec.files){if(options.failInjection)throw new Error('Injection denied');installed=true;}return [{result:true}];}}};
+ const context=vm.createContext({chrome,KIKI_FG_CONFIG:CFG,URL,setTimeout,clearTimeout,crypto:webcrypto,importScripts:()=>{},console:{info:()=>{}}});
  vm.runInContext(background,context);
  const send=(message,from=sender())=>new Promise(resolve=>listeners.message(message,from,result=>{calls.push({message:copy(message),result:copy(result)});resolve(copy(result));}));
- return {send,messages,calls,storage,context,bind:()=>context.kikiTest.bind(99)};
+ return {send,messages,calls,storage,context,injections,bind:()=>context.kikiTest.bind(99)};
 }
 
 test('duplicate hello for one reader stream preserves the acknowledged generation',async()=>{
@@ -170,4 +171,82 @@ test('confirmation handoff carries current publisher identity and rejects stale 
  const forwarded=w.messages.filter(m=>m.message.type==='fg_command').at(-1);
  assert.equal(forwarded.tabId,1);assert.deepEqual(forwarded.message.context,request.context);
  assert.equal(forwarded.message.command_version,1);assert.equal(forwarded.message.lab_revision,5);
+});
+
+
+test('explicit binding backfills top-frame content scripts in an already-open MATLAB tab',async()=>{
+ const w=worker({}, {targetAbsent:true});
+ const result=await w.bind();
+ assert.equal(result.ok,true);
+ const source=w.injections.find(spec=>spec.files);
+ assert.deepEqual(source?.target,{tabId:99,frameIds:[0]});
+ assert.deepEqual(source?.files,['config.js','core.js','ui.js','content.js']);
+ assert.equal(w.storage.kiki_fg.binding.tabId,99);
+ assert(w.messages.some(m=>m.message.type==='fg_bound'));
+});
+
+test('binding an already-ready target avoids duplicate script injection',async()=>{
+ const w=worker();assert.equal((await w.bind()).ok,true);
+ assert.equal(w.injections.filter(spec=>spec.files).length,0);
+});
+
+test('failed content injection cannot advertise a bound target to the reader',async()=>{
+ const w=worker({}, {targetAbsent:true,failInjection:true});
+ assert.equal((await w.bind()).ok,false);
+ assert.equal(w.storage.kiki_fg?.binding??null,null);
+ assert.equal(w.messages.filter(m=>m.message.type==='fg_target_bound').length,0);
+});
+
+
+test('an unanswered readiness handshake times out without binding or notification',async()=>{
+ const w=worker({}, {neverReady:true});
+ assert.equal((await w.bind()).ok,false);
+ assert.equal(w.storage.kiki_fg?.binding??null,null);
+ assert.equal(w.messages.filter(m=>m.message.type==='fg_target_bound').length,0);
+});
+
+test('content readiness waits for UI initialization and repeated injection creates only one UI',async()=>{
+ let finish,created=0,hosts=0;const listeners=[];
+ const host={isConnected:false,style:{},attachShadow:()=>({})};
+ const document={querySelectorAll:()=>[],createElement:()=>{hosts++;return host;},documentElement:{append:node=>{node.isConnected=true;}}};
+ const window={};window.top=window;
+ const chrome={runtime:{id:'fixture',onMessage:{addListener:fn=>listeners.push(fn)},sendMessage:async()=>({bound:false})},
+  storage:{local:{get:()=>new Promise(resolve=>{finish=resolve;}),set:async()=>{}}}};
+ const context=vm.createContext({window,document,chrome,KIKI_FG_CONFIG:CFG,location:{origin:CFG.targets[0]},performance,
+  MutationObserver:class{observe(){}},addEventListener:()=>{},setInterval:()=>{},clearTimeout:()=>{},
+  KikiFloatingCore:{},KikiFloatingUI:{installRouter:()=>{},create:()=>{created++;return {};}}});
+ vm.runInContext(content,context);vm.runInContext(content,context);
+ assert.equal(hosts,1);assert.equal(listeners.length,1);assert.equal(created,0);
+ let response;assert.equal(listeners[0]({to:'target',type:'fg_probe'},{id:'fixture'},value=>response=value),true);
+ await tick();assert.equal(response,undefined);
+ finish({});await tick();
+ assert.equal(created,1);assert.equal(response.ready,true);assert.equal(response.ok,true);
+});
+
+test('core and UI scripts can be injected again without lexical global redeclaration',async()=>{
+ const context=vm.createContext({});
+ for(const name of ['core','ui']){
+  const source=await readFile(new URL('../extension/'+name+'.js',import.meta.url),'utf8');
+  vm.runInContext(source,context);vm.runInContext(source,context);
+ }
+ assert.equal(typeof context.KikiFloatingCore.validate,'function');
+ assert.equal(typeof context.KikiFloatingUI.create,'function');
+});
+
+
+test('target disappearance between ready probe and show cannot leave an advertised binding',async()=>{
+ const w=worker({}, {boundDeliveryFails:true});
+ assert.equal((await w.bind()).ok,false);
+ assert.equal(w.storage.kiki_fg.binding,null);
+ assert.equal(w.messages.filter(m=>m.message.type==='fg_target_bound').length,0);
+});
+
+test('popup preserves the actionable bind failure after refreshing status',async()=>{
+ const source=await readFile(new URL('../extension/popup.js',import.meta.url),'utf8');
+ const nodes=Object.fromEntries(['bind','unbind','state'].map(id=>[id,{hidden:false,textContent:''}]));
+ const chrome={tabs:{query:async()=>[{id:99}]},runtime:{sendMessage:async message=>message.type==='bind_tab'?{ok:false,error:'Reload the MATLAB tab, then show Kiki again.'}:{bindable:true,bound:false,tracker_open:true}}};
+ const context=vm.createContext({chrome,document:{getElementById:id=>nodes[id]}});
+ vm.runInContext(source,context);await tick();await nodes.bind.onclick();
+ assert.equal(nodes.state.textContent,'Reload the MATLAB tab, then show Kiki again.');
+ assert.equal(nodes.bind.hidden,false);
 });

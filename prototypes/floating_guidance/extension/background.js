@@ -28,13 +28,35 @@ function kind(sender){
  const origin=originOf(sender.url);
  return CFG.readers.includes(origin)?'reader':CFG.targets.includes(origin)?'target':null;
 }
+async function ensureTarget(tabId){
+ const probe=async()=>{
+  let timer;
+  try{return await Promise.race([
+   sendTab(tabId,{to:'target',type:'fg_probe'}),
+   new Promise(resolve=>{timer=setTimeout(()=>resolve({ok:false}),1500);})
+  ]);}finally{clearTimeout(timer);}
+ };
+ let ready=await probe();
+ if(ready?.ok&&ready.ready)return true;
+ try{
+  // Declarative scripts do not backfill tabs opened before installation/reload.
+  await chrome.scripting.executeScript({target:{tabId,frameIds:[0]},files:['config.js','core.js','ui.js','content.js']});
+ }catch{return false;}
+ ready=await probe();return Boolean(ready?.ok&&ready.ready);
+}
+
 async function bind(s,tabId){
  const tab=await chrome.tabs.get(tabId),origin=originOf(tab.url);
  if(!CFG.targets.includes(origin))return {ok:false,error:'Open MATLAB Online in this tab first.'};
+ if(!await ensureTarget(tabId)){
+  if(s.binding?.tabId===tabId)await unbind(s,'target_not_ready');
+  return {ok:false,error:'Kiki could not open its windows. Reload the MATLAB tab, then show Kiki again.'};
+ }
  if(s.binding&&s.binding.tabId!==tabId){await toTarget(s,{type:'fg_unbound'});await setHandle(s.binding.tabId,'',[]);}
  s.binding={tabId,origin,handle:'kiki-fg-'+crypto.randomUUID(),bound_at:Date.now()};
  const handled=await setHandle(tabId,s.binding.handle,CFG.readers);log(s,'target_bound',{origin,capture_handle_set:handled});await save(s);
- await toTarget(s,{type:'fg_bound',connected:Boolean(s.controller)});
+ const shown=await toTarget(s,{type:'fg_bound',connected:Boolean(s.controller)});
+ if(!shown?.ok){await unbind(s,'target_not_ready');return {ok:false,error:'Kiki could not open its windows. Reload the MATLAB tab, then show Kiki again.'};}
  await toReader(s,{type:'fg_target_bound',handle:s.binding.handle,target_origin:origin});
  return {ok:true,capture_handle_set:handled};
 }

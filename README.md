@@ -174,6 +174,6 @@ The text CLI makes two dependent requests, stops on failed validation and has no
 
 Reconciled runtime schemas live in `contracts/`. The [source manifest](context/design-thinking/SOURCE.json) pins `73d16c0d967a5d81dd74f1f28ef0defc48c8a778`. Integrity checks establish unchanged bytes, not that every source file was read. `STARTER-MANIFEST.json` describes the original handoff baseline rather than freezing subsequent work.
 
-New agent sessions follow [AGENTS.md](AGENTS.md) and [CONTEXT-BOOT.md](CONTEXT-BOOT.md): load relevant context, report readiness, then wait for the user's direction. BB8 0.2.2 includes 22 skills, including prompt-design-engineering. Local wrappers and reference mode do not imply native ChatGPT plugin activation; see [BB8 usage](BB8.md).
+New agent sessions follow [AGENTS.md](AGENTS.md) and [CONTEXT-BOOT.md](CONTEXT-BOOT.md): load relevant context, report readiness, then wait for the user's direction. BB8 0.2.3 includes 23 skills, including prompt-design-engineering and deck-review. Local wrappers and reference mode do not imply native ChatGPT plugin activation; see [BB8 usage](BB8.md).
 
 Update the active plan with actual checks, failures and the exact next action. Preserve source precedence and historical evidence. Commits for this repository use **`arpanvihan5-sketch`**, with the author/committer and authenticated push identity checks required by `AGENTS.md`.

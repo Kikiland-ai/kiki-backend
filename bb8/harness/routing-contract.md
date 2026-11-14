@@ -86,6 +86,10 @@ Use `$engineering` as an explicit front door when the technical route is unclear
 
 Use `$product-design` as an explicit front door when the product route is unclear. Otherwise route directly to discovery, strategy, experience design, critique, or experiment design. Preserve broad top-of-funnel evidence before narrowing, and do not jump prematurely to polished interface production.
 
+### Deck review
+
+Use `deck-review` when an existing pitch, fundraising, or investor deck needs evaluation from the reader's side: an investor simulation, the slide where interest turns to doubt, and a P0–P3 fix plan. Use `design-critique` for non-fundraising artifacts. Building or revising the deck itself belongs to the host's deck-building skill; deck-review tags each fix with the storyline, evidence, or visual step that addresses it. Pair with `deep-research` only when a current market or benchmark claim needs verification.
+
 ### Transcript-insights TOFU
 
 Use for early-funnel transcript work: reconstruct context, preserve evidence, identify recurring signals, tensions, decisions, unmet needs, and candidate findings before narrowing into recommendations.

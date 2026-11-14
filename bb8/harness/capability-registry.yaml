@@ -116,6 +116,12 @@ capabilities:
     description: "Evidence-based evaluation of existing product and service design artifacts."
     entrypoint: "../skills/design-critique/SKILL.md"
 
+  - id: "deck-review"
+    status: "active"
+    role: "specialist"
+    description: "Investor-perspective pitch-deck review: reader simulation, flip slide, and a P0–P3 fix plan."
+    entrypoint: "../skills/deck-review/SKILL.md"
+
   - id: "experiment-design"
     status: "active"
     role: "specialist"

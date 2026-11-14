@@ -45,5 +45,6 @@ capability directory.
 20. `strategic-storytelling`
 21. `transcript-insights-tofu`
 22. `prompt-design-engineering`
+23. `deck-review`
 
-The 0.2.2 extension preserves the supplied skill text byte for byte. Existing canonical skill texts remain unchanged. Native hosted activation is a separate acceptance step.
+The 0.2.2 extension preserves the supplied skill text byte for byte; 0.2.3 adds `deck-review`, an investor-perspective pitch-deck review grounded in YC and a16z guidance. Existing canonical skill texts remain unchanged. Native hosted activation is a separate acceptance step.

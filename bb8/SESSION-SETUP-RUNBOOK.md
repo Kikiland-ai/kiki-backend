@@ -27,11 +27,12 @@ the skills, not project context.
    - `.codex-plugin/plugin.json`
 2. Confirm both manifests have:
    - name: `bb8`
-   - version: `0.2.2`
+   - version: `0.2.3`
    - description: `Local-first executive thinking partner, planner, and capability router.`
-3. Confirm `skills/` contains exactly these 22 directories:
+3. Confirm `skills/` contains exactly these 23 directories:
    - `bb8`
    - `data-analysis`
+   - `deck-review`
    - `deep-research`
    - `design-critique`
    - `engineering`
@@ -105,8 +106,8 @@ installation method.
 
 ## Later: acceptance test in a fresh session
 
-1. List the active plugin and confirm the identity is `bb8` version `0.2.2`.
-2. List its discovered skills and compare them exactly with the 22-item list
+1. List the active plugin and confirm the identity is `bb8` version `0.2.3`.
+2. List its discovered skills and compare them exactly with the 23-item list
    above.
 3. Invoke BB8 with: `Use BB8 to frame a consequential decision in Now, Next,
    Later form and tell me which specialist skill you would route to.`

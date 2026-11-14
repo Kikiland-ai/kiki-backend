@@ -6,7 +6,7 @@ BB8 for supported local clients to install; it does not install itself into
 a running hosted chat. ChatGPT uses `@` selection, Codex CLI/IDE uses `/skills`
 or `$bb8`, and Claude Code uses `/bb8`.
 
-The original 21 skill texts remain unchanged; the 0.2.2 registry/catalog add the user-supplied prompt-design-engineering skill. Small generated project
+The original 21 skill texts remain unchanged; the 0.2.2 and 0.2.3 registry/catalog add the prompt-design-engineering and deck-review skills. Small generated project
 skills expose their names and descriptions in each host's discovery location.
 
 | Surface | Files | Behavior |

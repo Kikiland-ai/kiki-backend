@@ -52,6 +52,7 @@ Use `$product-design` when you want the family router.
 | `$product-strategy` | Strategic choices, positioning, portfolios, and product bets. |
 | `$experience-design` | Journeys, interactions, service flows, states, trust, and recovery. |
 | `$design-critique` | Prioritized critique of an existing product or service artifact. |
+| `$deck-review` | Investor-seat review of a pitch deck with a P0–P3 fix plan. |
 | `$experiment-design` | The smallest credible test that can change a product decision. |
 
 ## Routing rules

@@ -9,8 +9,8 @@ import sys
 from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[2]
-EXPECTED = frozenset('bb8 data-analysis deep-research design-critique engineering engineering-architecture engineering-debugging engineering-implementation engineering-review engineering-security engineering-testing experience-design experiment-design minto-communication organise problem-solving product-design product-discovery product-strategy prompt-design-engineering strategic-storytelling transcript-insights-tofu'.split())
-IDENTITY = {'name': 'bb8', 'version': '0.2.2', 'description': 'Local-first executive thinking partner, planner, and capability router.'}
+EXPECTED = frozenset('bb8 data-analysis deck-review deep-research design-critique engineering engineering-architecture engineering-debugging engineering-implementation engineering-review engineering-security engineering-testing experience-design experiment-design minto-communication organise problem-solving product-design product-discovery product-strategy prompt-design-engineering strategic-storytelling transcript-insights-tofu'.split())
+IDENTITY = {'name': 'bb8', 'version': '0.2.3', 'description': 'Local-first executive thinking partner, planner, and capability router.'}
 
 
 def resource(relative, root=ROOT):

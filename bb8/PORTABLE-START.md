@@ -1,8 +1,8 @@
 # Start BB8 in a repository
 
-This is BB8 0.2.2, extending the original 0.2.1 starter with the user-supplied
-`prompt-design-engineering` skill. The original 21 skill texts are preserved;
-the registry/catalog now expose 22 skills. The reference adapter is version 0.1.0.
+This is BB8 0.2.3, extending the original 0.2.1 starter with the user-supplied
+`prompt-design-engineering` (0.2.2) and `deck-review` (0.2.3) skills. The original
+21 skill texts are preserved; the registry/catalog now expose 23 skills. The reference adapter is version 0.1.0.
 
 1. Read [AGENTS.md](AGENTS.md) for coordinator and repository-action instructions.
 2. Read [the usage guide](docs/BB8-GUIDE.md) for implementation, debugging,

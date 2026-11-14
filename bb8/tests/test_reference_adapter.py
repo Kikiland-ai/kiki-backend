@@ -22,8 +22,8 @@ def request(**overrides):
 class AdapterChecks(unittest.TestCase):
     def test_exact_inventory_and_links(self):
         result = adapter.validate(ROOT)
-        self.assertEqual(result['packaged_skills'], 22)
-        self.assertEqual(result['resolved_skill_links'], 33)
+        self.assertEqual(result['packaged_skills'], 23)
+        self.assertEqual(result['resolved_skill_links'], 36)
         self.assertEqual(result['native_registration'], 'not_checked')
 
     def test_scoped_reference_packet_without_repository_access(self):
@@ -41,6 +41,16 @@ class AdapterChecks(unittest.TestCase):
         self.assertIn('Packaged reference: skills/prompt-design-engineering/SKILL.md', packet)
         self.assertIn('Six-layer prompt architecture', packet)
         self.assertIn('A held-out set checks overfitting.', packet)
+        self.assertIn('"native_plugin_active": false', packet)
+        self.assertNotIn('Packaged reference: skills/organise/SKILL.md', packet)
+
+    def test_deck_review_skill_can_be_prepared_in_reference_mode(self):
+        packet = adapter.prepare(request(skill='deck-review', scope=['deck.pdf'],
+                                         reference=['skills/deck-review/references/investor-lens.md']), ROOT)
+        self.assertIn('Packaged reference: skills/deck-review/SKILL.md', packet)
+        self.assertIn('Mark the **flip slide**', packet)
+        self.assertIn('P0: stops the read or breaks trust', packet)
+        self.assertIn('Packaged reference: skills/deck-review/references/investor-lens.md', packet)
         self.assertIn('"native_plugin_active": false', packet)
         self.assertNotIn('Packaged reference: skills/organise/SKILL.md', packet)
 

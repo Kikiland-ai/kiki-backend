@@ -1,4 +1,4 @@
-> Historical 0.2.1 setup/port notes. The user-authorized 0.2.2 extension adds prompt-design-engineering; the current package has 22 skills. Use the current manifests, registry, and runbook for acceptance.
+> Historical 0.2.1 setup/port notes. The user-authorized 0.2.2 extension adds prompt-design-engineering; 0.2.3 adds deck-review; the current package has 23 skills. Use the current manifests, registry, and runbook for acceptance.
 
 # BB8 setup report
 

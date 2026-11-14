@@ -1,0 +1,7 @@
+interface:
+  display_name: "Deck Review"
+  short_description: "Review a pitch deck from the investor's seat"
+  brand_color: "#2E7D6B"
+  default_prompt: "Use $deck-review to read this pitch deck as an investor would and give me a prioritised fix plan."
+policy:
+  allow_implicit_invocation: true

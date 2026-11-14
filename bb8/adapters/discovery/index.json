@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generator": "Generated BB8 discovery wrapper",
   "plugin": "bb8",
-  "plugin_version": "0.2.2",
+  "plugin_version": "0.2.3",
   "skills": [
     {
       "name": "bb8",
@@ -17,6 +17,13 @@
       "sha256": "09e81c831f1eca98a4201a26bdb42581c72d56c0d24da74ffc049907c8de1d7f",
       "codex": ".agents/skills/data-analysis/SKILL.md",
       "claude": ".claude/skills/data-analysis/SKILL.md"
+    },
+    {
+      "name": "deck-review",
+      "canonical": "bb8/skills/deck-review/SKILL.md",
+      "sha256": "12ee7920de161daf0a04f3fc56c26d1a3656f8dc9ef448902b8a2a831b784ce4",
+      "codex": ".agents/skills/deck-review/SKILL.md",
+      "claude": ".claude/skills/deck-review/SKILL.md"
     },
     {
       "name": "deep-research",
@@ -162,28 +169,18 @@
   "resources": [
     {
       "path": "bb8/.codex-plugin/plugin.json",
-      "bytes": 863,
-      "sha256": "3079398035cb5702bc12b602e74c9eff967ad66ebbb31c0584658bd3d7280922"
-    },
-    {
-      "path": "bb8/README.md",
-      "bytes": 1657,
-      "sha256": "c45935778c5dd272374da467032e15e9cdd018cd36a68f22d661340b920e0ec6"
-    },
-    {
-      "path": "bb8/SESSION-SETUP-RUNBOOK.md",
-      "bytes": 5431,
-      "sha256": "a3b7fc6c7678db19a68e0f1015555b9f1228db070c8eff453d996fed453b2840"
+      "bytes": 838,
+      "sha256": "07709627c0f78c97977b83cc5deb426ac5ba87ca120eebc64fb5e5304202bebd"
     },
     {
       "path": "bb8/harness/capability-registry.yaml",
-      "bytes": 5125,
-      "sha256": "6d0da227e21a3bb9bd2bbd3fa94f8112ba60a0b126bda4f9258c09434018c52d"
+      "bytes": 5355,
+      "sha256": "dfde111d60ee9b76f77d560a65e343ef3bbda4c7d5b5ce32e9421f99c11a46f0"
     },
     {
       "path": "bb8/harness/manifest.yaml",
       "bytes": 1115,
-      "sha256": "7d870e40a0e14c99f57e382fe2cc0243490b155a440b88126203c02d1d6dcd8c"
+      "sha256": "4e013ad8e9ba5ff1b7e648717ffd8db732e0009211f2b99ec0b465c37b3e6e64"
     },
     {
       "path": "bb8/harness/plan-template.md",
@@ -212,13 +209,13 @@
     },
     {
       "path": "bb8/harness/routing-contract.md",
-      "bytes": 6067,
-      "sha256": "e79adea7b488768c8139268a92a2706acc1f0087ce17927412eaa395528d3bb5"
+      "bytes": 6602,
+      "sha256": "f80cd95c83707db413603010d95272f3dd0dad77c57135e73808248ddbc8104d"
     },
     {
       "path": "bb8/harness/skill-catalog.md",
-      "bytes": 2820,
-      "sha256": "b1f46d2e41c63100a5481c5b56b10e66e504e563e81112abc61301de65d482b4"
+      "bytes": 2903,
+      "sha256": "790bd456531b8df70676df010cfbc53eec690d39eceada86fcfef2f457390a20"
     },
     {
       "path": "bb8/harness/system-prompt.md",
@@ -228,12 +225,17 @@
     {
       "path": "bb8/plugin.json",
       "bytes": 1114,
-      "sha256": "1de82f6399507b7e70bbc2322c0e3c6849c74ab24271fdec3e8a9b859fe41bf9"
+      "sha256": "ddb6ee338bd729a9ebaa785554b7b6f4ada8a0be002dade9ab13b5952dce601c"
     },
     {
-      "path": "bb8/skills/bb8/SKILL.md",
-      "bytes": 1913,
-      "sha256": "3144e168d069c76c741accfa1349f009ce00aa0dffc969bdf19d1d3ebecebf04"
+      "path": "bb8/README.md",
+      "bytes": 1777,
+      "sha256": "f36226de86d64414e02ba90f3547f4fce8dec4f2c538837ebc920c737a63f0b4"
+    },
+    {
+      "path": "bb8/SESSION-SETUP-RUNBOOK.md",
+      "bytes": 5450,
+      "sha256": "81ce64ca83ecb1f5950f911c04fe5361b3aa1d647f7be2fe8e64d1d185e492e4"
     },
     {
       "path": "bb8/skills/bb8/agents/openai.yaml",
@@ -241,9 +243,9 @@
       "sha256": "d2c8cb17011d0e1eb9ddf04d00e0fb06eb5aa7178d70b7744aa73d5feb374e9a"
     },
     {
-      "path": "bb8/skills/data-analysis/SKILL.md",
-      "bytes": 2196,
-      "sha256": "09e81c831f1eca98a4201a26bdb42581c72d56c0d24da74ffc049907c8de1d7f"
+      "path": "bb8/skills/bb8/SKILL.md",
+      "bytes": 1913,
+      "sha256": "3144e168d069c76c741accfa1349f009ce00aa0dffc969bdf19d1d3ebecebf04"
     },
     {
       "path": "bb8/skills/data-analysis/agents/openai.yaml",
@@ -256,9 +258,34 @@
       "sha256": "5b15fbe6013264bef3f10d10531d5bbc7355be1cb8d1a856e33eaa1d23ec87fd"
     },
     {
-      "path": "bb8/skills/deep-research/SKILL.md",
-      "bytes": 1951,
-      "sha256": "213ba046ddc5d5fe592101abaeefbd29f68b55067bddedc1d73b00cf94c495e0"
+      "path": "bb8/skills/data-analysis/SKILL.md",
+      "bytes": 2196,
+      "sha256": "09e81c831f1eca98a4201a26bdb42581c72d56c0d24da74ffc049907c8de1d7f"
+    },
+    {
+      "path": "bb8/skills/deck-review/agents/openai.yaml",
+      "bytes": 294,
+      "sha256": "ff5b50abf87fc818b5f0bf3eeb6c59212e5bbc67546479fd91542921e0e0e739"
+    },
+    {
+      "path": "bb8/skills/deck-review/references/investor-lens.md",
+      "bytes": 11376,
+      "sha256": "402dd353fb5983405df523dfcb866cdd2dec72e80da4e35a917ebbf0d31c88d4"
+    },
+    {
+      "path": "bb8/skills/deck-review/references/metric-tripwires.md",
+      "bytes": 5713,
+      "sha256": "1ba5a8e90b62b529cd712beba535def73101dd3409b540a1cc5869c9d46c9212"
+    },
+    {
+      "path": "bb8/skills/deck-review/references/report-template.md",
+      "bytes": 2049,
+      "sha256": "4c4d75fac16bddcd297fc6022a709f63a31d8d49bfec8ceea20b04175c7bd103"
+    },
+    {
+      "path": "bb8/skills/deck-review/SKILL.md",
+      "bytes": 9153,
+      "sha256": "12ee7920de161daf0a04f3fc56c26d1a3656f8dc9ef448902b8a2a831b784ce4"
     },
     {
       "path": "bb8/skills/deep-research/agents/openai.yaml",
@@ -271,9 +298,9 @@
       "sha256": "ab00921f3fb9f27201fff0ccd075cb86818f5d50aa4be04c14c52ff8349cd7a9"
     },
     {
-      "path": "bb8/skills/design-critique/SKILL.md",
-      "bytes": 1364,
-      "sha256": "70d3a9ca132d9bbc1dd18996642f2af7e4fb12a4d29004f2601214d5be94ace5"
+      "path": "bb8/skills/deep-research/SKILL.md",
+      "bytes": 1951,
+      "sha256": "213ba046ddc5d5fe592101abaeefbd29f68b55067bddedc1d73b00cf94c495e0"
     },
     {
       "path": "bb8/skills/design-critique/agents/openai.yaml",
@@ -281,9 +308,9 @@
       "sha256": "5525670768fff335099e7f9b15bf0d469b516acbd1aa57e0a055ebd2d2690378"
     },
     {
-      "path": "bb8/skills/engineering/SKILL.md",
-      "bytes": 1470,
-      "sha256": "50322cda05fe483c73f3afba7f309545effc6ddf8fe1cddfe1c24302dbb33c4b"
+      "path": "bb8/skills/design-critique/SKILL.md",
+      "bytes": 1364,
+      "sha256": "70d3a9ca132d9bbc1dd18996642f2af7e4fb12a4d29004f2601214d5be94ace5"
     },
     {
       "path": "bb8/skills/engineering/agents/openai.yaml",
@@ -291,9 +318,9 @@
       "sha256": "664fd31fdcf4d0890649b5c972e060477a8f55df8072b77ac96c52a9a168d1f7"
     },
     {
-      "path": "bb8/skills/engineering-architecture/SKILL.md",
-      "bytes": 1511,
-      "sha256": "0bbae7a4a35b7a4aa0d2f1fef449037caa6b9bd259def56c36f747354abb3286"
+      "path": "bb8/skills/engineering/SKILL.md",
+      "bytes": 1470,
+      "sha256": "50322cda05fe483c73f3afba7f309545effc6ddf8fe1cddfe1c24302dbb33c4b"
     },
     {
       "path": "bb8/skills/engineering-architecture/agents/openai.yaml",
@@ -301,9 +328,9 @@
       "sha256": "3c7ad7d2b01220570c1dd30562eaa6d9c2518d49078b035c38150f34fefc0921"
     },
     {
-      "path": "bb8/skills/engineering-debugging/SKILL.md",
-      "bytes": 2750,
-      "sha256": "6338fdb3aaaf56c6301894e9f42f6cfbeba1ba0e12d161dbf4f4806bd93a5d73"
+      "path": "bb8/skills/engineering-architecture/SKILL.md",
+      "bytes": 1511,
+      "sha256": "0bbae7a4a35b7a4aa0d2f1fef449037caa6b9bd259def56c36f747354abb3286"
     },
     {
       "path": "bb8/skills/engineering-debugging/agents/openai.yaml",
@@ -311,9 +338,9 @@
       "sha256": "e3d219b78315fb733182c20ac609b4119953cacefd4f2ef5df443976310c082a"
     },
     {
-      "path": "bb8/skills/engineering-implementation/SKILL.md",
-      "bytes": 1432,
-      "sha256": "541fa5e452851a5e147493e9086ff2f5c636337d192bc3b692af1339fd0bfc8b"
+      "path": "bb8/skills/engineering-debugging/SKILL.md",
+      "bytes": 2750,
+      "sha256": "6338fdb3aaaf56c6301894e9f42f6cfbeba1ba0e12d161dbf4f4806bd93a5d73"
     },
     {
       "path": "bb8/skills/engineering-implementation/agents/openai.yaml",
@@ -321,9 +348,9 @@
       "sha256": "da48447870b10a583d8ff8fbde8c0e557c64ad78475408a347c01eefe1fd6cf7"
     },
     {
-      "path": "bb8/skills/engineering-review/SKILL.md",
-      "bytes": 1347,
-      "sha256": "e4d9b32734240300f9cb5552aaf326a4e7cf04d2811ee7a01be6682684bc756e"
+      "path": "bb8/skills/engineering-implementation/SKILL.md",
+      "bytes": 1432,
+      "sha256": "541fa5e452851a5e147493e9086ff2f5c636337d192bc3b692af1339fd0bfc8b"
     },
     {
       "path": "bb8/skills/engineering-review/agents/openai.yaml",
@@ -331,9 +358,9 @@
       "sha256": "b7bf66a8b1ee0b964aa357b6115f809c57957f281f3be8b5f19b7e1a0534a8e8"
     },
     {
-      "path": "bb8/skills/engineering-security/SKILL.md",
-      "bytes": 1425,
-      "sha256": "fe4f87e635d391c87855ab73eca2eb3e7e3b0ea3d8704a1e31fec97490854033"
+      "path": "bb8/skills/engineering-review/SKILL.md",
+      "bytes": 1347,
+      "sha256": "e4d9b32734240300f9cb5552aaf326a4e7cf04d2811ee7a01be6682684bc756e"
     },
     {
       "path": "bb8/skills/engineering-security/agents/openai.yaml",
@@ -341,9 +368,9 @@
       "sha256": "34036a57bb5e9e8f414c8a98b1c790ba168d614640820f6aa32f7d803a5f394d"
     },
     {
-      "path": "bb8/skills/engineering-testing/SKILL.md",
-      "bytes": 1423,
-      "sha256": "17b85c364f958a516cedcd04f98683a9d6c6f647a39ec6a196afbe5734d9f647"
+      "path": "bb8/skills/engineering-security/SKILL.md",
+      "bytes": 1425,
+      "sha256": "fe4f87e635d391c87855ab73eca2eb3e7e3b0ea3d8704a1e31fec97490854033"
     },
     {
       "path": "bb8/skills/engineering-testing/agents/openai.yaml",
@@ -351,9 +378,9 @@
       "sha256": "1f74eba71eec26e4465429485869fb11167b8f05a067842b0fab108322b33529"
     },
     {
-      "path": "bb8/skills/experience-design/SKILL.md",
-      "bytes": 1353,
-      "sha256": "4156dac0cb61b33d93915311aef61ad145531db6de3fe3df86e27ec9640bcf3f"
+      "path": "bb8/skills/engineering-testing/SKILL.md",
+      "bytes": 1423,
+      "sha256": "17b85c364f958a516cedcd04f98683a9d6c6f647a39ec6a196afbe5734d9f647"
     },
     {
       "path": "bb8/skills/experience-design/agents/openai.yaml",
@@ -361,9 +388,9 @@
       "sha256": "4e3d6b7730e915b2c72f5aa4a604c58c164df7d8cd2bd6d4a19ddbb2d1a7700b"
     },
     {
-      "path": "bb8/skills/experiment-design/SKILL.md",
-      "bytes": 1417,
-      "sha256": "917138b9db3ecfee8f877e277e6b59823cff40cae5be2abee2d93a072f27b9f9"
+      "path": "bb8/skills/experience-design/SKILL.md",
+      "bytes": 1353,
+      "sha256": "4156dac0cb61b33d93915311aef61ad145531db6de3fe3df86e27ec9640bcf3f"
     },
     {
       "path": "bb8/skills/experiment-design/agents/openai.yaml",
@@ -371,9 +398,9 @@
       "sha256": "1b2d680eec3b60305b1b5e02a688e2a0038a0a066bc8efa0aab905a28d052f95"
     },
     {
-      "path": "bb8/skills/minto-communication/SKILL.md",
-      "bytes": 1749,
-      "sha256": "f6548d11a83a06514622f0e39b7619485bcb596a725b3b18d923d8fe01e50d21"
+      "path": "bb8/skills/experiment-design/SKILL.md",
+      "bytes": 1417,
+      "sha256": "917138b9db3ecfee8f877e277e6b59823cff40cae5be2abee2d93a072f27b9f9"
     },
     {
       "path": "bb8/skills/minto-communication/agents/openai.yaml",
@@ -386,9 +413,9 @@
       "sha256": "6ee13caaf907900ba16c189d889fbf2072ca363ca647f59a4de4ccb3cf9e7a71"
     },
     {
-      "path": "bb8/skills/organise/SKILL.md",
-      "bytes": 4317,
-      "sha256": "80683cec83f8c85e60544b999017c2e7975c28eb637670a00648c46599a8216f"
+      "path": "bb8/skills/minto-communication/SKILL.md",
+      "bytes": 1749,
+      "sha256": "f6548d11a83a06514622f0e39b7619485bcb596a725b3b18d923d8fe01e50d21"
     },
     {
       "path": "bb8/skills/organise/agents/openai.yaml",
@@ -426,9 +453,9 @@
       "sha256": "b274b3e681273af5e1cf8c7a546a0e8d656ec5f95a848160cf0d210935b438dc"
     },
     {
-      "path": "bb8/skills/problem-solving/SKILL.md",
-      "bytes": 2007,
-      "sha256": "fa32c8120055ab690bf8a621b353621872d470b60b2d603b8ebc7197627817b5"
+      "path": "bb8/skills/organise/SKILL.md",
+      "bytes": 4317,
+      "sha256": "80683cec83f8c85e60544b999017c2e7975c28eb637670a00648c46599a8216f"
     },
     {
       "path": "bb8/skills/problem-solving/agents/openai.yaml",
@@ -446,9 +473,9 @@
       "sha256": "6e0080631cb0ac988e951b98869c357ccf2cf37e2ccdd8d25e919f98912c3b8a"
     },
     {
-      "path": "bb8/skills/product-design/SKILL.md",
-      "bytes": 1268,
-      "sha256": "1cce5f34d86b73b95095920910bfa9af60a75018e522bcff8a20cc3975d1aa98"
+      "path": "bb8/skills/problem-solving/SKILL.md",
+      "bytes": 2007,
+      "sha256": "fa32c8120055ab690bf8a621b353621872d470b60b2d603b8ebc7197627817b5"
     },
     {
       "path": "bb8/skills/product-design/agents/openai.yaml",
@@ -456,9 +483,9 @@
       "sha256": "f4dd2688b167fb5747f34356a23eee92c7e1eb84e552e3336a19440b61c06abd"
     },
     {
-      "path": "bb8/skills/product-discovery/SKILL.md",
-      "bytes": 1493,
-      "sha256": "b8bfc7d762d9e3712955b7899166f4c6a78b246dcee9c35e2dba00d3bed82701"
+      "path": "bb8/skills/product-design/SKILL.md",
+      "bytes": 1268,
+      "sha256": "1cce5f34d86b73b95095920910bfa9af60a75018e522bcff8a20cc3975d1aa98"
     },
     {
       "path": "bb8/skills/product-discovery/agents/openai.yaml",
@@ -466,9 +493,9 @@
       "sha256": "96cb61f7c615f8258c24b5ea08aa3dfec2d23453773e885f679d3024a8e872a5"
     },
     {
-      "path": "bb8/skills/product-strategy/SKILL.md",
-      "bytes": 1461,
-      "sha256": "1532b09c58ddc33865015cd6ab88a7861ccbb9ff3d9ed72c0aa5bdcbd63d1530"
+      "path": "bb8/skills/product-discovery/SKILL.md",
+      "bytes": 1493,
+      "sha256": "b8bfc7d762d9e3712955b7899166f4c6a78b246dcee9c35e2dba00d3bed82701"
     },
     {
       "path": "bb8/skills/product-strategy/agents/openai.yaml",
@@ -476,9 +503,9 @@
       "sha256": "4e29d3d4ac246bbd1149aca6d38cfbcaad71245f249901839c2d0a5865e7b6a0"
     },
     {
-      "path": "bb8/skills/prompt-design-engineering/SKILL.md",
-      "bytes": 12119,
-      "sha256": "523bea00286b0011441383f84df21740108a68602ef318ff6412f3897bf910de"
+      "path": "bb8/skills/product-strategy/SKILL.md",
+      "bytes": 1461,
+      "sha256": "1532b09c58ddc33865015cd6ab88a7861ccbb9ff3d9ed72c0aa5bdcbd63d1530"
     },
     {
       "path": "bb8/skills/prompt-design-engineering/agents/openai.yaml",
@@ -486,9 +513,9 @@
       "sha256": "e60c9e4b6f113ef0dba8225191cb40b5f65fef045a8befa0d9630993b323bfe1"
     },
     {
-      "path": "bb8/skills/strategic-storytelling/SKILL.md",
-      "bytes": 3582,
-      "sha256": "5dd8613d15717fe4ec5e736e7eab4ded1b76920583a228e8c6553dc0608c1005"
+      "path": "bb8/skills/prompt-design-engineering/SKILL.md",
+      "bytes": 12119,
+      "sha256": "523bea00286b0011441383f84df21740108a68602ef318ff6412f3897bf910de"
     },
     {
       "path": "bb8/skills/strategic-storytelling/agents/openai.yaml",
@@ -506,9 +533,9 @@
       "sha256": "97ece056de7cd1758fe73241a10aa28112be164739d94ed3113c41b9f1e209d5"
     },
     {
-      "path": "bb8/skills/transcript-insights-tofu/SKILL.md",
-      "bytes": 2069,
-      "sha256": "5d998c04e184e9fac776eddcd8c711e44a75229176bb61c219750c1fa7333573"
+      "path": "bb8/skills/strategic-storytelling/SKILL.md",
+      "bytes": 3582,
+      "sha256": "5dd8613d15717fe4ec5e736e7eab4ded1b76920583a228e8c6553dc0608c1005"
     },
     {
       "path": "bb8/skills/transcript-insights-tofu/agents/openai.yaml",
@@ -524,6 +551,11 @@
       "path": "bb8/skills/transcript-insights-tofu/references/pipeline.md",
       "bytes": 1642,
       "sha256": "a4d7a124fcd72b0f88e71c46ee704fb94d7410f0a467bac84e336854bb491e61"
+    },
+    {
+      "path": "bb8/skills/transcript-insights-tofu/SKILL.md",
+      "bytes": 2069,
+      "sha256": "5d998c04e184e9fac776eddcd8c711e44a75229176bb61c219750c1fa7333573"
     }
   ]
 }

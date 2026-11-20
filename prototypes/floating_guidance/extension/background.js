@@ -4,7 +4,7 @@
 // content: each new reader stream/document starts a generation; retries reuse it.
 importScripts('config.js');
 const CFG=globalThis.KIKI_FG_CONFIG,KEY='kiki_fg';
-const READER=new Set(['reader_hello','reader_snapshot','reader_command_result','reader_bye']);
+const READER=new Set(['reader_status','reader_hello','reader_snapshot','reader_command_result','reader_bye']);
 const TARGET=new Set(['target_hello','fg_command','fg_rects']);
 const POPUP=new Set(['popup_status','bind_tab','unbind']);
 let queue=Promise.resolve();
@@ -141,6 +141,8 @@ async function handle(k,m,sender){
 chrome.runtime.onMessage.addListener((m,sender,reply)=>{
  const k=kind(sender),allowed=k==='reader'?READER:k==='target'?TARGET:k==='popup'?POPUP:null;
  if(!allowed?.has(m?.type)){reply({ok:false,error:'rejected_sender_or_type'});return false;}
+ // Status checks cannot claim control, bind targets or touch lab state.
+ if(m.type==='reader_status'){reply({ok:true,version:chrome.runtime.getManifest().version});return false;}
  // Rect reports are frequent and stateless; keep them out of the state lock.
  if(m.type==='fg_rects'){load().then(s=>handle(k,m,sender)).then(reply,()=>reply({ok:false}));return true;}
  locked(()=>handle(k,m,sender)).then(reply,error=>reply({ok:false,error:String(error?.message||error)}));return true;

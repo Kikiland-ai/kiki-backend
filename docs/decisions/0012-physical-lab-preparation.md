@@ -1,3 +1,5 @@
+> Current repository boundary: student-facing UI/rendering has moved to kiki-web `codex/physical-lab-ui`; backend preview routes/modules are removed. See [the updated handoff](../handoffs/physical-lab-preparation.md). Earlier implementation notes below retain history.
+
 # Physical lab preparation through prescribed experiment packs
 
 20 November 2026. User-authorised local implementation, starting from backend main

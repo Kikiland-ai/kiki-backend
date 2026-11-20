@@ -1,3 +1,33 @@
+# Physical lab repository split — 21 November 2026
+
+User corrected the delivery boundary: follow the existing kiki-web Lab mode.
+Removed the backend-hosted student preview and browser modules/routes. Kept the
+pack-driven pipeline, versioned apparatus/content, numerical adapter, prerequisite
+checks, session/action validation and persistence here. Session summaries now
+include mode to support separate demo resume. Regenerated the backend OpenAPI.
+The kiki-web codex/physical-lab-ui branch owns the React screen, renderer, hints,
+floating guide/fullscreen/plots, service adapter and authenticated API relay.
+
+Frontend verification: 316 unit tests, 10 renderer checks, typecheck/lint and
+production build pass; web API 274 tests pass with 8 opt-in skips, lint passes.
+The live local web proxy plus real backend engine completed all nine steps and
+returned 1000 Hz / 0.5 V peak with theory unassessed. Native Chrome verified
+fullscreen, component hints, wrong-lead rejection and progression. No Google,
+Firestore or provider trial was run; the local acceptance identity is synthetic.
+
+Latest backend reruns encountered intermittent SQLITE_IOERR_SHMSIZE on this
+space-constrained machine, including untouched stores; isolated WAL reopen/write
+also reproduced it. Earlier full backend acceptance passed. Record the fresh
+remote CI result before claiming a new full local pass. No product storage policy
+was changed to hide this environment failure.
+
+Last completed: frontend integration and backend UI removal prepared for paired
+PRs. Exact next: publish the web companion PR, update backend PR #14, verify CI,
+then review the pair before enabling the upstream and doing signed-in hosted
+acceptance. No merge, deployment or learner data migration performed.
+
+---
+
 # Physical lab PR preparation — 21 November 2026
 
 User approved the refined preview and requested a PR for Kiki UI integration.

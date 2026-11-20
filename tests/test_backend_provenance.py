@@ -36,7 +36,6 @@ class BackendProvenanceTests(unittest.TestCase):
         self.assertTrue(actual['pr7_ancestor'])
         self.assertIn('prototypes/backend/lab_idempotency.py', actual['runtime_files'])
         self.assertIn('prototypes/floating_guidance/extension/background.js', actual['runtime_files'])
-        self.assertIn('prototypes/physical_labs/static/apparatus-viewer.mjs', actual['runtime_files'])
         self.assertIn('prototypes/physical_labs/assets/dsb-sc-trainer-v3.gltf', actual['runtime_files'])
         self.assertFalse(any('.env' in name or '/work/' in name for name in actual['runtime_files']))
         verify_source(actual, json.loads(json.dumps(actual)))

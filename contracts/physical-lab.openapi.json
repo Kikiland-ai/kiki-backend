@@ -186,25 +186,6 @@
   },
   "openapi": "3.1.0",
   "paths": {
-    "/v1/physical-labs/apparatus-viewer.mjs": {
-      "get": {
-        "operationId": "apparatus_viewer_v1_physical_labs_apparatus_viewer_mjs_get",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            },
-            "description": "Successful Response"
-          }
-        },
-        "summary": "Apparatus Viewer",
-        "tags": [
-          "physical-lab-preparation"
-        ]
-      }
-    },
     "/v1/physical-labs/assets/{name}": {
       "get": {
         "operationId": "asset_v1_physical_labs_assets__name__get",
@@ -240,25 +221,6 @@
           }
         },
         "summary": "Asset",
-        "tags": [
-          "physical-lab-preparation"
-        ]
-      }
-    },
-    "/v1/physical-labs/component-hints.mjs": {
-      "get": {
-        "operationId": "component_hints_v1_physical_labs_component_hints_mjs_get",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            },
-            "description": "Successful Response"
-          }
-        },
-        "summary": "Component Hints",
         "tags": [
           "physical-lab-preparation"
         ]
@@ -318,63 +280,6 @@
           }
         },
         "summary": "Experiment",
-        "tags": [
-          "physical-lab-preparation"
-        ]
-      }
-    },
-    "/v1/physical-labs/preparation-client.mjs": {
-      "get": {
-        "operationId": "preparation_client_v1_physical_labs_preparation_client_mjs_get",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            },
-            "description": "Successful Response"
-          }
-        },
-        "summary": "Preparation Client",
-        "tags": [
-          "physical-lab-preparation"
-        ]
-      }
-    },
-    "/v1/physical-labs/preview": {
-      "get": {
-        "operationId": "preview_v1_physical_labs_preview_get",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            },
-            "description": "Successful Response"
-          }
-        },
-        "summary": "Preview",
-        "tags": [
-          "physical-lab-preparation"
-        ]
-      }
-    },
-    "/v1/physical-labs/preview.js": {
-      "get": {
-        "operationId": "preview_js_v1_physical_labs_preview_js_get",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            },
-            "description": "Successful Response"
-          }
-        },
-        "summary": "Preview Js",
         "tags": [
           "physical-lab-preparation"
         ]

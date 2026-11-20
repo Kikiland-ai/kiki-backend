@@ -59,31 +59,6 @@ def physical_lab_router(service, owner_of, mutation_origin):
         return FileResponse(ROOT / 'assets' / name, media_type='model/gltf+json',
                             headers={'Cache-Control': 'private, max-age=0, must-revalidate'})
 
-    @router.get('/preview')
-    def preview(request: Request):
-        owner_of(request)
-        return FileResponse(ROOT / 'static' / 'preview.html')
-
-    @router.get('/preview.js')
-    def preview_js(request: Request):
-        owner_of(request)
-        return FileResponse(ROOT / 'static' / 'preview.js', media_type='text/javascript')
-
-    @router.get('/apparatus-viewer.mjs')
-    def apparatus_viewer(request: Request):
-        owner_of(request)
-        return FileResponse(ROOT / 'static' / 'apparatus-viewer.mjs', media_type='text/javascript')
-
-    @router.get('/preparation-client.mjs')
-    def preparation_client(request: Request):
-        owner_of(request)
-        return FileResponse(ROOT / 'static' / 'preparation-client.mjs', media_type='text/javascript')
-
-    @router.get('/component-hints.mjs')
-    def component_hints(request: Request):
-        owner_of(request)
-        return FileResponse(ROOT / 'static' / 'component-hints.mjs', media_type='text/javascript')
-
     @router.post('/sessions', status_code=201)
     def create(request: Request, body: CreatePreparation, idempotency_key: str = Header(..., alias='Idempotency-Key')):
         owner = owner_of(request); mutation_origin(request)

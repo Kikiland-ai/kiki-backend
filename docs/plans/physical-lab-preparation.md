@@ -1,3 +1,5 @@
+> Current repository boundary: student-facing UI/rendering has moved to kiki-web `codex/physical-lab-ui`; backend preview routes/modules are removed. See [the updated handoff](../handoffs/physical-lab-preparation.md). Earlier implementation notes below retain history.
+
 # Direct experiment demo update — 21 November 2026
 
 Completed the user's demo request: skip theory interactions in the preview while

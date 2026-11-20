@@ -150,7 +150,7 @@ class PreparationService:
         with self.connect() as db:
             rows = db.execute("SELECT state,pack FROM physical_sessions WHERE owner=? ORDER BY rowid DESC LIMIT 100", (owner,)).fetchall()
         return [{k: v for k, v in self.project(json.loads(r["state"]), json.loads(r["pack"])).items()
-                 if k in ("session_id", "revision", "stage", "experiment_id", "title", "updated_at")}
+                 if k in ("session_id", "revision", "stage", "experiment_id", "title", "updated_at", "mode")}
                 for r in rows]
 
     @staticmethod

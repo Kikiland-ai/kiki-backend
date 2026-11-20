@@ -304,18 +304,15 @@ class PhysicalLabApiTests(unittest.TestCase):
         self.app.state.mixed_language.executor.shutdown(wait=False)
         self.temp.cleanup()
 
-    def test_catalogue_assets_preview_and_openapi_are_served(self):
+    def test_catalogue_assets_and_openapi_are_served(self):
         base = '/v1/physical-labs'
         catalogue = self.client.get(base+'/experiments')
         self.assertEqual(catalogue.status_code, 200)
         self.assertEqual(catalogue.json()[0]['id'], 'dsb-sc-trainer')
         self.assertEqual(self.client.get(base+'/assets/dsb-sc-trainer-v1.gltf').status_code, 200)
         self.assertEqual(self.client.get(base+'/assets/dsb-sc-trainer-v2.gltf').status_code, 200)
-        self.assertEqual(self.client.get(base+'/apparatus-viewer.mjs').status_code, 200)
-        self.assertEqual(self.client.get(base+'/preparation-client.mjs').status_code, 200)
-        self.assertEqual(self.client.get(base+'/component-hints.mjs').status_code, 200)
         self.assertEqual(self.client.get(base+'/assets/unknown.gltf').status_code, 404)
-        self.assertEqual(self.client.get(base+'/preview').status_code, 200)
+        self.assertEqual(self.client.get(base+'/preview').status_code, 404)
         paths = self.client.get('/openapi.json').json()['paths']
         self.assertIn(base+'/sessions/{session_id}/events', paths)
         self.assertIn('requestBody', paths[base+'/sessions']['post'])

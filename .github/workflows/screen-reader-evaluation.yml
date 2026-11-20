@@ -30,12 +30,11 @@ jobs:
           node-version: '24'
       - run: pip install -r prototypes/screen_capture/requirements.txt
       - run: python scripts/run-screen-reader-evaluation.py
-      - name: Physical lab contracts, assets and preview
+      - name: Physical lab contracts, assets and pipeline
         run: |
           python -B scripts/export-physical-lab-contracts.py --check
           python -B scripts/build-physical-lab-assets.py --check
           python -B scripts/smoke-physical-labs.py
-          node --test tests/test_physical_lab_preview.mjs
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:

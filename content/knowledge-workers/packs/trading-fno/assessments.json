@@ -1,0 +1,1098 @@
+{
+  "schema": "kiki-authored-assessments/v1",
+  "review": "draft",
+  "concepts": {
+    "TR-IV-EVENT": {
+      "policy": {
+        "conceptChecks": 5,
+        "passPercent": 60,
+        "options": 4,
+        "chapterTest": false
+      },
+      "checks": [
+        {
+          "id": "Q-TR-IV-EVENT-1",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "diagnosis",
+          "prompt": "The index rose while the case option lost value. Which explanation fits the case?",
+          "options": [
+            "The quoted loss includes a new order",
+            "The strike changed overnight",
+            "Only the index direction mattered",
+            "Volatility fell and time passed"
+          ],
+          "answer": "Volatility fell and time passed",
+          "distractorRationale": {
+            "Only the index direction mattered": "error: Ignores volatility and time inputs",
+            "The strike changed overnight": "error: Assumes a strike change absent from the case",
+            "The quoted loss includes a new order": "error: Confuses historical attribution with new execution"
+          },
+          "explanation": "The case keeps the strike fixed and separates the favourable spot effect from volatility and time costs.",
+          "objectiveIds": [
+            "O-TR-IV-EVENT-1"
+          ],
+          "difficulty": 1,
+          "claimIds": [
+            "CL-TR-IV-EVENT-RULE",
+            "CL-TR-IV-EVENT-WORKED",
+            "CL-TR-IV-EVENT-definition-1",
+            "CL-TR-IV-EVENT-definition-2",
+            "CL-TR-IV-EVENT-concept-1",
+            "CL-TR-IV-EVENT-concept-2",
+            "CL-TR-IV-EVENT-concept-3"
+          ]
+        },
+        {
+          "id": "Q-TR-IV-EVENT-2",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "process",
+          "prompt": "Under EV-2.1, what is missing from a direction-only historical note?",
+          "options": [
+            "A second direction prediction",
+            "A higher-confidence adjective",
+            "The realised outcome written first",
+            "Expected move versus the priced move"
+          ],
+          "answer": "Expected move versus the priced move",
+          "distractorRationale": {
+            "A second direction prediction": "error: Repeats direction without a priced-move comparison",
+            "The realised outcome written first": "error: Uses hindsight instead of entry-time information",
+            "A higher-confidence adjective": "error: Substitutes confidence language for the desk requirement"
+          },
+          "explanation": "The desk asks for a move comparison using entry-time information; confidence language does not replace it.",
+          "objectiveIds": [
+            "O-TR-IV-EVENT-2"
+          ],
+          "difficulty": 1,
+          "claimIds": [
+            "CL-TR-IV-EVENT-RULE",
+            "CL-TR-IV-EVENT-WORKED",
+            "CL-TR-IV-EVENT-definition-1",
+            "CL-TR-IV-EVENT-definition-2",
+            "CL-TR-IV-EVENT-concept-1",
+            "CL-TR-IV-EVENT-concept-2",
+            "CL-TR-IV-EVENT-concept-3"
+          ]
+        },
+        {
+          "id": "Q-TR-IV-EVENT-3",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "judgement",
+          "prompt": "Which interpretation of the straddle guide is appropriate?",
+          "options": [
+            "An exact profit boundary",
+            "A desk planning heuristic",
+            "A directional trading signal",
+            "A guaranteed future range"
+          ],
+          "answer": "A desk planning heuristic",
+          "distractorRationale": {
+            "A guaranteed future range": "error: Treats a rough guide as a guaranteed range",
+            "An exact profit boundary": "error: Treats a planning heuristic as an exact profit threshold",
+            "A directional trading signal": "error: Turns a two-sided pricing guide into a direction signal"
+          },
+          "explanation": "The playbook uses a rough comparison; model price, time and volatility still determine the option value.",
+          "objectiveIds": [
+            "O-TR-IV-EVENT-1"
+          ],
+          "difficulty": 2,
+          "claimIds": [
+            "CL-TR-IV-EVENT-RULE",
+            "CL-TR-IV-EVENT-WORKED",
+            "CL-TR-IV-EVENT-definition-1",
+            "CL-TR-IV-EVENT-definition-2",
+            "CL-TR-IV-EVENT-concept-1",
+            "CL-TR-IV-EVENT-concept-2",
+            "CL-TR-IV-EVENT-concept-3"
+          ]
+        },
+        {
+          "id": "Q-TR-IV-EVENT-4",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "calculation",
+          "prompt": "What is the case straddle price, using 153.55 and 150.75?",
+          "options": [
+            "150.75 points",
+            "2.80 points",
+            "153.55 points",
+            "304.30 points"
+          ],
+          "answer": "304.30 points",
+          "distractorRationale": {
+            "153.55 points": "error: Counts only the call leg",
+            "150.75 points": "error: Counts only the put leg",
+            "2.80 points": "error: Subtracts the legs rather than adding them"
+          },
+          "explanation": "Add both legs for the straddle guide; subtracting them measures a different quantity.",
+          "objectiveIds": [
+            "O-TR-IV-EVENT-2"
+          ],
+          "difficulty": 2,
+          "claimIds": [
+            "CL-TR-IV-EVENT-RULE",
+            "CL-TR-IV-EVENT-WORKED",
+            "CL-TR-IV-EVENT-definition-1",
+            "CL-TR-IV-EVENT-definition-2",
+            "CL-TR-IV-EVENT-concept-1",
+            "CL-TR-IV-EVENT-concept-2",
+            "CL-TR-IV-EVENT-concept-3"
+          ]
+        },
+        {
+          "id": "Q-TR-IV-EVENT-5",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "diagnosis",
+          "prompt": "Which case component was the largest negative model contribution per unit?",
+          "options": [
+            "All contributions were positive",
+            "IV at about minus 48",
+            "Time at about minus 23",
+            "Spot at about plus 40"
+          ],
+          "answer": "IV at about minus 48",
+          "distractorRationale": {
+            "Spot at about plus 40": "error: Confuses a positive contribution with a drag",
+            "Time at about minus 23": "error: Chooses the smaller negative contribution",
+            "All contributions were positive": "error: Ignores both negative components"
+          },
+          "explanation": "The rounded attribution assigns the largest drag to IV; the positive spot component did not offset both costs.",
+          "objectiveIds": [
+            "O-TR-IV-EVENT-1"
+          ],
+          "difficulty": 3,
+          "claimIds": [
+            "CL-TR-IV-EVENT-RULE",
+            "CL-TR-IV-EVENT-WORKED",
+            "CL-TR-IV-EVENT-definition-1",
+            "CL-TR-IV-EVENT-definition-2",
+            "CL-TR-IV-EVENT-concept-1",
+            "CL-TR-IV-EVENT-concept-2",
+            "CL-TR-IV-EVENT-concept-3"
+          ]
+        },
+        {
+          "id": "Q-TR-IV-EVENT-WORDS",
+          "type": "fill_blank",
+          "dimension": "words",
+          "evaluates": "recall",
+          "prompt": "Name the term: The volatility input inferred from an option price using a pricing model.",
+          "answer": "implied volatility",
+          "explanation": "The term is implied volatility. The volatility input inferred from an option price using a pricing model.",
+          "objectiveIds": [
+            "O-TR-IV-EVENT-1"
+          ],
+          "difficulty": 1,
+          "claimIds": [
+            "CL-TR-IV-EVENT-RULE"
+          ]
+        },
+        {
+          "id": "Q-TR-IV-EVENT-EXPRESSION",
+          "type": "short_english",
+          "dimension": "english",
+          "evaluates": "process",
+          "prompt": "Explain in two lines why the case option lost despite a rising index, and distinguish the desk heuristic from a profit guarantee. Working language: English.",
+          "answer": "Add the two prices: 153.55 + 150.75 = 304.30 points as the desk guide. The note expects 150 points, below that guide; it does not justify the comparison required by EV-2.1. Record the missing justification. This heuristic does not by itself predict profit or loss.",
+          "explanation": "Assess conceptual claims separately from clarity and terminology. A language gap does not remove concept credit.",
+          "objectiveIds": [
+            "O-TR-IV-EVENT-1",
+            "O-TR-IV-EVENT-2"
+          ],
+          "difficulty": 2,
+          "claimIds": [
+            "CL-TR-IV-EVENT-RULE"
+          ],
+          "rubric": [
+            {
+              "criterion": "State the evidenced reasoning accurately; record concept credit separately.",
+              "dim": "concept"
+            },
+            {
+              "criterion": "Use the canonical terms to explain the reasoning clearly in the working language.",
+              "dim": "english"
+            }
+          ]
+        },
+        {
+          "id": "Q-TR-IV-EVENT-PRACTICE",
+          "type": "predict",
+          "dimension": "lab",
+          "evaluates": "process",
+          "prompt": "In the historical chain, identify the case call and put prices, add them, and annotate the old note with the missing EV-2.1 comparison.",
+          "answer": "Use the saved illustrative case only. Add the two prices: 153.55 + 150.75 = 304.30 points as the desk guide. The note expects 150 points, below that guide; it does not justify the comparison required by EV-2.1. Record the missing justification. This heuristic does not by itself predict profit or loss.",
+          "explanation": "The learner performs the inspection or edit. A predicted answer is not proof that the real tool action occurred.",
+          "objectiveIds": [
+            "O-TR-IV-EVENT-1",
+            "O-TR-IV-EVENT-2"
+          ],
+          "difficulty": 3,
+          "claimIds": [
+            "CL-TR-IV-EVENT-RULE"
+          ],
+          "evidencePolicy": {
+            "predictionOnly": true,
+            "earnsPracticeCredit": false,
+            "requires": "Observed learner action or a saved learner artefact, checked against the task criteria."
+          }
+        }
+      ],
+      "workedQuestion": {
+        "id": "W-TR-IV-EVENT",
+        "type": "short_english",
+        "marks": 3,
+        "prompt": "The case ATM call costs 153.55 and put 150.75. A historical note expects 150 points. Apply EV-2.1 without recommending a trade.",
+        "modelAnswer": [
+          "Add the two prices: 153.55 + 150.75 = 304.30 points as the desk guide.",
+          "The note expects 150 points, below that guide; it does not justify the comparison required by EV-2.1.",
+          "Record the missing justification. This heuristic does not by itself predict profit or loss."
+        ],
+        "rubric": [
+          {
+            "criterion": "Add the two prices: 153.55 + 150.75 = 304.30 points as the desk guide.",
+            "marks": 1,
+            "objectiveId": "O-TR-IV-EVENT-1"
+          },
+          {
+            "criterion": "The note expects 150 points, below that guide; it does not justify the comparison required by EV-2.1.",
+            "marks": 1,
+            "objectiveId": "O-TR-IV-EVENT-2"
+          },
+          {
+            "criterion": "Record the missing justification. This heuristic does not by itself predict profit or loss.",
+            "marks": 1,
+            "objectiveId": "O-TR-IV-EVENT-1"
+          }
+        ],
+        "examVocabulary": [
+          "T-TR-IV",
+          "T-TR-CRUSH",
+          "T-TR-PREMIUM",
+          "T-TR-STRADDLE",
+          "T-TR-MOVE"
+        ]
+      }
+    },
+    "TR-THETA": {
+      "policy": {
+        "conceptChecks": 5,
+        "passPercent": 60,
+        "options": 4,
+        "chapterTest": false
+      },
+      "checks": [
+        {
+          "id": "Q-TR-THETA-1",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "process",
+          "prompt": "What must a controlled EV-3.1 comparison keep fixed?",
+          "options": [
+            "Spot, volatility and other inputs",
+            "The final loss irrespective of inputs",
+            "Only the realised closing price",
+            "Only the date of the quote"
+          ],
+          "answer": "Spot, volatility and other inputs",
+          "distractorRationale": {
+            "Only the date of the quote": "error: Holds a label fixed rather than the pricing inputs",
+            "Only the realised closing price": "error: Uses the realised endpoint instead of a controlled spot input",
+            "The final loss irrespective of inputs": "error: Works backwards from a total loss rather than isolating time"
+          },
+          "explanation": "Moving several inputs at once cannot isolate time; the comparison changes the time remaining alone.",
+          "objectiveIds": [
+            "O-TR-THETA-1"
+          ],
+          "difficulty": 1,
+          "claimIds": [
+            "CL-TR-THETA-RULE",
+            "CL-TR-THETA-WORKED",
+            "CL-TR-THETA-definition-1",
+            "CL-TR-THETA-definition-2",
+            "CL-TR-THETA-concept-1",
+            "CL-TR-THETA-concept-2",
+            "CL-TR-THETA-concept-3"
+          ]
+        },
+        {
+          "id": "Q-TR-THETA-2",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "diagnosis",
+          "prompt": "Why is the entire overnight loss not theta in this case?",
+          "options": [
+            "Theta only applies to puts",
+            "The option had no expiry",
+            "The strike was renamed",
+            "Spot and IV changed as well"
+          ],
+          "answer": "Spot and IV changed as well",
+          "distractorRationale": {
+            "The option had no expiry": "error: Ignores the stated expiry",
+            "The strike was renamed": "error: Invents an instrument change",
+            "Theta only applies to puts": "error: Incorrectly restricts theta to put options"
+          },
+          "explanation": "The observed change mixes drivers, whereas theta describes sensitivity to time with other inputs fixed.",
+          "objectiveIds": [
+            "O-TR-THETA-2"
+          ],
+          "difficulty": 1,
+          "claimIds": [
+            "CL-TR-THETA-RULE",
+            "CL-TR-THETA-WORKED",
+            "CL-TR-THETA-definition-1",
+            "CL-TR-THETA-definition-2",
+            "CL-TR-THETA-concept-1",
+            "CL-TR-THETA-concept-2",
+            "CL-TR-THETA-concept-3"
+          ]
+        },
+        {
+          "id": "Q-TR-THETA-3",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "judgement",
+          "prompt": "Which note is most reproducible?",
+          "options": [
+            "Only the final percentage loss",
+            "Waiting always costs the same",
+            "Both input sets plus model values",
+            "Yesterday was simply unlucky"
+          ],
+          "answer": "Both input sets plus model values",
+          "distractorRationale": {
+            "Waiting always costs the same": "error: Assumes constant time sensitivity",
+            "Yesterday was simply unlucky": "error: Records a feeling without reproducible inputs",
+            "Only the final percentage loss": "error: Records an output without its assumptions"
+          },
+          "explanation": "Input sets let a reviewer reproduce the controlled comparison; a result alone cannot explain the assumptions.",
+          "objectiveIds": [
+            "O-TR-THETA-1"
+          ],
+          "difficulty": 2,
+          "claimIds": [
+            "CL-TR-THETA-RULE",
+            "CL-TR-THETA-WORKED",
+            "CL-TR-THETA-definition-1",
+            "CL-TR-THETA-definition-2",
+            "CL-TR-THETA-concept-1",
+            "CL-TR-THETA-concept-2",
+            "CL-TR-THETA-concept-3"
+          ]
+        },
+        {
+          "id": "Q-TR-THETA-4",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "calculation",
+          "prompt": "The rounded case time attribution is minus 23 per unit. For 300 units, what is that rounded component?",
+          "options": [
+            "Minus 23 rupees",
+            "Minus 6900 rupees",
+            "Minus 2300 rupees",
+            "Minus 300 rupees"
+          ],
+          "answer": "Minus 6900 rupees",
+          "distractorRationale": {
+            "Minus 23 rupees": "error: Omits multiplication by quantity",
+            "Minus 300 rupees": "error: Uses quantity as a cash amount",
+            "Minus 2300 rupees": "error: Drops a factor of three in the multiplication"
+          },
+          "explanation": "Multiply the rounded per-unit component by quantity. Rounded components need not equal the exact fill-based loss.",
+          "objectiveIds": [
+            "O-TR-THETA-2"
+          ],
+          "difficulty": 2,
+          "claimIds": [
+            "CL-TR-THETA-RULE",
+            "CL-TR-THETA-WORKED",
+            "CL-TR-THETA-definition-1",
+            "CL-TR-THETA-definition-2",
+            "CL-TR-THETA-concept-1",
+            "CL-TR-THETA-concept-2",
+            "CL-TR-THETA-concept-3"
+          ]
+        },
+        {
+          "id": "Q-TR-THETA-5",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "diagnosis",
+          "prompt": "Why is entry theta times three not necessarily an exact three-day value change?",
+          "options": [
+            "Theta changes as model inputs evolve",
+            "Theta is a fixed annual fee",
+            "Only the strike sets theta",
+            "Time has no pricing effect"
+          ],
+          "answer": "Theta changes as model inputs evolve",
+          "distractorRationale": {
+            "Theta is a fixed annual fee": "error: Mistakes a local sensitivity for a fixed fee",
+            "Only the strike sets theta": "error: Ignores every input other than strike",
+            "Time has no pricing effect": "error: Denies the pricing role of time"
+          },
+          "explanation": "Theta is a local model sensitivity that can change; a finite-period comparison requires repricing.",
+          "objectiveIds": [
+            "O-TR-THETA-1"
+          ],
+          "difficulty": 3,
+          "claimIds": [
+            "CL-TR-THETA-RULE",
+            "CL-TR-THETA-WORKED",
+            "CL-TR-THETA-definition-1",
+            "CL-TR-THETA-definition-2",
+            "CL-TR-THETA-concept-1",
+            "CL-TR-THETA-concept-2",
+            "CL-TR-THETA-concept-3"
+          ]
+        },
+        {
+          "id": "Q-TR-THETA-WORDS",
+          "type": "fill_blank",
+          "dimension": "words",
+          "evaluates": "recall",
+          "prompt": "Name the term: The model sensitivity to one day passing, holding other pricing inputs fixed.",
+          "answer": "theta",
+          "explanation": "The term is theta. The model sensitivity to one day passing, holding other pricing inputs fixed.",
+          "objectiveIds": [
+            "O-TR-THETA-1"
+          ],
+          "difficulty": 1,
+          "claimIds": [
+            "CL-TR-THETA-RULE"
+          ]
+        },
+        {
+          "id": "Q-TR-THETA-EXPRESSION",
+          "type": "short_english",
+          "dimension": "english",
+          "evaluates": "process",
+          "prompt": "Explain to the desk why the observed overnight loss mixes drivers and which inputs isolate the cost of waiting. Working language: English.",
+          "answer": "The full loss combines the favourable spot effect, volatility and time. The rounded time component is about minus 23 per unit; it is not the full minus 30.70 fill-based loss. For EV-3.1, compare next-day and original model values with spot, volatility and other inputs held fixed.",
+          "explanation": "Assess conceptual claims separately from clarity and terminology. A language gap does not remove concept credit.",
+          "objectiveIds": [
+            "O-TR-THETA-1",
+            "O-TR-THETA-2"
+          ],
+          "difficulty": 2,
+          "claimIds": [
+            "CL-TR-THETA-RULE"
+          ],
+          "rubric": [
+            {
+              "criterion": "State the evidenced reasoning accurately; record concept credit separately.",
+              "dim": "concept"
+            },
+            {
+              "criterion": "Use the canonical terms to explain the reasoning clearly in the working language.",
+              "dim": "english"
+            }
+          ]
+        },
+        {
+          "id": "Q-TR-THETA-PRACTICE",
+          "type": "predict",
+          "dimension": "lab",
+          "evaluates": "process",
+          "prompt": "In a historical pricing replay, hold spot and IV fixed, reduce time remaining by one day, and save both model values; do not submit an order.",
+          "answer": "Use the saved illustrative case only. The full loss combines the favourable spot effect, volatility and time. The rounded time component is about minus 23 per unit; it is not the full minus 30.70 fill-based loss. For EV-3.1, compare next-day and original model values with spot, volatility and other inputs held fixed.",
+          "explanation": "The learner performs the inspection or edit. A predicted answer is not proof that the real tool action occurred.",
+          "objectiveIds": [
+            "O-TR-THETA-1",
+            "O-TR-THETA-2"
+          ],
+          "difficulty": 3,
+          "claimIds": [
+            "CL-TR-THETA-RULE"
+          ],
+          "evidencePolicy": {
+            "predictionOnly": true,
+            "earnsPracticeCredit": false,
+            "requires": "Observed learner action or a saved learner artefact, checked against the task criteria."
+          }
+        }
+      ],
+      "workedQuestion": {
+        "id": "W-TR-THETA",
+        "type": "short_english",
+        "marks": 3,
+        "prompt": "A historical review calls the full 30.70-per-unit loss theta. The case attributes about minus 23 to time and minus 48 to IV. Correct the note.",
+        "modelAnswer": [
+          "The full loss combines the favourable spot effect, volatility and time.",
+          "The rounded time component is about minus 23 per unit; it is not the full minus 30.70 fill-based loss.",
+          "For EV-3.1, compare next-day and original model values with spot, volatility and other inputs held fixed."
+        ],
+        "rubric": [
+          {
+            "criterion": "The full loss combines the favourable spot effect, volatility and time.",
+            "marks": 1,
+            "objectiveId": "O-TR-THETA-1"
+          },
+          {
+            "criterion": "The rounded time component is about minus 23 per unit; it is not the full minus 30.70 fill-based loss.",
+            "marks": 1,
+            "objectiveId": "O-TR-THETA-2"
+          },
+          {
+            "criterion": "For EV-3.1, compare next-day and original model values with spot, volatility and other inputs held fixed.",
+            "marks": 1,
+            "objectiveId": "O-TR-THETA-1"
+          }
+        ],
+        "examVocabulary": [
+          "T-TR-THETA",
+          "T-TR-TIME"
+        ]
+      }
+    },
+    "TR-EVENT-RISK": {
+      "policy": {
+        "conceptChecks": 5,
+        "passPercent": 60,
+        "options": 4,
+        "chapterTest": false
+      },
+      "checks": [
+        {
+          "id": "Q-TR-EVENT-RISK-1",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "process",
+          "prompt": "Under EV-4.1, which amount is compared with the event budget at entry?",
+          "options": [
+            "Maximum loss under the assumptions",
+            "Only yesterday closing profit",
+            "The conviction score in the note",
+            "Only the eventual realised loss"
+          ],
+          "answer": "Maximum loss under the assumptions",
+          "distractorRationale": {
+            "Only the eventual realised loss": "error: Uses the eventual outcome instead of entry risk",
+            "Only yesterday closing profit": "error: Uses a prior profit instead of this position risk",
+            "The conviction score in the note": "error: Sizes from conviction instead of accepted loss"
+          },
+          "explanation": "The rule constrains risk taken before the outcome; later luck does not change the original exposure.",
+          "objectiveIds": [
+            "O-TR-EVENT-RISK-1"
+          ],
+          "difficulty": 1,
+          "claimIds": [
+            "CL-TR-EVENT-RISK-RULE",
+            "CL-TR-EVENT-RISK-WORKED",
+            "CL-TR-EVENT-RISK-definition-1",
+            "CL-TR-EVENT-RISK-definition-2",
+            "CL-TR-EVENT-RISK-concept-1",
+            "CL-TR-EVENT-RISK-concept-2",
+            "CL-TR-EVENT-RISK-concept-3"
+          ]
+        },
+        {
+          "id": "Q-TR-EVENT-RISK-2",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "diagnosis",
+          "prompt": "The case lost 9210 against a 10000 budget. Why was sizing still a breach?",
+          "options": [
+            "The budget applies only after expiry",
+            "The index moved upwards",
+            "A loss always breaks the rule",
+            "Entry maximum loss was 27075"
+          ],
+          "answer": "Entry maximum loss was 27075",
+          "distractorRationale": {
+            "A loss always breaks the rule": "error: Treats any loss as a compliance breach",
+            "The index moved upwards": "error: Confuses direction with the risk constraint",
+            "The budget applies only after expiry": "error: Postpones an entry-time rule until expiry"
+          },
+          "explanation": "The realised loss was inside budget, but the position could lose the full premium of 27075 before charges.",
+          "objectiveIds": [
+            "O-TR-EVENT-RISK-2"
+          ],
+          "difficulty": 1,
+          "claimIds": [
+            "CL-TR-EVENT-RISK-RULE",
+            "CL-TR-EVENT-RISK-WORKED",
+            "CL-TR-EVENT-RISK-definition-1",
+            "CL-TR-EVENT-RISK-definition-2",
+            "CL-TR-EVENT-RISK-concept-1",
+            "CL-TR-EVENT-RISK-concept-2",
+            "CL-TR-EVENT-RISK-concept-3"
+          ]
+        },
+        {
+          "id": "Q-TR-EVENT-RISK-3",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "judgement",
+          "prompt": "Which statement correctly describes defined risk?",
+          "options": [
+            "Its bounded loss still needs sizing",
+            "The structure cannot lose money",
+            "The budget no longer applies",
+            "It guarantees the expected return"
+          ],
+          "answer": "Its bounded loss still needs sizing",
+          "distractorRationale": {
+            "The structure cannot lose money": "error: Confuses bounded loss with no loss",
+            "The budget no longer applies": "error: Treats structure selection as a substitute for sizing",
+            "It guarantees the expected return": "error: Confuses a risk constraint with a return promise"
+          },
+          "explanation": "A bounded loss is not necessarily an affordable loss; the desk sizing rules still apply.",
+          "objectiveIds": [
+            "O-TR-EVENT-RISK-1"
+          ],
+          "difficulty": 2,
+          "claimIds": [
+            "CL-TR-EVENT-RISK-RULE",
+            "CL-TR-EVENT-RISK-WORKED",
+            "CL-TR-EVENT-RISK-definition-1",
+            "CL-TR-EVENT-RISK-definition-2",
+            "CL-TR-EVENT-RISK-concept-1",
+            "CL-TR-EVENT-RISK-concept-2",
+            "CL-TR-EVENT-RISK-concept-3"
+          ]
+        },
+        {
+          "id": "Q-TR-EVENT-RISK-4",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "calculation",
+          "prompt": "What is the case maximum loss per long-option lot before charges?",
+          "options": [
+            "6768.75 rupees",
+            "90.25 rupees",
+            "10000 rupees",
+            "300 rupees"
+          ],
+          "answer": "6768.75 rupees",
+          "distractorRationale": {
+            "90.25 rupees": "error: Omits units per lot",
+            "300 rupees": "error: Substitutes total historical units for premium per lot",
+            "10000 rupees": "error: Uses the budget rather than the per-lot maximum loss"
+          },
+          "explanation": "Multiply premium per unit, 90.25, by the illustrative 75 units in a lot.",
+          "objectiveIds": [
+            "O-TR-EVENT-RISK-2"
+          ],
+          "difficulty": 2,
+          "claimIds": [
+            "CL-TR-EVENT-RISK-RULE",
+            "CL-TR-EVENT-RISK-WORKED",
+            "CL-TR-EVENT-RISK-definition-1",
+            "CL-TR-EVENT-RISK-definition-2",
+            "CL-TR-EVENT-RISK-concept-1",
+            "CL-TR-EVENT-RISK-concept-2",
+            "CL-TR-EVENT-RISK-concept-3"
+          ]
+        },
+        {
+          "id": "Q-TR-EVENT-RISK-5",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "process",
+          "prompt": "Budget divided by maximum loss per lot is about 1.48. What does EV-4.2 require in this exercise?",
+          "options": [
+            "Round down to one whole lot",
+            "Round up to two whole lots",
+            "Keep four because conviction is high",
+            "Use the realised loss to round"
+          ],
+          "answer": "Round down to one whole lot",
+          "distractorRationale": {
+            "Round up to two whole lots": "error: Rounds up beyond the budget",
+            "Keep four because conviction is high": "error: Sizes from conviction rather than the rule",
+            "Use the realised loss to round": "error: Uses hindsight instead of entry-time risk"
+          },
+          "explanation": "Rounding up exceeds the stated budget; conviction and the realised outcome do not replace entry-time sizing.",
+          "objectiveIds": [
+            "O-TR-EVENT-RISK-1"
+          ],
+          "difficulty": 3,
+          "claimIds": [
+            "CL-TR-EVENT-RISK-RULE",
+            "CL-TR-EVENT-RISK-WORKED",
+            "CL-TR-EVENT-RISK-definition-1",
+            "CL-TR-EVENT-RISK-definition-2",
+            "CL-TR-EVENT-RISK-concept-1",
+            "CL-TR-EVENT-RISK-concept-2",
+            "CL-TR-EVENT-RISK-concept-3"
+          ]
+        },
+        {
+          "id": "Q-TR-EVENT-RISK-WORDS",
+          "type": "fill_blank",
+          "dimension": "words",
+          "evaluates": "recall",
+          "prompt": "Name the term: The illustrative desk limit on maximum loss per event trade.",
+          "answer": "event budget",
+          "explanation": "The term is event budget. The illustrative desk limit on maximum loss per event trade.",
+          "objectiveIds": [
+            "O-TR-EVENT-RISK-1"
+          ],
+          "difficulty": 1,
+          "claimIds": [
+            "CL-TR-EVENT-RISK-RULE"
+          ]
+        },
+        {
+          "id": "Q-TR-EVENT-RISK-EXPRESSION",
+          "type": "short_english",
+          "dimension": "english",
+          "evaluates": "process",
+          "prompt": "Explain why an inside-budget realised loss does not erase an entry-time sizing breach. Working language: English.",
+          "answer": "Budget: 1000000 times 0.01 = 10000 rupees. Maximum loss per lot: 90.25 times 75 = 6768.75 rupees before charges. Floor of 10000 divided by 6768.75 is 1 lot; four lots risked 27075, exceeding the budget by 17075.",
+          "explanation": "Assess conceptual claims separately from clarity and terminology. A language gap does not remove concept credit.",
+          "objectiveIds": [
+            "O-TR-EVENT-RISK-1",
+            "O-TR-EVENT-RISK-2"
+          ],
+          "difficulty": 2,
+          "claimIds": [
+            "CL-TR-EVENT-RISK-RULE"
+          ],
+          "rubric": [
+            {
+              "criterion": "State the evidenced reasoning accurately; record concept credit separately.",
+              "dim": "concept"
+            },
+            {
+              "criterion": "Use the canonical terms to explain the reasoning clearly in the working language.",
+              "dim": "english"
+            }
+          ]
+        },
+        {
+          "id": "Q-TR-EVENT-RISK-PRACTICE",
+          "type": "predict",
+          "dimension": "lab",
+          "evaluates": "process",
+          "prompt": "On the paper case, write budget, quantity, maximum loss and charges allowance in the saved risk note; make no order.",
+          "answer": "Use the saved illustrative case only. Budget: 1000000 times 0.01 = 10000 rupees. Maximum loss per lot: 90.25 times 75 = 6768.75 rupees before charges. Floor of 10000 divided by 6768.75 is 1 lot; four lots risked 27075, exceeding the budget by 17075.",
+          "explanation": "The learner performs the inspection or edit. A predicted answer is not proof that the real tool action occurred.",
+          "objectiveIds": [
+            "O-TR-EVENT-RISK-1",
+            "O-TR-EVENT-RISK-2"
+          ],
+          "difficulty": 3,
+          "claimIds": [
+            "CL-TR-EVENT-RISK-RULE"
+          ],
+          "evidencePolicy": {
+            "predictionOnly": true,
+            "earnsPracticeCredit": false,
+            "requires": "Observed learner action or a saved learner artefact, checked against the task criteria."
+          }
+        }
+      ],
+      "workedQuestion": {
+        "id": "W-TR-EVENT-RISK",
+        "type": "short_english",
+        "marks": 3,
+        "prompt": "Using only the illustrative case, compute the budget, maximum loss per lot and whole-lot limit before charges. Review the old four-lot position.",
+        "modelAnswer": [
+          "Budget: 1000000 times 0.01 = 10000 rupees.",
+          "Maximum loss per lot: 90.25 times 75 = 6768.75 rupees before charges.",
+          "Floor of 10000 divided by 6768.75 is 1 lot; four lots risked 27075, exceeding the budget by 17075."
+        ],
+        "rubric": [
+          {
+            "criterion": "Budget: 1000000 times 0.01 = 10000 rupees.",
+            "marks": 1,
+            "objectiveId": "O-TR-EVENT-RISK-1"
+          },
+          {
+            "criterion": "Maximum loss per lot: 90.25 times 75 = 6768.75 rupees before charges.",
+            "marks": 1,
+            "objectiveId": "O-TR-EVENT-RISK-2"
+          },
+          {
+            "criterion": "Floor of 10000 divided by 6768.75 is 1 lot; four lots risked 27075, exceeding the budget by 17075.",
+            "marks": 1,
+            "objectiveId": "O-TR-EVENT-RISK-1"
+          }
+        ],
+        "examVocabulary": [
+          "T-TR-BUDGET",
+          "T-TR-LOSS",
+          "T-TR-DEFINED"
+        ]
+      }
+    },
+    "TR-PRETRADE": {
+      "policy": {
+        "conceptChecks": 5,
+        "passPercent": 60,
+        "options": 4,
+        "chapterTest": false
+      },
+      "checks": [
+        {
+          "id": "Q-TR-PRETRADE-1",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "process",
+          "prompt": "What should a retrospective completion of the old note be labelled?",
+          "options": [
+            "A verified live trade instruction",
+            "Original entry-time evidence",
+            "Hindsight reconstruction",
+            "A replacement for the old record"
+          ],
+          "answer": "Hindsight reconstruction",
+          "distractorRationale": {
+            "Original entry-time evidence": "error: Misrepresents reconstructed fields as contemporaneous evidence",
+            "A verified live trade instruction": "error: Turns a review exercise into a live instruction",
+            "A replacement for the old record": "error: Overwrites the historical record with hindsight"
+          },
+          "explanation": "A reconstruction is useful for learning but must not be misrepresented as a note written before entry.",
+          "objectiveIds": [
+            "O-TR-PRETRADE-1"
+          ],
+          "difficulty": 1,
+          "claimIds": [
+            "CL-TR-PRETRADE-RULE",
+            "CL-TR-PRETRADE-WORKED",
+            "CL-TR-PRETRADE-definition-1",
+            "CL-TR-PRETRADE-definition-2",
+            "CL-TR-PRETRADE-concept-1",
+            "CL-TR-PRETRADE-concept-2",
+            "CL-TR-PRETRADE-concept-3"
+          ]
+        },
+        {
+          "id": "Q-TR-PRETRADE-2",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "diagnosis",
+          "prompt": "Which missing field matters in the direction-only case note?",
+          "options": [
+            "An exit plan and invalidation",
+            "The final colour of the chart",
+            "A second copy of the fill price",
+            "A promise of a profitable outcome"
+          ],
+          "answer": "An exit plan and invalidation",
+          "distractorRationale": {
+            "The final colour of the chart": "error: Adds a cosmetic field rather than a decision field",
+            "A promise of a profitable outcome": "error: Substitutes a guarantee for a falsifiable plan",
+            "A second copy of the fill price": "error: Duplicates the fill instead of documenting the exit"
+          },
+          "explanation": "The playbook requires exit and invalidation information before entry; a direction statement does not provide it.",
+          "objectiveIds": [
+            "O-TR-PRETRADE-2"
+          ],
+          "difficulty": 1,
+          "claimIds": [
+            "CL-TR-PRETRADE-RULE",
+            "CL-TR-PRETRADE-WORKED",
+            "CL-TR-PRETRADE-definition-1",
+            "CL-TR-PRETRADE-definition-2",
+            "CL-TR-PRETRADE-concept-1",
+            "CL-TR-PRETRADE-concept-2",
+            "CL-TR-PRETRADE-concept-3"
+          ]
+        },
+        {
+          "id": "Q-TR-PRETRADE-3",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "judgement",
+          "prompt": "A winner had no note and breached sizing. Which EV-6.1 review is appropriate?",
+          "options": [
+            "Bad process, good outcome",
+            "No review because it won",
+            "Good process, bad outcome",
+            "Good process because it won"
+          ],
+          "answer": "Bad process, good outcome",
+          "distractorRationale": {
+            "Good process because it won": "error: Uses profit to validate missing process",
+            "No review because it won": "error: Exempts winners from process review",
+            "Good process, bad outcome": "error: Reverses both process and outcome classifications"
+          },
+          "explanation": "The profitable outcome is separate from the missing record and sizing breach, which remain process defects.",
+          "objectiveIds": [
+            "O-TR-PRETRADE-1"
+          ],
+          "difficulty": 2,
+          "claimIds": [
+            "CL-TR-PRETRADE-RULE",
+            "CL-TR-PRETRADE-WORKED",
+            "CL-TR-PRETRADE-definition-1",
+            "CL-TR-PRETRADE-definition-2",
+            "CL-TR-PRETRADE-concept-1",
+            "CL-TR-PRETRADE-concept-2",
+            "CL-TR-PRETRADE-concept-3"
+          ]
+        },
+        {
+          "id": "Q-TR-PRETRADE-4",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "process",
+          "prompt": "Which pair of review lines best fits the desk rule?",
+          "options": [
+            "Profit first, omit the note",
+            "Rule compliance, then outcome",
+            "Feeling first, omit the budget",
+            "Outcome first, invent a reason"
+          ],
+          "answer": "Rule compliance, then outcome",
+          "distractorRationale": {
+            "Profit first, omit the note": "error: Suppresses the missing-note evidence",
+            "Feeling first, omit the budget": "error: Replaces recorded risk evidence with a feeling",
+            "Outcome first, invent a reason": "error: Invents a rationale after observing the outcome"
+          },
+          "explanation": "Process findings must use recorded evidence; the outcome is a separate description rather than its justification.",
+          "objectiveIds": [
+            "O-TR-PRETRADE-2"
+          ],
+          "difficulty": 2,
+          "claimIds": [
+            "CL-TR-PRETRADE-RULE",
+            "CL-TR-PRETRADE-WORKED",
+            "CL-TR-PRETRADE-definition-1",
+            "CL-TR-PRETRADE-definition-2",
+            "CL-TR-PRETRADE-concept-1",
+            "CL-TR-PRETRADE-concept-2",
+            "CL-TR-PRETRADE-concept-3"
+          ]
+        },
+        {
+          "id": "Q-TR-PRETRADE-5",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "judgement",
+          "prompt": "A complete, compliant paper note leads to a loss. What can the review conclude?",
+          "options": [
+            "Process may be sound despite the loss",
+            "The next live trade must recover it",
+            "The loss proves every rule failed",
+            "The note should be rewritten as a winner"
+          ],
+          "answer": "Process may be sound despite the loss",
+          "distractorRationale": {
+            "The loss proves every rule failed": "error: Treats loss as proof of a rule breach",
+            "The note should be rewritten as a winner": "error: Rewrites history instead of reviewing evidence",
+            "The next live trade must recover it": "error: Turns a review into a recovery-trade recommendation"
+          },
+          "explanation": "The desk separates decision quality from noisy outcomes; a loss alone does not establish a process failure.",
+          "objectiveIds": [
+            "O-TR-PRETRADE-1"
+          ],
+          "difficulty": 3,
+          "claimIds": [
+            "CL-TR-PRETRADE-RULE",
+            "CL-TR-PRETRADE-WORKED",
+            "CL-TR-PRETRADE-definition-1",
+            "CL-TR-PRETRADE-definition-2",
+            "CL-TR-PRETRADE-concept-1",
+            "CL-TR-PRETRADE-concept-2",
+            "CL-TR-PRETRADE-concept-3"
+          ]
+        },
+        {
+          "id": "Q-TR-PRETRADE-WORDS",
+          "type": "fill_blank",
+          "dimension": "words",
+          "evaluates": "recall",
+          "prompt": "Name the term: The written decision record made before a paper order.",
+          "answer": "pre-trade note",
+          "explanation": "The term is pre-trade note. The written decision record made before a paper order.",
+          "objectiveIds": [
+            "O-TR-PRETRADE-1"
+          ],
+          "difficulty": 1,
+          "claimIds": [
+            "CL-TR-PRETRADE-RULE"
+          ]
+        },
+        {
+          "id": "Q-TR-PRETRADE-EXPRESSION",
+          "type": "short_english",
+          "dimension": "english",
+          "evaluates": "process",
+          "prompt": "Give the desk two lines: the evidenced process finding and the separate illustrative outcome. Working language: English.",
+          "answer": "Process: the note lacks the expected-versus-priced move comparison, maximum loss and exit plan; entry risk also exceeded EV-4.1. Outcome: the paper trade lost 9210 rupees before charges despite a favourable index move. Any completed note written now is a labelled hindsight exercise, not evidence that an entry-time plan existed.",
+          "explanation": "Assess conceptual claims separately from clarity and terminology. A language gap does not remove concept credit.",
+          "objectiveIds": [
+            "O-TR-PRETRADE-1",
+            "O-TR-PRETRADE-2"
+          ],
+          "difficulty": 2,
+          "claimIds": [
+            "CL-TR-PRETRADE-RULE"
+          ],
+          "rubric": [
+            {
+              "criterion": "State the evidenced reasoning accurately; record concept credit separately.",
+              "dim": "concept"
+            },
+            {
+              "criterion": "Use the canonical terms to explain the reasoning clearly in the working language.",
+              "dim": "english"
+            }
+          ]
+        },
+        {
+          "id": "Q-TR-PRETRADE-PRACTICE",
+          "type": "predict",
+          "dimension": "lab",
+          "evaluates": "process",
+          "prompt": "Open the saved historical note, mark absent fields, and write a labelled reconstruction beside it without overwriting the original.",
+          "answer": "Use the saved illustrative case only. Process: the note lacks the expected-versus-priced move comparison, maximum loss and exit plan; entry risk also exceeded EV-4.1. Outcome: the paper trade lost 9210 rupees before charges despite a favourable index move. Any completed note written now is a labelled hindsight exercise, not evidence that an entry-time plan existed.",
+          "explanation": "The learner performs the inspection or edit. A predicted answer is not proof that the real tool action occurred.",
+          "objectiveIds": [
+            "O-TR-PRETRADE-1",
+            "O-TR-PRETRADE-2"
+          ],
+          "difficulty": 3,
+          "claimIds": [
+            "CL-TR-PRETRADE-RULE"
+          ],
+          "evidencePolicy": {
+            "predictionOnly": true,
+            "earnsPracticeCredit": false,
+            "requires": "Observed learner action or a saved learner artefact, checked against the task criteria."
+          }
+        }
+      ],
+      "workedQuestion": {
+        "id": "W-TR-PRETRADE",
+        "type": "short_english",
+        "marks": 3,
+        "prompt": "The case note says only that the policy will be positive and the index will rise. Write a two-line historical review under EV-6.1.",
+        "modelAnswer": [
+          "Process: the note lacks the expected-versus-priced move comparison, maximum loss and exit plan; entry risk also exceeded EV-4.1.",
+          "Outcome: the paper trade lost 9210 rupees before charges despite a favourable index move.",
+          "Any completed note written now is a labelled hindsight exercise, not evidence that an entry-time plan existed."
+        ],
+        "rubric": [
+          {
+            "criterion": "Process: the note lacks the expected-versus-priced move comparison, maximum loss and exit plan; entry risk also exceeded EV-4.1.",
+            "marks": 1,
+            "objectiveId": "O-TR-PRETRADE-1"
+          },
+          {
+            "criterion": "Outcome: the paper trade lost 9210 rupees before charges despite a favourable index move.",
+            "marks": 1,
+            "objectiveId": "O-TR-PRETRADE-2"
+          },
+          {
+            "criterion": "Any completed note written now is a labelled hindsight exercise, not evidence that an entry-time plan existed.",
+            "marks": 1,
+            "objectiveId": "O-TR-PRETRADE-1"
+          }
+        ],
+        "examVocabulary": [
+          "T-TR-NOTE",
+          "T-TR-BIAS"
+        ]
+      }
+    }
+  }
+}

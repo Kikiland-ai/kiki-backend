@@ -1,0 +1,939 @@
+{
+  "schema": "kiki-pedagogy-packet/v1",
+  "packetId": "PKT-TR-PRETRADE-1",
+  "createdAt": "2026-11-20T05:45:57Z",
+  "domain": {
+    "packId": "trading-fno",
+    "corner": "odds",
+    "profileId": "trading",
+    "learner": {
+      "role": "Trainee index-options trader, onboarding week 2",
+      "transition": "retail habits to a desk's written process",
+      "priorKnowledge": "calls and puts, premium, lot size (TR-OPT-BASICS)"
+    },
+    "languages": {
+      "source": "en",
+      "targets": [
+        "hi"
+      ],
+      "workingLanguage": "en"
+    },
+    "dimensionLabels": {
+      "concept": "Concept",
+      "words": "Words",
+      "english": "Expression",
+      "lab": "Practice"
+    },
+    "assessmentPolicy": {
+      "conceptChecks": 5,
+      "passPercent": 60,
+      "options": 4,
+      "chapterTest": false
+    },
+    "practical": {
+      "applies": true,
+      "label": "Practice",
+      "tool": "Trading terminal: chart and option chain (paper mode, historical replay)"
+    },
+    "guardrails": [
+      "Process, not picks: review past or paper trades only; never recommend a live trade",
+      "All market data is illustrative; show 'Education on a past, illustrative trade. Not investment advice.'",
+      "KiKi never places, modifies or suggests orders"
+    ],
+    "consumers": [
+      "kiki-pack/v0"
+    ]
+  },
+  "scope": {
+    "planId": "LP-TR-EVENT-DAYS",
+    "groupId": "MOD-TR-EVENT",
+    "conceptId": "TR-PRETRADE",
+    "order": 4,
+    "canonicalKey": "pre-trade-note-process-review",
+    "title": "Review the decision separately from its P&L",
+    "practiceTaskId": "pre-event-checklist"
+  },
+  "status": {
+    "review": "draft",
+    "domainReview": "pending",
+    "pronunciation": "pending",
+    "languages": {
+      "hi": "machine_draft"
+    }
+  },
+  "research": {
+    "governingQuestion": "The case note says only that the policy will be positive and the index will rise. Write a two-line historical review under EV-6.1.",
+    "sources": [
+      {
+        "id": "S-TR-PRETRADE-PLAYBOOK",
+        "origin": "org_playbook",
+        "tier": 1,
+        "label": "Options desk playbook: event days (illustrative)",
+        "locator": "content/knowledge-workers/sources/design/personas/trader/playbook-excerpt.md; §6, EV-6.1; trainee checklist; scenario trade.preTradeNote",
+        "illustrative": true
+      },
+      {
+        "id": "S-TR-PRETRADE-CASE",
+        "origin": "org_case",
+        "tier": 1,
+        "label": "Historical paper option case (illustrative)",
+        "locator": "content/knowledge-workers/sources/design/personas/trader/scenario.json",
+        "illustrative": true
+      },
+      {
+        "id": "S-TR-PRETRADE-OIC",
+        "origin": "vendor_doc",
+        "tier": 2,
+        "label": "Options Industry Council: Volatility and the Greeks",
+        "url": "https://www.optionseducation.org/advancedconcepts/volatility-the-greeks",
+        "locator": "Opened 2026-11-20; model sensitivities and assumptions",
+        "illustrative": false
+      }
+    ],
+    "claims": [
+      {
+        "id": "CL-TR-PRETRADE-RULE",
+        "kind": "org_rule",
+        "text": "EV-6.1 is the governing rule for this exercise; Write an auditable historical note and separate process quality from the result.",
+        "sourceIds": [
+          "S-TR-PRETRADE-PLAYBOOK"
+        ],
+        "confidence": "high",
+        "check": "Rule and scope read in the pinned illustrative playbook at §6, EV-6.1; trainee checklist; scenario trade.preTradeNote"
+      },
+      {
+        "id": "CL-TR-PRETRADE-WORKED",
+        "kind": "procedure",
+        "text": "The case note says only that the policy will be positive and the index will rise. Write a two-line historical review under EV-6.1. Process: the note lacks the expected-versus-priced move comparison, maximum loss and exit plan; entry risk also exceeded EV-4.1. Outcome: the paper trade lost 9210 rupees before charges despite a favourable index move. Any completed note written now is a labelled hindsight exercise, not evidence that an entry-time plan existed.",
+        "sourceIds": [
+          "S-TR-PRETRADE-PLAYBOOK",
+          "S-TR-PRETRADE-CASE"
+        ],
+        "confidence": "high",
+        "check": "derived: Process: the note lacks the expected-versus-priced move comparison, maximum loss and exit plan; entry risk also exceeded EV-4.1. Outcome: the paper trade lost 9210 rupees before charges despite a favourable index move. Any completed note written now is a labelled hindsight exercise, not evidence that an entry-time plan existed."
+      },
+      {
+        "id": "CL-TR-PRETRADE-definition-1",
+        "kind": "definition",
+        "text": "A pre-trade note records the thesis, priced move, structure, max loss, exit plan and invalidation before the paper order.",
+        "sourceIds": [
+          "S-TR-PRETRADE-PLAYBOOK"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-PRETRADE-definition-2",
+        "kind": "definition",
+        "text": "The outcome bias appears when a result replaces a review of the original reasoning.",
+        "sourceIds": [
+          "S-TR-PRETRADE-PLAYBOOK"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-PRETRADE-concept-1",
+        "kind": "procedure",
+        "text": "The desk rule EV-6.1 requires process and outcome to be tagged separately.",
+        "sourceIds": [
+          "S-TR-PRETRADE-PLAYBOOK",
+          "S-TR-PRETRADE-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-PRETRADE-concept-2",
+        "kind": "procedure",
+        "text": "A profitable result does not repair a missing pre-trade note or an event budget breach.",
+        "sourceIds": [
+          "S-TR-PRETRADE-PLAYBOOK",
+          "S-TR-PRETRADE-CASE",
+          "S-TR-PRETRADE-OIC"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-PRETRADE-concept-3",
+        "kind": "procedure",
+        "text": "The case note named direction but omitted the implied move, max loss and exit plan.",
+        "sourceIds": [
+          "S-TR-PRETRADE-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-PRETRADE-application-1",
+        "kind": "procedure",
+        "text": "For the historical review, reconstruct what the pre-trade note lacked and mark reconstructed fields as hindsight.",
+        "sourceIds": [
+          "S-TR-PRETRADE-PLAYBOOK",
+          "S-TR-PRETRADE-CASE",
+          "S-TR-PRETRADE-OIC"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-PRETRADE-application-2",
+        "kind": "procedure",
+        "text": "Use the original information to explain the move comparison and the event budget breach.",
+        "sourceIds": [
+          "S-TR-PRETRADE-PLAYBOOK",
+          "S-TR-PRETRADE-CASE",
+          "S-TR-PRETRADE-OIC"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-PRETRADE-application-3",
+        "kind": "procedure",
+        "text": "Write a short process finding and a separate outcome line; do not fabricate an exit plan that never existed.",
+        "sourceIds": [
+          "S-TR-PRETRADE-PLAYBOOK",
+          "S-TR-PRETRADE-CASE",
+          "S-TR-PRETRADE-OIC"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-PRETRADE-recap-1",
+        "kind": "procedure",
+        "text": "A pre-trade note is an entry-time record, not a story rewritten after the outcome.",
+        "sourceIds": [
+          "S-TR-PRETRADE-PLAYBOOK",
+          "S-TR-PRETRADE-CASE",
+          "S-TR-PRETRADE-OIC"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-PRETRADE-recap-2",
+        "kind": "procedure",
+        "text": "Counter outcome bias by naming the rule and evidence before describing the profit or loss.",
+        "sourceIds": [
+          "S-TR-PRETRADE-PLAYBOOK",
+          "S-TR-PRETRADE-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      }
+    ],
+    "outOfScope": [
+      "Live trading or tool control",
+      "Platform-wide or real-organisation claims",
+      "Narration, translation, publication and mastery certification"
+    ],
+    "openQuestions": [
+      "Illustrative organisation: replace with buyer-approved material before production.",
+      "Domain expert and native-language pronunciation review remain pending."
+    ]
+  },
+  "learner": {
+    "prerequisiteIds": [
+      "TR-IV-EVENT",
+      "TR-THETA",
+      "TR-EVENT-RISK"
+    ],
+    "externalPrerequisites": [
+      {
+        "title": "Calls, puts, premium per unit and quantities",
+        "level": "earlier_course",
+        "canonicalKey": "options-basics"
+      }
+    ],
+    "troublesome": "Separate the observations, the organisation rule and a justified conclusion. A winning result validates an incomplete pre-trade note.",
+    "misconceptions": [
+      {
+        "id": "M-TR-PRETRADE",
+        "statement": "A winning result validates an incomplete pre-trade note.",
+        "correction": "Review entry-time evidence and rule compliance independently of profit or loss.",
+        "basis": "inferred",
+        "sourceIds": [],
+        "reasoning": "Inferred from the case contrast and the playbook rule; no learner study or real user evidence is claimed."
+      }
+    ]
+  },
+  "objectives": [
+    {
+      "id": "O-TR-PRETRADE-1",
+      "statement": "Identify missing fields in the case pre-trade note.",
+      "bloom": "analyse",
+      "parentId": "O-MOD-TR-EVENT",
+      "ownerId": "TR-PRETRADE"
+    },
+    {
+      "id": "O-TR-PRETRADE-2",
+      "statement": "Evaluate process separately from outcome under EV-6.1.",
+      "bloom": "apply",
+      "parentId": "O-MOD-TR-EVENT",
+      "ownerId": "TR-PRETRADE"
+    }
+  ],
+  "terms": [
+    {
+      "id": "T-TR-NOTE",
+      "term": "pre-trade note",
+      "definition": "The written decision record made before a paper order.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "TR-PRETRADE",
+      "spoken": "pre-trade note",
+      "glosses": {
+        "hi": "Paper order से पहले लिखा हुआ decision record।"
+      },
+      "pronunciations": {
+        "hi": "प्री ट्रेड नोट"
+      },
+      "review_status": "pending"
+    },
+    {
+      "id": "T-TR-BIAS",
+      "term": "outcome bias",
+      "definition": "Judging a decision by its result instead of the information and process available beforehand.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "TR-PRETRADE",
+      "spoken": "outcome bias",
+      "glosses": {
+        "hi": "पहले की जानकारी और process के बजाय नतीजे से decision को आँकना।"
+      },
+      "pronunciations": {
+        "hi": "आउटकम बायस"
+      },
+      "review_status": "pending"
+    }
+  ],
+  "usesTerms": [
+    {
+      "id": "T-TR-MOVE",
+      "term": "implied move",
+      "definition": "The desk estimate of a priced move, using the ATM straddle as a rough guide.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "TR-IV-EVENT",
+      "spoken": "implied move",
+      "glosses": {
+        "hi": "Desk का अनुमान कि option की कीमत में कितना move शामिल है।"
+      },
+      "pronunciations": {
+        "hi": "इम्प्लाइड मूव"
+      },
+      "review_status": "pending"
+    },
+    {
+      "id": "T-TR-BUDGET",
+      "term": "event budget",
+      "definition": "The illustrative desk limit on maximum loss per event trade.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "TR-EVENT-RISK",
+      "spoken": "event budget",
+      "glosses": {
+        "hi": "इस desk की एक event trade में स्वीकार्य अधिकतम नुकसान की सीमा।"
+      },
+      "pronunciations": {
+        "hi": "इवेंट बजट"
+      },
+      "review_status": "pending"
+    },
+    {
+      "id": "T-TR-LOSS",
+      "term": "max loss",
+      "definition": "The worst loss specified for the position under the stated assumptions.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "TR-EVENT-RISK",
+      "spoken": "max loss",
+      "glosses": {
+        "hi": "बताई गई assumptions में position का सबसे बड़ा नुकसान।"
+      },
+      "pronunciations": {
+        "hi": "मैक्स लॉस"
+      },
+      "review_status": "pending"
+    }
+  ],
+  "teaching": {
+    "canDo": "Write an auditable historical note and separate process quality from the result.",
+    "keyIdea": "Review entry-time evidence and rule compliance independently of profit or loss.",
+    "explanation": {
+      "text": "The desk uses the pre-trade note to preserve reasoning before an order. It includes the thesis and expected move, volatility context, structure, maximum loss, exit plan and what would invalidate the idea. In the case, several of those fields were absent. A later reconstruction can teach the process, but it must be labelled as hindsight. Rule EV-6.1 separates process from outcome. A winning result cannot repair a missing note, and a compliant process may still lose. Review the recorded evidence first, then state the outcome separately. Expression quality is assessed independently from conceptual understanding.",
+      "defaultModality": "textImage",
+      "walkthrough": [
+        {
+          "target": "pre-trade note",
+          "mark": "marker",
+          "dim": "words",
+          "say": "pre-trade note: The written decision record made before a paper order."
+        },
+        {
+          "target": "The desk uses the pre-trade note to preserve reasoning before an order",
+          "mark": "sweep",
+          "dim": "concept",
+          "say": "The desk uses the pre-trade note to preserve reasoning before an order."
+        },
+        {
+          "target": "It includes the thesis and expected move, volatility context, structure, maximum loss, exit plan and what would invalidate the idea",
+          "mark": "sweep",
+          "dim": "concept",
+          "say": "It includes the thesis and expected move, volatility context, structure, maximum loss, exit plan and what would invalidate the idea."
+        }
+      ]
+    },
+    "example": {
+      "title": "Review the decision separately from its P&L (illustrative)",
+      "scenario": "The desk rule EV-6.1 requires process and outcome to be tagged separately. A profitable result does not repair a missing pre-trade note or an event budget breach. The case note named direction but omitted the implied move, max loss and exit plan.",
+      "takeaway": "Review entry-time evidence and rule compliance independently of profit or loss.",
+      "sourceIds": [
+        "S-TR-PRETRADE-CASE"
+      ]
+    },
+    "workedQuestion": {
+      "id": "W-TR-PRETRADE",
+      "type": "short_english",
+      "marks": 3,
+      "prompt": "The case note says only that the policy will be positive and the index will rise. Write a two-line historical review under EV-6.1.",
+      "modelAnswer": [
+        "Process: the note lacks the expected-versus-priced move comparison, maximum loss and exit plan; entry risk also exceeded EV-4.1.",
+        "Outcome: the paper trade lost 9210 rupees before charges despite a favourable index move.",
+        "Any completed note written now is a labelled hindsight exercise, not evidence that an entry-time plan existed."
+      ],
+      "rubric": [
+        {
+          "criterion": "Process: the note lacks the expected-versus-priced move comparison, maximum loss and exit plan; entry risk also exceeded EV-4.1.",
+          "marks": 1,
+          "objectiveId": "O-TR-PRETRADE-1"
+        },
+        {
+          "criterion": "Outcome: the paper trade lost 9210 rupees before charges despite a favourable index move.",
+          "marks": 1,
+          "objectiveId": "O-TR-PRETRADE-2"
+        },
+        {
+          "criterion": "Any completed note written now is a labelled hindsight exercise, not evidence that an entry-time plan existed.",
+          "marks": 1,
+          "objectiveId": "O-TR-PRETRADE-1"
+        }
+      ],
+      "examVocabulary": [
+        "T-TR-NOTE",
+        "T-TR-BIAS"
+      ]
+    },
+    "selfExplainPrompt": "Give the desk two lines: the evidenced process finding and the separate illustrative outcome.",
+    "checks": [
+      {
+        "id": "Q-TR-PRETRADE-1",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "process",
+        "prompt": "What should a retrospective completion of the old note be labelled?",
+        "options": [
+          "A verified live trade instruction",
+          "Original entry-time evidence",
+          "Hindsight reconstruction",
+          "A replacement for the old record"
+        ],
+        "answer": "Hindsight reconstruction",
+        "distractorRationale": {
+          "Original entry-time evidence": "error: Misrepresents reconstructed fields as contemporaneous evidence",
+          "A verified live trade instruction": "error: Turns a review exercise into a live instruction",
+          "A replacement for the old record": "error: Overwrites the historical record with hindsight"
+        },
+        "explanation": "A reconstruction is useful for learning but must not be misrepresented as a note written before entry.",
+        "objectiveIds": [
+          "O-TR-PRETRADE-1"
+        ],
+        "difficulty": 1,
+        "claimIds": [
+          "CL-TR-PRETRADE-RULE",
+          "CL-TR-PRETRADE-WORKED",
+          "CL-TR-PRETRADE-definition-1",
+          "CL-TR-PRETRADE-definition-2",
+          "CL-TR-PRETRADE-concept-1",
+          "CL-TR-PRETRADE-concept-2",
+          "CL-TR-PRETRADE-concept-3"
+        ]
+      },
+      {
+        "id": "Q-TR-PRETRADE-2",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "diagnosis",
+        "prompt": "Which missing field matters in the direction-only case note?",
+        "options": [
+          "An exit plan and invalidation",
+          "The final colour of the chart",
+          "A second copy of the fill price",
+          "A promise of a profitable outcome"
+        ],
+        "answer": "An exit plan and invalidation",
+        "distractorRationale": {
+          "The final colour of the chart": "error: Adds a cosmetic field rather than a decision field",
+          "A promise of a profitable outcome": "error: Substitutes a guarantee for a falsifiable plan",
+          "A second copy of the fill price": "error: Duplicates the fill instead of documenting the exit"
+        },
+        "explanation": "The playbook requires exit and invalidation information before entry; a direction statement does not provide it.",
+        "objectiveIds": [
+          "O-TR-PRETRADE-2"
+        ],
+        "difficulty": 1,
+        "claimIds": [
+          "CL-TR-PRETRADE-RULE",
+          "CL-TR-PRETRADE-WORKED",
+          "CL-TR-PRETRADE-definition-1",
+          "CL-TR-PRETRADE-definition-2",
+          "CL-TR-PRETRADE-concept-1",
+          "CL-TR-PRETRADE-concept-2",
+          "CL-TR-PRETRADE-concept-3"
+        ]
+      },
+      {
+        "id": "Q-TR-PRETRADE-3",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "judgement",
+        "prompt": "A winner had no note and breached sizing. Which EV-6.1 review is appropriate?",
+        "options": [
+          "Bad process, good outcome",
+          "No review because it won",
+          "Good process, bad outcome",
+          "Good process because it won"
+        ],
+        "answer": "Bad process, good outcome",
+        "distractorRationale": {
+          "Good process because it won": "error: Uses profit to validate missing process",
+          "No review because it won": "error: Exempts winners from process review",
+          "Good process, bad outcome": "error: Reverses both process and outcome classifications"
+        },
+        "explanation": "The profitable outcome is separate from the missing record and sizing breach, which remain process defects.",
+        "objectiveIds": [
+          "O-TR-PRETRADE-1"
+        ],
+        "difficulty": 2,
+        "claimIds": [
+          "CL-TR-PRETRADE-RULE",
+          "CL-TR-PRETRADE-WORKED",
+          "CL-TR-PRETRADE-definition-1",
+          "CL-TR-PRETRADE-definition-2",
+          "CL-TR-PRETRADE-concept-1",
+          "CL-TR-PRETRADE-concept-2",
+          "CL-TR-PRETRADE-concept-3"
+        ]
+      },
+      {
+        "id": "Q-TR-PRETRADE-4",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "process",
+        "prompt": "Which pair of review lines best fits the desk rule?",
+        "options": [
+          "Profit first, omit the note",
+          "Rule compliance, then outcome",
+          "Feeling first, omit the budget",
+          "Outcome first, invent a reason"
+        ],
+        "answer": "Rule compliance, then outcome",
+        "distractorRationale": {
+          "Profit first, omit the note": "error: Suppresses the missing-note evidence",
+          "Feeling first, omit the budget": "error: Replaces recorded risk evidence with a feeling",
+          "Outcome first, invent a reason": "error: Invents a rationale after observing the outcome"
+        },
+        "explanation": "Process findings must use recorded evidence; the outcome is a separate description rather than its justification.",
+        "objectiveIds": [
+          "O-TR-PRETRADE-2"
+        ],
+        "difficulty": 2,
+        "claimIds": [
+          "CL-TR-PRETRADE-RULE",
+          "CL-TR-PRETRADE-WORKED",
+          "CL-TR-PRETRADE-definition-1",
+          "CL-TR-PRETRADE-definition-2",
+          "CL-TR-PRETRADE-concept-1",
+          "CL-TR-PRETRADE-concept-2",
+          "CL-TR-PRETRADE-concept-3"
+        ]
+      },
+      {
+        "id": "Q-TR-PRETRADE-5",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "judgement",
+        "prompt": "A complete, compliant paper note leads to a loss. What can the review conclude?",
+        "options": [
+          "Process may be sound despite the loss",
+          "The next live trade must recover it",
+          "The loss proves every rule failed",
+          "The note should be rewritten as a winner"
+        ],
+        "answer": "Process may be sound despite the loss",
+        "distractorRationale": {
+          "The loss proves every rule failed": "error: Treats loss as proof of a rule breach",
+          "The note should be rewritten as a winner": "error: Rewrites history instead of reviewing evidence",
+          "The next live trade must recover it": "error: Turns a review into a recovery-trade recommendation"
+        },
+        "explanation": "The desk separates decision quality from noisy outcomes; a loss alone does not establish a process failure.",
+        "objectiveIds": [
+          "O-TR-PRETRADE-1"
+        ],
+        "difficulty": 3,
+        "claimIds": [
+          "CL-TR-PRETRADE-RULE",
+          "CL-TR-PRETRADE-WORKED",
+          "CL-TR-PRETRADE-definition-1",
+          "CL-TR-PRETRADE-definition-2",
+          "CL-TR-PRETRADE-concept-1",
+          "CL-TR-PRETRADE-concept-2",
+          "CL-TR-PRETRADE-concept-3"
+        ]
+      },
+      {
+        "id": "Q-TR-PRETRADE-WORDS",
+        "type": "fill_blank",
+        "dimension": "words",
+        "evaluates": "recall",
+        "prompt": "Name the term: The written decision record made before a paper order.",
+        "answer": "pre-trade note",
+        "explanation": "The term is pre-trade note. The written decision record made before a paper order.",
+        "objectiveIds": [
+          "O-TR-PRETRADE-1"
+        ],
+        "difficulty": 1,
+        "claimIds": [
+          "CL-TR-PRETRADE-RULE"
+        ]
+      },
+      {
+        "id": "Q-TR-PRETRADE-EXPRESSION",
+        "type": "short_english",
+        "dimension": "english",
+        "evaluates": "process",
+        "prompt": "Give the desk two lines: the evidenced process finding and the separate illustrative outcome. Working language: English.",
+        "answer": "Process: the note lacks the expected-versus-priced move comparison, maximum loss and exit plan; entry risk also exceeded EV-4.1. Outcome: the paper trade lost 9210 rupees before charges despite a favourable index move. Any completed note written now is a labelled hindsight exercise, not evidence that an entry-time plan existed.",
+        "explanation": "Assess conceptual claims separately from clarity and terminology. A language gap does not remove concept credit.",
+        "objectiveIds": [
+          "O-TR-PRETRADE-1",
+          "O-TR-PRETRADE-2"
+        ],
+        "difficulty": 2,
+        "claimIds": [
+          "CL-TR-PRETRADE-RULE"
+        ],
+        "rubric": [
+          {
+            "criterion": "State the evidenced reasoning accurately; record concept credit separately.",
+            "dim": "concept"
+          },
+          {
+            "criterion": "Use the canonical terms to explain the reasoning clearly in the working language.",
+            "dim": "english"
+          }
+        ]
+      },
+      {
+        "id": "Q-TR-PRETRADE-PRACTICE",
+        "type": "predict",
+        "dimension": "lab",
+        "evaluates": "process",
+        "prompt": "Open the saved historical note, mark absent fields, and write a labelled reconstruction beside it without overwriting the original.",
+        "answer": "Use the saved illustrative case only. Process: the note lacks the expected-versus-priced move comparison, maximum loss and exit plan; entry risk also exceeded EV-4.1. Outcome: the paper trade lost 9210 rupees before charges despite a favourable index move. Any completed note written now is a labelled hindsight exercise, not evidence that an entry-time plan existed.",
+        "explanation": "The learner performs the inspection or edit. A predicted answer is not proof that the real tool action occurred.",
+        "objectiveIds": [
+          "O-TR-PRETRADE-1",
+          "O-TR-PRETRADE-2"
+        ],
+        "difficulty": 3,
+        "claimIds": [
+          "CL-TR-PRETRADE-RULE"
+        ],
+        "evidencePolicy": {
+          "predictionOnly": true,
+          "earnsPracticeCredit": false,
+          "requires": "Observed learner action or a saved learner artefact, checked against the task criteria."
+        }
+      }
+    ],
+    "examSignal": {
+      "basis": "none",
+      "askedIn": 0,
+      "outOf": 0,
+      "note": "No past-paper or buyer assessment frequencies supplied."
+    },
+    "estMinutes": 12
+  },
+  "placards": [
+    {
+      "id": "CARD-TR-PRETRADE-definition",
+      "kind": "definition",
+      "title": {
+        "en": "Definition"
+      },
+      "sentences": [
+        {
+          "id": "CARD-TR-PRETRADE-definition.s1",
+          "english": "A pre-trade note records the thesis, priced move, structure, max loss, exit plan and invalidation before the paper order.",
+          "term_ids": [
+            "T-TR-NOTE",
+            "T-TR-LOSS"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-TR-PRETRADE-definition-1"
+          ]
+        },
+        {
+          "id": "CARD-TR-PRETRADE-definition.s2",
+          "english": "The outcome bias appears when a result replaces a review of the original reasoning.",
+          "term_ids": [
+            "T-TR-BIAS"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-TR-PRETRADE-definition-2"
+          ]
+        }
+      ],
+      "visualRef": "explanation"
+    },
+    {
+      "id": "CARD-TR-PRETRADE-concept",
+      "kind": "concept",
+      "title": {
+        "en": "Concept"
+      },
+      "sentences": [
+        {
+          "id": "CARD-TR-PRETRADE-concept.s1",
+          "english": "The desk rule EV-6.1 requires process and outcome to be tagged separately.",
+          "term_ids": [],
+          "literals": [
+            {
+              "text": "EV-6.1",
+              "spoken": "E V six point one"
+            }
+          ],
+          "claimIds": [
+            "CL-TR-PRETRADE-concept-1"
+          ],
+          "cue": {
+            "state": "review"
+          }
+        },
+        {
+          "id": "CARD-TR-PRETRADE-concept.s2",
+          "english": "A profitable result does not repair a missing pre-trade note or an event budget breach.",
+          "term_ids": [
+            "T-TR-NOTE",
+            "T-TR-BUDGET"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-TR-PRETRADE-concept-2"
+          ],
+          "refutesMisconceptionIds": [
+            "M-TR-PRETRADE"
+          ]
+        },
+        {
+          "id": "CARD-TR-PRETRADE-concept.s3",
+          "english": "The case note named direction but omitted the implied move, max loss and exit plan.",
+          "term_ids": [
+            "T-TR-MOVE",
+            "T-TR-LOSS"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-TR-PRETRADE-concept-3"
+          ]
+        }
+      ],
+      "visualRef": "explanation"
+    },
+    {
+      "id": "CARD-TR-PRETRADE-application",
+      "kind": "application",
+      "title": {
+        "en": "Application"
+      },
+      "sentences": [
+        {
+          "id": "CARD-TR-PRETRADE-application.s1",
+          "english": "For the historical review, reconstruct what the pre-trade note lacked and mark reconstructed fields as hindsight.",
+          "term_ids": [
+            "T-TR-NOTE"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-TR-PRETRADE-application-1"
+          ],
+          "cue": {
+            "state": "review"
+          }
+        },
+        {
+          "id": "CARD-TR-PRETRADE-application.s2",
+          "english": "Use the original information to explain the move comparison and the event budget breach.",
+          "term_ids": [
+            "T-TR-BUDGET"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-TR-PRETRADE-application-2"
+          ]
+        },
+        {
+          "id": "CARD-TR-PRETRADE-application.s3",
+          "english": "Write a short process finding and a separate outcome line; do not fabricate an exit plan that never existed.",
+          "term_ids": [],
+          "literals": [],
+          "claimIds": [
+            "CL-TR-PRETRADE-application-3"
+          ]
+        }
+      ],
+      "visualRef": "explanation"
+    },
+    {
+      "id": "CARD-TR-PRETRADE-recap",
+      "kind": "recap",
+      "title": {
+        "en": "Recap"
+      },
+      "sentences": [
+        {
+          "id": "CARD-TR-PRETRADE-recap.s1",
+          "english": "A pre-trade note is an entry-time record, not a story rewritten after the outcome.",
+          "term_ids": [
+            "T-TR-NOTE"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-TR-PRETRADE-recap-1"
+          ]
+        },
+        {
+          "id": "CARD-TR-PRETRADE-recap.s2",
+          "english": "Counter outcome bias by naming the rule and evidence before describing the profit or loss.",
+          "term_ids": [
+            "T-TR-BIAS"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-TR-PRETRADE-recap-2"
+          ]
+        }
+      ],
+      "visualRef": "explanation"
+    }
+  ],
+  "visual": {
+    "kind": "flow",
+    "description": "Review the decision separately from its P&L: use the saved illustrative scene; highlight the cited case state while explaining the rule.",
+    "alt": "Review entry-time evidence and rule compliance independently of profit or loss.",
+    "sourceIds": [
+      "S-TR-PRETRADE-CASE"
+    ]
+  },
+  "canvas": {
+    "form": "scene",
+    "purpose": {
+      "objectiveIds": [
+        "O-TR-PRETRADE-1",
+        "O-TR-PRETRADE-2"
+      ],
+      "misconceptionIds": [
+        "M-TR-PRETRADE"
+      ],
+      "insight": "Review entry-time evidence and rule compliance independently of profit or loss."
+    },
+    "illustrative": true,
+    "scene": {
+      "id": "tr-note-flow",
+      "template": "flow",
+      "params": {
+        "nodes": [
+          {
+            "id": "tr-note-flow-0",
+            "label": {
+              "en": "Original historical note"
+            }
+          },
+          {
+            "id": "tr-note-flow-1",
+            "label": {
+              "en": "Evidence and rule compliance"
+            }
+          },
+          {
+            "id": "tr-note-flow-2",
+            "label": {
+              "en": "Process finding"
+            }
+          },
+          {
+            "id": "tr-note-flow-3",
+            "label": {
+              "en": "Separate outcome"
+            }
+          }
+        ],
+        "edges": [
+          {
+            "from": "tr-note-flow-0",
+            "to": "tr-note-flow-1"
+          },
+          {
+            "from": "tr-note-flow-1",
+            "to": "tr-note-flow-2"
+          },
+          {
+            "from": "tr-note-flow-2",
+            "to": "tr-note-flow-3"
+          }
+        ]
+      },
+      "states": {
+        "review": {
+          "highlight": [
+            "tr-note-flow-1"
+          ]
+        }
+      }
+    },
+    "mustShow": [
+      "Illustrative case label",
+      "EV-6.1",
+      "Source and review status"
+    ],
+    "mustNotImply": [
+      "A live recommendation or a guaranteed outcome",
+      "Causation established by a single observation"
+    ],
+    "claim": "illustrative_case",
+    "alt": "Review the decision separately from its P&L; Review entry-time evidence and rule compliance independently of profit or loss."
+  },
+  "canvasNullReason": null,
+  "reflect": {
+    "graphRef": "trading-fno/bad-call-iv-crush"
+  },
+  "handoff": {
+    "audioUnit": "placard",
+    "speechNotes": [
+      "Use the supplied spoken literals and canonical terms.",
+      "No timestamps or audio assets exist yet."
+    ],
+    "practiceEvidence": "Only an actual learner action can earn practice evidence; this authored predict check cannot."
+  }
+}

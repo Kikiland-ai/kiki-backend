@@ -1,0 +1,1877 @@
+{
+  "schema": "kiki-tutor-graph/v0",
+  "id": "bad-call-iv-crush",
+  "packId": "trading-fno",
+  "title": {
+    "en": "Why was this a bad call?",
+    "hi": "यह trade खराब फ़ैसला क्यों था?"
+  },
+  "problem": {
+    "en": "Ravi, this is your paper trade from onboarding week 2. The day before the policy announcement you bought 4 lots of the 24200 CE at ₹90.25. The next day the index closed 110 points higher, and you sold at ₹59.55. Let's work out why, one step at a time.",
+    "hi": "रवि, यह onboarding के दूसरे हफ़्ते का आपका paper trade है। Policy announcement से एक दिन पहले आपने 24200 CE के 4 lots ₹90.25 पर खरीदे। अगले दिन index 110 points ऊपर बंद हुआ, और आपने ₹59.55 पर बेचा। चलिए, एक-एक कदम करके समझते हैं कि ऐसा क्यों हुआ।"
+  },
+  "caseData": {
+    "instrument": "24200 CE (weekly) on INDEX (illustrative)",
+    "lots": 4,
+    "lotSize": 75,
+    "entry": "D-1 15:25 · ₹90.25 · spot 24,040 · IV 17.5% · 3 days to expiry",
+    "exit": "D0 15:25 · ₹59.55 · spot 24,150 · IV 11.0% · 2 days to expiry",
+    "pnl": "−₹9,210 (−34%) on a paper book, before charges",
+    "event": "Scheduled policy announcement, D0 10:00; outcome as expected",
+    "deskRule": "Event budget: 1% of a ₹10,00,000 paper book = ₹10,000",
+    "disclaimer": {
+      "en": "Education on a past, illustrative trade. Not investment advice.",
+      "hi": "एक पुराने, illustrative trade पर शिक्षा। यह investment advice नहीं है।"
+    },
+    "source": "scenario.json (same folder)"
+  },
+  "metrics": [
+    {
+      "id": "sentiment",
+      "label": {
+        "en": "Market sentiment",
+        "hi": "Market sentiment"
+      },
+      "dim": "concept"
+    },
+    {
+      "id": "pattern",
+      "label": {
+        "en": "Pattern recognition",
+        "hi": "Pattern पहचानना"
+      },
+      "dim": "concept"
+    },
+    {
+      "id": "risk",
+      "label": {
+        "en": "Risk and sizing",
+        "hi": "Risk और sizing"
+      },
+      "dim": "concept"
+    },
+    {
+      "id": "timeToRightTrade",
+      "label": {
+        "en": "Time to the right trade",
+        "hi": "सही trade तक का समय"
+      },
+      "dim": "concept"
+    },
+    {
+      "id": "articulation",
+      "label": {
+        "en": "Articulation",
+        "hi": "बात साफ़ कहना"
+      },
+      "dim": "english"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "tr-candles",
+      "template": "candles",
+      "params": {
+        "bars": [
+          {
+            "t": "D-1 09:15",
+            "o": 23985,
+            "h": 24012,
+            "l": 23958,
+            "c": 23996
+          },
+          {
+            "t": "D-1 09:45",
+            "o": 23996,
+            "h": 24021,
+            "l": 23977,
+            "c": 24008
+          },
+          {
+            "t": "D-1 10:15",
+            "o": 24008,
+            "h": 24030,
+            "l": 23990,
+            "c": 23998
+          },
+          {
+            "t": "D-1 10:45",
+            "o": 23998,
+            "h": 24015,
+            "l": 23972,
+            "c": 23981
+          },
+          {
+            "t": "D-1 11:15",
+            "o": 23981,
+            "h": 24004,
+            "l": 23962,
+            "c": 23993
+          },
+          {
+            "t": "D-1 11:45",
+            "o": 23993,
+            "h": 24019,
+            "l": 23985,
+            "c": 24011
+          },
+          {
+            "t": "D-1 12:15",
+            "o": 24011,
+            "h": 24026,
+            "l": 23999,
+            "c": 24004
+          },
+          {
+            "t": "D-1 12:45",
+            "o": 24004,
+            "h": 24017,
+            "l": 23988,
+            "c": 24009
+          },
+          {
+            "t": "D-1 13:15",
+            "o": 24009,
+            "h": 24038,
+            "l": 24002,
+            "c": 24027
+          },
+          {
+            "t": "D-1 13:45",
+            "o": 24027,
+            "h": 24049,
+            "l": 24016,
+            "c": 24036
+          },
+          {
+            "t": "D-1 14:15",
+            "o": 24036,
+            "h": 24058,
+            "l": 24020,
+            "c": 24025
+          },
+          {
+            "t": "D-1 14:45",
+            "o": 24025,
+            "h": 24068,
+            "l": 24019,
+            "c": 24051
+          },
+          {
+            "t": "D-1 15:15",
+            "o": 24051,
+            "h": 24064,
+            "l": 24031,
+            "c": 24040
+          },
+          {
+            "t": "D0 09:15",
+            "o": 24032,
+            "h": 24055,
+            "l": 24011,
+            "c": 24038
+          },
+          {
+            "t": "D0 09:45",
+            "o": 24038,
+            "h": 24194,
+            "l": 23986,
+            "c": 24168
+          },
+          {
+            "t": "D0 10:15",
+            "o": 24168,
+            "h": 24181,
+            "l": 24109,
+            "c": 24126
+          },
+          {
+            "t": "D0 10:45",
+            "o": 24126,
+            "h": 24152,
+            "l": 24098,
+            "c": 24141
+          },
+          {
+            "t": "D0 11:15",
+            "o": 24141,
+            "h": 24166,
+            "l": 24122,
+            "c": 24158
+          },
+          {
+            "t": "D0 11:45",
+            "o": 24158,
+            "h": 24171,
+            "l": 24130,
+            "c": 24137
+          },
+          {
+            "t": "D0 12:15",
+            "o": 24137,
+            "h": 24150,
+            "l": 24112,
+            "c": 24124
+          },
+          {
+            "t": "D0 12:45",
+            "o": 24124,
+            "h": 24146,
+            "l": 24109,
+            "c": 24140
+          },
+          {
+            "t": "D0 13:15",
+            "o": 24140,
+            "h": 24168,
+            "l": 24131,
+            "c": 24161
+          },
+          {
+            "t": "D0 13:45",
+            "o": 24161,
+            "h": 24178,
+            "l": 24139,
+            "c": 24147
+          },
+          {
+            "t": "D0 14:15",
+            "o": 24147,
+            "h": 24163,
+            "l": 24128,
+            "c": 24135
+          },
+          {
+            "t": "D0 14:45",
+            "o": 24135,
+            "h": 24159,
+            "l": 24126,
+            "c": 24154
+          },
+          {
+            "t": "D0 15:15",
+            "o": 24154,
+            "h": 24166,
+            "l": 24141,
+            "c": 24150
+          }
+        ],
+        "events": [
+          {
+            "id": "ev-policy",
+            "at": "D0 09:45",
+            "label": {
+              "en": "Policy announcement · 10:00",
+              "hi": "Policy announcement · 10:00"
+            }
+          }
+        ],
+        "levels": [
+          {
+            "id": "lv-entry",
+            "price": 24040.0,
+            "label": {
+              "en": "Entry spot 24,040",
+              "hi": "Entry spot 24,040"
+            }
+          },
+          {
+            "id": "lv-strike",
+            "price": 24200.0,
+            "label": {
+              "en": "Strike 24200",
+              "hi": "Strike 24200"
+            }
+          },
+          {
+            "id": "lv-breakeven",
+            "price": 24290.25,
+            "label": {
+              "en": "Breakeven at expiry 24,290.25",
+              "hi": "Expiry पर breakeven 24,290.25"
+            }
+          },
+          {
+            "id": "lv-implied-up",
+            "price": 24344,
+            "label": {
+              "en": "+304 priced",
+              "hi": "+304 priced"
+            }
+          },
+          {
+            "id": "lv-implied-down",
+            "price": 23736,
+            "label": {
+              "en": "−304 priced",
+              "hi": "−304 priced"
+            }
+          }
+        ]
+      },
+      "states": {
+        "entry": {
+          "show": [
+            "lv-entry",
+            "lv-strike"
+          ],
+          "hide": [
+            "ev-policy",
+            "lv-breakeven",
+            "lv-implied-up",
+            "lv-implied-down"
+          ],
+          "focus": [
+            0,
+            12
+          ]
+        },
+        "event": {
+          "show": [
+            "ev-policy",
+            "lv-entry",
+            "lv-strike"
+          ],
+          "hide": [
+            "lv-breakeven",
+            "lv-implied-up",
+            "lv-implied-down"
+          ],
+          "highlight": [
+            "ev-policy"
+          ],
+          "focus": [
+            10,
+            25
+          ]
+        },
+        "implied-move": {
+          "show": [
+            "ev-policy",
+            "lv-entry",
+            "lv-implied-up",
+            "lv-implied-down"
+          ],
+          "hide": [
+            "lv-breakeven",
+            "lv-strike"
+          ],
+          "focus": [
+            10,
+            25
+          ]
+        },
+        "full": {
+          "show": [
+            "ev-policy",
+            "lv-entry",
+            "lv-strike",
+            "lv-breakeven"
+          ],
+          "hide": [
+            "lv-implied-up",
+            "lv-implied-down"
+          ],
+          "focus": [
+            0,
+            25
+          ]
+        }
+      }
+    },
+    {
+      "id": "tr-payoff",
+      "template": "payoff",
+      "params": {
+        "legs": [
+          {
+            "id": "leg-24200ce",
+            "type": "call",
+            "side": "long",
+            "strike": 24200.0,
+            "premium": 90.25,
+            "lots": 4
+          }
+        ],
+        "lotSize": 75,
+        "spot": 24040.0,
+        "range": [
+          23600,
+          24700
+        ],
+        "iv": {
+          "before": 0.175,
+          "after": 0.11
+        },
+        "daysToExpiry": {
+          "before": 3.0,
+          "after": 2.0
+        }
+      },
+      "states": {
+        "before": {
+          "values": {
+            "ivPhase": 0,
+            "dtePhase": 0
+          }
+        },
+        "after": {
+          "values": {
+            "ivPhase": 1,
+            "dtePhase": 1,
+            "spot": 24150
+          }
+        },
+        "after-no-crush": {
+          "values": {
+            "ivPhase": 0,
+            "dtePhase": 1,
+            "spot": 24150
+          }
+        }
+      }
+    },
+    {
+      "id": "tr-payoff-spread",
+      "template": "payoff",
+      "params": {
+        "legs": [
+          {
+            "id": "leg-24200ce",
+            "type": "call",
+            "side": "long",
+            "strike": 24200.0,
+            "premium": 90.25,
+            "lots": 2
+          },
+          {
+            "id": "leg-24400ce",
+            "type": "call",
+            "side": "short",
+            "strike": 24400.0,
+            "premium": 38.35,
+            "lots": 2
+          }
+        ],
+        "lotSize": 75,
+        "spot": 24040.0,
+        "range": [
+          23600,
+          24700
+        ],
+        "iv": {
+          "before": 0.175,
+          "after": 0.11
+        },
+        "daysToExpiry": {
+          "before": 3.0,
+          "after": 2.0
+        }
+      },
+      "states": {
+        "after": {
+          "values": {
+            "ivPhase": 1,
+            "dtePhase": 1,
+            "spot": 24150
+          }
+        }
+      }
+    },
+    {
+      "id": "tr-iv-line",
+      "template": "line",
+      "params": {
+        "x": {
+          "label": {
+            "en": "30-min bars, D-1 and D0",
+            "hi": "30-min bars, D-1 और D0"
+          },
+          "unit": "bar",
+          "values": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25
+          ]
+        },
+        "series": [
+          {
+            "id": "iv",
+            "label": {
+              "en": "IV of 24200 CE (%)",
+              "hi": "24200 CE का IV (%)"
+            },
+            "values": [
+              17.1,
+              17.14,
+              17.17,
+              17.2,
+              17.24,
+              17.27,
+              17.3,
+              17.34,
+              17.37,
+              17.41,
+              17.45,
+              17.48,
+              17.5,
+              19.21,
+              12.49,
+              12.28,
+              12.09,
+              11.9,
+              11.73,
+              11.57,
+              11.42,
+              11.29,
+              11.17,
+              11.08,
+              11.02,
+              11.0
+            ]
+          },
+          {
+            "id": "premium",
+            "label": {
+              "en": "24200 CE premium (₹)",
+              "hi": "24200 CE premium (₹)"
+            },
+            "values": [
+              78.04,
+              81.67,
+              78.25,
+              72.8,
+              76.26,
+              81.79,
+              79.31,
+              80.71,
+              86.49,
+              89.38,
+              85.37,
+              94.29,
+              90.23,
+              81.18,
+              83.16,
+              63.19,
+              67.35,
+              72.82,
+              62.22,
+              55.56,
+              60.35,
+              67.88,
+              60.61,
+              54.7,
+              61.57,
+              59.55
+            ]
+          }
+        ],
+        "markers": [
+          {
+            "id": "mk-entry",
+            "x": 12,
+            "label": {
+              "en": "Entry",
+              "hi": "Entry"
+            }
+          },
+          {
+            "id": "mk-event",
+            "x": 14,
+            "label": {
+              "en": "Policy · 10:00",
+              "hi": "Policy · 10:00"
+            }
+          },
+          {
+            "id": "mk-exit",
+            "x": 25,
+            "label": {
+              "en": "Exit",
+              "hi": "Exit"
+            }
+          }
+        ]
+      },
+      "states": {
+        "iv-only": {
+          "show": [
+            "iv",
+            "mk-entry",
+            "mk-event",
+            "mk-exit"
+          ],
+          "hide": [
+            "premium"
+          ],
+          "highlight": [
+            "iv"
+          ]
+        },
+        "premium-only": {
+          "show": [
+            "premium",
+            "mk-entry",
+            "mk-event",
+            "mk-exit"
+          ],
+          "hide": [
+            "iv"
+          ],
+          "highlight": [
+            "premium"
+          ]
+        }
+      }
+    }
+  ],
+  "start": "n1-thesis",
+  "nodes": {
+    "n1-thesis": {
+      "kind": "probe",
+      "goal": "Surface Ravi's thesis and check whether it covered the size of the move already priced in, not only direction.",
+      "say": {
+        "en": "When you bought, what was your thesis?",
+        "hi": "खरीदते वक़्त आपका thesis क्या था?"
+      },
+      "canvas": {
+        "sceneId": "tr-candles",
+        "state": "entry",
+        "annotate": [
+          {
+            "id": "a-entry",
+            "kind": "circle",
+            "at": {
+              "x": 12,
+              "y": 24040
+            },
+            "text": {
+              "en": "Entry · ₹90.25",
+              "hi": "Entry · ₹90.25"
+            },
+            "dim": "concept"
+          }
+        ]
+      },
+      "expect": [
+        {
+          "id": "direction-only",
+          "desc": "The thesis is only about direction: the announcement would be positive and the index would rise.",
+          "metric": "sentiment",
+          "level": "partial",
+          "next": "n2-premium"
+        },
+        {
+          "id": "vol-aware",
+          "desc": "The thesis also says how big a move was already priced in (IV or the implied move) and why he expected more.",
+          "metric": "sentiment",
+          "level": "ok",
+          "next": "n3-implied-move"
+        }
+      ],
+      "hints": [
+        {
+          "say": {
+            "en": "Forget the result for a moment. What did you expect the index to do, and by how many points?",
+            "hi": "Result को एक पल के लिए भूल जाइए। आपको index से क्या उम्मीद थी, और कितने points की?"
+          }
+        },
+        {
+          "say": {
+            "en": "On an event day a thesis has two parts: direction, and how big the move will be.",
+            "hi": "Event day पर thesis के दो हिस्से होते हैं: direction, और move कितना बड़ा होगा।"
+          }
+        },
+        {
+          "say": {
+            "en": "For example: 'I expect a rise of more than 300 points, bigger than the move the market is pricing.'",
+            "hi": "जैसे: 'मुझे 300 points से ज़्यादा की तेज़ी की उम्मीद है, जो market के price किए move से बड़ी है।'"
+          }
+        },
+        {
+          "say": {
+            "en": "Your thesis was direction only. On event days the desk also asks: how big a move is already priced in?",
+            "hi": "आपका thesis सिर्फ़ direction का था। Event day पर desk यह भी पूछता है: कितना बड़ा move पहले से price में है?"
+          }
+        }
+      ],
+      "chips": [
+        {
+          "label": {
+            "en": "Market will rise",
+            "hi": "Market ऊपर जाएगा"
+          },
+          "text": "Policy positive आती, तो market ऊपर जाता। इसलिए call लिया।"
+        },
+        {
+          "label": {
+            "en": "Bigger move than priced",
+            "hi": "Priced move से बड़ा move"
+          },
+          "text": "IV ऊँचा था, पर मुझे priced move से बड़े move की उम्मीद थी।"
+        },
+        {
+          "label": {
+            "en": "Not sure",
+            "hi": "पक्का नहीं"
+          },
+          "text": "पक्का नहीं पता, बस लगा कि ऊपर जाएगा।"
+        }
+      ],
+      "onUnclear": "hint",
+      "onOffTopic": "redirect"
+    },
+    "n2-premium": {
+      "kind": "probe",
+      "goal": "Get Ravi to name why the premium fell although spot rose: the IV fall after the event, together with theta.",
+      "say": {
+        "en": "The index rose 110 points, so your direction was right. Then why did the premium fall from ₹90 to ₹60?",
+        "hi": "Index 110 points ऊपर गया, यानी direction सही था। फिर premium ₹90 से ₹60 क्यों हो गया?"
+      },
+      "canvas": {
+        "sceneId": "tr-candles",
+        "state": "event",
+        "annotate": [
+          {
+            "id": "a-move",
+            "kind": "arrow",
+            "at": {
+              "x0": 12,
+              "y0": 24040,
+              "x1": 25,
+              "y1": 24150
+            },
+            "text": {
+              "en": "+110",
+              "hi": "+110"
+            },
+            "dim": "concept"
+          },
+          {
+            "id": "a-event",
+            "kind": "circle",
+            "target": "ev-policy",
+            "text": {
+              "en": "Policy · 10:00",
+              "hi": "Policy · 10:00"
+            },
+            "dim": "concept"
+          }
+        ]
+      },
+      "expect": [
+        {
+          "id": "names-iv",
+          "desc": "Names the fall in IV after the announcement (IV crush) as a main cause.",
+          "metric": "pattern",
+          "level": "ok",
+          "next": "n3-implied-move"
+        },
+        {
+          "id": "names-theta",
+          "desc": "Names time decay (theta) but not the IV fall.",
+          "metric": "pattern",
+          "level": "partial",
+          "next": "s1-payoff"
+        }
+      ],
+      "misconceptions": [
+        {
+          "id": "m-manipulation",
+          "desc": "Blames manipulation, 'operators' or a stop hunt instead of how options are priced.",
+          "metric": "pattern",
+          "level": "not_yet",
+          "next": "s1-payoff"
+        }
+      ],
+      "hints": [
+        {
+          "say": {
+            "en": "Apart from spot, which two things does an option's price depend on?",
+            "hi": "Spot के अलावा option की कीमत किन दो चीज़ों पर टिकी होती है?"
+          }
+        },
+        {
+          "say": {
+            "en": "What happened to IV after the announcement? Look at the case card.",
+            "hi": "Announcement के बाद IV का क्या हुआ? Case card देखिए।"
+          },
+          "canvas": {
+            "sceneId": "tr-iv-line",
+            "state": "iv-only",
+            "annotate": [
+              {
+                "id": "a-iv-drop",
+                "kind": "circle",
+                "at": {
+                  "x": 14,
+                  "y": 12.49
+                },
+                "text": {
+                  "en": "IV 19.2% → 12.5%",
+                  "hi": "IV 19.2% → 12.5%"
+                },
+                "dim": "concept"
+              }
+            ]
+          }
+        },
+        {
+          "say": {
+            "en": "IV fell from 17.5% to 11% and a day went by. Both cut the premium.",
+            "hi": "IV 17.5% से 11% पर आया और एक दिन बीत गया। दोनों premium घटाते हैं।"
+          }
+        },
+        {
+          "say": {
+            "en": "Together, the IV fall and theta took away more premium than the move added.",
+            "hi": "IV crush और theta ने मिलकर उससे ज़्यादा premium घटाया जितना move ने जोड़ा।"
+          }
+        }
+      ],
+      "chips": [
+        {
+          "label": {
+            "en": "IV fell",
+            "hi": "IV गिर गया"
+          },
+          "text": "Announcement के बाद IV गिर गया, इसलिए premium गिरा।"
+        },
+        {
+          "label": {
+            "en": "Theta",
+            "hi": "Theta"
+          },
+          "text": "एक दिन का theta लग गया।"
+        },
+        {
+          "label": {
+            "en": "Operators",
+            "hi": "Operators का खेल"
+          },
+          "text": "शायद operators ने खेल किया, stop hunt हुआ।"
+        }
+      ],
+      "onUnclear": "hint",
+      "onOffTopic": "redirect"
+    },
+    "s1-payoff": {
+      "kind": "show",
+      "goal": "Show, without telling Ravi he is wrong, that the same spot loses money once IV falls; split the change into move, IV and time.",
+      "say": {
+        "en": "Look: same spot, but when IV drops from 17.5% to 11% the whole curve sinks. Your move added ₹40 per unit; the IV fall took ₹48 and one day of time took ₹23.",
+        "hi": "देखिए: spot वही है, पर IV 17.5% से 11% होते ही पूरा curve नीचे खिसक गया। Move ने हर unit पर ₹40 जोड़े; IV ने ₹48 और एक दिन के time ने ₹23 घटाए।"
+      },
+      "canvas": {
+        "sceneId": "tr-payoff",
+        "state": "after",
+        "annotate": [
+          {
+            "id": "a-sink",
+            "kind": "arrow",
+            "at": {
+              "x0": 24150,
+              "y0": 13469,
+              "x1": 24150,
+              "y1": -9209
+            },
+            "text": {
+              "en": "IV 17.5% → 11%",
+              "hi": "IV 17.5% → 11%"
+            },
+            "dim": "concept"
+          },
+          {
+            "id": "a-split",
+            "kind": "label",
+            "at": {
+              "x": 24420,
+              "y": -9209
+            },
+            "text": {
+              "en": "Move +₹40 · IV −₹48 · time −₹23",
+              "hi": "Move +₹40 · IV −₹48 · time −₹23"
+            },
+            "dim": "concept"
+          }
+        ]
+      },
+      "next": "n3-implied-move"
+    },
+    "n3-implied-move": {
+      "kind": "probe",
+      "goal": "Get Ravi to compare the move the market priced (the ATM straddle) with the move that came.",
+      "say": {
+        "en": "Before the event, the 24050 straddle cost about ₹304. That's roughly the move the market was pricing. How big was the actual move?",
+        "hi": "Event से पहले 24050 का straddle करीब ₹304 का था। मोटे तौर पर market इतने points का move price कर रहा था। असल move कितना हुआ?"
+      },
+      "canvas": {
+        "sceneId": "tr-candles",
+        "state": "implied-move",
+        "annotate": [
+          {
+            "id": "a-band",
+            "kind": "box",
+            "at": {
+              "x0": 13,
+              "y0": 23736,
+              "x1": 25,
+              "y1": 24344
+            },
+            "text": {
+              "en": "Priced move ≈ ±304",
+              "hi": "Priced move ≈ ±304"
+            },
+            "dim": "concept"
+          },
+          {
+            "id": "a-actual",
+            "kind": "underline",
+            "at": {
+              "x0": 23,
+              "y0": 24150,
+              "x1": 25,
+              "y1": 24150
+            },
+            "text": {
+              "en": "Actual +110",
+              "hi": "असल +110"
+            },
+            "dim": "concept"
+          }
+        ]
+      },
+      "expect": [
+        {
+          "id": "move-smaller",
+          "desc": "Sees the actual move (+110) was much smaller than the priced move (about ±304), so the option was expensive for the move that came.",
+          "metric": "sentiment",
+          "level": "ok",
+          "next": "n4-sizing"
+        },
+        {
+          "id": "priced-in",
+          "desc": "Says the outcome was expected or 'already in the price' without comparing the numbers.",
+          "metric": "sentiment",
+          "level": "partial",
+          "next": "n4-sizing"
+        }
+      ],
+      "hints": [
+        {
+          "say": {
+            "en": "A ₹304 straddle means a move of roughly ±304 points. How far did the index actually go?",
+            "hi": "₹304 का straddle मतलब लगभग ±304 points का move। Index असल में कितना चला?"
+          }
+        },
+        {
+          "say": {
+            "en": "D-1 close 24,040; D0 close 24,150.",
+            "hi": "D-1 close 24,040; D0 close 24,150।"
+          }
+        },
+        {
+          "say": {
+            "en": "+110: about a third of the priced move.",
+            "hi": "+110, यानी priced move का करीब एक-तिहाई।"
+          }
+        },
+        {
+          "say": {
+            "en": "The market priced ±304 and got +110. An option buyer needs a bigger move than the one priced.",
+            "hi": "Market ने ±304 का move price किया था, आया +110। Option खरीदने वाले को priced move से बड़ा move चाहिए।"
+          }
+        }
+      ],
+      "chips": [
+        {
+          "label": {
+            "en": "Smaller than priced",
+            "hi": "Priced से छोटा"
+          },
+          "text": "±304 price था, आया सिर्फ़ 110। Option महँगा खरीदा।"
+        },
+        {
+          "label": {
+            "en": "Already priced in",
+            "hi": "पहले से price में"
+          },
+          "text": "Result तो सबको पता था, सब पहले से price में था।"
+        }
+      ],
+      "onUnclear": "hint",
+      "onOffTopic": "redirect"
+    },
+    "n4-sizing": {
+      "kind": "probe",
+      "goal": "Check that Ravi can compute the premium at risk and compare it with the desk's event budget.",
+      "say": {
+        "en": "The desk's event budget is 1% of your book: ₹10,000. How much premium did you put at risk?",
+        "hi": "Desk का event budget आपकी book का 1% है, यानी ₹10,000। आपने कितना premium risk पर रखा?"
+      },
+      "canvas": {
+        "sceneId": "tr-payoff",
+        "state": "before",
+        "annotate": [
+          {
+            "id": "a-maxloss",
+            "kind": "label",
+            "at": {
+              "x": 23800,
+              "y": -27075
+            },
+            "text": {
+              "en": "Max loss −₹27,075 · budget ₹10,000",
+              "hi": "Max loss −₹27,075 · budget ₹10,000"
+            },
+            "dim": "concept"
+          }
+        ]
+      },
+      "expect": [
+        {
+          "id": "over-budget",
+          "desc": "Computes about ₹27,000 at risk (4 lots × 75 × ₹90.25 = ₹27,075), about 2.7 times the ₹10,000 budget.",
+          "metric": "risk",
+          "level": "ok",
+          "next": "n5-setup"
+        }
+      ],
+      "misconceptions": [
+        {
+          "id": "m-premium-safe",
+          "desc": "Says buying options is safe because the loss is limited to the premium, so size doesn't matter.",
+          "metric": "risk",
+          "level": "not_yet",
+          "next": "n5-setup"
+        }
+      ],
+      "hints": [
+        {
+          "say": {
+            "en": "Premium × lot size × lots: what does that come to?",
+            "hi": "Premium × lot size × lots: कितना हुआ?"
+          }
+        },
+        {
+          "say": {
+            "en": "90.25 × 75 × 4.",
+            "hi": "90.25 × 75 × 4।"
+          }
+        },
+        {
+          "say": {
+            "en": "₹27,075: 2.7 times the budget.",
+            "hi": "₹27,075, यानी budget का 2.7 गुना।"
+          }
+        },
+        {
+          "say": {
+            "en": "When you buy an option, the whole premium is your max loss. So size comes from the budget, not from conviction.",
+            "hi": "Option खरीदने में पूरा premium ही max loss है। इसलिए size budget से तय होता है, भरोसे से नहीं।"
+          }
+        }
+      ],
+      "chips": [
+        {
+          "label": {
+            "en": "Over budget",
+            "hi": "Budget से ज़्यादा"
+          },
+          "text": "90.25 × 75 × 4, करीब ₹27,000। Budget से लगभग तीन गुना।"
+        },
+        {
+          "label": {
+            "en": "Loss is capped anyway",
+            "hi": "Loss तो limited है"
+          },
+          "text": "Option में loss तो premium तक ही limited है, size से क्या फ़र्क पड़ता है?"
+        }
+      ],
+      "onUnclear": "hint",
+      "onOffTopic": "redirect"
+    },
+    "n5-setup": {
+      "kind": "probe",
+      "goal": "Measure how quickly Ravi reaches the playbook's event-day process for this past situation: defined risk inside the budget, or standing aside. A reply that only cuts lots matches no branch and routes as unclear, which gives hint 1.",
+      "say": {
+        "en": "Same view, same day. Under the desk playbook, what setup would have kept this trade inside the rules?",
+        "hi": "वही view, वही दिन। Desk playbook के हिसाब से कौन-सा setup इस trade को rules के अंदर रखता?"
+      },
+      "canvas": {
+        "sceneId": "tr-payoff",
+        "state": "after",
+        "annotate": [
+          {
+            "id": "a-ravi-result",
+            "kind": "label",
+            "at": {
+              "x": 24420,
+              "y": -9209
+            },
+            "text": {
+              "en": "Your trade: −₹9,210",
+              "hi": "आपका trade: −₹9,210"
+            },
+            "dim": "concept"
+          }
+        ]
+      },
+      "expect": [
+        {
+          "id": "defined-risk",
+          "desc": "Names a defined-risk structure with a short leg (for example a call spread) sized inside the event budget.",
+          "metric": "timeToRightTrade",
+          "level": "ok",
+          "next": "n6-rationale"
+        },
+        {
+          "id": "stand-aside",
+          "desc": "Says no trade, or wait until after the announcement, because the priced move was bigger than his expected move.",
+          "metric": "timeToRightTrade",
+          "level": "ok",
+          "next": "n6-rationale"
+        }
+      ],
+      "hints": [
+        {
+          "say": {
+            "en": "Cutting lots alone isn't enough. What kind of structure does playbook §4 ask for on event days?",
+            "hi": "सिर्फ़ lots कम करना काफ़ी नहीं। Playbook §4 event day के लिए किस तरह के structure की बात करता है?"
+          }
+        },
+        {
+          "say": {
+            "en": "A structure with a short leg, so an IV fall hits both legs.",
+            "hi": "ऐसा structure जिसमें एक short leg हो, ताकि IV गिरे तो उसका असर दोनों legs पर बँट जाए।"
+          }
+        },
+        {
+          "say": {
+            "en": "For example a 24200/24400 call spread, 2 lots: max loss ₹7,785, inside the budget. On the same day it would have ended at −₹442.50.",
+            "hi": "जैसे 24200/24400 call spread, 2 lots: max loss ₹7,785, budget के अंदर। उसी दिन इसका नतीजा −₹442.50 होता।"
+          },
+          "canvas": {
+            "sceneId": "tr-payoff-spread",
+            "state": "after"
+          }
+        },
+        {
+          "say": {
+            "en": "The playbook's answer: a defined-risk structure inside the event budget, or wait until after the announcement.",
+            "hi": "Playbook का जवाब: event budget के अंदर defined-risk structure, या announcement के बाद तक इंतज़ार।"
+          }
+        }
+      ],
+      "chips": [
+        {
+          "label": {
+            "en": "Defined-risk spread",
+            "hi": "Defined-risk spread"
+          },
+          "text": "Defined-risk: 24200/24400 call spread, 2 lots, budget के अंदर।"
+        },
+        {
+          "label": {
+            "en": "Wait for the event",
+            "hi": "Event के बाद"
+          },
+          "text": "Announcement के बाद तक रुकता, जब IV नीचे आ जाता।"
+        },
+        {
+          "label": {
+            "en": "Fewer lots",
+            "hi": "कम lots"
+          },
+          "text": "शायद 1 lot ही लेता।"
+        }
+      ],
+      "onUnclear": "hint",
+      "onOffTopic": "redirect"
+    },
+    "n6-rationale": {
+      "kind": "probe",
+      "goal": "Get Ravi to state, for the desk, why the decision was bad and what his process is next time (expression evidence).",
+      "say": {
+        "en": "Now write it for the desk in one or two lines: why was this a bad decision, and what's your process next time?",
+        "hi": "अब desk के लिए एक-दो line में लिखिए: यह फ़ैसला खराब क्यों था, और अगली बार आपका process क्या होगा?"
+      },
+      "canvas": {
+        "sceneId": "tr-payoff-spread",
+        "state": "after",
+        "annotate": [
+          {
+            "id": "a-compare",
+            "kind": "label",
+            "at": {
+              "x": 24420,
+              "y": -444
+            },
+            "text": {
+              "en": "Playbook setup: −₹442.50 · your trade: −₹9,210",
+              "hi": "Playbook setup: −₹442.50 · आपका trade: −₹9,210"
+            },
+            "dim": "concept"
+          }
+        ]
+      },
+      "expect": [
+        {
+          "id": "clear-rationale",
+          "desc": "Names the priced-versus-actual move or the IV fall, the sizing breach and the playbook fix, clearly enough for a desk lead.",
+          "metric": "articulation",
+          "level": "ok",
+          "next": "c1-conclusion"
+        },
+        {
+          "id": "partial-rationale",
+          "desc": "Names only one or two of the three, or is hard to follow.",
+          "metric": "articulation",
+          "level": "partial",
+          "next": "c1-conclusion"
+        }
+      ],
+      "hints": [
+        {
+          "say": {
+            "en": "Three things: what happened, which rule broke, what you'll do next time.",
+            "hi": "तीन चीज़ें: क्या हुआ, कौन-सा rule टूटा, अगली बार क्या करेंगे।"
+          }
+        },
+        {
+          "say": {
+            "en": "You could start: 'Direction was right, but…'",
+            "hi": "ऐसे शुरू कर सकते हैं: 'Direction सही था, पर…'"
+          }
+        },
+        {
+          "say": {
+            "en": "'…IV was high and the priced move was big; size was over budget. Next time…'",
+            "hi": "'…IV ऊँचा था और priced move बड़ा था; size budget से ज़्यादा था। अगली बार…'"
+          }
+        },
+        {
+          "say": {
+            "en": "'Direction was right, but the market priced ±304 and got +110; the IV fall and theta cut the premium; size was 2.7 times the budget. Next time: check the implied move, use defined risk, stay inside the budget.'",
+            "hi": "'Direction सही था, पर market ने ±304 price किया और आया +110; IV crush और theta ने premium घटाया; size budget का 2.7 गुना था। अगली बार: implied move देखूँगा, defined-risk लूँगा, budget के अंदर रहूँगा।'"
+          }
+        }
+      ],
+      "onUnclear": "hint",
+      "onOffTopic": "redirect"
+    },
+    "c1-conclusion": {
+      "kind": "conclusion",
+      "goal": "Close with the conclusion Ravi reached, in his language, and hand off to the scorecard.",
+      "say": {
+        "en": "Here's what you worked out.",
+        "hi": "आपने जो निकाला, वह यह है।"
+      },
+      "canvas": {
+        "sceneId": "tr-candles",
+        "state": "full"
+      },
+      "summary": {
+        "en": "Direction was right, but the thesis was incomplete. Before the event IV was high and the market was pricing about ±304 points; the move was +110. The IV fall and one day of theta took more than the move added: ₹90.25 became ₹59.55. Size was 2.7 times the event budget. Next time: check the priced move first, use a defined-risk structure inside the budget, or wait.",
+        "hi": "Direction सही था, पर thesis अधूरा था। Event से पहले IV ऊँचा था और market करीब ±304 points का move price कर रहा था; move आया +110। IV crush और एक दिन के theta ने move से ज़्यादा ले लिया: ₹90.25 का premium ₹59.55 रह गया। Size event budget का 2.7 गुना था। अगली बार: पहले priced move देखें, budget के अंदर defined-risk structure लें, या इंतज़ार करें।"
+      }
+    }
+  },
+  "scriptedPath": [
+    {
+      "turn": 1,
+      "node": "n1-thesis",
+      "hintLevel": 0,
+      "kiki": {
+        "en": "When you bought, what was your thesis?",
+        "hi": "खरीदते वक़्त आपका thesis क्या था?"
+      },
+      "user": {
+        "lang": "hi",
+        "text": "Policy positive आने वाली थी, तो market ऊपर जाता। इसलिए call लिया।",
+        "en": "The policy was going to be positive, so the market would go up. That's why I bought the call."
+      },
+      "route": {
+        "label": "direction-only",
+        "matched": [
+          "direction-only"
+        ],
+        "misconception": null,
+        "confidence": 0.9,
+        "quote": "market ऊपर जाता"
+      },
+      "canvasCue": "Candles D-1 and D0; entry circled at 24,040; strike line 24200.",
+      "evidence": [
+        {
+          "metric": "sentiment",
+          "dim": "concept",
+          "level": "partial",
+          "quote": "market ऊपर जाता"
+        }
+      ],
+      "graphMap": {
+        "current": "n1-thesis",
+        "lit": [
+          "n1-thesis"
+        ]
+      },
+      "next": "n2-premium",
+      "video": {
+        "show": false,
+        "shot": "TR-01",
+        "note": "Thesis appears on the intro case card; the map starts with n1 lit."
+      }
+    },
+    {
+      "turn": 2,
+      "node": "n2-premium",
+      "hintLevel": 0,
+      "kiki": {
+        "en": "The index rose 110 points, so your direction was right. Then why did the premium fall from ₹90 to ₹60?",
+        "hi": "Index 110 points ऊपर गया, यानी direction सही था। फिर premium ₹90 से ₹60 क्यों हो गया?"
+      },
+      "user": {
+        "lang": "hi",
+        "text": "शायद operators ने खेल किया… stop hunt हुआ होगा।",
+        "en": "Maybe the operators played a game… a stop hunt."
+      },
+      "route": {
+        "label": "m-manipulation",
+        "matched": [],
+        "misconception": "m-manipulation",
+        "confidence": 0.86,
+        "quote": "operators ने खेल किया"
+      },
+      "canvasCue": "Arrow +110 from entry to exit close; the 10:00 event bar circled.",
+      "evidence": [
+        {
+          "metric": "pattern",
+          "dim": "concept",
+          "level": "not_yet",
+          "quote": "operators ने खेल किया"
+        }
+      ],
+      "graphMap": {
+        "current": "n2-premium",
+        "lit": [
+          "n1-thesis",
+          "n2-premium"
+        ],
+        "misconceptionEdge": "n2-premium→s1-payoff"
+      },
+      "next": "s1-payoff",
+      "video": {
+        "show": true,
+        "shot": "TR-04"
+      }
+    },
+    {
+      "turn": 3,
+      "node": "s1-payoff",
+      "hintLevel": 0,
+      "kiki": {
+        "en": "Look: same spot, but when IV drops from 17.5% to 11% the whole curve sinks. Your move added ₹40 per unit; the IV fall took ₹48 and one day of time took ₹23.",
+        "hi": "देखिए: spot वही है, पर IV 17.5% से 11% होते ही पूरा curve नीचे खिसक गया। Move ने हर unit पर ₹40 जोड़े; IV ने ₹48 और एक दिन के time ने ₹23 घटाए।"
+      },
+      "user": null,
+      "route": null,
+      "canvasCue": "Payoff 'before' (now-curve at entry, +₹13,469 at spot 24,150) morphs to 'after' (−₹9,209 at the same spot). Split label: Move +₹40 · IV −₹48 · time −₹23.",
+      "evidence": [],
+      "graphMap": {
+        "current": "s1-payoff",
+        "lit": [
+          "n1-thesis",
+          "n2-premium",
+          "s1-payoff"
+        ]
+      },
+      "next": "n3-implied-move",
+      "video": {
+        "show": true,
+        "shot": "TR-04"
+      }
+    },
+    {
+      "turn": 4,
+      "node": "n3-implied-move",
+      "hintLevel": 0,
+      "kiki": {
+        "en": "Before the event, the 24050 straddle cost about ₹304. That's roughly the move the market was pricing. How big was the actual move?",
+        "hi": "Event से पहले 24050 का straddle करीब ₹304 का था। मोटे तौर पर market इतने points का move price कर रहा था। असल move कितना हुआ?"
+      },
+      "user": {
+        "lang": "hi",
+        "text": "Market ±304 का move price कर रहा था, आया सिर्फ़ 110। मतलब option महँगा खरीदा।",
+        "en": "The market was pricing a ±304 move and only 110 came. So I bought an expensive option."
+      },
+      "route": {
+        "label": "move-smaller",
+        "matched": [
+          "move-smaller"
+        ],
+        "misconception": null,
+        "confidence": 0.93,
+        "quote": "±304 का move price कर रहा था, आया सिर्फ़ 110"
+      },
+      "canvasCue": "Shaded band 23,736 to 24,344 (priced move ±304) over D0; the 24,150 close underlined inside the band.",
+      "evidence": [
+        {
+          "metric": "sentiment",
+          "dim": "concept",
+          "level": "ok",
+          "quote": "±304 का move price कर रहा था, आया सिर्फ़ 110"
+        }
+      ],
+      "graphMap": {
+        "current": "n3-implied-move",
+        "lit": [
+          "n1-thesis",
+          "n2-premium",
+          "s1-payoff",
+          "n3-implied-move"
+        ]
+      },
+      "next": "n4-sizing",
+      "video": {
+        "show": true,
+        "shot": "TR-05"
+      }
+    },
+    {
+      "turn": 5,
+      "node": "n4-sizing",
+      "hintLevel": 0,
+      "kiki": {
+        "en": "The desk's event budget is 1% of your book: ₹10,000. How much premium did you put at risk?",
+        "hi": "Desk का event budget आपकी book का 1% है, यानी ₹10,000। आपने कितना premium risk पर रखा?"
+      },
+      "user": {
+        "lang": "hi",
+        "text": "90.25 × 75 × 4, करीब ₹27,000। Budget से लगभग तीन गुना।",
+        "en": "90.25 × 75 × 4, about ₹27,000. Almost three times the budget."
+      },
+      "route": {
+        "label": "over-budget",
+        "matched": [
+          "over-budget"
+        ],
+        "misconception": null,
+        "confidence": 0.95,
+        "quote": "करीब ₹27,000। Budget से लगभग तीन गुना"
+      },
+      "canvasCue": "Payoff at expiry; flat max-loss line labelled −₹27,075 against a ₹10,000 budget marker.",
+      "evidence": [
+        {
+          "metric": "risk",
+          "dim": "concept",
+          "level": "ok",
+          "quote": "करीब ₹27,000। Budget से लगभग तीन गुना"
+        }
+      ],
+      "graphMap": {
+        "current": "n4-sizing",
+        "lit": [
+          "n1-thesis",
+          "n2-premium",
+          "s1-payoff",
+          "n3-implied-move",
+          "n4-sizing"
+        ]
+      },
+      "next": "n5-setup",
+      "video": {
+        "show": true,
+        "shot": "TR-06"
+      }
+    },
+    {
+      "turn": 6,
+      "node": "n5-setup",
+      "hintLevel": 0,
+      "kiki": {
+        "en": "Same view, same day. Under the desk playbook, what setup would have kept this trade inside the rules?",
+        "hi": "वही view, वही दिन। Desk playbook के हिसाब से कौन-सा setup इस trade को rules के अंदर रखता?"
+      },
+      "user": {
+        "lang": "hi",
+        "text": "शायद 1 lot ही लेता।",
+        "en": "Maybe I'd have taken just 1 lot."
+      },
+      "route": {
+        "label": "unclear",
+        "matched": [],
+        "misconception": null,
+        "confidence": 0.71,
+        "quote": "1 lot ही लेता"
+      },
+      "kikiAfter": {
+        "en": "Cutting lots alone isn't enough. What kind of structure does playbook §4 ask for on event days?",
+        "hi": "सिर्फ़ lots कम करना काफ़ी नहीं। Playbook §4 event day के लिए किस तरह के structure की बात करता है?"
+      },
+      "canvasCue": "Ravi's trade after the event, labelled −₹9,210; hint chip 'Hint 1 · playbook §4' appears.",
+      "evidence": [],
+      "hintUsed": 1,
+      "graphMap": {
+        "current": "n5-setup",
+        "lit": [
+          "n1-thesis",
+          "n2-premium",
+          "s1-payoff",
+          "n3-implied-move",
+          "n4-sizing",
+          "n5-setup"
+        ],
+        "hintRung": 1
+      },
+      "next": "n5-setup",
+      "video": {
+        "show": true,
+        "shot": "TR-06"
+      }
+    },
+    {
+      "turn": 7,
+      "node": "n5-setup",
+      "hintLevel": 1,
+      "kiki": null,
+      "user": {
+        "lang": "hi",
+        "text": "Defined-risk: 24200/24400 call spread, 2 lots, budget के अंदर। या announcement के बाद तक रुकता।",
+        "en": "Defined risk: a 24200/24400 call spread, 2 lots, inside the budget. Or wait until after the announcement."
+      },
+      "route": {
+        "label": "defined-risk",
+        "matched": [
+          "defined-risk",
+          "stand-aside"
+        ],
+        "misconception": null,
+        "confidence": 0.92,
+        "quote": "Defined-risk: 24200/24400 call spread, 2 lots, budget के अंदर"
+      },
+      "canvasCue": "Spread payoff after the event appears beside Ravi's trade: −₹442.50 versus −₹9,210; spread max loss ₹7,785 inside the ₹10,000 budget.",
+      "evidence": [
+        {
+          "metric": "timeToRightTrade",
+          "dim": "concept",
+          "level": "partial",
+          "quote": "Defined-risk: 24200/24400 call spread, 2 lots",
+          "note": "Branch level is ok; capped at partial because hint rung 1 was used (7 turns)."
+        }
+      ],
+      "graphMap": {
+        "current": "n5-setup",
+        "lit": [
+          "n1-thesis",
+          "n2-premium",
+          "s1-payoff",
+          "n3-implied-move",
+          "n4-sizing",
+          "n5-setup"
+        ]
+      },
+      "next": "n6-rationale",
+      "video": {
+        "show": true,
+        "shot": "TR-06"
+      }
+    },
+    {
+      "turn": 8,
+      "node": "n6-rationale",
+      "hintLevel": 0,
+      "kiki": {
+        "en": "Now write it for the desk in one or two lines: why was this a bad decision, and what's your process next time?",
+        "hi": "अब desk के लिए एक-दो line में लिखिए: यह फ़ैसला खराब क्यों था, और अगली बार आपका process क्या होगा?"
+      },
+      "user": {
+        "lang": "hi",
+        "text": "Direction सही था, पर market ±304 price कर रहा था और आया 110। IV crush और theta ने premium खा लिया, और size budget का 2.7 गुना था। अगली बार: पहले implied move, फिर defined-risk, 1% budget के अंदर।",
+        "en": "Direction was right, but the market was pricing ±304 and got 110. IV crush and theta ate the premium, and size was 2.7 times the budget. Next time: implied move first, then defined risk, inside the 1% budget."
+      },
+      "route": {
+        "label": "clear-rationale",
+        "matched": [
+          "clear-rationale"
+        ],
+        "misconception": null,
+        "confidence": 0.94,
+        "quote": "IV crush और theta ने premium खा लिया, और size budget का 2.7 गुना था"
+      },
+      "expression": {
+        "clarity": 2,
+        "termsUsed": [
+          "implied move",
+          "IV crush",
+          "theta",
+          "premium",
+          "defined-risk",
+          "budget"
+        ]
+      },
+      "canvasCue": "Spread versus long call comparison stays; Ravi's two lines appear in a journal card.",
+      "evidence": [
+        {
+          "metric": "articulation",
+          "dim": "english",
+          "level": "ok",
+          "quote": "अगली बार: पहले implied move, फिर defined-risk, 1% budget के अंदर"
+        },
+        {
+          "dim": "words",
+          "level": "ok",
+          "quote": "IV crush, theta, premium, implied move, defined-risk",
+          "note": "From the classifier's expression.termsUsed (contract §4), not a separate question."
+        }
+      ],
+      "graphMap": {
+        "current": "n6-rationale",
+        "lit": [
+          "n1-thesis",
+          "n2-premium",
+          "s1-payoff",
+          "n3-implied-move",
+          "n4-sizing",
+          "n5-setup",
+          "n6-rationale"
+        ]
+      },
+      "next": "c1-conclusion",
+      "video": {
+        "show": true,
+        "shot": "TR-07"
+      }
+    },
+    {
+      "turn": 9,
+      "node": "c1-conclusion",
+      "hintLevel": 0,
+      "kiki": {
+        "en": "Here's what you worked out.",
+        "hi": "आपने जो निकाला, वह यह है।"
+      },
+      "user": null,
+      "route": null,
+      "canvasCue": "Full candles with entry, strike and breakeven 24,290.25; summary card in Hindi.",
+      "evidence": [],
+      "graphMap": {
+        "current": "c1-conclusion",
+        "lit": [
+          "n1-thesis",
+          "n2-premium",
+          "s1-payoff",
+          "n3-implied-move",
+          "n4-sizing",
+          "n5-setup",
+          "n6-rationale",
+          "c1-conclusion"
+        ]
+      },
+      "done": true,
+      "video": {
+        "show": true,
+        "shot": "TR-07"
+      }
+    }
+  ],
+  "scriptedScorecard": {
+    "metrics": [
+      {
+        "id": "sentiment",
+        "level": "ok",
+        "evidence": [
+          "T4: '±304 का move price कर रहा था, आया सिर्फ़ 110'",
+          "T1 was partial: direction-only thesis"
+        ]
+      },
+      {
+        "id": "pattern",
+        "level": "partial",
+        "evidence": [
+          "T2: misconception m-manipulation (not yet)",
+          "T8: used 'IV crush' correctly, after seeing the payoff visual in s1"
+        ]
+      },
+      {
+        "id": "risk",
+        "level": "ok",
+        "evidence": [
+          "T5: 'करीब ₹27,000। Budget से लगभग तीन गुना'"
+        ]
+      },
+      {
+        "id": "timeToRightTrade",
+        "level": "partial",
+        "evidence": [
+          "T7: reached the playbook setup after hint rung 1, at turn 7 of 9"
+        ]
+      },
+      {
+        "id": "articulation",
+        "level": "ok",
+        "evidence": [
+          "T8: two lines naming the priced versus actual move, IV crush and theta, the sizing breach and the fix"
+        ]
+      }
+    ],
+    "next": [
+      {
+        "kind": "concept",
+        "id": "iv-before-events",
+        "why": {
+          "en": "You named IV crush only after the visual. One more worked example will make it stick.",
+          "hi": "IV crush आपने visual देखने के बाद पहचाना। एक और उदाहरण से यह पक्का होगा।"
+        }
+      },
+      {
+        "kind": "lab",
+        "id": "pre-event-checklist",
+        "why": {
+          "en": "Practise the pre-event note in the terminal replay; the exit plan is still missing.",
+          "hi": "Terminal replay में pre-event note का अभ्यास कीजिए; exit plan अभी बाकी है।"
+        }
+      }
+    ]
+  },
+  "videoScorecard": {
+    "note": "What the Evidence shot shows: the four dimensions after Reflect (tutor) and Do (terminal replay). Colours: concept green, words red, expression yellow, practice blue. Levels show as filled, half-filled or outlined; never as red/green outcome colours.",
+    "dimensions": [
+      {
+        "dim": "concept",
+        "label": {
+          "en": "Concept",
+          "hi": "Concept"
+        },
+        "level": "partial",
+        "from": "tutor: sentiment ok, risk ok, pattern partial, time to the right trade partial"
+      },
+      {
+        "dim": "words",
+        "label": {
+          "en": "Words",
+          "hi": "Words"
+        },
+        "level": "ok",
+        "from": "tutor: terms used correctly in T8"
+      },
+      {
+        "dim": "english",
+        "label": {
+          "en": "Expression",
+          "hi": "Expression"
+        },
+        "level": "ok",
+        "from": "tutor: articulation ok in T8"
+      },
+      {
+        "dim": "lab",
+        "label": {
+          "en": "Practice",
+          "hi": "Practice"
+        },
+        "level": "partial",
+        "from": "Do: IV noted and implied move written; max loss inside budget; exit plan not yet"
+      }
+    ],
+    "cohortLine": {
+      "en": "Desk view · illustrative cohort of 20 trainees · Event-day options · primary gap: Concept 11 · Words 3 · Expression 4 · Practice 2",
+      "hi": "Desk view · illustrative cohort, 20 trainees · Event-day options · मुख्य gap: Concept 11 · Words 3 · Expression 4 · Practice 2",
+      "headline": {
+        "en": "11 of 20 trainees misread event-day IV: a concept gap, not a language gap.",
+        "hi": "20 में से 11 trainees event-day IV गलत पढ़ते हैं: यह concept gap है, language gap नहीं।"
+      }
+    }
+  },
+  "meta": {
+    "illustrative": true,
+    "status": "Draft for S5 review. Machine-drafted Hindi; needs a native Hindi reviewer and a practising trader.",
+    "languageReview": {
+      "en": "draft",
+      "hi": "draft (machine draft)"
+    },
+    "extraFields": "scriptedPath, scriptedScorecard, videoScorecard, sceneStates and meta are additive fields for the video and a replay. They are not part of kiki-tutor-graph/v0; a v0 loader can ignore them.",
+    "scoringRules": [
+      "A metric's level is its latest evidence, except: a branch reached after a hint rung is capped at partial; after the answer rung it is not_yet.",
+      "A misconception corrected by a show node leaves that metric at most partial until later evidence.",
+      "Words evidence comes from expression.termsUsed; expression evidence from the articulation node and expression.clarity."
+    ],
+    "metricDefinitions": {
+      "sentiment": "Reads what the market expected: whether the outcome was priced in and how big a move the options were pricing.",
+      "pattern": "Recognises the event-volatility pattern: IV builds into a scheduled event and falls after it, taking premium with it.",
+      "risk": "Computes premium at risk and compares it with the desk's event budget; knows max loss for a long option is the whole premium.",
+      "timeToRightTrade": "Turns and hint rungs Ravi needs to name the playbook-compliant setup for this past situation (defined risk inside the budget, or standing aside). Process on a past trade, never a live pick.",
+      "articulation": "States the diagnosis and next-time process in one or two lines a desk lead would accept."
+    },
+    "mapLayout": {
+      "note": "Positions for the small decision-graph map (0 to 1, left to right, top to bottom).",
+      "n1-thesis": [
+        0.06,
+        0.35
+      ],
+      "n2-premium": [
+        0.2,
+        0.35
+      ],
+      "s1-payoff": [
+        0.3,
+        0.75
+      ],
+      "n3-implied-move": [
+        0.42,
+        0.35
+      ],
+      "n4-sizing": [
+        0.56,
+        0.35
+      ],
+      "n5-setup": [
+        0.7,
+        0.35
+      ],
+      "n6-rationale": [
+        0.83,
+        0.35
+      ],
+      "c1-conclusion": [
+        0.95,
+        0.35
+      ]
+    },
+    "audio": "No audio files yet. Pre-generate KiKi's Hindi lines per node with TTS (contract: TutorNode.audio).",
+    "canvasCoordinates": "candles: x = bar index (0 = D-1 09:15, 25 = D0 15:15), y = index level. payoff: x = spot, y = position P&L in ₹ for the scene's lots. line: x = series index or minute, y = value.",
+    "validation": {
+      "nodes": 8,
+      "misconceptions": 2,
+      "reachable": true,
+      "pathsToConclusion": 3,
+      "acyclic": true,
+      "scriptedTurns": 9,
+      "scriptedTurnsInVideo": 8,
+      "checkedBy": "docs/knowledge-workers/personas/tools/tutor_build.py",
+      "note": "Local structural check only. S3's validator is the acceptance gate."
+    }
+  }
+}

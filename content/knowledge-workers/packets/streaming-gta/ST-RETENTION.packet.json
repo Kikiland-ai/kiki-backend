@@ -1,0 +1,1700 @@
+{
+  "schema": "kiki-pedagogy-packet/v1",
+  "packetId": "PKT-ST-RETENTION-1",
+  "createdAt": "2026-11-20T05:45:57Z",
+  "domain": {
+    "packId": "streaming-gta",
+    "corner": "audiences",
+    "profileId": "streaming",
+    "learner": {
+      "role": "Newly signed creator in an illustrative launch-week cohort",
+      "transition": "hobby streaming to an agency review process",
+      "priorKnowledge": "Basic stream operation and access to saved analytics"
+    },
+    "languages": {
+      "source": "en",
+      "targets": [
+        "hi-Latn"
+      ],
+      "workingLanguage": "hi-Latn"
+    },
+    "dimensionLabels": {
+      "concept": "Concept",
+      "words": "Words",
+      "english": "Expression",
+      "lab": "Practice"
+    },
+    "assessmentPolicy": {
+      "conceptChecks": 5,
+      "passPercent": 60,
+      "options": 4,
+      "chapterTest": false
+    },
+    "practical": {
+      "applies": true,
+      "label": "Practice",
+      "tool": "Saved generic analytics dashboard, VOD and run-of-show editor"
+    },
+    "guardrails": [
+      "All personas, agency rules and charts are illustrative; no platform-wide statistics are claimed",
+      "GTA 6 by name only; no publisher logos, footage, artwork or third-party assets",
+      "The creator acts; KiKi never edits a stream or tool",
+      "Hinglish is a machine draft pending native review"
+    ],
+    "consumers": [
+      "kiki-pack/v0"
+    ]
+  },
+  "scope": {
+    "planId": "LP-ST-LAUNCH-WEEK",
+    "groupId": "MOD-ST-LAUNCH",
+    "conceptId": "ST-RETENTION",
+    "order": 3,
+    "canonicalKey": "reading-ccv-by-segment",
+    "title": "Compare segments without mistaking counts for people",
+    "practiceTaskId": "find-the-drop"
+  },
+  "status": {
+    "review": "draft",
+    "domainReview": "pending",
+    "pronunciation": "pending",
+    "languages": {
+      "hi-Latn": "machine_draft"
+    }
+  },
+  "research": {
+    "governingQuestion": "Using grind endpoints 556 and 348, and vote endpoints 351 and 477, calculate the agency ratios and state one limitation.",
+    "sources": [
+      {
+        "id": "S-ST-RETENTION-PLAYBOOK",
+        "origin": "org_playbook",
+        "tier": 1,
+        "label": "Launch-week streaming playbook (illustrative)",
+        "locator": "content/knowledge-workers/sources/design/personas/streamer/playbook-excerpt.md; §6, LW-6.1; scenario segmentStats, series and drop",
+        "illustrative": true
+      },
+      {
+        "id": "S-ST-RETENTION-CASE",
+        "origin": "org_case",
+        "tier": 1,
+        "label": "Launch-week stream case (illustrative)",
+        "locator": "content/knowledge-workers/sources/design/personas/streamer/scenario.json",
+        "illustrative": true
+      }
+    ],
+    "claims": [
+      {
+        "id": "CL-ST-RETENTION-RULE",
+        "kind": "org_rule",
+        "text": "LW-6.1 is the governing rule for this exercise; Compute the agency segment ratio and explain its limits.",
+        "sourceIds": [
+          "S-ST-RETENTION-PLAYBOOK"
+        ],
+        "confidence": "high",
+        "check": "Rule and scope read in the pinned illustrative playbook at §6, LW-6.1; scenario segmentStats, series and drop"
+      },
+      {
+        "id": "CL-ST-RETENTION-WORKED",
+        "kind": "procedure",
+        "text": "Using grind endpoints 556 and 348, and vote endpoints 351 and 477, calculate the agency ratios and state one limitation. Grind: 348 / 556 = 0.625899, about 0.63; this is below the agency threshold 0.8. Vote: 477 / 351 = 1.358974, about 1.36; concurrent counts grew. These ratios compare aggregate counts, not the same people; they do not by themselves establish causation.",
+        "sourceIds": [
+          "S-ST-RETENTION-PLAYBOOK",
+          "S-ST-RETENTION-CASE"
+        ],
+        "confidence": "high",
+        "check": "derived: Grind: 348 / 556 = 0.625899, about 0.63; this is below the agency threshold 0.8. Vote: 477 / 351 = 1.358974, about 1.36; concurrent counts grew. These ratios compare aggregate counts, not the same people; they do not by themselves establish causation."
+      },
+      {
+        "id": "CL-ST-RETENTION-definition-1",
+        "kind": "definition",
+        "text": "The CCV measures concurrent viewers at a moment, rather than unique viewers across the whole stream.",
+        "sourceIds": [
+          "S-ST-RETENTION-PLAYBOOK"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-RETENTION-definition-2",
+        "kind": "definition",
+        "text": "The agency defines segment retention as last-minute CCV divided by first-minute CCV.",
+        "sourceIds": [
+          "S-ST-RETENTION-PLAYBOOK"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-RETENTION-concept-1",
+        "kind": "procedure",
+        "text": "The case grind segment uses minute 38 as its first sample and minute 59 as its last, with CCV of 556 and 348.",
+        "sourceIds": [
+          "S-ST-RETENTION-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-RETENTION-concept-2",
+        "kind": "procedure",
+        "text": "The segment retention is about 0.626, rounded to 0.63, below the agency review threshold of 0.8.",
+        "sourceIds": [
+          "S-ST-RETENTION-PLAYBOOK",
+          "S-ST-RETENTION-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-RETENTION-concept-3",
+        "kind": "procedure",
+        "text": "This ratio compares counts; it does not prove that the same 63% of viewers stayed throughout.",
+        "sourceIds": [
+          "S-ST-RETENTION-PLAYBOOK",
+          "S-ST-RETENTION-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-RETENTION-application-1",
+        "kind": "procedure",
+        "text": "The case vote segment has CCV of 351 at minute 60 and 477 at minute 91, giving a ratio near 1.36.",
+        "sourceIds": [
+          "S-ST-RETENTION-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-RETENTION-application-2",
+        "kind": "procedure",
+        "text": "A segment retention above 1 indicates net growth in concurrent counts, not impossible individual retention.",
+        "sourceIds": [
+          "S-ST-RETENTION-PLAYBOOK",
+          "S-ST-RETENTION-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-RETENTION-application-3",
+        "kind": "procedure",
+        "text": "Under the agency rule LW-6.1, flag the grind for VOD review and keep the later raid separate from this comparison.",
+        "sourceIds": [
+          "S-ST-RETENTION-PLAYBOOK",
+          "S-ST-RETENTION-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-RETENTION-recap-1",
+        "kind": "procedure",
+        "text": "Always state the CCV endpoint convention when reporting segment retention.",
+        "sourceIds": [
+          "S-ST-RETENTION-PLAYBOOK",
+          "S-ST-RETENTION-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-RETENTION-recap-2",
+        "kind": "procedure",
+        "text": "Use the agency threshold to prioritise review, rather than to assert a causal explanation.",
+        "sourceIds": [
+          "S-ST-RETENTION-PLAYBOOK",
+          "S-ST-RETENTION-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      }
+    ],
+    "outOfScope": [
+      "Live trading or tool control",
+      "Platform-wide or real-organisation claims",
+      "Narration, translation, publication and mastery certification"
+    ],
+    "openQuestions": [
+      "Illustrative organisation: replace with buyer-approved material before production.",
+      "Domain expert and native-language pronunciation review remain pending."
+    ]
+  },
+  "learner": {
+    "prerequisiteIds": [
+      "ST-HOOKS",
+      "ST-CHAT"
+    ],
+    "externalPrerequisites": [
+      {
+        "title": "Basic stream operation and access to saved analytics",
+        "level": "earlier_course",
+        "canonicalKey": "stream-operation-basics"
+      }
+    ],
+    "troublesome": "Separate the observations, the organisation rule and a justified conclusion. A segment retention of 0.63 means exactly 63 percent of the same people stayed.",
+    "misconceptions": [
+      {
+        "id": "M-ST-RETENTION",
+        "statement": "A segment retention of 0.63 means exactly 63 percent of the same people stayed.",
+        "correction": "The agency ratio compares counts, not tracked individual viewers.",
+        "basis": "inferred",
+        "sourceIds": [],
+        "reasoning": "Inferred from the case contrast and the playbook rule; no learner study or real user evidence is claimed."
+      }
+    ]
+  },
+  "objectives": [
+    {
+      "id": "O-ST-RETENTION-1",
+      "statement": "Calculate the agency segment retention ratio from case endpoints.",
+      "bloom": "analyse",
+      "parentId": "O-MOD-ST-LAUNCH",
+      "ownerId": "ST-RETENTION"
+    },
+    {
+      "id": "O-ST-RETENTION-2",
+      "statement": "Distinguish aggregate viewer counts from individual retention and causal evidence.",
+      "bloom": "apply",
+      "parentId": "O-MOD-ST-LAUNCH",
+      "ownerId": "ST-RETENTION"
+    }
+  ],
+  "terms": [
+    {
+      "id": "T-ST-CCV",
+      "term": "CCV",
+      "definition": "Concurrent viewers at a given time, rather than unique people across the whole stream.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "ST-RETENTION",
+      "spoken": "CCV",
+      "glosses": {
+        "hi-Latn": "Ek waqt par dekh rahe viewers; poore stream ke unique log nahi."
+      },
+      "pronunciations": {
+        "hi-Latn": "C C V"
+      },
+      "review_status": "pending"
+    },
+    {
+      "id": "T-ST-RETENTION",
+      "term": "segment retention",
+      "definition": "The agency ratio of last-minute CCV to first-minute CCV in a segment.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "ST-RETENTION",
+      "spoken": "segment retention",
+      "glosses": {
+        "hi-Latn": "Agency ka ratio: segment ke last minute ka CCV, first minute ke CCV se divide."
+      },
+      "pronunciations": {
+        "hi-Latn": "segment retention"
+      },
+      "review_status": "pending"
+    }
+  ],
+  "usesTerms": [
+    {
+      "id": "T-ST-SEGMENT",
+      "term": "segment",
+      "definition": "A named block of a stream with a goal and planned duration.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "ST-HOOKS",
+      "spoken": "segment",
+      "glosses": {
+        "hi-Latn": "Stream ka naam aur goal wala time block."
+      },
+      "pronunciations": {
+        "hi-Latn": "segment"
+      },
+      "review_status": "pending"
+    },
+    {
+      "id": "T-ST-VOD",
+      "term": "VOD",
+      "definition": "The saved video recording used to review what happened on stream.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "ST-HOOKS",
+      "spoken": "VOD",
+      "glosses": {
+        "hi-Latn": "Stream ki saved recording jise review karte hain."
+      },
+      "pronunciations": {
+        "hi-Latn": "V O D"
+      },
+      "review_status": "pending"
+    }
+  ],
+  "teaching": {
+    "canDo": "Compute the agency segment ratio and explain its limits.",
+    "keyIdea": "The agency ratio compares counts, not tracked individual viewers.",
+    "explanation": {
+      "text": "The agency segment retention ratio is a simple count comparison. Divide the last sampled CCV by the first sampled CCV within a segment. The illustrative grind uses minutes thirty-eight through fifty-nine, giving 348 divided by 556, about 0.63. This is below the agency review threshold. The later vote segment has a ratio above one because concurrent counts grew. Neither ratio tracks the same individuals, and neither proves why people arrived or left. Keep segment boundaries explicit, compare the VOD and avoid assigning the later raid to the earlier vote segment. The threshold is an agency heuristic, not a platform benchmark.",
+      "defaultModality": "textImage",
+      "walkthrough": [
+        {
+          "target": "CCV",
+          "mark": "marker",
+          "dim": "words",
+          "say": "CCV: Concurrent viewers at a given time, rather than unique people across the whole stream."
+        },
+        {
+          "target": "segment retention",
+          "mark": "marker",
+          "dim": "words",
+          "say": "segment retention: The agency ratio of last-minute CCV to first-minute CCV in a segment."
+        },
+        {
+          "target": "segment",
+          "mark": "marker",
+          "dim": "words",
+          "say": "segment: A named block of a stream with a goal and planned duration."
+        }
+      ]
+    },
+    "example": {
+      "title": "Compare segments without mistaking counts for people (illustrative)",
+      "scenario": "The case grind segment uses minute 38 as its first sample and minute 59 as its last, with CCV of 556 and 348. The segment retention is about 0.626, rounded to 0.63, below the agency review threshold of 0.8. This ratio compares counts; it does not prove that the same 63% of viewers stayed throughout.",
+      "takeaway": "The agency ratio compares counts, not tracked individual viewers.",
+      "sourceIds": [
+        "S-ST-RETENTION-CASE"
+      ]
+    },
+    "workedQuestion": {
+      "id": "W-ST-RETENTION",
+      "type": "short_english",
+      "marks": 3,
+      "prompt": "Using grind endpoints 556 and 348, and vote endpoints 351 and 477, calculate the agency ratios and state one limitation.",
+      "modelAnswer": [
+        "Grind: 348 / 556 = 0.625899, about 0.63; this is below the agency threshold 0.8.",
+        "Vote: 477 / 351 = 1.358974, about 1.36; concurrent counts grew.",
+        "These ratios compare aggregate counts, not the same people; they do not by themselves establish causation."
+      ],
+      "rubric": [
+        {
+          "criterion": "Grind: 348 / 556 = 0.625899, about 0.63; this is below the agency threshold 0.8.",
+          "marks": 1,
+          "objectiveId": "O-ST-RETENTION-1"
+        },
+        {
+          "criterion": "Vote: 477 / 351 = 1.358974, about 1.36; concurrent counts grew.",
+          "marks": 1,
+          "objectiveId": "O-ST-RETENTION-2"
+        },
+        {
+          "criterion": "These ratios compare aggregate counts, not the same people; they do not by themselves establish causation.",
+          "marks": 1,
+          "objectiveId": "O-ST-RETENTION-1"
+        }
+      ],
+      "examVocabulary": [
+        "T-ST-CCV",
+        "T-ST-RETENTION"
+      ]
+    },
+    "selfExplainPrompt": "Report the two ratios with their endpoint conventions and explain why they are not individual-viewer retention.",
+    "checks": [
+      {
+        "id": "Q-ST-RETENTION-1",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "diagnosis",
+        "prompt": "Why can segment retention exceed one under LW-6.1?",
+        "options": [
+          "Concurrent counts can grow",
+          "The ratio tracks immortal viewers",
+          "The platform reports only unique people",
+          "The denominator must be negative"
+        ],
+        "answer": "Concurrent counts can grow",
+        "distractorRationale": {
+          "The ratio tracks immortal viewers": "error: Treats an aggregate count ratio as tracked individuals",
+          "The denominator must be negative": "error: Invents a negative denominator",
+          "The platform reports only unique people": "error: Confuses concurrent counts with stream-wide unique viewers"
+        },
+        "explanation": "The agency ratio uses two concurrent counts, so arrivals can produce a value above one.",
+        "objectiveIds": [
+          "O-ST-RETENTION-1"
+        ],
+        "difficulty": 1,
+        "claimIds": [
+          "CL-ST-RETENTION-RULE",
+          "CL-ST-RETENTION-WORKED",
+          "CL-ST-RETENTION-definition-1",
+          "CL-ST-RETENTION-definition-2",
+          "CL-ST-RETENTION-concept-1",
+          "CL-ST-RETENTION-concept-2",
+          "CL-ST-RETENTION-concept-3"
+        ]
+      },
+      {
+        "id": "Q-ST-RETENTION-2",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "process",
+        "prompt": "Which endpoints belong to the grind interval from minute 38 up to minute 60?",
+        "options": [
+          "Minute 37 and minute 61",
+          "Minute 38 and minute 60",
+          "Minute 38 and minute 59",
+          "The stream peak and final minute"
+        ],
+        "answer": "Minute 38 and minute 59",
+        "distractorRationale": {
+          "Minute 38 and minute 60": "error: Includes the first sample of the next segment",
+          "Minute 37 and minute 61": "error: Includes samples outside both boundaries",
+          "The stream peak and final minute": "error: Ignores segment boundaries altogether"
+        },
+        "explanation": "The case uses an exclusive end boundary; minute sixty is the first sample of the next segment.",
+        "objectiveIds": [
+          "O-ST-RETENTION-2"
+        ],
+        "difficulty": 1,
+        "claimIds": [
+          "CL-ST-RETENTION-RULE",
+          "CL-ST-RETENTION-WORKED",
+          "CL-ST-RETENTION-definition-1",
+          "CL-ST-RETENTION-definition-2",
+          "CL-ST-RETENTION-concept-1",
+          "CL-ST-RETENTION-concept-2",
+          "CL-ST-RETENTION-concept-3"
+        ]
+      },
+      {
+        "id": "Q-ST-RETENTION-3",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "judgement",
+        "prompt": "How should a ratio below 0.8 be used?",
+        "options": [
+          "A universal platform quality grade",
+          "An agency flag for closer review",
+          "Proof of a specific individual cause",
+          "Evidence every viewer disliked the game"
+        ],
+        "answer": "An agency flag for closer review",
+        "distractorRationale": {
+          "Proof of a specific individual cause": "error: Uses a count ratio as causal proof",
+          "A universal platform quality grade": "error: Treats an invented agency threshold as a platform grade",
+          "Evidence every viewer disliked the game": "error: Claims a specific audience motive without evidence"
+        },
+        "explanation": "The agency threshold prioritises review; the VOD and surrounding signals are still needed for diagnosis.",
+        "objectiveIds": [
+          "O-ST-RETENTION-1"
+        ],
+        "difficulty": 2,
+        "claimIds": [
+          "CL-ST-RETENTION-RULE",
+          "CL-ST-RETENTION-WORKED",
+          "CL-ST-RETENTION-definition-1",
+          "CL-ST-RETENTION-definition-2",
+          "CL-ST-RETENTION-concept-1",
+          "CL-ST-RETENTION-concept-2",
+          "CL-ST-RETENTION-concept-3"
+        ]
+      },
+      {
+        "id": "Q-ST-RETENTION-4",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "calculation",
+        "prompt": "What is 348 divided by 556, rounded to two decimals?",
+        "options": [
+          "0.37",
+          "0.80",
+          "1.60",
+          "0.63"
+        ],
+        "answer": "0.63",
+        "distractorRationale": {
+          "0.37": "error: Reports the approximate decline fraction instead of endpoint ratio",
+          "0.80": "error: Substitutes the review threshold for the calculation",
+          "1.60": "error: Inverts the endpoint ratio"
+        },
+        "explanation": "The endpoint count ratio is about 0.626. The roughly thirty-seven percent decline is a different representation.",
+        "objectiveIds": [
+          "O-ST-RETENTION-2"
+        ],
+        "difficulty": 2,
+        "claimIds": [
+          "CL-ST-RETENTION-RULE",
+          "CL-ST-RETENTION-WORKED",
+          "CL-ST-RETENTION-definition-1",
+          "CL-ST-RETENTION-definition-2",
+          "CL-ST-RETENTION-concept-1",
+          "CL-ST-RETENTION-concept-2",
+          "CL-ST-RETENTION-concept-3"
+        ]
+      },
+      {
+        "id": "Q-ST-RETENTION-5",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "diagnosis",
+        "prompt": "What is unsupported by a count ratio of 0.63?",
+        "options": [
+          "The later count is lower than the earlier one",
+          "The segment warrants agency review",
+          "Exactly 63 percent of the same people stayed",
+          "The endpoint ratio is below 0.8"
+        ],
+        "answer": "Exactly 63 percent of the same people stayed",
+        "distractorRationale": {
+          "The later count is lower than the earlier one": "error: Denies the direction visible in the endpoint counts",
+          "The segment warrants agency review": "error: Denies the agency review rule",
+          "The endpoint ratio is below 0.8": "error: Confuses 0.63 with a value above the threshold"
+        },
+        "explanation": "Concurrent count endpoints do not identify individual viewers; arrivals and departures may both occur.",
+        "objectiveIds": [
+          "O-ST-RETENTION-1"
+        ],
+        "difficulty": 3,
+        "claimIds": [
+          "CL-ST-RETENTION-RULE",
+          "CL-ST-RETENTION-WORKED",
+          "CL-ST-RETENTION-definition-1",
+          "CL-ST-RETENTION-definition-2",
+          "CL-ST-RETENTION-concept-1",
+          "CL-ST-RETENTION-concept-2",
+          "CL-ST-RETENTION-concept-3"
+        ]
+      },
+      {
+        "id": "Q-ST-RETENTION-WORDS",
+        "type": "fill_blank",
+        "dimension": "words",
+        "evaluates": "recall",
+        "prompt": "Name the term: Concurrent viewers at a given time, rather than unique people across the whole stream.",
+        "answer": "CCV",
+        "explanation": "The term is CCV. Concurrent viewers at a given time, rather than unique people across the whole stream.",
+        "objectiveIds": [
+          "O-ST-RETENTION-1"
+        ],
+        "difficulty": 1,
+        "claimIds": [
+          "CL-ST-RETENTION-RULE"
+        ]
+      },
+      {
+        "id": "Q-ST-RETENTION-EXPRESSION",
+        "type": "short_english",
+        "dimension": "english",
+        "evaluates": "process",
+        "prompt": "Report the two ratios with their endpoint conventions and explain why they are not individual-viewer retention. Working language: Hinglish; canonical terms stay unchanged.",
+        "answer": "Grind: 348 / 556 = 0.625899, about 0.63; this is below the agency threshold 0.8. Vote: 477 / 351 = 1.358974, about 1.36; concurrent counts grew. These ratios compare aggregate counts, not the same people; they do not by themselves establish causation.",
+        "explanation": "Assess conceptual claims separately from clarity and terminology. A language gap does not remove concept credit.",
+        "objectiveIds": [
+          "O-ST-RETENTION-1",
+          "O-ST-RETENTION-2"
+        ],
+        "difficulty": 2,
+        "claimIds": [
+          "CL-ST-RETENTION-RULE"
+        ],
+        "rubric": [
+          {
+            "criterion": "State the evidenced reasoning accurately; record concept credit separately.",
+            "dim": "concept"
+          },
+          {
+            "criterion": "Use the canonical terms to explain the reasoning clearly in the working language.",
+            "dim": "english"
+          }
+        ]
+      },
+      {
+        "id": "Q-ST-RETENTION-PRACTICE",
+        "type": "predict",
+        "dimension": "lab",
+        "evaluates": "process",
+        "prompt": "Select the grind interval on the saved dashboard, read minutes 38 and 59, compute the ratio, then inspect the VOD around the transition.",
+        "answer": "Use the saved illustrative case only. Grind: 348 / 556 = 0.625899, about 0.63; this is below the agency threshold 0.8. Vote: 477 / 351 = 1.358974, about 1.36; concurrent counts grew. These ratios compare aggregate counts, not the same people; they do not by themselves establish causation.",
+        "explanation": "The learner performs the inspection or edit. A predicted answer is not proof that the real tool action occurred.",
+        "objectiveIds": [
+          "O-ST-RETENTION-1",
+          "O-ST-RETENTION-2"
+        ],
+        "difficulty": 3,
+        "claimIds": [
+          "CL-ST-RETENTION-RULE"
+        ],
+        "evidencePolicy": {
+          "predictionOnly": true,
+          "earnsPracticeCredit": false,
+          "requires": "Observed learner action or a saved learner artefact, checked against the task criteria."
+        }
+      }
+    ],
+    "examSignal": {
+      "basis": "none",
+      "askedIn": 0,
+      "outOf": 0,
+      "note": "No past-paper or buyer assessment frequencies supplied."
+    },
+    "estMinutes": 12
+  },
+  "placards": [
+    {
+      "id": "CARD-ST-RETENTION-definition",
+      "kind": "definition",
+      "title": {
+        "en": "Definition"
+      },
+      "sentences": [
+        {
+          "id": "CARD-ST-RETENTION-definition.s1",
+          "english": "The CCV measures concurrent viewers at a moment, rather than unique viewers across the whole stream.",
+          "term_ids": [
+            "T-ST-CCV"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-ST-RETENTION-definition-1"
+          ]
+        },
+        {
+          "id": "CARD-ST-RETENTION-definition.s2",
+          "english": "The agency defines segment retention as last-minute CCV divided by first-minute CCV.",
+          "term_ids": [
+            "T-ST-CCV",
+            "T-ST-RETENTION",
+            "T-ST-SEGMENT"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-ST-RETENTION-definition-2"
+          ]
+        }
+      ],
+      "visualRef": "explanation"
+    },
+    {
+      "id": "CARD-ST-RETENTION-concept",
+      "kind": "concept",
+      "title": {
+        "en": "Concept"
+      },
+      "sentences": [
+        {
+          "id": "CARD-ST-RETENTION-concept.s1",
+          "english": "The case grind segment uses minute 38 as its first sample and minute 59 as its last, with CCV of 556 and 348.",
+          "term_ids": [
+            "T-ST-CCV",
+            "T-ST-SEGMENT"
+          ],
+          "literals": [
+            {
+              "text": "38",
+              "spoken": "thirty eight"
+            },
+            {
+              "text": "59",
+              "spoken": "fifty nine"
+            },
+            {
+              "text": "556",
+              "spoken": "five hundred fifty six"
+            },
+            {
+              "text": "348",
+              "spoken": "three hundred forty eight"
+            }
+          ],
+          "claimIds": [
+            "CL-ST-RETENTION-concept-1"
+          ],
+          "cue": {
+            "state": "compare"
+          }
+        },
+        {
+          "id": "CARD-ST-RETENTION-concept.s2",
+          "english": "The segment retention is about 0.626, rounded to 0.63, below the agency review threshold of 0.8.",
+          "term_ids": [
+            "T-ST-RETENTION",
+            "T-ST-SEGMENT"
+          ],
+          "literals": [
+            {
+              "text": "0.626",
+              "spoken": "zero point six two six"
+            },
+            {
+              "text": "0.63",
+              "spoken": "zero point six three"
+            },
+            {
+              "text": "0.8",
+              "spoken": "zero point eight"
+            }
+          ],
+          "claimIds": [
+            "CL-ST-RETENTION-concept-2"
+          ]
+        },
+        {
+          "id": "CARD-ST-RETENTION-concept.s3",
+          "english": "This ratio compares counts; it does not prove that the same 63% of viewers stayed throughout.",
+          "term_ids": [],
+          "literals": [
+            {
+              "text": "63%",
+              "spoken": "sixty three percent"
+            }
+          ],
+          "claimIds": [
+            "CL-ST-RETENTION-concept-3"
+          ],
+          "refutesMisconceptionIds": [
+            "M-ST-RETENTION"
+          ]
+        }
+      ],
+      "visualRef": "explanation"
+    },
+    {
+      "id": "CARD-ST-RETENTION-application",
+      "kind": "application",
+      "title": {
+        "en": "Application"
+      },
+      "sentences": [
+        {
+          "id": "CARD-ST-RETENTION-application.s1",
+          "english": "The case vote segment has CCV of 351 at minute 60 and 477 at minute 91, giving a ratio near 1.36.",
+          "term_ids": [
+            "T-ST-CCV",
+            "T-ST-SEGMENT"
+          ],
+          "literals": [
+            {
+              "text": "351",
+              "spoken": "three hundred fifty one"
+            },
+            {
+              "text": "60",
+              "spoken": "sixty"
+            },
+            {
+              "text": "477",
+              "spoken": "four hundred seventy seven"
+            },
+            {
+              "text": "91",
+              "spoken": "ninety one"
+            },
+            {
+              "text": "1.36",
+              "spoken": "one point three six"
+            }
+          ],
+          "claimIds": [
+            "CL-ST-RETENTION-application-1"
+          ],
+          "cue": {
+            "state": "compare"
+          }
+        },
+        {
+          "id": "CARD-ST-RETENTION-application.s2",
+          "english": "A segment retention above 1 indicates net growth in concurrent counts, not impossible individual retention.",
+          "term_ids": [
+            "T-ST-RETENTION",
+            "T-ST-SEGMENT"
+          ],
+          "literals": [
+            {
+              "text": "1",
+              "spoken": "one"
+            }
+          ],
+          "claimIds": [
+            "CL-ST-RETENTION-application-2"
+          ]
+        },
+        {
+          "id": "CARD-ST-RETENTION-application.s3",
+          "english": "Under the agency rule LW-6.1, flag the grind for VOD review and keep the later raid separate from this comparison.",
+          "term_ids": [
+            "T-ST-VOD"
+          ],
+          "literals": [
+            {
+              "text": "LW-6.1",
+              "spoken": "L W six point one"
+            }
+          ],
+          "claimIds": [
+            "CL-ST-RETENTION-application-3"
+          ]
+        }
+      ],
+      "visualRef": "explanation"
+    },
+    {
+      "id": "CARD-ST-RETENTION-recap",
+      "kind": "recap",
+      "title": {
+        "en": "Recap"
+      },
+      "sentences": [
+        {
+          "id": "CARD-ST-RETENTION-recap.s1",
+          "english": "Always state the CCV endpoint convention when reporting segment retention.",
+          "term_ids": [
+            "T-ST-CCV",
+            "T-ST-RETENTION",
+            "T-ST-SEGMENT"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-ST-RETENTION-recap-1"
+          ]
+        },
+        {
+          "id": "CARD-ST-RETENTION-recap.s2",
+          "english": "Use the agency threshold to prioritise review, rather than to assert a causal explanation.",
+          "term_ids": [],
+          "literals": [],
+          "claimIds": [
+            "CL-ST-RETENTION-recap-2"
+          ]
+        }
+      ],
+      "visualRef": "explanation"
+    }
+  ],
+  "visual": {
+    "kind": "line",
+    "description": "Compare segments without mistaking counts for people: use the saved illustrative scene; highlight the cited case state while explaining the rule.",
+    "alt": "The agency ratio compares counts, not tracked individual viewers.",
+    "sourceIds": [
+      "S-ST-RETENTION-CASE"
+    ]
+  },
+  "canvas": {
+    "form": "scene",
+    "purpose": {
+      "objectiveIds": [
+        "O-ST-RETENTION-1",
+        "O-ST-RETENTION-2"
+      ],
+      "misconceptionIds": [
+        "M-ST-RETENTION"
+      ],
+      "insight": "The agency ratio compares counts, not tracked individual viewers."
+    },
+    "illustrative": true,
+    "scene": {
+      "id": "st-line",
+      "template": "line",
+      "params": {
+        "x": {
+          "label": {
+            "en": "Stream time",
+            "hi-Latn": "Stream time"
+          },
+          "unit": "min",
+          "values": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            71,
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83,
+            84,
+            85,
+            86,
+            87,
+            88,
+            89,
+            90,
+            91,
+            92,
+            93,
+            94,
+            95,
+            96,
+            97,
+            98,
+            99,
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            118,
+            119,
+            120,
+            121,
+            122,
+            123,
+            124,
+            125,
+            126,
+            127,
+            128,
+            129,
+            130,
+            131,
+            132,
+            133,
+            134,
+            135,
+            136,
+            137,
+            138,
+            139,
+            140,
+            141,
+            142,
+            143,
+            144,
+            145,
+            146,
+            147,
+            148,
+            149,
+            150,
+            151,
+            152,
+            153,
+            154,
+            155,
+            156,
+            157,
+            158,
+            159,
+            160,
+            161,
+            162,
+            163,
+            164,
+            165,
+            166,
+            167,
+            168,
+            169,
+            170,
+            171,
+            172,
+            173,
+            174,
+            175,
+            176,
+            177,
+            178,
+            179
+          ]
+        },
+        "series": [
+          {
+            "id": "ccv",
+            "label": {
+              "en": "CCV (concurrent viewers)",
+              "hi-Latn": "CCV (concurrent viewers)"
+            },
+            "values": [
+              45,
+              66,
+              102,
+              127,
+              151,
+              185,
+              206,
+              237,
+              253,
+              270,
+              291,
+              313,
+              339,
+              362,
+              381,
+              406,
+              407,
+              425,
+              443,
+              460,
+              475,
+              491,
+              501,
+              508,
+              530,
+              539,
+              554,
+              548,
+              541,
+              552,
+              549,
+              546,
+              542,
+              556,
+              554,
+              569,
+              554,
+              564,
+              556,
+              552,
+              555,
+              515,
+              501,
+              478,
+              457,
+              451,
+              436,
+              420,
+              415,
+              406,
+              381,
+              371,
+              373,
+              361,
+              363,
+              353,
+              357,
+              351,
+              354,
+              348,
+              351,
+              351,
+              370,
+              376,
+              375,
+              384,
+              403,
+              413,
+              429,
+              436,
+              432,
+              458,
+              456,
+              457,
+              451,
+              456,
+              460,
+              455,
+              457,
+              464,
+              482,
+              469,
+              460,
+              467,
+              454,
+              450,
+              464,
+              469,
+              474,
+              475,
+              474,
+              477,
+              484,
+              489,
+              489,
+              630,
+              630,
+              640,
+              624,
+              632,
+              639,
+              635,
+              634,
+              628,
+              631,
+              631,
+              622,
+              640,
+              649,
+              638,
+              645,
+              634,
+              634,
+              640,
+              649,
+              642,
+              648,
+              661,
+              664,
+              671,
+              667,
+              654,
+              663,
+              682,
+              681,
+              661,
+              664,
+              660,
+              652,
+              659,
+              636,
+              642,
+              652,
+              640,
+              652,
+              657,
+              640,
+              644,
+              628,
+              636,
+              640,
+              651,
+              653,
+              652,
+              645,
+              639,
+              630,
+              632,
+              635,
+              636,
+              631,
+              639,
+              628,
+              615,
+              600,
+              597,
+              611,
+              599,
+              581,
+              583,
+              573,
+              575,
+              568,
+              561,
+              530,
+              521,
+              510,
+              512,
+              502,
+              502,
+              498,
+              492,
+              501,
+              492,
+              479,
+              464,
+              450,
+              427,
+              434,
+              433
+            ]
+          },
+          {
+            "id": "chat",
+            "label": {
+              "en": "Chat messages per minute",
+              "hi-Latn": "Chat messages per minute"
+            },
+            "values": [
+              6,
+              8,
+              10,
+              14,
+              16,
+              34,
+              34,
+              38,
+              38,
+              44,
+              45,
+              46,
+              58,
+              68,
+              60,
+              71,
+              69,
+              73,
+              83,
+              75,
+              82,
+              77,
+              82,
+              79,
+              91,
+              121,
+              107,
+              88,
+              75,
+              86,
+              90,
+              86,
+              71,
+              120,
+              137,
+              116,
+              78,
+              87,
+              67,
+              40,
+              22,
+              15,
+              13,
+              15,
+              15,
+              14,
+              15,
+              14,
+              14,
+              14,
+              16,
+              17,
+              14,
+              14,
+              12,
+              14,
+              15,
+              13,
+              14,
+              14,
+              46,
+              71,
+              96,
+              135,
+              152,
+              124,
+              82,
+              97,
+              82,
+              85,
+              74,
+              82,
+              87,
+              77,
+              88,
+              90,
+              96,
+              134,
+              121,
+              91,
+              83,
+              85,
+              86,
+              82,
+              82,
+              95,
+              94,
+              90,
+              89,
+              91,
+              87,
+              83,
+              95,
+              99,
+              113,
+              223,
+              171,
+              153,
+              133,
+              115,
+              127,
+              100,
+              103,
+              125,
+              122,
+              110,
+              122,
+              113,
+              114,
+              104,
+              101,
+              111,
+              96,
+              97,
+              98,
+              103,
+              91,
+              88,
+              93,
+              100,
+              81,
+              84,
+              86,
+              93,
+              96,
+              83,
+              92,
+              86,
+              101,
+              93,
+              91,
+              83,
+              82,
+              107,
+              103,
+              93,
+              105,
+              101,
+              103,
+              99,
+              97,
+              102,
+              108,
+              111,
+              107,
+              89,
+              102,
+              112,
+              107,
+              112,
+              76,
+              79,
+              82,
+              80,
+              86,
+              77,
+              77,
+              71,
+              72,
+              79,
+              74,
+              87,
+              74,
+              79,
+              71,
+              77,
+              74,
+              74,
+              78,
+              68,
+              48,
+              51,
+              47,
+              51,
+              52,
+              54,
+              54,
+              59,
+              47,
+              117
+            ]
+          }
+        ],
+        "bands": [
+          {
+            "id": "seg-pre",
+            "from": 0,
+            "to": 5,
+            "label": {
+              "en": "Starting soon",
+              "hi-Latn": "Starting soon"
+            }
+          },
+          {
+            "id": "seg-intro",
+            "from": 5,
+            "to": 12,
+            "label": {
+              "en": "Intro + today's plan",
+              "hi-Latn": "Intro + aaj ka plan"
+            }
+          },
+          {
+            "id": "seg-mission",
+            "from": 12,
+            "to": 38,
+            "label": {
+              "en": "Story mission: first heist",
+              "hi-Latn": "Story mission: pehla heist"
+            }
+          },
+          {
+            "id": "seg-grind",
+            "from": 38,
+            "to": 60,
+            "label": {
+              "en": "Silent grind: cash farming",
+              "hi-Latn": "Silent grind: cash farming"
+            }
+          },
+          {
+            "id": "seg-vote",
+            "from": 60,
+            "to": 92,
+            "label": {
+              "en": "Free roam: chat votes the heist plan",
+              "hi-Latn": "Free roam: chat vote se heist plan"
+            }
+          },
+          {
+            "id": "seg-collab",
+            "from": 92,
+            "to": 150,
+            "label": {
+              "en": "Collab: duo heist with agency partner",
+              "hi-Latn": "Collab: agency partner ke saath duo heist"
+            }
+          },
+          {
+            "id": "seg-wind",
+            "from": 150,
+            "to": 180,
+            "label": {
+              "en": "Wind-down: Q&A + raid out",
+              "hi-Latn": "Wind-down: Q&A + raid out"
+            }
+          }
+        ],
+        "markers": [
+          {
+            "id": "mk-switch",
+            "x": 38,
+            "label": {
+              "en": "38:00 segment change",
+              "hi-Latn": "38:00 segment change"
+            }
+          },
+          {
+            "id": "mk-drop",
+            "x": 40,
+            "label": {
+              "en": "40:00 drop starts",
+              "hi-Latn": "40:00 drop shuru"
+            }
+          },
+          {
+            "id": "mk-trough",
+            "x": 59,
+            "label": {
+              "en": "Low 348",
+              "hi-Latn": "Low 348"
+            }
+          },
+          {
+            "id": "mk-raid-in",
+            "x": 95,
+            "label": {
+              "en": "Raid in · 140",
+              "hi-Latn": "Raid in · 140"
+            }
+          },
+          {
+            "id": "mk-raid-out",
+            "x": 179,
+            "label": {
+              "en": "Raid out",
+              "hi-Latn": "Raid out"
+            }
+          }
+        ]
+      },
+      "states": {
+        "overview": {
+          "show": [
+            "ccv",
+            "seg-pre",
+            "seg-intro",
+            "seg-mission",
+            "seg-grind",
+            "seg-vote",
+            "seg-collab",
+            "seg-wind",
+            "mk-switch",
+            "mk-raid-in"
+          ],
+          "hide": [
+            "chat"
+          ],
+          "focus": [
+            0,
+            179
+          ]
+        },
+        "drop": {
+          "show": [
+            "ccv",
+            "mk-drop"
+          ],
+          "hide": [
+            "chat",
+            "seg-pre",
+            "seg-intro",
+            "seg-mission",
+            "seg-grind",
+            "seg-vote",
+            "seg-collab",
+            "seg-wind"
+          ],
+          "highlight": [
+            "ccv"
+          ],
+          "focus": [
+            25,
+            70
+          ]
+        },
+        "bands": {
+          "show": [
+            "ccv",
+            "seg-mission",
+            "seg-grind",
+            "seg-vote",
+            "mk-switch",
+            "mk-drop"
+          ],
+          "hide": [
+            "chat"
+          ],
+          "highlight": [
+            "seg-grind"
+          ],
+          "focus": [
+            10,
+            95
+          ]
+        },
+        "chat-first": {
+          "show": [
+            "ccv",
+            "chat",
+            "seg-grind",
+            "mk-switch",
+            "mk-drop"
+          ],
+          "highlight": [
+            "chat"
+          ],
+          "focus": [
+            30,
+            50
+          ]
+        },
+        "compare": {
+          "show": [
+            "ccv",
+            "chat",
+            "seg-grind",
+            "seg-vote"
+          ],
+          "highlight": [
+            "seg-grind",
+            "seg-vote"
+          ],
+          "focus": [
+            30,
+            95
+          ]
+        }
+      }
+    },
+    "mustShow": [
+      "Illustrative case label",
+      "LW-6.1",
+      "Source and review status"
+    ],
+    "mustNotImply": [
+      "A live recommendation or a guaranteed outcome",
+      "Causation established by a single observation"
+    ],
+    "claim": "illustrative_case",
+    "alt": "Compare segments without mistaking counts for people; The agency ratio compares counts, not tracked individual viewers."
+  },
+  "canvasNullReason": null,
+  "reflect": {
+    "graphRef": "streaming-gta/engagement-drop-40"
+  },
+  "handoff": {
+    "audioUnit": "placard",
+    "speechNotes": [
+      "Use the supplied spoken literals and canonical terms.",
+      "No timestamps or audio assets exist yet."
+    ],
+    "practiceEvidence": "Only an actual learner action can earn practice evidence; this authored predict check cannot."
+  }
+}

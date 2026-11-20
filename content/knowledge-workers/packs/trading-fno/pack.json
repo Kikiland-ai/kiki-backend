@@ -1,0 +1,1379 @@
+{
+  "schema": "kiki-pack/v0",
+  "id": "trading-fno",
+  "version": "2026-11-20.1",
+  "corner": "odds",
+  "title": {
+    "en": "Event days"
+  },
+  "persona": {
+    "name": "Ravi (placeholder)",
+    "role": {
+      "en": "Trainee index-options trader, onboarding week 2"
+    },
+    "transition": {
+      "en": "retail habits to a desk's written process"
+    },
+    "org": {
+      "en": "Illustrative desk"
+    }
+  },
+  "languages": {
+    "source": "en",
+    "learner": "en",
+    "available": [
+      "en"
+    ],
+    "review": {
+      "en": "draft",
+      "hi": "draft"
+    }
+  },
+  "dimensionLabels": {
+    "concept": {
+      "en": "Concept"
+    },
+    "words": {
+      "en": "Words"
+    },
+    "english": {
+      "en": "Expression"
+    },
+    "lab": {
+      "en": "Practice"
+    }
+  },
+  "modules": [
+    {
+      "id": "MOD-TR-EVENT",
+      "title": {
+        "en": "Event days"
+      },
+      "conceptIds": [
+        "TR-IV-EVENT",
+        "TR-THETA",
+        "TR-EVENT-RISK",
+        "TR-PRETRADE"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "id": "TR-IV-EVENT",
+      "title": {
+        "en": "Direction is only one price driver"
+      },
+      "goal": {
+        "en": "Diagnose the illustrative option loss using price drivers and the desk comparison rule."
+      },
+      "placards": [
+        {
+          "kind": "definition",
+          "text": {
+            "en": "The [[T-TR-PREMIUM]] of a bought option reflects more than the direction of the index. The [[T-TR-IV]] is inferred from the option price through a pricing model."
+          },
+          "sources": [
+            {
+              "id": "S-TR-IV-EVENT-OIC",
+              "title": "Options Industry Council: Volatility and the Greeks",
+              "locator": "Opened 2026-11-20; model sensitivities and assumptions"
+            }
+          ],
+          "sceneId": "tr-payoff"
+        },
+        {
+          "kind": "concept",
+          "text": {
+            "en": "In this illustrative case, [[T-TR-IV]] fell from 17.5% to 11% after the announcement. That [[T-TR-CRUSH]] and elapsed time outweighed the favourable index move; direction alone did not protect the [[T-TR-PREMIUM]]. The desk uses the [[T-TR-STRADDLE]] as a rough [[T-TR-MOVE]] guide, not a guaranteed range or a profit threshold."
+          },
+          "sources": [
+            {
+              "id": "S-TR-IV-EVENT-CASE",
+              "title": "Historical paper option case (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/trader/scenario.json"
+            },
+            {
+              "id": "S-TR-IV-EVENT-PLAYBOOK",
+              "title": "Options desk playbook: event days (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/trader/playbook-excerpt.md; §2, EV-2.1; scenario marketBefore, marketAfter, impliedMove, decomposition"
+            },
+            {
+              "id": "S-TR-IV-EVENT-OIC",
+              "title": "Options Industry Council: Volatility and the Greeks",
+              "locator": "Opened 2026-11-20; model sensitivities and assumptions"
+            }
+          ],
+          "sceneId": "tr-payoff"
+        },
+        {
+          "kind": "application",
+          "text": {
+            "en": "The case [[T-TR-STRADDLE]] costs 153.55 plus 150.75, giving an [[T-TR-MOVE]] guide of 304.30 points. The desk rule EV-2.1 asks a historical note to compare its expected move with the [[T-TR-MOVE]]. In the replay, record the [[T-TR-PREMIUM]] drivers and the missing comparison before assessing the decision."
+          },
+          "sources": [
+            {
+              "id": "S-TR-IV-EVENT-CASE",
+              "title": "Historical paper option case (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/trader/scenario.json"
+            },
+            {
+              "id": "S-TR-IV-EVENT-PLAYBOOK",
+              "title": "Options desk playbook: event days (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/trader/playbook-excerpt.md; §2, EV-2.1; scenario marketBefore, marketAfter, impliedMove, decomposition"
+            },
+            {
+              "id": "S-TR-IV-EVENT-OIC",
+              "title": "Options Industry Council: Volatility and the Greeks",
+              "locator": "Opened 2026-11-20; model sensitivities and assumptions"
+            }
+          ],
+          "sceneId": "tr-payoff"
+        },
+        {
+          "kind": "recap",
+          "text": {
+            "en": "The [[T-TR-PREMIUM]] can fall even when the index moves favourably. Keep the desk [[T-TR-MOVE]] heuristic separate from the model price and the realised outcome."
+          },
+          "sources": [
+            {
+              "id": "S-TR-IV-EVENT-PLAYBOOK",
+              "title": "Options desk playbook: event days (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/trader/playbook-excerpt.md; §2, EV-2.1; scenario marketBefore, marketAfter, impliedMove, decomposition"
+            },
+            {
+              "id": "S-TR-IV-EVENT-CASE",
+              "title": "Historical paper option case (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/trader/scenario.json"
+            },
+            {
+              "id": "S-TR-IV-EVENT-OIC",
+              "title": "Options Industry Council: Volatility and the Greeks",
+              "locator": "Opened 2026-11-20; model sensitivities and assumptions"
+            }
+          ],
+          "sceneId": "tr-payoff"
+        }
+      ]
+    },
+    {
+      "id": "TR-THETA",
+      "title": {
+        "en": "Separate waiting from the IV change"
+      },
+      "goal": {
+        "en": "Use a controlled repricing comparison to identify the cost of waiting in the case."
+      },
+      "placards": [
+        {
+          "kind": "definition",
+          "text": {
+            "en": "The [[T-TR-THETA]] of an option describes model sensitivity to a day passing with other inputs fixed. The [[T-TR-TIME]] is the [[T-TR-PREMIUM]] above intrinsic value."
+          },
+          "sources": [
+            {
+              "id": "S-TR-THETA-OIC",
+              "title": "Options Industry Council: Theta",
+              "locator": "Opened 2026-11-20; model sensitivities and assumptions"
+            }
+          ],
+          "sceneId": "tr-iv-line"
+        },
+        {
+          "kind": "concept",
+          "text": {
+            "en": "A fall in [[T-TR-IV]] and the passage of time are different drivers of [[T-TR-PREMIUM]]. The case attribution assigns about 23 rupees per unit to time, with separate volatility and spot contributions. The [[T-TR-THETA]] is a local sensitivity, so multiplying its entry value by several days need not give an exact repricing."
+          },
+          "sources": [
+            {
+              "id": "S-TR-THETA-PLAYBOOK",
+              "title": "Options desk playbook: event days (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/trader/playbook-excerpt.md; §3, EV-3.1; scenario bsCheck and decomposition"
+            },
+            {
+              "id": "S-TR-THETA-CASE",
+              "title": "Historical paper option case (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/trader/scenario.json"
+            },
+            {
+              "id": "S-TR-THETA-OIC",
+              "title": "Options Industry Council: Theta",
+              "locator": "Opened 2026-11-20; model sensitivities and assumptions"
+            }
+          ],
+          "sceneId": "tr-iv-line"
+        },
+        {
+          "kind": "application",
+          "text": {
+            "en": "The desk rule EV-3.1 asks for a one-day-later [[T-TR-PREMIUM]] at the same spot before a historical overnight hold. Keep [[T-TR-IV]] and the other model inputs fixed to isolate waiting in that comparison. Save the replay inputs beside the [[T-TR-PREMIUM]] comparison so a reviewer can reproduce the reasoning."
+          },
+          "sources": [
+            {
+              "id": "S-TR-THETA-PLAYBOOK",
+              "title": "Options desk playbook: event days (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/trader/playbook-excerpt.md; §3, EV-3.1; scenario bsCheck and decomposition"
+            },
+            {
+              "id": "S-TR-THETA-CASE",
+              "title": "Historical paper option case (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/trader/scenario.json"
+            },
+            {
+              "id": "S-TR-THETA-OIC",
+              "title": "Options Industry Council: Theta",
+              "locator": "Opened 2026-11-20; model sensitivities and assumptions"
+            }
+          ],
+          "sceneId": "tr-iv-line"
+        },
+        {
+          "kind": "recap",
+          "text": {
+            "en": "A change in [[T-TR-PREMIUM]] across a night is not automatically all [[T-TR-THETA]]. Label a controlled time-only comparison separately from a full-case attribution."
+          },
+          "sources": [
+            {
+              "id": "S-TR-THETA-PLAYBOOK",
+              "title": "Options desk playbook: event days (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/trader/playbook-excerpt.md; §3, EV-3.1; scenario bsCheck and decomposition"
+            },
+            {
+              "id": "S-TR-THETA-CASE",
+              "title": "Historical paper option case (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/trader/scenario.json"
+            },
+            {
+              "id": "S-TR-THETA-OIC",
+              "title": "Options Industry Council: Theta",
+              "locator": "Opened 2026-11-20; model sensitivities and assumptions"
+            }
+          ],
+          "sceneId": "tr-iv-line"
+        }
+      ]
+    },
+    {
+      "id": "TR-EVENT-RISK",
+      "title": {
+        "en": "Size the risk before judging the result"
+      },
+      "goal": {
+        "en": "Calculate the illustrative budget and evaluate the old position against its maximum loss."
+      },
+      "placards": [
+        {
+          "kind": "definition",
+          "text": {
+            "en": "The [[T-TR-BUDGET]] is the illustrative desk limit on [[T-TR-LOSS]] for an event trade. A [[T-TR-DEFINED]] structure still needs sizing; a bounded loss can exceed the [[T-TR-BUDGET]]."
+          },
+          "sources": [
+            {
+              "id": "S-TR-EVENT-RISK-PLAYBOOK",
+              "title": "Options desk playbook: event days (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/trader/playbook-excerpt.md; §4, EV-4.1 to EV-4.5; scenario context and sizing"
+            }
+          ],
+          "sceneId": "tr-risk-flow"
+        },
+        {
+          "kind": "concept",
+          "text": {
+            "en": "Under the desk rule EV-4.1, the [[T-TR-BUDGET]] is 1% of the 1000000-rupee paper book, or 10000 rupees. The case long option puts the full [[T-TR-PREMIUM]] at risk before fees, with no claim about current exchange specifications. The realised loss was 9210 rupees, but the [[T-TR-LOSS]] at entry was 27075 rupees, so sizing breached the rule."
+          },
+          "sources": [
+            {
+              "id": "S-TR-EVENT-RISK-PLAYBOOK",
+              "title": "Options desk playbook: event days (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/trader/playbook-excerpt.md; §4, EV-4.1 to EV-4.5; scenario context and sizing"
+            },
+            {
+              "id": "S-TR-EVENT-RISK-CASE",
+              "title": "Historical paper option case (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/trader/scenario.json"
+            }
+          ],
+          "sceneId": "tr-risk-flow"
+        },
+        {
+          "kind": "application",
+          "text": {
+            "en": "At the case [[T-TR-PREMIUM]] of 90.25 and 75 units per lot, [[T-TR-LOSS]] per lot is 6768.75 rupees before charges. The desk rule EV-4.2 rounds the budget divided by [[T-TR-LOSS]] per lot down to whole lots. The replay calculation permits 1 such lot before costs, rather than the historical 4; record the breach without placing an order."
+          },
+          "sources": [
+            {
+              "id": "S-TR-EVENT-RISK-CASE",
+              "title": "Historical paper option case (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/trader/scenario.json"
+            },
+            {
+              "id": "S-TR-EVENT-RISK-PLAYBOOK",
+              "title": "Options desk playbook: event days (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/trader/playbook-excerpt.md; §4, EV-4.1 to EV-4.5; scenario context and sizing"
+            },
+            {
+              "id": "S-TR-EVENT-RISK-OIC",
+              "title": "Options Industry Council: Volatility and the Greeks",
+              "locator": "Opened 2026-11-20; model sensitivities and assumptions"
+            }
+          ],
+          "sceneId": "tr-risk-flow"
+        },
+        {
+          "kind": "recap",
+          "text": {
+            "en": "Judge the [[T-TR-BUDGET]] against [[T-TR-LOSS]] at entry, separately from the eventual outcome. Document [[T-TR-DEFINED]], position size and stress assumptions in the historical review."
+          },
+          "sources": [
+            {
+              "id": "S-TR-EVENT-RISK-PLAYBOOK",
+              "title": "Options desk playbook: event days (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/trader/playbook-excerpt.md; §4, EV-4.1 to EV-4.5; scenario context and sizing"
+            },
+            {
+              "id": "S-TR-EVENT-RISK-CASE",
+              "title": "Historical paper option case (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/trader/scenario.json"
+            },
+            {
+              "id": "S-TR-EVENT-RISK-OIC",
+              "title": "Options Industry Council: Volatility and the Greeks",
+              "locator": "Opened 2026-11-20; model sensitivities and assumptions"
+            }
+          ],
+          "sceneId": "tr-risk-flow"
+        }
+      ]
+    },
+    {
+      "id": "TR-PRETRADE",
+      "title": {
+        "en": "Review the decision separately from its P&L"
+      },
+      "goal": {
+        "en": "Write an auditable historical note and separate process quality from the result."
+      },
+      "placards": [
+        {
+          "kind": "definition",
+          "text": {
+            "en": "A [[T-TR-NOTE]] records the thesis, priced move, structure, [[T-TR-LOSS]], exit plan and invalidation before the paper order. The [[T-TR-BIAS]] appears when a result replaces a review of the original reasoning."
+          },
+          "sources": [
+            {
+              "id": "S-TR-PRETRADE-PLAYBOOK",
+              "title": "Options desk playbook: event days (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/trader/playbook-excerpt.md; §6, EV-6.1; trainee checklist; scenario trade.preTradeNote"
+            }
+          ],
+          "sceneId": "tr-note-flow"
+        },
+        {
+          "kind": "concept",
+          "text": {
+            "en": "The desk rule EV-6.1 requires process and outcome to be tagged separately. A profitable result does not repair a missing [[T-TR-NOTE]] or an [[T-TR-BUDGET]] breach. The case note named direction but omitted the [[T-TR-MOVE]], [[T-TR-LOSS]] and exit plan."
+          },
+          "sources": [
+            {
+              "id": "S-TR-PRETRADE-PLAYBOOK",
+              "title": "Options desk playbook: event days (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/trader/playbook-excerpt.md; §6, EV-6.1; trainee checklist; scenario trade.preTradeNote"
+            },
+            {
+              "id": "S-TR-PRETRADE-CASE",
+              "title": "Historical paper option case (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/trader/scenario.json"
+            },
+            {
+              "id": "S-TR-PRETRADE-OIC",
+              "title": "Options Industry Council: Volatility and the Greeks",
+              "locator": "Opened 2026-11-20; model sensitivities and assumptions"
+            }
+          ],
+          "sceneId": "tr-note-flow"
+        },
+        {
+          "kind": "application",
+          "text": {
+            "en": "For the historical review, reconstruct what the [[T-TR-NOTE]] lacked and mark reconstructed fields as hindsight. Use the original information to explain the move comparison and the [[T-TR-BUDGET]] breach. Write a short process finding and a separate outcome line; do not fabricate an exit plan that never existed."
+          },
+          "sources": [
+            {
+              "id": "S-TR-PRETRADE-PLAYBOOK",
+              "title": "Options desk playbook: event days (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/trader/playbook-excerpt.md; §6, EV-6.1; trainee checklist; scenario trade.preTradeNote"
+            },
+            {
+              "id": "S-TR-PRETRADE-CASE",
+              "title": "Historical paper option case (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/trader/scenario.json"
+            },
+            {
+              "id": "S-TR-PRETRADE-OIC",
+              "title": "Options Industry Council: Volatility and the Greeks",
+              "locator": "Opened 2026-11-20; model sensitivities and assumptions"
+            }
+          ],
+          "sceneId": "tr-note-flow"
+        },
+        {
+          "kind": "recap",
+          "text": {
+            "en": "A [[T-TR-NOTE]] is an entry-time record, not a story rewritten after the outcome. Counter [[T-TR-BIAS]] by naming the rule and evidence before describing the profit or loss."
+          },
+          "sources": [
+            {
+              "id": "S-TR-PRETRADE-PLAYBOOK",
+              "title": "Options desk playbook: event days (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/trader/playbook-excerpt.md; §6, EV-6.1; trainee checklist; scenario trade.preTradeNote"
+            },
+            {
+              "id": "S-TR-PRETRADE-CASE",
+              "title": "Historical paper option case (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/trader/scenario.json"
+            },
+            {
+              "id": "S-TR-PRETRADE-OIC",
+              "title": "Options Industry Council: Volatility and the Greeks",
+              "locator": "Opened 2026-11-20; model sensitivities and assumptions"
+            }
+          ],
+          "sceneId": "tr-note-flow"
+        }
+      ]
+    }
+  ],
+  "terms": [
+    {
+      "id": "T-TR-IV",
+      "term": "implied volatility",
+      "meaning": {
+        "en": "The volatility input inferred from an option price using a pricing model.",
+        "hi": "Option की कीमत से model के ज़रिये निकाला गया उतार-चढ़ाव का अनुमान।"
+      },
+      "say": {
+        "hi": "इम्प्लाइड वोलैटिलिटी"
+      }
+    },
+    {
+      "id": "T-TR-CRUSH",
+      "term": "IV crush",
+      "meaning": {
+        "en": "A sharp fall in implied volatility; the illustrative case shows one after an event.",
+        "hi": "इस case में announcement के बाद implied volatility का तेज़ गिरना।"
+      },
+      "say": {
+        "hi": "आई वी क्रश"
+      }
+    },
+    {
+      "id": "T-TR-PREMIUM",
+      "term": "premium",
+      "meaning": {
+        "en": "The price of an option, quoted per unit in this case.",
+        "hi": "इस case में option की प्रति unit कीमत।"
+      },
+      "say": {
+        "hi": "प्रीमियम"
+      }
+    },
+    {
+      "id": "T-TR-STRADDLE",
+      "term": "straddle",
+      "meaning": {
+        "en": "A call and a put at the same strike and expiry.",
+        "hi": "एक ही strike और expiry का call और put।"
+      },
+      "say": {
+        "hi": "स्ट्रैडल"
+      }
+    },
+    {
+      "id": "T-TR-MOVE",
+      "term": "implied move",
+      "meaning": {
+        "en": "The desk estimate of a priced move, using the ATM straddle as a rough guide.",
+        "hi": "Desk का अनुमान कि option की कीमत में कितना move शामिल है।"
+      },
+      "say": {
+        "hi": "इम्प्लाइड मूव"
+      }
+    },
+    {
+      "id": "T-TR-THETA",
+      "term": "theta",
+      "meaning": {
+        "en": "The model sensitivity to one day passing, holding other pricing inputs fixed.",
+        "hi": "बाकी model inputs स्थिर रखकर एक दिन बीतने से कीमत की संवेदनशीलता।"
+      },
+      "say": {
+        "hi": "थीटा"
+      }
+    },
+    {
+      "id": "T-TR-TIME",
+      "term": "time value",
+      "meaning": {
+        "en": "The part of an option price above its intrinsic value.",
+        "hi": "Option की कीमत का intrinsic value से ऊपर वाला हिस्सा।"
+      },
+      "say": {
+        "hi": "टाइम वैल्यू"
+      }
+    },
+    {
+      "id": "T-TR-BUDGET",
+      "term": "event budget",
+      "meaning": {
+        "en": "The illustrative desk limit on maximum loss per event trade.",
+        "hi": "इस desk की एक event trade में स्वीकार्य अधिकतम नुकसान की सीमा।"
+      },
+      "say": {
+        "hi": "इवेंट बजट"
+      }
+    },
+    {
+      "id": "T-TR-LOSS",
+      "term": "max loss",
+      "meaning": {
+        "en": "The worst loss specified for the position under the stated assumptions.",
+        "hi": "बताई गई assumptions में position का सबसे बड़ा नुकसान।"
+      },
+      "say": {
+        "hi": "मैक्स लॉस"
+      }
+    },
+    {
+      "id": "T-TR-DEFINED",
+      "term": "defined risk",
+      "meaning": {
+        "en": "A structure whose maximum loss is bounded under the stated contract assumptions.",
+        "hi": "ऐसी structure जिसका अधिकतम नुकसान बताई गई शर्तों में सीमित हो।"
+      },
+      "say": {
+        "hi": "डिफाइन्ड रिस्क"
+      }
+    },
+    {
+      "id": "T-TR-NOTE",
+      "term": "pre-trade note",
+      "meaning": {
+        "en": "The written decision record made before a paper order.",
+        "hi": "Paper order से पहले लिखा हुआ decision record।"
+      },
+      "say": {
+        "hi": "प्री ट्रेड नोट"
+      }
+    },
+    {
+      "id": "T-TR-BIAS",
+      "term": "outcome bias",
+      "meaning": {
+        "en": "Judging a decision by its result instead of the information and process available beforehand.",
+        "hi": "पहले की जानकारी और process के बजाय नतीजे से decision को आँकना।"
+      },
+      "say": {
+        "hi": "आउटकम बायस"
+      }
+    }
+  ],
+  "scenes": [
+    {
+      "id": "tr-candles",
+      "template": "candles",
+      "params": {
+        "bars": [
+          {
+            "t": "D-1 09:15",
+            "o": 23985,
+            "h": 24012,
+            "l": 23958,
+            "c": 23996
+          },
+          {
+            "t": "D-1 09:45",
+            "o": 23996,
+            "h": 24021,
+            "l": 23977,
+            "c": 24008
+          },
+          {
+            "t": "D-1 10:15",
+            "o": 24008,
+            "h": 24030,
+            "l": 23990,
+            "c": 23998
+          },
+          {
+            "t": "D-1 10:45",
+            "o": 23998,
+            "h": 24015,
+            "l": 23972,
+            "c": 23981
+          },
+          {
+            "t": "D-1 11:15",
+            "o": 23981,
+            "h": 24004,
+            "l": 23962,
+            "c": 23993
+          },
+          {
+            "t": "D-1 11:45",
+            "o": 23993,
+            "h": 24019,
+            "l": 23985,
+            "c": 24011
+          },
+          {
+            "t": "D-1 12:15",
+            "o": 24011,
+            "h": 24026,
+            "l": 23999,
+            "c": 24004
+          },
+          {
+            "t": "D-1 12:45",
+            "o": 24004,
+            "h": 24017,
+            "l": 23988,
+            "c": 24009
+          },
+          {
+            "t": "D-1 13:15",
+            "o": 24009,
+            "h": 24038,
+            "l": 24002,
+            "c": 24027
+          },
+          {
+            "t": "D-1 13:45",
+            "o": 24027,
+            "h": 24049,
+            "l": 24016,
+            "c": 24036
+          },
+          {
+            "t": "D-1 14:15",
+            "o": 24036,
+            "h": 24058,
+            "l": 24020,
+            "c": 24025
+          },
+          {
+            "t": "D-1 14:45",
+            "o": 24025,
+            "h": 24068,
+            "l": 24019,
+            "c": 24051
+          },
+          {
+            "t": "D-1 15:15",
+            "o": 24051,
+            "h": 24064,
+            "l": 24031,
+            "c": 24040
+          },
+          {
+            "t": "D0 09:15",
+            "o": 24032,
+            "h": 24055,
+            "l": 24011,
+            "c": 24038
+          },
+          {
+            "t": "D0 09:45",
+            "o": 24038,
+            "h": 24194,
+            "l": 23986,
+            "c": 24168
+          },
+          {
+            "t": "D0 10:15",
+            "o": 24168,
+            "h": 24181,
+            "l": 24109,
+            "c": 24126
+          },
+          {
+            "t": "D0 10:45",
+            "o": 24126,
+            "h": 24152,
+            "l": 24098,
+            "c": 24141
+          },
+          {
+            "t": "D0 11:15",
+            "o": 24141,
+            "h": 24166,
+            "l": 24122,
+            "c": 24158
+          },
+          {
+            "t": "D0 11:45",
+            "o": 24158,
+            "h": 24171,
+            "l": 24130,
+            "c": 24137
+          },
+          {
+            "t": "D0 12:15",
+            "o": 24137,
+            "h": 24150,
+            "l": 24112,
+            "c": 24124
+          },
+          {
+            "t": "D0 12:45",
+            "o": 24124,
+            "h": 24146,
+            "l": 24109,
+            "c": 24140
+          },
+          {
+            "t": "D0 13:15",
+            "o": 24140,
+            "h": 24168,
+            "l": 24131,
+            "c": 24161
+          },
+          {
+            "t": "D0 13:45",
+            "o": 24161,
+            "h": 24178,
+            "l": 24139,
+            "c": 24147
+          },
+          {
+            "t": "D0 14:15",
+            "o": 24147,
+            "h": 24163,
+            "l": 24128,
+            "c": 24135
+          },
+          {
+            "t": "D0 14:45",
+            "o": 24135,
+            "h": 24159,
+            "l": 24126,
+            "c": 24154
+          },
+          {
+            "t": "D0 15:15",
+            "o": 24154,
+            "h": 24166,
+            "l": 24141,
+            "c": 24150
+          }
+        ],
+        "events": [
+          {
+            "id": "ev-policy",
+            "at": "D0 09:45",
+            "label": {
+              "en": "Policy announcement · 10:00",
+              "hi": "Policy announcement · 10:00"
+            }
+          }
+        ],
+        "levels": [
+          {
+            "id": "lv-entry",
+            "price": 24040.0,
+            "label": {
+              "en": "Entry spot 24,040",
+              "hi": "Entry spot 24,040"
+            }
+          },
+          {
+            "id": "lv-strike",
+            "price": 24200.0,
+            "label": {
+              "en": "Strike 24200",
+              "hi": "Strike 24200"
+            }
+          },
+          {
+            "id": "lv-breakeven",
+            "price": 24290.25,
+            "label": {
+              "en": "Breakeven at expiry 24,290.25",
+              "hi": "Expiry पर breakeven 24,290.25"
+            }
+          },
+          {
+            "id": "lv-implied-up",
+            "price": 24344,
+            "label": {
+              "en": "+304 priced",
+              "hi": "+304 priced"
+            }
+          },
+          {
+            "id": "lv-implied-down",
+            "price": 23736,
+            "label": {
+              "en": "−304 priced",
+              "hi": "−304 priced"
+            }
+          }
+        ]
+      },
+      "states": {
+        "entry": {
+          "show": [
+            "lv-entry",
+            "lv-strike"
+          ],
+          "hide": [
+            "ev-policy",
+            "lv-breakeven",
+            "lv-implied-up",
+            "lv-implied-down"
+          ],
+          "focus": [
+            0,
+            12
+          ]
+        },
+        "event": {
+          "show": [
+            "ev-policy",
+            "lv-entry",
+            "lv-strike"
+          ],
+          "hide": [
+            "lv-breakeven",
+            "lv-implied-up",
+            "lv-implied-down"
+          ],
+          "highlight": [
+            "ev-policy"
+          ],
+          "focus": [
+            10,
+            25
+          ]
+        },
+        "implied-move": {
+          "show": [
+            "ev-policy",
+            "lv-entry",
+            "lv-implied-up",
+            "lv-implied-down"
+          ],
+          "hide": [
+            "lv-breakeven",
+            "lv-strike"
+          ],
+          "focus": [
+            10,
+            25
+          ]
+        },
+        "full": {
+          "show": [
+            "ev-policy",
+            "lv-entry",
+            "lv-strike",
+            "lv-breakeven"
+          ],
+          "hide": [
+            "lv-implied-up",
+            "lv-implied-down"
+          ],
+          "focus": [
+            0,
+            25
+          ]
+        }
+      }
+    },
+    {
+      "id": "tr-payoff",
+      "template": "payoff",
+      "params": {
+        "legs": [
+          {
+            "id": "leg-24200ce",
+            "type": "call",
+            "side": "long",
+            "strike": 24200.0,
+            "premium": 90.25,
+            "lots": 4
+          }
+        ],
+        "lotSize": 75,
+        "spot": 24040.0,
+        "range": [
+          23600,
+          24700
+        ],
+        "iv": {
+          "before": 0.175,
+          "after": 0.11
+        },
+        "daysToExpiry": {
+          "before": 3.0,
+          "after": 2.0
+        }
+      },
+      "states": {
+        "before": {
+          "values": {
+            "ivPhase": 0,
+            "dtePhase": 0
+          }
+        },
+        "after": {
+          "values": {
+            "ivPhase": 1,
+            "dtePhase": 1,
+            "spot": 24150
+          }
+        },
+        "after-no-crush": {
+          "values": {
+            "ivPhase": 0,
+            "dtePhase": 1,
+            "spot": 24150
+          }
+        }
+      }
+    },
+    {
+      "id": "tr-payoff-spread",
+      "template": "payoff",
+      "params": {
+        "legs": [
+          {
+            "id": "leg-24200ce",
+            "type": "call",
+            "side": "long",
+            "strike": 24200.0,
+            "premium": 90.25,
+            "lots": 2
+          },
+          {
+            "id": "leg-24400ce",
+            "type": "call",
+            "side": "short",
+            "strike": 24400.0,
+            "premium": 38.35,
+            "lots": 2
+          }
+        ],
+        "lotSize": 75,
+        "spot": 24040.0,
+        "range": [
+          23600,
+          24700
+        ],
+        "iv": {
+          "before": 0.175,
+          "after": 0.11
+        },
+        "daysToExpiry": {
+          "before": 3.0,
+          "after": 2.0
+        }
+      },
+      "states": {
+        "after": {
+          "values": {
+            "ivPhase": 1,
+            "dtePhase": 1,
+            "spot": 24150
+          }
+        }
+      }
+    },
+    {
+      "id": "tr-iv-line",
+      "template": "line",
+      "params": {
+        "x": {
+          "label": {
+            "en": "30-min bars, D-1 and D0",
+            "hi": "30-min bars, D-1 और D0"
+          },
+          "unit": "bar",
+          "values": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25
+          ]
+        },
+        "series": [
+          {
+            "id": "iv",
+            "label": {
+              "en": "IV of 24200 CE (%)",
+              "hi": "24200 CE का IV (%)"
+            },
+            "values": [
+              17.1,
+              17.14,
+              17.17,
+              17.2,
+              17.24,
+              17.27,
+              17.3,
+              17.34,
+              17.37,
+              17.41,
+              17.45,
+              17.48,
+              17.5,
+              19.21,
+              12.49,
+              12.28,
+              12.09,
+              11.9,
+              11.73,
+              11.57,
+              11.42,
+              11.29,
+              11.17,
+              11.08,
+              11.02,
+              11.0
+            ]
+          },
+          {
+            "id": "premium",
+            "label": {
+              "en": "24200 CE premium (₹)",
+              "hi": "24200 CE premium (₹)"
+            },
+            "values": [
+              78.04,
+              81.67,
+              78.25,
+              72.8,
+              76.26,
+              81.79,
+              79.31,
+              80.71,
+              86.49,
+              89.38,
+              85.37,
+              94.29,
+              90.23,
+              81.18,
+              83.16,
+              63.19,
+              67.35,
+              72.82,
+              62.22,
+              55.56,
+              60.35,
+              67.88,
+              60.61,
+              54.7,
+              61.57,
+              59.55
+            ]
+          }
+        ],
+        "markers": [
+          {
+            "id": "mk-entry",
+            "x": 12,
+            "label": {
+              "en": "Entry",
+              "hi": "Entry"
+            }
+          },
+          {
+            "id": "mk-event",
+            "x": 14,
+            "label": {
+              "en": "Policy · 10:00",
+              "hi": "Policy · 10:00"
+            }
+          },
+          {
+            "id": "mk-exit",
+            "x": 25,
+            "label": {
+              "en": "Exit",
+              "hi": "Exit"
+            }
+          }
+        ]
+      },
+      "states": {
+        "iv-only": {
+          "show": [
+            "iv",
+            "mk-entry",
+            "mk-event",
+            "mk-exit"
+          ],
+          "hide": [
+            "premium"
+          ],
+          "highlight": [
+            "iv"
+          ]
+        },
+        "premium-only": {
+          "show": [
+            "premium",
+            "mk-entry",
+            "mk-event",
+            "mk-exit"
+          ],
+          "hide": [
+            "iv"
+          ],
+          "highlight": [
+            "premium"
+          ]
+        }
+      }
+    },
+    {
+      "id": "tr-risk-flow",
+      "template": "flow",
+      "params": {
+        "nodes": [
+          {
+            "id": "tr-risk-flow-0",
+            "label": {
+              "en": "Paper book: 1000000 rupees"
+            }
+          },
+          {
+            "id": "tr-risk-flow-1",
+            "label": {
+              "en": "Desk budget: 10000 rupees"
+            }
+          },
+          {
+            "id": "tr-risk-flow-2",
+            "label": {
+              "en": "One case lot: 6768.75 rupees before charges"
+            }
+          },
+          {
+            "id": "tr-risk-flow-3",
+            "label": {
+              "en": "Four old lots: risk 27075, breach"
+            }
+          }
+        ],
+        "edges": [
+          {
+            "from": "tr-risk-flow-0",
+            "to": "tr-risk-flow-1"
+          },
+          {
+            "from": "tr-risk-flow-1",
+            "to": "tr-risk-flow-2"
+          },
+          {
+            "from": "tr-risk-flow-2",
+            "to": "tr-risk-flow-3"
+          }
+        ]
+      },
+      "states": {
+        "review": {
+          "highlight": [
+            "tr-risk-flow-1"
+          ]
+        }
+      }
+    },
+    {
+      "id": "tr-note-flow",
+      "template": "flow",
+      "params": {
+        "nodes": [
+          {
+            "id": "tr-note-flow-0",
+            "label": {
+              "en": "Original historical note"
+            }
+          },
+          {
+            "id": "tr-note-flow-1",
+            "label": {
+              "en": "Evidence and rule compliance"
+            }
+          },
+          {
+            "id": "tr-note-flow-2",
+            "label": {
+              "en": "Process finding"
+            }
+          },
+          {
+            "id": "tr-note-flow-3",
+            "label": {
+              "en": "Separate outcome"
+            }
+          }
+        ],
+        "edges": [
+          {
+            "from": "tr-note-flow-0",
+            "to": "tr-note-flow-1"
+          },
+          {
+            "from": "tr-note-flow-1",
+            "to": "tr-note-flow-2"
+          },
+          {
+            "from": "tr-note-flow-2",
+            "to": "tr-note-flow-3"
+          }
+        ]
+      },
+      "states": {
+        "review": {
+          "highlight": [
+            "tr-note-flow-1"
+          ]
+        }
+      }
+    }
+  ],
+  "tutorGraphs": [
+    {
+      "id": "bad-call-iv-crush",
+      "title": {
+        "en": "Why was this a bad call?",
+        "hi": "यह trade खराब फ़ैसला क्यों था?"
+      },
+      "file": "graphs/bad-call-iv-crush.json"
+    }
+  ],
+  "labLite": [
+    {
+      "id": "pre-event-checklist",
+      "tool": {
+        "en": "Trading terminal: chart and option chain (paper mode, historical replay of D-1)",
+        "hi": "Trading terminal: chart और option chain (paper mode, D-1 का historical replay)"
+      },
+      "userAsk": {
+        "en": "Is my pre-event note complete?",
+        "hi": "क्या मेरा pre-event note पूरा है?"
+      },
+      "lookFor": [
+        {
+          "id": "iv-read",
+          "desc": "IV of the chosen strike is noted (17.5%)"
+        },
+        {
+          "id": "implied-move",
+          "desc": "Implied move from the 24050 straddle is written (about ±304)"
+        },
+        {
+          "id": "max-loss",
+          "desc": "Max loss written and inside the event budget (≤ ₹10,000)"
+        },
+        {
+          "id": "exit-plan",
+          "desc": "Exit plan (time and price) is written"
+        }
+      ],
+      "askAfter": {
+        "en": "Which required fields can you verify in this historical note?"
+      },
+      "graphId": "trading-fno/bad-call-iv-crush"
+    }
+  ],
+  "provenance": {
+    "generatedBy": "authored-pedagogy-packets/1",
+    "generatedAt": "2026-11-20T05:45:57Z",
+    "sources": [
+      {
+        "id": "S-TR-IV-EVENT-PLAYBOOK",
+        "title": "Options desk playbook: event days (illustrative)",
+        "locator": "content/knowledge-workers/sources/design/personas/trader/playbook-excerpt.md; §2, EV-2.1; scenario marketBefore, marketAfter, impliedMove, decomposition"
+      },
+      {
+        "id": "S-TR-IV-EVENT-CASE",
+        "title": "Historical paper option case (illustrative)",
+        "locator": "content/knowledge-workers/sources/design/personas/trader/scenario.json"
+      },
+      {
+        "id": "S-TR-IV-EVENT-OIC",
+        "title": "Options Industry Council: Volatility and the Greeks",
+        "locator": "Opened 2026-11-20; model sensitivities and assumptions"
+      },
+      {
+        "id": "S-TR-THETA-PLAYBOOK",
+        "title": "Options desk playbook: event days (illustrative)",
+        "locator": "content/knowledge-workers/sources/design/personas/trader/playbook-excerpt.md; §3, EV-3.1; scenario bsCheck and decomposition"
+      },
+      {
+        "id": "S-TR-THETA-CASE",
+        "title": "Historical paper option case (illustrative)",
+        "locator": "content/knowledge-workers/sources/design/personas/trader/scenario.json"
+      },
+      {
+        "id": "S-TR-THETA-OIC",
+        "title": "Options Industry Council: Theta",
+        "locator": "Opened 2026-11-20; model sensitivities and assumptions"
+      },
+      {
+        "id": "S-TR-EVENT-RISK-PLAYBOOK",
+        "title": "Options desk playbook: event days (illustrative)",
+        "locator": "content/knowledge-workers/sources/design/personas/trader/playbook-excerpt.md; §4, EV-4.1 to EV-4.5; scenario context and sizing"
+      },
+      {
+        "id": "S-TR-EVENT-RISK-CASE",
+        "title": "Historical paper option case (illustrative)",
+        "locator": "content/knowledge-workers/sources/design/personas/trader/scenario.json"
+      },
+      {
+        "id": "S-TR-EVENT-RISK-OIC",
+        "title": "Options Industry Council: Volatility and the Greeks",
+        "locator": "Opened 2026-11-20; model sensitivities and assumptions"
+      },
+      {
+        "id": "S-TR-PRETRADE-PLAYBOOK",
+        "title": "Options desk playbook: event days (illustrative)",
+        "locator": "content/knowledge-workers/sources/design/personas/trader/playbook-excerpt.md; §6, EV-6.1; trainee checklist; scenario trade.preTradeNote"
+      },
+      {
+        "id": "S-TR-PRETRADE-CASE",
+        "title": "Historical paper option case (illustrative)",
+        "locator": "content/knowledge-workers/sources/design/personas/trader/scenario.json"
+      },
+      {
+        "id": "S-TR-PRETRADE-OIC",
+        "title": "Options Industry Council: Volatility and the Greeks",
+        "locator": "Opened 2026-11-20; model sensitivities and assumptions"
+      }
+    ],
+    "review": "draft",
+    "notes": "Illustrative prototype. English lesson source only; hi glosses and imported tutor lines are machine drafts. No target-language lesson rendition, audio, tool execution, mastery evidence or publication. Design baseline 45180af3f589bfdb11711766a4f8fbbc339a8ce9."
+  }
+}

@@ -1,0 +1,291 @@
+{
+  "schema": "kiki-chapter-plan/v1",
+  "planId": "LP-ST-LAUNCH-WEEK",
+  "domain": {
+    "packId": "streaming-gta",
+    "corner": "audiences",
+    "profileId": "streaming",
+    "learner": {
+      "role": "Newly signed creator in an illustrative launch-week cohort",
+      "transition": "hobby streaming to an agency review process",
+      "priorKnowledge": "Basic stream operation and access to saved analytics"
+    },
+    "languages": {
+      "source": "en",
+      "targets": [
+        "hi-Latn"
+      ],
+      "workingLanguage": "hi-Latn"
+    },
+    "dimensionLabels": {
+      "concept": "Concept",
+      "words": "Words",
+      "english": "Expression",
+      "lab": "Practice"
+    },
+    "assessmentPolicy": {
+      "conceptChecks": 5,
+      "passPercent": 60,
+      "options": 4,
+      "chapterTest": false
+    },
+    "practical": {
+      "applies": true,
+      "label": "Practice",
+      "tool": "Saved generic analytics dashboard, VOD and run-of-show editor"
+    },
+    "guardrails": [
+      "All personas, agency rules and charts are illustrative; no platform-wide statistics are claimed",
+      "GTA 6 by name only; no publisher logos, footage, artwork or third-party assets",
+      "The creator acts; KiKi never edits a stream or tool",
+      "Hinglish is a machine draft pending native review"
+    ],
+    "consumers": [
+      "kiki-pack/v0"
+    ]
+  },
+  "scope": "module",
+  "title": "Launch-week streams",
+  "governingQuestion": "What should the learner understand, practise and explain about this case?",
+  "canDo": "Produce an evidence-linked case review without confusing the outcome with its cause.",
+  "request": {
+    "kind": "playbook",
+    "text": "Compile the four-concept module specified by the illustrative playbook.",
+    "sourceIds": [
+      "S-ST-HOOKS-PLAYBOOK",
+      "S-ST-CHAT-PLAYBOOK",
+      "S-ST-RETENTION-PLAYBOOK",
+      "S-ST-EXPERIMENT-PLAYBOOK"
+    ]
+  },
+  "sources": [
+    {
+      "id": "S-ST-HOOKS-PLAYBOOK",
+      "origin": "org_playbook",
+      "tier": 1,
+      "label": "Launch-week streaming playbook (illustrative)",
+      "locator": "content/knowledge-workers/sources/design/personas/streamer/playbook-excerpt.md; §2-3, LW-3.1; §5, LW-5.1 and LW-5.2; scenario segments",
+      "illustrative": true
+    },
+    {
+      "id": "S-ST-HOOKS-CASE",
+      "origin": "org_case",
+      "tier": 1,
+      "label": "Launch-week stream case (illustrative)",
+      "locator": "content/knowledge-workers/sources/design/personas/streamer/scenario.json",
+      "illustrative": true
+    },
+    {
+      "id": "S-ST-CHAT-PLAYBOOK",
+      "origin": "org_playbook",
+      "tier": 1,
+      "label": "Launch-week streaming playbook (illustrative)",
+      "locator": "content/knowledge-workers/sources/design/personas/streamer/playbook-excerpt.md; §4, LW-4.1; scenario drop and series.chatPerMin",
+      "illustrative": true
+    },
+    {
+      "id": "S-ST-CHAT-CASE",
+      "origin": "org_case",
+      "tier": 1,
+      "label": "Launch-week stream case (illustrative)",
+      "locator": "content/knowledge-workers/sources/design/personas/streamer/scenario.json",
+      "illustrative": true
+    },
+    {
+      "id": "S-ST-RETENTION-PLAYBOOK",
+      "origin": "org_playbook",
+      "tier": 1,
+      "label": "Launch-week streaming playbook (illustrative)",
+      "locator": "content/knowledge-workers/sources/design/personas/streamer/playbook-excerpt.md; §6, LW-6.1; scenario segmentStats, series and drop",
+      "illustrative": true
+    },
+    {
+      "id": "S-ST-RETENTION-CASE",
+      "origin": "org_case",
+      "tier": 1,
+      "label": "Launch-week stream case (illustrative)",
+      "locator": "content/knowledge-workers/sources/design/personas/streamer/scenario.json",
+      "illustrative": true
+    },
+    {
+      "id": "S-ST-EXPERIMENT-PLAYBOOK",
+      "origin": "org_playbook",
+      "tier": 1,
+      "label": "Launch-week streaming playbook (illustrative)",
+      "locator": "content/knowledge-workers/sources/design/personas/streamer/playbook-excerpt.md; §6, LW-6.2; §5, LW-5.1; scenario recovery and events",
+      "illustrative": true
+    },
+    {
+      "id": "S-ST-EXPERIMENT-CASE",
+      "origin": "org_case",
+      "tier": 1,
+      "label": "Launch-week stream case (illustrative)",
+      "locator": "content/knowledge-workers/sources/design/personas/streamer/scenario.json",
+      "illustrative": true
+    }
+  ],
+  "mece": {
+    "dimension": "Steps of the organisation review workflow",
+    "rationale": "Separate model or signal interpretation, controlled comparison, constraints and the final record.",
+    "outOfScope": [
+      "Live deployment",
+      "Mastery or native-language approval"
+    ]
+  },
+  "objectives": [
+    {
+      "id": "O-LP-ST-LAUNCH-WEEK",
+      "statement": "Apply the illustrative organisation review process to a saved case.",
+      "bloom": "apply",
+      "parentId": null,
+      "ownerId": "LP-ST-LAUNCH-WEEK"
+    },
+    {
+      "id": "O-MOD-ST-LAUNCH",
+      "statement": "Produce a justified case review and a plan for practice.",
+      "bloom": "apply",
+      "parentId": "O-LP-ST-LAUNCH-WEEK",
+      "ownerId": "MOD-ST-LAUNCH"
+    },
+    {
+      "id": "O-ST-HOOKS-1",
+      "statement": "Diagnose the missing hook in the case segment.",
+      "bloom": "analyse",
+      "parentId": "O-MOD-ST-LAUNCH",
+      "ownerId": "ST-HOOKS"
+    },
+    {
+      "id": "O-ST-HOOKS-2",
+      "statement": "Apply the agency planning constraints to a slow segment.",
+      "bloom": "apply",
+      "parentId": "O-MOD-ST-LAUNCH",
+      "ownerId": "ST-HOOKS"
+    },
+    {
+      "id": "O-ST-CHAT-1",
+      "statement": "Diagnose the sequence of chat and viewer changes in the case.",
+      "bloom": "analyse",
+      "parentId": "O-MOD-ST-LAUNCH",
+      "ownerId": "ST-CHAT"
+    },
+    {
+      "id": "O-ST-CHAT-2",
+      "statement": "Apply the agency participation rule during a slow segment.",
+      "bloom": "apply",
+      "parentId": "O-MOD-ST-LAUNCH",
+      "ownerId": "ST-CHAT"
+    },
+    {
+      "id": "O-ST-RETENTION-1",
+      "statement": "Calculate the agency segment retention ratio from case endpoints.",
+      "bloom": "analyse",
+      "parentId": "O-MOD-ST-LAUNCH",
+      "ownerId": "ST-RETENTION"
+    },
+    {
+      "id": "O-ST-RETENTION-2",
+      "statement": "Distinguish aggregate viewer counts from individual retention and causal evidence.",
+      "bloom": "apply",
+      "parentId": "O-MOD-ST-LAUNCH",
+      "ownerId": "ST-RETENTION"
+    },
+    {
+      "id": "O-ST-EXPERIMENT-1",
+      "statement": "Design a single-change agency experiment with an explicit measure.",
+      "bloom": "analyse",
+      "parentId": "O-MOD-ST-LAUNCH",
+      "ownerId": "ST-EXPERIMENT"
+    },
+    {
+      "id": "O-ST-EXPERIMENT-2",
+      "statement": "Identify confounders when interpreting a later result.",
+      "bloom": "apply",
+      "parentId": "O-MOD-ST-LAUNCH",
+      "ownerId": "ST-EXPERIMENT"
+    }
+  ],
+  "groups": [
+    {
+      "id": "MOD-ST-LAUNCH",
+      "order": 1,
+      "title": "Launch-week streams",
+      "governingQuestion": "How does this organisation review the case?",
+      "objectiveId": "O-MOD-ST-LAUNCH",
+      "mece": {
+        "dimension": "Distinct review decisions",
+        "rationale": "Each concept owns its terms and its assessment evidence.",
+        "outOfScope": []
+      },
+      "conceptIds": [
+        "ST-HOOKS",
+        "ST-CHAT",
+        "ST-RETENTION",
+        "ST-EXPERIMENT"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "id": "ST-HOOKS",
+      "title": "Give every slow segment a reason to stay",
+      "canonicalKey": "hooks-segment-structure",
+      "groupId": "MOD-ST-LAUNCH",
+      "prerequisiteIds": [],
+      "requiredForPractical": true,
+      "estMinutes": 12
+    },
+    {
+      "id": "ST-CHAT",
+      "title": "Read chat as an early warning, then verify",
+      "canonicalKey": "chat-early-warning",
+      "groupId": "MOD-ST-LAUNCH",
+      "prerequisiteIds": [
+        "ST-HOOKS"
+      ],
+      "requiredForPractical": true,
+      "estMinutes": 12
+    },
+    {
+      "id": "ST-RETENTION",
+      "title": "Compare segments without mistaking counts for people",
+      "canonicalKey": "reading-ccv-by-segment",
+      "groupId": "MOD-ST-LAUNCH",
+      "prerequisiteIds": [
+        "ST-HOOKS",
+        "ST-CHAT"
+      ],
+      "requiredForPractical": true,
+      "estMinutes": 12
+    },
+    {
+      "id": "ST-EXPERIMENT",
+      "title": "Propose one change and a measurable review",
+      "canonicalKey": "one-change-per-stream",
+      "groupId": "MOD-ST-LAUNCH",
+      "prerequisiteIds": [
+        "ST-HOOKS",
+        "ST-CHAT",
+        "ST-RETENTION"
+      ],
+      "requiredForPractical": true,
+      "estMinutes": 12
+    }
+  ],
+  "route": [
+    "ST-HOOKS",
+    "ST-CHAT",
+    "ST-RETENTION",
+    "ST-EXPERIMENT"
+  ],
+  "practical": {
+    "id": "P-MOD-ST-LAUNCH",
+    "title": "Historical or saved-case review",
+    "requiredConceptIds": [
+      "ST-HOOKS",
+      "ST-CHAT",
+      "ST-RETENTION",
+      "ST-EXPERIMENT"
+    ]
+  },
+  "chapterTest": []
+}

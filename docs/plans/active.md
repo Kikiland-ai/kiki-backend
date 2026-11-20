@@ -1,3 +1,17 @@
+## Trader and streamer source-content modules — 20 November 2026
+
+Implemented on `feat/trader-streamer-content` from PR #13 (`940065c`). The two illustrative
+playbooks at Design-Thinking `45180af` now have four-concept modules: eight packets, two plans,
+32 placards, 64 checks, two assembled draft packs and two adapted eight-node tutor graphs.
+Source hashes, case arithmetic, objective/term ownership, graph links and deterministic exports
+are checked. All ten packet/plan checks have zero errors/warnings; seven content regressions,
+the source baseline and BB8 checks pass. English lessons only; Hindi/Hinglish support remains
+machine draft, and native/domain review, translated renditions, narration and runtime acceptance
+are pending. No provider calls or publication. Start with
+[the content README](../../content/knowledge-workers/README.md),
+[decision 0019](../decisions/0019-trader-streamer-content-bundles.md) and
+[the continuation plan](trader-streamer-content.md).
+
 ## Pedagogy packets skill - 20 November 2026
 
 Added the `kiki-pedagogy-packets` skill (`.claude/skills/`, Codex wrapper in `.agents/skills/`),

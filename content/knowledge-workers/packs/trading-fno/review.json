@@ -1,0 +1,21 @@
+{
+  "schema": "kiki-content-review/v1",
+  "review": "draft",
+  "illustrative": true,
+  "domainReview": "pending",
+  "nativeLanguageReview": {
+    "hi": "pending"
+  },
+  "guardrails": [
+    "Process, not picks: review past or paper trades only; never recommend a live trade",
+    "All market data is illustrative; show 'Education on a past, illustrative trade. Not investment advice.'",
+    "KiKi never places, modifies or suggests orders"
+  ],
+  "lessonLanguagesAvailable": [
+    "en"
+  ],
+  "plannedTarget": "hi",
+  "audio": "not_generated",
+  "practiceEvidence": "not_observed",
+  "tutorAdaptation": "Pinned topology; nextSteps resolved; evidence-assuming copy and causal overclaims corrected; review state added; prototype scorecards removed. Changed dialogue is English-only until translation and native review. Routing/runtime review still pending."
+}

@@ -1,0 +1,86 @@
+{
+  "schema": "kiki-cue-seeds/v1",
+  "timing": "pending_tts",
+  "concepts": {
+    "TR-IV-EVENT": [
+      {
+        "placard": 1,
+        "sentence": 0,
+        "sentenceId": "CARD-TR-IV-EVENT-concept.s1",
+        "scene": {
+          "id": "tr-payoff",
+          "state": "after"
+        }
+      },
+      {
+        "placard": 2,
+        "sentence": 0,
+        "sentenceId": "CARD-TR-IV-EVENT-application.s1",
+        "scene": {
+          "id": "tr-payoff",
+          "state": "after"
+        }
+      }
+    ],
+    "TR-THETA": [
+      {
+        "placard": 1,
+        "sentence": 0,
+        "sentenceId": "CARD-TR-THETA-concept.s1",
+        "scene": {
+          "id": "tr-iv-line",
+          "state": "premium-only"
+        }
+      },
+      {
+        "placard": 2,
+        "sentence": 0,
+        "sentenceId": "CARD-TR-THETA-application.s1",
+        "scene": {
+          "id": "tr-iv-line",
+          "state": "premium-only"
+        }
+      }
+    ],
+    "TR-EVENT-RISK": [
+      {
+        "placard": 1,
+        "sentence": 0,
+        "sentenceId": "CARD-TR-EVENT-RISK-concept.s1",
+        "scene": {
+          "id": "tr-risk-flow",
+          "state": "review"
+        }
+      },
+      {
+        "placard": 2,
+        "sentence": 0,
+        "sentenceId": "CARD-TR-EVENT-RISK-application.s1",
+        "scene": {
+          "id": "tr-risk-flow",
+          "state": "review"
+        }
+      }
+    ],
+    "TR-PRETRADE": [
+      {
+        "placard": 1,
+        "sentence": 0,
+        "sentenceId": "CARD-TR-PRETRADE-concept.s1",
+        "scene": {
+          "id": "tr-note-flow",
+          "state": "review"
+        }
+      },
+      {
+        "placard": 2,
+        "sentence": 0,
+        "sentenceId": "CARD-TR-PRETRADE-application.s1",
+        "scene": {
+          "id": "tr-note-flow",
+          "state": "review"
+        }
+      }
+    ]
+  }
+}

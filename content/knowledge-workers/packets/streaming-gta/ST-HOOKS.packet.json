@@ -1,0 +1,1649 @@
+{
+  "schema": "kiki-pedagogy-packet/v1",
+  "packetId": "PKT-ST-HOOKS-1",
+  "createdAt": "2026-11-20T05:45:57Z",
+  "domain": {
+    "packId": "streaming-gta",
+    "corner": "audiences",
+    "profileId": "streaming",
+    "learner": {
+      "role": "Newly signed creator in an illustrative launch-week cohort",
+      "transition": "hobby streaming to an agency review process",
+      "priorKnowledge": "Basic stream operation and access to saved analytics"
+    },
+    "languages": {
+      "source": "en",
+      "targets": [
+        "hi-Latn"
+      ],
+      "workingLanguage": "hi-Latn"
+    },
+    "dimensionLabels": {
+      "concept": "Concept",
+      "words": "Words",
+      "english": "Expression",
+      "lab": "Practice"
+    },
+    "assessmentPolicy": {
+      "conceptChecks": 5,
+      "passPercent": 60,
+      "options": 4,
+      "chapterTest": false
+    },
+    "practical": {
+      "applies": true,
+      "label": "Practice",
+      "tool": "Saved generic analytics dashboard, VOD and run-of-show editor"
+    },
+    "guardrails": [
+      "All personas, agency rules and charts are illustrative; no platform-wide statistics are claimed",
+      "GTA 6 by name only; no publisher logos, footage, artwork or third-party assets",
+      "The creator acts; KiKi never edits a stream or tool",
+      "Hinglish is a machine draft pending native review"
+    ],
+    "consumers": [
+      "kiki-pack/v0"
+    ]
+  },
+  "scope": {
+    "planId": "LP-ST-LAUNCH-WEEK",
+    "groupId": "MOD-ST-LAUNCH",
+    "conceptId": "ST-HOOKS",
+    "order": 1,
+    "canonicalKey": "hooks-segment-structure",
+    "title": "Give every slow segment a reason to stay",
+    "practiceTaskId": "run-of-show-plan"
+  },
+  "status": {
+    "review": "draft",
+    "domainReview": "pending",
+    "pronunciation": "pending",
+    "languages": {
+      "hi-Latn": "machine_draft"
+    }
+  },
+  "research": {
+    "governingQuestion": "The case grind runs from minute 38 to 60 without a goal or chat participation. Diagnose it under LW-5.2 and draft a replacement.",
+    "sources": [
+      {
+        "id": "S-ST-HOOKS-PLAYBOOK",
+        "origin": "org_playbook",
+        "tier": 1,
+        "label": "Launch-week streaming playbook (illustrative)",
+        "locator": "content/knowledge-workers/sources/design/personas/streamer/playbook-excerpt.md; §2-3, LW-3.1; §5, LW-5.1 and LW-5.2; scenario segments",
+        "illustrative": true
+      },
+      {
+        "id": "S-ST-HOOKS-CASE",
+        "origin": "org_case",
+        "tier": 1,
+        "label": "Launch-week stream case (illustrative)",
+        "locator": "content/knowledge-workers/sources/design/personas/streamer/scenario.json",
+        "illustrative": true
+      }
+    ],
+    "claims": [
+      {
+        "id": "CL-ST-HOOKS-RULE",
+        "kind": "org_rule",
+        "text": "LW-5.2 is the governing rule for this exercise; Restructure the illustrative grind using the agency segment rules.",
+        "sourceIds": [
+          "S-ST-HOOKS-PLAYBOOK"
+        ],
+        "confidence": "high",
+        "check": "Rule and scope read in the pinned illustrative playbook at §2-3, LW-3.1; §5, LW-5.1 and LW-5.2; scenario segments"
+      },
+      {
+        "id": "CL-ST-HOOKS-WORKED",
+        "kind": "procedure",
+        "text": "The case grind runs from minute 38 to 60 without a goal or chat participation. Diagnose it under LW-5.2 and draft a replacement. The duration is 22 minutes, exceeding the agency ten-minute cap. The stated goal and participation are also absent. Draft a grind of at most ten minutes, say the goal before the transition, and attach a poll or other chat mechanic. Save a review plan and test it; this is not a claim that every grind loses viewers.",
+        "sourceIds": [
+          "S-ST-HOOKS-PLAYBOOK",
+          "S-ST-HOOKS-CASE"
+        ],
+        "confidence": "high",
+        "check": "derived: The duration is 22 minutes, exceeding the agency ten-minute cap. The stated goal and participation are also absent. Draft a grind of at most ten minutes, say the goal before the transition, and attach a poll or other chat mechanic. Save a review plan and test it; this is not a claim that every grind loses viewers."
+      },
+      {
+        "id": "CL-ST-HOOKS-definition-1",
+        "kind": "definition",
+        "text": "A hook states why an audience should keep watching the current segment.",
+        "sourceIds": [
+          "S-ST-HOOKS-PLAYBOOK"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-HOOKS-definition-2",
+        "kind": "definition",
+        "text": "A run-of-show names each segment, its goal and its target duration.",
+        "sourceIds": [
+          "S-ST-HOOKS-PLAYBOOK"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-HOOKS-concept-1",
+        "kind": "procedure",
+        "text": "In the illustrative case, the silent grind segment ran from minute 38 to minute 60 with no stated goal or chat interaction.",
+        "sourceIds": [
+          "S-ST-HOOKS-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-HOOKS-concept-2",
+        "kind": "procedure",
+        "text": "The agency rule LW-5.2 limits a grind segment to 10 minutes with a stated goal and audience participation.",
+        "sourceIds": [
+          "S-ST-HOOKS-PLAYBOOK",
+          "S-ST-HOOKS-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-HOOKS-concept-3",
+        "kind": "procedure",
+        "text": "The weak hook and missing participation are review hypotheses; the chart alone does not prove why each viewer left.",
+        "sourceIds": [
+          "S-ST-HOOKS-PLAYBOOK",
+          "S-ST-HOOKS-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-HOOKS-application-1",
+        "kind": "procedure",
+        "text": "Review the VOD around the transition before diagnosing the segment.",
+        "sourceIds": [
+          "S-ST-HOOKS-PLAYBOOK",
+          "S-ST-HOOKS-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-HOOKS-application-2",
+        "kind": "procedure",
+        "text": "Draft a shorter grind segment with a stated goal and a poll, following the agency playbook.",
+        "sourceIds": [
+          "S-ST-HOOKS-PLAYBOOK",
+          "S-ST-HOOKS-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-HOOKS-application-3",
+        "kind": "procedure",
+        "text": "Save the revised run-of-show for the manager instead of changing the live stream automatically.",
+        "sourceIds": [
+          "S-ST-HOOKS-PLAYBOOK",
+          "S-ST-HOOKS-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-HOOKS-recap-1",
+        "kind": "procedure",
+        "text": "A slow segment needs a hook and a plan under this agency playbook.",
+        "sourceIds": [
+          "S-ST-HOOKS-PLAYBOOK",
+          "S-ST-HOOKS-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-HOOKS-recap-2",
+        "kind": "procedure",
+        "text": "Treat the duration and silence limits as agency rules, not universal platform statistics.",
+        "sourceIds": [
+          "S-ST-HOOKS-PLAYBOOK",
+          "S-ST-HOOKS-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      }
+    ],
+    "outOfScope": [
+      "Live trading or tool control",
+      "Platform-wide or real-organisation claims",
+      "Narration, translation, publication and mastery certification"
+    ],
+    "openQuestions": [
+      "Illustrative organisation: replace with buyer-approved material before production.",
+      "Domain expert and native-language pronunciation review remain pending."
+    ]
+  },
+  "learner": {
+    "prerequisiteIds": [],
+    "externalPrerequisites": [
+      {
+        "title": "Basic stream operation and access to saved analytics",
+        "level": "earlier_course",
+        "canonicalKey": "stream-operation-basics"
+      }
+    ],
+    "troublesome": "Separate the observations, the organisation rule and a justified conclusion. Grinding itself always makes viewers leave.",
+    "misconceptions": [
+      {
+        "id": "M-ST-HOOKS",
+        "statement": "Grinding itself always makes viewers leave.",
+        "correction": "A slow segment can have a stated goal and participation; compare the context rather than condemning all grinding.",
+        "basis": "inferred",
+        "sourceIds": [],
+        "reasoning": "Inferred from the case contrast and the playbook rule; no learner study or real user evidence is claimed."
+      }
+    ]
+  },
+  "objectives": [
+    {
+      "id": "O-ST-HOOKS-1",
+      "statement": "Diagnose the missing hook in the case segment.",
+      "bloom": "analyse",
+      "parentId": "O-MOD-ST-LAUNCH",
+      "ownerId": "ST-HOOKS"
+    },
+    {
+      "id": "O-ST-HOOKS-2",
+      "statement": "Apply the agency planning constraints to a slow segment.",
+      "bloom": "apply",
+      "parentId": "O-MOD-ST-LAUNCH",
+      "ownerId": "ST-HOOKS"
+    }
+  ],
+  "terms": [
+    {
+      "id": "T-ST-HOOK",
+      "term": "hook",
+      "definition": "A stated reason for the audience to keep watching.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "ST-HOOKS",
+      "spoken": "hook",
+      "glosses": {
+        "hi-Latn": "Viewer ko rukne ka saaf reason."
+      },
+      "pronunciations": {
+        "hi-Latn": "hook"
+      },
+      "review_status": "pending"
+    },
+    {
+      "id": "T-ST-SEGMENT",
+      "term": "segment",
+      "definition": "A named block of a stream with a goal and planned duration.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "ST-HOOKS",
+      "spoken": "segment",
+      "glosses": {
+        "hi-Latn": "Stream ka naam aur goal wala time block."
+      },
+      "pronunciations": {
+        "hi-Latn": "segment"
+      },
+      "review_status": "pending"
+    },
+    {
+      "id": "T-ST-ROS",
+      "term": "run-of-show",
+      "definition": "The ordered plan of named segments and target durations.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "ST-HOOKS",
+      "spoken": "run-of-show",
+      "glosses": {
+        "hi-Latn": "Segments ka order, goal aur planned time."
+      },
+      "pronunciations": {
+        "hi-Latn": "run of show"
+      },
+      "review_status": "pending"
+    },
+    {
+      "id": "T-ST-VOD",
+      "term": "VOD",
+      "definition": "The saved video recording used to review what happened on stream.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "ST-HOOKS",
+      "spoken": "VOD",
+      "glosses": {
+        "hi-Latn": "Stream ki saved recording jise review karte hain."
+      },
+      "pronunciations": {
+        "hi-Latn": "V O D"
+      },
+      "review_status": "pending"
+    }
+  ],
+  "usesTerms": [],
+  "teaching": {
+    "canDo": "Restructure the illustrative grind using the agency segment rules.",
+    "keyIdea": "A slow segment can have a stated goal and participation; compare the context rather than condemning all grinding.",
+    "explanation": {
+      "text": "A hook tells people why to keep watching. The agency uses a run-of-show to make that reason explicit for every segment. In the illustrative case a mission ended and a silent grind began, with no stated goal and little audience interaction. That is a plausible planning gap, not proof of every viewer motivation. The agency rule LW-5.2 sets a ten-minute cap, an announced goal and participation for a grind. Review the VOD around the transition, then draft a revised segment. The rules belong to this invented agency; they are neither platform statistics nor a guarantee of retention.",
+      "defaultModality": "textImage",
+      "walkthrough": [
+        {
+          "target": "hook",
+          "mark": "marker",
+          "dim": "words",
+          "say": "hook: A stated reason for the audience to keep watching."
+        },
+        {
+          "target": "segment",
+          "mark": "marker",
+          "dim": "words",
+          "say": "segment: A named block of a stream with a goal and planned duration."
+        },
+        {
+          "target": "run-of-show",
+          "mark": "marker",
+          "dim": "words",
+          "say": "run-of-show: The ordered plan of named segments and target durations."
+        }
+      ]
+    },
+    "example": {
+      "title": "Give every slow segment a reason to stay (illustrative)",
+      "scenario": "In the illustrative case, the silent grind segment ran from minute 38 to minute 60 with no stated goal or chat interaction. The agency rule LW-5.2 limits a grind segment to 10 minutes with a stated goal and audience participation. The weak hook and missing participation are review hypotheses; the chart alone does not prove why each viewer left.",
+      "takeaway": "A slow segment can have a stated goal and participation; compare the context rather than condemning all grinding.",
+      "sourceIds": [
+        "S-ST-HOOKS-CASE"
+      ]
+    },
+    "workedQuestion": {
+      "id": "W-ST-HOOKS",
+      "type": "short_english",
+      "marks": 3,
+      "prompt": "The case grind runs from minute 38 to 60 without a goal or chat participation. Diagnose it under LW-5.2 and draft a replacement.",
+      "modelAnswer": [
+        "The duration is 22 minutes, exceeding the agency ten-minute cap. The stated goal and participation are also absent.",
+        "Draft a grind of at most ten minutes, say the goal before the transition, and attach a poll or other chat mechanic.",
+        "Save a review plan and test it; this is not a claim that every grind loses viewers."
+      ],
+      "rubric": [
+        {
+          "criterion": "The duration is 22 minutes, exceeding the agency ten-minute cap. The stated goal and participation are also absent.",
+          "marks": 1,
+          "objectiveId": "O-ST-HOOKS-1"
+        },
+        {
+          "criterion": "Draft a grind of at most ten minutes, say the goal before the transition, and attach a poll or other chat mechanic.",
+          "marks": 1,
+          "objectiveId": "O-ST-HOOKS-2"
+        },
+        {
+          "criterion": "Save a review plan and test it; this is not a claim that every grind loses viewers.",
+          "marks": 1,
+          "objectiveId": "O-ST-HOOKS-1"
+        }
+      ],
+      "examVocabulary": [
+        "T-ST-HOOK",
+        "T-ST-SEGMENT",
+        "T-ST-ROS",
+        "T-ST-VOD"
+      ]
+    },
+    "selfExplainPrompt": "Pitch the segment diagnosis and the revised goal-led block to the agency in two clear lines.",
+    "checks": [
+      {
+        "id": "Q-ST-HOOKS-1",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "diagnosis",
+        "prompt": "What is the most defensible planning gap in the case grind?",
+        "options": [
+          "The game category must be wrong",
+          "Any grind is forbidden everywhere",
+          "Every departing viewer disliked the creator",
+          "No stated goal or participation"
+        ],
+        "answer": "No stated goal or participation",
+        "distractorRationale": {
+          "Any grind is forbidden everywhere": "error: Overgeneralises one case into a universal ban",
+          "The game category must be wrong": "error: Infers a category error unsupported by the case",
+          "Every departing viewer disliked the creator": "error: Infers every viewer motivation without evidence"
+        },
+        "explanation": "The case notes establish missing structure; they do not establish every viewer motivation or a universal ban.",
+        "objectiveIds": [
+          "O-ST-HOOKS-1"
+        ],
+        "difficulty": 1,
+        "claimIds": [
+          "CL-ST-HOOKS-RULE",
+          "CL-ST-HOOKS-WORKED",
+          "CL-ST-HOOKS-definition-1",
+          "CL-ST-HOOKS-definition-2",
+          "CL-ST-HOOKS-concept-1",
+          "CL-ST-HOOKS-concept-2",
+          "CL-ST-HOOKS-concept-3"
+        ]
+      },
+      {
+        "id": "Q-ST-HOOKS-2",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "process",
+        "prompt": "Under LW-5.2, which draft fits the agency rule?",
+        "options": [
+          "Twenty minutes with no target",
+          "Twenty minutes with music only",
+          "Ten minutes, stated goal and poll",
+          "An unlimited grind with a new title"
+        ],
+        "answer": "Ten minutes, stated goal and poll",
+        "distractorRationale": {
+          "Twenty minutes with music only": "error: Exceeds the agency duration cap and omits participation",
+          "Twenty minutes with no target": "error: Omits both a time target and a participation mechanism",
+          "An unlimited grind with a new title": "error: Uses a title in place of goal, duration and participation"
+        },
+        "explanation": "The agency requires duration, goal and participation together; music or a title alone does not satisfy the rule.",
+        "objectiveIds": [
+          "O-ST-HOOKS-2"
+        ],
+        "difficulty": 1,
+        "claimIds": [
+          "CL-ST-HOOKS-RULE",
+          "CL-ST-HOOKS-WORKED",
+          "CL-ST-HOOKS-definition-1",
+          "CL-ST-HOOKS-definition-2",
+          "CL-ST-HOOKS-concept-1",
+          "CL-ST-HOOKS-concept-2",
+          "CL-ST-HOOKS-concept-3"
+        ]
+      },
+      {
+        "id": "Q-ST-HOOKS-3",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "judgement",
+        "prompt": "How should the agency silence limit be described?",
+        "options": [
+          "A measured platform-wide statistic",
+          "A legal platform requirement",
+          "A guaranteed retention mechanism",
+          "This agency rule of thumb"
+        ],
+        "answer": "This agency rule of thumb",
+        "distractorRationale": {
+          "A measured platform-wide statistic": "error: Invents a platform-wide empirical claim",
+          "A guaranteed retention mechanism": "error: Confuses a heuristic with a guaranteed effect",
+          "A legal platform requirement": "error: Invents a legal platform requirement"
+        },
+        "explanation": "The source is an illustrative agency playbook, not a platform study or published legal requirement.",
+        "objectiveIds": [
+          "O-ST-HOOKS-1"
+        ],
+        "difficulty": 2,
+        "claimIds": [
+          "CL-ST-HOOKS-RULE",
+          "CL-ST-HOOKS-WORKED",
+          "CL-ST-HOOKS-definition-1",
+          "CL-ST-HOOKS-definition-2",
+          "CL-ST-HOOKS-concept-1",
+          "CL-ST-HOOKS-concept-2",
+          "CL-ST-HOOKS-concept-3"
+        ]
+      },
+      {
+        "id": "Q-ST-HOOKS-4",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "calculation",
+        "prompt": "How long was the case grind from minute 38 up to minute 60?",
+        "options": [
+          "10 minutes",
+          "22 minutes",
+          "38 minutes",
+          "18 minutes"
+        ],
+        "answer": "22 minutes",
+        "distractorRationale": {
+          "10 minutes": "error: Substitutes the allowed cap for the actual duration",
+          "18 minutes": "error: Miscomputes the boundary difference",
+          "38 minutes": "error: Uses the start minute as the duration"
+        },
+        "explanation": "Subtract the start from the exclusive end of the segment; that gives twenty-two minutes.",
+        "objectiveIds": [
+          "O-ST-HOOKS-2"
+        ],
+        "difficulty": 2,
+        "claimIds": [
+          "CL-ST-HOOKS-RULE",
+          "CL-ST-HOOKS-WORKED",
+          "CL-ST-HOOKS-definition-1",
+          "CL-ST-HOOKS-definition-2",
+          "CL-ST-HOOKS-concept-1",
+          "CL-ST-HOOKS-concept-2",
+          "CL-ST-HOOKS-concept-3"
+        ]
+      },
+      {
+        "id": "Q-ST-HOOKS-5",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "process",
+        "prompt": "What should the learner do before making a causal claim from the drop?",
+        "options": [
+          "Treat the overall average as proof",
+          "Review the transition in the VOD",
+          "Replace the live game automatically",
+          "Assume all viewers left for one cause"
+        ],
+        "answer": "Review the transition in the VOD",
+        "distractorRationale": {
+          "Replace the live game automatically": "error: Delegates tool control instead of learner review",
+          "Assume all viewers left for one cause": "error: Asserts one cause for everyone without evidence",
+          "Treat the overall average as proof": "error: Uses an aggregate average to explain a local transition"
+        },
+        "explanation": "The VOD adds context to the timing; a line chart by itself does not establish a causal explanation.",
+        "objectiveIds": [
+          "O-ST-HOOKS-1"
+        ],
+        "difficulty": 3,
+        "claimIds": [
+          "CL-ST-HOOKS-RULE",
+          "CL-ST-HOOKS-WORKED",
+          "CL-ST-HOOKS-definition-1",
+          "CL-ST-HOOKS-definition-2",
+          "CL-ST-HOOKS-concept-1",
+          "CL-ST-HOOKS-concept-2",
+          "CL-ST-HOOKS-concept-3"
+        ]
+      },
+      {
+        "id": "Q-ST-HOOKS-WORDS",
+        "type": "fill_blank",
+        "dimension": "words",
+        "evaluates": "recall",
+        "prompt": "Name the term: A stated reason for the audience to keep watching.",
+        "answer": "hook",
+        "explanation": "The term is hook. A stated reason for the audience to keep watching.",
+        "objectiveIds": [
+          "O-ST-HOOKS-1"
+        ],
+        "difficulty": 1,
+        "claimIds": [
+          "CL-ST-HOOKS-RULE"
+        ]
+      },
+      {
+        "id": "Q-ST-HOOKS-EXPRESSION",
+        "type": "short_english",
+        "dimension": "english",
+        "evaluates": "process",
+        "prompt": "Pitch the segment diagnosis and the revised goal-led block to the agency in two clear lines. Working language: Hinglish; canonical terms stay unchanged.",
+        "answer": "The duration is 22 minutes, exceeding the agency ten-minute cap. The stated goal and participation are also absent. Draft a grind of at most ten minutes, say the goal before the transition, and attach a poll or other chat mechanic. Save a review plan and test it; this is not a claim that every grind loses viewers.",
+        "explanation": "Assess conceptual claims separately from clarity and terminology. A language gap does not remove concept credit.",
+        "objectiveIds": [
+          "O-ST-HOOKS-1",
+          "O-ST-HOOKS-2"
+        ],
+        "difficulty": 2,
+        "claimIds": [
+          "CL-ST-HOOKS-RULE"
+        ],
+        "rubric": [
+          {
+            "criterion": "State the evidenced reasoning accurately; record concept credit separately.",
+            "dim": "concept"
+          },
+          {
+            "criterion": "Use the canonical terms to explain the reasoning clearly in the working language.",
+            "dim": "english"
+          }
+        ]
+      },
+      {
+        "id": "Q-ST-HOOKS-PRACTICE",
+        "type": "predict",
+        "dimension": "lab",
+        "evaluates": "process",
+        "prompt": "In the saved run-of-show, mark the 38-to-60 segment and draft a shorter goal-led version; the learner makes the edit.",
+        "answer": "Use the saved illustrative case only. The duration is 22 minutes, exceeding the agency ten-minute cap. The stated goal and participation are also absent. Draft a grind of at most ten minutes, say the goal before the transition, and attach a poll or other chat mechanic. Save a review plan and test it; this is not a claim that every grind loses viewers.",
+        "explanation": "The learner performs the inspection or edit. A predicted answer is not proof that the real tool action occurred.",
+        "objectiveIds": [
+          "O-ST-HOOKS-1",
+          "O-ST-HOOKS-2"
+        ],
+        "difficulty": 3,
+        "claimIds": [
+          "CL-ST-HOOKS-RULE"
+        ],
+        "evidencePolicy": {
+          "predictionOnly": true,
+          "earnsPracticeCredit": false,
+          "requires": "Observed learner action or a saved learner artefact, checked against the task criteria."
+        }
+      }
+    ],
+    "examSignal": {
+      "basis": "none",
+      "askedIn": 0,
+      "outOf": 0,
+      "note": "No past-paper or buyer assessment frequencies supplied."
+    },
+    "estMinutes": 12
+  },
+  "placards": [
+    {
+      "id": "CARD-ST-HOOKS-definition",
+      "kind": "definition",
+      "title": {
+        "en": "Definition"
+      },
+      "sentences": [
+        {
+          "id": "CARD-ST-HOOKS-definition.s1",
+          "english": "A hook states why an audience should keep watching the current segment.",
+          "term_ids": [
+            "T-ST-HOOK",
+            "T-ST-SEGMENT"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-ST-HOOKS-definition-1"
+          ]
+        },
+        {
+          "id": "CARD-ST-HOOKS-definition.s2",
+          "english": "A run-of-show names each segment, its goal and its target duration.",
+          "term_ids": [
+            "T-ST-SEGMENT",
+            "T-ST-ROS"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-ST-HOOKS-definition-2"
+          ]
+        }
+      ],
+      "visualRef": "explanation"
+    },
+    {
+      "id": "CARD-ST-HOOKS-concept",
+      "kind": "concept",
+      "title": {
+        "en": "Concept"
+      },
+      "sentences": [
+        {
+          "id": "CARD-ST-HOOKS-concept.s1",
+          "english": "In the illustrative case, the silent grind segment ran from minute 38 to minute 60 with no stated goal or chat interaction.",
+          "term_ids": [
+            "T-ST-SEGMENT"
+          ],
+          "literals": [
+            {
+              "text": "38",
+              "spoken": "thirty eight"
+            },
+            {
+              "text": "60",
+              "spoken": "sixty"
+            }
+          ],
+          "claimIds": [
+            "CL-ST-HOOKS-concept-1"
+          ],
+          "cue": {
+            "state": "bands"
+          }
+        },
+        {
+          "id": "CARD-ST-HOOKS-concept.s2",
+          "english": "The agency rule LW-5.2 limits a grind segment to 10 minutes with a stated goal and audience participation.",
+          "term_ids": [
+            "T-ST-SEGMENT"
+          ],
+          "literals": [
+            {
+              "text": "LW-5.2",
+              "spoken": "L W five point two"
+            },
+            {
+              "text": "10",
+              "spoken": "ten"
+            }
+          ],
+          "claimIds": [
+            "CL-ST-HOOKS-concept-2"
+          ]
+        },
+        {
+          "id": "CARD-ST-HOOKS-concept.s3",
+          "english": "The weak hook and missing participation are review hypotheses; the chart alone does not prove why each viewer left.",
+          "term_ids": [
+            "T-ST-HOOK"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-ST-HOOKS-concept-3"
+          ],
+          "refutesMisconceptionIds": [
+            "M-ST-HOOKS"
+          ]
+        }
+      ],
+      "visualRef": "explanation"
+    },
+    {
+      "id": "CARD-ST-HOOKS-application",
+      "kind": "application",
+      "title": {
+        "en": "Application"
+      },
+      "sentences": [
+        {
+          "id": "CARD-ST-HOOKS-application.s1",
+          "english": "Review the VOD around the transition before diagnosing the segment.",
+          "term_ids": [
+            "T-ST-SEGMENT",
+            "T-ST-VOD"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-ST-HOOKS-application-1"
+          ],
+          "cue": {
+            "state": "bands"
+          }
+        },
+        {
+          "id": "CARD-ST-HOOKS-application.s2",
+          "english": "Draft a shorter grind segment with a stated goal and a poll, following the agency playbook.",
+          "term_ids": [
+            "T-ST-SEGMENT"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-ST-HOOKS-application-2"
+          ]
+        },
+        {
+          "id": "CARD-ST-HOOKS-application.s3",
+          "english": "Save the revised run-of-show for the manager instead of changing the live stream automatically.",
+          "term_ids": [
+            "T-ST-ROS"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-ST-HOOKS-application-3"
+          ]
+        }
+      ],
+      "visualRef": "explanation"
+    },
+    {
+      "id": "CARD-ST-HOOKS-recap",
+      "kind": "recap",
+      "title": {
+        "en": "Recap"
+      },
+      "sentences": [
+        {
+          "id": "CARD-ST-HOOKS-recap.s1",
+          "english": "A slow segment needs a hook and a plan under this agency playbook.",
+          "term_ids": [
+            "T-ST-HOOK",
+            "T-ST-SEGMENT"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-ST-HOOKS-recap-1"
+          ]
+        },
+        {
+          "id": "CARD-ST-HOOKS-recap.s2",
+          "english": "Treat the duration and silence limits as agency rules, not universal platform statistics.",
+          "term_ids": [],
+          "literals": [],
+          "claimIds": [
+            "CL-ST-HOOKS-recap-2"
+          ]
+        }
+      ],
+      "visualRef": "explanation"
+    }
+  ],
+  "visual": {
+    "kind": "line",
+    "description": "Give every slow segment a reason to stay: use the saved illustrative scene; highlight the cited case state while explaining the rule.",
+    "alt": "A slow segment can have a stated goal and participation; compare the context rather than condemning all grinding.",
+    "sourceIds": [
+      "S-ST-HOOKS-CASE"
+    ]
+  },
+  "canvas": {
+    "form": "scene",
+    "purpose": {
+      "objectiveIds": [
+        "O-ST-HOOKS-1",
+        "O-ST-HOOKS-2"
+      ],
+      "misconceptionIds": [
+        "M-ST-HOOKS"
+      ],
+      "insight": "A slow segment can have a stated goal and participation; compare the context rather than condemning all grinding."
+    },
+    "illustrative": true,
+    "scene": {
+      "id": "st-line",
+      "template": "line",
+      "params": {
+        "x": {
+          "label": {
+            "en": "Stream time",
+            "hi-Latn": "Stream time"
+          },
+          "unit": "min",
+          "values": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            71,
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83,
+            84,
+            85,
+            86,
+            87,
+            88,
+            89,
+            90,
+            91,
+            92,
+            93,
+            94,
+            95,
+            96,
+            97,
+            98,
+            99,
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            118,
+            119,
+            120,
+            121,
+            122,
+            123,
+            124,
+            125,
+            126,
+            127,
+            128,
+            129,
+            130,
+            131,
+            132,
+            133,
+            134,
+            135,
+            136,
+            137,
+            138,
+            139,
+            140,
+            141,
+            142,
+            143,
+            144,
+            145,
+            146,
+            147,
+            148,
+            149,
+            150,
+            151,
+            152,
+            153,
+            154,
+            155,
+            156,
+            157,
+            158,
+            159,
+            160,
+            161,
+            162,
+            163,
+            164,
+            165,
+            166,
+            167,
+            168,
+            169,
+            170,
+            171,
+            172,
+            173,
+            174,
+            175,
+            176,
+            177,
+            178,
+            179
+          ]
+        },
+        "series": [
+          {
+            "id": "ccv",
+            "label": {
+              "en": "CCV (concurrent viewers)",
+              "hi-Latn": "CCV (concurrent viewers)"
+            },
+            "values": [
+              45,
+              66,
+              102,
+              127,
+              151,
+              185,
+              206,
+              237,
+              253,
+              270,
+              291,
+              313,
+              339,
+              362,
+              381,
+              406,
+              407,
+              425,
+              443,
+              460,
+              475,
+              491,
+              501,
+              508,
+              530,
+              539,
+              554,
+              548,
+              541,
+              552,
+              549,
+              546,
+              542,
+              556,
+              554,
+              569,
+              554,
+              564,
+              556,
+              552,
+              555,
+              515,
+              501,
+              478,
+              457,
+              451,
+              436,
+              420,
+              415,
+              406,
+              381,
+              371,
+              373,
+              361,
+              363,
+              353,
+              357,
+              351,
+              354,
+              348,
+              351,
+              351,
+              370,
+              376,
+              375,
+              384,
+              403,
+              413,
+              429,
+              436,
+              432,
+              458,
+              456,
+              457,
+              451,
+              456,
+              460,
+              455,
+              457,
+              464,
+              482,
+              469,
+              460,
+              467,
+              454,
+              450,
+              464,
+              469,
+              474,
+              475,
+              474,
+              477,
+              484,
+              489,
+              489,
+              630,
+              630,
+              640,
+              624,
+              632,
+              639,
+              635,
+              634,
+              628,
+              631,
+              631,
+              622,
+              640,
+              649,
+              638,
+              645,
+              634,
+              634,
+              640,
+              649,
+              642,
+              648,
+              661,
+              664,
+              671,
+              667,
+              654,
+              663,
+              682,
+              681,
+              661,
+              664,
+              660,
+              652,
+              659,
+              636,
+              642,
+              652,
+              640,
+              652,
+              657,
+              640,
+              644,
+              628,
+              636,
+              640,
+              651,
+              653,
+              652,
+              645,
+              639,
+              630,
+              632,
+              635,
+              636,
+              631,
+              639,
+              628,
+              615,
+              600,
+              597,
+              611,
+              599,
+              581,
+              583,
+              573,
+              575,
+              568,
+              561,
+              530,
+              521,
+              510,
+              512,
+              502,
+              502,
+              498,
+              492,
+              501,
+              492,
+              479,
+              464,
+              450,
+              427,
+              434,
+              433
+            ]
+          },
+          {
+            "id": "chat",
+            "label": {
+              "en": "Chat messages per minute",
+              "hi-Latn": "Chat messages per minute"
+            },
+            "values": [
+              6,
+              8,
+              10,
+              14,
+              16,
+              34,
+              34,
+              38,
+              38,
+              44,
+              45,
+              46,
+              58,
+              68,
+              60,
+              71,
+              69,
+              73,
+              83,
+              75,
+              82,
+              77,
+              82,
+              79,
+              91,
+              121,
+              107,
+              88,
+              75,
+              86,
+              90,
+              86,
+              71,
+              120,
+              137,
+              116,
+              78,
+              87,
+              67,
+              40,
+              22,
+              15,
+              13,
+              15,
+              15,
+              14,
+              15,
+              14,
+              14,
+              14,
+              16,
+              17,
+              14,
+              14,
+              12,
+              14,
+              15,
+              13,
+              14,
+              14,
+              46,
+              71,
+              96,
+              135,
+              152,
+              124,
+              82,
+              97,
+              82,
+              85,
+              74,
+              82,
+              87,
+              77,
+              88,
+              90,
+              96,
+              134,
+              121,
+              91,
+              83,
+              85,
+              86,
+              82,
+              82,
+              95,
+              94,
+              90,
+              89,
+              91,
+              87,
+              83,
+              95,
+              99,
+              113,
+              223,
+              171,
+              153,
+              133,
+              115,
+              127,
+              100,
+              103,
+              125,
+              122,
+              110,
+              122,
+              113,
+              114,
+              104,
+              101,
+              111,
+              96,
+              97,
+              98,
+              103,
+              91,
+              88,
+              93,
+              100,
+              81,
+              84,
+              86,
+              93,
+              96,
+              83,
+              92,
+              86,
+              101,
+              93,
+              91,
+              83,
+              82,
+              107,
+              103,
+              93,
+              105,
+              101,
+              103,
+              99,
+              97,
+              102,
+              108,
+              111,
+              107,
+              89,
+              102,
+              112,
+              107,
+              112,
+              76,
+              79,
+              82,
+              80,
+              86,
+              77,
+              77,
+              71,
+              72,
+              79,
+              74,
+              87,
+              74,
+              79,
+              71,
+              77,
+              74,
+              74,
+              78,
+              68,
+              48,
+              51,
+              47,
+              51,
+              52,
+              54,
+              54,
+              59,
+              47,
+              117
+            ]
+          }
+        ],
+        "bands": [
+          {
+            "id": "seg-pre",
+            "from": 0,
+            "to": 5,
+            "label": {
+              "en": "Starting soon",
+              "hi-Latn": "Starting soon"
+            }
+          },
+          {
+            "id": "seg-intro",
+            "from": 5,
+            "to": 12,
+            "label": {
+              "en": "Intro + today's plan",
+              "hi-Latn": "Intro + aaj ka plan"
+            }
+          },
+          {
+            "id": "seg-mission",
+            "from": 12,
+            "to": 38,
+            "label": {
+              "en": "Story mission: first heist",
+              "hi-Latn": "Story mission: pehla heist"
+            }
+          },
+          {
+            "id": "seg-grind",
+            "from": 38,
+            "to": 60,
+            "label": {
+              "en": "Silent grind: cash farming",
+              "hi-Latn": "Silent grind: cash farming"
+            }
+          },
+          {
+            "id": "seg-vote",
+            "from": 60,
+            "to": 92,
+            "label": {
+              "en": "Free roam: chat votes the heist plan",
+              "hi-Latn": "Free roam: chat vote se heist plan"
+            }
+          },
+          {
+            "id": "seg-collab",
+            "from": 92,
+            "to": 150,
+            "label": {
+              "en": "Collab: duo heist with agency partner",
+              "hi-Latn": "Collab: agency partner ke saath duo heist"
+            }
+          },
+          {
+            "id": "seg-wind",
+            "from": 150,
+            "to": 180,
+            "label": {
+              "en": "Wind-down: Q&A + raid out",
+              "hi-Latn": "Wind-down: Q&A + raid out"
+            }
+          }
+        ],
+        "markers": [
+          {
+            "id": "mk-switch",
+            "x": 38,
+            "label": {
+              "en": "38:00 segment change",
+              "hi-Latn": "38:00 segment change"
+            }
+          },
+          {
+            "id": "mk-drop",
+            "x": 40,
+            "label": {
+              "en": "40:00 drop starts",
+              "hi-Latn": "40:00 drop shuru"
+            }
+          },
+          {
+            "id": "mk-trough",
+            "x": 59,
+            "label": {
+              "en": "Low 348",
+              "hi-Latn": "Low 348"
+            }
+          },
+          {
+            "id": "mk-raid-in",
+            "x": 95,
+            "label": {
+              "en": "Raid in · 140",
+              "hi-Latn": "Raid in · 140"
+            }
+          },
+          {
+            "id": "mk-raid-out",
+            "x": 179,
+            "label": {
+              "en": "Raid out",
+              "hi-Latn": "Raid out"
+            }
+          }
+        ]
+      },
+      "states": {
+        "overview": {
+          "show": [
+            "ccv",
+            "seg-pre",
+            "seg-intro",
+            "seg-mission",
+            "seg-grind",
+            "seg-vote",
+            "seg-collab",
+            "seg-wind",
+            "mk-switch",
+            "mk-raid-in"
+          ],
+          "hide": [
+            "chat"
+          ],
+          "focus": [
+            0,
+            179
+          ]
+        },
+        "drop": {
+          "show": [
+            "ccv",
+            "mk-drop"
+          ],
+          "hide": [
+            "chat",
+            "seg-pre",
+            "seg-intro",
+            "seg-mission",
+            "seg-grind",
+            "seg-vote",
+            "seg-collab",
+            "seg-wind"
+          ],
+          "highlight": [
+            "ccv"
+          ],
+          "focus": [
+            25,
+            70
+          ]
+        },
+        "bands": {
+          "show": [
+            "ccv",
+            "seg-mission",
+            "seg-grind",
+            "seg-vote",
+            "mk-switch",
+            "mk-drop"
+          ],
+          "hide": [
+            "chat"
+          ],
+          "highlight": [
+            "seg-grind"
+          ],
+          "focus": [
+            10,
+            95
+          ]
+        },
+        "chat-first": {
+          "show": [
+            "ccv",
+            "chat",
+            "seg-grind",
+            "mk-switch",
+            "mk-drop"
+          ],
+          "highlight": [
+            "chat"
+          ],
+          "focus": [
+            30,
+            50
+          ]
+        },
+        "compare": {
+          "show": [
+            "ccv",
+            "chat",
+            "seg-grind",
+            "seg-vote"
+          ],
+          "highlight": [
+            "seg-grind",
+            "seg-vote"
+          ],
+          "focus": [
+            30,
+            95
+          ]
+        }
+      }
+    },
+    "mustShow": [
+      "Illustrative case label",
+      "LW-5.2",
+      "Source and review status"
+    ],
+    "mustNotImply": [
+      "A live recommendation or a guaranteed outcome",
+      "Causation established by a single observation"
+    ],
+    "claim": "illustrative_case",
+    "alt": "Give every slow segment a reason to stay; A slow segment can have a stated goal and participation; compare the context rather than condemning all grinding."
+  },
+  "canvasNullReason": null,
+  "reflect": {
+    "graphRef": "streaming-gta/engagement-drop-40"
+  },
+  "handoff": {
+    "audioUnit": "placard",
+    "speechNotes": [
+      "Use the supplied spoken literals and canonical terms.",
+      "No timestamps or audio assets exist yet."
+    ],
+    "practiceEvidence": "Only an actual learner action can earn practice evidence; this authored predict check cannot."
+  }
+}

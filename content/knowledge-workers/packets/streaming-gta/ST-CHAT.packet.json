@@ -1,0 +1,1656 @@
+{
+  "schema": "kiki-pedagogy-packet/v1",
+  "packetId": "PKT-ST-CHAT-1",
+  "createdAt": "2026-11-20T05:45:57Z",
+  "domain": {
+    "packId": "streaming-gta",
+    "corner": "audiences",
+    "profileId": "streaming",
+    "learner": {
+      "role": "Newly signed creator in an illustrative launch-week cohort",
+      "transition": "hobby streaming to an agency review process",
+      "priorKnowledge": "Basic stream operation and access to saved analytics"
+    },
+    "languages": {
+      "source": "en",
+      "targets": [
+        "hi-Latn"
+      ],
+      "workingLanguage": "hi-Latn"
+    },
+    "dimensionLabels": {
+      "concept": "Concept",
+      "words": "Words",
+      "english": "Expression",
+      "lab": "Practice"
+    },
+    "assessmentPolicy": {
+      "conceptChecks": 5,
+      "passPercent": 60,
+      "options": 4,
+      "chapterTest": false
+    },
+    "practical": {
+      "applies": true,
+      "label": "Practice",
+      "tool": "Saved generic analytics dashboard, VOD and run-of-show editor"
+    },
+    "guardrails": [
+      "All personas, agency rules and charts are illustrative; no platform-wide statistics are claimed",
+      "GTA 6 by name only; no publisher logos, footage, artwork or third-party assets",
+      "The creator acts; KiKi never edits a stream or tool",
+      "Hinglish is a machine draft pending native review"
+    ],
+    "consumers": [
+      "kiki-pack/v0"
+    ]
+  },
+  "scope": {
+    "planId": "LP-ST-LAUNCH-WEEK",
+    "groupId": "MOD-ST-LAUNCH",
+    "conceptId": "ST-CHAT",
+    "order": 2,
+    "canonicalKey": "chat-early-warning",
+    "title": "Read chat as an early warning, then verify",
+    "practiceTaskId": "find-the-drop"
+  },
+  "status": {
+    "review": "draft",
+    "domainReview": "pending",
+    "pronunciation": "pending",
+    "languages": {
+      "hi-Latn": "machine_draft"
+    }
+  },
+  "research": {
+    "governingQuestion": "Chat changes from 87 messages at minute 37 to 15 at minute 41, while viewers initially hold. What should the agency review?",
+    "sources": [
+      {
+        "id": "S-ST-CHAT-PLAYBOOK",
+        "origin": "org_playbook",
+        "tier": 1,
+        "label": "Launch-week streaming playbook (illustrative)",
+        "locator": "content/knowledge-workers/sources/design/personas/streamer/playbook-excerpt.md; §4, LW-4.1; scenario drop and series.chatPerMin",
+        "illustrative": true
+      },
+      {
+        "id": "S-ST-CHAT-CASE",
+        "origin": "org_case",
+        "tier": 1,
+        "label": "Launch-week stream case (illustrative)",
+        "locator": "content/knowledge-workers/sources/design/personas/streamer/scenario.json",
+        "illustrative": true
+      }
+    ],
+    "claims": [
+      {
+        "id": "CL-ST-CHAT-RULE",
+        "kind": "org_rule",
+        "text": "LW-4.1 is the governing rule for this exercise; Compare the timing of chat and viewer changes without claiming causation from correlation.",
+        "sourceIds": [
+          "S-ST-CHAT-PLAYBOOK"
+        ],
+        "confidence": "high",
+        "check": "Rule and scope read in the pinned illustrative playbook at §4, LW-4.1; scenario drop and series.chatPerMin"
+      },
+      {
+        "id": "CL-ST-CHAT-WORKED",
+        "kind": "procedure",
+        "text": "Chat changes from 87 messages at minute 37 to 15 at minute 41, while viewers initially hold. What should the agency review? The chat decline is 72 messages per minute, about 82.76 percent of the earlier rate. Viewer stability does not erase the participation warning. Compare the transition and VOD with the chat trace. Check whether the planned chat mechanic required by LW-4.1 was present; do not claim this alone proves a cause.",
+        "sourceIds": [
+          "S-ST-CHAT-PLAYBOOK",
+          "S-ST-CHAT-CASE"
+        ],
+        "confidence": "high",
+        "check": "derived: The chat decline is 72 messages per minute, about 82.76 percent of the earlier rate. Viewer stability does not erase the participation warning. Compare the transition and VOD with the chat trace. Check whether the planned chat mechanic required by LW-4.1 was present; do not claim this alone proves a cause."
+      },
+      {
+        "id": "CL-ST-CHAT-definition-1",
+        "kind": "definition",
+        "text": "The chat rate is the number of messages per minute in this case.",
+        "sourceIds": [
+          "S-ST-CHAT-PLAYBOOK"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-CHAT-definition-2",
+        "kind": "definition",
+        "text": "A chat mechanic gives viewers a planned way to participate, such as a poll.",
+        "sourceIds": [
+          "S-ST-CHAT-PLAYBOOK"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-CHAT-concept-1",
+        "kind": "procedure",
+        "text": "The case chat rate fell from 87 messages at minute 37 to 15 at minute 41.",
+        "sourceIds": [
+          "S-ST-CHAT-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-CHAT-concept-2",
+        "kind": "procedure",
+        "text": "The viewer line remained near its earlier level around minute 40 before declining.",
+        "sourceIds": [
+          "S-ST-CHAT-PLAYBOOK",
+          "S-ST-CHAT-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-CHAT-concept-3",
+        "kind": "procedure",
+        "text": "The agency treats chat rate as an early warning, but a quiet chat alone cannot identify a cause.",
+        "sourceIds": [
+          "S-ST-CHAT-PLAYBOOK",
+          "S-ST-CHAT-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-CHAT-application-1",
+        "kind": "procedure",
+        "text": "Under the agency rule LW-4.1, every grind or loading stretch needs a chat mechanic.",
+        "sourceIds": [
+          "S-ST-CHAT-PLAYBOOK",
+          "S-ST-CHAT-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-CHAT-application-2",
+        "kind": "procedure",
+        "text": "Compare chat rate with the segment transition, then inspect the VOD to check what changed.",
+        "sourceIds": [
+          "S-ST-CHAT-PLAYBOOK",
+          "S-ST-CHAT-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-CHAT-application-3",
+        "kind": "procedure",
+        "text": "Record the warning and the proposed response in the next plan; do not infer a live audience preference from one signal.",
+        "sourceIds": [
+          "S-ST-CHAT-PLAYBOOK",
+          "S-ST-CHAT-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-CHAT-recap-1",
+        "kind": "procedure",
+        "text": "Use chat rate with the viewer line and segment notes.",
+        "sourceIds": [
+          "S-ST-CHAT-PLAYBOOK",
+          "S-ST-CHAT-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-CHAT-recap-2",
+        "kind": "procedure",
+        "text": "Treat a missing chat mechanic as a playbook gap, while keeping the causal diagnosis provisional.",
+        "sourceIds": [
+          "S-ST-CHAT-PLAYBOOK",
+          "S-ST-CHAT-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      }
+    ],
+    "outOfScope": [
+      "Live trading or tool control",
+      "Platform-wide or real-organisation claims",
+      "Narration, translation, publication and mastery certification"
+    ],
+    "openQuestions": [
+      "Illustrative organisation: replace with buyer-approved material before production.",
+      "Domain expert and native-language pronunciation review remain pending."
+    ]
+  },
+  "learner": {
+    "prerequisiteIds": [
+      "ST-HOOKS"
+    ],
+    "externalPrerequisites": [
+      {
+        "title": "Basic stream operation and access to saved analytics",
+        "level": "earlier_course",
+        "canonicalKey": "stream-operation-basics"
+      }
+    ],
+    "troublesome": "Separate the observations, the organisation rule and a justified conclusion. A stable viewer line proves the segment is healthy.",
+    "misconceptions": [
+      {
+        "id": "M-ST-CHAT",
+        "statement": "A stable viewer line proves the segment is healthy.",
+        "correction": "Viewer counts can lag a chat change; use both signals and review the context.",
+        "basis": "inferred",
+        "sourceIds": [],
+        "reasoning": "Inferred from the case contrast and the playbook rule; no learner study or real user evidence is claimed."
+      }
+    ]
+  },
+  "objectives": [
+    {
+      "id": "O-ST-CHAT-1",
+      "statement": "Diagnose the sequence of chat and viewer changes in the case.",
+      "bloom": "analyse",
+      "parentId": "O-MOD-ST-LAUNCH",
+      "ownerId": "ST-CHAT"
+    },
+    {
+      "id": "O-ST-CHAT-2",
+      "statement": "Apply the agency participation rule during a slow segment.",
+      "bloom": "apply",
+      "parentId": "O-MOD-ST-LAUNCH",
+      "ownerId": "ST-CHAT"
+    }
+  ],
+  "terms": [
+    {
+      "id": "T-ST-CHAT",
+      "term": "chat rate",
+      "definition": "Messages per minute in this illustrative analytics case.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "ST-CHAT",
+      "spoken": "chat rate",
+      "glosses": {
+        "hi-Latn": "Is case mein ek minute ke chat messages."
+      },
+      "pronunciations": {
+        "hi-Latn": "chat rate"
+      },
+      "review_status": "pending"
+    },
+    {
+      "id": "T-ST-MECHANIC",
+      "term": "chat mechanic",
+      "definition": "A planned way for viewers to participate, such as a poll.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "ST-CHAT",
+      "spoken": "chat mechanic",
+      "glosses": {
+        "hi-Latn": "Viewers ko involve karne ka planned tareeka, jaise poll."
+      },
+      "pronunciations": {
+        "hi-Latn": "chat mechanic"
+      },
+      "review_status": "pending"
+    }
+  ],
+  "usesTerms": [
+    {
+      "id": "T-ST-SEGMENT",
+      "term": "segment",
+      "definition": "A named block of a stream with a goal and planned duration.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "ST-HOOKS",
+      "spoken": "segment",
+      "glosses": {
+        "hi-Latn": "Stream ka naam aur goal wala time block."
+      },
+      "pronunciations": {
+        "hi-Latn": "segment"
+      },
+      "review_status": "pending"
+    },
+    {
+      "id": "T-ST-VOD",
+      "term": "VOD",
+      "definition": "The saved video recording used to review what happened on stream.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "ST-HOOKS",
+      "spoken": "VOD",
+      "glosses": {
+        "hi-Latn": "Stream ki saved recording jise review karte hain."
+      },
+      "pronunciations": {
+        "hi-Latn": "V O D"
+      },
+      "review_status": "pending"
+    }
+  ],
+  "teaching": {
+    "canDo": "Compare the timing of chat and viewer changes without claiming causation from correlation.",
+    "keyIdea": "Viewer counts can lag a chat change; use both signals and review the context.",
+    "explanation": {
+      "text": "Chat rate and viewer counts answer different questions. A viewer may remain present while chat participation changes. In the illustrative case chat fell sharply near the transition, while the viewer line initially held. The agency uses this sequence as an early warning and requires participation during grind or loading stretches under LW-4.1. It is a review prompt, not a universal law about lag times. Compare both traces, identify the segment and inspect the VOD. A quiet chat could have more than one explanation. Record the observed timing separately from the proposed content explanation.",
+      "defaultModality": "textImage",
+      "walkthrough": [
+        {
+          "target": "segment",
+          "mark": "marker",
+          "dim": "words",
+          "say": "segment: A named block of a stream with a goal and planned duration."
+        },
+        {
+          "target": "VOD",
+          "mark": "marker",
+          "dim": "words",
+          "say": "VOD: The saved video recording used to review what happened on stream."
+        },
+        {
+          "target": "Chat rate and viewer counts answer different questions",
+          "mark": "sweep",
+          "dim": "concept",
+          "say": "Chat rate and viewer counts answer different questions."
+        }
+      ]
+    },
+    "example": {
+      "title": "Read chat as an early warning, then verify (illustrative)",
+      "scenario": "The case chat rate fell from 87 messages at minute 37 to 15 at minute 41. The viewer line remained near its earlier level around minute 40 before declining. The agency treats chat rate as an early warning, but a quiet chat alone cannot identify a cause.",
+      "takeaway": "Viewer counts can lag a chat change; use both signals and review the context.",
+      "sourceIds": [
+        "S-ST-CHAT-CASE"
+      ]
+    },
+    "workedQuestion": {
+      "id": "W-ST-CHAT",
+      "type": "short_english",
+      "marks": 3,
+      "prompt": "Chat changes from 87 messages at minute 37 to 15 at minute 41, while viewers initially hold. What should the agency review?",
+      "modelAnswer": [
+        "The chat decline is 72 messages per minute, about 82.76 percent of the earlier rate.",
+        "Viewer stability does not erase the participation warning. Compare the transition and VOD with the chat trace.",
+        "Check whether the planned chat mechanic required by LW-4.1 was present; do not claim this alone proves a cause."
+      ],
+      "rubric": [
+        {
+          "criterion": "The chat decline is 72 messages per minute, about 82.76 percent of the earlier rate.",
+          "marks": 1,
+          "objectiveId": "O-ST-CHAT-1"
+        },
+        {
+          "criterion": "Viewer stability does not erase the participation warning. Compare the transition and VOD with the chat trace.",
+          "marks": 1,
+          "objectiveId": "O-ST-CHAT-2"
+        },
+        {
+          "criterion": "Check whether the planned chat mechanic required by LW-4.1 was present; do not claim this alone proves a cause.",
+          "marks": 1,
+          "objectiveId": "O-ST-CHAT-1"
+        }
+      ],
+      "examVocabulary": [
+        "T-ST-CHAT",
+        "T-ST-MECHANIC"
+      ]
+    },
+    "selfExplainPrompt": "Explain the observed chat-first sequence and state what further evidence would support your diagnosis.",
+    "checks": [
+      {
+        "id": "Q-ST-CHAT-1",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "diagnosis",
+        "prompt": "Which signal changed early in the case?",
+        "options": [
+          "Chat rate near the transition",
+          "A change in the game logo",
+          "Only the final stream average",
+          "A later incoming raid"
+        ],
+        "answer": "Chat rate near the transition",
+        "distractorRationale": {
+          "Only the final stream average": "error: Uses a whole-stream aggregate instead of the early signal",
+          "A later incoming raid": "error: Uses an event that happens much later",
+          "A change in the game logo": "error: Introduces a cosmetic change absent from the case"
+        },
+        "explanation": "The case trace shows the early chat decline; the later raid cannot explain the earlier sequence.",
+        "objectiveIds": [
+          "O-ST-CHAT-1"
+        ],
+        "difficulty": 1,
+        "claimIds": [
+          "CL-ST-CHAT-RULE",
+          "CL-ST-CHAT-WORKED",
+          "CL-ST-CHAT-definition-1",
+          "CL-ST-CHAT-definition-2",
+          "CL-ST-CHAT-concept-1",
+          "CL-ST-CHAT-concept-2",
+          "CL-ST-CHAT-concept-3"
+        ]
+      },
+      {
+        "id": "Q-ST-CHAT-2",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "process",
+        "prompt": "What does LW-4.1 require during a grind?",
+        "options": [
+          "Automatic edits by KiKi",
+          "A new title only",
+          "Silence until viewers leave",
+          "A poll or participation mechanic"
+        ],
+        "answer": "A poll or participation mechanic",
+        "distractorRationale": {
+          "A new title only": "error: Uses a title instead of viewer participation",
+          "Silence until viewers leave": "error: Waits for a lagging count instead of checking the warning",
+          "Automatic edits by KiKi": "error: Delegates execution instead of learner action"
+        },
+        "explanation": "The agency requires a participation mechanism; KiKi coaches while the creator performs the work.",
+        "objectiveIds": [
+          "O-ST-CHAT-2"
+        ],
+        "difficulty": 1,
+        "claimIds": [
+          "CL-ST-CHAT-RULE",
+          "CL-ST-CHAT-WORKED",
+          "CL-ST-CHAT-definition-1",
+          "CL-ST-CHAT-definition-2",
+          "CL-ST-CHAT-concept-1",
+          "CL-ST-CHAT-concept-2",
+          "CL-ST-CHAT-concept-3"
+        ]
+      },
+      {
+        "id": "Q-ST-CHAT-3",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "judgement",
+        "prompt": "What follows from a quiet chat alone?",
+        "options": [
+          "The creator caused every departure",
+          "The whole stream has failed",
+          "A warning that needs context",
+          "Proof the platform hid the stream"
+        ],
+        "answer": "A warning that needs context",
+        "distractorRationale": {
+          "The creator caused every departure": "error: Infers individual causation from one trace",
+          "The whole stream has failed": "error: Extrapolates a local warning to the whole stream",
+          "Proof the platform hid the stream": "error: Invents a platform distribution explanation"
+        },
+        "explanation": "A warning guides a review; the trace alone cannot identify one cause or prove a platform action.",
+        "objectiveIds": [
+          "O-ST-CHAT-1"
+        ],
+        "difficulty": 2,
+        "claimIds": [
+          "CL-ST-CHAT-RULE",
+          "CL-ST-CHAT-WORKED",
+          "CL-ST-CHAT-definition-1",
+          "CL-ST-CHAT-definition-2",
+          "CL-ST-CHAT-concept-1",
+          "CL-ST-CHAT-concept-2",
+          "CL-ST-CHAT-concept-3"
+        ]
+      },
+      {
+        "id": "Q-ST-CHAT-4",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "calculation",
+        "prompt": "What is the decline from 87 to 15 chat messages per minute?",
+        "options": [
+          "15 messages",
+          "87 messages",
+          "41 messages",
+          "72 messages"
+        ],
+        "answer": "72 messages",
+        "distractorRationale": {
+          "15 messages": "error: Reports the final level rather than the decline",
+          "41 messages": "error: Uses the later sample minute as a message count",
+          "87 messages": "error: Reports the initial level rather than the decline"
+        },
+        "explanation": "Subtract the later rate from the earlier one. The size of the decline is separate from its cause.",
+        "objectiveIds": [
+          "O-ST-CHAT-2"
+        ],
+        "difficulty": 2,
+        "claimIds": [
+          "CL-ST-CHAT-RULE",
+          "CL-ST-CHAT-WORKED",
+          "CL-ST-CHAT-definition-1",
+          "CL-ST-CHAT-definition-2",
+          "CL-ST-CHAT-concept-1",
+          "CL-ST-CHAT-concept-2",
+          "CL-ST-CHAT-concept-3"
+        ]
+      },
+      {
+        "id": "Q-ST-CHAT-5",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "process",
+        "prompt": "Which review best uses the early warning?",
+        "options": [
+          "Compare both traces and inspect the VOD",
+          "Infer a platform-wide lag rule",
+          "Change several live settings immediately",
+          "Ignore chat while viewers are stable"
+        ],
+        "answer": "Compare both traces and inspect the VOD",
+        "distractorRationale": {
+          "Ignore chat while viewers are stable": "error: Ignores a leading signal because the count still holds",
+          "Infer a platform-wide lag rule": "error: Generalises one illustrative lag to all streams",
+          "Change several live settings immediately": "error: Changes several variables before diagnosing the evidence"
+        },
+        "explanation": "Multiple traces and the VOD provide context; a single illustrative episode cannot establish a universal timing rule.",
+        "objectiveIds": [
+          "O-ST-CHAT-1"
+        ],
+        "difficulty": 3,
+        "claimIds": [
+          "CL-ST-CHAT-RULE",
+          "CL-ST-CHAT-WORKED",
+          "CL-ST-CHAT-definition-1",
+          "CL-ST-CHAT-definition-2",
+          "CL-ST-CHAT-concept-1",
+          "CL-ST-CHAT-concept-2",
+          "CL-ST-CHAT-concept-3"
+        ]
+      },
+      {
+        "id": "Q-ST-CHAT-WORDS",
+        "type": "fill_blank",
+        "dimension": "words",
+        "evaluates": "recall",
+        "prompt": "Name the term: Messages per minute in this illustrative analytics case.",
+        "answer": "chat rate",
+        "explanation": "The term is chat rate. Messages per minute in this illustrative analytics case.",
+        "objectiveIds": [
+          "O-ST-CHAT-1"
+        ],
+        "difficulty": 1,
+        "claimIds": [
+          "CL-ST-CHAT-RULE"
+        ]
+      },
+      {
+        "id": "Q-ST-CHAT-EXPRESSION",
+        "type": "short_english",
+        "dimension": "english",
+        "evaluates": "process",
+        "prompt": "Explain the observed chat-first sequence and state what further evidence would support your diagnosis. Working language: Hinglish; canonical terms stay unchanged.",
+        "answer": "The chat decline is 72 messages per minute, about 82.76 percent of the earlier rate. Viewer stability does not erase the participation warning. Compare the transition and VOD with the chat trace. Check whether the planned chat mechanic required by LW-4.1 was present; do not claim this alone proves a cause.",
+        "explanation": "Assess conceptual claims separately from clarity and terminology. A language gap does not remove concept credit.",
+        "objectiveIds": [
+          "O-ST-CHAT-1",
+          "O-ST-CHAT-2"
+        ],
+        "difficulty": 2,
+        "claimIds": [
+          "CL-ST-CHAT-RULE"
+        ],
+        "rubric": [
+          {
+            "criterion": "State the evidenced reasoning accurately; record concept credit separately.",
+            "dim": "concept"
+          },
+          {
+            "criterion": "Use the canonical terms to explain the reasoning clearly in the working language.",
+            "dim": "english"
+          }
+        ]
+      },
+      {
+        "id": "Q-ST-CHAT-PRACTICE",
+        "type": "predict",
+        "dimension": "lab",
+        "evaluates": "process",
+        "prompt": "On the saved analytics trace, locate minutes 37 to 43, compare chat with viewers, and note the transition for VOD review.",
+        "answer": "Use the saved illustrative case only. The chat decline is 72 messages per minute, about 82.76 percent of the earlier rate. Viewer stability does not erase the participation warning. Compare the transition and VOD with the chat trace. Check whether the planned chat mechanic required by LW-4.1 was present; do not claim this alone proves a cause.",
+        "explanation": "The learner performs the inspection or edit. A predicted answer is not proof that the real tool action occurred.",
+        "objectiveIds": [
+          "O-ST-CHAT-1",
+          "O-ST-CHAT-2"
+        ],
+        "difficulty": 3,
+        "claimIds": [
+          "CL-ST-CHAT-RULE"
+        ],
+        "evidencePolicy": {
+          "predictionOnly": true,
+          "earnsPracticeCredit": false,
+          "requires": "Observed learner action or a saved learner artefact, checked against the task criteria."
+        }
+      }
+    ],
+    "examSignal": {
+      "basis": "none",
+      "askedIn": 0,
+      "outOf": 0,
+      "note": "No past-paper or buyer assessment frequencies supplied."
+    },
+    "estMinutes": 12
+  },
+  "placards": [
+    {
+      "id": "CARD-ST-CHAT-definition",
+      "kind": "definition",
+      "title": {
+        "en": "Definition"
+      },
+      "sentences": [
+        {
+          "id": "CARD-ST-CHAT-definition.s1",
+          "english": "The chat rate is the number of messages per minute in this case.",
+          "term_ids": [
+            "T-ST-CHAT"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-ST-CHAT-definition-1"
+          ]
+        },
+        {
+          "id": "CARD-ST-CHAT-definition.s2",
+          "english": "A chat mechanic gives viewers a planned way to participate, such as a poll.",
+          "term_ids": [
+            "T-ST-MECHANIC"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-ST-CHAT-definition-2"
+          ]
+        }
+      ],
+      "visualRef": "explanation"
+    },
+    {
+      "id": "CARD-ST-CHAT-concept",
+      "kind": "concept",
+      "title": {
+        "en": "Concept"
+      },
+      "sentences": [
+        {
+          "id": "CARD-ST-CHAT-concept.s1",
+          "english": "The case chat rate fell from 87 messages at minute 37 to 15 at minute 41.",
+          "term_ids": [
+            "T-ST-CHAT"
+          ],
+          "literals": [
+            {
+              "text": "87",
+              "spoken": "eighty seven"
+            },
+            {
+              "text": "37",
+              "spoken": "thirty seven"
+            },
+            {
+              "text": "15",
+              "spoken": "fifteen"
+            },
+            {
+              "text": "41",
+              "spoken": "forty one"
+            }
+          ],
+          "claimIds": [
+            "CL-ST-CHAT-concept-1"
+          ],
+          "cue": {
+            "state": "chat-first"
+          }
+        },
+        {
+          "id": "CARD-ST-CHAT-concept.s2",
+          "english": "The viewer line remained near its earlier level around minute 40 before declining.",
+          "term_ids": [],
+          "literals": [
+            {
+              "text": "40",
+              "spoken": "forty"
+            }
+          ],
+          "claimIds": [
+            "CL-ST-CHAT-concept-2"
+          ]
+        },
+        {
+          "id": "CARD-ST-CHAT-concept.s3",
+          "english": "The agency treats chat rate as an early warning, but a quiet chat alone cannot identify a cause.",
+          "term_ids": [
+            "T-ST-CHAT"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-ST-CHAT-concept-3"
+          ],
+          "refutesMisconceptionIds": [
+            "M-ST-CHAT"
+          ]
+        }
+      ],
+      "visualRef": "explanation"
+    },
+    {
+      "id": "CARD-ST-CHAT-application",
+      "kind": "application",
+      "title": {
+        "en": "Application"
+      },
+      "sentences": [
+        {
+          "id": "CARD-ST-CHAT-application.s1",
+          "english": "Under the agency rule LW-4.1, every grind or loading stretch needs a chat mechanic.",
+          "term_ids": [
+            "T-ST-MECHANIC"
+          ],
+          "literals": [
+            {
+              "text": "LW-4.1",
+              "spoken": "L W four point one"
+            }
+          ],
+          "claimIds": [
+            "CL-ST-CHAT-application-1"
+          ],
+          "cue": {
+            "state": "chat-first"
+          }
+        },
+        {
+          "id": "CARD-ST-CHAT-application.s2",
+          "english": "Compare chat rate with the segment transition, then inspect the VOD to check what changed.",
+          "term_ids": [
+            "T-ST-CHAT",
+            "T-ST-SEGMENT",
+            "T-ST-VOD"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-ST-CHAT-application-2"
+          ]
+        },
+        {
+          "id": "CARD-ST-CHAT-application.s3",
+          "english": "Record the warning and the proposed response in the next plan; do not infer a live audience preference from one signal.",
+          "term_ids": [],
+          "literals": [],
+          "claimIds": [
+            "CL-ST-CHAT-application-3"
+          ]
+        }
+      ],
+      "visualRef": "explanation"
+    },
+    {
+      "id": "CARD-ST-CHAT-recap",
+      "kind": "recap",
+      "title": {
+        "en": "Recap"
+      },
+      "sentences": [
+        {
+          "id": "CARD-ST-CHAT-recap.s1",
+          "english": "Use chat rate with the viewer line and segment notes.",
+          "term_ids": [
+            "T-ST-CHAT",
+            "T-ST-SEGMENT"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-ST-CHAT-recap-1"
+          ]
+        },
+        {
+          "id": "CARD-ST-CHAT-recap.s2",
+          "english": "Treat a missing chat mechanic as a playbook gap, while keeping the causal diagnosis provisional.",
+          "term_ids": [
+            "T-ST-MECHANIC"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-ST-CHAT-recap-2"
+          ]
+        }
+      ],
+      "visualRef": "explanation"
+    }
+  ],
+  "visual": {
+    "kind": "line",
+    "description": "Read chat as an early warning, then verify: use the saved illustrative scene; highlight the cited case state while explaining the rule.",
+    "alt": "Viewer counts can lag a chat change; use both signals and review the context.",
+    "sourceIds": [
+      "S-ST-CHAT-CASE"
+    ]
+  },
+  "canvas": {
+    "form": "scene",
+    "purpose": {
+      "objectiveIds": [
+        "O-ST-CHAT-1",
+        "O-ST-CHAT-2"
+      ],
+      "misconceptionIds": [
+        "M-ST-CHAT"
+      ],
+      "insight": "Viewer counts can lag a chat change; use both signals and review the context."
+    },
+    "illustrative": true,
+    "scene": {
+      "id": "st-line",
+      "template": "line",
+      "params": {
+        "x": {
+          "label": {
+            "en": "Stream time",
+            "hi-Latn": "Stream time"
+          },
+          "unit": "min",
+          "values": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            71,
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83,
+            84,
+            85,
+            86,
+            87,
+            88,
+            89,
+            90,
+            91,
+            92,
+            93,
+            94,
+            95,
+            96,
+            97,
+            98,
+            99,
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            118,
+            119,
+            120,
+            121,
+            122,
+            123,
+            124,
+            125,
+            126,
+            127,
+            128,
+            129,
+            130,
+            131,
+            132,
+            133,
+            134,
+            135,
+            136,
+            137,
+            138,
+            139,
+            140,
+            141,
+            142,
+            143,
+            144,
+            145,
+            146,
+            147,
+            148,
+            149,
+            150,
+            151,
+            152,
+            153,
+            154,
+            155,
+            156,
+            157,
+            158,
+            159,
+            160,
+            161,
+            162,
+            163,
+            164,
+            165,
+            166,
+            167,
+            168,
+            169,
+            170,
+            171,
+            172,
+            173,
+            174,
+            175,
+            176,
+            177,
+            178,
+            179
+          ]
+        },
+        "series": [
+          {
+            "id": "ccv",
+            "label": {
+              "en": "CCV (concurrent viewers)",
+              "hi-Latn": "CCV (concurrent viewers)"
+            },
+            "values": [
+              45,
+              66,
+              102,
+              127,
+              151,
+              185,
+              206,
+              237,
+              253,
+              270,
+              291,
+              313,
+              339,
+              362,
+              381,
+              406,
+              407,
+              425,
+              443,
+              460,
+              475,
+              491,
+              501,
+              508,
+              530,
+              539,
+              554,
+              548,
+              541,
+              552,
+              549,
+              546,
+              542,
+              556,
+              554,
+              569,
+              554,
+              564,
+              556,
+              552,
+              555,
+              515,
+              501,
+              478,
+              457,
+              451,
+              436,
+              420,
+              415,
+              406,
+              381,
+              371,
+              373,
+              361,
+              363,
+              353,
+              357,
+              351,
+              354,
+              348,
+              351,
+              351,
+              370,
+              376,
+              375,
+              384,
+              403,
+              413,
+              429,
+              436,
+              432,
+              458,
+              456,
+              457,
+              451,
+              456,
+              460,
+              455,
+              457,
+              464,
+              482,
+              469,
+              460,
+              467,
+              454,
+              450,
+              464,
+              469,
+              474,
+              475,
+              474,
+              477,
+              484,
+              489,
+              489,
+              630,
+              630,
+              640,
+              624,
+              632,
+              639,
+              635,
+              634,
+              628,
+              631,
+              631,
+              622,
+              640,
+              649,
+              638,
+              645,
+              634,
+              634,
+              640,
+              649,
+              642,
+              648,
+              661,
+              664,
+              671,
+              667,
+              654,
+              663,
+              682,
+              681,
+              661,
+              664,
+              660,
+              652,
+              659,
+              636,
+              642,
+              652,
+              640,
+              652,
+              657,
+              640,
+              644,
+              628,
+              636,
+              640,
+              651,
+              653,
+              652,
+              645,
+              639,
+              630,
+              632,
+              635,
+              636,
+              631,
+              639,
+              628,
+              615,
+              600,
+              597,
+              611,
+              599,
+              581,
+              583,
+              573,
+              575,
+              568,
+              561,
+              530,
+              521,
+              510,
+              512,
+              502,
+              502,
+              498,
+              492,
+              501,
+              492,
+              479,
+              464,
+              450,
+              427,
+              434,
+              433
+            ]
+          },
+          {
+            "id": "chat",
+            "label": {
+              "en": "Chat messages per minute",
+              "hi-Latn": "Chat messages per minute"
+            },
+            "values": [
+              6,
+              8,
+              10,
+              14,
+              16,
+              34,
+              34,
+              38,
+              38,
+              44,
+              45,
+              46,
+              58,
+              68,
+              60,
+              71,
+              69,
+              73,
+              83,
+              75,
+              82,
+              77,
+              82,
+              79,
+              91,
+              121,
+              107,
+              88,
+              75,
+              86,
+              90,
+              86,
+              71,
+              120,
+              137,
+              116,
+              78,
+              87,
+              67,
+              40,
+              22,
+              15,
+              13,
+              15,
+              15,
+              14,
+              15,
+              14,
+              14,
+              14,
+              16,
+              17,
+              14,
+              14,
+              12,
+              14,
+              15,
+              13,
+              14,
+              14,
+              46,
+              71,
+              96,
+              135,
+              152,
+              124,
+              82,
+              97,
+              82,
+              85,
+              74,
+              82,
+              87,
+              77,
+              88,
+              90,
+              96,
+              134,
+              121,
+              91,
+              83,
+              85,
+              86,
+              82,
+              82,
+              95,
+              94,
+              90,
+              89,
+              91,
+              87,
+              83,
+              95,
+              99,
+              113,
+              223,
+              171,
+              153,
+              133,
+              115,
+              127,
+              100,
+              103,
+              125,
+              122,
+              110,
+              122,
+              113,
+              114,
+              104,
+              101,
+              111,
+              96,
+              97,
+              98,
+              103,
+              91,
+              88,
+              93,
+              100,
+              81,
+              84,
+              86,
+              93,
+              96,
+              83,
+              92,
+              86,
+              101,
+              93,
+              91,
+              83,
+              82,
+              107,
+              103,
+              93,
+              105,
+              101,
+              103,
+              99,
+              97,
+              102,
+              108,
+              111,
+              107,
+              89,
+              102,
+              112,
+              107,
+              112,
+              76,
+              79,
+              82,
+              80,
+              86,
+              77,
+              77,
+              71,
+              72,
+              79,
+              74,
+              87,
+              74,
+              79,
+              71,
+              77,
+              74,
+              74,
+              78,
+              68,
+              48,
+              51,
+              47,
+              51,
+              52,
+              54,
+              54,
+              59,
+              47,
+              117
+            ]
+          }
+        ],
+        "bands": [
+          {
+            "id": "seg-pre",
+            "from": 0,
+            "to": 5,
+            "label": {
+              "en": "Starting soon",
+              "hi-Latn": "Starting soon"
+            }
+          },
+          {
+            "id": "seg-intro",
+            "from": 5,
+            "to": 12,
+            "label": {
+              "en": "Intro + today's plan",
+              "hi-Latn": "Intro + aaj ka plan"
+            }
+          },
+          {
+            "id": "seg-mission",
+            "from": 12,
+            "to": 38,
+            "label": {
+              "en": "Story mission: first heist",
+              "hi-Latn": "Story mission: pehla heist"
+            }
+          },
+          {
+            "id": "seg-grind",
+            "from": 38,
+            "to": 60,
+            "label": {
+              "en": "Silent grind: cash farming",
+              "hi-Latn": "Silent grind: cash farming"
+            }
+          },
+          {
+            "id": "seg-vote",
+            "from": 60,
+            "to": 92,
+            "label": {
+              "en": "Free roam: chat votes the heist plan",
+              "hi-Latn": "Free roam: chat vote se heist plan"
+            }
+          },
+          {
+            "id": "seg-collab",
+            "from": 92,
+            "to": 150,
+            "label": {
+              "en": "Collab: duo heist with agency partner",
+              "hi-Latn": "Collab: agency partner ke saath duo heist"
+            }
+          },
+          {
+            "id": "seg-wind",
+            "from": 150,
+            "to": 180,
+            "label": {
+              "en": "Wind-down: Q&A + raid out",
+              "hi-Latn": "Wind-down: Q&A + raid out"
+            }
+          }
+        ],
+        "markers": [
+          {
+            "id": "mk-switch",
+            "x": 38,
+            "label": {
+              "en": "38:00 segment change",
+              "hi-Latn": "38:00 segment change"
+            }
+          },
+          {
+            "id": "mk-drop",
+            "x": 40,
+            "label": {
+              "en": "40:00 drop starts",
+              "hi-Latn": "40:00 drop shuru"
+            }
+          },
+          {
+            "id": "mk-trough",
+            "x": 59,
+            "label": {
+              "en": "Low 348",
+              "hi-Latn": "Low 348"
+            }
+          },
+          {
+            "id": "mk-raid-in",
+            "x": 95,
+            "label": {
+              "en": "Raid in · 140",
+              "hi-Latn": "Raid in · 140"
+            }
+          },
+          {
+            "id": "mk-raid-out",
+            "x": 179,
+            "label": {
+              "en": "Raid out",
+              "hi-Latn": "Raid out"
+            }
+          }
+        ]
+      },
+      "states": {
+        "overview": {
+          "show": [
+            "ccv",
+            "seg-pre",
+            "seg-intro",
+            "seg-mission",
+            "seg-grind",
+            "seg-vote",
+            "seg-collab",
+            "seg-wind",
+            "mk-switch",
+            "mk-raid-in"
+          ],
+          "hide": [
+            "chat"
+          ],
+          "focus": [
+            0,
+            179
+          ]
+        },
+        "drop": {
+          "show": [
+            "ccv",
+            "mk-drop"
+          ],
+          "hide": [
+            "chat",
+            "seg-pre",
+            "seg-intro",
+            "seg-mission",
+            "seg-grind",
+            "seg-vote",
+            "seg-collab",
+            "seg-wind"
+          ],
+          "highlight": [
+            "ccv"
+          ],
+          "focus": [
+            25,
+            70
+          ]
+        },
+        "bands": {
+          "show": [
+            "ccv",
+            "seg-mission",
+            "seg-grind",
+            "seg-vote",
+            "mk-switch",
+            "mk-drop"
+          ],
+          "hide": [
+            "chat"
+          ],
+          "highlight": [
+            "seg-grind"
+          ],
+          "focus": [
+            10,
+            95
+          ]
+        },
+        "chat-first": {
+          "show": [
+            "ccv",
+            "chat",
+            "seg-grind",
+            "mk-switch",
+            "mk-drop"
+          ],
+          "highlight": [
+            "chat"
+          ],
+          "focus": [
+            30,
+            50
+          ]
+        },
+        "compare": {
+          "show": [
+            "ccv",
+            "chat",
+            "seg-grind",
+            "seg-vote"
+          ],
+          "highlight": [
+            "seg-grind",
+            "seg-vote"
+          ],
+          "focus": [
+            30,
+            95
+          ]
+        }
+      }
+    },
+    "mustShow": [
+      "Illustrative case label",
+      "LW-4.1",
+      "Source and review status"
+    ],
+    "mustNotImply": [
+      "A live recommendation or a guaranteed outcome",
+      "Causation established by a single observation"
+    ],
+    "claim": "illustrative_case",
+    "alt": "Read chat as an early warning, then verify; Viewer counts can lag a chat change; use both signals and review the context."
+  },
+  "canvasNullReason": null,
+  "reflect": {
+    "graphRef": "streaming-gta/engagement-drop-40"
+  },
+  "handoff": {
+    "audioUnit": "placard",
+    "speechNotes": [
+      "Use the supplied spoken literals and canonical terms.",
+      "No timestamps or audio assets exist yet."
+    ],
+    "practiceEvidence": "Only an actual learner action can earn practice evidence; this authored predict check cannot."
+  }
+}

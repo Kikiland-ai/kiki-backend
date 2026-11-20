@@ -1,0 +1,86 @@
+{
+  "schema": "kiki-cue-seeds/v1",
+  "timing": "pending_tts",
+  "concepts": {
+    "ST-HOOKS": [
+      {
+        "placard": 1,
+        "sentence": 0,
+        "sentenceId": "CARD-ST-HOOKS-concept.s1",
+        "scene": {
+          "id": "st-line",
+          "state": "bands"
+        }
+      },
+      {
+        "placard": 2,
+        "sentence": 0,
+        "sentenceId": "CARD-ST-HOOKS-application.s1",
+        "scene": {
+          "id": "st-line",
+          "state": "bands"
+        }
+      }
+    ],
+    "ST-CHAT": [
+      {
+        "placard": 1,
+        "sentence": 0,
+        "sentenceId": "CARD-ST-CHAT-concept.s1",
+        "scene": {
+          "id": "st-line",
+          "state": "chat-first"
+        }
+      },
+      {
+        "placard": 2,
+        "sentence": 0,
+        "sentenceId": "CARD-ST-CHAT-application.s1",
+        "scene": {
+          "id": "st-line",
+          "state": "chat-first"
+        }
+      }
+    ],
+    "ST-RETENTION": [
+      {
+        "placard": 1,
+        "sentence": 0,
+        "sentenceId": "CARD-ST-RETENTION-concept.s1",
+        "scene": {
+          "id": "st-line",
+          "state": "compare"
+        }
+      },
+      {
+        "placard": 2,
+        "sentence": 0,
+        "sentenceId": "CARD-ST-RETENTION-application.s1",
+        "scene": {
+          "id": "st-line",
+          "state": "compare"
+        }
+      }
+    ],
+    "ST-EXPERIMENT": [
+      {
+        "placard": 1,
+        "sentence": 0,
+        "sentenceId": "CARD-ST-EXPERIMENT-concept.s1",
+        "scene": {
+          "id": "st-experiment-flow",
+          "state": "review"
+        }
+      },
+      {
+        "placard": 2,
+        "sentence": 0,
+        "sentenceId": "CARD-ST-EXPERIMENT-application.s1",
+        "scene": {
+          "id": "st-experiment-flow",
+          "state": "review"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,1096 @@
+{
+  "schema": "kiki-authored-assessments/v1",
+  "review": "draft",
+  "concepts": {
+    "ST-HOOKS": {
+      "policy": {
+        "conceptChecks": 5,
+        "passPercent": 60,
+        "options": 4,
+        "chapterTest": false
+      },
+      "checks": [
+        {
+          "id": "Q-ST-HOOKS-1",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "diagnosis",
+          "prompt": "What is the most defensible planning gap in the case grind?",
+          "options": [
+            "The game category must be wrong",
+            "Any grind is forbidden everywhere",
+            "Every departing viewer disliked the creator",
+            "No stated goal or participation"
+          ],
+          "answer": "No stated goal or participation",
+          "distractorRationale": {
+            "Any grind is forbidden everywhere": "error: Overgeneralises one case into a universal ban",
+            "The game category must be wrong": "error: Infers a category error unsupported by the case",
+            "Every departing viewer disliked the creator": "error: Infers every viewer motivation without evidence"
+          },
+          "explanation": "The case notes establish missing structure; they do not establish every viewer motivation or a universal ban.",
+          "objectiveIds": [
+            "O-ST-HOOKS-1"
+          ],
+          "difficulty": 1,
+          "claimIds": [
+            "CL-ST-HOOKS-RULE",
+            "CL-ST-HOOKS-WORKED",
+            "CL-ST-HOOKS-definition-1",
+            "CL-ST-HOOKS-definition-2",
+            "CL-ST-HOOKS-concept-1",
+            "CL-ST-HOOKS-concept-2",
+            "CL-ST-HOOKS-concept-3"
+          ]
+        },
+        {
+          "id": "Q-ST-HOOKS-2",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "process",
+          "prompt": "Under LW-5.2, which draft fits the agency rule?",
+          "options": [
+            "Twenty minutes with no target",
+            "Twenty minutes with music only",
+            "Ten minutes, stated goal and poll",
+            "An unlimited grind with a new title"
+          ],
+          "answer": "Ten minutes, stated goal and poll",
+          "distractorRationale": {
+            "Twenty minutes with music only": "error: Exceeds the agency duration cap and omits participation",
+            "Twenty minutes with no target": "error: Omits both a time target and a participation mechanism",
+            "An unlimited grind with a new title": "error: Uses a title in place of goal, duration and participation"
+          },
+          "explanation": "The agency requires duration, goal and participation together; music or a title alone does not satisfy the rule.",
+          "objectiveIds": [
+            "O-ST-HOOKS-2"
+          ],
+          "difficulty": 1,
+          "claimIds": [
+            "CL-ST-HOOKS-RULE",
+            "CL-ST-HOOKS-WORKED",
+            "CL-ST-HOOKS-definition-1",
+            "CL-ST-HOOKS-definition-2",
+            "CL-ST-HOOKS-concept-1",
+            "CL-ST-HOOKS-concept-2",
+            "CL-ST-HOOKS-concept-3"
+          ]
+        },
+        {
+          "id": "Q-ST-HOOKS-3",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "judgement",
+          "prompt": "How should the agency silence limit be described?",
+          "options": [
+            "A measured platform-wide statistic",
+            "A legal platform requirement",
+            "A guaranteed retention mechanism",
+            "This agency rule of thumb"
+          ],
+          "answer": "This agency rule of thumb",
+          "distractorRationale": {
+            "A measured platform-wide statistic": "error: Invents a platform-wide empirical claim",
+            "A guaranteed retention mechanism": "error: Confuses a heuristic with a guaranteed effect",
+            "A legal platform requirement": "error: Invents a legal platform requirement"
+          },
+          "explanation": "The source is an illustrative agency playbook, not a platform study or published legal requirement.",
+          "objectiveIds": [
+            "O-ST-HOOKS-1"
+          ],
+          "difficulty": 2,
+          "claimIds": [
+            "CL-ST-HOOKS-RULE",
+            "CL-ST-HOOKS-WORKED",
+            "CL-ST-HOOKS-definition-1",
+            "CL-ST-HOOKS-definition-2",
+            "CL-ST-HOOKS-concept-1",
+            "CL-ST-HOOKS-concept-2",
+            "CL-ST-HOOKS-concept-3"
+          ]
+        },
+        {
+          "id": "Q-ST-HOOKS-4",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "calculation",
+          "prompt": "How long was the case grind from minute 38 up to minute 60?",
+          "options": [
+            "10 minutes",
+            "22 minutes",
+            "38 minutes",
+            "18 minutes"
+          ],
+          "answer": "22 minutes",
+          "distractorRationale": {
+            "10 minutes": "error: Substitutes the allowed cap for the actual duration",
+            "18 minutes": "error: Miscomputes the boundary difference",
+            "38 minutes": "error: Uses the start minute as the duration"
+          },
+          "explanation": "Subtract the start from the exclusive end of the segment; that gives twenty-two minutes.",
+          "objectiveIds": [
+            "O-ST-HOOKS-2"
+          ],
+          "difficulty": 2,
+          "claimIds": [
+            "CL-ST-HOOKS-RULE",
+            "CL-ST-HOOKS-WORKED",
+            "CL-ST-HOOKS-definition-1",
+            "CL-ST-HOOKS-definition-2",
+            "CL-ST-HOOKS-concept-1",
+            "CL-ST-HOOKS-concept-2",
+            "CL-ST-HOOKS-concept-3"
+          ]
+        },
+        {
+          "id": "Q-ST-HOOKS-5",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "process",
+          "prompt": "What should the learner do before making a causal claim from the drop?",
+          "options": [
+            "Treat the overall average as proof",
+            "Review the transition in the VOD",
+            "Replace the live game automatically",
+            "Assume all viewers left for one cause"
+          ],
+          "answer": "Review the transition in the VOD",
+          "distractorRationale": {
+            "Replace the live game automatically": "error: Delegates tool control instead of learner review",
+            "Assume all viewers left for one cause": "error: Asserts one cause for everyone without evidence",
+            "Treat the overall average as proof": "error: Uses an aggregate average to explain a local transition"
+          },
+          "explanation": "The VOD adds context to the timing; a line chart by itself does not establish a causal explanation.",
+          "objectiveIds": [
+            "O-ST-HOOKS-1"
+          ],
+          "difficulty": 3,
+          "claimIds": [
+            "CL-ST-HOOKS-RULE",
+            "CL-ST-HOOKS-WORKED",
+            "CL-ST-HOOKS-definition-1",
+            "CL-ST-HOOKS-definition-2",
+            "CL-ST-HOOKS-concept-1",
+            "CL-ST-HOOKS-concept-2",
+            "CL-ST-HOOKS-concept-3"
+          ]
+        },
+        {
+          "id": "Q-ST-HOOKS-WORDS",
+          "type": "fill_blank",
+          "dimension": "words",
+          "evaluates": "recall",
+          "prompt": "Name the term: A stated reason for the audience to keep watching.",
+          "answer": "hook",
+          "explanation": "The term is hook. A stated reason for the audience to keep watching.",
+          "objectiveIds": [
+            "O-ST-HOOKS-1"
+          ],
+          "difficulty": 1,
+          "claimIds": [
+            "CL-ST-HOOKS-RULE"
+          ]
+        },
+        {
+          "id": "Q-ST-HOOKS-EXPRESSION",
+          "type": "short_english",
+          "dimension": "english",
+          "evaluates": "process",
+          "prompt": "Pitch the segment diagnosis and the revised goal-led block to the agency in two clear lines. Working language: Hinglish; canonical terms stay unchanged.",
+          "answer": "The duration is 22 minutes, exceeding the agency ten-minute cap. The stated goal and participation are also absent. Draft a grind of at most ten minutes, say the goal before the transition, and attach a poll or other chat mechanic. Save a review plan and test it; this is not a claim that every grind loses viewers.",
+          "explanation": "Assess conceptual claims separately from clarity and terminology. A language gap does not remove concept credit.",
+          "objectiveIds": [
+            "O-ST-HOOKS-1",
+            "O-ST-HOOKS-2"
+          ],
+          "difficulty": 2,
+          "claimIds": [
+            "CL-ST-HOOKS-RULE"
+          ],
+          "rubric": [
+            {
+              "criterion": "State the evidenced reasoning accurately; record concept credit separately.",
+              "dim": "concept"
+            },
+            {
+              "criterion": "Use the canonical terms to explain the reasoning clearly in the working language.",
+              "dim": "english"
+            }
+          ]
+        },
+        {
+          "id": "Q-ST-HOOKS-PRACTICE",
+          "type": "predict",
+          "dimension": "lab",
+          "evaluates": "process",
+          "prompt": "In the saved run-of-show, mark the 38-to-60 segment and draft a shorter goal-led version; the learner makes the edit.",
+          "answer": "Use the saved illustrative case only. The duration is 22 minutes, exceeding the agency ten-minute cap. The stated goal and participation are also absent. Draft a grind of at most ten minutes, say the goal before the transition, and attach a poll or other chat mechanic. Save a review plan and test it; this is not a claim that every grind loses viewers.",
+          "explanation": "The learner performs the inspection or edit. A predicted answer is not proof that the real tool action occurred.",
+          "objectiveIds": [
+            "O-ST-HOOKS-1",
+            "O-ST-HOOKS-2"
+          ],
+          "difficulty": 3,
+          "claimIds": [
+            "CL-ST-HOOKS-RULE"
+          ],
+          "evidencePolicy": {
+            "predictionOnly": true,
+            "earnsPracticeCredit": false,
+            "requires": "Observed learner action or a saved learner artefact, checked against the task criteria."
+          }
+        }
+      ],
+      "workedQuestion": {
+        "id": "W-ST-HOOKS",
+        "type": "short_english",
+        "marks": 3,
+        "prompt": "The case grind runs from minute 38 to 60 without a goal or chat participation. Diagnose it under LW-5.2 and draft a replacement.",
+        "modelAnswer": [
+          "The duration is 22 minutes, exceeding the agency ten-minute cap. The stated goal and participation are also absent.",
+          "Draft a grind of at most ten minutes, say the goal before the transition, and attach a poll or other chat mechanic.",
+          "Save a review plan and test it; this is not a claim that every grind loses viewers."
+        ],
+        "rubric": [
+          {
+            "criterion": "The duration is 22 minutes, exceeding the agency ten-minute cap. The stated goal and participation are also absent.",
+            "marks": 1,
+            "objectiveId": "O-ST-HOOKS-1"
+          },
+          {
+            "criterion": "Draft a grind of at most ten minutes, say the goal before the transition, and attach a poll or other chat mechanic.",
+            "marks": 1,
+            "objectiveId": "O-ST-HOOKS-2"
+          },
+          {
+            "criterion": "Save a review plan and test it; this is not a claim that every grind loses viewers.",
+            "marks": 1,
+            "objectiveId": "O-ST-HOOKS-1"
+          }
+        ],
+        "examVocabulary": [
+          "T-ST-HOOK",
+          "T-ST-SEGMENT",
+          "T-ST-ROS",
+          "T-ST-VOD"
+        ]
+      }
+    },
+    "ST-CHAT": {
+      "policy": {
+        "conceptChecks": 5,
+        "passPercent": 60,
+        "options": 4,
+        "chapterTest": false
+      },
+      "checks": [
+        {
+          "id": "Q-ST-CHAT-1",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "diagnosis",
+          "prompt": "Which signal changed early in the case?",
+          "options": [
+            "Chat rate near the transition",
+            "A change in the game logo",
+            "Only the final stream average",
+            "A later incoming raid"
+          ],
+          "answer": "Chat rate near the transition",
+          "distractorRationale": {
+            "Only the final stream average": "error: Uses a whole-stream aggregate instead of the early signal",
+            "A later incoming raid": "error: Uses an event that happens much later",
+            "A change in the game logo": "error: Introduces a cosmetic change absent from the case"
+          },
+          "explanation": "The case trace shows the early chat decline; the later raid cannot explain the earlier sequence.",
+          "objectiveIds": [
+            "O-ST-CHAT-1"
+          ],
+          "difficulty": 1,
+          "claimIds": [
+            "CL-ST-CHAT-RULE",
+            "CL-ST-CHAT-WORKED",
+            "CL-ST-CHAT-definition-1",
+            "CL-ST-CHAT-definition-2",
+            "CL-ST-CHAT-concept-1",
+            "CL-ST-CHAT-concept-2",
+            "CL-ST-CHAT-concept-3"
+          ]
+        },
+        {
+          "id": "Q-ST-CHAT-2",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "process",
+          "prompt": "What does LW-4.1 require during a grind?",
+          "options": [
+            "Automatic edits by KiKi",
+            "A new title only",
+            "Silence until viewers leave",
+            "A poll or participation mechanic"
+          ],
+          "answer": "A poll or participation mechanic",
+          "distractorRationale": {
+            "A new title only": "error: Uses a title instead of viewer participation",
+            "Silence until viewers leave": "error: Waits for a lagging count instead of checking the warning",
+            "Automatic edits by KiKi": "error: Delegates execution instead of learner action"
+          },
+          "explanation": "The agency requires a participation mechanism; KiKi coaches while the creator performs the work.",
+          "objectiveIds": [
+            "O-ST-CHAT-2"
+          ],
+          "difficulty": 1,
+          "claimIds": [
+            "CL-ST-CHAT-RULE",
+            "CL-ST-CHAT-WORKED",
+            "CL-ST-CHAT-definition-1",
+            "CL-ST-CHAT-definition-2",
+            "CL-ST-CHAT-concept-1",
+            "CL-ST-CHAT-concept-2",
+            "CL-ST-CHAT-concept-3"
+          ]
+        },
+        {
+          "id": "Q-ST-CHAT-3",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "judgement",
+          "prompt": "What follows from a quiet chat alone?",
+          "options": [
+            "The creator caused every departure",
+            "The whole stream has failed",
+            "A warning that needs context",
+            "Proof the platform hid the stream"
+          ],
+          "answer": "A warning that needs context",
+          "distractorRationale": {
+            "The creator caused every departure": "error: Infers individual causation from one trace",
+            "The whole stream has failed": "error: Extrapolates a local warning to the whole stream",
+            "Proof the platform hid the stream": "error: Invents a platform distribution explanation"
+          },
+          "explanation": "A warning guides a review; the trace alone cannot identify one cause or prove a platform action.",
+          "objectiveIds": [
+            "O-ST-CHAT-1"
+          ],
+          "difficulty": 2,
+          "claimIds": [
+            "CL-ST-CHAT-RULE",
+            "CL-ST-CHAT-WORKED",
+            "CL-ST-CHAT-definition-1",
+            "CL-ST-CHAT-definition-2",
+            "CL-ST-CHAT-concept-1",
+            "CL-ST-CHAT-concept-2",
+            "CL-ST-CHAT-concept-3"
+          ]
+        },
+        {
+          "id": "Q-ST-CHAT-4",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "calculation",
+          "prompt": "What is the decline from 87 to 15 chat messages per minute?",
+          "options": [
+            "15 messages",
+            "87 messages",
+            "41 messages",
+            "72 messages"
+          ],
+          "answer": "72 messages",
+          "distractorRationale": {
+            "15 messages": "error: Reports the final level rather than the decline",
+            "41 messages": "error: Uses the later sample minute as a message count",
+            "87 messages": "error: Reports the initial level rather than the decline"
+          },
+          "explanation": "Subtract the later rate from the earlier one. The size of the decline is separate from its cause.",
+          "objectiveIds": [
+            "O-ST-CHAT-2"
+          ],
+          "difficulty": 2,
+          "claimIds": [
+            "CL-ST-CHAT-RULE",
+            "CL-ST-CHAT-WORKED",
+            "CL-ST-CHAT-definition-1",
+            "CL-ST-CHAT-definition-2",
+            "CL-ST-CHAT-concept-1",
+            "CL-ST-CHAT-concept-2",
+            "CL-ST-CHAT-concept-3"
+          ]
+        },
+        {
+          "id": "Q-ST-CHAT-5",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "process",
+          "prompt": "Which review best uses the early warning?",
+          "options": [
+            "Compare both traces and inspect the VOD",
+            "Infer a platform-wide lag rule",
+            "Change several live settings immediately",
+            "Ignore chat while viewers are stable"
+          ],
+          "answer": "Compare both traces and inspect the VOD",
+          "distractorRationale": {
+            "Ignore chat while viewers are stable": "error: Ignores a leading signal because the count still holds",
+            "Infer a platform-wide lag rule": "error: Generalises one illustrative lag to all streams",
+            "Change several live settings immediately": "error: Changes several variables before diagnosing the evidence"
+          },
+          "explanation": "Multiple traces and the VOD provide context; a single illustrative episode cannot establish a universal timing rule.",
+          "objectiveIds": [
+            "O-ST-CHAT-1"
+          ],
+          "difficulty": 3,
+          "claimIds": [
+            "CL-ST-CHAT-RULE",
+            "CL-ST-CHAT-WORKED",
+            "CL-ST-CHAT-definition-1",
+            "CL-ST-CHAT-definition-2",
+            "CL-ST-CHAT-concept-1",
+            "CL-ST-CHAT-concept-2",
+            "CL-ST-CHAT-concept-3"
+          ]
+        },
+        {
+          "id": "Q-ST-CHAT-WORDS",
+          "type": "fill_blank",
+          "dimension": "words",
+          "evaluates": "recall",
+          "prompt": "Name the term: Messages per minute in this illustrative analytics case.",
+          "answer": "chat rate",
+          "explanation": "The term is chat rate. Messages per minute in this illustrative analytics case.",
+          "objectiveIds": [
+            "O-ST-CHAT-1"
+          ],
+          "difficulty": 1,
+          "claimIds": [
+            "CL-ST-CHAT-RULE"
+          ]
+        },
+        {
+          "id": "Q-ST-CHAT-EXPRESSION",
+          "type": "short_english",
+          "dimension": "english",
+          "evaluates": "process",
+          "prompt": "Explain the observed chat-first sequence and state what further evidence would support your diagnosis. Working language: Hinglish; canonical terms stay unchanged.",
+          "answer": "The chat decline is 72 messages per minute, about 82.76 percent of the earlier rate. Viewer stability does not erase the participation warning. Compare the transition and VOD with the chat trace. Check whether the planned chat mechanic required by LW-4.1 was present; do not claim this alone proves a cause.",
+          "explanation": "Assess conceptual claims separately from clarity and terminology. A language gap does not remove concept credit.",
+          "objectiveIds": [
+            "O-ST-CHAT-1",
+            "O-ST-CHAT-2"
+          ],
+          "difficulty": 2,
+          "claimIds": [
+            "CL-ST-CHAT-RULE"
+          ],
+          "rubric": [
+            {
+              "criterion": "State the evidenced reasoning accurately; record concept credit separately.",
+              "dim": "concept"
+            },
+            {
+              "criterion": "Use the canonical terms to explain the reasoning clearly in the working language.",
+              "dim": "english"
+            }
+          ]
+        },
+        {
+          "id": "Q-ST-CHAT-PRACTICE",
+          "type": "predict",
+          "dimension": "lab",
+          "evaluates": "process",
+          "prompt": "On the saved analytics trace, locate minutes 37 to 43, compare chat with viewers, and note the transition for VOD review.",
+          "answer": "Use the saved illustrative case only. The chat decline is 72 messages per minute, about 82.76 percent of the earlier rate. Viewer stability does not erase the participation warning. Compare the transition and VOD with the chat trace. Check whether the planned chat mechanic required by LW-4.1 was present; do not claim this alone proves a cause.",
+          "explanation": "The learner performs the inspection or edit. A predicted answer is not proof that the real tool action occurred.",
+          "objectiveIds": [
+            "O-ST-CHAT-1",
+            "O-ST-CHAT-2"
+          ],
+          "difficulty": 3,
+          "claimIds": [
+            "CL-ST-CHAT-RULE"
+          ],
+          "evidencePolicy": {
+            "predictionOnly": true,
+            "earnsPracticeCredit": false,
+            "requires": "Observed learner action or a saved learner artefact, checked against the task criteria."
+          }
+        }
+      ],
+      "workedQuestion": {
+        "id": "W-ST-CHAT",
+        "type": "short_english",
+        "marks": 3,
+        "prompt": "Chat changes from 87 messages at minute 37 to 15 at minute 41, while viewers initially hold. What should the agency review?",
+        "modelAnswer": [
+          "The chat decline is 72 messages per minute, about 82.76 percent of the earlier rate.",
+          "Viewer stability does not erase the participation warning. Compare the transition and VOD with the chat trace.",
+          "Check whether the planned chat mechanic required by LW-4.1 was present; do not claim this alone proves a cause."
+        ],
+        "rubric": [
+          {
+            "criterion": "The chat decline is 72 messages per minute, about 82.76 percent of the earlier rate.",
+            "marks": 1,
+            "objectiveId": "O-ST-CHAT-1"
+          },
+          {
+            "criterion": "Viewer stability does not erase the participation warning. Compare the transition and VOD with the chat trace.",
+            "marks": 1,
+            "objectiveId": "O-ST-CHAT-2"
+          },
+          {
+            "criterion": "Check whether the planned chat mechanic required by LW-4.1 was present; do not claim this alone proves a cause.",
+            "marks": 1,
+            "objectiveId": "O-ST-CHAT-1"
+          }
+        ],
+        "examVocabulary": [
+          "T-ST-CHAT",
+          "T-ST-MECHANIC"
+        ]
+      }
+    },
+    "ST-RETENTION": {
+      "policy": {
+        "conceptChecks": 5,
+        "passPercent": 60,
+        "options": 4,
+        "chapterTest": false
+      },
+      "checks": [
+        {
+          "id": "Q-ST-RETENTION-1",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "diagnosis",
+          "prompt": "Why can segment retention exceed one under LW-6.1?",
+          "options": [
+            "Concurrent counts can grow",
+            "The ratio tracks immortal viewers",
+            "The platform reports only unique people",
+            "The denominator must be negative"
+          ],
+          "answer": "Concurrent counts can grow",
+          "distractorRationale": {
+            "The ratio tracks immortal viewers": "error: Treats an aggregate count ratio as tracked individuals",
+            "The denominator must be negative": "error: Invents a negative denominator",
+            "The platform reports only unique people": "error: Confuses concurrent counts with stream-wide unique viewers"
+          },
+          "explanation": "The agency ratio uses two concurrent counts, so arrivals can produce a value above one.",
+          "objectiveIds": [
+            "O-ST-RETENTION-1"
+          ],
+          "difficulty": 1,
+          "claimIds": [
+            "CL-ST-RETENTION-RULE",
+            "CL-ST-RETENTION-WORKED",
+            "CL-ST-RETENTION-definition-1",
+            "CL-ST-RETENTION-definition-2",
+            "CL-ST-RETENTION-concept-1",
+            "CL-ST-RETENTION-concept-2",
+            "CL-ST-RETENTION-concept-3"
+          ]
+        },
+        {
+          "id": "Q-ST-RETENTION-2",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "process",
+          "prompt": "Which endpoints belong to the grind interval from minute 38 up to minute 60?",
+          "options": [
+            "Minute 37 and minute 61",
+            "Minute 38 and minute 60",
+            "Minute 38 and minute 59",
+            "The stream peak and final minute"
+          ],
+          "answer": "Minute 38 and minute 59",
+          "distractorRationale": {
+            "Minute 38 and minute 60": "error: Includes the first sample of the next segment",
+            "Minute 37 and minute 61": "error: Includes samples outside both boundaries",
+            "The stream peak and final minute": "error: Ignores segment boundaries altogether"
+          },
+          "explanation": "The case uses an exclusive end boundary; minute sixty is the first sample of the next segment.",
+          "objectiveIds": [
+            "O-ST-RETENTION-2"
+          ],
+          "difficulty": 1,
+          "claimIds": [
+            "CL-ST-RETENTION-RULE",
+            "CL-ST-RETENTION-WORKED",
+            "CL-ST-RETENTION-definition-1",
+            "CL-ST-RETENTION-definition-2",
+            "CL-ST-RETENTION-concept-1",
+            "CL-ST-RETENTION-concept-2",
+            "CL-ST-RETENTION-concept-3"
+          ]
+        },
+        {
+          "id": "Q-ST-RETENTION-3",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "judgement",
+          "prompt": "How should a ratio below 0.8 be used?",
+          "options": [
+            "A universal platform quality grade",
+            "An agency flag for closer review",
+            "Proof of a specific individual cause",
+            "Evidence every viewer disliked the game"
+          ],
+          "answer": "An agency flag for closer review",
+          "distractorRationale": {
+            "Proof of a specific individual cause": "error: Uses a count ratio as causal proof",
+            "A universal platform quality grade": "error: Treats an invented agency threshold as a platform grade",
+            "Evidence every viewer disliked the game": "error: Claims a specific audience motive without evidence"
+          },
+          "explanation": "The agency threshold prioritises review; the VOD and surrounding signals are still needed for diagnosis.",
+          "objectiveIds": [
+            "O-ST-RETENTION-1"
+          ],
+          "difficulty": 2,
+          "claimIds": [
+            "CL-ST-RETENTION-RULE",
+            "CL-ST-RETENTION-WORKED",
+            "CL-ST-RETENTION-definition-1",
+            "CL-ST-RETENTION-definition-2",
+            "CL-ST-RETENTION-concept-1",
+            "CL-ST-RETENTION-concept-2",
+            "CL-ST-RETENTION-concept-3"
+          ]
+        },
+        {
+          "id": "Q-ST-RETENTION-4",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "calculation",
+          "prompt": "What is 348 divided by 556, rounded to two decimals?",
+          "options": [
+            "0.37",
+            "0.80",
+            "1.60",
+            "0.63"
+          ],
+          "answer": "0.63",
+          "distractorRationale": {
+            "0.37": "error: Reports the approximate decline fraction instead of endpoint ratio",
+            "0.80": "error: Substitutes the review threshold for the calculation",
+            "1.60": "error: Inverts the endpoint ratio"
+          },
+          "explanation": "The endpoint count ratio is about 0.626. The roughly thirty-seven percent decline is a different representation.",
+          "objectiveIds": [
+            "O-ST-RETENTION-2"
+          ],
+          "difficulty": 2,
+          "claimIds": [
+            "CL-ST-RETENTION-RULE",
+            "CL-ST-RETENTION-WORKED",
+            "CL-ST-RETENTION-definition-1",
+            "CL-ST-RETENTION-definition-2",
+            "CL-ST-RETENTION-concept-1",
+            "CL-ST-RETENTION-concept-2",
+            "CL-ST-RETENTION-concept-3"
+          ]
+        },
+        {
+          "id": "Q-ST-RETENTION-5",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "diagnosis",
+          "prompt": "What is unsupported by a count ratio of 0.63?",
+          "options": [
+            "The later count is lower than the earlier one",
+            "The segment warrants agency review",
+            "Exactly 63 percent of the same people stayed",
+            "The endpoint ratio is below 0.8"
+          ],
+          "answer": "Exactly 63 percent of the same people stayed",
+          "distractorRationale": {
+            "The later count is lower than the earlier one": "error: Denies the direction visible in the endpoint counts",
+            "The segment warrants agency review": "error: Denies the agency review rule",
+            "The endpoint ratio is below 0.8": "error: Confuses 0.63 with a value above the threshold"
+          },
+          "explanation": "Concurrent count endpoints do not identify individual viewers; arrivals and departures may both occur.",
+          "objectiveIds": [
+            "O-ST-RETENTION-1"
+          ],
+          "difficulty": 3,
+          "claimIds": [
+            "CL-ST-RETENTION-RULE",
+            "CL-ST-RETENTION-WORKED",
+            "CL-ST-RETENTION-definition-1",
+            "CL-ST-RETENTION-definition-2",
+            "CL-ST-RETENTION-concept-1",
+            "CL-ST-RETENTION-concept-2",
+            "CL-ST-RETENTION-concept-3"
+          ]
+        },
+        {
+          "id": "Q-ST-RETENTION-WORDS",
+          "type": "fill_blank",
+          "dimension": "words",
+          "evaluates": "recall",
+          "prompt": "Name the term: Concurrent viewers at a given time, rather than unique people across the whole stream.",
+          "answer": "CCV",
+          "explanation": "The term is CCV. Concurrent viewers at a given time, rather than unique people across the whole stream.",
+          "objectiveIds": [
+            "O-ST-RETENTION-1"
+          ],
+          "difficulty": 1,
+          "claimIds": [
+            "CL-ST-RETENTION-RULE"
+          ]
+        },
+        {
+          "id": "Q-ST-RETENTION-EXPRESSION",
+          "type": "short_english",
+          "dimension": "english",
+          "evaluates": "process",
+          "prompt": "Report the two ratios with their endpoint conventions and explain why they are not individual-viewer retention. Working language: Hinglish; canonical terms stay unchanged.",
+          "answer": "Grind: 348 / 556 = 0.625899, about 0.63; this is below the agency threshold 0.8. Vote: 477 / 351 = 1.358974, about 1.36; concurrent counts grew. These ratios compare aggregate counts, not the same people; they do not by themselves establish causation.",
+          "explanation": "Assess conceptual claims separately from clarity and terminology. A language gap does not remove concept credit.",
+          "objectiveIds": [
+            "O-ST-RETENTION-1",
+            "O-ST-RETENTION-2"
+          ],
+          "difficulty": 2,
+          "claimIds": [
+            "CL-ST-RETENTION-RULE"
+          ],
+          "rubric": [
+            {
+              "criterion": "State the evidenced reasoning accurately; record concept credit separately.",
+              "dim": "concept"
+            },
+            {
+              "criterion": "Use the canonical terms to explain the reasoning clearly in the working language.",
+              "dim": "english"
+            }
+          ]
+        },
+        {
+          "id": "Q-ST-RETENTION-PRACTICE",
+          "type": "predict",
+          "dimension": "lab",
+          "evaluates": "process",
+          "prompt": "Select the grind interval on the saved dashboard, read minutes 38 and 59, compute the ratio, then inspect the VOD around the transition.",
+          "answer": "Use the saved illustrative case only. Grind: 348 / 556 = 0.625899, about 0.63; this is below the agency threshold 0.8. Vote: 477 / 351 = 1.358974, about 1.36; concurrent counts grew. These ratios compare aggregate counts, not the same people; they do not by themselves establish causation.",
+          "explanation": "The learner performs the inspection or edit. A predicted answer is not proof that the real tool action occurred.",
+          "objectiveIds": [
+            "O-ST-RETENTION-1",
+            "O-ST-RETENTION-2"
+          ],
+          "difficulty": 3,
+          "claimIds": [
+            "CL-ST-RETENTION-RULE"
+          ],
+          "evidencePolicy": {
+            "predictionOnly": true,
+            "earnsPracticeCredit": false,
+            "requires": "Observed learner action or a saved learner artefact, checked against the task criteria."
+          }
+        }
+      ],
+      "workedQuestion": {
+        "id": "W-ST-RETENTION",
+        "type": "short_english",
+        "marks": 3,
+        "prompt": "Using grind endpoints 556 and 348, and vote endpoints 351 and 477, calculate the agency ratios and state one limitation.",
+        "modelAnswer": [
+          "Grind: 348 / 556 = 0.625899, about 0.63; this is below the agency threshold 0.8.",
+          "Vote: 477 / 351 = 1.358974, about 1.36; concurrent counts grew.",
+          "These ratios compare aggregate counts, not the same people; they do not by themselves establish causation."
+        ],
+        "rubric": [
+          {
+            "criterion": "Grind: 348 / 556 = 0.625899, about 0.63; this is below the agency threshold 0.8.",
+            "marks": 1,
+            "objectiveId": "O-ST-RETENTION-1"
+          },
+          {
+            "criterion": "Vote: 477 / 351 = 1.358974, about 1.36; concurrent counts grew.",
+            "marks": 1,
+            "objectiveId": "O-ST-RETENTION-2"
+          },
+          {
+            "criterion": "These ratios compare aggregate counts, not the same people; they do not by themselves establish causation.",
+            "marks": 1,
+            "objectiveId": "O-ST-RETENTION-1"
+          }
+        ],
+        "examVocabulary": [
+          "T-ST-CCV",
+          "T-ST-RETENTION"
+        ]
+      }
+    },
+    "ST-EXPERIMENT": {
+      "policy": {
+        "conceptChecks": 5,
+        "passPercent": 60,
+        "options": 4,
+        "chapterTest": false
+      },
+      "checks": [
+        {
+          "id": "Q-ST-EXPERIMENT-1",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "process",
+          "prompt": "Which plan best fits LW-6.2?",
+          "options": [
+            "New game, time, title and poll together",
+            "Promise a fixed increase before testing",
+            "Copy the peak without logging changes",
+            "One poll change with a prediction and measure"
+          ],
+          "answer": "One poll change with a prediction and measure",
+          "distractorRationale": {
+            "New game, time, title and poll together": "error: Changes several factors and loses attribution",
+            "Copy the peak without logging changes": "error: Selects a peak without a documented intervention",
+            "Promise a fixed increase before testing": "error: Promises an effect before collecting evidence"
+          },
+          "explanation": "The rule asks for a traceable single change; several simultaneous changes make attribution harder.",
+          "objectiveIds": [
+            "O-ST-EXPERIMENT-1"
+          ],
+          "difficulty": 1,
+          "claimIds": [
+            "CL-ST-EXPERIMENT-RULE",
+            "CL-ST-EXPERIMENT-WORKED",
+            "CL-ST-EXPERIMENT-definition-1",
+            "CL-ST-EXPERIMENT-definition-2",
+            "CL-ST-EXPERIMENT-concept-1",
+            "CL-ST-EXPERIMENT-concept-2",
+            "CL-ST-EXPERIMENT-concept-3"
+          ]
+        },
+        {
+          "id": "Q-ST-EXPERIMENT-2",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "diagnosis",
+          "prompt": "Why can the case recovery not identify the effect of polls alone?",
+          "options": [
+            "There were no viewer counts",
+            "The stream had no chat",
+            "Talking and segment context also changed",
+            "Every poll must reduce engagement"
+          ],
+          "answer": "Talking and segment context also changed",
+          "distractorRationale": {
+            "There were no viewer counts": "error: Ignores the available viewer series",
+            "The stream had no chat": "error: Ignores the case chat trace",
+            "Every poll must reduce engagement": "error: Invents a universal negative poll effect"
+          },
+          "explanation": "Several things changed together, so the historical comparison does not isolate a poll effect.",
+          "objectiveIds": [
+            "O-ST-EXPERIMENT-2"
+          ],
+          "difficulty": 1,
+          "claimIds": [
+            "CL-ST-EXPERIMENT-RULE",
+            "CL-ST-EXPERIMENT-WORKED",
+            "CL-ST-EXPERIMENT-definition-1",
+            "CL-ST-EXPERIMENT-definition-2",
+            "CL-ST-EXPERIMENT-concept-1",
+            "CL-ST-EXPERIMENT-concept-2",
+            "CL-ST-EXPERIMENT-concept-3"
+          ]
+        },
+        {
+          "id": "Q-ST-EXPERIMENT-3",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "judgement",
+          "prompt": "What should happen when a raid makes the comparison unclear?",
+          "options": [
+            "Count the whole gain as the poll effect",
+            "Log the confounder and qualify the result",
+            "Declare the agency rule invalid",
+            "Delete the unsuccessful observation"
+          ],
+          "answer": "Log the confounder and qualify the result",
+          "distractorRationale": {
+            "Count the whole gain as the poll effect": "error: Attributes the raid-driven gain to the poll",
+            "Delete the unsuccessful observation": "error: Deletes evidence that complicates the story",
+            "Declare the agency rule invalid": "error: Treats an inconclusive episode as a rule refutation"
+          },
+          "explanation": "The raid changes who is present; honest review retains the observation and qualifies attribution.",
+          "objectiveIds": [
+            "O-ST-EXPERIMENT-1"
+          ],
+          "difficulty": 2,
+          "claimIds": [
+            "CL-ST-EXPERIMENT-RULE",
+            "CL-ST-EXPERIMENT-WORKED",
+            "CL-ST-EXPERIMENT-definition-1",
+            "CL-ST-EXPERIMENT-definition-2",
+            "CL-ST-EXPERIMENT-concept-1",
+            "CL-ST-EXPERIMENT-concept-2",
+            "CL-ST-EXPERIMENT-concept-3"
+          ]
+        },
+        {
+          "id": "Q-ST-EXPERIMENT-4",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "process",
+          "prompt": "When should the prediction and review measure be written?",
+          "options": [
+            "Only if the stream improves",
+            "Before the planned experiment",
+            "Only after seeing the final peak",
+            "After choosing the best-looking segment"
+          ],
+          "answer": "Before the planned experiment",
+          "distractorRationale": {
+            "Only after seeing the final peak": "error: Chooses the measure after observing the outcome",
+            "After choosing the best-looking segment": "error: Selects the most favourable segment after the fact",
+            "Only if the stream improves": "error: Documents only successful outcomes"
+          },
+          "explanation": "Writing the measure beforehand reduces hindsight selection and makes the later review auditable.",
+          "objectiveIds": [
+            "O-ST-EXPERIMENT-2"
+          ],
+          "difficulty": 2,
+          "claimIds": [
+            "CL-ST-EXPERIMENT-RULE",
+            "CL-ST-EXPERIMENT-WORKED",
+            "CL-ST-EXPERIMENT-definition-1",
+            "CL-ST-EXPERIMENT-definition-2",
+            "CL-ST-EXPERIMENT-concept-1",
+            "CL-ST-EXPERIMENT-concept-2",
+            "CL-ST-EXPERIMENT-concept-3"
+          ]
+        },
+        {
+          "id": "Q-ST-EXPERIMENT-5",
+          "type": "mcq",
+          "dimension": "concept",
+          "evaluates": "judgement",
+          "prompt": "What does meeting the provisional threshold establish?",
+          "options": [
+            "Evidence to review with context",
+            "A guaranteed repeatable audience gain",
+            "Proof the poll caused the result",
+            "Permission to omit the VOD review"
+          ],
+          "answer": "Evidence to review with context",
+          "distractorRationale": {
+            "Proof the poll caused the result": "error: Equates a threshold crossing with causal proof",
+            "A guaranteed repeatable audience gain": "error: Confuses one episode with a guaranteed repeatable gain",
+            "Permission to omit the VOD review": "error: Omits contextual review after a favourable metric"
+          },
+          "explanation": "A threshold organises review. Context and confounders still matter, especially with one illustrative episode.",
+          "objectiveIds": [
+            "O-ST-EXPERIMENT-1"
+          ],
+          "difficulty": 3,
+          "claimIds": [
+            "CL-ST-EXPERIMENT-RULE",
+            "CL-ST-EXPERIMENT-WORKED",
+            "CL-ST-EXPERIMENT-definition-1",
+            "CL-ST-EXPERIMENT-definition-2",
+            "CL-ST-EXPERIMENT-concept-1",
+            "CL-ST-EXPERIMENT-concept-2",
+            "CL-ST-EXPERIMENT-concept-3"
+          ]
+        },
+        {
+          "id": "Q-ST-EXPERIMENT-WORDS",
+          "type": "fill_blank",
+          "dimension": "words",
+          "evaluates": "recall",
+          "prompt": "Name the term: A planned change with a prediction and a measure for the next review.",
+          "answer": "experiment",
+          "explanation": "The term is experiment. A planned change with a prediction and a measure for the next review.",
+          "objectiveIds": [
+            "O-ST-EXPERIMENT-1"
+          ],
+          "difficulty": 1,
+          "claimIds": [
+            "CL-ST-EXPERIMENT-RULE"
+          ]
+        },
+        {
+          "id": "Q-ST-EXPERIMENT-EXPRESSION",
+          "type": "short_english",
+          "dimension": "english",
+          "evaluates": "process",
+          "prompt": "Pitch cause hypothesis, one change, measure and uncertainty to the manager in two lines. Working language: Hinglish; canonical terms stay unchanged.",
+          "answer": "Change: add one poll to a comparable slow segment, keeping its stated goal and duration fixed. Prediction and review: participation may improve; compare chat rate and agency segment retention, using 0.8 as a provisional review flag rather than a success guarantee. Log raids, audience mix and execution differences; repeat or report inconclusive if they prevent attribution.",
+          "explanation": "Assess conceptual claims separately from clarity and terminology. A language gap does not remove concept credit.",
+          "objectiveIds": [
+            "O-ST-EXPERIMENT-1",
+            "O-ST-EXPERIMENT-2"
+          ],
+          "difficulty": 2,
+          "claimIds": [
+            "CL-ST-EXPERIMENT-RULE"
+          ],
+          "rubric": [
+            {
+              "criterion": "State the evidenced reasoning accurately; record concept credit separately.",
+              "dim": "concept"
+            },
+            {
+              "criterion": "Use the canonical terms to explain the reasoning clearly in the working language.",
+              "dim": "english"
+            }
+          ]
+        },
+        {
+          "id": "Q-ST-EXPERIMENT-PRACTICE",
+          "type": "predict",
+          "dimension": "lab",
+          "evaluates": "process",
+          "prompt": "Draft tomorrow run-of-show yourself with one labelled experiment, its prediction and review measure; log any raid or concurrent change.",
+          "answer": "Use the saved illustrative case only. Change: add one poll to a comparable slow segment, keeping its stated goal and duration fixed. Prediction and review: participation may improve; compare chat rate and agency segment retention, using 0.8 as a provisional review flag rather than a success guarantee. Log raids, audience mix and execution differences; repeat or report inconclusive if they prevent attribution.",
+          "explanation": "The learner performs the inspection or edit. A predicted answer is not proof that the real tool action occurred.",
+          "objectiveIds": [
+            "O-ST-EXPERIMENT-1",
+            "O-ST-EXPERIMENT-2"
+          ],
+          "difficulty": 3,
+          "claimIds": [
+            "CL-ST-EXPERIMENT-RULE"
+          ],
+          "evidencePolicy": {
+            "predictionOnly": true,
+            "earnsPracticeCredit": false,
+            "requires": "Observed learner action or a saved learner artefact, checked against the task criteria."
+          }
+        }
+      ],
+      "workedQuestion": {
+        "id": "W-ST-EXPERIMENT",
+        "type": "short_english",
+        "marks": 3,
+        "prompt": "Draft a one-change plan under LW-6.2. Include a measure, a provisional threshold and a reason the result may be inconclusive.",
+        "modelAnswer": [
+          "Change: add one poll to a comparable slow segment, keeping its stated goal and duration fixed.",
+          "Prediction and review: participation may improve; compare chat rate and agency segment retention, using 0.8 as a provisional review flag rather than a success guarantee.",
+          "Log raids, audience mix and execution differences; repeat or report inconclusive if they prevent attribution."
+        ],
+        "rubric": [
+          {
+            "criterion": "Change: add one poll to a comparable slow segment, keeping its stated goal and duration fixed.",
+            "marks": 1,
+            "objectiveId": "O-ST-EXPERIMENT-1"
+          },
+          {
+            "criterion": "Prediction and review: participation may improve; compare chat rate and agency segment retention, using 0.8 as a provisional review flag rather than a success guarantee.",
+            "marks": 1,
+            "objectiveId": "O-ST-EXPERIMENT-2"
+          },
+          {
+            "criterion": "Log raids, audience mix and execution differences; repeat or report inconclusive if they prevent attribution.",
+            "marks": 1,
+            "objectiveId": "O-ST-EXPERIMENT-1"
+          }
+        ],
+        "examVocabulary": [
+          "T-ST-EXPERIMENT",
+          "T-ST-CONFOUNDER"
+        ]
+      }
+    }
+  }
+}

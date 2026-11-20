@@ -1,0 +1,325 @@
+{
+  "schema": "kiki-chapter-plan/v1",
+  "planId": "LP-TR-EVENT-DAYS",
+  "domain": {
+    "packId": "trading-fno",
+    "corner": "odds",
+    "profileId": "trading",
+    "learner": {
+      "role": "Trainee index-options trader, onboarding week 2",
+      "transition": "retail habits to a desk's written process",
+      "priorKnowledge": "calls and puts, premium, lot size (TR-OPT-BASICS)"
+    },
+    "languages": {
+      "source": "en",
+      "targets": [
+        "hi"
+      ],
+      "workingLanguage": "en"
+    },
+    "dimensionLabels": {
+      "concept": "Concept",
+      "words": "Words",
+      "english": "Expression",
+      "lab": "Practice"
+    },
+    "assessmentPolicy": {
+      "conceptChecks": 5,
+      "passPercent": 60,
+      "options": 4,
+      "chapterTest": false
+    },
+    "practical": {
+      "applies": true,
+      "label": "Practice",
+      "tool": "Trading terminal: chart and option chain (paper mode, historical replay)"
+    },
+    "guardrails": [
+      "Process, not picks: review past or paper trades only; never recommend a live trade",
+      "All market data is illustrative; show 'Education on a past, illustrative trade. Not investment advice.'",
+      "KiKi never places, modifies or suggests orders"
+    ],
+    "consumers": [
+      "kiki-pack/v0"
+    ]
+  },
+  "scope": "module",
+  "title": "Event days",
+  "governingQuestion": "What should the learner understand, practise and explain about this case?",
+  "canDo": "Produce an evidence-linked case review without confusing the outcome with its cause.",
+  "request": {
+    "kind": "playbook",
+    "text": "Compile the four-concept module specified by the illustrative playbook.",
+    "sourceIds": [
+      "S-TR-IV-EVENT-PLAYBOOK",
+      "S-TR-THETA-PLAYBOOK",
+      "S-TR-EVENT-RISK-PLAYBOOK",
+      "S-TR-PRETRADE-PLAYBOOK"
+    ]
+  },
+  "sources": [
+    {
+      "id": "S-TR-IV-EVENT-PLAYBOOK",
+      "origin": "org_playbook",
+      "tier": 1,
+      "label": "Options desk playbook: event days (illustrative)",
+      "locator": "content/knowledge-workers/sources/design/personas/trader/playbook-excerpt.md; §2, EV-2.1; scenario marketBefore, marketAfter, impliedMove, decomposition",
+      "illustrative": true
+    },
+    {
+      "id": "S-TR-IV-EVENT-CASE",
+      "origin": "org_case",
+      "tier": 1,
+      "label": "Historical paper option case (illustrative)",
+      "locator": "content/knowledge-workers/sources/design/personas/trader/scenario.json",
+      "illustrative": true
+    },
+    {
+      "id": "S-TR-IV-EVENT-OIC",
+      "origin": "vendor_doc",
+      "tier": 2,
+      "label": "Options Industry Council: Volatility and the Greeks",
+      "url": "https://www.optionseducation.org/advancedconcepts/volatility-the-greeks",
+      "locator": "Opened 2026-11-20; model sensitivities and assumptions",
+      "illustrative": false
+    },
+    {
+      "id": "S-TR-THETA-PLAYBOOK",
+      "origin": "org_playbook",
+      "tier": 1,
+      "label": "Options desk playbook: event days (illustrative)",
+      "locator": "content/knowledge-workers/sources/design/personas/trader/playbook-excerpt.md; §3, EV-3.1; scenario bsCheck and decomposition",
+      "illustrative": true
+    },
+    {
+      "id": "S-TR-THETA-CASE",
+      "origin": "org_case",
+      "tier": 1,
+      "label": "Historical paper option case (illustrative)",
+      "locator": "content/knowledge-workers/sources/design/personas/trader/scenario.json",
+      "illustrative": true
+    },
+    {
+      "id": "S-TR-THETA-OIC",
+      "origin": "vendor_doc",
+      "tier": 2,
+      "label": "Options Industry Council: Theta",
+      "url": "https://www.optionseducation.org/advancedconcepts/theta",
+      "locator": "Opened 2026-11-20; model sensitivities and assumptions",
+      "illustrative": false
+    },
+    {
+      "id": "S-TR-EVENT-RISK-PLAYBOOK",
+      "origin": "org_playbook",
+      "tier": 1,
+      "label": "Options desk playbook: event days (illustrative)",
+      "locator": "content/knowledge-workers/sources/design/personas/trader/playbook-excerpt.md; §4, EV-4.1 to EV-4.5; scenario context and sizing",
+      "illustrative": true
+    },
+    {
+      "id": "S-TR-EVENT-RISK-CASE",
+      "origin": "org_case",
+      "tier": 1,
+      "label": "Historical paper option case (illustrative)",
+      "locator": "content/knowledge-workers/sources/design/personas/trader/scenario.json",
+      "illustrative": true
+    },
+    {
+      "id": "S-TR-EVENT-RISK-OIC",
+      "origin": "vendor_doc",
+      "tier": 2,
+      "label": "Options Industry Council: Volatility and the Greeks",
+      "url": "https://www.optionseducation.org/advancedconcepts/volatility-the-greeks",
+      "locator": "Opened 2026-11-20; model sensitivities and assumptions",
+      "illustrative": false
+    },
+    {
+      "id": "S-TR-PRETRADE-PLAYBOOK",
+      "origin": "org_playbook",
+      "tier": 1,
+      "label": "Options desk playbook: event days (illustrative)",
+      "locator": "content/knowledge-workers/sources/design/personas/trader/playbook-excerpt.md; §6, EV-6.1; trainee checklist; scenario trade.preTradeNote",
+      "illustrative": true
+    },
+    {
+      "id": "S-TR-PRETRADE-CASE",
+      "origin": "org_case",
+      "tier": 1,
+      "label": "Historical paper option case (illustrative)",
+      "locator": "content/knowledge-workers/sources/design/personas/trader/scenario.json",
+      "illustrative": true
+    },
+    {
+      "id": "S-TR-PRETRADE-OIC",
+      "origin": "vendor_doc",
+      "tier": 2,
+      "label": "Options Industry Council: Volatility and the Greeks",
+      "url": "https://www.optionseducation.org/advancedconcepts/volatility-the-greeks",
+      "locator": "Opened 2026-11-20; model sensitivities and assumptions",
+      "illustrative": false
+    }
+  ],
+  "mece": {
+    "dimension": "Steps of the organisation review workflow",
+    "rationale": "Separate model or signal interpretation, controlled comparison, constraints and the final record.",
+    "outOfScope": [
+      "Live deployment",
+      "Mastery or native-language approval"
+    ]
+  },
+  "objectives": [
+    {
+      "id": "O-LP-TR-EVENT-DAYS",
+      "statement": "Apply the illustrative organisation review process to a saved case.",
+      "bloom": "apply",
+      "parentId": null,
+      "ownerId": "LP-TR-EVENT-DAYS"
+    },
+    {
+      "id": "O-MOD-TR-EVENT",
+      "statement": "Produce a justified case review and a plan for practice.",
+      "bloom": "apply",
+      "parentId": "O-LP-TR-EVENT-DAYS",
+      "ownerId": "MOD-TR-EVENT"
+    },
+    {
+      "id": "O-TR-IV-EVENT-1",
+      "statement": "Explain the illustrative option loss using spot, volatility and time.",
+      "bloom": "analyse",
+      "parentId": "O-MOD-TR-EVENT",
+      "ownerId": "TR-IV-EVENT"
+    },
+    {
+      "id": "O-TR-IV-EVENT-2",
+      "statement": "Apply the desk implied-move comparison to a historical note.",
+      "bloom": "apply",
+      "parentId": "O-MOD-TR-EVENT",
+      "ownerId": "TR-IV-EVENT"
+    },
+    {
+      "id": "O-TR-THETA-1",
+      "statement": "Distinguish time sensitivity from volatility sensitivity.",
+      "bloom": "analyse",
+      "parentId": "O-MOD-TR-EVENT",
+      "ownerId": "TR-THETA"
+    },
+    {
+      "id": "O-TR-THETA-2",
+      "statement": "Apply EV-3.1 by holding other model inputs fixed.",
+      "bloom": "apply",
+      "parentId": "O-MOD-TR-EVENT",
+      "ownerId": "TR-THETA"
+    },
+    {
+      "id": "O-TR-EVENT-RISK-1",
+      "statement": "Calculate the desk event budget and maximum whole-lot size.",
+      "bloom": "analyse",
+      "parentId": "O-MOD-TR-EVENT",
+      "ownerId": "TR-EVENT-RISK"
+    },
+    {
+      "id": "O-TR-EVENT-RISK-2",
+      "statement": "Evaluate a historical position using risk taken rather than realised loss.",
+      "bloom": "apply",
+      "parentId": "O-MOD-TR-EVENT",
+      "ownerId": "TR-EVENT-RISK"
+    },
+    {
+      "id": "O-TR-PRETRADE-1",
+      "statement": "Identify missing fields in the case pre-trade note.",
+      "bloom": "analyse",
+      "parentId": "O-MOD-TR-EVENT",
+      "ownerId": "TR-PRETRADE"
+    },
+    {
+      "id": "O-TR-PRETRADE-2",
+      "statement": "Evaluate process separately from outcome under EV-6.1.",
+      "bloom": "apply",
+      "parentId": "O-MOD-TR-EVENT",
+      "ownerId": "TR-PRETRADE"
+    }
+  ],
+  "groups": [
+    {
+      "id": "MOD-TR-EVENT",
+      "order": 1,
+      "title": "Event days",
+      "governingQuestion": "How does this organisation review the case?",
+      "objectiveId": "O-MOD-TR-EVENT",
+      "mece": {
+        "dimension": "Distinct review decisions",
+        "rationale": "Each concept owns its terms and its assessment evidence.",
+        "outOfScope": []
+      },
+      "conceptIds": [
+        "TR-IV-EVENT",
+        "TR-THETA",
+        "TR-EVENT-RISK",
+        "TR-PRETRADE"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "id": "TR-IV-EVENT",
+      "title": "Direction is only one price driver",
+      "canonicalKey": "iv-before-events",
+      "groupId": "MOD-TR-EVENT",
+      "prerequisiteIds": [],
+      "requiredForPractical": true,
+      "estMinutes": 12
+    },
+    {
+      "id": "TR-THETA",
+      "title": "Separate waiting from the IV change",
+      "canonicalKey": "theta-near-expiry",
+      "groupId": "MOD-TR-EVENT",
+      "prerequisiteIds": [
+        "TR-IV-EVENT"
+      ],
+      "requiredForPractical": true,
+      "estMinutes": 12
+    },
+    {
+      "id": "TR-EVENT-RISK",
+      "title": "Size the risk before judging the result",
+      "canonicalKey": "event-sizing-defined-risk",
+      "groupId": "MOD-TR-EVENT",
+      "prerequisiteIds": [
+        "TR-IV-EVENT"
+      ],
+      "requiredForPractical": true,
+      "estMinutes": 12
+    },
+    {
+      "id": "TR-PRETRADE",
+      "title": "Review the decision separately from its P&L",
+      "canonicalKey": "pre-trade-note-process-review",
+      "groupId": "MOD-TR-EVENT",
+      "prerequisiteIds": [
+        "TR-IV-EVENT",
+        "TR-THETA",
+        "TR-EVENT-RISK"
+      ],
+      "requiredForPractical": true,
+      "estMinutes": 12
+    }
+  ],
+  "route": [
+    "TR-IV-EVENT",
+    "TR-THETA",
+    "TR-EVENT-RISK",
+    "TR-PRETRADE"
+  ],
+  "practical": {
+    "id": "P-MOD-TR-EVENT",
+    "title": "Historical or saved-case review",
+    "requiredConceptIds": [
+      "TR-IV-EVENT",
+      "TR-THETA",
+      "TR-EVENT-RISK",
+      "TR-PRETRADE"
+    ]
+  },
+  "chapterTest": []
+}

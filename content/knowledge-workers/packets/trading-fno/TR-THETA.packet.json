@@ -1,0 +1,1040 @@
+{
+  "schema": "kiki-pedagogy-packet/v1",
+  "packetId": "PKT-TR-THETA-1",
+  "createdAt": "2026-11-20T05:45:57Z",
+  "domain": {
+    "packId": "trading-fno",
+    "corner": "odds",
+    "profileId": "trading",
+    "learner": {
+      "role": "Trainee index-options trader, onboarding week 2",
+      "transition": "retail habits to a desk's written process",
+      "priorKnowledge": "calls and puts, premium, lot size (TR-OPT-BASICS)"
+    },
+    "languages": {
+      "source": "en",
+      "targets": [
+        "hi"
+      ],
+      "workingLanguage": "en"
+    },
+    "dimensionLabels": {
+      "concept": "Concept",
+      "words": "Words",
+      "english": "Expression",
+      "lab": "Practice"
+    },
+    "assessmentPolicy": {
+      "conceptChecks": 5,
+      "passPercent": 60,
+      "options": 4,
+      "chapterTest": false
+    },
+    "practical": {
+      "applies": true,
+      "label": "Practice",
+      "tool": "Trading terminal: chart and option chain (paper mode, historical replay)"
+    },
+    "guardrails": [
+      "Process, not picks: review past or paper trades only; never recommend a live trade",
+      "All market data is illustrative; show 'Education on a past, illustrative trade. Not investment advice.'",
+      "KiKi never places, modifies or suggests orders"
+    ],
+    "consumers": [
+      "kiki-pack/v0"
+    ]
+  },
+  "scope": {
+    "planId": "LP-TR-EVENT-DAYS",
+    "groupId": "MOD-TR-EVENT",
+    "conceptId": "TR-THETA",
+    "order": 2,
+    "canonicalKey": "theta-near-expiry",
+    "title": "Separate waiting from the IV change",
+    "practiceTaskId": "pre-event-checklist"
+  },
+  "status": {
+    "review": "draft",
+    "domainReview": "pending",
+    "pronunciation": "pending",
+    "languages": {
+      "hi": "machine_draft"
+    }
+  },
+  "research": {
+    "governingQuestion": "A historical review calls the full 30.70-per-unit loss theta. The case attributes about minus 23 to time and minus 48 to IV. Correct the note.",
+    "sources": [
+      {
+        "id": "S-TR-THETA-PLAYBOOK",
+        "origin": "org_playbook",
+        "tier": 1,
+        "label": "Options desk playbook: event days (illustrative)",
+        "locator": "content/knowledge-workers/sources/design/personas/trader/playbook-excerpt.md; §3, EV-3.1; scenario bsCheck and decomposition",
+        "illustrative": true
+      },
+      {
+        "id": "S-TR-THETA-CASE",
+        "origin": "org_case",
+        "tier": 1,
+        "label": "Historical paper option case (illustrative)",
+        "locator": "content/knowledge-workers/sources/design/personas/trader/scenario.json",
+        "illustrative": true
+      },
+      {
+        "id": "S-TR-THETA-OIC",
+        "origin": "vendor_doc",
+        "tier": 2,
+        "label": "Options Industry Council: Theta",
+        "url": "https://www.optionseducation.org/advancedconcepts/theta",
+        "locator": "Opened 2026-11-20; model sensitivities and assumptions",
+        "illustrative": false
+      }
+    ],
+    "claims": [
+      {
+        "id": "CL-TR-THETA-RULE",
+        "kind": "org_rule",
+        "text": "EV-3.1 is the governing rule for this exercise; Use a controlled repricing comparison to identify the cost of waiting in the case.",
+        "sourceIds": [
+          "S-TR-THETA-PLAYBOOK"
+        ],
+        "confidence": "high",
+        "check": "Rule and scope read in the pinned illustrative playbook at §3, EV-3.1; scenario bsCheck and decomposition"
+      },
+      {
+        "id": "CL-TR-THETA-WORKED",
+        "kind": "procedure",
+        "text": "A historical review calls the full 30.70-per-unit loss theta. The case attributes about minus 23 to time and minus 48 to IV. Correct the note. The full loss combines the favourable spot effect, volatility and time. The rounded time component is about minus 23 per unit; it is not the full minus 30.70 fill-based loss. For EV-3.1, compare next-day and original model values with spot, volatility and other inputs held fixed.",
+        "sourceIds": [
+          "S-TR-THETA-PLAYBOOK",
+          "S-TR-THETA-CASE"
+        ],
+        "confidence": "high",
+        "check": "derived: The full loss combines the favourable spot effect, volatility and time. The rounded time component is about minus 23 per unit; it is not the full minus 30.70 fill-based loss. For EV-3.1, compare next-day and original model values with spot, volatility and other inputs held fixed."
+      },
+      {
+        "id": "CL-TR-THETA-definition-1",
+        "kind": "definition",
+        "text": "The theta of an option describes model sensitivity to a day passing with other inputs fixed.",
+        "sourceIds": [
+          "S-TR-THETA-OIC"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-THETA-definition-2",
+        "kind": "definition",
+        "text": "The time value is the premium above intrinsic value.",
+        "sourceIds": [
+          "S-TR-THETA-OIC"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-THETA-concept-1",
+        "kind": "procedure",
+        "text": "A fall in implied volatility and the passage of time are different drivers of premium.",
+        "sourceIds": [
+          "S-TR-THETA-PLAYBOOK",
+          "S-TR-THETA-CASE",
+          "S-TR-THETA-OIC"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-THETA-concept-2",
+        "kind": "procedure",
+        "text": "The case attribution assigns about 23 rupees per unit to time, with separate volatility and spot contributions.",
+        "sourceIds": [
+          "S-TR-THETA-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-THETA-concept-3",
+        "kind": "procedure",
+        "text": "The theta is a local sensitivity, so multiplying its entry value by several days need not give an exact repricing.",
+        "sourceIds": [
+          "S-TR-THETA-PLAYBOOK",
+          "S-TR-THETA-CASE",
+          "S-TR-THETA-OIC"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-THETA-application-1",
+        "kind": "procedure",
+        "text": "The desk rule EV-3.1 asks for a one-day-later premium at the same spot before a historical overnight hold.",
+        "sourceIds": [
+          "S-TR-THETA-PLAYBOOK",
+          "S-TR-THETA-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-THETA-application-2",
+        "kind": "procedure",
+        "text": "Keep implied volatility and the other model inputs fixed to isolate waiting in that comparison.",
+        "sourceIds": [
+          "S-TR-THETA-PLAYBOOK",
+          "S-TR-THETA-CASE",
+          "S-TR-THETA-OIC"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-THETA-application-3",
+        "kind": "procedure",
+        "text": "Save the replay inputs beside the premium comparison so a reviewer can reproduce the reasoning.",
+        "sourceIds": [
+          "S-TR-THETA-PLAYBOOK",
+          "S-TR-THETA-CASE",
+          "S-TR-THETA-OIC"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-THETA-recap-1",
+        "kind": "procedure",
+        "text": "A change in premium across a night is not automatically all theta.",
+        "sourceIds": [
+          "S-TR-THETA-PLAYBOOK",
+          "S-TR-THETA-CASE",
+          "S-TR-THETA-OIC"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-THETA-recap-2",
+        "kind": "procedure",
+        "text": "Label a controlled time-only comparison separately from a full-case attribution.",
+        "sourceIds": [
+          "S-TR-THETA-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      }
+    ],
+    "outOfScope": [
+      "Live trading or tool control",
+      "Platform-wide or real-organisation claims",
+      "Narration, translation, publication and mastery certification"
+    ],
+    "openQuestions": [
+      "Illustrative organisation: replace with buyer-approved material before production.",
+      "Domain expert and native-language pronunciation review remain pending."
+    ]
+  },
+  "learner": {
+    "prerequisiteIds": [
+      "TR-IV-EVENT"
+    ],
+    "externalPrerequisites": [
+      {
+        "title": "Calls, puts, premium per unit and quantities",
+        "level": "earlier_course",
+        "canonicalKey": "options-basics"
+      }
+    ],
+    "troublesome": "Separate the observations, the organisation rule and a justified conclusion. Every loss after a night is theta.",
+    "misconceptions": [
+      {
+        "id": "M-TR-THETA",
+        "statement": "Every loss after a night is theta.",
+        "correction": "A time-only comparison must hold spot and volatility fixed.",
+        "basis": "inferred",
+        "sourceIds": [],
+        "reasoning": "Inferred from the case contrast and the playbook rule; no learner study or real user evidence is claimed."
+      }
+    ]
+  },
+  "objectives": [
+    {
+      "id": "O-TR-THETA-1",
+      "statement": "Distinguish time sensitivity from volatility sensitivity.",
+      "bloom": "analyse",
+      "parentId": "O-MOD-TR-EVENT",
+      "ownerId": "TR-THETA"
+    },
+    {
+      "id": "O-TR-THETA-2",
+      "statement": "Apply EV-3.1 by holding other model inputs fixed.",
+      "bloom": "apply",
+      "parentId": "O-MOD-TR-EVENT",
+      "ownerId": "TR-THETA"
+    }
+  ],
+  "terms": [
+    {
+      "id": "T-TR-THETA",
+      "term": "theta",
+      "definition": "The model sensitivity to one day passing, holding other pricing inputs fixed.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "TR-THETA",
+      "spoken": "theta",
+      "glosses": {
+        "hi": "बाकी model inputs स्थिर रखकर एक दिन बीतने से कीमत की संवेदनशीलता।"
+      },
+      "pronunciations": {
+        "hi": "थीटा"
+      },
+      "review_status": "pending"
+    },
+    {
+      "id": "T-TR-TIME",
+      "term": "time value",
+      "definition": "The part of an option price above its intrinsic value.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "TR-THETA",
+      "spoken": "time value",
+      "glosses": {
+        "hi": "Option की कीमत का intrinsic value से ऊपर वाला हिस्सा।"
+      },
+      "pronunciations": {
+        "hi": "टाइम वैल्यू"
+      },
+      "review_status": "pending"
+    }
+  ],
+  "usesTerms": [
+    {
+      "id": "T-TR-IV",
+      "term": "implied volatility",
+      "definition": "The volatility input inferred from an option price using a pricing model.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "TR-IV-EVENT",
+      "spoken": "implied volatility",
+      "glosses": {
+        "hi": "Option की कीमत से model के ज़रिये निकाला गया उतार-चढ़ाव का अनुमान।"
+      },
+      "pronunciations": {
+        "hi": "इम्प्लाइड वोलैटिलिटी"
+      },
+      "review_status": "pending"
+    },
+    {
+      "id": "T-TR-PREMIUM",
+      "term": "premium",
+      "definition": "The price of an option, quoted per unit in this case.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "TR-IV-EVENT",
+      "spoken": "premium",
+      "glosses": {
+        "hi": "इस case में option की प्रति unit कीमत।"
+      },
+      "pronunciations": {
+        "hi": "प्रीमियम"
+      },
+      "review_status": "pending"
+    }
+  ],
+  "teaching": {
+    "canDo": "Use a controlled repricing comparison to identify the cost of waiting in the case.",
+    "keyIdea": "A time-only comparison must hold spot and volatility fixed.",
+    "explanation": {
+      "text": "A premium change can mix several drivers. Theta isolates sensitivity to time while other model inputs stay fixed. In the case, the index moved and implied volatility fell as a day passed, so the total loss cannot be called time decay alone. The desk rule EV-3.1 asks for a same-spot next-day repricing. For a controlled comparison, also hold volatility and other pricing inputs fixed. Record both input sets. An entry theta is a local estimate, not an exact multi-day forecast. The rounded case attribution is a model explanation of this past example, not a measured future loss.",
+      "defaultModality": "textImage",
+      "walkthrough": [
+        {
+          "target": "theta",
+          "mark": "marker",
+          "dim": "words",
+          "say": "theta: The model sensitivity to one day passing, holding other pricing inputs fixed."
+        },
+        {
+          "target": "implied volatility",
+          "mark": "marker",
+          "dim": "words",
+          "say": "implied volatility: The volatility input inferred from an option price using a pricing model."
+        },
+        {
+          "target": "premium",
+          "mark": "marker",
+          "dim": "words",
+          "say": "premium: The price of an option, quoted per unit in this case."
+        }
+      ]
+    },
+    "example": {
+      "title": "Separate waiting from the IV change (illustrative)",
+      "scenario": "A fall in implied volatility and the passage of time are different drivers of premium. The case attribution assigns about 23 rupees per unit to time, with separate volatility and spot contributions. The theta is a local sensitivity, so multiplying its entry value by several days need not give an exact repricing.",
+      "takeaway": "A time-only comparison must hold spot and volatility fixed.",
+      "sourceIds": [
+        "S-TR-THETA-CASE"
+      ]
+    },
+    "workedQuestion": {
+      "id": "W-TR-THETA",
+      "type": "short_english",
+      "marks": 3,
+      "prompt": "A historical review calls the full 30.70-per-unit loss theta. The case attributes about minus 23 to time and minus 48 to IV. Correct the note.",
+      "modelAnswer": [
+        "The full loss combines the favourable spot effect, volatility and time.",
+        "The rounded time component is about minus 23 per unit; it is not the full minus 30.70 fill-based loss.",
+        "For EV-3.1, compare next-day and original model values with spot, volatility and other inputs held fixed."
+      ],
+      "rubric": [
+        {
+          "criterion": "The full loss combines the favourable spot effect, volatility and time.",
+          "marks": 1,
+          "objectiveId": "O-TR-THETA-1"
+        },
+        {
+          "criterion": "The rounded time component is about minus 23 per unit; it is not the full minus 30.70 fill-based loss.",
+          "marks": 1,
+          "objectiveId": "O-TR-THETA-2"
+        },
+        {
+          "criterion": "For EV-3.1, compare next-day and original model values with spot, volatility and other inputs held fixed.",
+          "marks": 1,
+          "objectiveId": "O-TR-THETA-1"
+        }
+      ],
+      "examVocabulary": [
+        "T-TR-THETA",
+        "T-TR-TIME"
+      ]
+    },
+    "selfExplainPrompt": "Explain to the desk why the observed overnight loss mixes drivers and which inputs isolate the cost of waiting.",
+    "checks": [
+      {
+        "id": "Q-TR-THETA-1",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "process",
+        "prompt": "What must a controlled EV-3.1 comparison keep fixed?",
+        "options": [
+          "Spot, volatility and other inputs",
+          "The final loss irrespective of inputs",
+          "Only the realised closing price",
+          "Only the date of the quote"
+        ],
+        "answer": "Spot, volatility and other inputs",
+        "distractorRationale": {
+          "Only the date of the quote": "error: Holds a label fixed rather than the pricing inputs",
+          "Only the realised closing price": "error: Uses the realised endpoint instead of a controlled spot input",
+          "The final loss irrespective of inputs": "error: Works backwards from a total loss rather than isolating time"
+        },
+        "explanation": "Moving several inputs at once cannot isolate time; the comparison changes the time remaining alone.",
+        "objectiveIds": [
+          "O-TR-THETA-1"
+        ],
+        "difficulty": 1,
+        "claimIds": [
+          "CL-TR-THETA-RULE",
+          "CL-TR-THETA-WORKED",
+          "CL-TR-THETA-definition-1",
+          "CL-TR-THETA-definition-2",
+          "CL-TR-THETA-concept-1",
+          "CL-TR-THETA-concept-2",
+          "CL-TR-THETA-concept-3"
+        ]
+      },
+      {
+        "id": "Q-TR-THETA-2",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "diagnosis",
+        "prompt": "Why is the entire overnight loss not theta in this case?",
+        "options": [
+          "Theta only applies to puts",
+          "The option had no expiry",
+          "The strike was renamed",
+          "Spot and IV changed as well"
+        ],
+        "answer": "Spot and IV changed as well",
+        "distractorRationale": {
+          "The option had no expiry": "error: Ignores the stated expiry",
+          "The strike was renamed": "error: Invents an instrument change",
+          "Theta only applies to puts": "error: Incorrectly restricts theta to put options"
+        },
+        "explanation": "The observed change mixes drivers, whereas theta describes sensitivity to time with other inputs fixed.",
+        "objectiveIds": [
+          "O-TR-THETA-2"
+        ],
+        "difficulty": 1,
+        "claimIds": [
+          "CL-TR-THETA-RULE",
+          "CL-TR-THETA-WORKED",
+          "CL-TR-THETA-definition-1",
+          "CL-TR-THETA-definition-2",
+          "CL-TR-THETA-concept-1",
+          "CL-TR-THETA-concept-2",
+          "CL-TR-THETA-concept-3"
+        ]
+      },
+      {
+        "id": "Q-TR-THETA-3",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "judgement",
+        "prompt": "Which note is most reproducible?",
+        "options": [
+          "Only the final percentage loss",
+          "Waiting always costs the same",
+          "Both input sets plus model values",
+          "Yesterday was simply unlucky"
+        ],
+        "answer": "Both input sets plus model values",
+        "distractorRationale": {
+          "Waiting always costs the same": "error: Assumes constant time sensitivity",
+          "Yesterday was simply unlucky": "error: Records a feeling without reproducible inputs",
+          "Only the final percentage loss": "error: Records an output without its assumptions"
+        },
+        "explanation": "Input sets let a reviewer reproduce the controlled comparison; a result alone cannot explain the assumptions.",
+        "objectiveIds": [
+          "O-TR-THETA-1"
+        ],
+        "difficulty": 2,
+        "claimIds": [
+          "CL-TR-THETA-RULE",
+          "CL-TR-THETA-WORKED",
+          "CL-TR-THETA-definition-1",
+          "CL-TR-THETA-definition-2",
+          "CL-TR-THETA-concept-1",
+          "CL-TR-THETA-concept-2",
+          "CL-TR-THETA-concept-3"
+        ]
+      },
+      {
+        "id": "Q-TR-THETA-4",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "calculation",
+        "prompt": "The rounded case time attribution is minus 23 per unit. For 300 units, what is that rounded component?",
+        "options": [
+          "Minus 23 rupees",
+          "Minus 6900 rupees",
+          "Minus 2300 rupees",
+          "Minus 300 rupees"
+        ],
+        "answer": "Minus 6900 rupees",
+        "distractorRationale": {
+          "Minus 23 rupees": "error: Omits multiplication by quantity",
+          "Minus 300 rupees": "error: Uses quantity as a cash amount",
+          "Minus 2300 rupees": "error: Drops a factor of three in the multiplication"
+        },
+        "explanation": "Multiply the rounded per-unit component by quantity. Rounded components need not equal the exact fill-based loss.",
+        "objectiveIds": [
+          "O-TR-THETA-2"
+        ],
+        "difficulty": 2,
+        "claimIds": [
+          "CL-TR-THETA-RULE",
+          "CL-TR-THETA-WORKED",
+          "CL-TR-THETA-definition-1",
+          "CL-TR-THETA-definition-2",
+          "CL-TR-THETA-concept-1",
+          "CL-TR-THETA-concept-2",
+          "CL-TR-THETA-concept-3"
+        ]
+      },
+      {
+        "id": "Q-TR-THETA-5",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "diagnosis",
+        "prompt": "Why is entry theta times three not necessarily an exact three-day value change?",
+        "options": [
+          "Theta changes as model inputs evolve",
+          "Theta is a fixed annual fee",
+          "Only the strike sets theta",
+          "Time has no pricing effect"
+        ],
+        "answer": "Theta changes as model inputs evolve",
+        "distractorRationale": {
+          "Theta is a fixed annual fee": "error: Mistakes a local sensitivity for a fixed fee",
+          "Only the strike sets theta": "error: Ignores every input other than strike",
+          "Time has no pricing effect": "error: Denies the pricing role of time"
+        },
+        "explanation": "Theta is a local model sensitivity that can change; a finite-period comparison requires repricing.",
+        "objectiveIds": [
+          "O-TR-THETA-1"
+        ],
+        "difficulty": 3,
+        "claimIds": [
+          "CL-TR-THETA-RULE",
+          "CL-TR-THETA-WORKED",
+          "CL-TR-THETA-definition-1",
+          "CL-TR-THETA-definition-2",
+          "CL-TR-THETA-concept-1",
+          "CL-TR-THETA-concept-2",
+          "CL-TR-THETA-concept-3"
+        ]
+      },
+      {
+        "id": "Q-TR-THETA-WORDS",
+        "type": "fill_blank",
+        "dimension": "words",
+        "evaluates": "recall",
+        "prompt": "Name the term: The model sensitivity to one day passing, holding other pricing inputs fixed.",
+        "answer": "theta",
+        "explanation": "The term is theta. The model sensitivity to one day passing, holding other pricing inputs fixed.",
+        "objectiveIds": [
+          "O-TR-THETA-1"
+        ],
+        "difficulty": 1,
+        "claimIds": [
+          "CL-TR-THETA-RULE"
+        ]
+      },
+      {
+        "id": "Q-TR-THETA-EXPRESSION",
+        "type": "short_english",
+        "dimension": "english",
+        "evaluates": "process",
+        "prompt": "Explain to the desk why the observed overnight loss mixes drivers and which inputs isolate the cost of waiting. Working language: English.",
+        "answer": "The full loss combines the favourable spot effect, volatility and time. The rounded time component is about minus 23 per unit; it is not the full minus 30.70 fill-based loss. For EV-3.1, compare next-day and original model values with spot, volatility and other inputs held fixed.",
+        "explanation": "Assess conceptual claims separately from clarity and terminology. A language gap does not remove concept credit.",
+        "objectiveIds": [
+          "O-TR-THETA-1",
+          "O-TR-THETA-2"
+        ],
+        "difficulty": 2,
+        "claimIds": [
+          "CL-TR-THETA-RULE"
+        ],
+        "rubric": [
+          {
+            "criterion": "State the evidenced reasoning accurately; record concept credit separately.",
+            "dim": "concept"
+          },
+          {
+            "criterion": "Use the canonical terms to explain the reasoning clearly in the working language.",
+            "dim": "english"
+          }
+        ]
+      },
+      {
+        "id": "Q-TR-THETA-PRACTICE",
+        "type": "predict",
+        "dimension": "lab",
+        "evaluates": "process",
+        "prompt": "In a historical pricing replay, hold spot and IV fixed, reduce time remaining by one day, and save both model values; do not submit an order.",
+        "answer": "Use the saved illustrative case only. The full loss combines the favourable spot effect, volatility and time. The rounded time component is about minus 23 per unit; it is not the full minus 30.70 fill-based loss. For EV-3.1, compare next-day and original model values with spot, volatility and other inputs held fixed.",
+        "explanation": "The learner performs the inspection or edit. A predicted answer is not proof that the real tool action occurred.",
+        "objectiveIds": [
+          "O-TR-THETA-1",
+          "O-TR-THETA-2"
+        ],
+        "difficulty": 3,
+        "claimIds": [
+          "CL-TR-THETA-RULE"
+        ],
+        "evidencePolicy": {
+          "predictionOnly": true,
+          "earnsPracticeCredit": false,
+          "requires": "Observed learner action or a saved learner artefact, checked against the task criteria."
+        }
+      }
+    ],
+    "examSignal": {
+      "basis": "none",
+      "askedIn": 0,
+      "outOf": 0,
+      "note": "No past-paper or buyer assessment frequencies supplied."
+    },
+    "estMinutes": 12
+  },
+  "placards": [
+    {
+      "id": "CARD-TR-THETA-definition",
+      "kind": "definition",
+      "title": {
+        "en": "Definition"
+      },
+      "sentences": [
+        {
+          "id": "CARD-TR-THETA-definition.s1",
+          "english": "The theta of an option describes model sensitivity to a day passing with other inputs fixed.",
+          "term_ids": [
+            "T-TR-THETA"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-TR-THETA-definition-1"
+          ]
+        },
+        {
+          "id": "CARD-TR-THETA-definition.s2",
+          "english": "The time value is the premium above intrinsic value.",
+          "term_ids": [
+            "T-TR-TIME",
+            "T-TR-PREMIUM"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-TR-THETA-definition-2"
+          ]
+        }
+      ],
+      "visualRef": "explanation"
+    },
+    {
+      "id": "CARD-TR-THETA-concept",
+      "kind": "concept",
+      "title": {
+        "en": "Concept"
+      },
+      "sentences": [
+        {
+          "id": "CARD-TR-THETA-concept.s1",
+          "english": "A fall in implied volatility and the passage of time are different drivers of premium.",
+          "term_ids": [
+            "T-TR-IV",
+            "T-TR-PREMIUM"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-TR-THETA-concept-1"
+          ],
+          "cue": {
+            "state": "premium-only"
+          },
+          "refutesMisconceptionIds": [
+            "M-TR-THETA"
+          ]
+        },
+        {
+          "id": "CARD-TR-THETA-concept.s2",
+          "english": "The case attribution assigns about 23 rupees per unit to time, with separate volatility and spot contributions.",
+          "term_ids": [],
+          "literals": [
+            {
+              "text": "23",
+              "spoken": "twenty three"
+            }
+          ],
+          "claimIds": [
+            "CL-TR-THETA-concept-2"
+          ]
+        },
+        {
+          "id": "CARD-TR-THETA-concept.s3",
+          "english": "The theta is a local sensitivity, so multiplying its entry value by several days need not give an exact repricing.",
+          "term_ids": [
+            "T-TR-THETA"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-TR-THETA-concept-3"
+          ]
+        }
+      ],
+      "visualRef": "explanation"
+    },
+    {
+      "id": "CARD-TR-THETA-application",
+      "kind": "application",
+      "title": {
+        "en": "Application"
+      },
+      "sentences": [
+        {
+          "id": "CARD-TR-THETA-application.s1",
+          "english": "The desk rule EV-3.1 asks for a one-day-later premium at the same spot before a historical overnight hold.",
+          "term_ids": [
+            "T-TR-PREMIUM"
+          ],
+          "literals": [
+            {
+              "text": "EV-3.1",
+              "spoken": "E V three point one"
+            }
+          ],
+          "claimIds": [
+            "CL-TR-THETA-application-1"
+          ],
+          "cue": {
+            "state": "premium-only"
+          }
+        },
+        {
+          "id": "CARD-TR-THETA-application.s2",
+          "english": "Keep implied volatility and the other model inputs fixed to isolate waiting in that comparison.",
+          "term_ids": [
+            "T-TR-IV"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-TR-THETA-application-2"
+          ]
+        },
+        {
+          "id": "CARD-TR-THETA-application.s3",
+          "english": "Save the replay inputs beside the premium comparison so a reviewer can reproduce the reasoning.",
+          "term_ids": [
+            "T-TR-PREMIUM"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-TR-THETA-application-3"
+          ]
+        }
+      ],
+      "visualRef": "explanation"
+    },
+    {
+      "id": "CARD-TR-THETA-recap",
+      "kind": "recap",
+      "title": {
+        "en": "Recap"
+      },
+      "sentences": [
+        {
+          "id": "CARD-TR-THETA-recap.s1",
+          "english": "A change in premium across a night is not automatically all theta.",
+          "term_ids": [
+            "T-TR-THETA",
+            "T-TR-PREMIUM"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-TR-THETA-recap-1"
+          ]
+        },
+        {
+          "id": "CARD-TR-THETA-recap.s2",
+          "english": "Label a controlled time-only comparison separately from a full-case attribution.",
+          "term_ids": [],
+          "literals": [],
+          "claimIds": [
+            "CL-TR-THETA-recap-2"
+          ]
+        }
+      ],
+      "visualRef": "explanation"
+    }
+  ],
+  "visual": {
+    "kind": "line",
+    "description": "Separate waiting from the IV change: use the saved illustrative scene; highlight the cited case state while explaining the rule.",
+    "alt": "A time-only comparison must hold spot and volatility fixed.",
+    "sourceIds": [
+      "S-TR-THETA-CASE"
+    ]
+  },
+  "canvas": {
+    "form": "scene",
+    "purpose": {
+      "objectiveIds": [
+        "O-TR-THETA-1",
+        "O-TR-THETA-2"
+      ],
+      "misconceptionIds": [
+        "M-TR-THETA"
+      ],
+      "insight": "A time-only comparison must hold spot and volatility fixed."
+    },
+    "illustrative": true,
+    "scene": {
+      "id": "tr-iv-line",
+      "template": "line",
+      "params": {
+        "x": {
+          "label": {
+            "en": "30-min bars, D-1 and D0",
+            "hi": "30-min bars, D-1 और D0"
+          },
+          "unit": "bar",
+          "values": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25
+          ]
+        },
+        "series": [
+          {
+            "id": "iv",
+            "label": {
+              "en": "IV of 24200 CE (%)",
+              "hi": "24200 CE का IV (%)"
+            },
+            "values": [
+              17.1,
+              17.14,
+              17.17,
+              17.2,
+              17.24,
+              17.27,
+              17.3,
+              17.34,
+              17.37,
+              17.41,
+              17.45,
+              17.48,
+              17.5,
+              19.21,
+              12.49,
+              12.28,
+              12.09,
+              11.9,
+              11.73,
+              11.57,
+              11.42,
+              11.29,
+              11.17,
+              11.08,
+              11.02,
+              11.0
+            ]
+          },
+          {
+            "id": "premium",
+            "label": {
+              "en": "24200 CE premium (₹)",
+              "hi": "24200 CE premium (₹)"
+            },
+            "values": [
+              78.04,
+              81.67,
+              78.25,
+              72.8,
+              76.26,
+              81.79,
+              79.31,
+              80.71,
+              86.49,
+              89.38,
+              85.37,
+              94.29,
+              90.23,
+              81.18,
+              83.16,
+              63.19,
+              67.35,
+              72.82,
+              62.22,
+              55.56,
+              60.35,
+              67.88,
+              60.61,
+              54.7,
+              61.57,
+              59.55
+            ]
+          }
+        ],
+        "markers": [
+          {
+            "id": "mk-entry",
+            "x": 12,
+            "label": {
+              "en": "Entry",
+              "hi": "Entry"
+            }
+          },
+          {
+            "id": "mk-event",
+            "x": 14,
+            "label": {
+              "en": "Policy · 10:00",
+              "hi": "Policy · 10:00"
+            }
+          },
+          {
+            "id": "mk-exit",
+            "x": 25,
+            "label": {
+              "en": "Exit",
+              "hi": "Exit"
+            }
+          }
+        ]
+      },
+      "states": {
+        "iv-only": {
+          "show": [
+            "iv",
+            "mk-entry",
+            "mk-event",
+            "mk-exit"
+          ],
+          "hide": [
+            "premium"
+          ],
+          "highlight": [
+            "iv"
+          ]
+        },
+        "premium-only": {
+          "show": [
+            "premium",
+            "mk-entry",
+            "mk-event",
+            "mk-exit"
+          ],
+          "hide": [
+            "iv"
+          ],
+          "highlight": [
+            "premium"
+          ]
+        }
+      }
+    },
+    "mustShow": [
+      "Illustrative case label",
+      "EV-3.1",
+      "Source and review status"
+    ],
+    "mustNotImply": [
+      "A live recommendation or a guaranteed outcome",
+      "Causation established by a single observation"
+    ],
+    "claim": "illustrative_case",
+    "alt": "Separate waiting from the IV change; A time-only comparison must hold spot and volatility fixed."
+  },
+  "canvasNullReason": null,
+  "reflect": {
+    "graphRef": "trading-fno/bad-call-iv-crush"
+  },
+  "handoff": {
+    "audioUnit": "placard",
+    "speechNotes": [
+      "Use the supplied spoken literals and canonical terms.",
+      "No timestamps or audio assets exist yet."
+    ],
+    "practiceEvidence": "Only an actual learner action can earn practice evidence; this authored predict check cannot."
+  }
+}

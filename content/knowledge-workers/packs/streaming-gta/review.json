@@ -1,0 +1,22 @@
+{
+  "schema": "kiki-content-review/v1",
+  "review": "draft",
+  "illustrative": true,
+  "domainReview": "pending",
+  "nativeLanguageReview": {
+    "hi-Latn": "pending"
+  },
+  "guardrails": [
+    "All personas, agency rules and charts are illustrative; no platform-wide statistics are claimed",
+    "GTA 6 by name only; no publisher logos, footage, artwork or third-party assets",
+    "The creator acts; KiKi never edits a stream or tool",
+    "Hinglish is a machine draft pending native review"
+  ],
+  "lessonLanguagesAvailable": [
+    "en"
+  ],
+  "plannedTarget": "hi-Latn",
+  "audio": "not_generated",
+  "practiceEvidence": "not_observed",
+  "tutorAdaptation": "Pinned topology; nextSteps resolved; evidence-assuming copy and causal overclaims corrected; review state added; prototype scorecards removed. Changed dialogue is English-only until translation and native review. Routing/runtime review still pending."
+}

@@ -1,0 +1,959 @@
+{
+  "schema": "kiki-pedagogy-packet/v1",
+  "packetId": "PKT-TR-IV-EVENT-1",
+  "createdAt": "2026-11-20T05:45:57Z",
+  "domain": {
+    "packId": "trading-fno",
+    "corner": "odds",
+    "profileId": "trading",
+    "learner": {
+      "role": "Trainee index-options trader, onboarding week 2",
+      "transition": "retail habits to a desk's written process",
+      "priorKnowledge": "calls and puts, premium, lot size (TR-OPT-BASICS)"
+    },
+    "languages": {
+      "source": "en",
+      "targets": [
+        "hi"
+      ],
+      "workingLanguage": "en"
+    },
+    "dimensionLabels": {
+      "concept": "Concept",
+      "words": "Words",
+      "english": "Expression",
+      "lab": "Practice"
+    },
+    "assessmentPolicy": {
+      "conceptChecks": 5,
+      "passPercent": 60,
+      "options": 4,
+      "chapterTest": false
+    },
+    "practical": {
+      "applies": true,
+      "label": "Practice",
+      "tool": "Trading terminal: chart and option chain (paper mode, historical replay)"
+    },
+    "guardrails": [
+      "Process, not picks: review past or paper trades only; never recommend a live trade",
+      "All market data is illustrative; show 'Education on a past, illustrative trade. Not investment advice.'",
+      "KiKi never places, modifies or suggests orders"
+    ],
+    "consumers": [
+      "kiki-pack/v0"
+    ]
+  },
+  "scope": {
+    "planId": "LP-TR-EVENT-DAYS",
+    "groupId": "MOD-TR-EVENT",
+    "conceptId": "TR-IV-EVENT",
+    "order": 1,
+    "canonicalKey": "iv-before-events",
+    "title": "Direction is only one price driver",
+    "practiceTaskId": "pre-event-checklist"
+  },
+  "status": {
+    "review": "draft",
+    "domainReview": "pending",
+    "pronunciation": "pending",
+    "languages": {
+      "hi": "machine_draft"
+    }
+  },
+  "research": {
+    "governingQuestion": "The case ATM call costs 153.55 and put 150.75. A historical note expects 150 points. Apply EV-2.1 without recommending a trade.",
+    "sources": [
+      {
+        "id": "S-TR-IV-EVENT-PLAYBOOK",
+        "origin": "org_playbook",
+        "tier": 1,
+        "label": "Options desk playbook: event days (illustrative)",
+        "locator": "content/knowledge-workers/sources/design/personas/trader/playbook-excerpt.md; §2, EV-2.1; scenario marketBefore, marketAfter, impliedMove, decomposition",
+        "illustrative": true
+      },
+      {
+        "id": "S-TR-IV-EVENT-CASE",
+        "origin": "org_case",
+        "tier": 1,
+        "label": "Historical paper option case (illustrative)",
+        "locator": "content/knowledge-workers/sources/design/personas/trader/scenario.json",
+        "illustrative": true
+      },
+      {
+        "id": "S-TR-IV-EVENT-OIC",
+        "origin": "vendor_doc",
+        "tier": 2,
+        "label": "Options Industry Council: Volatility and the Greeks",
+        "url": "https://www.optionseducation.org/advancedconcepts/volatility-the-greeks",
+        "locator": "Opened 2026-11-20; model sensitivities and assumptions",
+        "illustrative": false
+      }
+    ],
+    "claims": [
+      {
+        "id": "CL-TR-IV-EVENT-RULE",
+        "kind": "org_rule",
+        "text": "EV-2.1 is the governing rule for this exercise; Diagnose the illustrative option loss using price drivers and the desk comparison rule.",
+        "sourceIds": [
+          "S-TR-IV-EVENT-PLAYBOOK"
+        ],
+        "confidence": "high",
+        "check": "Rule and scope read in the pinned illustrative playbook at §2, EV-2.1; scenario marketBefore, marketAfter, impliedMove, decomposition"
+      },
+      {
+        "id": "CL-TR-IV-EVENT-WORKED",
+        "kind": "procedure",
+        "text": "The case ATM call costs 153.55 and put 150.75. A historical note expects 150 points. Apply EV-2.1 without recommending a trade. Add the two prices: 153.55 + 150.75 = 304.30 points as the desk guide. The note expects 150 points, below that guide; it does not justify the comparison required by EV-2.1. Record the missing justification. This heuristic does not by itself predict profit or loss.",
+        "sourceIds": [
+          "S-TR-IV-EVENT-PLAYBOOK",
+          "S-TR-IV-EVENT-CASE"
+        ],
+        "confidence": "high",
+        "check": "derived: Add the two prices: 153.55 + 150.75 = 304.30 points as the desk guide. The note expects 150 points, below that guide; it does not justify the comparison required by EV-2.1. Record the missing justification. This heuristic does not by itself predict profit or loss."
+      },
+      {
+        "id": "CL-TR-IV-EVENT-definition-1",
+        "kind": "definition",
+        "text": "The premium of a bought option reflects more than the direction of the index.",
+        "sourceIds": [
+          "S-TR-IV-EVENT-OIC"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-IV-EVENT-definition-2",
+        "kind": "definition",
+        "text": "The implied volatility is inferred from the option price through a pricing model.",
+        "sourceIds": [
+          "S-TR-IV-EVENT-OIC"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-IV-EVENT-concept-1",
+        "kind": "procedure",
+        "text": "In this illustrative case, implied volatility fell from 17.5% to 11% after the announcement.",
+        "sourceIds": [
+          "S-TR-IV-EVENT-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-IV-EVENT-concept-2",
+        "kind": "procedure",
+        "text": "That IV crush and elapsed time outweighed the favourable index move; direction alone did not protect the premium.",
+        "sourceIds": [
+          "S-TR-IV-EVENT-PLAYBOOK",
+          "S-TR-IV-EVENT-CASE",
+          "S-TR-IV-EVENT-OIC"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-IV-EVENT-concept-3",
+        "kind": "procedure",
+        "text": "The desk uses the straddle as a rough implied move guide, not a guaranteed range or a profit threshold.",
+        "sourceIds": [
+          "S-TR-IV-EVENT-PLAYBOOK",
+          "S-TR-IV-EVENT-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-IV-EVENT-application-1",
+        "kind": "procedure",
+        "text": "The case straddle costs 153.55 plus 150.75, giving an implied move guide of 304.30 points.",
+        "sourceIds": [
+          "S-TR-IV-EVENT-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-IV-EVENT-application-2",
+        "kind": "procedure",
+        "text": "The desk rule EV-2.1 asks a historical note to compare its expected move with the implied move.",
+        "sourceIds": [
+          "S-TR-IV-EVENT-PLAYBOOK",
+          "S-TR-IV-EVENT-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-IV-EVENT-application-3",
+        "kind": "procedure",
+        "text": "In the replay, record the premium drivers and the missing comparison before assessing the decision.",
+        "sourceIds": [
+          "S-TR-IV-EVENT-PLAYBOOK",
+          "S-TR-IV-EVENT-CASE",
+          "S-TR-IV-EVENT-OIC"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-IV-EVENT-recap-1",
+        "kind": "procedure",
+        "text": "The premium can fall even when the index moves favourably.",
+        "sourceIds": [
+          "S-TR-IV-EVENT-PLAYBOOK",
+          "S-TR-IV-EVENT-CASE",
+          "S-TR-IV-EVENT-OIC"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-IV-EVENT-recap-2",
+        "kind": "procedure",
+        "text": "Keep the desk implied move heuristic separate from the model price and the realised outcome.",
+        "sourceIds": [
+          "S-TR-IV-EVENT-PLAYBOOK",
+          "S-TR-IV-EVENT-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      }
+    ],
+    "outOfScope": [
+      "Live trading or tool control",
+      "Platform-wide or real-organisation claims",
+      "Narration, translation, publication and mastery certification"
+    ],
+    "openQuestions": [
+      "Illustrative organisation: replace with buyer-approved material before production.",
+      "Domain expert and native-language pronunciation review remain pending."
+    ]
+  },
+  "learner": {
+    "prerequisiteIds": [],
+    "externalPrerequisites": [
+      {
+        "title": "Calls, puts, premium per unit and quantities",
+        "level": "earlier_course",
+        "canonicalKey": "options-basics"
+      }
+    ],
+    "troublesome": "Separate the observations, the organisation rule and a justified conclusion. A right direction guarantees a profit on a bought option.",
+    "misconceptions": [
+      {
+        "id": "M-TR-IV-EVENT",
+        "statement": "A right direction guarantees a profit on a bought option.",
+        "correction": "Volatility and time can offset a favourable spot move.",
+        "basis": "inferred",
+        "sourceIds": [],
+        "reasoning": "Inferred from the case contrast and the playbook rule; no learner study or real user evidence is claimed."
+      }
+    ]
+  },
+  "objectives": [
+    {
+      "id": "O-TR-IV-EVENT-1",
+      "statement": "Explain the illustrative option loss using spot, volatility and time.",
+      "bloom": "analyse",
+      "parentId": "O-MOD-TR-EVENT",
+      "ownerId": "TR-IV-EVENT"
+    },
+    {
+      "id": "O-TR-IV-EVENT-2",
+      "statement": "Apply the desk implied-move comparison to a historical note.",
+      "bloom": "apply",
+      "parentId": "O-MOD-TR-EVENT",
+      "ownerId": "TR-IV-EVENT"
+    }
+  ],
+  "terms": [
+    {
+      "id": "T-TR-IV",
+      "term": "implied volatility",
+      "definition": "The volatility input inferred from an option price using a pricing model.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "TR-IV-EVENT",
+      "spoken": "implied volatility",
+      "glosses": {
+        "hi": "Option की कीमत से model के ज़रिये निकाला गया उतार-चढ़ाव का अनुमान।"
+      },
+      "pronunciations": {
+        "hi": "इम्प्लाइड वोलैटिलिटी"
+      },
+      "review_status": "pending"
+    },
+    {
+      "id": "T-TR-CRUSH",
+      "term": "IV crush",
+      "definition": "A sharp fall in implied volatility; the illustrative case shows one after an event.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "TR-IV-EVENT",
+      "spoken": "IV crush",
+      "glosses": {
+        "hi": "इस case में announcement के बाद implied volatility का तेज़ गिरना।"
+      },
+      "pronunciations": {
+        "hi": "आई वी क्रश"
+      },
+      "review_status": "pending"
+    },
+    {
+      "id": "T-TR-PREMIUM",
+      "term": "premium",
+      "definition": "The price of an option, quoted per unit in this case.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "TR-IV-EVENT",
+      "spoken": "premium",
+      "glosses": {
+        "hi": "इस case में option की प्रति unit कीमत।"
+      },
+      "pronunciations": {
+        "hi": "प्रीमियम"
+      },
+      "review_status": "pending"
+    },
+    {
+      "id": "T-TR-STRADDLE",
+      "term": "straddle",
+      "definition": "A call and a put at the same strike and expiry.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "TR-IV-EVENT",
+      "spoken": "straddle",
+      "glosses": {
+        "hi": "एक ही strike और expiry का call और put।"
+      },
+      "pronunciations": {
+        "hi": "स्ट्रैडल"
+      },
+      "review_status": "pending"
+    },
+    {
+      "id": "T-TR-MOVE",
+      "term": "implied move",
+      "definition": "The desk estimate of a priced move, using the ATM straddle as a rough guide.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "TR-IV-EVENT",
+      "spoken": "implied move",
+      "glosses": {
+        "hi": "Desk का अनुमान कि option की कीमत में कितना move शामिल है।"
+      },
+      "pronunciations": {
+        "hi": "इम्प्लाइड मूव"
+      },
+      "review_status": "pending"
+    }
+  ],
+  "usesTerms": [],
+  "teaching": {
+    "canDo": "Diagnose the illustrative option loss using price drivers and the desk comparison rule.",
+    "keyIdea": "Volatility and time can offset a favourable spot move.",
+    "explanation": {
+      "text": "The option premium reflects several inputs, including spot, time and implied volatility. In the illustrative case the index rose, but the premium fell after volatility dropped and a day passed. The desk estimates an implied move from the ATM straddle. This is a rough planning heuristic, not a guaranteed range or a universal condition for profit. The desk rule EV-2.1 asks for a written comparison between the expected and priced moves. Review that comparison using information available before the event. The outcome alone cannot tell whether the original process was sound.",
+      "defaultModality": "textImage",
+      "walkthrough": [
+        {
+          "target": "implied volatility",
+          "mark": "marker",
+          "dim": "words",
+          "say": "implied volatility: The volatility input inferred from an option price using a pricing model."
+        },
+        {
+          "target": "premium",
+          "mark": "marker",
+          "dim": "words",
+          "say": "premium: The price of an option, quoted per unit in this case."
+        },
+        {
+          "target": "straddle",
+          "mark": "marker",
+          "dim": "words",
+          "say": "straddle: A call and a put at the same strike and expiry."
+        }
+      ]
+    },
+    "example": {
+      "title": "Direction is only one price driver (illustrative)",
+      "scenario": "In this illustrative case, implied volatility fell from 17.5% to 11% after the announcement. That IV crush and elapsed time outweighed the favourable index move; direction alone did not protect the premium. The desk uses the straddle as a rough implied move guide, not a guaranteed range or a profit threshold.",
+      "takeaway": "Volatility and time can offset a favourable spot move.",
+      "sourceIds": [
+        "S-TR-IV-EVENT-CASE"
+      ]
+    },
+    "workedQuestion": {
+      "id": "W-TR-IV-EVENT",
+      "type": "short_english",
+      "marks": 3,
+      "prompt": "The case ATM call costs 153.55 and put 150.75. A historical note expects 150 points. Apply EV-2.1 without recommending a trade.",
+      "modelAnswer": [
+        "Add the two prices: 153.55 + 150.75 = 304.30 points as the desk guide.",
+        "The note expects 150 points, below that guide; it does not justify the comparison required by EV-2.1.",
+        "Record the missing justification. This heuristic does not by itself predict profit or loss."
+      ],
+      "rubric": [
+        {
+          "criterion": "Add the two prices: 153.55 + 150.75 = 304.30 points as the desk guide.",
+          "marks": 1,
+          "objectiveId": "O-TR-IV-EVENT-1"
+        },
+        {
+          "criterion": "The note expects 150 points, below that guide; it does not justify the comparison required by EV-2.1.",
+          "marks": 1,
+          "objectiveId": "O-TR-IV-EVENT-2"
+        },
+        {
+          "criterion": "Record the missing justification. This heuristic does not by itself predict profit or loss.",
+          "marks": 1,
+          "objectiveId": "O-TR-IV-EVENT-1"
+        }
+      ],
+      "examVocabulary": [
+        "T-TR-IV",
+        "T-TR-CRUSH",
+        "T-TR-PREMIUM",
+        "T-TR-STRADDLE",
+        "T-TR-MOVE"
+      ]
+    },
+    "selfExplainPrompt": "Explain in two lines why the case option lost despite a rising index, and distinguish the desk heuristic from a profit guarantee.",
+    "checks": [
+      {
+        "id": "Q-TR-IV-EVENT-1",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "diagnosis",
+        "prompt": "The index rose while the case option lost value. Which explanation fits the case?",
+        "options": [
+          "The quoted loss includes a new order",
+          "The strike changed overnight",
+          "Only the index direction mattered",
+          "Volatility fell and time passed"
+        ],
+        "answer": "Volatility fell and time passed",
+        "distractorRationale": {
+          "Only the index direction mattered": "error: Ignores volatility and time inputs",
+          "The strike changed overnight": "error: Assumes a strike change absent from the case",
+          "The quoted loss includes a new order": "error: Confuses historical attribution with new execution"
+        },
+        "explanation": "The case keeps the strike fixed and separates the favourable spot effect from volatility and time costs.",
+        "objectiveIds": [
+          "O-TR-IV-EVENT-1"
+        ],
+        "difficulty": 1,
+        "claimIds": [
+          "CL-TR-IV-EVENT-RULE",
+          "CL-TR-IV-EVENT-WORKED",
+          "CL-TR-IV-EVENT-definition-1",
+          "CL-TR-IV-EVENT-definition-2",
+          "CL-TR-IV-EVENT-concept-1",
+          "CL-TR-IV-EVENT-concept-2",
+          "CL-TR-IV-EVENT-concept-3"
+        ]
+      },
+      {
+        "id": "Q-TR-IV-EVENT-2",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "process",
+        "prompt": "Under EV-2.1, what is missing from a direction-only historical note?",
+        "options": [
+          "A second direction prediction",
+          "A higher-confidence adjective",
+          "The realised outcome written first",
+          "Expected move versus the priced move"
+        ],
+        "answer": "Expected move versus the priced move",
+        "distractorRationale": {
+          "A second direction prediction": "error: Repeats direction without a priced-move comparison",
+          "The realised outcome written first": "error: Uses hindsight instead of entry-time information",
+          "A higher-confidence adjective": "error: Substitutes confidence language for the desk requirement"
+        },
+        "explanation": "The desk asks for a move comparison using entry-time information; confidence language does not replace it.",
+        "objectiveIds": [
+          "O-TR-IV-EVENT-2"
+        ],
+        "difficulty": 1,
+        "claimIds": [
+          "CL-TR-IV-EVENT-RULE",
+          "CL-TR-IV-EVENT-WORKED",
+          "CL-TR-IV-EVENT-definition-1",
+          "CL-TR-IV-EVENT-definition-2",
+          "CL-TR-IV-EVENT-concept-1",
+          "CL-TR-IV-EVENT-concept-2",
+          "CL-TR-IV-EVENT-concept-3"
+        ]
+      },
+      {
+        "id": "Q-TR-IV-EVENT-3",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "judgement",
+        "prompt": "Which interpretation of the straddle guide is appropriate?",
+        "options": [
+          "An exact profit boundary",
+          "A desk planning heuristic",
+          "A directional trading signal",
+          "A guaranteed future range"
+        ],
+        "answer": "A desk planning heuristic",
+        "distractorRationale": {
+          "A guaranteed future range": "error: Treats a rough guide as a guaranteed range",
+          "An exact profit boundary": "error: Treats a planning heuristic as an exact profit threshold",
+          "A directional trading signal": "error: Turns a two-sided pricing guide into a direction signal"
+        },
+        "explanation": "The playbook uses a rough comparison; model price, time and volatility still determine the option value.",
+        "objectiveIds": [
+          "O-TR-IV-EVENT-1"
+        ],
+        "difficulty": 2,
+        "claimIds": [
+          "CL-TR-IV-EVENT-RULE",
+          "CL-TR-IV-EVENT-WORKED",
+          "CL-TR-IV-EVENT-definition-1",
+          "CL-TR-IV-EVENT-definition-2",
+          "CL-TR-IV-EVENT-concept-1",
+          "CL-TR-IV-EVENT-concept-2",
+          "CL-TR-IV-EVENT-concept-3"
+        ]
+      },
+      {
+        "id": "Q-TR-IV-EVENT-4",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "calculation",
+        "prompt": "What is the case straddle price, using 153.55 and 150.75?",
+        "options": [
+          "150.75 points",
+          "2.80 points",
+          "153.55 points",
+          "304.30 points"
+        ],
+        "answer": "304.30 points",
+        "distractorRationale": {
+          "153.55 points": "error: Counts only the call leg",
+          "150.75 points": "error: Counts only the put leg",
+          "2.80 points": "error: Subtracts the legs rather than adding them"
+        },
+        "explanation": "Add both legs for the straddle guide; subtracting them measures a different quantity.",
+        "objectiveIds": [
+          "O-TR-IV-EVENT-2"
+        ],
+        "difficulty": 2,
+        "claimIds": [
+          "CL-TR-IV-EVENT-RULE",
+          "CL-TR-IV-EVENT-WORKED",
+          "CL-TR-IV-EVENT-definition-1",
+          "CL-TR-IV-EVENT-definition-2",
+          "CL-TR-IV-EVENT-concept-1",
+          "CL-TR-IV-EVENT-concept-2",
+          "CL-TR-IV-EVENT-concept-3"
+        ]
+      },
+      {
+        "id": "Q-TR-IV-EVENT-5",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "diagnosis",
+        "prompt": "Which case component was the largest negative model contribution per unit?",
+        "options": [
+          "All contributions were positive",
+          "IV at about minus 48",
+          "Time at about minus 23",
+          "Spot at about plus 40"
+        ],
+        "answer": "IV at about minus 48",
+        "distractorRationale": {
+          "Spot at about plus 40": "error: Confuses a positive contribution with a drag",
+          "Time at about minus 23": "error: Chooses the smaller negative contribution",
+          "All contributions were positive": "error: Ignores both negative components"
+        },
+        "explanation": "The rounded attribution assigns the largest drag to IV; the positive spot component did not offset both costs.",
+        "objectiveIds": [
+          "O-TR-IV-EVENT-1"
+        ],
+        "difficulty": 3,
+        "claimIds": [
+          "CL-TR-IV-EVENT-RULE",
+          "CL-TR-IV-EVENT-WORKED",
+          "CL-TR-IV-EVENT-definition-1",
+          "CL-TR-IV-EVENT-definition-2",
+          "CL-TR-IV-EVENT-concept-1",
+          "CL-TR-IV-EVENT-concept-2",
+          "CL-TR-IV-EVENT-concept-3"
+        ]
+      },
+      {
+        "id": "Q-TR-IV-EVENT-WORDS",
+        "type": "fill_blank",
+        "dimension": "words",
+        "evaluates": "recall",
+        "prompt": "Name the term: The volatility input inferred from an option price using a pricing model.",
+        "answer": "implied volatility",
+        "explanation": "The term is implied volatility. The volatility input inferred from an option price using a pricing model.",
+        "objectiveIds": [
+          "O-TR-IV-EVENT-1"
+        ],
+        "difficulty": 1,
+        "claimIds": [
+          "CL-TR-IV-EVENT-RULE"
+        ]
+      },
+      {
+        "id": "Q-TR-IV-EVENT-EXPRESSION",
+        "type": "short_english",
+        "dimension": "english",
+        "evaluates": "process",
+        "prompt": "Explain in two lines why the case option lost despite a rising index, and distinguish the desk heuristic from a profit guarantee. Working language: English.",
+        "answer": "Add the two prices: 153.55 + 150.75 = 304.30 points as the desk guide. The note expects 150 points, below that guide; it does not justify the comparison required by EV-2.1. Record the missing justification. This heuristic does not by itself predict profit or loss.",
+        "explanation": "Assess conceptual claims separately from clarity and terminology. A language gap does not remove concept credit.",
+        "objectiveIds": [
+          "O-TR-IV-EVENT-1",
+          "O-TR-IV-EVENT-2"
+        ],
+        "difficulty": 2,
+        "claimIds": [
+          "CL-TR-IV-EVENT-RULE"
+        ],
+        "rubric": [
+          {
+            "criterion": "State the evidenced reasoning accurately; record concept credit separately.",
+            "dim": "concept"
+          },
+          {
+            "criterion": "Use the canonical terms to explain the reasoning clearly in the working language.",
+            "dim": "english"
+          }
+        ]
+      },
+      {
+        "id": "Q-TR-IV-EVENT-PRACTICE",
+        "type": "predict",
+        "dimension": "lab",
+        "evaluates": "process",
+        "prompt": "In the historical chain, identify the case call and put prices, add them, and annotate the old note with the missing EV-2.1 comparison.",
+        "answer": "Use the saved illustrative case only. Add the two prices: 153.55 + 150.75 = 304.30 points as the desk guide. The note expects 150 points, below that guide; it does not justify the comparison required by EV-2.1. Record the missing justification. This heuristic does not by itself predict profit or loss.",
+        "explanation": "The learner performs the inspection or edit. A predicted answer is not proof that the real tool action occurred.",
+        "objectiveIds": [
+          "O-TR-IV-EVENT-1",
+          "O-TR-IV-EVENT-2"
+        ],
+        "difficulty": 3,
+        "claimIds": [
+          "CL-TR-IV-EVENT-RULE"
+        ],
+        "evidencePolicy": {
+          "predictionOnly": true,
+          "earnsPracticeCredit": false,
+          "requires": "Observed learner action or a saved learner artefact, checked against the task criteria."
+        }
+      }
+    ],
+    "examSignal": {
+      "basis": "none",
+      "askedIn": 0,
+      "outOf": 0,
+      "note": "No past-paper or buyer assessment frequencies supplied."
+    },
+    "estMinutes": 12
+  },
+  "placards": [
+    {
+      "id": "CARD-TR-IV-EVENT-definition",
+      "kind": "definition",
+      "title": {
+        "en": "Definition"
+      },
+      "sentences": [
+        {
+          "id": "CARD-TR-IV-EVENT-definition.s1",
+          "english": "The premium of a bought option reflects more than the direction of the index.",
+          "term_ids": [
+            "T-TR-PREMIUM"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-TR-IV-EVENT-definition-1"
+          ]
+        },
+        {
+          "id": "CARD-TR-IV-EVENT-definition.s2",
+          "english": "The implied volatility is inferred from the option price through a pricing model.",
+          "term_ids": [
+            "T-TR-IV"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-TR-IV-EVENT-definition-2"
+          ]
+        }
+      ],
+      "visualRef": "explanation"
+    },
+    {
+      "id": "CARD-TR-IV-EVENT-concept",
+      "kind": "concept",
+      "title": {
+        "en": "Concept"
+      },
+      "sentences": [
+        {
+          "id": "CARD-TR-IV-EVENT-concept.s1",
+          "english": "In this illustrative case, implied volatility fell from 17.5% to 11% after the announcement.",
+          "term_ids": [
+            "T-TR-IV"
+          ],
+          "literals": [
+            {
+              "text": "17.5%",
+              "spoken": "seventeen point five percent"
+            },
+            {
+              "text": "11%",
+              "spoken": "eleven percent"
+            }
+          ],
+          "claimIds": [
+            "CL-TR-IV-EVENT-concept-1"
+          ],
+          "cue": {
+            "state": "after"
+          }
+        },
+        {
+          "id": "CARD-TR-IV-EVENT-concept.s2",
+          "english": "That IV crush and elapsed time outweighed the favourable index move; direction alone did not protect the premium.",
+          "term_ids": [
+            "T-TR-CRUSH",
+            "T-TR-PREMIUM"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-TR-IV-EVENT-concept-2"
+          ],
+          "refutesMisconceptionIds": [
+            "M-TR-IV-EVENT"
+          ]
+        },
+        {
+          "id": "CARD-TR-IV-EVENT-concept.s3",
+          "english": "The desk uses the straddle as a rough implied move guide, not a guaranteed range or a profit threshold.",
+          "term_ids": [
+            "T-TR-STRADDLE",
+            "T-TR-MOVE"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-TR-IV-EVENT-concept-3"
+          ]
+        }
+      ],
+      "visualRef": "explanation"
+    },
+    {
+      "id": "CARD-TR-IV-EVENT-application",
+      "kind": "application",
+      "title": {
+        "en": "Application"
+      },
+      "sentences": [
+        {
+          "id": "CARD-TR-IV-EVENT-application.s1",
+          "english": "The case straddle costs 153.55 plus 150.75, giving an implied move guide of 304.30 points.",
+          "term_ids": [
+            "T-TR-STRADDLE",
+            "T-TR-MOVE"
+          ],
+          "literals": [
+            {
+              "text": "153.55",
+              "spoken": "one hundred fifty three point five five"
+            },
+            {
+              "text": "150.75",
+              "spoken": "one hundred fifty point seven five"
+            },
+            {
+              "text": "304.30",
+              "spoken": "three hundred four point three zero"
+            }
+          ],
+          "claimIds": [
+            "CL-TR-IV-EVENT-application-1"
+          ],
+          "cue": {
+            "state": "after"
+          }
+        },
+        {
+          "id": "CARD-TR-IV-EVENT-application.s2",
+          "english": "The desk rule EV-2.1 asks a historical note to compare its expected move with the implied move.",
+          "term_ids": [
+            "T-TR-MOVE"
+          ],
+          "literals": [
+            {
+              "text": "EV-2.1",
+              "spoken": "E V two point one"
+            }
+          ],
+          "claimIds": [
+            "CL-TR-IV-EVENT-application-2"
+          ]
+        },
+        {
+          "id": "CARD-TR-IV-EVENT-application.s3",
+          "english": "In the replay, record the premium drivers and the missing comparison before assessing the decision.",
+          "term_ids": [
+            "T-TR-PREMIUM"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-TR-IV-EVENT-application-3"
+          ]
+        }
+      ],
+      "visualRef": "explanation"
+    },
+    {
+      "id": "CARD-TR-IV-EVENT-recap",
+      "kind": "recap",
+      "title": {
+        "en": "Recap"
+      },
+      "sentences": [
+        {
+          "id": "CARD-TR-IV-EVENT-recap.s1",
+          "english": "The premium can fall even when the index moves favourably.",
+          "term_ids": [
+            "T-TR-PREMIUM"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-TR-IV-EVENT-recap-1"
+          ]
+        },
+        {
+          "id": "CARD-TR-IV-EVENT-recap.s2",
+          "english": "Keep the desk implied move heuristic separate from the model price and the realised outcome.",
+          "term_ids": [
+            "T-TR-MOVE"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-TR-IV-EVENT-recap-2"
+          ]
+        }
+      ],
+      "visualRef": "explanation"
+    }
+  ],
+  "visual": {
+    "kind": "payoff",
+    "description": "Direction is only one price driver: use the saved illustrative scene; highlight the cited case state while explaining the rule.",
+    "alt": "Volatility and time can offset a favourable spot move.",
+    "sourceIds": [
+      "S-TR-IV-EVENT-CASE"
+    ]
+  },
+  "canvas": {
+    "form": "scene",
+    "purpose": {
+      "objectiveIds": [
+        "O-TR-IV-EVENT-1",
+        "O-TR-IV-EVENT-2"
+      ],
+      "misconceptionIds": [
+        "M-TR-IV-EVENT"
+      ],
+      "insight": "Volatility and time can offset a favourable spot move."
+    },
+    "illustrative": true,
+    "scene": {
+      "id": "tr-payoff",
+      "template": "payoff",
+      "params": {
+        "legs": [
+          {
+            "id": "leg-24200ce",
+            "type": "call",
+            "side": "long",
+            "strike": 24200.0,
+            "premium": 90.25,
+            "lots": 4
+          }
+        ],
+        "lotSize": 75,
+        "spot": 24040.0,
+        "range": [
+          23600,
+          24700
+        ],
+        "iv": {
+          "before": 0.175,
+          "after": 0.11
+        },
+        "daysToExpiry": {
+          "before": 3.0,
+          "after": 2.0
+        }
+      },
+      "states": {
+        "before": {
+          "values": {
+            "ivPhase": 0,
+            "dtePhase": 0
+          }
+        },
+        "after": {
+          "values": {
+            "ivPhase": 1,
+            "dtePhase": 1,
+            "spot": 24150
+          }
+        },
+        "after-no-crush": {
+          "values": {
+            "ivPhase": 0,
+            "dtePhase": 1,
+            "spot": 24150
+          }
+        }
+      }
+    },
+    "mustShow": [
+      "Illustrative case label",
+      "EV-2.1",
+      "Source and review status"
+    ],
+    "mustNotImply": [
+      "A live recommendation or a guaranteed outcome",
+      "Causation established by a single observation"
+    ],
+    "claim": "illustrative_case",
+    "alt": "Direction is only one price driver; Volatility and time can offset a favourable spot move."
+  },
+  "canvasNullReason": null,
+  "reflect": {
+    "graphRef": "trading-fno/bad-call-iv-crush"
+  },
+  "handoff": {
+    "audioUnit": "placard",
+    "speechNotes": [
+      "Use the supplied spoken literals and canonical terms.",
+      "No timestamps or audio assets exist yet."
+    ],
+    "practiceEvidence": "Only an actual learner action can earn practice evidence; this authored predict check cannot."
+  }
+}

@@ -1,0 +1,965 @@
+{
+  "schema": "kiki-pedagogy-packet/v1",
+  "packetId": "PKT-ST-EXPERIMENT-1",
+  "createdAt": "2026-11-20T05:45:57Z",
+  "domain": {
+    "packId": "streaming-gta",
+    "corner": "audiences",
+    "profileId": "streaming",
+    "learner": {
+      "role": "Newly signed creator in an illustrative launch-week cohort",
+      "transition": "hobby streaming to an agency review process",
+      "priorKnowledge": "Basic stream operation and access to saved analytics"
+    },
+    "languages": {
+      "source": "en",
+      "targets": [
+        "hi-Latn"
+      ],
+      "workingLanguage": "hi-Latn"
+    },
+    "dimensionLabels": {
+      "concept": "Concept",
+      "words": "Words",
+      "english": "Expression",
+      "lab": "Practice"
+    },
+    "assessmentPolicy": {
+      "conceptChecks": 5,
+      "passPercent": 60,
+      "options": 4,
+      "chapterTest": false
+    },
+    "practical": {
+      "applies": true,
+      "label": "Practice",
+      "tool": "Saved generic analytics dashboard, VOD and run-of-show editor"
+    },
+    "guardrails": [
+      "All personas, agency rules and charts are illustrative; no platform-wide statistics are claimed",
+      "GTA 6 by name only; no publisher logos, footage, artwork or third-party assets",
+      "The creator acts; KiKi never edits a stream or tool",
+      "Hinglish is a machine draft pending native review"
+    ],
+    "consumers": [
+      "kiki-pack/v0"
+    ]
+  },
+  "scope": {
+    "planId": "LP-ST-LAUNCH-WEEK",
+    "groupId": "MOD-ST-LAUNCH",
+    "conceptId": "ST-EXPERIMENT",
+    "order": 4,
+    "canonicalKey": "one-change-per-stream",
+    "title": "Propose one change and a measurable review",
+    "practiceTaskId": "run-of-show-plan"
+  },
+  "status": {
+    "review": "draft",
+    "domainReview": "pending",
+    "pronunciation": "pending",
+    "languages": {
+      "hi-Latn": "machine_draft"
+    }
+  },
+  "research": {
+    "governingQuestion": "Draft a one-change plan under LW-6.2. Include a measure, a provisional threshold and a reason the result may be inconclusive.",
+    "sources": [
+      {
+        "id": "S-ST-EXPERIMENT-PLAYBOOK",
+        "origin": "org_playbook",
+        "tier": 1,
+        "label": "Launch-week streaming playbook (illustrative)",
+        "locator": "content/knowledge-workers/sources/design/personas/streamer/playbook-excerpt.md; §6, LW-6.2; §5, LW-5.1; scenario recovery and events",
+        "illustrative": true
+      },
+      {
+        "id": "S-ST-EXPERIMENT-CASE",
+        "origin": "org_case",
+        "tier": 1,
+        "label": "Launch-week stream case (illustrative)",
+        "locator": "content/knowledge-workers/sources/design/personas/streamer/scenario.json",
+        "illustrative": true
+      }
+    ],
+    "claims": [
+      {
+        "id": "CL-ST-EXPERIMENT-RULE",
+        "kind": "org_rule",
+        "text": "LW-6.2 is the governing rule for this exercise; Write a single-change learning plan with a prediction, measure and attribution limits.",
+        "sourceIds": [
+          "S-ST-EXPERIMENT-PLAYBOOK"
+        ],
+        "confidence": "high",
+        "check": "Rule and scope read in the pinned illustrative playbook at §6, LW-6.2; §5, LW-5.1; scenario recovery and events"
+      },
+      {
+        "id": "CL-ST-EXPERIMENT-WORKED",
+        "kind": "procedure",
+        "text": "Draft a one-change plan under LW-6.2. Include a measure, a provisional threshold and a reason the result may be inconclusive. Change: add one poll to a comparable slow segment, keeping its stated goal and duration fixed. Prediction and review: participation may improve; compare chat rate and agency segment retention, using 0.8 as a provisional review flag rather than a success guarantee. Log raids, audience mix and execution differences; repeat or report inconclusive if they prevent attribution.",
+        "sourceIds": [
+          "S-ST-EXPERIMENT-PLAYBOOK",
+          "S-ST-EXPERIMENT-CASE"
+        ],
+        "confidence": "high",
+        "check": "derived: Change: add one poll to a comparable slow segment, keeping its stated goal and duration fixed. Prediction and review: participation may improve; compare chat rate and agency segment retention, using 0.8 as a provisional review flag rather than a success guarantee. Log raids, audience mix and execution differences; repeat or report inconclusive if they prevent attribution."
+      },
+      {
+        "id": "CL-ST-EXPERIMENT-definition-1",
+        "kind": "definition",
+        "text": "An experiment records a planned change, the expected effect and a measure for review.",
+        "sourceIds": [
+          "S-ST-EXPERIMENT-PLAYBOOK"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-EXPERIMENT-definition-2",
+        "kind": "definition",
+        "text": "A confounder is another changing factor that makes attribution uncertain.",
+        "sourceIds": [
+          "S-ST-EXPERIMENT-PLAYBOOK"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-EXPERIMENT-concept-1",
+        "kind": "procedure",
+        "text": "Under the agency rule LW-6.2, change one thing per stream and log the prediction, measure and result.",
+        "sourceIds": [
+          "S-ST-EXPERIMENT-PLAYBOOK",
+          "S-ST-EXPERIMENT-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-EXPERIMENT-concept-2",
+        "kind": "procedure",
+        "text": "The case recovery coincided with polls, talking and a new segment, so it cannot isolate one change.",
+        "sourceIds": [
+          "S-ST-EXPERIMENT-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-EXPERIMENT-concept-3",
+        "kind": "procedure",
+        "text": "The incoming raid at minute 95 is another confounder when comparing later viewer counts.",
+        "sourceIds": [
+          "S-ST-EXPERIMENT-PLAYBOOK",
+          "S-ST-EXPERIMENT-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-EXPERIMENT-application-1",
+        "kind": "procedure",
+        "text": "Draft one experiment that adds a poll to an otherwise comparable slow segment.",
+        "sourceIds": [
+          "S-ST-EXPERIMENT-PLAYBOOK",
+          "S-ST-EXPERIMENT-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-EXPERIMENT-application-2",
+        "kind": "procedure",
+        "text": "Keep the goal and duration fixed, then compare segment retention and chat rate while logging audience-source differences.",
+        "sourceIds": [
+          "S-ST-EXPERIMENT-PLAYBOOK",
+          "S-ST-EXPERIMENT-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-EXPERIMENT-application-3",
+        "kind": "procedure",
+        "text": "State a provisional review threshold before the next stream, send the plan to the manager, and record an inconclusive result honestly.",
+        "sourceIds": [
+          "S-ST-EXPERIMENT-PLAYBOOK",
+          "S-ST-EXPERIMENT-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-EXPERIMENT-recap-1",
+        "kind": "procedure",
+        "text": "A useful experiment includes one change, a prediction, a measure and a review decision.",
+        "sourceIds": [
+          "S-ST-EXPERIMENT-PLAYBOOK",
+          "S-ST-EXPERIMENT-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-ST-EXPERIMENT-recap-2",
+        "kind": "procedure",
+        "text": "A threshold guides review; a positive result does not remove every confounder or prove causation.",
+        "sourceIds": [
+          "S-ST-EXPERIMENT-PLAYBOOK",
+          "S-ST-EXPERIMENT-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      }
+    ],
+    "outOfScope": [
+      "Live trading or tool control",
+      "Platform-wide or real-organisation claims",
+      "Narration, translation, publication and mastery certification"
+    ],
+    "openQuestions": [
+      "Illustrative organisation: replace with buyer-approved material before production.",
+      "Domain expert and native-language pronunciation review remain pending."
+    ]
+  },
+  "learner": {
+    "prerequisiteIds": [
+      "ST-HOOKS",
+      "ST-CHAT",
+      "ST-RETENTION"
+    ],
+    "externalPrerequisites": [
+      {
+        "title": "Basic stream operation and access to saved analytics",
+        "level": "earlier_course",
+        "canonicalKey": "stream-operation-basics"
+      }
+    ],
+    "troublesome": "Separate the observations, the organisation rule and a justified conclusion. A better next stream proves that every simultaneous change worked.",
+    "misconceptions": [
+      {
+        "id": "M-ST-EXPERIMENT",
+        "statement": "A better next stream proves that every simultaneous change worked.",
+        "correction": "Several changes or audience shocks make attribution uncertain.",
+        "basis": "inferred",
+        "sourceIds": [],
+        "reasoning": "Inferred from the case contrast and the playbook rule; no learner study or real user evidence is claimed."
+      }
+    ]
+  },
+  "objectives": [
+    {
+      "id": "O-ST-EXPERIMENT-1",
+      "statement": "Design a single-change agency experiment with an explicit measure.",
+      "bloom": "analyse",
+      "parentId": "O-MOD-ST-LAUNCH",
+      "ownerId": "ST-EXPERIMENT"
+    },
+    {
+      "id": "O-ST-EXPERIMENT-2",
+      "statement": "Identify confounders when interpreting a later result.",
+      "bloom": "apply",
+      "parentId": "O-MOD-ST-LAUNCH",
+      "ownerId": "ST-EXPERIMENT"
+    }
+  ],
+  "terms": [
+    {
+      "id": "T-ST-EXPERIMENT",
+      "term": "experiment",
+      "definition": "A planned change with a prediction and a measure for the next review.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "ST-EXPERIMENT",
+      "spoken": "experiment",
+      "glosses": {
+        "hi-Latn": "Ek planned change, expected effect aur measure ke saath."
+      },
+      "pronunciations": {
+        "hi-Latn": "experiment"
+      },
+      "review_status": "pending"
+    },
+    {
+      "id": "T-ST-CONFOUNDER",
+      "term": "confounder",
+      "definition": "Another changing factor that makes attribution of a result uncertain.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "ST-EXPERIMENT",
+      "spoken": "confounder",
+      "glosses": {
+        "hi-Latn": "Doosra badalta factor jo result ka reason clear nahi hone deta."
+      },
+      "pronunciations": {
+        "hi-Latn": "confounder"
+      },
+      "review_status": "pending"
+    }
+  ],
+  "usesTerms": [
+    {
+      "id": "T-ST-SEGMENT",
+      "term": "segment",
+      "definition": "A named block of a stream with a goal and planned duration.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "ST-HOOKS",
+      "spoken": "segment",
+      "glosses": {
+        "hi-Latn": "Stream ka naam aur goal wala time block."
+      },
+      "pronunciations": {
+        "hi-Latn": "segment"
+      },
+      "review_status": "pending"
+    },
+    {
+      "id": "T-ST-ROS",
+      "term": "run-of-show",
+      "definition": "The ordered plan of named segments and target durations.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "ST-HOOKS",
+      "spoken": "run-of-show",
+      "glosses": {
+        "hi-Latn": "Segments ka order, goal aur planned time."
+      },
+      "pronunciations": {
+        "hi-Latn": "run of show"
+      },
+      "review_status": "pending"
+    },
+    {
+      "id": "T-ST-CHAT",
+      "term": "chat rate",
+      "definition": "Messages per minute in this illustrative analytics case.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "ST-CHAT",
+      "spoken": "chat rate",
+      "glosses": {
+        "hi-Latn": "Is case mein ek minute ke chat messages."
+      },
+      "pronunciations": {
+        "hi-Latn": "chat rate"
+      },
+      "review_status": "pending"
+    },
+    {
+      "id": "T-ST-RETENTION",
+      "term": "segment retention",
+      "definition": "The agency ratio of last-minute CCV to first-minute CCV in a segment.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "ST-RETENTION",
+      "spoken": "segment retention",
+      "glosses": {
+        "hi-Latn": "Agency ka ratio: segment ke last minute ka CCV, first minute ke CCV se divide."
+      },
+      "pronunciations": {
+        "hi-Latn": "segment retention"
+      },
+      "review_status": "pending"
+    },
+    {
+      "id": "T-ST-VOD",
+      "term": "VOD",
+      "definition": "The saved video recording used to review what happened on stream.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "ST-HOOKS",
+      "spoken": "VOD",
+      "glosses": {
+        "hi-Latn": "Stream ki saved recording jise review karte hain."
+      },
+      "pronunciations": {
+        "hi-Latn": "V O D"
+      },
+      "review_status": "pending"
+    }
+  ],
+  "teaching": {
+    "canDo": "Write a single-change learning plan with a prediction, measure and attribution limits.",
+    "keyIdea": "Several changes or audience shocks make attribution uncertain.",
+    "explanation": {
+      "text": "The agency wants a plan that can teach the creator something. Rule LW-6.2 asks for one change, its expected effect, a measure and the observed result. In the case, the recovery included several changes, so it cannot identify which one mattered. A later raid also changes audience composition. A next-stream experiment can add a poll to a comparable slow segment while holding its goal and duration steady. Record chat rate and segment retention, log raids and audience differences, and choose a provisional review threshold beforehand. A better result is evidence to examine, not proof that the poll caused it.",
+      "defaultModality": "textImage",
+      "walkthrough": [
+        {
+          "target": "experiment",
+          "mark": "marker",
+          "dim": "words",
+          "say": "experiment: A planned change with a prediction and a measure for the next review."
+        },
+        {
+          "target": "segment",
+          "mark": "marker",
+          "dim": "words",
+          "say": "segment: A named block of a stream with a goal and planned duration."
+        },
+        {
+          "target": "chat rate",
+          "mark": "marker",
+          "dim": "words",
+          "say": "chat rate: Messages per minute in this illustrative analytics case."
+        }
+      ]
+    },
+    "example": {
+      "title": "Propose one change and a measurable review (illustrative)",
+      "scenario": "Under the agency rule LW-6.2, change one thing per stream and log the prediction, measure and result. The case recovery coincided with polls, talking and a new segment, so it cannot isolate one change. The incoming raid at minute 95 is another confounder when comparing later viewer counts.",
+      "takeaway": "Several changes or audience shocks make attribution uncertain.",
+      "sourceIds": [
+        "S-ST-EXPERIMENT-CASE"
+      ]
+    },
+    "workedQuestion": {
+      "id": "W-ST-EXPERIMENT",
+      "type": "short_english",
+      "marks": 3,
+      "prompt": "Draft a one-change plan under LW-6.2. Include a measure, a provisional threshold and a reason the result may be inconclusive.",
+      "modelAnswer": [
+        "Change: add one poll to a comparable slow segment, keeping its stated goal and duration fixed.",
+        "Prediction and review: participation may improve; compare chat rate and agency segment retention, using 0.8 as a provisional review flag rather than a success guarantee.",
+        "Log raids, audience mix and execution differences; repeat or report inconclusive if they prevent attribution."
+      ],
+      "rubric": [
+        {
+          "criterion": "Change: add one poll to a comparable slow segment, keeping its stated goal and duration fixed.",
+          "marks": 1,
+          "objectiveId": "O-ST-EXPERIMENT-1"
+        },
+        {
+          "criterion": "Prediction and review: participation may improve; compare chat rate and agency segment retention, using 0.8 as a provisional review flag rather than a success guarantee.",
+          "marks": 1,
+          "objectiveId": "O-ST-EXPERIMENT-2"
+        },
+        {
+          "criterion": "Log raids, audience mix and execution differences; repeat or report inconclusive if they prevent attribution.",
+          "marks": 1,
+          "objectiveId": "O-ST-EXPERIMENT-1"
+        }
+      ],
+      "examVocabulary": [
+        "T-ST-EXPERIMENT",
+        "T-ST-CONFOUNDER"
+      ]
+    },
+    "selfExplainPrompt": "Pitch cause hypothesis, one change, measure and uncertainty to the manager in two lines.",
+    "checks": [
+      {
+        "id": "Q-ST-EXPERIMENT-1",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "process",
+        "prompt": "Which plan best fits LW-6.2?",
+        "options": [
+          "New game, time, title and poll together",
+          "Promise a fixed increase before testing",
+          "Copy the peak without logging changes",
+          "One poll change with a prediction and measure"
+        ],
+        "answer": "One poll change with a prediction and measure",
+        "distractorRationale": {
+          "New game, time, title and poll together": "error: Changes several factors and loses attribution",
+          "Copy the peak without logging changes": "error: Selects a peak without a documented intervention",
+          "Promise a fixed increase before testing": "error: Promises an effect before collecting evidence"
+        },
+        "explanation": "The rule asks for a traceable single change; several simultaneous changes make attribution harder.",
+        "objectiveIds": [
+          "O-ST-EXPERIMENT-1"
+        ],
+        "difficulty": 1,
+        "claimIds": [
+          "CL-ST-EXPERIMENT-RULE",
+          "CL-ST-EXPERIMENT-WORKED",
+          "CL-ST-EXPERIMENT-definition-1",
+          "CL-ST-EXPERIMENT-definition-2",
+          "CL-ST-EXPERIMENT-concept-1",
+          "CL-ST-EXPERIMENT-concept-2",
+          "CL-ST-EXPERIMENT-concept-3"
+        ]
+      },
+      {
+        "id": "Q-ST-EXPERIMENT-2",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "diagnosis",
+        "prompt": "Why can the case recovery not identify the effect of polls alone?",
+        "options": [
+          "There were no viewer counts",
+          "The stream had no chat",
+          "Talking and segment context also changed",
+          "Every poll must reduce engagement"
+        ],
+        "answer": "Talking and segment context also changed",
+        "distractorRationale": {
+          "There were no viewer counts": "error: Ignores the available viewer series",
+          "The stream had no chat": "error: Ignores the case chat trace",
+          "Every poll must reduce engagement": "error: Invents a universal negative poll effect"
+        },
+        "explanation": "Several things changed together, so the historical comparison does not isolate a poll effect.",
+        "objectiveIds": [
+          "O-ST-EXPERIMENT-2"
+        ],
+        "difficulty": 1,
+        "claimIds": [
+          "CL-ST-EXPERIMENT-RULE",
+          "CL-ST-EXPERIMENT-WORKED",
+          "CL-ST-EXPERIMENT-definition-1",
+          "CL-ST-EXPERIMENT-definition-2",
+          "CL-ST-EXPERIMENT-concept-1",
+          "CL-ST-EXPERIMENT-concept-2",
+          "CL-ST-EXPERIMENT-concept-3"
+        ]
+      },
+      {
+        "id": "Q-ST-EXPERIMENT-3",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "judgement",
+        "prompt": "What should happen when a raid makes the comparison unclear?",
+        "options": [
+          "Count the whole gain as the poll effect",
+          "Log the confounder and qualify the result",
+          "Declare the agency rule invalid",
+          "Delete the unsuccessful observation"
+        ],
+        "answer": "Log the confounder and qualify the result",
+        "distractorRationale": {
+          "Count the whole gain as the poll effect": "error: Attributes the raid-driven gain to the poll",
+          "Delete the unsuccessful observation": "error: Deletes evidence that complicates the story",
+          "Declare the agency rule invalid": "error: Treats an inconclusive episode as a rule refutation"
+        },
+        "explanation": "The raid changes who is present; honest review retains the observation and qualifies attribution.",
+        "objectiveIds": [
+          "O-ST-EXPERIMENT-1"
+        ],
+        "difficulty": 2,
+        "claimIds": [
+          "CL-ST-EXPERIMENT-RULE",
+          "CL-ST-EXPERIMENT-WORKED",
+          "CL-ST-EXPERIMENT-definition-1",
+          "CL-ST-EXPERIMENT-definition-2",
+          "CL-ST-EXPERIMENT-concept-1",
+          "CL-ST-EXPERIMENT-concept-2",
+          "CL-ST-EXPERIMENT-concept-3"
+        ]
+      },
+      {
+        "id": "Q-ST-EXPERIMENT-4",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "process",
+        "prompt": "When should the prediction and review measure be written?",
+        "options": [
+          "Only if the stream improves",
+          "Before the planned experiment",
+          "Only after seeing the final peak",
+          "After choosing the best-looking segment"
+        ],
+        "answer": "Before the planned experiment",
+        "distractorRationale": {
+          "Only after seeing the final peak": "error: Chooses the measure after observing the outcome",
+          "After choosing the best-looking segment": "error: Selects the most favourable segment after the fact",
+          "Only if the stream improves": "error: Documents only successful outcomes"
+        },
+        "explanation": "Writing the measure beforehand reduces hindsight selection and makes the later review auditable.",
+        "objectiveIds": [
+          "O-ST-EXPERIMENT-2"
+        ],
+        "difficulty": 2,
+        "claimIds": [
+          "CL-ST-EXPERIMENT-RULE",
+          "CL-ST-EXPERIMENT-WORKED",
+          "CL-ST-EXPERIMENT-definition-1",
+          "CL-ST-EXPERIMENT-definition-2",
+          "CL-ST-EXPERIMENT-concept-1",
+          "CL-ST-EXPERIMENT-concept-2",
+          "CL-ST-EXPERIMENT-concept-3"
+        ]
+      },
+      {
+        "id": "Q-ST-EXPERIMENT-5",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "judgement",
+        "prompt": "What does meeting the provisional threshold establish?",
+        "options": [
+          "Evidence to review with context",
+          "A guaranteed repeatable audience gain",
+          "Proof the poll caused the result",
+          "Permission to omit the VOD review"
+        ],
+        "answer": "Evidence to review with context",
+        "distractorRationale": {
+          "Proof the poll caused the result": "error: Equates a threshold crossing with causal proof",
+          "A guaranteed repeatable audience gain": "error: Confuses one episode with a guaranteed repeatable gain",
+          "Permission to omit the VOD review": "error: Omits contextual review after a favourable metric"
+        },
+        "explanation": "A threshold organises review. Context and confounders still matter, especially with one illustrative episode.",
+        "objectiveIds": [
+          "O-ST-EXPERIMENT-1"
+        ],
+        "difficulty": 3,
+        "claimIds": [
+          "CL-ST-EXPERIMENT-RULE",
+          "CL-ST-EXPERIMENT-WORKED",
+          "CL-ST-EXPERIMENT-definition-1",
+          "CL-ST-EXPERIMENT-definition-2",
+          "CL-ST-EXPERIMENT-concept-1",
+          "CL-ST-EXPERIMENT-concept-2",
+          "CL-ST-EXPERIMENT-concept-3"
+        ]
+      },
+      {
+        "id": "Q-ST-EXPERIMENT-WORDS",
+        "type": "fill_blank",
+        "dimension": "words",
+        "evaluates": "recall",
+        "prompt": "Name the term: A planned change with a prediction and a measure for the next review.",
+        "answer": "experiment",
+        "explanation": "The term is experiment. A planned change with a prediction and a measure for the next review.",
+        "objectiveIds": [
+          "O-ST-EXPERIMENT-1"
+        ],
+        "difficulty": 1,
+        "claimIds": [
+          "CL-ST-EXPERIMENT-RULE"
+        ]
+      },
+      {
+        "id": "Q-ST-EXPERIMENT-EXPRESSION",
+        "type": "short_english",
+        "dimension": "english",
+        "evaluates": "process",
+        "prompt": "Pitch cause hypothesis, one change, measure and uncertainty to the manager in two lines. Working language: Hinglish; canonical terms stay unchanged.",
+        "answer": "Change: add one poll to a comparable slow segment, keeping its stated goal and duration fixed. Prediction and review: participation may improve; compare chat rate and agency segment retention, using 0.8 as a provisional review flag rather than a success guarantee. Log raids, audience mix and execution differences; repeat or report inconclusive if they prevent attribution.",
+        "explanation": "Assess conceptual claims separately from clarity and terminology. A language gap does not remove concept credit.",
+        "objectiveIds": [
+          "O-ST-EXPERIMENT-1",
+          "O-ST-EXPERIMENT-2"
+        ],
+        "difficulty": 2,
+        "claimIds": [
+          "CL-ST-EXPERIMENT-RULE"
+        ],
+        "rubric": [
+          {
+            "criterion": "State the evidenced reasoning accurately; record concept credit separately.",
+            "dim": "concept"
+          },
+          {
+            "criterion": "Use the canonical terms to explain the reasoning clearly in the working language.",
+            "dim": "english"
+          }
+        ]
+      },
+      {
+        "id": "Q-ST-EXPERIMENT-PRACTICE",
+        "type": "predict",
+        "dimension": "lab",
+        "evaluates": "process",
+        "prompt": "Draft tomorrow run-of-show yourself with one labelled experiment, its prediction and review measure; log any raid or concurrent change.",
+        "answer": "Use the saved illustrative case only. Change: add one poll to a comparable slow segment, keeping its stated goal and duration fixed. Prediction and review: participation may improve; compare chat rate and agency segment retention, using 0.8 as a provisional review flag rather than a success guarantee. Log raids, audience mix and execution differences; repeat or report inconclusive if they prevent attribution.",
+        "explanation": "The learner performs the inspection or edit. A predicted answer is not proof that the real tool action occurred.",
+        "objectiveIds": [
+          "O-ST-EXPERIMENT-1",
+          "O-ST-EXPERIMENT-2"
+        ],
+        "difficulty": 3,
+        "claimIds": [
+          "CL-ST-EXPERIMENT-RULE"
+        ],
+        "evidencePolicy": {
+          "predictionOnly": true,
+          "earnsPracticeCredit": false,
+          "requires": "Observed learner action or a saved learner artefact, checked against the task criteria."
+        }
+      }
+    ],
+    "examSignal": {
+      "basis": "none",
+      "askedIn": 0,
+      "outOf": 0,
+      "note": "No past-paper or buyer assessment frequencies supplied."
+    },
+    "estMinutes": 12
+  },
+  "placards": [
+    {
+      "id": "CARD-ST-EXPERIMENT-definition",
+      "kind": "definition",
+      "title": {
+        "en": "Definition"
+      },
+      "sentences": [
+        {
+          "id": "CARD-ST-EXPERIMENT-definition.s1",
+          "english": "An experiment records a planned change, the expected effect and a measure for review.",
+          "term_ids": [
+            "T-ST-EXPERIMENT"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-ST-EXPERIMENT-definition-1"
+          ]
+        },
+        {
+          "id": "CARD-ST-EXPERIMENT-definition.s2",
+          "english": "A confounder is another changing factor that makes attribution uncertain.",
+          "term_ids": [
+            "T-ST-CONFOUNDER"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-ST-EXPERIMENT-definition-2"
+          ]
+        }
+      ],
+      "visualRef": "explanation"
+    },
+    {
+      "id": "CARD-ST-EXPERIMENT-concept",
+      "kind": "concept",
+      "title": {
+        "en": "Concept"
+      },
+      "sentences": [
+        {
+          "id": "CARD-ST-EXPERIMENT-concept.s1",
+          "english": "Under the agency rule LW-6.2, change one thing per stream and log the prediction, measure and result.",
+          "term_ids": [],
+          "literals": [
+            {
+              "text": "LW-6.2",
+              "spoken": "L W six point two"
+            }
+          ],
+          "claimIds": [
+            "CL-ST-EXPERIMENT-concept-1"
+          ],
+          "cue": {
+            "state": "review"
+          }
+        },
+        {
+          "id": "CARD-ST-EXPERIMENT-concept.s2",
+          "english": "The case recovery coincided with polls, talking and a new segment, so it cannot isolate one change.",
+          "term_ids": [
+            "T-ST-SEGMENT"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-ST-EXPERIMENT-concept-2"
+          ],
+          "refutesMisconceptionIds": [
+            "M-ST-EXPERIMENT"
+          ]
+        },
+        {
+          "id": "CARD-ST-EXPERIMENT-concept.s3",
+          "english": "The incoming raid at minute 95 is another confounder when comparing later viewer counts.",
+          "term_ids": [
+            "T-ST-CONFOUNDER"
+          ],
+          "literals": [
+            {
+              "text": "95",
+              "spoken": "ninety five"
+            }
+          ],
+          "claimIds": [
+            "CL-ST-EXPERIMENT-concept-3"
+          ]
+        }
+      ],
+      "visualRef": "explanation"
+    },
+    {
+      "id": "CARD-ST-EXPERIMENT-application",
+      "kind": "application",
+      "title": {
+        "en": "Application"
+      },
+      "sentences": [
+        {
+          "id": "CARD-ST-EXPERIMENT-application.s1",
+          "english": "Draft one experiment that adds a poll to an otherwise comparable slow segment.",
+          "term_ids": [
+            "T-ST-EXPERIMENT",
+            "T-ST-SEGMENT"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-ST-EXPERIMENT-application-1"
+          ],
+          "cue": {
+            "state": "review"
+          }
+        },
+        {
+          "id": "CARD-ST-EXPERIMENT-application.s2",
+          "english": "Keep the goal and duration fixed, then compare segment retention and chat rate while logging audience-source differences.",
+          "term_ids": [
+            "T-ST-SEGMENT",
+            "T-ST-CHAT",
+            "T-ST-RETENTION"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-ST-EXPERIMENT-application-2"
+          ]
+        },
+        {
+          "id": "CARD-ST-EXPERIMENT-application.s3",
+          "english": "State a provisional review threshold before the next stream, send the plan to the manager, and record an inconclusive result honestly.",
+          "term_ids": [],
+          "literals": [],
+          "claimIds": [
+            "CL-ST-EXPERIMENT-application-3"
+          ]
+        }
+      ],
+      "visualRef": "explanation"
+    },
+    {
+      "id": "CARD-ST-EXPERIMENT-recap",
+      "kind": "recap",
+      "title": {
+        "en": "Recap"
+      },
+      "sentences": [
+        {
+          "id": "CARD-ST-EXPERIMENT-recap.s1",
+          "english": "A useful experiment includes one change, a prediction, a measure and a review decision.",
+          "term_ids": [
+            "T-ST-EXPERIMENT"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-ST-EXPERIMENT-recap-1"
+          ]
+        },
+        {
+          "id": "CARD-ST-EXPERIMENT-recap.s2",
+          "english": "A threshold guides review; a positive result does not remove every confounder or prove causation.",
+          "term_ids": [
+            "T-ST-CONFOUNDER"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-ST-EXPERIMENT-recap-2"
+          ]
+        }
+      ],
+      "visualRef": "explanation"
+    }
+  ],
+  "visual": {
+    "kind": "flow",
+    "description": "Propose one change and a measurable review: use the saved illustrative scene; highlight the cited case state while explaining the rule.",
+    "alt": "Several changes or audience shocks make attribution uncertain.",
+    "sourceIds": [
+      "S-ST-EXPERIMENT-CASE"
+    ]
+  },
+  "canvas": {
+    "form": "scene",
+    "purpose": {
+      "objectiveIds": [
+        "O-ST-EXPERIMENT-1",
+        "O-ST-EXPERIMENT-2"
+      ],
+      "misconceptionIds": [
+        "M-ST-EXPERIMENT"
+      ],
+      "insight": "Several changes or audience shocks make attribution uncertain."
+    },
+    "illustrative": true,
+    "scene": {
+      "id": "st-experiment-flow",
+      "template": "flow",
+      "params": {
+        "nodes": [
+          {
+            "id": "st-experiment-flow-0",
+            "label": {
+              "en": "Hypothesis from the review"
+            }
+          },
+          {
+            "id": "st-experiment-flow-1",
+            "label": {
+              "en": "One planned change"
+            }
+          },
+          {
+            "id": "st-experiment-flow-2",
+            "label": {
+              "en": "Prediction and measure"
+            }
+          },
+          {
+            "id": "st-experiment-flow-3",
+            "label": {
+              "en": "Result, context and next review"
+            }
+          }
+        ],
+        "edges": [
+          {
+            "from": "st-experiment-flow-0",
+            "to": "st-experiment-flow-1"
+          },
+          {
+            "from": "st-experiment-flow-1",
+            "to": "st-experiment-flow-2"
+          },
+          {
+            "from": "st-experiment-flow-2",
+            "to": "st-experiment-flow-3"
+          }
+        ]
+      },
+      "states": {
+        "review": {
+          "highlight": [
+            "st-experiment-flow-1"
+          ]
+        }
+      }
+    },
+    "mustShow": [
+      "Illustrative case label",
+      "LW-6.2",
+      "Source and review status"
+    ],
+    "mustNotImply": [
+      "A live recommendation or a guaranteed outcome",
+      "Causation established by a single observation"
+    ],
+    "claim": "illustrative_case",
+    "alt": "Propose one change and a measurable review; Several changes or audience shocks make attribution uncertain."
+  },
+  "canvasNullReason": null,
+  "reflect": {
+    "graphRef": "streaming-gta/engagement-drop-40"
+  },
+  "handoff": {
+    "audioUnit": "placard",
+    "speechNotes": [
+      "Use the supplied spoken literals and canonical terms.",
+      "No timestamps or audio assets exist yet."
+    ],
+    "practiceEvidence": "Only an actual learner action can earn practice evidence; this authored predict check cannot."
+  }
+}

@@ -1,0 +1,753 @@
+{
+  "schema": "kiki-scenario/v0-draft",
+  "id": "trader-event-day-iv-crush",
+  "packId": "trading-fno",
+  "illustrative": true,
+  "labels": {
+    "prototype": "Prototype · illustrative",
+    "disclaimer": {
+      "en": "Education on a past, illustrative trade. Not investment advice.",
+      "hi": "एक पुराने, illustrative trade पर शिक्षा। यह investment advice नहीं है।"
+    },
+    "machineDraft": {
+      "en": "Machine draft · native review pending",
+      "hi": "Machine draft · native review बाकी"
+    }
+  },
+  "languageReview": {
+    "en": "draft",
+    "hi": "draft (machine draft: needs a native Hindi reviewer and a trader)"
+  },
+  "persona": {
+    "name": "Ravi (placeholder)",
+    "role": "Trainee index-options trader, onboarding week 2",
+    "org": "Illustrative proprietary trading desk (paper book during onboarding)"
+  },
+  "context": {
+    "book": "Trainee paper book (simulated); no real money",
+    "bookNotionalInr": 1000000,
+    "eventBudgetPct": 1.0,
+    "eventBudgetInr": 10000.0,
+    "playbookRefs": [
+      "EV-2.1 implied move before premium",
+      "EV-4.1 event budget 1% of book",
+      "EV-4.3 defined risk on event days",
+      "EV-6.1 journal: process over P&L"
+    ]
+  },
+  "underlying": {
+    "name": "INDEX (illustrative)",
+    "note": "A generic index. Levels, lot size and strike step are illustrative, not any exchange's specification.",
+    "lotSize": 75,
+    "strikeStep": 50,
+    "tickSize": 0.05,
+    "currency": "INR"
+  },
+  "event": {
+    "id": "ev-policy",
+    "label": {
+      "en": "Scheduled policy announcement",
+      "hi": "Scheduled policy announcement"
+    },
+    "kind": "Scheduled monetary-policy announcement (generic; no real date)",
+    "at": "D0 10:00",
+    "outcome": "As widely expected; no surprise",
+    "timeline": {
+      "D-1": "day before the event (entry at the close)",
+      "D0": "event day (exit at the close)",
+      "D+2": "weekly expiry, 15:30"
+    }
+  },
+  "trade": {
+    "legs": [
+      {
+        "id": "leg-24200ce",
+        "instrument": "24200 CE (weekly)",
+        "type": "call",
+        "side": "long",
+        "strike": 24200.0,
+        "lots": 4,
+        "qty": 300,
+        "entry": {
+          "at": "D-1 15:25",
+          "price": 90.25
+        },
+        "exit": {
+          "at": "D0 15:25",
+          "price": 59.55
+        }
+      }
+    ],
+    "thesisAsWritten": {
+      "en": "Policy will be positive, index will go up. Bought calls.",
+      "hi": "Policy positive आएगी, index ऊपर जाएगा। Call खरीदे।"
+    },
+    "preTradeNote": "Direction only; no implied move, no max-loss line, no exit plan"
+  },
+  "marketBefore": {
+    "at": "D-1 15:30",
+    "spot": 24040.0,
+    "ivPct": 17.5,
+    "daysToExpiry": 3.0,
+    "premiumModel": 90.23
+  },
+  "marketAfter": {
+    "at": "D0 15:30",
+    "spot": 24150.0,
+    "ivPct": 11.0,
+    "daysToExpiry": 2.0,
+    "premiumModel": 59.55
+  },
+  "move": {
+    "points": 110.0,
+    "pct": 0.46,
+    "direction": "up (Ravi's direction was right)"
+  },
+  "pnl": {
+    "perUnit": -30.7,
+    "total": -9210.0,
+    "pctOfPremium": -34.02,
+    "pctOfBook": -0.92,
+    "note": "Before brokerage, taxes and charges. Notional (paper book)."
+  },
+  "decomposition": {
+    "method": "Shapley average over the 6 orders of changing spot, IV and time (order-independent)",
+    "perUnitModel": {
+      "spot": 40.04,
+      "iv": -47.87,
+      "time": -22.85
+    },
+    "perUnitRoundedForScreen": {
+      "spot": 40,
+      "iv": -48,
+      "time": -23
+    },
+    "totalForLotsModel": {
+      "spot": 12012,
+      "iv": -14360,
+      "time": -6854
+    },
+    "totalsNote": "Model components x 300 units sum to about −₹9,202; the fills-based P&L is −₹9,210 because entry and exit prices are rounded to ₹0.05 ticks. The screen line uses per-unit rupees, which sum to −₹31 (P&L per unit −₹30.70).",
+    "sequentialSpotThenIvThenTime": {
+      "spot": 44.92,
+      "iv": -56.4,
+      "time": -19.2
+    },
+    "screenLine": {
+      "en": "Move +₹40 · IV −₹48 · time −₹23",
+      "hi": "Move +₹40 · IV −₹48 · time −₹23"
+    }
+  },
+  "greeksAtEntry": {
+    "delta": 0.35327,
+    "gamma": 0.00097,
+    "vegaPerVolPoint": 8.09985,
+    "thetaPerCalendarDay": -25.12087
+  },
+  "impliedMove": {
+    "atmStrike": 24050.0,
+    "atmCall": 153.55,
+    "atmPut": 150.75,
+    "straddle": 304.3,
+    "straddlePctOfSpot": 1.27,
+    "eventOneSdPoints": 296.6,
+    "eventModel": "IV(t)^2 = IV_base^2 + V_event / T(t), with IV_base = 11% (post-event IV); V_event = (17.5%^2 - 11%^2) * 3/365",
+    "realisedPoints": 110.0,
+    "realisedVsStraddle": 0.36,
+    "screenLine": {
+      "en": "Priced move ≈ ±304 · actual +110",
+      "hi": "Priced move ≈ ±304 · असल move +110"
+    },
+    "rule": "Desk rule of thumb: the ATM straddle price approximates the move the market expects by expiry"
+  },
+  "sizing": {
+    "premiumAtRisk": 27075.0,
+    "eventBudget": 10000.0,
+    "multipleOfBudget": 2.71,
+    "pctOfBook": 2.71,
+    "note": "The realised loss stayed under the budget, but the risk taken (max loss = full premium) was 2.7x the budget: process breach, not outcome."
+  },
+  "breakevens": {
+    "atExpiry": 24290.25,
+    "spotNeededAtD0CloseToRecoverPremium": 24214.0,
+    "note": "With IV at 11% and 2 days left, spot had to close near this level (above the strike) just to get ₹90.25 back."
+  },
+  "counterfactuals": {
+    "noIvFall": {
+      "desc": "Same spot move and same day passed, IV stays 17.5%",
+      "value": 105.31,
+      "pnlPerUnit": 15.06,
+      "pnlTotal": 4517.93
+    },
+    "playbookSpread": {
+      "desc": "Playbook event-day setup applied to the same past view: 24200/24400 call spread, sized inside the event budget",
+      "legs": [
+        {
+          "strike": 24200.0,
+          "type": "call",
+          "side": "long",
+          "entry": 90.25,
+          "exit": 59.55
+        },
+        {
+          "strike": 24400.0,
+          "type": "call",
+          "side": "short",
+          "entry": 38.35,
+          "exit": 10.6
+        }
+      ],
+      "netDebit": 51.9,
+      "valueAfter": 48.95,
+      "lots": 2,
+      "qty": 150,
+      "maxLoss": 7785.0,
+      "pnl": -442.5,
+      "pnlIfFourLots": -885.0,
+      "framing": "Shown only as a review of a past trade against the desk's process. Not a recommendation."
+    }
+  },
+  "candles": {
+    "interval": "30m",
+    "session": "09:15-15:30",
+    "barCloseNote": "Last bar of each day is 15:15-15:30",
+    "bars": [
+      {
+        "t": "D-1 09:15",
+        "o": 23985,
+        "h": 24012,
+        "l": 23958,
+        "c": 23996
+      },
+      {
+        "t": "D-1 09:45",
+        "o": 23996,
+        "h": 24021,
+        "l": 23977,
+        "c": 24008
+      },
+      {
+        "t": "D-1 10:15",
+        "o": 24008,
+        "h": 24030,
+        "l": 23990,
+        "c": 23998
+      },
+      {
+        "t": "D-1 10:45",
+        "o": 23998,
+        "h": 24015,
+        "l": 23972,
+        "c": 23981
+      },
+      {
+        "t": "D-1 11:15",
+        "o": 23981,
+        "h": 24004,
+        "l": 23962,
+        "c": 23993
+      },
+      {
+        "t": "D-1 11:45",
+        "o": 23993,
+        "h": 24019,
+        "l": 23985,
+        "c": 24011
+      },
+      {
+        "t": "D-1 12:15",
+        "o": 24011,
+        "h": 24026,
+        "l": 23999,
+        "c": 24004
+      },
+      {
+        "t": "D-1 12:45",
+        "o": 24004,
+        "h": 24017,
+        "l": 23988,
+        "c": 24009
+      },
+      {
+        "t": "D-1 13:15",
+        "o": 24009,
+        "h": 24038,
+        "l": 24002,
+        "c": 24027
+      },
+      {
+        "t": "D-1 13:45",
+        "o": 24027,
+        "h": 24049,
+        "l": 24016,
+        "c": 24036
+      },
+      {
+        "t": "D-1 14:15",
+        "o": 24036,
+        "h": 24058,
+        "l": 24020,
+        "c": 24025
+      },
+      {
+        "t": "D-1 14:45",
+        "o": 24025,
+        "h": 24068,
+        "l": 24019,
+        "c": 24051
+      },
+      {
+        "t": "D-1 15:15",
+        "o": 24051,
+        "h": 24064,
+        "l": 24031,
+        "c": 24040
+      },
+      {
+        "t": "D0 09:15",
+        "o": 24032,
+        "h": 24055,
+        "l": 24011,
+        "c": 24038
+      },
+      {
+        "t": "D0 09:45",
+        "o": 24038,
+        "h": 24194,
+        "l": 23986,
+        "c": 24168
+      },
+      {
+        "t": "D0 10:15",
+        "o": 24168,
+        "h": 24181,
+        "l": 24109,
+        "c": 24126
+      },
+      {
+        "t": "D0 10:45",
+        "o": 24126,
+        "h": 24152,
+        "l": 24098,
+        "c": 24141
+      },
+      {
+        "t": "D0 11:15",
+        "o": 24141,
+        "h": 24166,
+        "l": 24122,
+        "c": 24158
+      },
+      {
+        "t": "D0 11:45",
+        "o": 24158,
+        "h": 24171,
+        "l": 24130,
+        "c": 24137
+      },
+      {
+        "t": "D0 12:15",
+        "o": 24137,
+        "h": 24150,
+        "l": 24112,
+        "c": 24124
+      },
+      {
+        "t": "D0 12:45",
+        "o": 24124,
+        "h": 24146,
+        "l": 24109,
+        "c": 24140
+      },
+      {
+        "t": "D0 13:15",
+        "o": 24140,
+        "h": 24168,
+        "l": 24131,
+        "c": 24161
+      },
+      {
+        "t": "D0 13:45",
+        "o": 24161,
+        "h": 24178,
+        "l": 24139,
+        "c": 24147
+      },
+      {
+        "t": "D0 14:15",
+        "o": 24147,
+        "h": 24163,
+        "l": 24128,
+        "c": 24135
+      },
+      {
+        "t": "D0 14:45",
+        "o": 24135,
+        "h": 24159,
+        "l": 24126,
+        "c": 24154
+      },
+      {
+        "t": "D0 15:15",
+        "o": 24154,
+        "h": 24166,
+        "l": 24141,
+        "c": 24150
+      }
+    ],
+    "entryBarIndex": 12,
+    "eventBarIndex": 14,
+    "exitBarIndex": 25,
+    "eventDay": {
+      "open": 24032,
+      "high": 24194,
+      "low": 23986,
+      "close": 24150,
+      "changePoints": 110.0,
+      "note": "High stayed below the 24200 strike"
+    }
+  },
+  "ivSeries": {
+    "unit": "%",
+    "of": "24200 CE",
+    "byBar": [
+      17.1,
+      17.14,
+      17.17,
+      17.2,
+      17.24,
+      17.27,
+      17.3,
+      17.34,
+      17.37,
+      17.41,
+      17.45,
+      17.48,
+      17.5,
+      19.21,
+      12.49,
+      12.28,
+      12.09,
+      11.9,
+      11.73,
+      11.57,
+      11.42,
+      11.29,
+      11.17,
+      11.08,
+      11.02,
+      11.0
+    ],
+    "note": "Rises into the event (event variance over shrinking time), collapses at 10:00 on D0, bleeds to 11% by the close"
+  },
+  "premiumSeries": {
+    "unit": "INR",
+    "of": "24200 CE (model value at each bar close)",
+    "byBar": [
+      78.04,
+      81.67,
+      78.25,
+      72.8,
+      76.26,
+      81.79,
+      79.31,
+      80.71,
+      86.49,
+      89.38,
+      85.37,
+      94.29,
+      90.23,
+      81.18,
+      83.16,
+      63.19,
+      67.35,
+      72.82,
+      62.22,
+      55.56,
+      60.35,
+      67.88,
+      60.61,
+      54.7,
+      61.57,
+      59.55
+    ]
+  },
+  "optionChainSnapshot": {
+    "at": "D-1 15:25",
+    "spot": 24040.0,
+    "daysToExpiry": 3.0,
+    "note": "LTPs are Black-Scholes values at a flat 17.5% IV (teaching simplification); OI figures are invented for the prototype.",
+    "rows": [
+      {
+        "strike": 23900,
+        "callLtp": 240.15,
+        "callIvPct": 17.5,
+        "callOi": 21400,
+        "putLtp": 87.35,
+        "putIvPct": 17.5,
+        "putOi": 68300
+      },
+      {
+        "strike": 23950,
+        "callLtp": 208.75,
+        "callIvPct": 17.5,
+        "callOi": 18900,
+        "putLtp": 105.95,
+        "putIvPct": 17.5,
+        "putOi": 47900
+      },
+      {
+        "strike": 24000,
+        "callLtp": 179.85,
+        "callIvPct": 17.5,
+        "callOi": 52300,
+        "putLtp": 127.05,
+        "putIvPct": 17.5,
+        "putOi": 104800
+      },
+      {
+        "strike": 24050,
+        "callLtp": 153.55,
+        "callIvPct": 17.5,
+        "callOi": 38700,
+        "putLtp": 150.75,
+        "putIvPct": 17.5,
+        "putOi": 51600
+      },
+      {
+        "strike": 24100,
+        "callLtp": 129.9,
+        "callIvPct": 17.5,
+        "callOi": 61200,
+        "putLtp": 177.05,
+        "putIvPct": 17.5,
+        "putOi": 42700
+      },
+      {
+        "strike": 24150,
+        "callLtp": 108.8,
+        "callIvPct": 17.5,
+        "callOi": 44800,
+        "putLtp": 205.9,
+        "putIvPct": 17.5,
+        "putOi": 22300
+      },
+      {
+        "strike": 24200,
+        "callLtp": 90.25,
+        "callIvPct": 17.5,
+        "callOi": 112600,
+        "putLtp": 237.3,
+        "putIvPct": 17.5,
+        "putOi": 18900
+      },
+      {
+        "strike": 24250,
+        "callLtp": 74.05,
+        "callIvPct": 17.5,
+        "callOi": 58100,
+        "putLtp": 271.1,
+        "putIvPct": 17.5,
+        "putOi": 9800
+      },
+      {
+        "strike": 24300,
+        "callLtp": 60.1,
+        "callIvPct": 17.5,
+        "callOi": 89400,
+        "putLtp": 307.15,
+        "putIvPct": 17.5,
+        "putOi": 7600
+      },
+      {
+        "strike": 24350,
+        "callLtp": 48.3,
+        "callIvPct": 17.5,
+        "callOi": 41200,
+        "putLtp": 345.3,
+        "putIvPct": 17.5,
+        "putOi": 4100
+      },
+      {
+        "strike": 24400,
+        "callLtp": 38.35,
+        "callIvPct": 17.5,
+        "callOi": 76500,
+        "putLtp": 385.3,
+        "putIvPct": 17.5,
+        "putOi": 3900
+      }
+    ],
+    "pcrOi": 0.62
+  },
+  "doTask": {
+    "id": "pre-event-checklist",
+    "tool": {
+      "en": "Trading terminal: chart and option chain (paper mode, historical replay of D-1)",
+      "hi": "Trading terminal: chart और option chain (paper mode, D-1 का historical replay)"
+    },
+    "userAsk": {
+      "en": "Is my pre-event note complete?",
+      "hi": "क्या मेरा pre-event note पूरा है?"
+    },
+    "lookFor": [
+      {
+        "id": "iv-read",
+        "desc": "IV of the chosen strike is noted (17.5%)"
+      },
+      {
+        "id": "implied-move",
+        "desc": "Implied move from the 24050 straddle is written (about ±304)"
+      },
+      {
+        "id": "max-loss",
+        "desc": "Max loss written and inside the event budget (≤ ₹10,000)"
+      },
+      {
+        "id": "exit-plan",
+        "desc": "Exit plan (time and price) is written"
+      }
+    ],
+    "askAfter": {
+      "en": "Your exit plan is missing. When would you get out?",
+      "hi": "Exit plan अभी नहीं लिखा। आप कब निकलेंगे?"
+    },
+    "graphId": "trading-fno/bad-call-iv-crush",
+    "note": "KiKi points and checks visible work. It never places, modifies or suggests an order."
+  },
+  "bsCheck": {
+    "result": "PASS",
+    "script": "docs/knowledge-workers/personas/tools/trader_build.py",
+    "rerun": "py -3 -I trader_build.py",
+    "model": {
+      "formula": "Black-Scholes-Merton, European",
+      "riskFreeRate": 0.065,
+      "dividendYield": 0.0,
+      "dayCount": "calendar days / 365",
+      "ivUnitInParams": "fraction (0.175 = 17.5%)",
+      "smile": "flat IV across strikes (simplification)"
+    },
+    "inputs": {
+      "before": {
+        "S": 24040.0,
+        "K": 24200.0,
+        "T_days": 3.0,
+        "iv": 0.175
+      },
+      "after": {
+        "S": 24150.0,
+        "K": 24200.0,
+        "T_days": 2.0,
+        "iv": 0.11
+      }
+    },
+    "outputs": {
+      "callBefore": 90.2263,
+      "callAfter": 59.5543,
+      "changePerUnit": -30.672
+    },
+    "checks": [
+      {
+        "name": "self-test: textbook call 4.76",
+        "pass": true,
+        "detail": "4.7594"
+      },
+      {
+        "name": "self-test: textbook put 0.81",
+        "pass": true,
+        "detail": "0.8086"
+      },
+      {
+        "name": "self-test: put-call parity",
+        "pass": true,
+        "detail": "residual -5.33e-15"
+      },
+      {
+        "name": "direction was right (spot rose)",
+        "pass": true,
+        "detail": "24040 -> 24150 (+0.46%)"
+      },
+      {
+        "name": "option lost value despite the favourable move",
+        "pass": true,
+        "detail": "90.23 -> 59.55"
+      },
+      {
+        "name": "loss is material (> 25% of premium)",
+        "pass": true,
+        "detail": "-34.0%"
+      },
+      {
+        "name": "decomposition sums to the model change",
+        "pass": true,
+        "detail": "-30.6720 vs -30.6720"
+      },
+      {
+        "name": "IV fall is the largest single drag",
+        "pass": true,
+        "detail": "iv -47.87, time -22.85, spot +40.04"
+      },
+      {
+        "name": "without the IV fall the same move would have gained",
+        "pass": true,
+        "detail": "105.31 vs 90.23"
+      },
+      {
+        "name": "realised move smaller than the priced move",
+        "pass": true,
+        "detail": "+110 vs straddle 304.30"
+      },
+      {
+        "name": "spread max loss inside the event budget",
+        "pass": true,
+        "detail": "7785.00 <= 10000"
+      },
+      {
+        "name": "spread loses far less than the long call",
+        "pass": true,
+        "detail": "-442.50 vs -9210.00"
+      },
+      {
+        "name": "candles consistent (H/L bound O/C, opens follow closes intraday)",
+        "pass": true,
+        "detail": "26 bars"
+      },
+      {
+        "name": "per-bar premium at entry bar equals headline model price",
+        "pass": true,
+        "detail": "90.23 vs 90.23"
+      },
+      {
+        "name": "per-bar premium at exit bar equals headline model price",
+        "pass": true,
+        "detail": "59.55 vs 59.55"
+      },
+      {
+        "name": "per-bar IV at entry/exit equals headline IV",
+        "pass": true,
+        "detail": "17.5 / 11.0"
+      },
+      {
+        "name": "spot never reached the strike on event day",
+        "pass": true,
+        "detail": "D0 high 24194 < 24200"
+      },
+      {
+        "name": "chain: 24200 CE LTP equals Ravi's fill",
+        "pass": true,
+        "detail": "90.25"
+      },
+      {
+        "name": "breakeven at expiry = strike + premium",
+        "pass": true,
+        "detail": "24290.25"
+      }
+    ],
+    "selfTestReference": "Textbook example S=42, K=40, r=10%, sigma=20%, T=0.5: call 4.76, put 0.81"
+  },
+  "notes": [
+    "Everything here is illustrative: a generic index, invented levels and OI, a placeholder trainee and a paper book.",
+    "Numbers are internally consistent: the per-bar series, the chain and the payoff scenes all come from the same Black-Scholes function as the headline premiums.",
+    "Process, not picks: the scenario reviews a past decision against the desk's process. No recommendation for any live trade."
+  ]
+}

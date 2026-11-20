@@ -1,0 +1,67 @@
+{
+  "repository": "https://github.com/Kikiland-ai/Design-Thinking",
+  "revision": "45180af3f589bfdb11711766a4f8fbbc339a8ce9",
+  "retrievedOn": "2026-11-20",
+  "files": [
+    {
+      "upstreamPath": "docs/knowledge-workers/01-kiki-for-knowledge-workers.md",
+      "localPath": "sources/design/01-kiki-for-knowledge-workers.md",
+      "sha256": "73093b65a8ea8827f3b1a371b9e4267e35742928a5c767a699d7344ecdeda76c"
+    },
+    {
+      "upstreamPath": "docs/knowledge-workers/05-contracts-v0.md",
+      "localPath": "sources/design/05-contracts-v0.md",
+      "sha256": "22f4f875880d3056706e8d3c77ebf8be42c0f99a372a19752b6fb3bf536304e0"
+    },
+    {
+      "upstreamPath": "docs/knowledge-workers/personas/trader/persona.md",
+      "localPath": "sources/design/personas/trader/persona.md",
+      "sha256": "077c8028beda2b6f63a54d1de40f3b5503c7fefc4fe994cce142581e1e859ce6"
+    },
+    {
+      "upstreamPath": "docs/knowledge-workers/personas/trader/playbook-excerpt.md",
+      "localPath": "sources/design/personas/trader/playbook-excerpt.md",
+      "sha256": "a171c579bc7c883e109cffc2b8c1dd7a382826584041aa40707a86c672a41539"
+    },
+    {
+      "upstreamPath": "docs/knowledge-workers/personas/trader/scenario.json",
+      "localPath": "sources/design/personas/trader/scenario.json",
+      "sha256": "5a981156e7b49b3d7e7f78e0efcb5c305f074a4de77930a9c051f0954ff3fa3c"
+    },
+    {
+      "upstreamPath": "docs/knowledge-workers/personas/trader/tutor-flow.json",
+      "localPath": "sources/design/personas/trader/tutor-flow.json",
+      "sha256": "a6555fafbd3854340922ce00fe8bd85adc1fe6b66d8f6f321025d59f0353d7f4"
+    },
+    {
+      "upstreamPath": "docs/knowledge-workers/personas/trader/storyboard.md",
+      "localPath": "sources/design/personas/trader/storyboard.md",
+      "sha256": "26a4386bb3a74c4b3068baf08e7e7eab1475fac0335df93214d01965a5420b5c"
+    },
+    {
+      "upstreamPath": "docs/knowledge-workers/personas/streamer/persona.md",
+      "localPath": "sources/design/personas/streamer/persona.md",
+      "sha256": "081d7a4638885d2e8606720bb5556a4a7c0005d4b47d0b87d25d1c555c7928b9"
+    },
+    {
+      "upstreamPath": "docs/knowledge-workers/personas/streamer/playbook-excerpt.md",
+      "localPath": "sources/design/personas/streamer/playbook-excerpt.md",
+      "sha256": "875b5e78866580bd4dc2f8f0283044501a1a3f6362f3ac40573f771015d94398"
+    },
+    {
+      "upstreamPath": "docs/knowledge-workers/personas/streamer/scenario.json",
+      "localPath": "sources/design/personas/streamer/scenario.json",
+      "sha256": "1e01923a082740eab5c17345520470712ccdd1436cb014f1d36896b5d22926f9"
+    },
+    {
+      "upstreamPath": "docs/knowledge-workers/personas/streamer/tutor-flow.json",
+      "localPath": "sources/design/personas/streamer/tutor-flow.json",
+      "sha256": "dd5d54aaea9474879b70dd912a013ce1c79c5fee8f4044a8155e0e5e1ee0dd3b"
+    },
+    {
+      "upstreamPath": "docs/knowledge-workers/personas/streamer/storyboard.md",
+      "localPath": "sources/design/personas/streamer/storyboard.md",
+      "sha256": "8ca0ec99f1c24b7743f2b19ca3bb26e60cda3865fc2d76d1c3afc2d59f54265f"
+    }
+  ]
+}

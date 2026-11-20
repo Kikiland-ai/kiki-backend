@@ -1,0 +1,1462 @@
+{
+  "schema": "kiki-pack/v0",
+  "id": "streaming-gta",
+  "version": "2026-11-20.1",
+  "corner": "audiences",
+  "title": {
+    "en": "Launch-week streams"
+  },
+  "persona": {
+    "name": "Meera (placeholder)",
+    "role": {
+      "en": "Newly signed creator in an illustrative launch-week cohort"
+    },
+    "transition": {
+      "en": "hobby streaming to an agency review process"
+    },
+    "org": {
+      "en": "Illustrative creator agency"
+    }
+  },
+  "languages": {
+    "source": "en",
+    "learner": "en",
+    "available": [
+      "en"
+    ],
+    "review": {
+      "en": "draft",
+      "hi-Latn": "draft"
+    }
+  },
+  "dimensionLabels": {
+    "concept": {
+      "en": "Concept"
+    },
+    "words": {
+      "en": "Words"
+    },
+    "english": {
+      "en": "Expression"
+    },
+    "lab": {
+      "en": "Practice"
+    }
+  },
+  "modules": [
+    {
+      "id": "MOD-ST-LAUNCH",
+      "title": {
+        "en": "Launch-week streams"
+      },
+      "conceptIds": [
+        "ST-HOOKS",
+        "ST-CHAT",
+        "ST-RETENTION",
+        "ST-EXPERIMENT"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "id": "ST-HOOKS",
+      "title": {
+        "en": "Give every slow segment a reason to stay"
+      },
+      "goal": {
+        "en": "Restructure the illustrative grind using the agency segment rules."
+      },
+      "placards": [
+        {
+          "kind": "definition",
+          "text": {
+            "en": "A [[T-ST-HOOK]] states why an audience should keep watching the current [[T-ST-SEGMENT]]. A [[T-ST-ROS]] names each [[T-ST-SEGMENT]], its goal and its target duration."
+          },
+          "sources": [
+            {
+              "id": "S-ST-HOOKS-PLAYBOOK",
+              "title": "Launch-week streaming playbook (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/streamer/playbook-excerpt.md; §2-3, LW-3.1; §5, LW-5.1 and LW-5.2; scenario segments"
+            }
+          ],
+          "sceneId": "st-line"
+        },
+        {
+          "kind": "concept",
+          "text": {
+            "en": "In the illustrative case, the silent grind [[T-ST-SEGMENT]] ran from minute 38 to minute 60 with no stated goal or chat interaction. The agency rule LW-5.2 limits a grind [[T-ST-SEGMENT]] to 10 minutes with a stated goal and audience participation. The weak [[T-ST-HOOK]] and missing participation are review hypotheses; the chart alone does not prove why each viewer left."
+          },
+          "sources": [
+            {
+              "id": "S-ST-HOOKS-CASE",
+              "title": "Launch-week stream case (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/streamer/scenario.json"
+            },
+            {
+              "id": "S-ST-HOOKS-PLAYBOOK",
+              "title": "Launch-week streaming playbook (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/streamer/playbook-excerpt.md; §2-3, LW-3.1; §5, LW-5.1 and LW-5.2; scenario segments"
+            }
+          ],
+          "sceneId": "st-line"
+        },
+        {
+          "kind": "application",
+          "text": {
+            "en": "Review the [[T-ST-VOD]] around the transition before diagnosing the [[T-ST-SEGMENT]]. Draft a shorter grind [[T-ST-SEGMENT]] with a stated goal and a poll, following the agency playbook. Save the revised [[T-ST-ROS]] for the manager instead of changing the live stream automatically."
+          },
+          "sources": [
+            {
+              "id": "S-ST-HOOKS-PLAYBOOK",
+              "title": "Launch-week streaming playbook (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/streamer/playbook-excerpt.md; §2-3, LW-3.1; §5, LW-5.1 and LW-5.2; scenario segments"
+            },
+            {
+              "id": "S-ST-HOOKS-CASE",
+              "title": "Launch-week stream case (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/streamer/scenario.json"
+            }
+          ],
+          "sceneId": "st-line"
+        },
+        {
+          "kind": "recap",
+          "text": {
+            "en": "A slow [[T-ST-SEGMENT]] needs a [[T-ST-HOOK]] and a plan under this agency playbook. Treat the duration and silence limits as agency rules, not universal platform statistics."
+          },
+          "sources": [
+            {
+              "id": "S-ST-HOOKS-PLAYBOOK",
+              "title": "Launch-week streaming playbook (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/streamer/playbook-excerpt.md; §2-3, LW-3.1; §5, LW-5.1 and LW-5.2; scenario segments"
+            },
+            {
+              "id": "S-ST-HOOKS-CASE",
+              "title": "Launch-week stream case (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/streamer/scenario.json"
+            }
+          ],
+          "sceneId": "st-line"
+        }
+      ]
+    },
+    {
+      "id": "ST-CHAT",
+      "title": {
+        "en": "Read chat as an early warning, then verify"
+      },
+      "goal": {
+        "en": "Compare the timing of chat and viewer changes without claiming causation from correlation."
+      },
+      "placards": [
+        {
+          "kind": "definition",
+          "text": {
+            "en": "The [[T-ST-CHAT]] is the number of messages per minute in this case. A [[T-ST-MECHANIC]] gives viewers a planned way to participate, such as a poll."
+          },
+          "sources": [
+            {
+              "id": "S-ST-CHAT-PLAYBOOK",
+              "title": "Launch-week streaming playbook (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/streamer/playbook-excerpt.md; §4, LW-4.1; scenario drop and series.chatPerMin"
+            }
+          ],
+          "sceneId": "st-line"
+        },
+        {
+          "kind": "concept",
+          "text": {
+            "en": "The case [[T-ST-CHAT]] fell from 87 messages at minute 37 to 15 at minute 41. The viewer line remained near its earlier level around minute 40 before declining. The agency treats [[T-ST-CHAT]] as an early warning, but a quiet chat alone cannot identify a cause."
+          },
+          "sources": [
+            {
+              "id": "S-ST-CHAT-CASE",
+              "title": "Launch-week stream case (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/streamer/scenario.json"
+            },
+            {
+              "id": "S-ST-CHAT-PLAYBOOK",
+              "title": "Launch-week streaming playbook (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/streamer/playbook-excerpt.md; §4, LW-4.1; scenario drop and series.chatPerMin"
+            }
+          ],
+          "sceneId": "st-line"
+        },
+        {
+          "kind": "application",
+          "text": {
+            "en": "Under the agency rule LW-4.1, every grind or loading stretch needs a [[T-ST-MECHANIC]]. Compare [[T-ST-CHAT]] with the [[T-ST-SEGMENT]] transition, then inspect the [[T-ST-VOD]] to check what changed. Record the warning and the proposed response in the next plan; do not infer a live audience preference from one signal."
+          },
+          "sources": [
+            {
+              "id": "S-ST-CHAT-PLAYBOOK",
+              "title": "Launch-week streaming playbook (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/streamer/playbook-excerpt.md; §4, LW-4.1; scenario drop and series.chatPerMin"
+            },
+            {
+              "id": "S-ST-CHAT-CASE",
+              "title": "Launch-week stream case (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/streamer/scenario.json"
+            }
+          ],
+          "sceneId": "st-line"
+        },
+        {
+          "kind": "recap",
+          "text": {
+            "en": "Use [[T-ST-CHAT]] with the viewer line and [[T-ST-SEGMENT]] notes. Treat a missing [[T-ST-MECHANIC]] as a playbook gap, while keeping the causal diagnosis provisional."
+          },
+          "sources": [
+            {
+              "id": "S-ST-CHAT-PLAYBOOK",
+              "title": "Launch-week streaming playbook (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/streamer/playbook-excerpt.md; §4, LW-4.1; scenario drop and series.chatPerMin"
+            },
+            {
+              "id": "S-ST-CHAT-CASE",
+              "title": "Launch-week stream case (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/streamer/scenario.json"
+            }
+          ],
+          "sceneId": "st-line"
+        }
+      ]
+    },
+    {
+      "id": "ST-RETENTION",
+      "title": {
+        "en": "Compare segments without mistaking counts for people"
+      },
+      "goal": {
+        "en": "Compute the agency segment ratio and explain its limits."
+      },
+      "placards": [
+        {
+          "kind": "definition",
+          "text": {
+            "en": "The [[T-ST-CCV]] measures concurrent viewers at a moment, rather than unique viewers across the whole stream. The agency defines [[T-ST-RETENTION]] as last-minute [[T-ST-CCV]] divided by first-minute [[T-ST-CCV]]."
+          },
+          "sources": [
+            {
+              "id": "S-ST-RETENTION-PLAYBOOK",
+              "title": "Launch-week streaming playbook (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/streamer/playbook-excerpt.md; §6, LW-6.1; scenario segmentStats, series and drop"
+            }
+          ],
+          "sceneId": "st-line"
+        },
+        {
+          "kind": "concept",
+          "text": {
+            "en": "The case grind [[T-ST-SEGMENT]] uses minute 38 as its first sample and minute 59 as its last, with [[T-ST-CCV]] of 556 and 348. The [[T-ST-RETENTION]] is about 0.626, rounded to 0.63, below the agency review threshold of 0.8. This ratio compares counts; it does not prove that the same 63% of viewers stayed throughout."
+          },
+          "sources": [
+            {
+              "id": "S-ST-RETENTION-CASE",
+              "title": "Launch-week stream case (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/streamer/scenario.json"
+            },
+            {
+              "id": "S-ST-RETENTION-PLAYBOOK",
+              "title": "Launch-week streaming playbook (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/streamer/playbook-excerpt.md; §6, LW-6.1; scenario segmentStats, series and drop"
+            }
+          ],
+          "sceneId": "st-line"
+        },
+        {
+          "kind": "application",
+          "text": {
+            "en": "The case vote [[T-ST-SEGMENT]] has [[T-ST-CCV]] of 351 at minute 60 and 477 at minute 91, giving a ratio near 1.36. A [[T-ST-RETENTION]] above 1 indicates net growth in concurrent counts, not impossible individual retention. Under the agency rule LW-6.1, flag the grind for [[T-ST-VOD]] review and keep the later raid separate from this comparison."
+          },
+          "sources": [
+            {
+              "id": "S-ST-RETENTION-CASE",
+              "title": "Launch-week stream case (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/streamer/scenario.json"
+            },
+            {
+              "id": "S-ST-RETENTION-PLAYBOOK",
+              "title": "Launch-week streaming playbook (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/streamer/playbook-excerpt.md; §6, LW-6.1; scenario segmentStats, series and drop"
+            }
+          ],
+          "sceneId": "st-line"
+        },
+        {
+          "kind": "recap",
+          "text": {
+            "en": "Always state the [[T-ST-CCV]] endpoint convention when reporting [[T-ST-RETENTION]]. Use the agency threshold to prioritise review, rather than to assert a causal explanation."
+          },
+          "sources": [
+            {
+              "id": "S-ST-RETENTION-PLAYBOOK",
+              "title": "Launch-week streaming playbook (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/streamer/playbook-excerpt.md; §6, LW-6.1; scenario segmentStats, series and drop"
+            },
+            {
+              "id": "S-ST-RETENTION-CASE",
+              "title": "Launch-week stream case (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/streamer/scenario.json"
+            }
+          ],
+          "sceneId": "st-line"
+        }
+      ]
+    },
+    {
+      "id": "ST-EXPERIMENT",
+      "title": {
+        "en": "Propose one change and a measurable review"
+      },
+      "goal": {
+        "en": "Write a single-change learning plan with a prediction, measure and attribution limits."
+      },
+      "placards": [
+        {
+          "kind": "definition",
+          "text": {
+            "en": "An [[T-ST-EXPERIMENT]] records a planned change, the expected effect and a measure for review. A [[T-ST-CONFOUNDER]] is another changing factor that makes attribution uncertain."
+          },
+          "sources": [
+            {
+              "id": "S-ST-EXPERIMENT-PLAYBOOK",
+              "title": "Launch-week streaming playbook (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/streamer/playbook-excerpt.md; §6, LW-6.2; §5, LW-5.1; scenario recovery and events"
+            }
+          ],
+          "sceneId": "st-experiment-flow"
+        },
+        {
+          "kind": "concept",
+          "text": {
+            "en": "Under the agency rule LW-6.2, change one thing per stream and log the prediction, measure and result. The case recovery coincided with polls, talking and a new [[T-ST-SEGMENT]], so it cannot isolate one change. The incoming raid at minute 95 is another [[T-ST-CONFOUNDER]] when comparing later viewer counts."
+          },
+          "sources": [
+            {
+              "id": "S-ST-EXPERIMENT-PLAYBOOK",
+              "title": "Launch-week streaming playbook (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/streamer/playbook-excerpt.md; §6, LW-6.2; §5, LW-5.1; scenario recovery and events"
+            },
+            {
+              "id": "S-ST-EXPERIMENT-CASE",
+              "title": "Launch-week stream case (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/streamer/scenario.json"
+            }
+          ],
+          "sceneId": "st-experiment-flow"
+        },
+        {
+          "kind": "application",
+          "text": {
+            "en": "Draft one [[T-ST-EXPERIMENT]] that adds a poll to an otherwise comparable slow [[T-ST-SEGMENT]]. Keep the goal and duration fixed, then compare [[T-ST-RETENTION]] and [[T-ST-CHAT]] while logging audience-source differences. State a provisional review threshold before the next stream, send the plan to the manager, and record an inconclusive result honestly."
+          },
+          "sources": [
+            {
+              "id": "S-ST-EXPERIMENT-PLAYBOOK",
+              "title": "Launch-week streaming playbook (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/streamer/playbook-excerpt.md; §6, LW-6.2; §5, LW-5.1; scenario recovery and events"
+            },
+            {
+              "id": "S-ST-EXPERIMENT-CASE",
+              "title": "Launch-week stream case (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/streamer/scenario.json"
+            }
+          ],
+          "sceneId": "st-experiment-flow"
+        },
+        {
+          "kind": "recap",
+          "text": {
+            "en": "A useful [[T-ST-EXPERIMENT]] includes one change, a prediction, a measure and a review decision. A threshold guides review; a positive result does not remove every [[T-ST-CONFOUNDER]] or prove causation."
+          },
+          "sources": [
+            {
+              "id": "S-ST-EXPERIMENT-PLAYBOOK",
+              "title": "Launch-week streaming playbook (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/streamer/playbook-excerpt.md; §6, LW-6.2; §5, LW-5.1; scenario recovery and events"
+            },
+            {
+              "id": "S-ST-EXPERIMENT-CASE",
+              "title": "Launch-week stream case (illustrative)",
+              "locator": "content/knowledge-workers/sources/design/personas/streamer/scenario.json"
+            }
+          ],
+          "sceneId": "st-experiment-flow"
+        }
+      ]
+    }
+  ],
+  "terms": [
+    {
+      "id": "T-ST-HOOK",
+      "term": "hook",
+      "meaning": {
+        "en": "A stated reason for the audience to keep watching.",
+        "hi-Latn": "Viewer ko rukne ka saaf reason."
+      },
+      "say": {
+        "hi-Latn": "hook"
+      }
+    },
+    {
+      "id": "T-ST-SEGMENT",
+      "term": "segment",
+      "meaning": {
+        "en": "A named block of a stream with a goal and planned duration.",
+        "hi-Latn": "Stream ka naam aur goal wala time block."
+      },
+      "say": {
+        "hi-Latn": "segment"
+      }
+    },
+    {
+      "id": "T-ST-ROS",
+      "term": "run-of-show",
+      "meaning": {
+        "en": "The ordered plan of named segments and target durations.",
+        "hi-Latn": "Segments ka order, goal aur planned time."
+      },
+      "say": {
+        "hi-Latn": "run of show"
+      }
+    },
+    {
+      "id": "T-ST-VOD",
+      "term": "VOD",
+      "meaning": {
+        "en": "The saved video recording used to review what happened on stream.",
+        "hi-Latn": "Stream ki saved recording jise review karte hain."
+      },
+      "say": {
+        "hi-Latn": "V O D"
+      }
+    },
+    {
+      "id": "T-ST-CHAT",
+      "term": "chat rate",
+      "meaning": {
+        "en": "Messages per minute in this illustrative analytics case.",
+        "hi-Latn": "Is case mein ek minute ke chat messages."
+      },
+      "say": {
+        "hi-Latn": "chat rate"
+      }
+    },
+    {
+      "id": "T-ST-MECHANIC",
+      "term": "chat mechanic",
+      "meaning": {
+        "en": "A planned way for viewers to participate, such as a poll.",
+        "hi-Latn": "Viewers ko involve karne ka planned tareeka, jaise poll."
+      },
+      "say": {
+        "hi-Latn": "chat mechanic"
+      }
+    },
+    {
+      "id": "T-ST-CCV",
+      "term": "CCV",
+      "meaning": {
+        "en": "Concurrent viewers at a given time, rather than unique people across the whole stream.",
+        "hi-Latn": "Ek waqt par dekh rahe viewers; poore stream ke unique log nahi."
+      },
+      "say": {
+        "hi-Latn": "C C V"
+      }
+    },
+    {
+      "id": "T-ST-RETENTION",
+      "term": "segment retention",
+      "meaning": {
+        "en": "The agency ratio of last-minute CCV to first-minute CCV in a segment.",
+        "hi-Latn": "Agency ka ratio: segment ke last minute ka CCV, first minute ke CCV se divide."
+      },
+      "say": {
+        "hi-Latn": "segment retention"
+      }
+    },
+    {
+      "id": "T-ST-EXPERIMENT",
+      "term": "experiment",
+      "meaning": {
+        "en": "A planned change with a prediction and a measure for the next review.",
+        "hi-Latn": "Ek planned change, expected effect aur measure ke saath."
+      },
+      "say": {
+        "hi-Latn": "experiment"
+      }
+    },
+    {
+      "id": "T-ST-CONFOUNDER",
+      "term": "confounder",
+      "meaning": {
+        "en": "Another changing factor that makes attribution of a result uncertain.",
+        "hi-Latn": "Doosra badalta factor jo result ka reason clear nahi hone deta."
+      },
+      "say": {
+        "hi-Latn": "confounder"
+      }
+    }
+  ],
+  "scenes": [
+    {
+      "id": "st-line",
+      "template": "line",
+      "params": {
+        "x": {
+          "label": {
+            "en": "Stream time",
+            "hi-Latn": "Stream time"
+          },
+          "unit": "min",
+          "values": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            71,
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83,
+            84,
+            85,
+            86,
+            87,
+            88,
+            89,
+            90,
+            91,
+            92,
+            93,
+            94,
+            95,
+            96,
+            97,
+            98,
+            99,
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            118,
+            119,
+            120,
+            121,
+            122,
+            123,
+            124,
+            125,
+            126,
+            127,
+            128,
+            129,
+            130,
+            131,
+            132,
+            133,
+            134,
+            135,
+            136,
+            137,
+            138,
+            139,
+            140,
+            141,
+            142,
+            143,
+            144,
+            145,
+            146,
+            147,
+            148,
+            149,
+            150,
+            151,
+            152,
+            153,
+            154,
+            155,
+            156,
+            157,
+            158,
+            159,
+            160,
+            161,
+            162,
+            163,
+            164,
+            165,
+            166,
+            167,
+            168,
+            169,
+            170,
+            171,
+            172,
+            173,
+            174,
+            175,
+            176,
+            177,
+            178,
+            179
+          ]
+        },
+        "series": [
+          {
+            "id": "ccv",
+            "label": {
+              "en": "CCV (concurrent viewers)",
+              "hi-Latn": "CCV (concurrent viewers)"
+            },
+            "values": [
+              45,
+              66,
+              102,
+              127,
+              151,
+              185,
+              206,
+              237,
+              253,
+              270,
+              291,
+              313,
+              339,
+              362,
+              381,
+              406,
+              407,
+              425,
+              443,
+              460,
+              475,
+              491,
+              501,
+              508,
+              530,
+              539,
+              554,
+              548,
+              541,
+              552,
+              549,
+              546,
+              542,
+              556,
+              554,
+              569,
+              554,
+              564,
+              556,
+              552,
+              555,
+              515,
+              501,
+              478,
+              457,
+              451,
+              436,
+              420,
+              415,
+              406,
+              381,
+              371,
+              373,
+              361,
+              363,
+              353,
+              357,
+              351,
+              354,
+              348,
+              351,
+              351,
+              370,
+              376,
+              375,
+              384,
+              403,
+              413,
+              429,
+              436,
+              432,
+              458,
+              456,
+              457,
+              451,
+              456,
+              460,
+              455,
+              457,
+              464,
+              482,
+              469,
+              460,
+              467,
+              454,
+              450,
+              464,
+              469,
+              474,
+              475,
+              474,
+              477,
+              484,
+              489,
+              489,
+              630,
+              630,
+              640,
+              624,
+              632,
+              639,
+              635,
+              634,
+              628,
+              631,
+              631,
+              622,
+              640,
+              649,
+              638,
+              645,
+              634,
+              634,
+              640,
+              649,
+              642,
+              648,
+              661,
+              664,
+              671,
+              667,
+              654,
+              663,
+              682,
+              681,
+              661,
+              664,
+              660,
+              652,
+              659,
+              636,
+              642,
+              652,
+              640,
+              652,
+              657,
+              640,
+              644,
+              628,
+              636,
+              640,
+              651,
+              653,
+              652,
+              645,
+              639,
+              630,
+              632,
+              635,
+              636,
+              631,
+              639,
+              628,
+              615,
+              600,
+              597,
+              611,
+              599,
+              581,
+              583,
+              573,
+              575,
+              568,
+              561,
+              530,
+              521,
+              510,
+              512,
+              502,
+              502,
+              498,
+              492,
+              501,
+              492,
+              479,
+              464,
+              450,
+              427,
+              434,
+              433
+            ]
+          },
+          {
+            "id": "chat",
+            "label": {
+              "en": "Chat messages per minute",
+              "hi-Latn": "Chat messages per minute"
+            },
+            "values": [
+              6,
+              8,
+              10,
+              14,
+              16,
+              34,
+              34,
+              38,
+              38,
+              44,
+              45,
+              46,
+              58,
+              68,
+              60,
+              71,
+              69,
+              73,
+              83,
+              75,
+              82,
+              77,
+              82,
+              79,
+              91,
+              121,
+              107,
+              88,
+              75,
+              86,
+              90,
+              86,
+              71,
+              120,
+              137,
+              116,
+              78,
+              87,
+              67,
+              40,
+              22,
+              15,
+              13,
+              15,
+              15,
+              14,
+              15,
+              14,
+              14,
+              14,
+              16,
+              17,
+              14,
+              14,
+              12,
+              14,
+              15,
+              13,
+              14,
+              14,
+              46,
+              71,
+              96,
+              135,
+              152,
+              124,
+              82,
+              97,
+              82,
+              85,
+              74,
+              82,
+              87,
+              77,
+              88,
+              90,
+              96,
+              134,
+              121,
+              91,
+              83,
+              85,
+              86,
+              82,
+              82,
+              95,
+              94,
+              90,
+              89,
+              91,
+              87,
+              83,
+              95,
+              99,
+              113,
+              223,
+              171,
+              153,
+              133,
+              115,
+              127,
+              100,
+              103,
+              125,
+              122,
+              110,
+              122,
+              113,
+              114,
+              104,
+              101,
+              111,
+              96,
+              97,
+              98,
+              103,
+              91,
+              88,
+              93,
+              100,
+              81,
+              84,
+              86,
+              93,
+              96,
+              83,
+              92,
+              86,
+              101,
+              93,
+              91,
+              83,
+              82,
+              107,
+              103,
+              93,
+              105,
+              101,
+              103,
+              99,
+              97,
+              102,
+              108,
+              111,
+              107,
+              89,
+              102,
+              112,
+              107,
+              112,
+              76,
+              79,
+              82,
+              80,
+              86,
+              77,
+              77,
+              71,
+              72,
+              79,
+              74,
+              87,
+              74,
+              79,
+              71,
+              77,
+              74,
+              74,
+              78,
+              68,
+              48,
+              51,
+              47,
+              51,
+              52,
+              54,
+              54,
+              59,
+              47,
+              117
+            ]
+          }
+        ],
+        "bands": [
+          {
+            "id": "seg-pre",
+            "from": 0,
+            "to": 5,
+            "label": {
+              "en": "Starting soon",
+              "hi-Latn": "Starting soon"
+            }
+          },
+          {
+            "id": "seg-intro",
+            "from": 5,
+            "to": 12,
+            "label": {
+              "en": "Intro + today's plan",
+              "hi-Latn": "Intro + aaj ka plan"
+            }
+          },
+          {
+            "id": "seg-mission",
+            "from": 12,
+            "to": 38,
+            "label": {
+              "en": "Story mission: first heist",
+              "hi-Latn": "Story mission: pehla heist"
+            }
+          },
+          {
+            "id": "seg-grind",
+            "from": 38,
+            "to": 60,
+            "label": {
+              "en": "Silent grind: cash farming",
+              "hi-Latn": "Silent grind: cash farming"
+            }
+          },
+          {
+            "id": "seg-vote",
+            "from": 60,
+            "to": 92,
+            "label": {
+              "en": "Free roam: chat votes the heist plan",
+              "hi-Latn": "Free roam: chat vote se heist plan"
+            }
+          },
+          {
+            "id": "seg-collab",
+            "from": 92,
+            "to": 150,
+            "label": {
+              "en": "Collab: duo heist with agency partner",
+              "hi-Latn": "Collab: agency partner ke saath duo heist"
+            }
+          },
+          {
+            "id": "seg-wind",
+            "from": 150,
+            "to": 180,
+            "label": {
+              "en": "Wind-down: Q&A + raid out",
+              "hi-Latn": "Wind-down: Q&A + raid out"
+            }
+          }
+        ],
+        "markers": [
+          {
+            "id": "mk-switch",
+            "x": 38,
+            "label": {
+              "en": "38:00 segment change",
+              "hi-Latn": "38:00 segment change"
+            }
+          },
+          {
+            "id": "mk-drop",
+            "x": 40,
+            "label": {
+              "en": "40:00 drop starts",
+              "hi-Latn": "40:00 drop shuru"
+            }
+          },
+          {
+            "id": "mk-trough",
+            "x": 59,
+            "label": {
+              "en": "Low 348",
+              "hi-Latn": "Low 348"
+            }
+          },
+          {
+            "id": "mk-raid-in",
+            "x": 95,
+            "label": {
+              "en": "Raid in · 140",
+              "hi-Latn": "Raid in · 140"
+            }
+          },
+          {
+            "id": "mk-raid-out",
+            "x": 179,
+            "label": {
+              "en": "Raid out",
+              "hi-Latn": "Raid out"
+            }
+          }
+        ]
+      },
+      "states": {
+        "overview": {
+          "show": [
+            "ccv",
+            "seg-pre",
+            "seg-intro",
+            "seg-mission",
+            "seg-grind",
+            "seg-vote",
+            "seg-collab",
+            "seg-wind",
+            "mk-switch",
+            "mk-raid-in"
+          ],
+          "hide": [
+            "chat"
+          ],
+          "focus": [
+            0,
+            179
+          ]
+        },
+        "drop": {
+          "show": [
+            "ccv",
+            "mk-drop"
+          ],
+          "hide": [
+            "chat",
+            "seg-pre",
+            "seg-intro",
+            "seg-mission",
+            "seg-grind",
+            "seg-vote",
+            "seg-collab",
+            "seg-wind"
+          ],
+          "highlight": [
+            "ccv"
+          ],
+          "focus": [
+            25,
+            70
+          ]
+        },
+        "bands": {
+          "show": [
+            "ccv",
+            "seg-mission",
+            "seg-grind",
+            "seg-vote",
+            "mk-switch",
+            "mk-drop"
+          ],
+          "hide": [
+            "chat"
+          ],
+          "highlight": [
+            "seg-grind"
+          ],
+          "focus": [
+            10,
+            95
+          ]
+        },
+        "chat-first": {
+          "show": [
+            "ccv",
+            "chat",
+            "seg-grind",
+            "mk-switch",
+            "mk-drop"
+          ],
+          "highlight": [
+            "chat"
+          ],
+          "focus": [
+            30,
+            50
+          ]
+        },
+        "compare": {
+          "show": [
+            "ccv",
+            "chat",
+            "seg-grind",
+            "seg-vote"
+          ],
+          "highlight": [
+            "seg-grind",
+            "seg-vote"
+          ],
+          "focus": [
+            30,
+            95
+          ]
+        }
+      }
+    },
+    {
+      "id": "st-experiment-flow",
+      "template": "flow",
+      "params": {
+        "nodes": [
+          {
+            "id": "st-experiment-flow-0",
+            "label": {
+              "en": "Hypothesis from the review"
+            }
+          },
+          {
+            "id": "st-experiment-flow-1",
+            "label": {
+              "en": "One planned change"
+            }
+          },
+          {
+            "id": "st-experiment-flow-2",
+            "label": {
+              "en": "Prediction and measure"
+            }
+          },
+          {
+            "id": "st-experiment-flow-3",
+            "label": {
+              "en": "Result, context and next review"
+            }
+          }
+        ],
+        "edges": [
+          {
+            "from": "st-experiment-flow-0",
+            "to": "st-experiment-flow-1"
+          },
+          {
+            "from": "st-experiment-flow-1",
+            "to": "st-experiment-flow-2"
+          },
+          {
+            "from": "st-experiment-flow-2",
+            "to": "st-experiment-flow-3"
+          }
+        ]
+      },
+      "states": {
+        "review": {
+          "highlight": [
+            "st-experiment-flow-1"
+          ]
+        }
+      }
+    }
+  ],
+  "tutorGraphs": [
+    {
+      "id": "engagement-drop-40",
+      "title": {
+        "en": "Why did engagement fall at minute 40?",
+        "hi-Latn": "Minute 40 pe engagement kyun gira?"
+      },
+      "file": "graphs/engagement-drop-40.json"
+    }
+  ],
+  "labLite": [
+    {
+      "id": "find-the-drop",
+      "tool": {
+        "en": "Stream analytics dashboard (generic, unbranded)",
+        "hi-Latn": "Stream analytics dashboard (generic, unbranded)"
+      },
+      "userAsk": {
+        "en": "KiKi, why did viewers drop here?",
+        "hi-Latn": "KiKi, yahan viewers kyun gire?"
+      },
+      "lookFor": [
+        {
+          "id": "ccv-drop-40",
+          "desc": "The CCV drop starting at 40:00 on the viewers chart"
+        },
+        {
+          "id": "chat-lull-38",
+          "desc": "The chat-rate lull starting at 38:00"
+        },
+        {
+          "id": "segment-change-38",
+          "desc": "The segment marker at 38:00 (mission -> grind)"
+        },
+        {
+          "id": "recovery-60",
+          "desc": "The recovery after 60:00"
+        },
+        {
+          "id": "raid-in-95",
+          "desc": "The incoming raid at 95:00"
+        }
+      ],
+      "askAfter": {
+        "en": "What changed on stream just before the drop?",
+        "hi-Latn": "Drop se just pehle stream pe kya badla tha?"
+      },
+      "graphId": "streaming-gta/engagement-drop-40"
+    },
+    {
+      "id": "run-of-show-plan",
+      "tool": {
+        "en": "Saved run-of-show editor"
+      },
+      "userAsk": {
+        "en": "Does my next-stream plan test one change?"
+      },
+      "lookFor": [
+        {
+          "id": "one-change",
+          "desc": "One stated change with a prediction"
+        },
+        {
+          "id": "measure",
+          "desc": "Review measure and provisional threshold"
+        },
+        {
+          "id": "context",
+          "desc": "Raids and simultaneous changes logged"
+        }
+      ],
+      "askAfter": {
+        "en": "What would make this comparison inconclusive?"
+      },
+      "graphId": "streaming-gta/engagement-drop-40"
+    }
+  ],
+  "provenance": {
+    "generatedBy": "authored-pedagogy-packets/1",
+    "generatedAt": "2026-11-20T05:45:57Z",
+    "sources": [
+      {
+        "id": "S-ST-HOOKS-PLAYBOOK",
+        "title": "Launch-week streaming playbook (illustrative)",
+        "locator": "content/knowledge-workers/sources/design/personas/streamer/playbook-excerpt.md; §2-3, LW-3.1; §5, LW-5.1 and LW-5.2; scenario segments"
+      },
+      {
+        "id": "S-ST-HOOKS-CASE",
+        "title": "Launch-week stream case (illustrative)",
+        "locator": "content/knowledge-workers/sources/design/personas/streamer/scenario.json"
+      },
+      {
+        "id": "S-ST-CHAT-PLAYBOOK",
+        "title": "Launch-week streaming playbook (illustrative)",
+        "locator": "content/knowledge-workers/sources/design/personas/streamer/playbook-excerpt.md; §4, LW-4.1; scenario drop and series.chatPerMin"
+      },
+      {
+        "id": "S-ST-CHAT-CASE",
+        "title": "Launch-week stream case (illustrative)",
+        "locator": "content/knowledge-workers/sources/design/personas/streamer/scenario.json"
+      },
+      {
+        "id": "S-ST-RETENTION-PLAYBOOK",
+        "title": "Launch-week streaming playbook (illustrative)",
+        "locator": "content/knowledge-workers/sources/design/personas/streamer/playbook-excerpt.md; §6, LW-6.1; scenario segmentStats, series and drop"
+      },
+      {
+        "id": "S-ST-RETENTION-CASE",
+        "title": "Launch-week stream case (illustrative)",
+        "locator": "content/knowledge-workers/sources/design/personas/streamer/scenario.json"
+      },
+      {
+        "id": "S-ST-EXPERIMENT-PLAYBOOK",
+        "title": "Launch-week streaming playbook (illustrative)",
+        "locator": "content/knowledge-workers/sources/design/personas/streamer/playbook-excerpt.md; §6, LW-6.2; §5, LW-5.1; scenario recovery and events"
+      },
+      {
+        "id": "S-ST-EXPERIMENT-CASE",
+        "title": "Launch-week stream case (illustrative)",
+        "locator": "content/knowledge-workers/sources/design/personas/streamer/scenario.json"
+      }
+    ],
+    "review": "draft",
+    "notes": "Illustrative prototype. English lesson source only; hi-Latn glosses and imported tutor lines are machine drafts. No target-language lesson rendition, audio, tool execution, mastery evidence or publication. Design baseline 45180af3f589bfdb11711766a4f8fbbc339a8ce9."
+  }
+}

@@ -1,0 +1,969 @@
+{
+  "schema": "kiki-pedagogy-packet/v1",
+  "packetId": "PKT-TR-EVENT-RISK-1",
+  "createdAt": "2026-11-20T05:45:57Z",
+  "domain": {
+    "packId": "trading-fno",
+    "corner": "odds",
+    "profileId": "trading",
+    "learner": {
+      "role": "Trainee index-options trader, onboarding week 2",
+      "transition": "retail habits to a desk's written process",
+      "priorKnowledge": "calls and puts, premium, lot size (TR-OPT-BASICS)"
+    },
+    "languages": {
+      "source": "en",
+      "targets": [
+        "hi"
+      ],
+      "workingLanguage": "en"
+    },
+    "dimensionLabels": {
+      "concept": "Concept",
+      "words": "Words",
+      "english": "Expression",
+      "lab": "Practice"
+    },
+    "assessmentPolicy": {
+      "conceptChecks": 5,
+      "passPercent": 60,
+      "options": 4,
+      "chapterTest": false
+    },
+    "practical": {
+      "applies": true,
+      "label": "Practice",
+      "tool": "Trading terminal: chart and option chain (paper mode, historical replay)"
+    },
+    "guardrails": [
+      "Process, not picks: review past or paper trades only; never recommend a live trade",
+      "All market data is illustrative; show 'Education on a past, illustrative trade. Not investment advice.'",
+      "KiKi never places, modifies or suggests orders"
+    ],
+    "consumers": [
+      "kiki-pack/v0"
+    ]
+  },
+  "scope": {
+    "planId": "LP-TR-EVENT-DAYS",
+    "groupId": "MOD-TR-EVENT",
+    "conceptId": "TR-EVENT-RISK",
+    "order": 3,
+    "canonicalKey": "event-sizing-defined-risk",
+    "title": "Size the risk before judging the result",
+    "practiceTaskId": "pre-event-checklist"
+  },
+  "status": {
+    "review": "draft",
+    "domainReview": "pending",
+    "pronunciation": "pending",
+    "languages": {
+      "hi": "machine_draft"
+    }
+  },
+  "research": {
+    "governingQuestion": "Using only the illustrative case, compute the budget, maximum loss per lot and whole-lot limit before charges. Review the old four-lot position.",
+    "sources": [
+      {
+        "id": "S-TR-EVENT-RISK-PLAYBOOK",
+        "origin": "org_playbook",
+        "tier": 1,
+        "label": "Options desk playbook: event days (illustrative)",
+        "locator": "content/knowledge-workers/sources/design/personas/trader/playbook-excerpt.md; §4, EV-4.1 to EV-4.5; scenario context and sizing",
+        "illustrative": true
+      },
+      {
+        "id": "S-TR-EVENT-RISK-CASE",
+        "origin": "org_case",
+        "tier": 1,
+        "label": "Historical paper option case (illustrative)",
+        "locator": "content/knowledge-workers/sources/design/personas/trader/scenario.json",
+        "illustrative": true
+      },
+      {
+        "id": "S-TR-EVENT-RISK-OIC",
+        "origin": "vendor_doc",
+        "tier": 2,
+        "label": "Options Industry Council: Volatility and the Greeks",
+        "url": "https://www.optionseducation.org/advancedconcepts/volatility-the-greeks",
+        "locator": "Opened 2026-11-20; model sensitivities and assumptions",
+        "illustrative": false
+      }
+    ],
+    "claims": [
+      {
+        "id": "CL-TR-EVENT-RISK-RULE",
+        "kind": "org_rule",
+        "text": "EV-4.1 is the governing rule for this exercise; Calculate the illustrative budget and evaluate the old position against its maximum loss.",
+        "sourceIds": [
+          "S-TR-EVENT-RISK-PLAYBOOK"
+        ],
+        "confidence": "high",
+        "check": "Rule and scope read in the pinned illustrative playbook at §4, EV-4.1 to EV-4.5; scenario context and sizing"
+      },
+      {
+        "id": "CL-TR-EVENT-RISK-WORKED",
+        "kind": "procedure",
+        "text": "Using only the illustrative case, compute the budget, maximum loss per lot and whole-lot limit before charges. Review the old four-lot position. Budget: 1000000 times 0.01 = 10000 rupees. Maximum loss per lot: 90.25 times 75 = 6768.75 rupees before charges. Floor of 10000 divided by 6768.75 is 1 lot; four lots risked 27075, exceeding the budget by 17075.",
+        "sourceIds": [
+          "S-TR-EVENT-RISK-PLAYBOOK",
+          "S-TR-EVENT-RISK-CASE"
+        ],
+        "confidence": "high",
+        "check": "derived: Budget: 1000000 times 0.01 = 10000 rupees. Maximum loss per lot: 90.25 times 75 = 6768.75 rupees before charges. Floor of 10000 divided by 6768.75 is 1 lot; four lots risked 27075, exceeding the budget by 17075."
+      },
+      {
+        "id": "CL-TR-EVENT-RISK-definition-1",
+        "kind": "definition",
+        "text": "The event budget is the illustrative desk limit on max loss for an event trade.",
+        "sourceIds": [
+          "S-TR-EVENT-RISK-PLAYBOOK"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-EVENT-RISK-definition-2",
+        "kind": "definition",
+        "text": "A defined risk structure still needs sizing; a bounded loss can exceed the event budget.",
+        "sourceIds": [
+          "S-TR-EVENT-RISK-PLAYBOOK"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-EVENT-RISK-concept-1",
+        "kind": "procedure",
+        "text": "Under the desk rule EV-4.1, the event budget is 1% of the 1000000-rupee paper book, or 10000 rupees.",
+        "sourceIds": [
+          "S-TR-EVENT-RISK-PLAYBOOK",
+          "S-TR-EVENT-RISK-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-EVENT-RISK-concept-2",
+        "kind": "procedure",
+        "text": "The case long option puts the full premium at risk before fees, with no claim about current exchange specifications.",
+        "sourceIds": [
+          "S-TR-EVENT-RISK-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-EVENT-RISK-concept-3",
+        "kind": "procedure",
+        "text": "The realised loss was 9210 rupees, but the max loss at entry was 27075 rupees, so sizing breached the rule.",
+        "sourceIds": [
+          "S-TR-EVENT-RISK-PLAYBOOK",
+          "S-TR-EVENT-RISK-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-EVENT-RISK-application-1",
+        "kind": "procedure",
+        "text": "At the case premium of 90.25 and 75 units per lot, max loss per lot is 6768.75 rupees before charges.",
+        "sourceIds": [
+          "S-TR-EVENT-RISK-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-EVENT-RISK-application-2",
+        "kind": "procedure",
+        "text": "The desk rule EV-4.2 rounds the budget divided by max loss per lot down to whole lots.",
+        "sourceIds": [
+          "S-TR-EVENT-RISK-PLAYBOOK",
+          "S-TR-EVENT-RISK-CASE"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-EVENT-RISK-application-3",
+        "kind": "procedure",
+        "text": "The replay calculation permits 1 such lot before costs, rather than the historical 4; record the breach without placing an order.",
+        "sourceIds": [
+          "S-TR-EVENT-RISK-PLAYBOOK",
+          "S-TR-EVENT-RISK-CASE",
+          "S-TR-EVENT-RISK-OIC"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-EVENT-RISK-recap-1",
+        "kind": "procedure",
+        "text": "Judge the event budget against max loss at entry, separately from the eventual outcome.",
+        "sourceIds": [
+          "S-TR-EVENT-RISK-PLAYBOOK",
+          "S-TR-EVENT-RISK-CASE",
+          "S-TR-EVENT-RISK-OIC"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      },
+      {
+        "id": "CL-TR-EVENT-RISK-recap-2",
+        "kind": "procedure",
+        "text": "Document defined risk, position size and stress assumptions in the historical review.",
+        "sourceIds": [
+          "S-TR-EVENT-RISK-PLAYBOOK",
+          "S-TR-EVENT-RISK-CASE",
+          "S-TR-EVENT-RISK-OIC"
+        ],
+        "confidence": "moderate",
+        "check": "Read against the pinned playbook and case. Numeric calculations are reproduced by scripts/build-persona-content.py where applicable; rules remain illustrative."
+      }
+    ],
+    "outOfScope": [
+      "Live trading or tool control",
+      "Platform-wide or real-organisation claims",
+      "Narration, translation, publication and mastery certification"
+    ],
+    "openQuestions": [
+      "Illustrative organisation: replace with buyer-approved material before production.",
+      "Domain expert and native-language pronunciation review remain pending."
+    ]
+  },
+  "learner": {
+    "prerequisiteIds": [
+      "TR-IV-EVENT"
+    ],
+    "externalPrerequisites": [
+      {
+        "title": "Calls, puts, premium per unit and quantities",
+        "level": "earlier_course",
+        "canonicalKey": "options-basics"
+      }
+    ],
+    "troublesome": "Separate the observations, the organisation rule and a justified conclusion. A realised loss below the budget proves the position was correctly sized.",
+    "misconceptions": [
+      {
+        "id": "M-TR-EVENT-RISK",
+        "statement": "A realised loss below the budget proves the position was correctly sized.",
+        "correction": "The budget constrains maximum loss at entry, not only the realised loss.",
+        "basis": "inferred",
+        "sourceIds": [],
+        "reasoning": "Inferred from the case contrast and the playbook rule; no learner study or real user evidence is claimed."
+      }
+    ]
+  },
+  "objectives": [
+    {
+      "id": "O-TR-EVENT-RISK-1",
+      "statement": "Calculate the desk event budget and maximum whole-lot size.",
+      "bloom": "analyse",
+      "parentId": "O-MOD-TR-EVENT",
+      "ownerId": "TR-EVENT-RISK"
+    },
+    {
+      "id": "O-TR-EVENT-RISK-2",
+      "statement": "Evaluate a historical position using risk taken rather than realised loss.",
+      "bloom": "apply",
+      "parentId": "O-MOD-TR-EVENT",
+      "ownerId": "TR-EVENT-RISK"
+    }
+  ],
+  "terms": [
+    {
+      "id": "T-TR-BUDGET",
+      "term": "event budget",
+      "definition": "The illustrative desk limit on maximum loss per event trade.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "TR-EVENT-RISK",
+      "spoken": "event budget",
+      "glosses": {
+        "hi": "इस desk की एक event trade में स्वीकार्य अधिकतम नुकसान की सीमा।"
+      },
+      "pronunciations": {
+        "hi": "इवेंट बजट"
+      },
+      "review_status": "pending"
+    },
+    {
+      "id": "T-TR-LOSS",
+      "term": "max loss",
+      "definition": "The worst loss specified for the position under the stated assumptions.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "TR-EVENT-RISK",
+      "spoken": "max loss",
+      "glosses": {
+        "hi": "बताई गई assumptions में position का सबसे बड़ा नुकसान।"
+      },
+      "pronunciations": {
+        "hi": "मैक्स लॉस"
+      },
+      "review_status": "pending"
+    },
+    {
+      "id": "T-TR-DEFINED",
+      "term": "defined risk",
+      "definition": "A structure whose maximum loss is bounded under the stated contract assumptions.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "TR-EVENT-RISK",
+      "spoken": "defined risk",
+      "glosses": {
+        "hi": "ऐसी structure जिसका अधिकतम नुकसान बताई गई शर्तों में सीमित हो।"
+      },
+      "pronunciations": {
+        "hi": "डिफाइन्ड रिस्क"
+      },
+      "review_status": "pending"
+    }
+  ],
+  "usesTerms": [
+    {
+      "id": "T-TR-PREMIUM",
+      "term": "premium",
+      "definition": "The price of an option, quoted per unit in this case.",
+      "aliases": [],
+      "symbol": null,
+      "unit": null,
+      "ownerConceptId": "TR-IV-EVENT",
+      "spoken": "premium",
+      "glosses": {
+        "hi": "इस case में option की प्रति unit कीमत।"
+      },
+      "pronunciations": {
+        "hi": "प्रीमियम"
+      },
+      "review_status": "pending"
+    }
+  ],
+  "teaching": {
+    "canDo": "Calculate the illustrative budget and evaluate the old position against its maximum loss.",
+    "keyIdea": "The budget constrains maximum loss at entry, not only the realised loss.",
+    "explanation": {
+      "text": "The desk event budget is a limit on risk taken, not on the loss that happened to occur. For the illustrative paper book, one percent is 10000 rupees. The old long-option position paid 27075 rupees in premium, so its maximum loss before charges exceeded that limit even though its realised loss was 9210. Defined risk only means the loss is bounded under the stated assumptions; the bound still needs sizing. The desk divides budget by maximum loss per lot and rounds down. Use the case lot size only for this historical exercise, and record any extra cost allowance explicitly.",
+      "defaultModality": "textImage",
+      "walkthrough": [
+        {
+          "target": "event budget",
+          "mark": "marker",
+          "dim": "words",
+          "say": "event budget: The illustrative desk limit on maximum loss per event trade."
+        },
+        {
+          "target": "premium",
+          "mark": "marker",
+          "dim": "words",
+          "say": "premium: The price of an option, quoted per unit in this case."
+        },
+        {
+          "target": "The desk event budget is a limit on risk taken, not on the loss that happened to occur",
+          "mark": "sweep",
+          "dim": "concept",
+          "say": "The desk event budget is a limit on risk taken, not on the loss that happened to occur."
+        }
+      ]
+    },
+    "example": {
+      "title": "Size the risk before judging the result (illustrative)",
+      "scenario": "Under the desk rule EV-4.1, the event budget is 1% of the 1000000-rupee paper book, or 10000 rupees. The case long option puts the full premium at risk before fees, with no claim about current exchange specifications. The realised loss was 9210 rupees, but the max loss at entry was 27075 rupees, so sizing breached the rule.",
+      "takeaway": "The budget constrains maximum loss at entry, not only the realised loss.",
+      "sourceIds": [
+        "S-TR-EVENT-RISK-CASE"
+      ]
+    },
+    "workedQuestion": {
+      "id": "W-TR-EVENT-RISK",
+      "type": "short_english",
+      "marks": 3,
+      "prompt": "Using only the illustrative case, compute the budget, maximum loss per lot and whole-lot limit before charges. Review the old four-lot position.",
+      "modelAnswer": [
+        "Budget: 1000000 times 0.01 = 10000 rupees.",
+        "Maximum loss per lot: 90.25 times 75 = 6768.75 rupees before charges.",
+        "Floor of 10000 divided by 6768.75 is 1 lot; four lots risked 27075, exceeding the budget by 17075."
+      ],
+      "rubric": [
+        {
+          "criterion": "Budget: 1000000 times 0.01 = 10000 rupees.",
+          "marks": 1,
+          "objectiveId": "O-TR-EVENT-RISK-1"
+        },
+        {
+          "criterion": "Maximum loss per lot: 90.25 times 75 = 6768.75 rupees before charges.",
+          "marks": 1,
+          "objectiveId": "O-TR-EVENT-RISK-2"
+        },
+        {
+          "criterion": "Floor of 10000 divided by 6768.75 is 1 lot; four lots risked 27075, exceeding the budget by 17075.",
+          "marks": 1,
+          "objectiveId": "O-TR-EVENT-RISK-1"
+        }
+      ],
+      "examVocabulary": [
+        "T-TR-BUDGET",
+        "T-TR-LOSS",
+        "T-TR-DEFINED"
+      ]
+    },
+    "selfExplainPrompt": "Explain why an inside-budget realised loss does not erase an entry-time sizing breach.",
+    "checks": [
+      {
+        "id": "Q-TR-EVENT-RISK-1",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "process",
+        "prompt": "Under EV-4.1, which amount is compared with the event budget at entry?",
+        "options": [
+          "Maximum loss under the assumptions",
+          "Only yesterday closing profit",
+          "The conviction score in the note",
+          "Only the eventual realised loss"
+        ],
+        "answer": "Maximum loss under the assumptions",
+        "distractorRationale": {
+          "Only the eventual realised loss": "error: Uses the eventual outcome instead of entry risk",
+          "Only yesterday closing profit": "error: Uses a prior profit instead of this position risk",
+          "The conviction score in the note": "error: Sizes from conviction instead of accepted loss"
+        },
+        "explanation": "The rule constrains risk taken before the outcome; later luck does not change the original exposure.",
+        "objectiveIds": [
+          "O-TR-EVENT-RISK-1"
+        ],
+        "difficulty": 1,
+        "claimIds": [
+          "CL-TR-EVENT-RISK-RULE",
+          "CL-TR-EVENT-RISK-WORKED",
+          "CL-TR-EVENT-RISK-definition-1",
+          "CL-TR-EVENT-RISK-definition-2",
+          "CL-TR-EVENT-RISK-concept-1",
+          "CL-TR-EVENT-RISK-concept-2",
+          "CL-TR-EVENT-RISK-concept-3"
+        ]
+      },
+      {
+        "id": "Q-TR-EVENT-RISK-2",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "diagnosis",
+        "prompt": "The case lost 9210 against a 10000 budget. Why was sizing still a breach?",
+        "options": [
+          "The budget applies only after expiry",
+          "The index moved upwards",
+          "A loss always breaks the rule",
+          "Entry maximum loss was 27075"
+        ],
+        "answer": "Entry maximum loss was 27075",
+        "distractorRationale": {
+          "A loss always breaks the rule": "error: Treats any loss as a compliance breach",
+          "The index moved upwards": "error: Confuses direction with the risk constraint",
+          "The budget applies only after expiry": "error: Postpones an entry-time rule until expiry"
+        },
+        "explanation": "The realised loss was inside budget, but the position could lose the full premium of 27075 before charges.",
+        "objectiveIds": [
+          "O-TR-EVENT-RISK-2"
+        ],
+        "difficulty": 1,
+        "claimIds": [
+          "CL-TR-EVENT-RISK-RULE",
+          "CL-TR-EVENT-RISK-WORKED",
+          "CL-TR-EVENT-RISK-definition-1",
+          "CL-TR-EVENT-RISK-definition-2",
+          "CL-TR-EVENT-RISK-concept-1",
+          "CL-TR-EVENT-RISK-concept-2",
+          "CL-TR-EVENT-RISK-concept-3"
+        ]
+      },
+      {
+        "id": "Q-TR-EVENT-RISK-3",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "judgement",
+        "prompt": "Which statement correctly describes defined risk?",
+        "options": [
+          "Its bounded loss still needs sizing",
+          "The structure cannot lose money",
+          "The budget no longer applies",
+          "It guarantees the expected return"
+        ],
+        "answer": "Its bounded loss still needs sizing",
+        "distractorRationale": {
+          "The structure cannot lose money": "error: Confuses bounded loss with no loss",
+          "The budget no longer applies": "error: Treats structure selection as a substitute for sizing",
+          "It guarantees the expected return": "error: Confuses a risk constraint with a return promise"
+        },
+        "explanation": "A bounded loss is not necessarily an affordable loss; the desk sizing rules still apply.",
+        "objectiveIds": [
+          "O-TR-EVENT-RISK-1"
+        ],
+        "difficulty": 2,
+        "claimIds": [
+          "CL-TR-EVENT-RISK-RULE",
+          "CL-TR-EVENT-RISK-WORKED",
+          "CL-TR-EVENT-RISK-definition-1",
+          "CL-TR-EVENT-RISK-definition-2",
+          "CL-TR-EVENT-RISK-concept-1",
+          "CL-TR-EVENT-RISK-concept-2",
+          "CL-TR-EVENT-RISK-concept-3"
+        ]
+      },
+      {
+        "id": "Q-TR-EVENT-RISK-4",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "calculation",
+        "prompt": "What is the case maximum loss per long-option lot before charges?",
+        "options": [
+          "6768.75 rupees",
+          "90.25 rupees",
+          "10000 rupees",
+          "300 rupees"
+        ],
+        "answer": "6768.75 rupees",
+        "distractorRationale": {
+          "90.25 rupees": "error: Omits units per lot",
+          "300 rupees": "error: Substitutes total historical units for premium per lot",
+          "10000 rupees": "error: Uses the budget rather than the per-lot maximum loss"
+        },
+        "explanation": "Multiply premium per unit, 90.25, by the illustrative 75 units in a lot.",
+        "objectiveIds": [
+          "O-TR-EVENT-RISK-2"
+        ],
+        "difficulty": 2,
+        "claimIds": [
+          "CL-TR-EVENT-RISK-RULE",
+          "CL-TR-EVENT-RISK-WORKED",
+          "CL-TR-EVENT-RISK-definition-1",
+          "CL-TR-EVENT-RISK-definition-2",
+          "CL-TR-EVENT-RISK-concept-1",
+          "CL-TR-EVENT-RISK-concept-2",
+          "CL-TR-EVENT-RISK-concept-3"
+        ]
+      },
+      {
+        "id": "Q-TR-EVENT-RISK-5",
+        "type": "mcq",
+        "dimension": "concept",
+        "evaluates": "process",
+        "prompt": "Budget divided by maximum loss per lot is about 1.48. What does EV-4.2 require in this exercise?",
+        "options": [
+          "Round down to one whole lot",
+          "Round up to two whole lots",
+          "Keep four because conviction is high",
+          "Use the realised loss to round"
+        ],
+        "answer": "Round down to one whole lot",
+        "distractorRationale": {
+          "Round up to two whole lots": "error: Rounds up beyond the budget",
+          "Keep four because conviction is high": "error: Sizes from conviction rather than the rule",
+          "Use the realised loss to round": "error: Uses hindsight instead of entry-time risk"
+        },
+        "explanation": "Rounding up exceeds the stated budget; conviction and the realised outcome do not replace entry-time sizing.",
+        "objectiveIds": [
+          "O-TR-EVENT-RISK-1"
+        ],
+        "difficulty": 3,
+        "claimIds": [
+          "CL-TR-EVENT-RISK-RULE",
+          "CL-TR-EVENT-RISK-WORKED",
+          "CL-TR-EVENT-RISK-definition-1",
+          "CL-TR-EVENT-RISK-definition-2",
+          "CL-TR-EVENT-RISK-concept-1",
+          "CL-TR-EVENT-RISK-concept-2",
+          "CL-TR-EVENT-RISK-concept-3"
+        ]
+      },
+      {
+        "id": "Q-TR-EVENT-RISK-WORDS",
+        "type": "fill_blank",
+        "dimension": "words",
+        "evaluates": "recall",
+        "prompt": "Name the term: The illustrative desk limit on maximum loss per event trade.",
+        "answer": "event budget",
+        "explanation": "The term is event budget. The illustrative desk limit on maximum loss per event trade.",
+        "objectiveIds": [
+          "O-TR-EVENT-RISK-1"
+        ],
+        "difficulty": 1,
+        "claimIds": [
+          "CL-TR-EVENT-RISK-RULE"
+        ]
+      },
+      {
+        "id": "Q-TR-EVENT-RISK-EXPRESSION",
+        "type": "short_english",
+        "dimension": "english",
+        "evaluates": "process",
+        "prompt": "Explain why an inside-budget realised loss does not erase an entry-time sizing breach. Working language: English.",
+        "answer": "Budget: 1000000 times 0.01 = 10000 rupees. Maximum loss per lot: 90.25 times 75 = 6768.75 rupees before charges. Floor of 10000 divided by 6768.75 is 1 lot; four lots risked 27075, exceeding the budget by 17075.",
+        "explanation": "Assess conceptual claims separately from clarity and terminology. A language gap does not remove concept credit.",
+        "objectiveIds": [
+          "O-TR-EVENT-RISK-1",
+          "O-TR-EVENT-RISK-2"
+        ],
+        "difficulty": 2,
+        "claimIds": [
+          "CL-TR-EVENT-RISK-RULE"
+        ],
+        "rubric": [
+          {
+            "criterion": "State the evidenced reasoning accurately; record concept credit separately.",
+            "dim": "concept"
+          },
+          {
+            "criterion": "Use the canonical terms to explain the reasoning clearly in the working language.",
+            "dim": "english"
+          }
+        ]
+      },
+      {
+        "id": "Q-TR-EVENT-RISK-PRACTICE",
+        "type": "predict",
+        "dimension": "lab",
+        "evaluates": "process",
+        "prompt": "On the paper case, write budget, quantity, maximum loss and charges allowance in the saved risk note; make no order.",
+        "answer": "Use the saved illustrative case only. Budget: 1000000 times 0.01 = 10000 rupees. Maximum loss per lot: 90.25 times 75 = 6768.75 rupees before charges. Floor of 10000 divided by 6768.75 is 1 lot; four lots risked 27075, exceeding the budget by 17075.",
+        "explanation": "The learner performs the inspection or edit. A predicted answer is not proof that the real tool action occurred.",
+        "objectiveIds": [
+          "O-TR-EVENT-RISK-1",
+          "O-TR-EVENT-RISK-2"
+        ],
+        "difficulty": 3,
+        "claimIds": [
+          "CL-TR-EVENT-RISK-RULE"
+        ],
+        "evidencePolicy": {
+          "predictionOnly": true,
+          "earnsPracticeCredit": false,
+          "requires": "Observed learner action or a saved learner artefact, checked against the task criteria."
+        }
+      }
+    ],
+    "examSignal": {
+      "basis": "none",
+      "askedIn": 0,
+      "outOf": 0,
+      "note": "No past-paper or buyer assessment frequencies supplied."
+    },
+    "estMinutes": 12
+  },
+  "placards": [
+    {
+      "id": "CARD-TR-EVENT-RISK-definition",
+      "kind": "definition",
+      "title": {
+        "en": "Definition"
+      },
+      "sentences": [
+        {
+          "id": "CARD-TR-EVENT-RISK-definition.s1",
+          "english": "The event budget is the illustrative desk limit on max loss for an event trade.",
+          "term_ids": [
+            "T-TR-BUDGET",
+            "T-TR-LOSS"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-TR-EVENT-RISK-definition-1"
+          ]
+        },
+        {
+          "id": "CARD-TR-EVENT-RISK-definition.s2",
+          "english": "A defined risk structure still needs sizing; a bounded loss can exceed the event budget.",
+          "term_ids": [
+            "T-TR-BUDGET",
+            "T-TR-DEFINED"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-TR-EVENT-RISK-definition-2"
+          ]
+        }
+      ],
+      "visualRef": "explanation"
+    },
+    {
+      "id": "CARD-TR-EVENT-RISK-concept",
+      "kind": "concept",
+      "title": {
+        "en": "Concept"
+      },
+      "sentences": [
+        {
+          "id": "CARD-TR-EVENT-RISK-concept.s1",
+          "english": "Under the desk rule EV-4.1, the event budget is 1% of the 1000000-rupee paper book, or 10000 rupees.",
+          "term_ids": [
+            "T-TR-BUDGET"
+          ],
+          "literals": [
+            {
+              "text": "EV-4.1",
+              "spoken": "E V four point one"
+            },
+            {
+              "text": "1%",
+              "spoken": "one percent"
+            },
+            {
+              "text": "1000000",
+              "spoken": "one million"
+            },
+            {
+              "text": "10000",
+              "spoken": "ten thousand"
+            }
+          ],
+          "claimIds": [
+            "CL-TR-EVENT-RISK-concept-1"
+          ],
+          "cue": {
+            "state": "review"
+          }
+        },
+        {
+          "id": "CARD-TR-EVENT-RISK-concept.s2",
+          "english": "The case long option puts the full premium at risk before fees, with no claim about current exchange specifications.",
+          "term_ids": [
+            "T-TR-PREMIUM"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-TR-EVENT-RISK-concept-2"
+          ]
+        },
+        {
+          "id": "CARD-TR-EVENT-RISK-concept.s3",
+          "english": "The realised loss was 9210 rupees, but the max loss at entry was 27075 rupees, so sizing breached the rule.",
+          "term_ids": [
+            "T-TR-LOSS"
+          ],
+          "literals": [
+            {
+              "text": "9210",
+              "spoken": "nine thousand two hundred ten"
+            },
+            {
+              "text": "27075",
+              "spoken": "twenty seven thousand seventy five"
+            }
+          ],
+          "claimIds": [
+            "CL-TR-EVENT-RISK-concept-3"
+          ],
+          "refutesMisconceptionIds": [
+            "M-TR-EVENT-RISK"
+          ]
+        }
+      ],
+      "visualRef": "explanation"
+    },
+    {
+      "id": "CARD-TR-EVENT-RISK-application",
+      "kind": "application",
+      "title": {
+        "en": "Application"
+      },
+      "sentences": [
+        {
+          "id": "CARD-TR-EVENT-RISK-application.s1",
+          "english": "At the case premium of 90.25 and 75 units per lot, max loss per lot is 6768.75 rupees before charges.",
+          "term_ids": [
+            "T-TR-LOSS",
+            "T-TR-PREMIUM"
+          ],
+          "literals": [
+            {
+              "text": "90.25",
+              "spoken": "ninety point two five"
+            },
+            {
+              "text": "75",
+              "spoken": "seventy five"
+            },
+            {
+              "text": "6768.75",
+              "spoken": "six thousand seven hundred sixty eight point seven five"
+            }
+          ],
+          "claimIds": [
+            "CL-TR-EVENT-RISK-application-1"
+          ],
+          "cue": {
+            "state": "review"
+          }
+        },
+        {
+          "id": "CARD-TR-EVENT-RISK-application.s2",
+          "english": "The desk rule EV-4.2 rounds the budget divided by max loss per lot down to whole lots.",
+          "term_ids": [
+            "T-TR-LOSS"
+          ],
+          "literals": [
+            {
+              "text": "EV-4.2",
+              "spoken": "E V four point two"
+            }
+          ],
+          "claimIds": [
+            "CL-TR-EVENT-RISK-application-2"
+          ]
+        },
+        {
+          "id": "CARD-TR-EVENT-RISK-application.s3",
+          "english": "The replay calculation permits 1 such lot before costs, rather than the historical 4; record the breach without placing an order.",
+          "term_ids": [],
+          "literals": [
+            {
+              "text": "1",
+              "spoken": "one"
+            },
+            {
+              "text": "4",
+              "spoken": "four"
+            }
+          ],
+          "claimIds": [
+            "CL-TR-EVENT-RISK-application-3"
+          ]
+        }
+      ],
+      "visualRef": "explanation"
+    },
+    {
+      "id": "CARD-TR-EVENT-RISK-recap",
+      "kind": "recap",
+      "title": {
+        "en": "Recap"
+      },
+      "sentences": [
+        {
+          "id": "CARD-TR-EVENT-RISK-recap.s1",
+          "english": "Judge the event budget against max loss at entry, separately from the eventual outcome.",
+          "term_ids": [
+            "T-TR-BUDGET",
+            "T-TR-LOSS"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-TR-EVENT-RISK-recap-1"
+          ]
+        },
+        {
+          "id": "CARD-TR-EVENT-RISK-recap.s2",
+          "english": "Document defined risk, position size and stress assumptions in the historical review.",
+          "term_ids": [
+            "T-TR-DEFINED"
+          ],
+          "literals": [],
+          "claimIds": [
+            "CL-TR-EVENT-RISK-recap-2"
+          ]
+        }
+      ],
+      "visualRef": "explanation"
+    }
+  ],
+  "visual": {
+    "kind": "flow",
+    "description": "Size the risk before judging the result: use the saved illustrative scene; highlight the cited case state while explaining the rule.",
+    "alt": "The budget constrains maximum loss at entry, not only the realised loss.",
+    "sourceIds": [
+      "S-TR-EVENT-RISK-CASE"
+    ]
+  },
+  "canvas": {
+    "form": "scene",
+    "purpose": {
+      "objectiveIds": [
+        "O-TR-EVENT-RISK-1",
+        "O-TR-EVENT-RISK-2"
+      ],
+      "misconceptionIds": [
+        "M-TR-EVENT-RISK"
+      ],
+      "insight": "The budget constrains maximum loss at entry, not only the realised loss."
+    },
+    "illustrative": true,
+    "scene": {
+      "id": "tr-risk-flow",
+      "template": "flow",
+      "params": {
+        "nodes": [
+          {
+            "id": "tr-risk-flow-0",
+            "label": {
+              "en": "Paper book: 1000000 rupees"
+            }
+          },
+          {
+            "id": "tr-risk-flow-1",
+            "label": {
+              "en": "Desk budget: 10000 rupees"
+            }
+          },
+          {
+            "id": "tr-risk-flow-2",
+            "label": {
+              "en": "One case lot: 6768.75 rupees before charges"
+            }
+          },
+          {
+            "id": "tr-risk-flow-3",
+            "label": {
+              "en": "Four old lots: risk 27075, breach"
+            }
+          }
+        ],
+        "edges": [
+          {
+            "from": "tr-risk-flow-0",
+            "to": "tr-risk-flow-1"
+          },
+          {
+            "from": "tr-risk-flow-1",
+            "to": "tr-risk-flow-2"
+          },
+          {
+            "from": "tr-risk-flow-2",
+            "to": "tr-risk-flow-3"
+          }
+        ]
+      },
+      "states": {
+        "review": {
+          "highlight": [
+            "tr-risk-flow-1"
+          ]
+        }
+      }
+    },
+    "mustShow": [
+      "Illustrative case label",
+      "EV-4.1",
+      "Source and review status"
+    ],
+    "mustNotImply": [
+      "A live recommendation or a guaranteed outcome",
+      "Causation established by a single observation"
+    ],
+    "claim": "illustrative_case",
+    "alt": "Size the risk before judging the result; The budget constrains maximum loss at entry, not only the realised loss."
+  },
+  "canvasNullReason": null,
+  "reflect": {
+    "graphRef": "trading-fno/bad-call-iv-crush"
+  },
+  "handoff": {
+    "audioUnit": "placard",
+    "speechNotes": [
+      "Use the supplied spoken literals and canonical terms.",
+      "No timestamps or audio assets exist yet."
+    ],
+    "practiceEvidence": "Only an actual learner action can earn practice evidence; this authored predict check cannot."
+  }
+}

@@ -16,6 +16,8 @@ from prototypes.backend.lab_idempotency import start_lab_route
 from prototypes.json_stream.analysis import JsonStreamingAnalyzer
 from prototypes.json_stream.api import stream_router
 from prototypes.lab_tracking.api import lab_router
+from prototypes.physical_labs.api import PhysicalBodyLimit, physical_lab_router
+from prototypes.physical_labs.firestore_store import FirestorePreparationService
 from prototypes.screen_capture.cloud_access import SiteProxyGuard
 from prototypes.screen_capture.server import same_origin, validate_image
 from .capture import FirestoreCaptureStore
@@ -67,6 +69,7 @@ def create_app(*, client=None, analyzer=None, proxy_secret=None, clock=time.time
     app = FastAPI(title='Kiki cloud lab engine', version='1.0.0')
     app.state.store, app.state.lab, app.state.captures = store, lab, captures
     app.state.lab_keys = CloudLabCreateKeys(store)
+    app.state.physical_labs = FirestorePreparationService(client, collection_prefix)
 
     def owner_of(request):
         owner = request.headers.get('x-kiki-owner')
@@ -95,12 +98,15 @@ def create_app(*, client=None, analyzer=None, proxy_secret=None, clock=time.time
                 'lab_storage': 'named_firestore', 'image_storage': 'private_latest_firestore_chunks_30s_access_ttl',
                 'analysis': {'provider': 'gemini', 'configured': analyzer.configured, 'model': getattr(analyzer, 'model', None)},
                 'json_stream': {'available': bool(getattr(analyzer, 'supports_stream', False)), 'wire_format': 'lab-analysis-stream/v2'},
+                'physical_labs': {'available': True, 'storage': 'named_firestore'},
                 'mixed_language': {'available': False, 'reason': 'prepared_media_only_cloud_runtime'}}
 
     # Place keyed create before the frozen router's unkeyed route.
     app.add_api_route('/lab-sessions', start_lab_route(lab, app.state.lab_keys, owner_of, mutation_origin), methods=['POST'], status_code=201)
     app.include_router(lab_router(lab, owner_of, mutation_origin))
     app.include_router(stream_router(lab, owner_of, mutation_origin))
+    app.include_router(physical_lab_router(app.state.physical_labs, owner_of, mutation_origin))
+    app.add_middleware(PhysicalBodyLimit)
 
     @app.post('/screen-sessions', status_code=201)
     async def create_capture(request: Request):

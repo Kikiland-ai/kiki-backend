@@ -60,9 +60,7 @@ def load_packs(directory=PACKS):
 
 class PreparationService:
     def __init__(self, data_dir, packs=None):
-        self.packs = load_packs() if packs is None else {
-            p.id: p.model_dump() for p in (ExperimentPack.model_validate(x) for x in packs)
-        }
+        self.packs = self.validated_packs(packs)
         self.path = Path(data_dir) / "physical-labs.sqlite"
         self.path.parent.mkdir(parents=True, exist_ok=True)
         with self.connect() as db:
@@ -78,6 +76,12 @@ class PreparationService:
                     response TEXT NOT NULL, PRIMARY KEY(session_id, event_id)
                 );
             """)
+
+    @staticmethod
+    def validated_packs(packs):
+        return load_packs() if packs is None else {
+            p.id: p.model_dump() for p in (ExperimentPack.model_validate(x) for x in packs)
+        }
 
     @contextmanager
     def connect(self):
@@ -105,13 +109,7 @@ class PreparationService:
                 "connections": [], "measurements": {}, "selected": []}
 
     def create(self, owner, key, body):
-        pack = self.packs.get(body.experiment_id)
-        if pack is None:
-            raise HTTPException(404, "Prescribed experiment not found")
-        if body.mode == 'experiment_demo' and not pack.get('demo'):
-            raise HTTPException(409, "This experiment has no authored demo setup")
-        # Keep existing normal-session creation keys compatible with the v1 body.
-        body_hash = digest(body.model_dump(exclude={'mode'}) if body.mode == 'guided_preparation' else body.model_dump())
+        pack, body_hash = self.creation_input(body)
         with self.connect() as db:
             db.execute("BEGIN IMMEDIATE")
             row = db.execute("SELECT * FROM physical_sessions WHERE owner=? AND create_key=?", (owner, key)).fetchone()
@@ -119,20 +117,34 @@ class PreparationService:
                 if row["create_hash"] != body_hash:
                     raise HTTPException(409, "Creation key already used for another request")
                 return self.project(json.loads(row["state"]), json.loads(row["pack"]))
-            state = {"session_id": secrets.token_hex(16), "revision": 0, "stage": "orientation",
-                     "mode": body.mode,
-                     "language": body.language, "created_at": now(), "updated_at": now(),
-                     "pack_sha256": digest(pack), "orientation_seen": [], "concepts": {},
-                     "demonstration_index": 0, "step_index": 0, "observation_index": 0, "procedure_index": 0,
-                     "faults": {}, "assessment": None, "attempts": [],
-                     "apparatus": self.initial_apparatus(pack), "feedback": None}
-            if body.mode == 'experiment_demo':
-                state['apparatus']['controls'].update(pack['demo']['initial_controls'])
-                first = procedure_steps(pack, state)[0]['rule']['kind']
-                state['stage'] = 'observations' if first == 'measure' else 'rehearsal'
+            state = self.new_session(pack, body)
             db.execute("INSERT INTO physical_sessions VALUES(?,?,?,?,?,?)",
                        (state["session_id"], owner, key, body_hash, json.dumps(pack), json.dumps(state)))
             return self.project(state, pack)
+
+    def creation_input(self, body):
+        pack = self.packs.get(body.experiment_id)
+        if pack is None:
+            raise HTTPException(404, "Prescribed experiment not found")
+        if body.mode == 'experiment_demo' and not pack.get('demo'):
+            raise HTTPException(409, "This experiment has no authored demo setup")
+        # Keep existing normal-session creation keys compatible with the v1 body.
+        body_hash = digest(body.model_dump(exclude={'mode'}) if body.mode == 'guided_preparation' else body.model_dump())
+        return pack, body_hash
+
+    def new_session(self, pack, body):
+        state = {"session_id": secrets.token_hex(16), "revision": 0, "stage": "orientation",
+                 "mode": body.mode,
+                 "language": body.language, "created_at": now(), "updated_at": now(),
+                 "pack_sha256": digest(pack), "orientation_seen": [], "concepts": {},
+                 "demonstration_index": 0, "step_index": 0, "observation_index": 0, "procedure_index": 0,
+                 "faults": {}, "assessment": None, "attempts": [],
+                 "apparatus": self.initial_apparatus(pack), "feedback": None}
+        if body.mode == 'experiment_demo':
+            state['apparatus']['controls'].update(pack['demo']['initial_controls'])
+            first = procedure_steps(pack, state)[0]['rule']['kind']
+            state['stage'] = 'observations' if first == 'measure' else 'rehearsal'
+        return state
 
     @staticmethod
     def owned(db, session_id, owner):
@@ -141,9 +153,12 @@ class PreparationService:
             raise HTTPException(404, "Preparation session not found")
         return json.loads(row["state"]), json.loads(row["pack"])
 
-    def get(self, session_id, owner):
+    def saved(self, session_id, owner):
         with self.connect() as db:
-            state, pack = self.owned(db, session_id, owner)
+            return self.owned(db, session_id, owner)
+
+    def get(self, session_id, owner):
+        state, pack = self.saved(session_id, owner)
         return self.project(state, pack)
 
     def list_sessions(self, owner):
@@ -189,13 +204,11 @@ class PreparationService:
         return result
 
     def session_pack(self, session_id, owner):
-        with self.connect() as db:
-            _, pack = self.owned(db, session_id, owner)
+        _, pack = self.saved(session_id, owner)
         return public(pack)
 
     def observations(self, session_id, owner):
-        with self.connect() as db:
-            state, pack = self.owned(db, session_id, owner)
+        state, pack = self.saved(session_id, owner)
         return ADAPTERS[pack["adapter"]]().observations(pack, state["apparatus"])
 
     @staticmethod
@@ -219,17 +232,20 @@ class PreparationService:
                 if existing["body_hash"] != body_hash:
                     raise HTTPException(409, "Event ID already used for another request")
                 return json.loads(existing["response"])
-            if event.revision != state["revision"]:
-                raise HTTPException(409, "Stale session revision; reload before retrying")
-            if state["revision"] >= 2000:
-                raise HTTPException(409, "Session attempt limit reached; start a new preparation")
-            self.apply(state, pack, event)
-            state["revision"] += 1
-            state["updated_at"] = now()
-            response = self.project(state, pack)
+            response = self.advance(state, pack, event)
             db.execute("UPDATE physical_sessions SET state=? WHERE id=?", (json.dumps(state), session_id))
             db.execute("INSERT INTO physical_events VALUES(?,?,?,?)", (session_id, event.event_id, body_hash, json.dumps(response)))
         return response
+
+    def advance(self, state, pack, event):
+        if event.revision != state["revision"]:
+            raise HTTPException(409, "Stale session revision; reload before retrying")
+        if state["revision"] >= 2000:
+            raise HTTPException(409, "Session attempt limit reached; start a new preparation")
+        self.apply(state, pack, event)
+        state["revision"] += 1
+        state["updated_at"] = now()
+        return self.project(state, pack)
 
     def apply(self, state, pack, event):
         state["feedback"] = None
@@ -359,8 +375,7 @@ class PreparationService:
             state["stage"] = "observations" if following == "measure" else "rehearsal"
 
     def experiment_result(self, session_id, owner):
-        with self.connect() as db:
-            state, pack = self.owned(db, session_id, owner)
+        state, pack = self.saved(session_id, owner)
         if state.get('mode') != 'experiment_demo' or state['stage'] != 'experiment_complete':
             raise HTTPException(409, 'Complete the experiment demo first')
         observations = ADAPTERS[pack['adapter']]().observations(pack, state['apparatus'])
@@ -374,8 +389,7 @@ class PreparationService:
                 'preset_controls': pack['demo']['initial_controls'], 'completed_at': state['updated_at']}
 
     def receipt(self, session_id, owner):
-        with self.connect() as db:
-            state, pack = self.owned(db, session_id, owner)
+        state, pack = self.saved(session_id, owner)
         if state["stage"] != "prepared":
             raise HTTPException(409, "Preparation requirements are not complete")
         return {"schema_version": "physical-lab-receipt/v1", "session_id": session_id,

@@ -135,7 +135,7 @@ class FirestoreProviderPool(ProviderPool):
                     self.persist(row, owner)
                     if status == 429:
                         self.save(quota_id, self.clock()+max(60, advised or 0))
-                    elif status in (401,403):
+                    elif status in (401, 402, 403):
                         self.save(key_id, self.clock()+900)
                     elif status and status < 500:
                         self.save(model_id, self.clock()+900)

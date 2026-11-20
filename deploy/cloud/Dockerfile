@@ -9,6 +9,7 @@ COPY prototypes/screen_capture/ /app/prototypes/screen_capture/
 COPY prototypes/lab_tracking/ /app/prototypes/lab_tracking/
 COPY prototypes/backend/lab_idempotency.py /app/prototypes/backend/lab_idempotency.py
 COPY prototypes/json_stream/ /app/prototypes/json_stream/
+COPY prototypes/physical_labs/ /app/prototypes/physical_labs/
 COPY docs/architecture/examples/ /app/docs/architecture/examples/
 USER 65532:65532
 EXPOSE 8080

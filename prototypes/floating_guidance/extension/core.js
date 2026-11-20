@@ -27,6 +27,8 @@
   if(!Number.isSafeInteger(message.sequence)||message.sequence<1)return fail('bad_sequence');
   if(!Number.isSafeInteger(message.generation)||message.generation<1)return fail('bad_generation');
   const b=message.body;if(!b||typeof b!=='object')return fail('bad_body');
+  const n=b.narration;
+  if(n!==undefined&&(!n||typeof n.muted!=='boolean'||typeof n.replay!=='boolean'))return fail('bad_narration');
   if(!b.lab||!LAB.has(b.lab.status))return fail('bad_lab');
   if(!Number.isSafeInteger(b.lab_revision))return fail('bad_revision');
   const i=b.instructions;if(!i||i.basis!=='authoritative_tracker'||!action(i.now??null,true)||!action(i.next??null,false)||!str(i.why??null)||!str(i.already_tracked??null))return fail('bad_instructions');
@@ -62,6 +64,7 @@
   const p=b.progress||{},stage=p.checkpoint_position&&p.checkpoint_total?`Stage ${p.checkpoint_position} of ${p.checkpoint_total}`:null,act=p.action_position&&p.action_total?`Action ${p.action_position} of ${p.action_total}`:null;
   const pausing=pending==='pause'||pending==='resume';
   return {empty:false,connection,live,
+   narration:live&&lab==='active'&&b.runtime.capture_active?b.narration:null,
    header:[stage,act].filter(Boolean).join(' · ')||'Kiki',
    guide:{label:guideLabel,now:b.instructions.now,next:b.instructions.next,why:b.instructions.why,already:b.instructions.already_tracked},
    // Provider error codes stay in logs; the learner sees what happens next.

@@ -1,3 +1,13 @@
+## Combined lab narration · 21 November 2026
+
+The `feature/combined-lab-narration` worktree pairs the physical experiment
+engine from backend PR #14 with the Simulink floating guide extension 0.1.4.
+The web client owns playback. The extension acknowledges the displayed
+Simulink step and forwards Replay and Mute. The physical engine supplies stable
+step IDs and the pinned pack hash for the web API’s narration lookup.
+
+The extension built successfully and passed 20 lifecycle and overlay checks. The combined browser exercise played two hosted Simulink WAVs.
+
 # Physical lab repository split — 21 November 2026
 
 User corrected the delivery boundary: follow the existing kiki-web Lab mode.

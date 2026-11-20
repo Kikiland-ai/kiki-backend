@@ -112,6 +112,12 @@ async function handle(k,m,sender){
   if(!mine)return {ok:false,error:'not_bound'};
   if(m.type==='fg_rects'){if(s.controller)void toReader(s,{type:'fg_rects',rects:m.rects,viewport:m.viewport,moving:Boolean(m.moving)});return {ok:true};}
   if(m.type==='fg_command'){
+   if(['narration_toggle','narration_replay'].includes(m.command)){
+    if(!s.controller||m.command_version!==1||m.stream_id!==s.controller.stream_id||m.generation!==s.controller.generation)return {ok:false,error:'stale_stream_or_generation'};
+    if(![m.action_id,m.visit_id].every(value=>value===null||(typeof value==='string'&&value.length<=160))||typeof m.verification_only!=='boolean')return {ok:false,error:'invalid_narration_command'};
+    const {command,command_version,stream_id,generation,action_id,verification_only,visit_id}=m;
+    return toReader(s,{type:'fg_command',command,command_version,stream_id,generation,action_id,verification_only,visit_id});
+   }
    if(!s.controller)return {ok:false,error:'tracker_not_open'};
    if(m.command==='focus_confirmation'){
     if(m.command_version!==1||m.stream_id!==s.controller.stream_id||m.generation!==s.controller.generation)return {ok:false,error:'stale_stream_or_generation'};

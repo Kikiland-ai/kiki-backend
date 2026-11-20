@@ -75,7 +75,7 @@ class StreamingProviderPool(ProviderPool):
                     finally:metrics['provider_http_ms']+=(time.monotonic()-http_started)*1000
                     failed.add(item['id']);row.update(failed_keys=json.dumps(sorted(failed)),last_error=last);self._persist(row,owner,metrics)
                     if status==429:self._measure(metrics,1,lambda:self.save(quota_id,self.clock()+max(60,advised or 0)))
-                    elif status in (401,403):self._measure(metrics,1,lambda:self.save(key_id,self.clock()+900))
+                    elif status in (401,402,403):self._measure(metrics,1,lambda:self.save(key_id,self.clock()+900))
                     elif status and status<500: self._measure(metrics,1,lambda:self.save(model_id,self.clock()+900));raise AnalysisFailure(last,int((self.clock()+900)*1000))
                     elif advised is not None:self._measure(metrics,1,lambda:self.save(key_id,self.clock()+max(10,advised)))
         except BaseException as error:

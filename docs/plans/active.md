@@ -5,8 +5,12 @@ Added the `kiki-pedagogy-packets` skill (`.claude/skills/`, Codex wrapper in `.a
 [session handoff](../handoffs/pedagogy-packets-skill.md). The skill researches a
 chapter/topic/concept and writes translation-, audio- and canvas-ready English packets.
 `scripts/check_packet.py` checks them and runs the real mixed-script `validate_input` on every
-placard projection. The worked example `templates/C-AM-03.packet.json` passes (0 errors,
-0 warnings). Eleven seeded defects were each caught. No translation, TTS or canvas generation
+placard projection. Later the same day the skill was generalised for the Design-Thinking
+knowledge-worker widening (`45180af`): domain block, laws/odds/audiences corners, any language,
+1-6 placards, scene templates, cues and tutor seeds. Two worked examples pass (0 errors, 0 warnings):
+`templates/laws-C-AM-03.packet.json` and `templates/odds-TR-IV-EVENT.packet.json`. Twenty-two seeded
+defects across both passes were each caught. The remaining work is chartered in
+[the generalisation charter](../handoffs/pedagogy-skill-generalisation.md). No translation, TTS or canvas generation
 was run, and no runner was built. Next: build the runner (packet → mixed-language job → TTS →
 canvas factory → ledger/case assembly), then trial one new concept end to end.
 

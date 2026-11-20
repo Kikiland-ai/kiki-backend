@@ -1,0 +1,169 @@
+{
+  "schema": "kiki-pedagogy-packet/v1",
+  "packetId": "PKT-TR-IV-EVENT-1",
+  "createdAt": "2026-11-20T00:00:00Z",
+  "domain": {
+    "packId": "trading-fno",
+    "corner": "odds",
+    "profileId": "trading",
+    "learner": {"role": "Trainee index-options trader, onboarding week 2", "transition": "retail habits to a desk's written process", "priorKnowledge": "calls and puts, premium, lot size (TR-OPT-BASICS)"},
+    "languages": {"source": "en", "targets": ["hi"], "workingLanguage": "en"},
+    "dimensionLabels": {"concept": "Concept", "words": "Words", "english": "Expression", "lab": "Practice"},
+    "assessmentPolicy": {"conceptChecks": 5, "passPercent": 60, "options": 4, "chapterTest": false},
+    "practical": {"applies": true, "label": "Practice", "tool": "Trading terminal: chart and option chain (paper mode, historical replay)"},
+    "guardrails": [
+      "Process, not picks: review past or paper trades only; never recommend a live trade",
+      "All market data is illustrative; show 'Education on a past, illustrative trade. Not investment advice.'",
+      "KiKi never places, modifies or suggests orders"
+    ],
+    "consumers": ["kiki-pack/v0"]
+  },
+  "scope": {"planId": "LP-TR-EVENT-DAYS", "groupId": "MOD-TR-EVENT", "conceptId": "TR-IV-EVENT", "order": 1, "canonicalKey": "iv-before-events", "title": "Implied volatility before scheduled events", "practiceTaskId": "pre-event-checklist"},
+  "status": {"review": "draft", "domainReview": "pending", "pronunciation": "pending", "languages": {"hi": "machine_draft"}},
+
+  "research": {
+    "governingQuestion": "Why can a bought option lose money on a scheduled event even when the direction is right, and what must a trainee write before buying premium into an event?",
+    "sources": [
+      {"id": "S-1", "origin": "org_playbook", "tier": 1, "label": "Options desk playbook: event days (illustrative desk, version 3)", "locator": "Design-Thinking docs/knowledge-workers/personas/trader/playbook-excerpt.md, sections 2, 4 and 6 (EV-2.1, EV-6.1)", "illustrative": true},
+      {"id": "S-2", "origin": "org_case", "tier": 1, "label": "Case file trader-event-day-iv-crush (illustrative paper trade; Black-Scholes check PASS)", "locator": "Design-Thinking docs/knowledge-workers/personas/trader/scenario.json", "illustrative": true},
+      {"id": "S-3", "origin": "research", "tier": 4, "label": "Baron & Hershey 1988, Outcome bias in decision evaluation, JPSP 54(4):569-579", "url": "https://bear.warrington.ufl.edu/brenner/mar7588/Papers/baron-hershey-jpsp1988.pdf", "illustrative": false}
+    ],
+    "claims": [
+      {"id": "CL-0", "kind": "definition", "text": "Implied volatility is the volatility input that makes the pricing model reproduce an option's market price.", "sourceIds": ["S-2"], "confidence": "moderate", "check": "S-2 bsCheck: Black-Scholes at iv=0.175, S=24040, K=24200, 3 days gives 90.2263, matching the 90.25 entry. Standard-reference citation still to add (openQuestions)."},
+      {"id": "CL-1", "kind": "heuristic", "text": "IV climbs into a scheduled event and usually falls within minutes after the outcome is known (the IV crush).", "sourceIds": ["S-1", "S-2"], "confidence": "moderate", "check": "S-1 section 2; S-2 ivSeries rises to 17.5 then collapses to 11.0 on D0."},
+      {"id": "CL-2", "kind": "heuristic", "text": "An option bought before the event pays for the uncertainty; profit needs a move bigger than the one already priced.", "sourceIds": ["S-1"], "confidence": "moderate", "check": "S-1 section 2, bullet 2 (simplified: also depends on time decay)."},
+      {"id": "CL-3", "kind": "heuristic", "text": "The desk's quick guide: the ATM straddle price approximates the move the market expects by expiry.", "sourceIds": ["S-1", "S-2"], "confidence": "moderate", "check": "S-1 section 2(b); S-2 impliedMove.rule."},
+      {"id": "CL-4", "kind": "org_rule", "text": "EV-2.1: if you cannot say why your expected move beats the implied move, do not buy premium into the event.", "sourceIds": ["S-1"], "confidence": "high", "check": "Quoted rule, S-1 section 2."},
+      {"id": "CL-5", "kind": "org_rule", "text": "No trade is a valid event-day position; waiting until IV has reset after the announcement can be cheaper.", "sourceIds": ["S-1"], "confidence": "high", "check": "S-1 section 4, last bullet."},
+      {"id": "CL-6", "kind": "illustrative_data", "text": "Entry on D-1: 4 lots (300 units) of the 24200 call at 90.25, spot 24040, IV 17.5%, 3 days to expiry.", "sourceIds": ["S-2"], "confidence": "high", "check": "S-2 trade and marketBefore; bsCheck callBefore 90.2263."},
+      {"id": "CL-7", "kind": "illustrative_data", "text": "On D0 spot closed at 24150 (+110), IV at 11%, premium 59.55; P&L -30.70 per unit.", "sourceIds": ["S-2"], "confidence": "high", "check": "derived: 59.55-90.25=-30.70; 24150-24040=110. S-2 bsCheck callAfter 59.5543."},
+      {"id": "CL-8", "kind": "illustrative_data", "text": "Per-unit decomposition on screen: Move +40, IV -48, time -23 rupees.", "sourceIds": ["S-2"], "confidence": "high", "check": "S-2 decomposition (Shapley): 40.04-47.87-22.85=-30.68, about -30.70."},
+      {"id": "CL-9", "kind": "illustrative_data", "text": "ATM 24050 call 153.55 + put 150.75 = 304.30, so the priced move was about 304 points; the realised 110 was 0.36 of it.", "sourceIds": ["S-2"], "confidence": "high", "check": "derived: 153.55+150.75=304.30; 110/304.3=0.36."},
+      {"id": "CL-10", "kind": "org_rule", "text": "EV-6.1: the desk reviews process, not P&L; tag process and outcome separately (good process + bad outcome = repeat it).", "sourceIds": ["S-1"], "confidence": "high", "check": "S-1 section 6 table and EV-6.1."},
+      {"id": "CL-11", "kind": "misconception_evidence", "text": "People rate the same decision as better when its outcome was good (outcome bias), even when they say outcomes should not matter.", "sourceIds": ["S-3"], "confidence": "high", "check": "S-3 five studies; replicated in a 2023 preregistered study (Aiyer et al.)."},
+      {"id": "CL-12", "kind": "org_rule", "text": "Before an event-day trade, write the strike's IV now and its usual level, the implied move, and your expected move with the reason.", "sourceIds": ["S-1"], "confidence": "high", "check": "S-1 section 2, write-down list (a)-(c)."}
+    ],
+    "outOfScope": ["Greeks beyond the IV and time-decay intuition", "spread construction and event sizing (EV-4.x, a separate concept)", "any live trading decision"],
+    "openQuestions": ["The playbook and case are illustrative. A real desk's playbook and a trader reviewer are needed (Design-Thinking clarity map K4).", "Add a standard reference for the IV definition (CL-0 rests on the case's model check).", "Hindi glosses need a native reviewer who trades."]
+  },
+
+  "learner": {
+    "prerequisiteIds": ["TR-OPT-BASICS"],
+    "externalPrerequisites": [{"title": "Percentages and simple probability", "level": "school", "canonicalKey": "percent-probability"}],
+    "troublesome": "Two price drivers move at once: the index and IV. The learner's direction call can be right while the trade still loses, which feels unfair and invites outcome-based conclusions.",
+    "misconceptions": [
+      {"id": "M-TR-1", "statement": "If the direction is right, a bought option makes money.", "correction": "The move must beat the move already priced in; an IV fall and time decay can outweigh a right-direction move.", "basis": "inferred", "sourceIds": [], "reasoning": "The playbook states 'Direction alone is not a thesis', and the case trainee's written thesis is direction-only, so the desk expects this error."},
+      {"id": "M-TR-2", "statement": "A trade's profit or loss shows whether the decision was good.", "correction": "Judge the decision by the process that was knowable at entry; outcomes are noisy.", "basis": "documented", "sourceIds": ["S-3", "S-1"], "reasoning": "Outcome bias is documented in general populations (S-3); the desk rule EV-6.1 exists to counter it."}
+    ]
+  },
+
+  "objectives": [
+    {"id": "O-TR-IV-1", "statement": "Explain why a bought option can lose money on a scheduled event even when the direction is right.", "bloom": "understand", "parentId": "O-TR-EVENT", "ownerId": "TR-IV-EVENT"},
+    {"id": "O-TR-IV-2", "statement": "Estimate the implied move from the ATM straddle and write the EV-2.1 check into a pre-trade note.", "bloom": "apply", "parentId": "O-TR-EVENT", "ownerId": "TR-IV-EVENT"},
+    {"id": "O-TR-IV-3", "statement": "Review an event-day trade on its process, separately from its outcome.", "bloom": "evaluate", "parentId": "O-TR-EVENT", "ownerId": "TR-IV-EVENT"}
+  ],
+
+  "terms": [
+    {"id": "T-TR-IV", "term": "implied volatility", "definition": "The volatility input that makes the pricing model reproduce an option's market price, quoted as an annual percentage.", "aliases": ["IV"], "symbol": null, "unit": "%", "ownerConceptId": "TR-IV-EVENT", "spoken": "implied volatility", "glosses": {"hi": "Option के price में छुपा हुआ अनुमानित उतार-चढ़ाव, सालाना % में"}, "pronunciations": {"hi": "इम्प्लाइड वोलैटिलिटी"}, "review_status": "pending"},
+    {"id": "T-TR-IVCRUSH", "term": "IV crush", "definition": "The quick fall in implied volatility once a scheduled event's outcome is known.", "aliases": [], "symbol": null, "unit": null, "ownerConceptId": "TR-IV-EVENT", "spoken": "I V crush", "glosses": {"hi": "Announcement के बाद IV का तेज़ी से गिरना"}, "pronunciations": {"hi": "आई वी क्रश"}, "review_status": "pending"},
+    {"id": "T-TR-IMPMOVE", "term": "implied move", "definition": "The size of move, up or down, that option prices are paying for by expiry.", "aliases": [], "symbol": null, "unit": "points", "ownerConceptId": "TR-IV-EVENT", "spoken": "implied move", "glosses": {"hi": "Market जितने move का price पहले से दे रहा है"}, "pronunciations": {"hi": "इम्प्लाइड मूव"}, "review_status": "pending"},
+    {"id": "T-TR-STRADDLE", "term": "straddle", "definition": "A call and a put at the same strike and expiry; its price is the desk's quick guide to the implied move.", "aliases": [], "symbol": null, "unit": null, "ownerConceptId": "TR-IV-EVENT", "spoken": "straddle", "glosses": {"hi": "एक ही strike और expiry पर call और put दोनों"}, "pronunciations": {"hi": "स्ट्रैडल"}, "review_status": "pending"}
+  ],
+  "usesTerms": [
+    {"id": "T-TR-PREMIUM", "term": "premium", "definition": "The price paid to buy an option; for a bought option it is the maximum loss.", "aliases": [], "symbol": null, "unit": "INR", "ownerConceptId": "TR-OPT-BASICS", "spoken": "premium", "glosses": {"hi": "Option खरीदने के लिए दी गई कीमत"}, "pronunciations": {"hi": "प्रीमियम"}, "review_status": "pending"}
+  ],
+
+  "teaching": {
+    "canDo": "Before buying premium into a scheduled event, estimate the implied move and write why your expected move beats it, or record no trade.",
+    "keyIdea": "Implied volatility rises into an event and crushes after it, so a right direction only pays if the move beats the implied move.",
+    "selfExplainPrompt": "Why did the trainee's call lose money even though the index rose?",
+    "explanation": {
+      "text": "Implied volatility is the volatility that makes the pricing model match an option's market price. Before a scheduled event it usually climbs, because the outcome is unknown, and after the announcement it usually falls within minutes: the IV crush. A call bought the day before therefore carries that uncertainty in its premium. A right direction is not enough; the move must beat the implied move, which the desk estimates from the ATM straddle. In the case, the index rose 110 points against a priced move of about 304, and the IV fall cost more than the move earned. Rule EV-2.1 asks you to write why your expected move beats the implied move, or to choose no trade.",
+      "defaultModality": "textImage",
+      "walkthrough": [
+        {"target": "IV crush", "mark": "marker", "dim": "words", "say": "The IV crush is the quick fall in implied volatility once the announcement removes the uncertainty."},
+        {"target": "the move must beat the implied move", "mark": "sweep", "dim": "concept", "say": "A right direction is not enough: the move must beat the implied move that the premium already paid for."},
+        {"target": "ATM straddle", "mark": "circle", "dim": "words", "say": "Add the ATM call and put prices: that straddle is the desk's quick guide to the implied move."},
+        {"target": "Rule EV-2.1", "mark": "marker", "dim": "lab", "say": "Rule EV-2.1 goes into your pre-trade note: why your expected move beats the implied move, or no trade."}
+      ]
+    },
+    "example": {"title": "A trainee's event-day call (illustrative paper trade)", "scenario": "A trainee bought 4 lots of the 24200 call at 90.25 rupees the day before a policy announcement. The index rose 110 points, IV fell from 17.5% to 11%, and the call closed at 59.55.", "takeaway": "The priced move was about 304 points; a 110 point rise could not pay for the premium once IV crushed.", "sourceIds": ["S-2"]},
+    "workedQuestion": {
+      "id": "W-TR-IV", "type": "numerical", "marks": 3,
+      "prompt": "Before an event, the ATM 24050 call is 153.55 and the put is 150.75. Your thesis expects a 150 point rise. Estimate the implied move and say what EV-2.1 tells you to do.",
+      "modelAnswer": ["Implied move: 153.55 + 150.75 = 304.30, so about plus or minus 304 points.", "My expected move of 150 points is smaller than the implied move of about 304 points.", "Under EV-2.1 I cannot say why my move beats the implied move, so I record no trade, or wait until IV resets after the announcement."],
+      "rubric": [{"criterion": "Computes the straddle as the implied move", "marks": 1, "objectiveId": "O-TR-IV-2"}, {"criterion": "Compares the expected move with the implied move", "marks": 1, "objectiveId": "O-TR-IV-1"}, {"criterion": "Applies EV-2.1 to reach no trade or wait", "marks": 1, "objectiveId": "O-TR-IV-2"}],
+      "examVocabulary": ["T-TR-IMPMOVE", "T-TR-STRADDLE"]
+    },
+    "checks": [
+      {"id": "Q-TR-IV-1", "type": "mcq", "dimension": "concept", "evaluates": "fact", "prompt": "What usually happens to implied volatility right after a scheduled announcement?", "options": ["It usually falls quickly", "It usually rises further", "It stays the same until expiry", "It moves only with the index direction"], "answer": "It usually falls quickly", "distractorRationale": {"It usually rises further": "error: confuses the run-up before the event with the reaction after it", "It stays the same until expiry": "error: thinks IV only changes at expiry", "It moves only with the index direction": "M-TR-1"}, "explanation": "Once the outcome is known the uncertainty is gone, so IV usually falls within minutes: the IV crush. It climbs before the event, not after.", "objectiveIds": ["O-TR-IV-1"], "difficulty": 1, "claimIds": ["CL-1"]},
+      {"id": "Q-TR-IV-2", "type": "mcq", "dimension": "concept", "evaluates": "process", "prompt": "A trainee's note before a policy announcement says only 'Policy will be positive, index will go up. Bought calls.' Under EV-2.1, what is missing?", "options": ["A stronger reason why the index will rise", "Why the expected move beats the implied move", "The previous day's closing price", "A bigger position to cover the cost"], "answer": "Why the expected move beats the implied move", "distractorRationale": {"A stronger reason why the index will rise": "M-TR-1", "The previous day's closing price": "error: lists data that does not change the decision", "A bigger position to cover the cost": "error: sizes from conviction, which the desk forbids"}, "explanation": "EV-2.1 asks for the size of the move, not only its direction. A stronger direction argument still says nothing about whether the move beats the roughly 304 points already priced.", "objectiveIds": ["O-TR-IV-2"], "difficulty": 2, "claimIds": ["CL-4", "CL-12"]},
+      {"id": "Q-TR-IV-3", "type": "mcq", "dimension": "concept", "evaluates": "diagnosis", "prompt": "The index rose 110 points, but the call lost 30.70 rupees per unit. The screen reads Move +40, IV -48, time -23. What mainly caused the loss?", "options": ["The index moved the wrong way", "Brokerage and other charges", "The fall in IV after the event", "The strike was below spot"], "answer": "The fall in IV after the event", "distractorRationale": {"The index moved the wrong way": "M-TR-1", "Brokerage and other charges": "error: the P&L shown is before charges", "The strike was below spot": "error: misreads moneyness; 24200 is above the 24040 spot"}, "explanation": "The move earned 40 rupees per unit, but the IV fall took 48 and time took 23. The direction was right; the IV crush was the largest cost.", "objectiveIds": ["O-TR-IV-1"], "difficulty": 2, "claimIds": ["CL-8", "CL-1"]},
+      {"id": "Q-TR-IV-4", "type": "mcq", "dimension": "concept", "evaluates": "calculation", "prompt": "Before the event, the ATM 24050 call is 153.55 and the put is 150.75. Roughly what move is the market pricing by expiry?", "options": ["About 304 points either way", "About 154 points either way", "About 110 points either way", "About 31 points either way"], "answer": "About 304 points either way", "distractorRationale": {"About 154 points either way": "error: used one leg of the straddle only", "About 110 points either way": "error: used the realised move, which was not known at entry", "About 31 points either way": "error: used the per-unit P&L"}, "explanation": "153.55 + 150.75 = 304.30, so the desk's quick guide puts the implied move near 304 points. The 110 point move only became known after the event.", "objectiveIds": ["O-TR-IV-2"], "difficulty": 3, "claimIds": ["CL-9", "CL-3"]},
+      {"id": "Q-TR-IV-5", "type": "mcq", "dimension": "concept", "evaluates": "judgement", "prompt": "An event-day trade lost money, but the pre-trade note was complete, followed EV-2.1 and stayed inside the event budget. How should the desk review it?", "options": ["Bad trade: tighten the rule that allowed it", "Lucky escape: the loss could have been bigger", "Skip the review because the loss was inside budget", "Good process, bad outcome: repeat the process"], "answer": "Good process, bad outcome: repeat the process", "distractorRationale": {"Bad trade: tighten the rule that allowed it": "M-TR-2", "Lucky escape: the loss could have been bigger": "error: confuses the process and outcome quadrants", "Skip the review because the loss was inside budget": "error: EV-6.1 reviews every trade on process"}, "explanation": "EV-6.1 judges process, not P&L. A complete note with a loss is the cost of the odds; calling it a bad trade is outcome bias.", "objectiveIds": ["O-TR-IV-3"], "difficulty": 3, "claimIds": ["CL-10", "CL-11"]},
+      {"id": "Q-TR-IV-WORDS", "type": "term_match", "dimension": "words", "evaluates": "recall", "prompt": "Choose the meaning of implied move.", "options": ["The size of move, up or down, that option prices are paying for by expiry.", "A call and a put at the same strike and expiry; its price is the desk's quick guide to the implied move.", "The quick fall in implied volatility once a scheduled event's outcome is known.", "The price paid to buy an option; for a bought option it is the maximum loss."], "answer": "The size of move, up or down, that option prices are paying for by expiry.", "explanation": "The implied move is the priced size of move; the other options define straddle, IV crush and premium.", "objectiveIds": ["O-TR-IV-2"], "difficulty": 1},
+      {"id": "Q-TR-IV-EXPRESSION", "type": "short_english", "dimension": "english", "evaluates": "diagnosis", "prompt": "In two sentences the desk lead can read in the morning meeting, explain why the trainee's call lost money even though the index rose.", "answer": "The index rose 110 points, but the market had priced a move of about 304, so the IV crush after the announcement cost more than the move earned. The note was direction-only and did not check the implied move under EV-2.1.", "explanation": "Report vocabulary and clarity separately; this never changes the concept score.", "objectiveIds": ["O-TR-IV-1"], "difficulty": 2, "claimIds": ["CL-1", "CL-9", "CL-4"]},
+      {"id": "Q-TR-IV-PRACTICE", "type": "predict", "dimension": "lab", "evaluates": "process", "prompt": "In the paper-mode replay of D-1, which number do you read from the option chain and write in the pre-trade note before any event-day order, and why?", "answer": "The implied move: add the ATM 24050 call and put prices (about 304 points), because EV-2.1 needs it to compare with my expected move.", "explanation": "KiKi checks that the note shows the implied move; it never suggests an order.", "objectiveIds": ["O-TR-IV-2"], "difficulty": 2, "claimIds": ["CL-12", "CL-4"]}
+    ],
+    "examSignal": {"basis": "none", "askedIn": 0, "outOf": 0, "note": "Desk review, not an exam; no past reviews supplied."},
+    "estMinutes": 12
+  },
+
+  "placards": [
+    {"id": "CARD-TR-IV-definition", "kind": "definition", "title": {"en": "Definition"}, "visualRef": "explanation",
+     "sentences": [
+       {"id": "CARD-TR-IV-definition.s1", "english": "The implied volatility of an option is the volatility that, put into the pricing model, gives its market price.", "term_ids": ["T-TR-IV"], "literals": [], "claimIds": ["CL-0"]},
+       {"id": "CARD-TR-IV-definition.s2", "english": "Before a scheduled event, implied volatility usually climbs, because the market is paying for an outcome nobody knows yet.", "term_ids": ["T-TR-IV"], "literals": [], "claimIds": ["CL-1"], "cue": {"state": "before"}}
+     ]},
+    {"id": "CARD-TR-IV-concept", "kind": "concept", "title": {"en": "Why the right direction is not enough"}, "visualRef": "explanation",
+     "sentences": [
+       {"id": "CARD-TR-IV-concept.s1", "english": "After the announcement the uncertainty is gone, and implied volatility usually falls within minutes; the desk calls this the IV crush.", "term_ids": ["T-TR-IV", "T-TR-IVCRUSH"], "literals": [], "claimIds": ["CL-1"], "cue": {"state": "after"}},
+       {"id": "CARD-TR-IV-concept.s2", "english": "An option bought the day before the event has that uncertainty built into its premium.", "term_ids": ["T-TR-PREMIUM"], "literals": [], "claimIds": ["CL-2"]},
+       {"id": "CARD-TR-IV-concept.s3", "english": "So a right direction is not enough: the index must move more than the implied move to pay for the premium.", "term_ids": ["T-TR-IMPMOVE", "T-TR-PREMIUM"], "literals": [], "claimIds": ["CL-2"], "refutesMisconceptionIds": ["M-TR-1"]},
+       {"id": "CARD-TR-IV-concept.s4", "english": "The desk's quick guide is that the ATM straddle price approximates the implied move by expiry.", "term_ids": ["T-TR-STRADDLE", "T-TR-IMPMOVE"], "literals": [{"text": "ATM", "spoken": "A T M"}], "claimIds": ["CL-3"]},
+       {"id": "CARD-TR-IV-concept.s5", "english": "Rule EV-2.1 says: if you cannot explain why your expected move beats the implied move, do not buy premium into the event.", "term_ids": ["T-TR-IMPMOVE", "T-TR-PREMIUM"], "literals": [{"text": "EV-2.1", "spoken": "E V two point one"}], "claimIds": ["CL-4"]}
+     ]},
+    {"id": "CARD-TR-IV-example", "kind": "example", "title": {"en": "The case: right direction, losing trade"}, "visualRef": "explanation",
+     "sentences": [
+       {"id": "CARD-TR-IV-example.s1", "english": "On D-1 a trainee bought 4 lots of the 24200 call at ₹90.25, with spot at 24040 and IV at 17.5%.", "term_ids": [], "literals": [{"text": "D-1", "spoken": "the day before the event"}, {"text": "4 lots", "spoken": "four lots"}, {"text": "24200", "spoken": "twenty-four thousand two hundred"}, {"text": "₹90.25", "spoken": "ninety rupees twenty-five paise"}, {"text": "24040", "spoken": "twenty-four thousand forty"}, {"text": "IV at 17.5%", "spoken": "I V at seventeen point five percent"}], "claimIds": ["CL-6"], "cue": {"state": "before", "highlight": ["leg-24200ce"]}},
+       {"id": "CARD-TR-IV-example.s2", "english": "On event day the index rose 110 points, but IV fell to 11% and the premium dropped to ₹59.55.", "term_ids": ["T-TR-PREMIUM"], "literals": [{"text": "110 points", "spoken": "one hundred ten points"}, {"text": "IV", "spoken": "I V"}, {"text": "11%", "spoken": "eleven percent"}, {"text": "₹59.55", "spoken": "fifty-nine rupees fifty-five paise"}], "claimIds": ["CL-7"], "cue": {"state": "after"}},
+       {"id": "CARD-TR-IV-example.s3", "english": "The screen line reads Move +₹40, IV -₹48, time -₹23, so the IV crush cost more than the index move earned.", "term_ids": ["T-TR-IVCRUSH"], "literals": [{"text": "Move +₹40, IV -₹48, time -₹23", "spoken": "move plus forty rupees, I V minus forty-eight rupees, time minus twenty-three rupees"}], "claimIds": ["CL-8"], "refutesMisconceptionIds": ["M-TR-1"]},
+       {"id": "CARD-TR-IV-example.s4", "english": "The implied move was about 304 points, so a 110 point rise was never enough to recover the premium.", "term_ids": ["T-TR-IMPMOVE", "T-TR-PREMIUM"], "literals": [{"text": "304 points", "spoken": "three hundred four points"}, {"text": "110 point", "spoken": "one hundred ten point"}], "claimIds": ["CL-9"]}
+     ]},
+    {"id": "CARD-TR-IV-application", "kind": "application", "title": {"en": "Your pre-trade note"},
+     "sentences": [
+       {"id": "CARD-TR-IV-application.s1", "english": "Before an event-day trade, write the strike's implied volatility now and its usual level in your pre-trade note.", "term_ids": ["T-TR-IV"], "literals": [], "claimIds": ["CL-12"]},
+       {"id": "CARD-TR-IV-application.s2", "english": "Add the ATM call and put prices to get the straddle, and write that number as the implied move.", "term_ids": ["T-TR-STRADDLE", "T-TR-IMPMOVE"], "literals": [{"text": "ATM", "spoken": "A T M"}], "claimIds": ["CL-3", "CL-12"]},
+       {"id": "CARD-TR-IV-application.s3", "english": "Write your expected move and the reason it beats the implied move, or record no trade under EV-2.1.", "term_ids": ["T-TR-IMPMOVE"], "literals": [{"text": "EV-2.1", "spoken": "E V two point one"}], "claimIds": ["CL-4", "CL-5"]},
+       {"id": "CARD-TR-IV-application.s4", "english": "If you still have a view, waiting until implied volatility resets after the announcement can be a cheaper way to act on it.", "term_ids": ["T-TR-IV"], "literals": [], "claimIds": ["CL-5"]}
+     ]},
+    {"id": "CARD-TR-IV-recap", "kind": "recap", "title": {"en": "Recap"},
+     "sentences": [
+       {"id": "CARD-TR-IV-recap.s1", "english": "Before a scheduled event implied volatility rises, and after it implied volatility usually falls in an IV crush.", "term_ids": ["T-TR-IV", "T-TR-IVCRUSH"], "literals": [], "claimIds": ["CL-1"]},
+       {"id": "CARD-TR-IV-recap.s2", "english": "Direction alone is not a thesis: the expected move must beat the implied move from the ATM straddle.", "term_ids": ["T-TR-IMPMOVE", "T-TR-STRADDLE"], "literals": [{"text": "ATM", "spoken": "A T M"}], "claimIds": ["CL-2", "CL-3"], "refutesMisconceptionIds": ["M-TR-1"]},
+       {"id": "CARD-TR-IV-recap.s3", "english": "Judge an event-day decision by the process in the note, not by its profit or loss, as EV-6.1 says.", "term_ids": [], "literals": [{"text": "EV-6.1", "spoken": "E V six point one"}], "claimIds": ["CL-10"], "refutesMisconceptionIds": ["M-TR-2"]}
+     ]}
+  ],
+
+  "visual": {"kind": "graph", "description": "Payoff of the long 24200 call: the 'now' curve at entry (IV 17.5%, 3 days) and after the announcement (IV 11%, 2 days), the entry premium as a dashed line, and spot markers at 24040 and 24150. A strip below shows the screen line Move +40 · IV -48 · time -23. Label: Illustrative · not investment advice.", "alt": "The same upward move from 24040 to 24150 ends below the entry premium once IV falls from 17.5% to 11%.", "sourceIds": ["S-2"]},
+
+  "canvas": {
+    "form": "scene",
+    "purpose": {"objectiveIds": ["O-TR-IV-1"], "misconceptionIds": ["M-TR-1"], "insight": "The 'now' curve drops when IV falls, so the position is below entry even though spot moved up."},
+    "illustrative": true,
+    "scene": {
+      "id": "tr-payoff", "template": "payoff",
+      "params": {"legs": [{"id": "leg-24200ce", "type": "call", "side": "long", "strike": 24200, "premium": 90.25, "lots": 4}],
+                 "lotSize": 75, "spot": 24040, "range": [23600, 24600], "rate": 0.065,
+                 "iv": {"before": 0.175, "after": 0.11}, "daysToExpiry": {"before": 3, "after": 2}},
+      "states": {"before": {"values": {"ivPhase": 0, "spot": 24040}}, "after": {"values": {"ivPhase": 1, "spot": 24150}, "highlight": ["leg-24200ce"]}}
+    },
+    "mustShow": ["the 'now' curve before and after the IV fall", "the entry premium line", "spot markers at 24040 and 24150", "the illustrative, not-advice label"],
+    "mustNotImply": ["a recommendation to buy or sell any option", "that a spread or no trade is always better"],
+    "claim": "illustrative_case",
+    "alt": "Payoff chart of the trainee's long call before and after the announcement; the curve falls with IV while spot rises."
+  },
+  "canvasNullReason": null,
+  "reflect": {"graphRef": "trading-fno/bad-call-iv-crush"},
+  "handoff": {"speechNotes": ["Say 'IV' as 'I V'; keep IV, ATM, straddle and premium in English in the Hindi rendition.", "Read rupee amounts as rupees and paise."]}
+}

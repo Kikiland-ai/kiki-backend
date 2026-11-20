@@ -1,90 +1,112 @@
 # Research protocol: going deep on a concept
 
-The goal is not a long survey. It is a **claim ledger** complete enough that every placard
-sentence, check answer and canvas behaviour traces to a verified claim.
+The goal is a **claim ledger**, not a long survey. It must be complete enough that every placard
+sentence, check answer, canvas value and tutor branch traces to a verified claim.
 
-## 1. Decompose the topic into research branches
+## 1. Decompose into research branches
 
-For each concept, answer these questions (skip any that do not apply, and say which):
+For each concept, answer the branches that apply and say which ones you skipped:
 
 | Branch | Question | Feeds |
 |---|---|---|
-| Definition | What exactly is it? In what notation and units does *this course* write it? | definition placard, terms |
-| Purpose | Why does it exist and what problem does it solve? | hook (`canDo`), concept placard opening |
-| Mechanism | How does it work, step by step? What causes what? | concept placard, walkthrough |
-| Mathematics | Governing relations, derivation sketch, valid ranges, limiting cases | literals, canvas model, worked question |
-| Conditions | Assumptions, idealisations, where it stops holding | refutation sentences, canvas `assumptions` |
-| Contrasts | Nearest neighbouring concepts that students confuse it with | misconceptions, distractors |
-| Misconceptions | Documented student errors (concept inventories, education research, instructor notes) | misconceptions, distractors, canvas purpose |
-| Application | Where it is used: a lab, a device, a design decision, an exam question type | application placard, example, practical link |
-| Assessment | How exams and vivas ask it (past papers if supplied) | worked question, checks, `examSignal` |
+| Definition | What exactly is it, in the notation and vocabulary *this organisation or course* uses? | definition placard, terms |
+| Purpose | What job problem or decision does it serve? | `canDo`, concept placard opening |
+| Mechanism or rule | How does it work, or what does the organisation's rule say, and why? | concept placard, walkthrough |
+| Quantities | Governing relations, ranges, thresholds, budgets, limiting cases | literals, canvas, worked question |
+| Conditions | Assumptions, idealisations, when the rule stops applying | refutation sentences, `assumptions` |
+| Contrasts | Neighbouring ideas that people confuse with it; two close cases | misconceptions, distractors, contrast scenes |
+| Misconceptions | Documented errors (research, inventories, the org's own review notes) | misconceptions, distractors, tutor seed |
+| Application | Where it shows up in the job or the tool | application placard, example, practice check |
+| Assessment | How exams, desk reviews, agency reviews or vivas test it | worked question, checks, `examSignal` |
 
-## 2. Source order (claim-specific authority)
+## 2. Source order (authority depends on the claim)
 
-1. **The student's own material** (syllabus, slides, notes, experiment sheet, past papers). It
-   sets scope, notation and emphasis. Cite with `origin` + `locator` ("slide 14").
-2. **Standard references**: university textbooks, course notes from established engineering
-   departments (open courseware), standards bodies.
-3. **Official tool and vendor documentation** (MathWorks, device datasheets, application notes),
-   authoritative for tool behaviour, block parameters and device specifications.
-4. **Education research** (concept inventories, misconception studies), authoritative for
-   what students get wrong.
-5. **Encyclopaedias, tutorials, forums**: leads only, never the sole source of a claim.
+1. **The organisation's or learner's own material.** Playbooks, SOPs, case files, recorded
+   reviews, lecture notes, syllabus, experiment sheets, past papers. It sets scope, vocabulary,
+   rules and emphasis. Cite it by its own ids and locators (`EV-2.1`, "slide 14", "p. 3").
+   Origins: `org_playbook`, `org_sop`, `org_case`, `org_recording`, `lecture_notes`, `syllabus`,
+   `student_notes`, `experiment_sheet`, `past_paper`, `teacher`.
+2. **Standard references**: textbooks, university course notes, standards, regulator
+   guidance (`textbook`, `standard`, `regulator`).
+3. **Official tool and vendor documentation**: tool behaviour, parameters and specifications (`vendor_doc`).
+4. **Research**: learning-science and domain studies, concept inventories, misconception
+   studies (`research`).
+5. **Encyclopaedias, tutorials and forums**: leads only, never the sole source of a claim (`curated` at most).
 
-Search-result snippets are not reviewed sources. Open the page you cite. If a source cannot be
-opened, it cannot be cited. Record it in `research.openQuestions` instead.
+Open every page you cite. Snippets are not sources. A source you cannot open goes to
+`research.openQuestions`.
+
+**When organisation material conflicts with external evidence:**
+- An org *rule* (a budget, a template, a review practice) is authoritative for that
+  organisation. Teach it as their rule.
+- An org *factual* claim that external evidence contradicts (a wrong formula, a misread
+  regulation) must not be taught as fact. Record it in `openQuestions` for the domain owner.
+  Teach only what is right, or what both sources agree on.
+- Never override safety, legal or regulatory constraints with an org heuristic.
 
 ## 3. Claim ledger
 
-Every material statement becomes a claim:
-
 ```json
-{"id": "CL-03-4", "kind": "condition", "text": "For 0 <= mu <= 1 the conventional AM envelope never crosses zero.",
- "sourceIds": ["S-2"], "confidence": "high", "check": "derived: envelope = Ac(1+mu cos) >= Ac(1-mu) >= 0"}
+{"id": "CL-4", "kind": "org_rule", "text": "EV-2.1: if you cannot say why your expected move beats the implied move, do not buy premium into the event.",
+ "sourceIds": ["S-1"], "confidence": "high", "check": "Quoted rule from the desk playbook, section 2."}
 ```
 
-- `kind`: `definition` | `fact` | `relation` | `condition` | `idealisation` | `procedure` |
-  `convention` | `misconception_evidence`.
-- `confidence`: `high` (two independent sources or a source plus derivation), `moderate` (one
-  authoritative source), `low` (indirect). **Low-confidence claims may not appear in placards
-  or answer keys.** Resolve them or move them to `openQuestions`.
-- `check`: how you verified it (derivation, recomputation, second source). Recompute every
-  numeric example and worked answer. Write the arithmetic in `check`.
-- Notation conflicts (for example `m` vs `mu`, `Ka` vs `ka`) are a `convention` claim. Use the
-  student's material's notation, else the dominant textbook convention, and say so.
+- `kind`:
+  - `definition`, `fact`, `relation`, `condition`, `idealisation`, `procedure`, `convention`;
+  - `org_rule`: the organisation's binding rule;
+  - `heuristic`: the organisation's rule of thumb;
+  - `illustrative_data`: numbers in a teaching case;
+  - `misconception_evidence`.
+- `confidence`:
+  - `high`: two independent sources, or a source plus a derivation, or a verbatim org rule;
+  - `moderate`: one authoritative source;
+  - `low`: indirect. **Low-confidence claims may not appear in placards, answer keys, canvas
+    expectations or tutor branches.**
+- `check`: how you verified the claim. Recompute every number and write the arithmetic down.
+  For illustrative cases, cite the case file's own consistency check if it has one (for
+  example, a Black–Scholes check script), or recompute.
+- Notation and vocabulary: use the organisation's terms. Record the mapping to standard notation
+  as a `convention` claim.
 
 ## 4. Contradictions
 
-Before calling two sources contradictory, check definitions (peak vs RMS, one-sided vs
-two-sided spectrum), normalisation, units, and idealised vs practical models. Most conflicts are
-apparent. Record real conflicts in `openQuestions` and teach only what both sources agree on,
-or state the condition that separates them.
+Before calling sources contradictory, check:
+
+- definitions (peak vs RMS, gross vs net, concurrent vs average viewers);
+- normalisation, units, time windows and populations;
+- an idealised model vs practice;
+- a rule vs a fact.
+
+Most conflicts turn out to be apparent. Record real ones in `openQuestions`.
 
 ## 5. Misconception mining
 
-1. Search for a concept inventory or misconception study for the topic (search terms:
-   "<topic> misconceptions", "<topic> concept inventory", "students' difficulties with <topic>").
-2. List near-neighbour confusions from the Contrasts branch.
-3. Add predictable formula slips (sign, factor of 2, rad vs Hz, peak vs peak-to-peak).
-4. Tag each one `documented` (with a source) or `inferred` (with your reasoning). Two or three
+1. Look for misconception research for the topic: "<topic> misconceptions", "<topic> concept
+   inventory", "common mistakes <role>", "<bias> decision making".
+2. Mine the organisation's own material. Rules that say "never" or "don't" usually exist because
+   people made that mistake. Recorded reviews and post-mortems are the best evidence.
+3. Add contrasts and predictable slips: sign errors, factors of two, units; for odds, sizing
+   from conviction; for audiences, reading one metric alone.
+4. In odds domains, consider **outcome bias** every time (pedagogy principles §11).
+5. Tag each misconception `documented` (with a source) or `inferred` (with reasoning). Two or three
    strong misconceptions beat a long weak list.
 
 ## 6. Stopping rule
 
-Stop when every branch that applies has high/moderate claims for what the placards, checks
-and canvas need, and more searching would not change the content. Do not research beyond the
-concept boundary. Name exclusions in `research.outOfScope`.
+Stop when every applicable branch has high- or moderate-confidence claims for what the placards,
+checks, canvas and tutor seed need, and further searching would not change the content. Name
+exclusions in `research.outOfScope`.
 
-## 7. Chapter mapping (chapter and topic scope)
+## 7. Scope mapping (chapter, module and topic scope)
 
-- Split the chapter on **one stated dimension** per level (ledger P4 `mece`) with a rationale
-  and named exclusions. Chapter: 2–5 broad concepts; topic: 1 broad concept; each broad concept
-  2–5 concepts.
-- Each concept is one teachable idea (about 8–15 minutes) with its own objective(s).
-- Prerequisites form a DAG. A concept never uses a term before its owning concept is a
-  prerequisite (ledger D3). School-level needs become `externalPrerequisites`.
-- When a practical exists, list its required concepts and confirm the route includes all of
-  their prerequisites.
-- Chapter test blueprint: 10 MCQs; with ≤10 concepts, at least one per concept, the rest on
-  key applications and relationships; >10 concepts, prioritise core ideas and use
-  cross-concept items.
+- Split on **one stated dimension** per level, with a rationale and named exclusions:
+  - chapter: 2–5 groups;
+  - module or topic: 1 group;
+  - each group: 2–5 concepts.
+
+  Groups map to `kiki-pack/v0` modules and to ledger broad concepts.
+- Each concept is one teachable idea, about 8–15 minutes, with its own objective(s).
+- Prerequisites form a DAG. School-level or earlier-role needs become `externalPrerequisites`.
+- When a practical or Do-mode task exists, list its required concepts and include all their prerequisites.
+- Tests: a chapter gets the policy's chapter test (10 MCQs in the student journey). Modules and
+  topics need none unless the policy says so.

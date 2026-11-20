@@ -1,6 +1,6 @@
 ---
 name: kiki-pedagogy-packets
-description: Research a chapter, topic or single concept in depth and author evidence-backed, pedagogically designed Kiki learning packets (English source of truth) that the backend can feed straight into the mixed-language translation, speech and concept-canvas pipelines. Use when asked to "make packets", "research and teach" a chapter/topic/concept, build placards, concept checks, chapter tests, glossaries or canvas widget specs for Kiki. Do not use to translate, synthesize audio, render canvases or publish media; those are downstream pipeline stages.
+description: Turn a body of knowledge (a chapter, an organisation's playbook or SOP, lecture notes, a recorded review, or a single concept) into researched, pedagogically designed KiKi learning packets for any domain, any learner (students or knowledge workers) and any target language. The packets feed the multilingual translation and speech pipeline, the canvas factory (widgets and scene templates), domain packs, lesson ledgers and tutor graphs. Use when asked to build lessons, modules, placards, checks, glossaries, canvas specs or tutor-graph seeds for KiKi, or to "research and teach" a topic. Do not use to translate, synthesize audio, render canvases, run tutor sessions or publish; those are downstream stages.
 ---
 
 # Kiki: pedagogy packets

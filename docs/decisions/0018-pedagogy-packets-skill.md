@@ -41,3 +41,13 @@ glossary and canvas specification that go with it.
 - The authored C-AM-03 ledger cites a MathWorks page for the modulation index and
   overmodulation. That page (read 2026-11-20) covers DSB AM with an offset `k` and does not
   mention either. The worked example packet cites two university lecture decks instead.
+
+## Addendum: generalised for knowledge workers (20 November 2026)
+
+Design-Thinking `45180af` widens KiKi to knowledge workers sold to organisations (laws, odds,
+audiences), in any language, with the organisation's material first. The skill now carries a
+`domain` block (corner, languages, dimension labels, assessment policy, practical, guardrails,
+consumers). Per-corner rules are enforced by the checker. Placards run 1-6. Canvases are a widget
+or a contracts-v0 scene template, with sentence cues and an optional tutor `reflect` link or seed.
+`kiki-pack/v0` concepts are emitted always; the Odia pipeline is projected only for `or` targets.
+Remaining work: [generalisation charter](../handoffs/pedagogy-skill-generalisation.md).

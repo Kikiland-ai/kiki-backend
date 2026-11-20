@@ -1,5 +1,10 @@
 # Session handoff: pedagogy packets skill
 
+> **Update, same day:** after the Design-Thinking knowledge-worker widening (`45180af`) the skill was
+> generalised to any domain, corner and language. The template names and some field names below
+> changed. Read the [generalisation charter](pedagogy-skill-generalisation.md) first; it is the current
+> state and the next owner's work list.
+
 20 November 2026 · branch `feat/pedagogy-packets-skill` (from `main` at `c51b654`) ·
 decision [0018](../decisions/0018-pedagogy-packets-skill.md)
 
@@ -21,11 +26,12 @@ produces that prepared English. The user scoped the runner out for now.
 | `.claude/skills/kiki-pedagogy-packets/SKILL.md` | Canonical skill: workflow, outputs, boundaries |
 | `.claude/skills/kiki-pedagogy-packets/references/pedagogy-principles.md` | Learning-science evidence (verified 2026-11-20) → packet rules, with confidence labels |
 | `.../references/research-protocol.md` | Research branches, source order, claim ledger, misconception mining, chapter mapping |
-| `.../references/packet-contract.md` | `kiki-pedagogy-packet/v1`, `kiki-chapter-plan/v1`, canvas widget spec, projection to `mixed-script-input/v1` |
+| `.../references/domain-corners.md` | Domain block and per-corner (laws, odds, audiences) rules |
+| `.../references/packet-contract.md` | `kiki-pedagogy-packet/v1`, `kiki-chapter-plan/v1`, canvas widget and scene forms, `reflect`, projections to `kiki-pack/v0` and `mixed-script-input/v1` |
 | `.../references/authoring-rules.md` | Placard roles, translation- and audio-safe sentences, glossary, MCQs, canvas design |
 | `.../references/quality-gates.md` | Review checklist and anti-patterns found in earlier content |
 | `.../scripts/check_packet.py` | Standard-library checker; imports the real `validate_input` |
-| `.../templates/C-AM-03.packet.json` | Complete worked example that passes the checker |
+| `.../templates/laws-C-AM-03.packet.json`, `odds-TR-IV-EVENT.packet.json` | Worked examples (ECE in Odia; F&O trainee in Hindi) that pass the checker |
 | `.agents/skills/kiki-pedagogy-packets/SKILL.md` | Codex discovery wrapper pointing to the canonical skill |
 
 ## How it connects downstream
@@ -50,7 +56,7 @@ Run with the backend venv (`python` on the authoring machine was a Microsoft Sto
 
 ```sh
 .venv/Scripts/python.exe -X utf8 -B .claude/skills/kiki-pedagogy-packets/scripts/check_packet.py \
-  .claude/skills/kiki-pedagogy-packets/templates/C-AM-03.packet.json --emit-mixed-inputs <dir>
+  .claude/skills/kiki-pedagogy-packets/templates/*.packet.json --emit <dir>
 ```
 
 - Worked example: PASS, 0 errors, 0 warnings. 4 placards, 16 sentences, 8 checks, 5+4 terms,

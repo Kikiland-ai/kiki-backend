@@ -1,187 +1,183 @@
 # Packet contract
 
-Two documents. Both are UTF-8 JSON. Ids use `[A-Za-z0-9][A-Za-z0-9_.-]{0,79}` (the
-mixed-script pipeline's id rule). Concept ids follow the ledger style (`C-AM-03`); placard ids
-`CARD-<concept-suffix>-<kind>`; sentence ids `<placard-id>.s<n>`.
+There are two documents, both UTF-8 JSON. Ids match `[A-Za-z0-9][A-Za-z0-9_.-]{0,79}` (the
+pipeline id rule), are stable and ASCII. Sentence ids are `<placard-id>.s<n>`.
 
-## `kiki-concept-packet` → downstream map
+## Downstream map
 
-| Packet field | Consumed by | As |
+| Packet field | Consumer | As |
 |---|---|---|
-| `placards[].sentences` + `terms`/`usesTerms` + `research.sources` | mixed-script pipeline | one `mixed-script-input/v1` per placard (projection below) |
-| `placards[].title.en/body` (joined sentences) | kiki-web `learning-case/v1` | `Placard.title.en`, `Placard.body.en` (Odia filled by the pipeline) |
+| `placards`, `terms`/`usesTerms`, `canvas` (scene form) | **kiki-pack/v0** (`05-contracts-v0.md` §1) | `Concept{id,title,goal,placards}`, `Term{id,term,meaning,say}`, `Scene` |
+| `placards[].sentences[].cue` | Cue track (§2) | seeds for `Cue{sentence, scene{state, highlight}}`; the runner adds `t` from TTS timing |
+| `canvas` (widget form) | concept-canvas factory | a trusted analytic widget plus behaviour tests |
+| `canvas` (scene form) | scene templates (§3) | a `candles` / `payoff` / `line` / `flow` / `ece` scene with `states` |
+| `reflect` | tutor graph authoring (§4) | a link to an existing graph, or a seed (problem, insights, misconceptions, hint ladder) |
 | `teaching.*`, `objectives`, `terms`, `learner.*` | kiki-web `lesson-ledger/v2` | `Concept`, `Objective[]`, `Term[]` (same field names) |
-| `visual` | ledger `explanation.modalities.textImage.visual`; canvas `visualBrief` | static image/SVG brief |
-| `canvas` | canvas factory | widget spec → scene + trusted model + behaviour tests |
-| `teaching.checks` + `chapter-plan.chapterTest` | `AssessmentDefinition` | concept (5, 60%) / chapter (10, 80%) |
+| placards (exactly four kinds) | kiki-web `learning-case/v1` | `Placard` (source text; target text added by the pipeline) |
+| placards + terms | backend `mixed-script-input/v1` (Odia only today) | one input per placard |
+| `teaching.checks` | assessments / evidence (§6) | lesson-check evidence on the four dimensions |
 
 ## `kiki-pedagogy-packet/v1` (one per concept)
 
 ```jsonc
 {
   "schema": "kiki-pedagogy-packet/v1",
-  "packetId": "PKT-C-AM-03-1",
+  "packetId": "PKT-TR-IV-EVENT-1",
   "createdAt": "2026-11-20T00:00:00Z",
-  "scope": {
-    "lessonPlanId": "LP-ANALOG-MODULATION", "broadConceptId": "BC-AM-2",
-    "conceptId": "C-AM-03", "order": 3, "canonicalKey": "conventional-am-envelope",
-    "title": "Conventional AM, envelope and modulation index",
-    "subjectProfileId": "electronics", "hasPractical": true
-  },
-  "status": {"review": "draft", "scientific": "pending", "nativeOdia": "pending", "pronunciation": "pending"},
+  "domain": { /* see domain-corners.md */ },
+  "scope": {"planId": "LP-…", "groupId": "MOD-…", "conceptId": "TR-IV-EVENT", "order": 1,
+            "canonicalKey": "iv-before-events", "title": "…", "practiceTaskId": "pre-event-checklist"},
+  "status": {"review": "draft", "domainReview": "pending", "pronunciation": "pending",
+             "languages": {"hi": "machine_draft"}},
 
   "research": {
     "governingQuestion": "…",
-    "sources": [{"id": "S-1", "origin": "textbook|student_notes|syllabus|past_paper|experiment_sheet|teacher|curated",
-                 "tier": 1, "label": "…", "url": "https://…", "locator": "§4.2"}],
-    "claims": [{"id": "CL-…", "kind": "…", "text": "…", "sourceIds": ["S-1"], "confidence": "high|moderate|low", "check": "…"}],
-    "outOfScope": ["…"],
-    "openQuestions": ["…"]
+    "sources": [{"id": "S-1", "origin": "org_playbook", "tier": 1, "label": "…", "url": "https://… (optional)",
+                 "locator": "§2, EV-2.1", "illustrative": false}],
+    "claims": [{"id": "CL-1", "kind": "org_rule", "text": "…", "sourceIds": ["S-1"], "confidence": "high", "check": "…"}],
+    "outOfScope": [], "openQuestions": []
   },
+  "learner": {"prerequisiteIds": [], "externalPrerequisites": [], "troublesome": "…",
+              "misconceptions": [{"id": "M-…", "statement": "…", "correction": "…", "basis": "documented|inferred",
+                                  "sourceIds": [], "reasoning": "…"}]},
+  "objectives": [{"id": "O-…", "statement": "…", "bloom": "apply", "parentId": "O-…", "ownerId": "<conceptId>"}],
 
-  "learner": {
-    "prerequisiteIds": ["C-AM-02"],
-    "externalPrerequisites": [{"title": "…", "level": "school|earlier_course", "canonicalKey": "…"}],
-    "troublesome": "why this concept is hard (element interactivity, counter-intuitive part)",
-    "misconceptions": [{"id": "M-AM-03-1", "statement": "…", "correction": "…",
-                        "basis": "documented|inferred", "sourceIds": [], "reasoning": "…", "faultType": "Wrong assumption"}]
-  },
-
-  "objectives": [{"id": "O-AM-03", "statement": "Interpret … and calculate …", "bloom": "apply",
-                  "parentId": "O-AM-G2", "ownerId": "C-AM-03"}],
-
-  "terms": [{"id": "T-AM-03-2", "term": "envelope", "definition": "…", "aliases": [], "symbol": null, "unit": null,
-             "ownerConceptId": "C-AM-03", "spoken_en": "envelope",
-             "glosses": {"or": "draft"}, "pronunciations": {"or": "draft"}, "review_status": "pending"}],
-  "usesTerms": [ /* same shape, copied from the owning packet; ownerConceptId ≠ this concept */ ],
+  "terms": [{"id": "T-…", "term": "implied volatility", "definition": "…", "aliases": ["IV"], "symbol": null, "unit": null,
+             "ownerConceptId": "<conceptId>", "spoken": "implied volatility",
+             "glosses": {"hi": "draft meaning"}, "pronunciations": {"hi": "draft, in the target script"},
+             "review_status": "pending"}],
+  "usesTerms": [ /* same shape, owned by another concept */ ],
 
   "teaching": {
-    "canDo": "…", "keyIdea": "one sentence",
+    "canDo": "…", "keyIdea": "…", "selfExplainPrompt": "Why …?",
     "explanation": {"text": "60–140 words", "defaultModality": "textImage",
                     "walkthrough": [{"target": "phrase in text", "mark": "sweep|marker|lens|connect|circle",
-                                     "dim": "concept|words|english|lab", "say": "narration about the target"}]},
-    "example": {"title": "…", "scenario": "…", "takeaway": "…", "sourceIds": ["S-1"]},
-    "workedQuestion": {"id": "W-AM-03", "type": "numerical", "marks": 2, "prompt": "…",
-                       "modelAnswer": ["line", "line"], "rubric": [{"criterion": "…", "marks": 1, "objectiveId": "O-AM-03"}],
-                       "examVocabulary": ["T-AM-03-3"]},
-    "selfExplainPrompt": "Why …?",
-    "checks": [{"id": "Q-AM-03-1", "type": "mcq", "dimension": "concept", "prompt": "…",
-                "options": ["…"], "answer": "…", "distractorRationale": {"<option>": "M-…|error: sign slip"},
-                "explanation": "why right + why the tempting wrong option is wrong",
-                "objectiveIds": ["O-AM-03"], "difficulty": 1, "claimIds": ["CL-…"]}],
-    "examSignal": {"basis": "none", "askedIn": 0, "outOf": 0, "note": "No past papers supplied."},
+                                     "dim": "concept|words|english|lab", "say": "…"}]},
+    "example": {"title": "…", "scenario": "…", "takeaway": "…", "sourceIds": ["S-2"]},
+    "workedQuestion": {"id": "W-…", "type": "numerical", "marks": 2, "prompt": "…", "modelAnswer": ["…"],
+                       "rubric": [{"criterion": "…", "marks": 1, "objectiveId": "O-…"}], "examVocabulary": ["T-…"]},
+    "checks": [{"id": "Q-…", "type": "mcq", "dimension": "concept",
+                "evaluates": "fact|calculation|procedure|process|diagnosis|judgement|recall",
+                "prompt": "…", "options": ["…"], "answer": "…",
+                "distractorRationale": {"<option>": "M-…|error: …"}, "explanation": "…",
+                "objectiveIds": ["O-…"], "difficulty": 1, "claimIds": ["CL-…"]}],
+    "examSignal": {"basis": "none", "askedIn": 0, "outOf": 0, "note": "…"},
     "estMinutes": 12
   },
 
-  "placards": [{
-    "id": "CARD-AM-03-definition", "kind": "definition",
-    "title": {"en": "Definition"},
-    "sentences": [{"id": "CARD-AM-03-definition.s1", "english": "…",
-                   "term_ids": ["T-AM-03-1"], "literals": [{"text": "mu", "spoken": "mu"}],
-                   "claimIds": ["CL-…"], "refutesMisconceptionIds": []}],
-    "visualRef": "explanation", "canvasState": {"mu": 0.5}
-  }],
+  "placards": [{"id": "CARD-…-definition", "kind": "definition|concept|example|application|recap",
+                "title": {"en": "…"},
+                "sentences": [{"id": "CARD-…-definition.s1", "english": "source-language sentence",
+                               "term_ids": ["T-…"], "literals": [{"text": "…", "spoken": "…"}],
+                               "claimIds": ["CL-…"], "refutesMisconceptionIds": [],
+                               "cue": {"state": "after", "highlight": ["leg-24200ce"]}}],
+                "visualRef": "explanation"}],
 
-  "visual": {"kind": "waveform", "description": "what to draw", "alt": "…", "sourceIds": ["S-1"]},
-  "canvas": { /* widget spec below, or null */ },
+  "visual": {"kind": "…", "description": "what to draw", "alt": "…", "sourceIds": ["S-1"]},
+  "canvas": { /* widget or scene form, or null */ },
   "canvasNullReason": "required when canvas is null",
-  "handoff": {"audioUnit": "placard", "speechNotes": ["say 'mu' as 'mu', not 'micro'"]}
+  "reflect": null,      // or {"graphRef": "trading-fno/bad-call-iv-crush"} or {"seed": {…}}
+  "handoff": {"speechNotes": ["…"]}
 }
 ```
 
-Rules the checker enforces: exactly four placards in the order definition, concept, application,
-recap; 1–10 sentences each; sentence `term_ids` equal **exactly** the glossary terms that occur
-in the sentence (case-sensitive, whole-word, same rule as `pipeline.py`); each literal is a
-substring of its sentence; all claim/source/term/misconception/objective references resolve.
+- The field is named `english` for compatibility, but it holds the sentence in
+  `domain.languages.source`. The sentence lints assume a Latin-script source.
+- **Placards.**
+  - 1–6 per concept; at least one `concept` placard.
+  - At most one `definition` (first, if present) and one `recap` (last, if present).
+  - When `consumers` includes `learning-case/v1`, exactly `definition, concept, application, recap`.
+  - Sentences per placard: 1–10.
+- `term_ids` equal **exactly** the glossary terms whose text occurs in the sentence
+  (case-sensitive, whole-word: the same rule as `pipeline.py`).
+- Each term has a draft gloss for **every** target language. Pronunciations are required for
+  `or` (the pipeline needs them) and recommended for the other targets.
 
-## Canvas widget spec (`canvas`)
-
-A canvas is a **small controllable widget**: 1–3 controls, a trusted analytic model, readouts
-and views, bound to placards. The packet describes it declaratively. The factory implements it
-as reviewed code and pins conformance cases. Existing CAM scenes (`cam-interactive-scene/v1`)
-are pinned to their concept and model hash, so a new topic is `kind: "new"`.
+## Canvas, widget form (a controllable concept widget)
 
 ```jsonc
-{
-  "artifactId": "CANVAS-C-AM-03",
-  "status": "proposed",
-  "reusesPinnedScene": "C-AM-03",          // or null for new topics
-  "kind": "am",                              // existing scene kind, or "new"
-  "interaction": "parameter_sweep",          // ledger Interactive kinds
-  "purpose": {"objectiveIds": ["O-AM-03"], "misconceptionIds": ["M-AM-03-1"],
-              "insight": "what the student should notice by moving the control"},
-  "controls": [{"name": "mu", "label": "Modulation index", "min": 0, "max": 1.5, "step": 0.1, "default": 0.5, "unit": ""}],
-  "model": {
-    "assumptions": ["ideal single-tone message", "normalised carrier amplitude Ac = 1"],
-    "equations": [{"text": "s(t)=Ac[1+mu*cos(2*pi*fm*t)]cos(2*pi*fc*t)", "spoken": "…"}],
-    "outputs": [{"name": "envMin", "label": "Minimum envelope", "unit": "normalized", "formula": "1-mu", "decimals": 2}],
-    "views": [{"kind": "trace|spectrum|flow|table|phasor", "description": "…"}]
-  },
-  "behaviorCases": [{"inputs": {"mu": 0.5}, "expect": {"envMin": 0.5}, "tolerance": 0.001,
-                     "observation": "envelope stays above zero"},
-                    {"inputs": {"mu": 1.2}, "expect": {"envMin": -0.2}, "tolerance": 0.001,
-                     "observation": "envelope crosses zero", "showsMisconception": true}],
-  "placardStates": [{"placardId": "CARD-AM-03-concept", "controls": {"mu": 1.2}, "cue": "watch the envelope cross zero"}],
-  "mustShow": ["…"], "mustNotImply": ["…"],
-  "claim": "ideal_teaching_model",
-  "alt": "text alternative for the whole widget"
-}
+{"form": "widget", "artifactId": "CANVAS-…", "status": "proposed", "reusesPinnedScene": "C-AM-03" /* or null */,
+ "kind": "am" /* pinned scene kind or "new" */, "interaction": "parameter_sweep|compare_toggle|step_through|label_parts|sort_steps",
+ "purpose": {"objectiveIds": [], "misconceptionIds": [], "insight": "what the learner should notice"},
+ "controls": [{"name": "mu", "label": "…", "min": 0, "max": 1.5, "step": 0.1, "default": 0.5, "unit": ""}],
+ "model": {"assumptions": [], "equations": [{"text": "…", "spoken": "…"}],
+           "outputs": [{"name": "envMin", "label": "…", "unit": "normalized", "formula": "1-mu", "decimals": 2}],
+           "views": [{"kind": "trace|table|spectrum|flow|phasor", "description": "…"}]},
+ "behaviorCases": [{"inputs": {"mu": 1.2}, "expect": {"envMin": -0.2}, "tolerance": 1e-6, "observation": "…", "showsMisconception": true}],
+ "placardStates": [{"placardId": "…", "controls": {"mu": 1.2}, "cue": "…"}],
+ "mustShow": [], "mustNotImply": [], "claim": "ideal_teaching_model", "alt": "…"}
 ```
 
-- Controls: unique `[a-zA-Z][a-zA-Z0-9]*` names, `min ≤ default ≤ max`, `step > 0`; units from
-  `"" | normalized | Hz | degree | V | s | rad` (the current scene contract allows only the first four;
-  others require a factory contract change, and the checker warns).
-- Formulas use the ledger grammar: numbers, input names, earlier output names,
-  `+ - * / ^ ( )`, `exp log sqrt abs min max pi`, plus `sin cos tan` (canvas only; the ledger
-  `parameter_sweep` grammar has no trigonometry, so the checker warns).
-- 3–7 behaviour cases, including the default and at least one case that makes the
-  misconception fail. The checker evaluates every formula against them.
+- 1–3 controls. Units are `"" | normalized | Hz | degree` for the current scene contract; other
+  units raise a warning.
+- Formulas use the ledger grammar plus `sin`, `cos` and `tan`. 3–7 behaviour cases, which the
+  checker evaluates; at least one has `showsMisconception: true`.
+- Sentence cues set control values: `"cue": {"state": {"mu": 1.2}}`.
+
+## Canvas, scene form (a deterministic template from contracts v0 §3)
+
+```jsonc
+{"form": "scene", "purpose": {…}, "illustrative": true,
+ "scene": {"id": "tr-payoff", "template": "payoff",
+           "params": {"legs": [{"id": "leg-24200ce", "type": "call", "side": "long", "strike": 24200, "premium": 90.25, "lots": 4}],
+                      "lotSize": 75, "spot": 24040, "range": [23600, 24600],
+                      "iv": {"before": 0.175, "after": 0.11}, "daysToExpiry": {"before": 3, "after": 2}},
+           "states": {"before": {"values": {"ivPhase": 0}}, "after": {"values": {"ivPhase": 1}}}},
+ "mustShow": [], "mustNotImply": [], "claim": "illustrative_case|ideal_teaching_model", "alt": "…"}
+```
+
+- Templates: `candles`, `payoff`, `line`, `flow` and `ece`. The checker validates their parameters
+  against contracts v0. A sentence `cue.state` must name one of `scene.states`, and `highlight`
+  ids must exist in the scene.
+- `illustrative: true` is required when the numbers are invented for teaching. The UI must label
+  it ("Illustrative · not advice").
+
+## `reflect` (optional tutor-mode handoff)
+
+Either `{"graphRef": "<packId>/<graphId>"}` for an existing `kiki-tutor-graph/v0`, or a seed:
+
+```jsonc
+{"seed": {"problem": "Why was this a bad call?", "caseRef": "S-2",
+          "metrics": [{"id": "sentiment", "label": "Market sentiment", "dim": "concept"}],
+          "insights": [{"id": "vol-aware", "desc": "…", "metric": "sentiment"}],
+          "misconceptionIds": ["M-…"],
+          "hintLadder": [{"rung": "question", "say": "…"}, {"rung": "nudge", "say": "…"},
+                         {"rung": "worked_step", "say": "…"}, {"rung": "answer", "say": "…"}]}}
+```
+
+A graph author turns the seed into 8–12 nodes. The seed keeps the graph on the same model,
+misconceptions and rules as the lesson.
 
 ## `kiki-chapter-plan/v1` (one per request)
 
 ```jsonc
-{
-  "schema": "kiki-chapter-plan/v1",
-  "lessonPlanId": "LP-…", "scope": "chapter|topic|concept", "title": "…",
-  "governingQuestion": "…", "canDo": "…",
-  "request": {"kind": "syllabus|chapter_name|question|material", "text": "…", "sourceIds": ["S-1"]},
-  "sources": [ /* same shape as packet sources */ ],
-  "mece": {"dimension": "…", "rationale": "…", "outOfScope": ["…"]},
-  "objectives": [ /* apex (parentId null) + one per broad concept */ ],
-  "broadConcepts": [{"id": "BC-…", "order": 1, "title": "…", "governingQuestion": "…", "objectiveId": "O-…",
-                     "mece": {"dimension": "…", "rationale": "…", "outOfScope": []}, "conceptIds": ["C-…"]}],
-  "concepts": [{"id": "C-…", "title": "…", "canonicalKey": "…", "broadConceptId": "BC-…",
-                "prerequisiteIds": [], "requiredForPractical": false, "estMinutes": 12}],
-  "route": ["C-…"],
-  "practical": {"id": "P-…", "title": "…", "requiredConceptIds": ["C-…"]},   // or null
-  "chapterTest": [ /* exactly 10 mcq CheckQuestions, each with conceptIds */ ]
-}
+{"schema": "kiki-chapter-plan/v1", "planId": "LP-…", "domain": {…}, "scope": "chapter|module|topic|concept",
+ "title": "…", "governingQuestion": "…", "canDo": "…",
+ "request": {"kind": "syllabus|chapter_name|question|material|playbook", "text": "…", "sourceIds": []},
+ "sources": [], "mece": {"dimension": "…", "rationale": "…", "outOfScope": []},
+ "objectives": [], "groups": [{"id": "MOD-…", "order": 1, "title": "…", "governingQuestion": "…", "objectiveId": "O-…",
+                               "mece": {…}, "conceptIds": []}],
+ "concepts": [{"id": "…", "title": "…", "canonicalKey": "…", "groupId": "MOD-…", "prerequisiteIds": [],
+               "requiredForPractical": false, "estMinutes": 12}],
+ "route": [], "practical": null, "chapterTest": []}
 ```
 
-## Projection to `mixed-script-input/v1` (what a runner submits)
+Shapes:
 
-For each placard:
+- chapter: 2–5 groups;
+- module or topic: 1 group;
+- concept: 1 group with 1 concept.
 
-```json
-{
-  "schema": "mixed-script-input/v1",
-  "id": "<placard id>",
-  "title": "<scope.title> — <placard title.en>",
-  "source": {"kind": "adapted_reference", "review_status": "pending",
-             "references": [{"title": "<source label>", "url": "<https url>"}]},
-  "mix": {"support_language": "or", "script": "Odia", "level": "odia-led-english-terms"},
-  "glossary": [{"id": "<term id>", "english": "<term>", "meaning_or": "<glosses.or>",
-                "pronunciation_or": "<pronunciations.or>", "spoken_en": "<spoken_en>", "review_status": "pending"}],
-  "sentences": [{"id": "…", "english": "…", "term_ids": ["…"], "literals": [{"text": "…", "spoken": "…"}]}]
-}
-```
+Each group has 2–5 concepts (exactly 1 at concept scope). `chapterTest` is required only at
+chapter scope when the policy defines one (10 MCQs in the student journey).
 
-- `references` are the HTTPS sources cited by that placard's claims. If none has a URL (for
-  example only student notes), the projection fails and the checker reports it. Notes-only
-  packets need the runner to attach a document reference, which is an open contract gap.
-- `glossary` is the union of `terms` and `usesTerms` that occur in the placard. A term whose
-  English text contains another term (for example "modulation index" ⊃ "modulation") is
-  allowed. Each counts by its own whole-word occurrences, which is why `term_ids` must list
-  both.
-- The pipeline currently runs one fixed Odia mix level. The student proficiency pair
-  is applied by the runner/job, not the packet.
+## Projections the checker emits (`--emit DIR`)
+
+- `<conceptId>.pack-concept.json`: `{concept, terms, scenes}` in `kiki-pack/v0` shape. Placard
+  text is the source-language sentences joined, with each term occurrence replaced by
+  `[[term-id]]` (longest match first). Term `meaning` holds the source definition plus the
+  target glosses, and `say` holds the target pronunciations.
+- `<placard-id>.mixed-input.json` (only when `mixed-script-input/v1` is a consumer and `or` is
+  a target): the backend pipeline input. The checker runs the real `validate_input` on it.
+  The pipeline requires an HTTPS reference, so notes-only packets fail here until the contract
+  grows a document-reference form.

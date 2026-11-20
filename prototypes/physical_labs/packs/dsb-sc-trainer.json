@@ -1,0 +1,1220 @@
+{
+  "schema_version": "physical-lab-pack/v1",
+  "id": "dsb-sc-trainer",
+  "version": "1.2.0",
+  "title": "DSB-SC balanced modulator and synchronous detector",
+  "aim": {
+    "en": "Prepare to connect, observe and explain DSB-SC generation and coherent recovery on a physical trainer.",
+    "or": "ପ୍ରକୃତ trainer ରେ DSB-SC generation ଓ coherent recovery ପାଇଁ ପ୍ରସ୍ତୁତ ହୁଅନ୍ତୁ।"
+  },
+  "curriculum": {
+    "subject": "Analog Communication",
+    "course_reference": "ECE-319",
+    "experiment": "3",
+    "assignment": "Confirmed prescribed experiment; semester mapping supplied by the college catalogue"
+  },
+  "equipment": {
+    "id": "anits-1496-schematic-v1",
+    "label": "Manual-based IC 1496 trainer reconstruction",
+    "geometry": "Reference-informed PCB trainer with cream enclosure, labelled sockets and physical components; not an exact manufacturer replica",
+    "reference": "ANITS experiment 3; no manufacturer model specified"
+  },
+  "sources": [
+    {
+      "id": "anits-ece319-exp3",
+      "url": "https://ece.anits.edu.in/labmanuals/AC%20%26%20DC%20LAB%20MANUAL%20%5BR-19%5D.pdf",
+      "locator": "Experiment 3: Balanced modulator and synchronous detector; circuit diagrams and procedure",
+      "used_for": "Experiment identity, IC 1496, apparatus, 1 kHz AF, 82.5 kHz RF, null adjustment and synchronous detection"
+    },
+    {
+      "id": "visual-1",
+      "url": "https://www.sslabindia.com/aclabtest.html",
+      "locator": "SS Labs AC-07: PCB, enclosure, sockets, ICs and potentiometers",
+      "used_for": "Visual reference only: enclosure, PCB, component forms and labels; numerical procedure remains ANITS-based"
+    },
+    {
+      "id": "visual-2",
+      "url": "https://biet.ac.in/ece-facilities-assets.php",
+      "locator": "BIET laboratory: Future Tech balanced modulator and synchronous detector",
+      "used_for": "Visual reference only: enclosure, PCB, component forms and labels; numerical procedure remains ANITS-based"
+    }
+  ],
+  "review": {
+    "technical": "pending_instructor_review",
+    "odia": "machine_draft_pending_native_review",
+    "geometry": "reference_informed_reconstruction",
+    "release": "development_testing"
+  },
+  "adapter": "dsb-sc-ideal/v1",
+  "asset": "dsb-sc-trainer-v3.gltf",
+  "parts": [
+    {
+      "id": "trainer.body",
+      "label": "IC 1496 training board",
+      "kind": "body",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "size": [
+        1.6,
+        0.16,
+        1.02
+      ],
+      "description": {
+        "en": "A schematic reconstruction of the modulator and receiver, not a manufacturer panel replica.",
+        "or": "ଏହା modulator ଓ receiver ର ଶିକ୍ଷଣ ମଡେଲ୍।"
+      }
+    },
+    {
+      "id": "source.message",
+      "label": "Message output",
+      "kind": "output",
+      "position": [
+        -0.14,
+        0.128,
+        0.3
+      ],
+      "size": [
+        0.04,
+        0.027,
+        0.04
+      ],
+      "description": {
+        "en": "Audio-frequency message source.",
+        "or": "ଏହା message signal ର ଉତ୍ସ।"
+      }
+    },
+    {
+      "id": "source.carrier",
+      "label": "Carrier output",
+      "kind": "output",
+      "position": [
+        0.65,
+        0.128,
+        0.3
+      ],
+      "size": [
+        0.04,
+        0.027,
+        0.04
+      ],
+      "description": {
+        "en": "Carrier source shared with the synchronous receiver.",
+        "or": "ଏହି carrier କୁ modulator ଓ receiver ରେ ବ୍ୟବହାର କରାଯାଏ।"
+      }
+    },
+    {
+      "id": "modulator.message",
+      "label": "Message input",
+      "kind": "input",
+      "position": [
+        -0.67,
+        0.128,
+        -0.16
+      ],
+      "size": [
+        0.04,
+        0.027,
+        0.04
+      ],
+      "description": {
+        "en": "Apply the message to this input.",
+        "or": "ଏଠାରେ message signal ଯୋଡ଼ନ୍ତୁ।"
+      }
+    },
+    {
+      "id": "modulator.carrier",
+      "label": "Carrier input",
+      "kind": "input",
+      "position": [
+        -0.67,
+        0.128,
+        0.035
+      ],
+      "size": [
+        0.04,
+        0.027,
+        0.04
+      ],
+      "description": {
+        "en": "Apply the carrier to this input.",
+        "or": "ଏଠାରେ carrier signal ଯୋଡ଼ନ୍ତୁ।"
+      }
+    },
+    {
+      "id": "modulator.output",
+      "label": "DSB-SC output",
+      "kind": "output",
+      "position": [
+        -0.1,
+        0.128,
+        -0.16
+      ],
+      "size": [
+        0.04,
+        0.027,
+        0.04
+      ],
+      "description": {
+        "en": "Balanced-modulator output; inspect suppression after null adjustment.",
+        "or": "null adjustment ପରେ ଏଠାରେ DSB-SC signal ଦେଖନ୍ତୁ।"
+      }
+    },
+    {
+      "id": "detector.input",
+      "label": "Detector signal input",
+      "kind": "input",
+      "position": [
+        0.105,
+        0.128,
+        -0.16
+      ],
+      "size": [
+        0.04,
+        0.027,
+        0.04
+      ],
+      "description": {
+        "en": "Input for the transmitted DSB-SC signal.",
+        "or": "ଏଠାରେ DSB-SC signal ଯୋଡ଼ନ୍ତୁ।"
+      }
+    },
+    {
+      "id": "detector.reference",
+      "label": "Detector reference input",
+      "kind": "input",
+      "position": [
+        0.105,
+        0.128,
+        0.035
+      ],
+      "size": [
+        0.04,
+        0.027,
+        0.04
+      ],
+      "description": {
+        "en": "A coherent carrier reference is required for recovery.",
+        "or": "message ପାଇବା ପାଇଁ coherent carrier reference ଦରକାର।"
+      }
+    },
+    {
+      "id": "detector.output",
+      "label": "Recovered output",
+      "kind": "output",
+      "position": [
+        0.65,
+        0.128,
+        -0.16
+      ],
+      "size": [
+        0.04,
+        0.027,
+        0.04
+      ],
+      "description": {
+        "en": "Receiver output after the low-pass section.",
+        "or": "low-pass filter ପରେ ମିଳୁଥିବା signal।"
+      }
+    },
+    {
+      "id": "scope.input",
+      "label": "CRO input",
+      "kind": "input",
+      "position": [
+        1.07,
+        0.2,
+        0.32
+      ],
+      "size": [
+        0.055,
+        0.05,
+        0.055
+      ],
+      "description": {
+        "en": "Probe the specified signal output and follow the approved common-reference arrangement.",
+        "or": "ନିର୍ଦ୍ଦିଷ୍ଟ signal output ରେ probe ଯୋଡ଼ନ୍ତୁ।"
+      }
+    },
+    {
+      "id": "trainer.power",
+      "label": "Trainer power",
+      "kind": "control",
+      "position": [
+        0.67,
+        0.13,
+        -0.405
+      ],
+      "size": [
+        0.045,
+        0.018,
+        0.065
+      ],
+      "description": {
+        "en": "Virtual power switch; physical power checks remain with the instructor.",
+        "or": "ଏହା virtual power switch। ପ୍ରକୃତ power check ଶିକ୍ଷକ କରିବେ।"
+      }
+    },
+    {
+      "id": "source.message_frequency",
+      "label": "Message frequency",
+      "kind": "control",
+      "position": [
+        -0.53,
+        0.14,
+        0.3
+      ],
+      "size": [
+        0.082,
+        0.06,
+        0.082
+      ],
+      "description": {
+        "en": "Set the message source to 1000 Hz.",
+        "or": "message frequency କୁ 1000 Hz କରନ୍ତୁ।"
+      }
+    },
+    {
+      "id": "source.carrier_frequency",
+      "label": "Carrier frequency",
+      "kind": "control",
+      "position": [
+        0.25,
+        0.14,
+        0.3
+      ],
+      "size": [
+        0.082,
+        0.06,
+        0.082
+      ],
+      "description": {
+        "en": "Set the carrier source to 82500 Hz.",
+        "or": "carrier frequency କୁ 82500 Hz କରନ୍ତୁ।"
+      }
+    },
+    {
+      "id": "modulator.null",
+      "label": "Carrier null adjustment",
+      "kind": "control",
+      "position": [
+        -0.29,
+        0.14,
+        0.045
+      ],
+      "size": [
+        0.083,
+        0.06,
+        0.083
+      ],
+      "description": {
+        "en": "Reduce the residual carrier; the virtual dial uses a normalised coefficient.",
+        "or": "ଅବଶିଷ୍ଟ carrier କମାନ୍ତୁ।"
+      }
+    },
+    {
+      "id": "scope.trigger",
+      "label": "CRO trigger",
+      "kind": "control",
+      "position": [
+        1.4,
+        0.2,
+        0.32
+      ],
+      "size": [
+        0.075,
+        0.055,
+        0.075
+      ],
+      "description": {
+        "en": "Stabilise the display; this does not alter the source signal.",
+        "or": "display ସ୍ଥିର କରନ୍ତୁ। ଏହା source signal ବଦଳାଏ ନାହିଁ।"
+      }
+    },
+    {
+      "id": "scope.body",
+      "label": "CRO",
+      "kind": "body",
+      "position": [
+        1.235,
+        0.04,
+        -0.01
+      ],
+      "size": [
+        0.68,
+        0.25,
+        0.91
+      ],
+      "description": {
+        "en": "Measurement instrument supporting the trainer experiment.",
+        "or": "trainer experiment ପାଇଁ ମାପ ଯନ୍ତ୍ର।"
+      }
+    },
+    {
+      "id": "scope.display",
+      "label": "CRO display",
+      "kind": "display",
+      "position": [
+        1.16,
+        0.174,
+        -0.11
+      ],
+      "size": [
+        0.41,
+        0.012,
+        0.47
+      ],
+      "description": {
+        "en": "Compare the message, modulated and recovered waveforms.",
+        "or": "message, modulated ଓ recovered waveform ତୁଳନା କରନ୍ତୁ।"
+      }
+    }
+  ],
+  "orientation": [
+    "source.message",
+    "source.carrier",
+    "modulator.message",
+    "modulator.carrier",
+    "modulator.output",
+    "detector.input",
+    "detector.reference",
+    "detector.output",
+    "modulator.null",
+    "scope.display"
+  ],
+  "concepts": [
+    {
+      "id": "signals",
+      "title": "Reading signals",
+      "depends_on": [],
+      "targets": [
+        "source.message_frequency",
+        "source.carrier_frequency",
+        "scope.display"
+      ],
+      "explanation": {
+        "en": "Frequency counts cycles per second. Period T = 1/f. Peak amplitude and peak-to-peak amplitude are different measurements. CRO settings change the display, not the source.",
+        "or": "Frequency ହେଉଛି ପ୍ରତି second ରେ cycle ସଂଖ୍ୟା। T = 1/f। Peak ଓ peak-to-peak amplitude ଅଲଗା। CRO setting source signal ବଦଳାଏ ନାହିଁ।"
+      },
+      "questions": [
+        {
+          "id": "signals-1",
+          "prompt": "What is the unit of frequency?",
+          "options": {
+            "a": "V",
+            "b": "Hz",
+            "c": "s",
+            "d": "ohm"
+          },
+          "correct": "b",
+          "explanation": "Frequency is measured in Hz."
+        },
+        {
+          "id": "signals-2",
+          "prompt": "What is the period of a 1 kHz signal?",
+          "options": {
+            "a": "1 ms",
+            "b": "1 s",
+            "c": "1000 s",
+            "d": "82.5 ms"
+          },
+          "correct": "a",
+          "explanation": "T = 1/1000 s = 1 ms."
+        },
+        {
+          "id": "signals-3",
+          "prompt": "A centred sine has 1 V peak. What is its peak-to-peak amplitude?",
+          "options": {
+            "a": "0.5 V",
+            "b": "1 V",
+            "c": "2 V",
+            "d": "4 V"
+          },
+          "correct": "c",
+          "explanation": "Peak-to-peak spans the positive and negative peaks."
+        },
+        {
+          "id": "signals-4",
+          "prompt": "Changing CRO time/div changes what?",
+          "options": {
+            "a": "Source frequency",
+            "b": "Circuit supply",
+            "c": "Carrier amplitude",
+            "d": "Displayed time scale"
+          },
+          "correct": "d",
+          "explanation": "The display scale changes; the source remains the same."
+        },
+        {
+          "id": "signals-5",
+          "prompt": "Which signal has more cycles per second?",
+          "options": {
+            "a": "82.5 kHz",
+            "b": "1 kHz",
+            "c": "Both equal",
+            "d": "Neither has cycles"
+          },
+          "correct": "a",
+          "explanation": "82.5 kHz is greater than 1 kHz."
+        }
+      ]
+    },
+    {
+      "id": "roles",
+      "title": "Message and carrier",
+      "depends_on": [
+        "signals"
+      ],
+      "targets": [
+        "source.message",
+        "source.carrier",
+        "modulator.message",
+        "modulator.carrier"
+      ],
+      "explanation": {
+        "en": "The message carries the information. The carrier supplies a higher-frequency reference for modulation. Trace each source to its designated input.",
+        "or": "Message ରେ ସୂଚନା ଥାଏ। Carrier ର frequency ଅଧିକ। ପ୍ରତ୍ୟେକ source କୁ ଠିକ input ସହ ଯୋଡ଼ନ୍ତୁ।"
+      },
+      "questions": [
+        {
+          "id": "roles-1",
+          "prompt": "Which signal represents the information?",
+          "options": {
+            "a": "Supply",
+            "b": "CRO trigger",
+            "c": "Message",
+            "d": "Patch cord"
+          },
+          "correct": "c",
+          "explanation": "The message is the information-bearing signal."
+        },
+        {
+          "id": "roles-2",
+          "prompt": "Where should the AF output go?",
+          "options": {
+            "a": "Carrier input",
+            "b": "Message input",
+            "c": "Power switch",
+            "d": "CRO trigger"
+          },
+          "correct": "b",
+          "explanation": "AF supplies the low-frequency message."
+        },
+        {
+          "id": "roles-3",
+          "prompt": "Which source supplies the carrier in this pack?",
+          "options": {
+            "a": "1 kHz AF",
+            "b": "Power supply",
+            "c": "Ground",
+            "d": "82.5 kHz RF"
+          },
+          "correct": "d",
+          "explanation": "The manual specifies an 82.5 kHz RF source."
+        },
+        {
+          "id": "roles-4",
+          "prompt": "What does a patch cord do here?",
+          "options": {
+            "a": "Routes a signal between terminals",
+            "b": "Generates the carrier",
+            "c": "Filters the message",
+            "d": "Measures frequency"
+          },
+          "correct": "a",
+          "explanation": "Patch cords establish the signal path."
+        },
+        {
+          "id": "roles-5",
+          "prompt": "Removing the message should remove which ideal output?",
+          "options": {
+            "a": "Power",
+            "b": "CRO grid",
+            "c": "Information-bearing DSB-SC sidebands",
+            "d": "RF source itself"
+          },
+          "correct": "c",
+          "explanation": "Without a message, the ideal balanced product is zero."
+        }
+      ]
+    },
+    {
+      "id": "dsbsc",
+      "title": "Balanced modulation",
+      "depends_on": [
+        "roles"
+      ],
+      "targets": [
+        "modulator.output",
+        "modulator.null"
+      ],
+      "explanation": {
+        "en": "A balanced modulator multiplies message and carrier. For sinusoidal inputs the product has sidebands at fc - fm and fc + fm. Null adjustment reduces carrier leakage; a time trace alone does not prove complete suppression.",
+        "or": "Balanced modulator message ଓ carrier କୁ multiply କରେ। Sideband frequency ହେଉଛି fc - fm ଓ fc + fm। Null adjustment carrier leakage କମାଏ।"
+      },
+      "questions": [
+        {
+          "id": "dsbsc-1",
+          "prompt": "What does SC stand for?",
+          "options": {
+            "a": "Signal current",
+            "b": "Suppressed carrier",
+            "c": "Source control",
+            "d": "Sine correction"
+          },
+          "correct": "b",
+          "explanation": "SC denotes suppressed carrier."
+        },
+        {
+          "id": "dsbsc-2",
+          "prompt": "Which operation models ideal DSB-SC generation?",
+          "options": {
+            "a": "Addition only",
+            "b": "Differentiation",
+            "c": "Multiplication",
+            "d": "Rectification only"
+          },
+          "correct": "c",
+          "explanation": "Multiplication shifts the message to sidebands."
+        },
+        {
+          "id": "dsbsc-3",
+          "prompt": "For fc = 82.5 kHz and fm = 1 kHz, where are the sidebands?",
+          "options": {
+            "a": "81.5 and 83.5 kHz",
+            "b": "1 and 82.5 kHz",
+            "c": "82.5 and 165 kHz",
+            "d": "0 and 1 kHz"
+          },
+          "correct": "a",
+          "explanation": "Subtract and add the message frequency to the carrier frequency."
+        },
+        {
+          "id": "dsbsc-4",
+          "prompt": "What is null adjustment used for?",
+          "options": {
+            "a": "Changing message frequency",
+            "b": "Setting supply voltage",
+            "c": "Changing CRO timebase",
+            "d": "Reducing residual carrier"
+          },
+          "correct": "d",
+          "explanation": "Balancing reduces the residual carrier term."
+        },
+        {
+          "id": "dsbsc-5",
+          "prompt": "Does an attractive CRO trace prove zero carrier leakage?",
+          "options": {
+            "a": "Always",
+            "b": "No; appropriate spectral or other validated evidence is needed",
+            "c": "Only with a larger screen",
+            "d": "Only when zoomed"
+          },
+          "correct": "b",
+          "explanation": "A time trace alone does not establish complete carrier suppression."
+        }
+      ]
+    },
+    {
+      "id": "recovery",
+      "title": "Synchronous recovery",
+      "depends_on": [
+        "dsbsc"
+      ],
+      "targets": [
+        "detector.input",
+        "detector.reference",
+        "detector.output"
+      ],
+      "explanation": {
+        "en": "A synchronous detector multiplies DSB-SC by a coherent reference. Low-pass filtering retains the message term. With unit carrier amplitudes and unity recovery gain, the ideal output peak is half the input message peak.",
+        "or": "Synchronous detector ପାଇଁ coherent reference ଦରକାର। Low-pass filter message ଅଂଶ ରଖେ। ଏହି ideal model ରେ output peak, message peak ର ଅଧା।"
+      },
+      "questions": [
+        {
+          "id": "recovery-1",
+          "prompt": "What extra input does synchronous detection need?",
+          "options": {
+            "a": "A screen image",
+            "b": "Another supply only",
+            "c": "Coherent carrier reference",
+            "d": "Random noise"
+          },
+          "correct": "c",
+          "explanation": "The receiver needs a coherent reference."
+        },
+        {
+          "id": "recovery-2",
+          "prompt": "Which section removes the high-frequency product?",
+          "options": {
+            "a": "Low-pass filter",
+            "b": "Patch cord",
+            "c": "Trigger",
+            "d": "Power switch"
+          },
+          "correct": "a",
+          "explanation": "Low-pass filtering retains baseband."
+        },
+        {
+          "id": "recovery-3",
+          "prompt": "Which receiver output frequency is expected here?",
+          "options": {
+            "a": "82.5 kHz",
+            "b": "165 kHz",
+            "c": "83.5 kHz",
+            "d": "1 kHz"
+          },
+          "correct": "d",
+          "explanation": "Recovery returns the message frequency."
+        },
+        {
+          "id": "recovery-4",
+          "prompt": "Can a simple envelope detector generally recover DSB-SC correctly?",
+          "options": {
+            "a": "Yes for every message",
+            "b": "No; coherent detection is required in this experiment",
+            "c": "Only by zooming",
+            "d": "Only with a new cord"
+          },
+          "correct": "b",
+          "explanation": "DSB-SC lacks the conventional AM carrier-supported envelope."
+        },
+        {
+          "id": "recovery-5",
+          "prompt": "For a 1 V peak message in this ideal unity-gain receiver, what is the recovered peak?",
+          "options": {
+            "a": "2 V",
+            "b": "1 V",
+            "c": "0.5 V",
+            "d": "82.5 V"
+          },
+          "correct": "c",
+          "explanation": "Multiplication gives a half-amplitude baseband term before gain correction."
+        }
+      ]
+    },
+    {
+      "id": "measurement",
+      "title": "Procedure and measurement",
+      "depends_on": [
+        "recovery"
+      ],
+      "targets": [
+        "scope.input",
+        "scope.display",
+        "trainer.power"
+      ],
+      "explanation": {
+        "en": "Follow the instructor-approved supply and common-reference procedure. Stabilise the display before reading frequency and amplitude, retain units, and compare recovered frequency with message frequency. Virtual readings do not count as physical observations.",
+        "or": "ଶିକ୍ଷକଙ୍କ supply ଓ connection ନିୟମ ମାନନ୍ତୁ। ସ୍ଥିର display ରୁ frequency ଓ amplitude ପଢ଼ନ୍ତୁ। Virtual reading ପ୍ରକୃତ lab observation ନୁହେଁ।"
+      },
+      "questions": [
+        {
+          "id": "measurement-1",
+          "prompt": "Who approves physical power-on checks?",
+          "options": {
+            "a": "A virtual completion badge",
+            "b": "The CRO trace alone",
+            "c": "An inferred screenshot",
+            "d": "Instructor and approved lab procedure"
+          },
+          "correct": "d",
+          "explanation": "Physical power-on checks belong to the instructor-approved procedure."
+        },
+        {
+          "id": "measurement-2",
+          "prompt": "Which values should be compared after detection?",
+          "options": {
+            "a": "Message and recovered frequencies",
+            "b": "CRO size and cord length",
+            "c": "Supply and time scale",
+            "d": "Only board colour"
+          },
+          "correct": "a",
+          "explanation": "The recovered frequency should match the message frequency."
+        },
+        {
+          "id": "measurement-3",
+          "prompt": "A moving display should first prompt what check?",
+          "options": {
+            "a": "Change the theory",
+            "b": "Check trigger and signal connections",
+            "c": "Assume the fibre is faulty",
+            "d": "Increase carrier without limit"
+          },
+          "correct": "b",
+          "explanation": "Check display stability and signal routing."
+        },
+        {
+          "id": "measurement-4",
+          "prompt": "How should amplitude be recorded?",
+          "options": {
+            "a": "Without a unit",
+            "b": "Only as a colour",
+            "c": "With units and peak or peak-to-peak convention",
+            "d": "As frequency"
+          },
+          "correct": "c",
+          "explanation": "State both units and amplitude convention."
+        },
+        {
+          "id": "measurement-5",
+          "prompt": "What does finishing this preparation establish?",
+          "options": {
+            "a": "Physical proficiency",
+            "b": "A safety certificate",
+            "c": "Actual measured lab results",
+            "d": "Theory and virtual preparation evidence"
+          },
+          "correct": "d",
+          "explanation": "Physical execution remains a separate instructor-observed activity."
+        }
+      ]
+    }
+  ],
+  "controls": {
+    "trainer.power": {
+      "initial": false
+    },
+    "source.message_frequency": {
+      "initial": 0.0,
+      "minimum": 0.0,
+      "maximum": 5000.0,
+      "unit": "Hz"
+    },
+    "source.carrier_frequency": {
+      "initial": 0.0,
+      "minimum": 0.0,
+      "maximum": 100000.0,
+      "unit": "Hz"
+    },
+    "modulator.null": {
+      "initial": 0.3,
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    "scope.trigger": {
+      "initial": "free",
+      "choices": [
+        "free",
+        "auto"
+      ]
+    }
+  },
+  "connections": [
+    [
+      "source.message",
+      "modulator.message"
+    ],
+    [
+      "source.carrier",
+      "modulator.carrier"
+    ],
+    [
+      "modulator.output",
+      "scope.input"
+    ],
+    [
+      "modulator.output",
+      "detector.input"
+    ],
+    [
+      "source.carrier",
+      "detector.reference"
+    ],
+    [
+      "detector.output",
+      "scope.input"
+    ]
+  ],
+  "steps": [
+    {
+      "id": "inspect",
+      "instruction": {
+        "en": "Select the balanced-modulator output.",
+        "or": "balanced-modulator output ବାଛନ୍ତୁ।"
+      },
+      "why": {
+        "en": "Locate the output before wiring.",
+        "or": "ଏହି ପଦକ୍ଷେପର କାରଣ ବୁଝି ଆଗକୁ ବଢ଼ନ୍ତୁ।"
+      },
+      "rule": {
+        "kind": "select",
+        "target": "modulator.output"
+      }
+    },
+    {
+      "id": "power",
+      "instruction": {
+        "en": "Enable virtual trainer power.",
+        "or": "virtual trainer power ଚାଲୁ କରନ୍ତୁ।"
+      },
+      "why": {
+        "en": "This enables the teaching model; it is not physical power-on approval.",
+        "or": "ଏହି ପଦକ୍ଷେପର କାରଣ ବୁଝି ଆଗକୁ ବଢ଼ନ୍ତୁ।"
+      },
+      "rule": {
+        "kind": "set",
+        "target": "trainer.power",
+        "value": true
+      }
+    },
+    {
+      "id": "af",
+      "instruction": {
+        "en": "Set the AF message to 1000 Hz.",
+        "or": "AF message କୁ 1000 Hz କରନ୍ତୁ।"
+      },
+      "why": {
+        "en": "Use the message frequency specified by the source procedure.",
+        "or": "ଏହି ପଦକ୍ଷେପର କାରଣ ବୁଝି ଆଗକୁ ବଢ଼ନ୍ତୁ।"
+      },
+      "rule": {
+        "kind": "set",
+        "target": "source.message_frequency",
+        "value": 1000.0,
+        "unit": "Hz"
+      }
+    },
+    {
+      "id": "rf",
+      "instruction": {
+        "en": "Set the RF carrier to 82500 Hz.",
+        "or": "RF carrier କୁ 82500 Hz କରନ୍ତୁ।"
+      },
+      "why": {
+        "en": "Keep the message and carrier sources distinct.",
+        "or": "ଏହି ପଦକ୍ଷେପର କାରଣ ବୁଝି ଆଗକୁ ବଢ଼ନ୍ତୁ।"
+      },
+      "rule": {
+        "kind": "set",
+        "target": "source.carrier_frequency",
+        "value": 82500.0,
+        "unit": "Hz"
+      }
+    },
+    {
+      "id": "message-wire",
+      "instruction": {
+        "en": "Connect Message output to Message input.",
+        "or": "Message output କୁ Message input ସହ ଯୋଡ଼ନ୍ତୁ।"
+      },
+      "why": {
+        "en": "Route information to the balanced modulator.",
+        "or": "ଏହି ପଦକ୍ଷେପର କାରଣ ବୁଝି ଆଗକୁ ବଢ଼ନ୍ତୁ।"
+      },
+      "rule": {
+        "kind": "connect",
+        "target": "source.message",
+        "other": "modulator.message"
+      }
+    },
+    {
+      "id": "carrier-wire",
+      "instruction": {
+        "en": "Connect Carrier output to Carrier input.",
+        "or": "Carrier output କୁ Carrier input ସହ ଯୋଡ଼ନ୍ତୁ।"
+      },
+      "why": {
+        "en": "The carrier is multiplied by the message.",
+        "or": "ଏହି ପଦକ୍ଷେପର କାରଣ ବୁଝି ଆଗକୁ ବଢ଼ନ୍ତୁ।"
+      },
+      "rule": {
+        "kind": "connect",
+        "target": "source.carrier",
+        "other": "modulator.carrier"
+      }
+    },
+    {
+      "id": "probe-tx",
+      "instruction": {
+        "en": "Connect DSB-SC output to the CRO input.",
+        "or": "DSB-SC output କୁ CRO input ସହ ଯୋଡ଼ନ୍ତୁ।"
+      },
+      "why": {
+        "en": "Inspect the transmitter output at the specified test point.",
+        "or": "ଏହି ପଦକ୍ଷେପର କାରଣ ବୁଝି ଆଗକୁ ବଢ଼ନ୍ତୁ।"
+      },
+      "rule": {
+        "kind": "connect",
+        "target": "modulator.output",
+        "other": "scope.input"
+      }
+    },
+    {
+      "id": "trigger",
+      "instruction": {
+        "en": "Choose auto trigger for a stable virtual display.",
+        "or": "ସ୍ଥିର virtual display ପାଇଁ auto trigger ବାଛନ୍ତୁ।"
+      },
+      "why": {
+        "en": "Display stability supports reliable reading.",
+        "or": "ଏହି ପଦକ୍ଷେପର କାରଣ ବୁଝି ଆଗକୁ ବଢ଼ନ୍ତୁ।"
+      },
+      "rule": {
+        "kind": "set",
+        "target": "scope.trigger",
+        "value": "auto"
+      }
+    },
+    {
+      "id": "null",
+      "instruction": {
+        "en": "Reduce the normalised virtual residual-carrier coefficient to zero.",
+        "or": "virtual residual-carrier coefficient କୁ zero କରନ୍ତୁ।"
+      },
+      "why": {
+        "en": "This represents balancing the modulator, not a calibrated hardware dial value.",
+        "or": "ଏହି ପଦକ୍ଷେପର କାରଣ ବୁଝି ଆଗକୁ ବଢ଼ନ୍ତୁ।"
+      },
+      "rule": {
+        "kind": "set",
+        "target": "modulator.null",
+        "value": 0.0,
+        "tolerance": 0.02
+      }
+    },
+    {
+      "id": "receiver-wire",
+      "instruction": {
+        "en": "Connect DSB-SC output to Detector signal input.",
+        "or": "DSB-SC output କୁ Detector signal input ସହ ଯୋଡ଼ନ୍ତୁ।"
+      },
+      "why": {
+        "en": "Route the transmitted signal to synchronous detection.",
+        "or": "ଏହି ପଦକ୍ଷେପର କାରଣ ବୁଝି ଆଗକୁ ବଢ଼ନ୍ତୁ।"
+      },
+      "rule": {
+        "kind": "connect",
+        "target": "modulator.output",
+        "other": "detector.input"
+      }
+    },
+    {
+      "id": "reference-wire",
+      "instruction": {
+        "en": "Connect Carrier output to Detector reference input.",
+        "or": "Carrier output କୁ Detector reference input ସହ ଯୋଡ଼ନ୍ତୁ।"
+      },
+      "why": {
+        "en": "A shared reference provides ideal coherent recovery.",
+        "or": "ଏହି ପଦକ୍ଷେପର କାରଣ ବୁଝି ଆଗକୁ ବଢ଼ନ୍ତୁ।"
+      },
+      "rule": {
+        "kind": "connect",
+        "target": "source.carrier",
+        "other": "detector.reference"
+      }
+    },
+    {
+      "id": "probe-rx",
+      "instruction": {
+        "en": "Move the virtual CRO probe to Recovered output.",
+        "or": "virtual CRO probe କୁ Recovered output ରେ ଯୋଡ଼ନ୍ତୁ।"
+      },
+      "why": {
+        "en": "Compare the recovered output with the original message.",
+        "or": "ଏହି ପଦକ୍ଷେପର କାରଣ ବୁଝି ଆଗକୁ ବଢ଼ନ୍ତୁ।"
+      },
+      "rule": {
+        "kind": "connect",
+        "target": "detector.output",
+        "other": "scope.input"
+      }
+    },
+    {
+      "id": "frequency",
+      "instruction": {
+        "en": "Measure the recovered frequency in Hz.",
+        "or": "recovered frequency କୁ Hz ରେ ମାପନ୍ତୁ।"
+      },
+      "why": {
+        "en": "Recovery should return the original message frequency.",
+        "or": "ଏହି ପଦକ୍ଷେପର କାରଣ ବୁଝି ଆଗକୁ ବଢ଼ନ୍ତୁ।"
+      },
+      "rule": {
+        "kind": "measure",
+        "target": "scope.display",
+        "other": "recovered_frequency_hz",
+        "value": 1000.0,
+        "unit": "Hz",
+        "tolerance": 20.0
+      }
+    },
+    {
+      "id": "amplitude",
+      "instruction": {
+        "en": "Measure recovered peak amplitude in V in the ideal model.",
+        "or": "ideal model ର recovered peak amplitude କୁ V ରେ ମାପନ୍ତୁ।"
+      },
+      "why": {
+        "en": "The normalised model has unity recovery gain; hardware amplitude must be measured separately.",
+        "or": "ଏହି ପଦକ୍ଷେପର କାରଣ ବୁଝି ଆଗକୁ ବଢ଼ନ୍ତୁ।"
+      },
+      "rule": {
+        "kind": "measure",
+        "target": "scope.display",
+        "other": "recovered_peak_v",
+        "value": 0.5,
+        "unit": "V",
+        "tolerance": 0.02
+      }
+    }
+  ],
+  "faults": [
+    {
+      "id": "missing-message",
+      "target": "modulator.message",
+      "question": {
+        "id": "fault-missing-message",
+        "prompt": "The carrier source is present but the ideal DSB-SC output is zero. Which connection should you inspect?",
+        "options": {
+          "a": "Message source to modulator input",
+          "b": "CRO screen brightness",
+          "c": "Board label",
+          "d": "Carrier phase knob not present on the kit"
+        },
+        "correct": "a",
+        "explanation": "Both message and carrier inputs are required."
+      }
+    },
+    {
+      "id": "carrier-leak",
+      "target": "modulator.null",
+      "question": {
+        "id": "fault-carrier-leak",
+        "prompt": "A carrier component remains in the transmitter output. Which supported adjustment addresses this?",
+        "options": {
+          "a": "AF frequency",
+          "b": "Null adjustment",
+          "c": "CRO timebase",
+          "d": "Receiver output label"
+        },
+        "correct": "b",
+        "explanation": "Balance the modulator using the null control."
+      }
+    },
+    {
+      "id": "missing-reference",
+      "target": "detector.reference",
+      "question": {
+        "id": "fault-missing-reference",
+        "prompt": "The transmitter is working but coherent recovery fails. Which input must be checked?",
+        "options": {
+          "a": "CRO colour",
+          "b": "AF label",
+          "c": "Detector reference carrier",
+          "d": "Screen size"
+        },
+        "correct": "c",
+        "explanation": "Synchronous detection needs the coherent reference."
+      }
+    }
+  ],
+  "assessment": [
+    {
+      "id": "ready-1",
+      "prompt": "Which physical terminal receives the information signal?",
+      "options": {
+        "a": "Message input",
+        "b": "Carrier input",
+        "c": "Power switch",
+        "d": "CRO trigger"
+      },
+      "correct": "a",
+      "explanation": "The message carries the information."
+    },
+    {
+      "id": "ready-2",
+      "prompt": "What causes sidebands in the ideal balanced modulator?",
+      "options": {
+        "a": "A power label",
+        "b": "A display grid",
+        "c": "Message-carrier multiplication",
+        "d": "A larger CRO"
+      },
+      "correct": "c",
+      "explanation": "Multiplication creates the sum and difference frequency components."
+    },
+    {
+      "id": "ready-3",
+      "prompt": "The recovered message disappears while transmitter output remains. What do you check?",
+      "options": {
+        "a": "CRO paint",
+        "b": "Coherent reference connection",
+        "c": "Board size",
+        "d": "Only the source name"
+      },
+      "correct": "b",
+      "explanation": "The detector needs its coherent reference."
+    },
+    {
+      "id": "ready-4",
+      "prompt": "What should be recorded during the real college lab?",
+      "options": {
+        "a": "Only virtual values",
+        "b": "Only a badge",
+        "c": "Only the formula",
+        "d": "Actual readings with units and amplitude convention"
+      },
+      "correct": "d",
+      "explanation": "Record actual physical measurements separately from virtual practice."
+    },
+    {
+      "id": "ready-5",
+      "prompt": "What is the appropriate next action before energising the real apparatus?",
+      "options": {
+        "a": "Follow instructor-approved connection and supply checks",
+        "b": "Use the virtual badge as approval",
+        "c": "Copy virtual power settings blindly",
+        "d": "Assume all grounds are interchangeable"
+      },
+      "correct": "a",
+      "explanation": "Preparation does not replace instructor-approved physical checks.",
+      "required": true
+    }
+  ],
+  "precautions": [
+    "Physical supply, grounding and power-on checks follow the instructor and the actual trainer documentation.",
+    "The manual includes receiver supply details beyond the +12 V overview; this virtual model does not specify a physical supply wiring plan.",
+    "Do not treat virtual values or a preparation receipt as physical measurements or permission to energise equipment.",
+    "The source modulation table resembles conventional-AM envelope-index calculations; that formula is not used to grade DSB-SC here.",
+    "Keep actual readings and virtual practice separate; note frequency units and peak versus peak-to-peak amplitude."
+  ],
+  "observation_columns": [
+    {
+      "key": "message_frequency_hz",
+      "label": "Message frequency",
+      "unit": "Hz"
+    },
+    {
+      "key": "recovered_frequency_hz",
+      "label": "Recovered frequency",
+      "unit": "Hz"
+    },
+    {
+      "key": "recovered_peak_v",
+      "label": "Recovered peak amplitude",
+      "unit": "V"
+    }
+  ],
+  "asset_sha256": "c3b63c34dd608c5cd7a158a8708069975772409c05bba4c1183a05dc43f14778",
+  "visual_design": "dsb-sc-trainer-v2.json",
+  "demo": {
+    "initial_controls": {
+      "trainer.power": true,
+      "source.message_frequency": 1000.0,
+      "source.carrier_frequency": 82500.0,
+      "scope.trigger": "auto"
+    },
+    "omit_step_ids": [
+      "inspect",
+      "power",
+      "af",
+      "rf",
+      "trigger"
+    ]
+  }
+}

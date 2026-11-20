@@ -1,0 +1,606 @@
+{
+  "$defs": {
+    "Concept": {
+      "additionalProperties": false,
+      "properties": {
+        "depends_on": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Depends On",
+          "type": "array"
+        },
+        "explanation": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Explanation",
+          "type": "object"
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "questions": {
+          "items": {
+            "$ref": "#/$defs/Question"
+          },
+          "maxItems": 5,
+          "minItems": 5,
+          "title": "Questions",
+          "type": "array"
+        },
+        "targets": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Targets",
+          "type": "array"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "targets",
+        "explanation",
+        "questions"
+      ],
+      "title": "Concept",
+      "type": "object"
+    },
+    "Control": {
+      "additionalProperties": false,
+      "properties": {
+        "choices": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Choices",
+          "type": "array"
+        },
+        "initial": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Initial"
+        },
+        "maximum": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Maximum"
+        },
+        "minimum": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Minimum"
+        },
+        "unit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unit"
+        }
+      },
+      "required": [
+        "initial"
+      ],
+      "title": "Control",
+      "type": "object"
+    },
+    "ExperimentDemo": {
+      "additionalProperties": false,
+      "properties": {
+        "initial_controls": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "title": "Initial Controls",
+          "type": "object"
+        },
+        "omit_step_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Omit Step Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "initial_controls",
+        "omit_step_ids"
+      ],
+      "title": "ExperimentDemo",
+      "type": "object"
+    },
+    "Fault": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "question": {
+          "$ref": "#/$defs/Question"
+        },
+        "target": {
+          "title": "Target",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "target",
+        "question"
+      ],
+      "title": "Fault",
+      "type": "object"
+    },
+    "Part": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Description",
+          "type": "object"
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "body",
+            "output",
+            "input",
+            "control",
+            "display"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "position": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "title": "Position",
+          "type": "array"
+        },
+        "size": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "title": "Size",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "kind",
+        "position",
+        "size",
+        "description"
+      ],
+      "title": "Part",
+      "type": "object"
+    },
+    "Question": {
+      "additionalProperties": false,
+      "properties": {
+        "correct": {
+          "title": "Correct",
+          "type": "string"
+        },
+        "explanation": {
+          "title": "Explanation",
+          "type": "string"
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "options": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Options",
+          "type": "object"
+        },
+        "prompt": {
+          "title": "Prompt",
+          "type": "string"
+        },
+        "required": {
+          "default": false,
+          "title": "Required",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "prompt",
+        "options",
+        "correct",
+        "explanation"
+      ],
+      "title": "Question",
+      "type": "object"
+    },
+    "Rule": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "select",
+            "connect",
+            "set",
+            "measure"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "other": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Other"
+        },
+        "target": {
+          "title": "Target",
+          "type": "string"
+        },
+        "tolerance": {
+          "default": 0.0,
+          "minimum": 0,
+          "title": "Tolerance",
+          "type": "number"
+        },
+        "unit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unit"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Value"
+        }
+      },
+      "required": [
+        "kind",
+        "target"
+      ],
+      "title": "Rule",
+      "type": "object"
+    },
+    "Step": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "instruction": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Instruction",
+          "type": "object"
+        },
+        "rule": {
+          "$ref": "#/$defs/Rule"
+        },
+        "why": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Why",
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "instruction",
+        "why",
+        "rule"
+      ],
+      "title": "Step",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "adapter": {
+      "title": "Adapter",
+      "type": "string"
+    },
+    "aim": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Aim",
+      "type": "object"
+    },
+    "assessment": {
+      "items": {
+        "$ref": "#/$defs/Question"
+      },
+      "minItems": 5,
+      "title": "Assessment",
+      "type": "array"
+    },
+    "asset": {
+      "pattern": "^[A-Za-z0-9_-]+\\.gltf$",
+      "title": "Asset",
+      "type": "string"
+    },
+    "asset_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Asset Sha256",
+      "type": "string"
+    },
+    "concept_pass_percent": {
+      "default": 60.0,
+      "exclusiveMinimum": 0,
+      "maximum": 100,
+      "title": "Concept Pass Percent",
+      "type": "number"
+    },
+    "concepts": {
+      "items": {
+        "$ref": "#/$defs/Concept"
+      },
+      "minItems": 1,
+      "title": "Concepts",
+      "type": "array"
+    },
+    "connections": {
+      "items": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "title": "Connections",
+      "type": "array"
+    },
+    "controls": {
+      "additionalProperties": {
+        "$ref": "#/$defs/Control"
+      },
+      "title": "Controls",
+      "type": "object"
+    },
+    "curriculum": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Curriculum",
+      "type": "object"
+    },
+    "demo": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ExperimentDemo"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "equipment": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Equipment",
+      "type": "object"
+    },
+    "faults": {
+      "items": {
+        "$ref": "#/$defs/Fault"
+      },
+      "minItems": 1,
+      "title": "Faults",
+      "type": "array"
+    },
+    "id": {
+      "title": "Id",
+      "type": "string"
+    },
+    "observation_columns": {
+      "items": {
+        "additionalProperties": {
+          "type": "string"
+        },
+        "type": "object"
+      },
+      "title": "Observation Columns",
+      "type": "array"
+    },
+    "orientation": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Orientation",
+      "type": "array"
+    },
+    "parts": {
+      "items": {
+        "$ref": "#/$defs/Part"
+      },
+      "title": "Parts",
+      "type": "array"
+    },
+    "precautions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Precautions",
+      "type": "array"
+    },
+    "readiness_pass_percent": {
+      "default": 80.0,
+      "exclusiveMinimum": 0,
+      "maximum": 100,
+      "title": "Readiness Pass Percent",
+      "type": "number"
+    },
+    "review": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Review",
+      "type": "object"
+    },
+    "schema_version": {
+      "const": "physical-lab-pack/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "sources": {
+      "items": {
+        "additionalProperties": {
+          "type": "string"
+        },
+        "type": "object"
+      },
+      "title": "Sources",
+      "type": "array"
+    },
+    "steps": {
+      "items": {
+        "$ref": "#/$defs/Step"
+      },
+      "minItems": 1,
+      "title": "Steps",
+      "type": "array"
+    },
+    "title": {
+      "title": "Title",
+      "type": "string"
+    },
+    "version": {
+      "title": "Version",
+      "type": "string"
+    },
+    "visual_design": {
+      "anyOf": [
+        {
+          "pattern": "^[A-Za-z0-9_-]+\\.json$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Visual Design"
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "version",
+    "title",
+    "aim",
+    "curriculum",
+    "equipment",
+    "sources",
+    "review",
+    "adapter",
+    "asset",
+    "asset_sha256",
+    "parts",
+    "orientation",
+    "concepts",
+    "controls",
+    "connections",
+    "steps",
+    "faults",
+    "assessment",
+    "precautions",
+    "observation_columns"
+  ],
+  "title": "ExperimentPack",
+  "type": "object"
+}

@@ -13,6 +13,8 @@ from prototypes.mixed_language.api import mixed_language_router, MixedBodyLimit
 from prototypes.json_stream.analysis import JsonStreamingAnalyzer
 from prototypes.json_stream.api import stream_router
 from prototypes.backend.lab_idempotency import LabCreateKeys, start_lab_route
+from prototypes.physical_labs.api import physical_lab_router, PhysicalBodyLimit
+from prototypes.physical_labs.service import PreparationService
 
 def create_app(data_dir=Path('work/backend'), *, analyzer=None, text_factory=None, speech_factory=None, proxy_secret=None):
     secret=os.environ.get('KIKI_PROXY_SECRET','') if proxy_secret is None else proxy_secret
@@ -33,6 +35,9 @@ def create_app(data_dir=Path('work/backend'), *, analyzer=None, text_factory=Non
     app.include_router(mixed_language_router(jobs,owner_of,mutation_origin))
     app.include_router(stream_router(app.state.lab,owner_of,mutation_origin))
     app.add_middleware(MixedBodyLimit)
+    app.state.physical_labs=PreparationService(data_dir)
+    app.include_router(physical_lab_router(app.state.physical_labs,owner_of,mutation_origin))
+    app.add_middleware(PhysicalBodyLimit)
 
     # Shadow the frozen create route (it sits inside an included router) so a trusted upstream
     # can safely retry it with Idempotency-Key. It must match first; the schema keeps the frozen operation.
@@ -71,6 +76,9 @@ def create_app(data_dir=Path('work/backend'), *, analyzer=None, text_factory=Non
         value=await original_health()
         value['mode']='screen_lab_and_mixed_language_jobs'
         value['api_schema']='kiki-prototype-api/v1'
+        value['physical_labs']={'available':True,'pack_schema':'physical-lab-pack/v1',
+            'experiments':list(app.state.physical_labs.packs),'mode':'virtual_preparation',
+            'store':'single_instance_sqlite','physical_actuation':False}
         value['latency_experiment']={'id':'stream-context-batch/v1','provider_io_mode':getattr(getattr(app.state.lab.analyzer,'provider',None),'io_mode',None),'context_validation_mode':os.environ.get('KIKI_STREAM_CONTEXT_MODE','per_chunk')}
         value['json_stream']={'available':bool(getattr(app.state.lab.analyzer,'supports_stream',False)),'wire_format':'lab-analysis-stream/v2','priority':['criteria','action_findings','uncertainties'],'commit_before_auxiliary':True}
         value['mixed_language']={'text_configured':jobs.text_configured,'speech_configured':jobs.speech_configured,

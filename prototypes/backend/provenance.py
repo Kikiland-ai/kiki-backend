@@ -23,7 +23,7 @@ def source_receipt(checkout):
         relative = Path(name)
         if not (name.startswith(('prototypes/', 'contracts/')) or name == 'scripts/smoke-lab-upstream.py'):
             continue
-        if relative.suffix not in {'.py', '.js', '.mjs', '.json', '.html', '.css'}:
+        if relative.suffix not in {'.py', '.js', '.mjs', '.json', '.html', '.css', '.gltf'}:
             continue
         if any(part.startswith('.') or part in {'work', 'node_modules', '__pycache__'} for part in relative.parts):
             continue

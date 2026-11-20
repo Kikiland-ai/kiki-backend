@@ -4,7 +4,7 @@
 // content: each new reader stream/document starts a generation; retries reuse it.
 importScripts('config.js');
 const CFG=globalThis.KIKI_FG_CONFIG,KEY='kiki_fg';
-const READER=new Set(['reader_hello','reader_snapshot','reader_command_result','reader_bye']);
+const READER=new Set(['reader_status','reader_hello','reader_snapshot','reader_command_result','reader_bye']);
 const TARGET=new Set(['target_hello','fg_command','fg_rects']);
 const POPUP=new Set(['popup_status','bind_tab','unbind']);
 let queue=Promise.resolve();
@@ -112,6 +112,12 @@ async function handle(k,m,sender){
   if(!mine)return {ok:false,error:'not_bound'};
   if(m.type==='fg_rects'){if(s.controller)void toReader(s,{type:'fg_rects',rects:m.rects,viewport:m.viewport,moving:Boolean(m.moving)});return {ok:true};}
   if(m.type==='fg_command'){
+   if(['narration_toggle','narration_replay'].includes(m.command)){
+    if(!s.controller||m.command_version!==1||m.stream_id!==s.controller.stream_id||m.generation!==s.controller.generation)return {ok:false,error:'stale_stream_or_generation'};
+    if(![m.action_id,m.visit_id].every(value=>value===null||(typeof value==='string'&&value.length<=160))||typeof m.verification_only!=='boolean')return {ok:false,error:'invalid_narration_command'};
+    const {command,command_version,stream_id,generation,action_id,verification_only,visit_id}=m;
+    return toReader(s,{type:'fg_command',command,command_version,stream_id,generation,action_id,verification_only,visit_id});
+   }
    if(!s.controller)return {ok:false,error:'tracker_not_open'};
    if(m.command==='focus_confirmation'){
     if(m.command_version!==1||m.stream_id!==s.controller.stream_id||m.generation!==s.controller.generation)return {ok:false,error:'stale_stream_or_generation'};
@@ -135,6 +141,8 @@ async function handle(k,m,sender){
 chrome.runtime.onMessage.addListener((m,sender,reply)=>{
  const k=kind(sender),allowed=k==='reader'?READER:k==='target'?TARGET:k==='popup'?POPUP:null;
  if(!allowed?.has(m?.type)){reply({ok:false,error:'rejected_sender_or_type'});return false;}
+ // Status checks cannot claim control, bind targets or touch lab state.
+ if(m.type==='reader_status'){reply({ok:true,version:chrome.runtime.getManifest().version});return false;}
  // Rect reports are frequent and stateless; keep them out of the state lock.
  if(m.type==='fg_rects'){load().then(s=>handle(k,m,sender)).then(reply,()=>reply({ok:false}));return true;}
  locked(()=>handle(k,m,sender)).then(reply,error=>reply({ok:false,error:String(error?.message||error)}));return true;

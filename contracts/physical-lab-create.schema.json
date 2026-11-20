@@ -1,0 +1,34 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "experiment_id": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Experiment Id",
+      "type": "string"
+    },
+    "language": {
+      "default": "or",
+      "enum": [
+        "en",
+        "or"
+      ],
+      "title": "Language",
+      "type": "string"
+    },
+    "mode": {
+      "default": "guided_preparation",
+      "enum": [
+        "guided_preparation",
+        "experiment_demo"
+      ],
+      "title": "Mode",
+      "type": "string"
+    }
+  },
+  "required": [
+    "experiment_id"
+  ],
+  "title": "CreatePreparation",
+  "type": "object"
+}

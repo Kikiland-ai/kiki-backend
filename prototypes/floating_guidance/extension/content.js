@@ -28,6 +28,15 @@
  }
  function settle(text){pending=null;clearTimeout(commandTimer);if(text!==undefined)ui.showNotice(text);draw();}
  function onCommand(command){
+  if(command==='narration_toggle'||command==='narration_replay'){
+   if(!message)return;
+   const narration=core.viewModel(message,{receivedAt,now:performance.now(),lastMessageAt,connection,pending}).narration;
+   if(!narration||(command==='narration_replay'&&!narration.replay))return;
+   const action=message.body.instructions.now;
+   void send({type:'fg_command',command,command_version:1,stream_id:message.stream_id,generation:message.generation,
+    action_id:action?.action_id??null,verification_only:action?.verification_only===true,visit_id:message.body.context?.visit_id??null});
+   return;
+  }
   if(command==='focus_confirmation'){
    if(!message)return;
    void send({type:'fg_command',command,command_version:1,stream_id:message.stream_id,generation:message.generation,context:message.body.context,lab_revision:message.body.lab_revision}).then(r=>ui.showNotice(r?.ok?'Continue in the tracker: select only evidence you reviewed and write your own note.':'The step changed. Open the tracker to review the current form.'));return;

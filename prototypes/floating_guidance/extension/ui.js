@@ -81,7 +81,9 @@ dl{margin:4px 0 0}dt{font-size:12px;color:var(--pencil);margin-top:8px}dd{margin
   const nextTag=h('span',{class:'tag',hidden:true},'· next stage'),next=h('p',{class:'next'});
   const confirm=h('button',{class:'btn',type:'button','data-action':'focus_confirmation',hidden:true},'Confirm saved model in tracker');
   const saveHelp=h('p',{hidden:true},'Save the model in MATLAB first. This opens your confirmation form; it does not save the model.');
-  const guide=h('div',{class:'guide'},label,h('h2',{},'Now'),now,settings,toggle,details,confirm,saveHelp,h('h2',{},'Next',nextTag),next);
+  const replay=h('button',{class:'btn',type:'button','data-action':'narration_replay',hidden:true},'Replay narration');
+  const mute=h('button',{class:'btn',type:'button','data-action':'narration_toggle',hidden:true},'Mute narration');
+  const guide=h('div',{class:'guide'},label,h('h2',{},'Now'),now,settings,replay,mute,toggle,details,confirm,saveHelp,h('h2',{},'Next',nextTag),next);
   const screenHeading=h('span'),age=h('span',{class:'age'}),summary=h('p',{class:'summary'}),check=h('ul',{class:'check',hidden:true}),uncertain=h('p',{class:'uncertain',hidden:true});
   const screen=h('div',{class:'screen'},h('h2',{},screenHeading,age),summary,check,uncertain);
   const status=h('div',{class:'status'}),notice=h('p',{class:'notice',hidden:true,role:'alert'});
@@ -126,6 +128,8 @@ dl{margin:4px 0 0}dt{font-size:12px;color:var(--pencil);margin-top:8px}dd{margin
   function setText(node,value){const text=value??'';if(node.textContent!==text)node.textContent=text;}
   function render(model){
    vm=model;
+   replay.hidden=!vm.narration?.replay;mute.hidden=!vm.narration;
+   if(vm.narration)setText(mute,vm.narration.muted?'Unmute narration':'Mute narration');
    if(vm.empty){confirm.hidden=saveHelp.hidden=true;confirm.disabled=true;setText(label,'Kiki');label.dataset.tone='muted';setText(now,vm.status.text);settings.hidden=true;toggle.hidden=true;details.hidden=true;setText(next,'');
     setText(screenHeading,'Screen context');setText(age,'');setText(summary,'Waiting for the Kiki tracker.');check.hidden=uncertain.hidden=true;
     setText(status,vm.status.text);status.dataset.live='false';pause.disabled=true;setText(hdr,'');setText(launcherState,'· not connected');place();return;}
@@ -163,6 +167,7 @@ dl{margin:4px 0 0}dt{font-size:12px;color:var(--pencil);margin-top:8px}dd{margin
    else if(action==='details'){layout.details=!layout.details;if(vm)render(vm);}
    else if(action==='pause'){if(!pause.disabled)onCommand(pause.dataset.command);return;}
    else if(action==='focus_confirmation'){if(!confirm.hidden&&!confirm.disabled)onCommand('focus_confirmation');return;}
+   else if(action==='narration_replay'||action==='narration_toggle'){if(!(action==='narration_replay'?replay:mute).hidden)onCommand(action);return;}
    else if(action==='open_tracker'){onCommand('open_tracker');return;}
    else return;
    save();place();

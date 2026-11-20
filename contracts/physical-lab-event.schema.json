@@ -1,0 +1,93 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "answers": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "maxProperties": 30,
+      "title": "Answers",
+      "type": "object"
+    },
+    "event_id": {
+      "pattern": "^[A-Za-z0-9_.:-]{1,100}$",
+      "title": "Event Id",
+      "type": "string"
+    },
+    "kind": {
+      "enum": [
+        "select",
+        "advance",
+        "answer",
+        "connect",
+        "set",
+        "measure",
+        "language"
+      ],
+      "title": "Kind",
+      "type": "string"
+    },
+    "other": {
+      "anyOf": [
+        {
+          "maxLength": 100,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Other"
+    },
+    "revision": {
+      "minimum": 0,
+      "title": "Revision",
+      "type": "integer"
+    },
+    "target": {
+      "default": "",
+      "maxLength": 100,
+      "title": "Target",
+      "type": "string"
+    },
+    "unit": {
+      "anyOf": [
+        {
+          "maxLength": 30,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Unit"
+    },
+    "value": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Value"
+    }
+  },
+  "required": [
+    "event_id",
+    "revision",
+    "kind"
+  ],
+  "title": "PreparationEvent",
+  "type": "object"
+}

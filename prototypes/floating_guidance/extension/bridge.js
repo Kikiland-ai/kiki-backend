@@ -9,7 +9,15 @@
  const post=m=>window.postMessage({channel:CHANNEL,direction:'extension',...m},location.origin);
  let activeStream=null,activeGeneration=null,helloEpoch=0;
  window.addEventListener('message',e=>{
-  if(e.source!==window||e.origin!==location.origin||e.data?.channel!==CHANNEL||e.data.direction!=='page'||!PAGE.has(e.data.type))return;
+  if(e.source!==window||e.origin!==location.origin||e.data?.channel!==CHANNEL||e.data.direction!=='page'||(!PAGE.has(e.data.type)&&e.data.type!=='reader_status'))return;
+  if(e.data.type==='reader_status'){
+   const request_id=e.data.request_id;
+   if(typeof request_id!=='string'||request_id.length>64)return;
+   try{chrome.runtime.sendMessage({type:'reader_status'}).then(result=>{
+    if(result?.ok)post({type:'extension_status',request_id,version:result.version});
+   },()=>{});}catch{}
+   return;
+  }
   const {channel,direction,bridge_id,...message}=e.data;
   if(message.type==='reader_hello'){
    if(typeof message.stream_id!=='string'||!/^[A-Za-z0-9-]{8,64}$/.test(message.stream_id))return;

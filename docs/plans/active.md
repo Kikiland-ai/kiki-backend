@@ -1,3 +1,169 @@
+## Combined lab narration · 21 November 2026
+
+The `feature/combined-lab-narration` worktree pairs the physical experiment
+engine from backend PR #14 with the Simulink floating guide extension 0.1.4.
+The web client owns playback. The extension acknowledges the displayed
+Simulink step and forwards Replay and Mute. The physical engine supplies stable
+step IDs and the pinned pack hash for the web API’s narration lookup.
+
+The extension built successfully and passed 20 lifecycle and overlay checks. The combined browser exercise played two hosted Simulink WAVs.
+
+# Physical lab repository split — 21 November 2026
+
+User corrected the delivery boundary: follow the existing kiki-web Lab mode.
+Removed the backend-hosted student preview and browser modules/routes. Kept the
+pack-driven pipeline, versioned apparatus/content, numerical adapter, prerequisite
+checks, session/action validation and persistence here. Session summaries now
+include mode to support separate demo resume. Regenerated the backend OpenAPI.
+The kiki-web codex/physical-lab-ui branch owns the React screen, renderer, hints,
+floating guide/fullscreen/plots, service adapter and authenticated API relay.
+
+Frontend verification: 316 unit tests, 10 renderer checks, typecheck/lint and
+production build pass; web API 274 tests pass with 8 opt-in skips, lint passes.
+The live local web proxy plus real backend engine completed all nine steps and
+returned 1000 Hz / 0.5 V peak with theory unassessed. Native Chrome verified
+fullscreen, component hints, wrong-lead rejection and progression. No Google,
+Firestore or provider trial was run; the local acceptance identity is synthetic.
+
+Latest backend reruns encountered intermittent SQLITE_IOERR_SHMSIZE on this
+space-constrained machine, including untouched stores; isolated WAL reopen/write
+also reproduced it. Earlier full backend acceptance passed. Record the fresh
+remote CI result before claiming a new full local pass. No product storage policy
+was changed to hide this environment failure.
+
+After clearing rebuildable dependency caches, the fresh local backend rerun also passed: 222 tests, 35 skips, plus complete normal preparation smoke. The local SQLite I/O failures above remain historical evidence; no storage-policy workaround was needed.
+
+Fresh clean-runner acceptance passed: https://github.com/Kikiland-ai/kiki-backend/actions/runs/44823028370 (full offline gate plus physical pipeline/schema/asset smoke).
+
+Last completed: backend PR #14 updated, frontend PR #22 published
+(https://github.com/Kikiland-ai/kiki-web/pull/22), and backend clean-runner CI passed.
+Exact next: review the pair before enabling the upstream and doing signed-in hosted
+acceptance. No merge, deployment or learner data migration performed.
+
+---
+
+# Physical lab PR preparation — 21 November 2026
+
+User approved the refined preview and requested a PR for Kiki UI integration.
+Final interaction: numbered circuit markers and cursor hover names remain;
+the floating guide uses component names only. The integration handoff now covers
+Lab entry, trusted proxy routes, explicit demo mode, pinned packs, renderer/client
+reuse, server-checked progression, outputs, resume and acceptance criteria.
+CI now checks physical-lab schemas, reproducible assets, smoke and preview tests.
+
+Validation: 222 Python tests (35 conditional skips), 36 BB8 tests, 12 preview
+JavaScript checks, full normal preparation HTTP smoke, contract/asset checks,
+source integrity and BB8/discovery checks passed. Full screen-reader offline
+gate passed using Node 24 with zero paid calls. The initial Node 20 run failed
+because its timer API and node:sqlite do not meet that gate's runtime requirement;
+no product-code workaround was needed.
+
+Last completed: pushed codex/physical-lab-preparation from main c51b654 and opened
+https://github.com/Kikiland-ai/kiki-backend/pull/14 targeting main. The user's
+authenticated GitHub account is akshitanitr (repository ADMIN); commit author and
+committer retain the required arpanvihan5-sketch identity.
+Exact next: review the backend PR and implement the dependent Kiki UI slice using
+docs/handoffs/physical-lab-preparation.md. No merge or production rollout performed.
+
+---
+
+# Direct physical experiment demo — 21 November 2026
+
+User-directed change: assume prerequisite knowledge for the demo and focus on
+conducting the experiment with fewer clicks. The default local preview now opens
+a direct nine-step DSB-SC experiment with a floating Kiki guide, bottom-right
+fullscreen control, server-checked actions, automatic progression and live
+outputs. Regular prerequisite content/checks remain in the backend and in the
+normal preparation mode. Demo mode does not fabricate theory evidence.
+
+Pack version: 1.2.0, retaining the same v3 instrument asset. Demo setup presets
+virtual power, AF/RF frequencies and trigger; students still connect six leads,
+adjust null and record two readings. The final state is experiment_complete,
+with a separate result endpoint. No normal preparation receipt is awarded.
+
+Native Chrome acceptance completed all nine steps, including a wrong-lead
+negative test, correct progression, native fullscreen entry/exit and recovered
+1000 Hz / 0.5 V peak output. The guide was adjusted to avoid required sockets
+following an observed CRO-input obstruction. The actual 3D CRO now uses the
+backend trace selected by its probe connection.
+
+Checks: 222 Python tests run, 35 conditional skips, no failures; seven JS checks;
+full normal preparation smoke; contract/source/asset checks. No provider calls,
+production updates, commit or push. Local service remains on port 8771.
+
+Last completed: direct experiment demo and fullscreen/native wiring acceptance.
+Exact next: user review of the local demo, followed by Kiki web integration using
+mode=experiment_demo and the physical-lab handoff. The normal pipeline remains
+available using the default guided_preparation API mode.
+
+---
+
+# Physical trainer refinement — 21 November 2026
+
+Reproduced the user's prerequisite navigation failure in native Chrome: the old
+button required all ten orientation targets, while fast clicks were silently
+ignored during saves. Prerequisites are now directly accessible; theory gates
+still protect demonstration and independent practice. The client serialises
+rapid actions using the latest saved revision.
+
+The DSB-SC pack is now draft 1.1.1, with a reference-informed 3D PCB trainer,
+cream enclosure, printed circuit paths and labels, metal socket contacts, ICs,
+resistors, grip/index details on knobs and a distinct power switch. Seventeen
+semantic parts are accompanied by 242 mechanical/component details and 22
+printed labels. Physical colour choices come from SS Labs AC-07 and BIET
+Future Tech trainer photographs, recorded as visual references in the pack.
+The ANITS procedure/frequencies remain the instructional source.
+
+The preview supports direct part selection, adjustable dials, trainer/CRO/top
+views and output-to-input patching during rehearsal. Old glTF assets are retained
+for saved sessions. Start preparation for the refined apparatus; earlier sessions
+are not rewritten. Technical/native Odia review remains pending.
+
+Verified: 219 Python tests run, 35 conditional skips, no failures (17 focused
+physical-lab tests); four JavaScript checks for rapid saves, rejection recovery,
+3D picking and actual mesh/artwork rendering; full synthetic HTTP smoke; glTF
+validator zero errors/warnings; source integrity unchanged. Native browser checks
+confirmed direct lesson entry, a submitted 100% first check progressing to the
+second concept, model selection and a confirmed exploratory 1000 Hz dial setting.
+
+Last completed: visual refinement and prerequisite repair, running locally on
+port 8771 on `codex/physical-lab-preparation`. No commit, push or deployment.
+Exact next: student/instructor review of this local preview, then the existing
+Kiki web integration described in the physical-lab handoff.
+
+---
+
+# Physical lab preparation backend — 20 November 2026
+
+Implemented locally on `codex/physical-lab-preparation` from main `c51b654`.
+The generic prescribed-experiment pipeline and DSB-SC pack are ready for local
+backend integration testing. No recognition/uncertain-match branch was added.
+
+See [implementation record](physical-lab-preparation.md),
+[frontend handoff](../handoffs/physical-lab-preparation.md) and
+[ADR 0012](../decisions/0012-physical-lab-preparation.md).
+
+The slice includes 17 semantic 3D parts, five prerequisite concepts, 14 procedure
+steps, three fault scenarios, readiness assessment, durable owner-scoped sessions,
+virtual signal observations, and preparation receipts. It adds routes to the
+unified local app and leaves the deployed cloud/software guidance unchanged.
+Technical and native Odia reviews remain pending; geometry is schematic.
+
+Verification: 15 physical-lab tests; full backend suite 217 tests run with 35
+conditional skips and no failures; full HTTP smoke; glTF validator zero errors
+or warnings; source-integrity, BB8/discovery and JS syntax checks. The pipeline
+also completes a distinct test-only optical geometry pack, including interleaved
+repositioning/measurements. No provider calls or production changes were made.
+
+Last completed: reusable backend and DSB-SC preparation acceptance.
+Exact next: connect Kiki web's physical-lab route, proxy, asset player and activity
+UI to `/v1/physical-labs`; review content before student release.
+
+The historical hosted-trial records below remain unchanged. Their exhausted
+screen-analysis budget must not be reused for this unrelated feature.
+
+---
+
 ## Hosted MATLAB trial completed - 18 October 2026
 
 This is the current continuation record; the earlier trial-pending notes below

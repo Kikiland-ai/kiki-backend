@@ -250,3 +250,31 @@ test('popup preserves the actionable bind failure after refreshing status',async
  assert.equal(nodes.state.textContent,'Reload the MATLAB tab, then show Kiki again.');
  assert.equal(nodes.bind.hidden,false);
 });
+
+
+test('reader status probe validates sender and cannot change controller or binding', async()=>{
+ const w=worker();
+ // The fixture runtime gets its version exactly as the actual worker does.
+ w.context.chrome.runtime.getManifest=()=>({version:'0.1.4'});
+ await w.send({type:'reader_hello',stream_id:'stream-aaaa-1111'});
+ const before=copy(w.storage);
+ assert.deepEqual(await w.send({type:'reader_status'}),{ok:true,version:'0.1.4'});
+ assert.deepEqual(w.storage,before);
+ assert.equal((await w.send({type:'reader_status'},{...sender(),url:'https://evil.example'})).ok,false);
+ assert.equal((await w.send({type:'reader_status'},{...sender(),frameId:1})).ok,false);
+});
+
+
+test('bridge status probe works without a publisher and does not supersede an active stream',async()=>{
+ const p=pageBridge();
+ p.send({type:'reader_status',request_id:'check-1'});
+ assert.deepEqual(p.pending[0].message,{type:'reader_status'});
+ p.pending[0].resolve({ok:true,version:'0.1.4'});await tick();
+ assert.deepEqual(p.posted.at(-1),{channel:'kiki-floating-guidance',direction:'extension',type:'extension_status',request_id:'check-1',version:'0.1.4'});
+ p.send({type:'reader_hello',stream_id:'stream-aaaa-1111',bridge_id:1});
+ p.send({type:'reader_status',request_id:'check-2'});
+ p.pending[1].resolve({ok:true,generation:7});await tick();
+ assert.equal(p.posted.at(-1).result.generation,7);
+ p.send({type:'reader_snapshot',message:{stream_id:'stream-aaaa-1111',generation:7},bridge_id:2});
+ assert.equal(p.pending.at(-1).message.type,'reader_snapshot');
+});

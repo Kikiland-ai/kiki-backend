@@ -3,8 +3,8 @@
 import json
 
 from fastapi import HTTPException
-from google.cloud.firestore import transactional
 
+from prototypes.cloud_lab.store import run_atomic
 from .service import PreparationService, digest
 
 
@@ -36,7 +36,6 @@ class FirestorePreparationService(PreparationService):
         key_ref = self.owners.document(digest(owner)).collection("creation_keys").document(digest(key))
         state = self.new_session(pack, body)
 
-        @transactional
         def persist(transaction):
             previous = key_ref.get(transaction=transaction).to_dict()
             if previous is not None:
@@ -50,7 +49,7 @@ class FirestorePreparationService(PreparationService):
             transaction.create(key_ref, {"session_id": state["session_id"], "body_hash": body_hash})
             return self.project(state, pack)
 
-        return persist(self.client.transaction())
+        return run_atomic(self.client, persist)
 
     def saved(self, session_id, owner):
         return read_session(self.sessions(owner).document(session_id).get())
@@ -66,7 +65,6 @@ class FirestorePreparationService(PreparationService):
         receipt = session.collection("events").document(event.event_id)
         body_hash = digest(event.model_dump())
 
-        @transactional
         def persist(transaction):
             state, pack = read_session(session.get(transaction=transaction))
             previous = receipt.get(transaction=transaction).to_dict()
@@ -79,4 +77,4 @@ class FirestorePreparationService(PreparationService):
             transaction.create(receipt, {"body_hash": body_hash, "response": encode(response)})
             return response
 
-        return persist(self.client.transaction())
+        return run_atomic(self.client, persist)

@@ -21,9 +21,11 @@ also reproduced it. Earlier full backend acceptance passed. Record the fresh
 remote CI result before claiming a new full local pass. No product storage policy
 was changed to hide this environment failure.
 
-Last completed: frontend integration and backend UI removal prepared for paired
-PRs. Exact next: publish the web companion PR, update backend PR #14, verify CI,
-then review the pair before enabling the upstream and doing signed-in hosted
+Fresh clean-runner acceptance passed: https://github.com/Kikiland-ai/kiki-backend/actions/runs/44823028370 (full offline gate plus physical pipeline/schema/asset smoke).
+
+Last completed: backend PR #14 updated, frontend PR #22 published
+(https://github.com/Kikiland-ai/kiki-web/pull/22), and backend clean-runner CI passed.
+Exact next: review the pair before enabling the upstream and doing signed-in hosted
 acceptance. No merge, deployment or learner data migration performed.
 
 ---

@@ -1,3 +1,15 @@
+## Pedagogy packets skill - 20 November 2026
+
+Added the `kiki-pedagogy-packets` skill (`.claude/skills/`, Codex wrapper in `.agents/skills/`),
+[decision 0018](../decisions/0018-pedagogy-packets-skill.md) and the
+[session handoff](../handoffs/pedagogy-packets-skill.md). The skill researches a
+chapter/topic/concept and writes translation-, audio- and canvas-ready English packets.
+`scripts/check_packet.py` checks them and runs the real mixed-script `validate_input` on every
+placard projection. The worked example `templates/C-AM-03.packet.json` passes (0 errors,
+0 warnings). Eleven seeded defects were each caught. No translation, TTS or canvas generation
+was run, and no runner was built. Next: build the runner (packet → mixed-language job → TTS →
+canvas factory → ledger/case assembly), then trial one new concept end to end.
+
 ## Hosted MATLAB trial completed - 18 October 2026
 
 This is the current continuation record; the earlier trial-pending notes below
